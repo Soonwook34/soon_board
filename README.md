@@ -30,7 +30,7 @@ npm run dev        # http://localhost:5173
 - **Zustand 4** — 글로벌 타이머 + 텔레메트리 + 세션 상태
 - **ml-matrix** — 텔레메트리 ↔ SVG affine fit
 - **데이터 소스:** [OpenF1 API](https://openf1.org/) 무료 플랜 (anonymous, ~3초 lag)
-- **호스팅:** GitHub Pages (정적, 백엔드 없음)
+- **호스팅:** Vercel (정적, 백엔드 없음, main 브랜치 push 시 자동 배포)
 
 ## 핵심 설계 (TL;DR)
 
@@ -86,11 +86,16 @@ vendor/
   state/      research artifacts
 ```
 
+## 배포
+
+- main 브랜치에 push될 때마다 Vercel이 자동으로 빌드 + 배포한다 (`vercel.json` framework preset = vite).
+- PR마다 preview 배포 URL이 자동 생성된다.
+- **최초 1회 설정:** Vercel 프로젝트 **Settings → Git → Git Submodules** 토글을 ON으로. 끄면 `vendor/bacinger-circuits/`가 비어 `prebuild` 단계에서 LICENSE 검증이 실패한다.
+
 ## v1 태그 전 수동 게이트
 
 - [ ] **AC7.6b** iPad Safari 실기기 Lighthouse — Performance ≥ 80, Accessibility ≥ 90. 증거 → `.omc/release-evidence/v1/`
 - [ ] **AC1.4** 실제 OpenF1 라이브 세션에서 P95 신선도 ≤ 4초 스톱워치 검증
-- [ ] GitHub 저장소 Settings → Pages → Source: **GitHub Actions**
 
 ## Credits
 
