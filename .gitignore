@@ -26,3 +26,6 @@ test-results
 !.omc/state/research-openf1-svg.md
 .omc/project-memory.json
 progress.txt
+
+# scratch / legacy
+old_project
