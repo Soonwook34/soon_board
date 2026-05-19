@@ -1,0 +1,22 @@
+node_modules
+dist
+dist-ssr
+.DS_Store
+*.local
+.vite
+coverage
+.eslintcache
+playwright-report
+test-results
+.lighthouseci
+
+# secrets / local config
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json

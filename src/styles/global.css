@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-text-primary: #F5F5F7;
+  --color-text-muted: #9CA3AF;
+}
+
+html {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Pretendard, sans-serif;
+}
+
+body {
+  background-color: #0A0A0B;
+  color: var(--color-text-primary);
+  margin: 0;
+  padding: 0;
+}

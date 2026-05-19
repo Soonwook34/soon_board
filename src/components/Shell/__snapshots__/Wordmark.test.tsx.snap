@@ -1,0 +1,21 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Wordmark > matches snapshot 1`] = `
+<span
+  class="font-display font-black tracking-tight text-2xl"
+>
+  S
+  <span
+    class="text-soon-accent"
+    style="text-shadow: 0 0 6px currentColor;"
+  >
+    ON
+  </span>
+   
+  <span
+    class="text-soon-muted font-medium"
+  >
+    Board
+  </span>
+</span>
+`;

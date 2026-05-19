@@ -1,0 +1,164 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`App > matches empty-state snapshot 1`] = `
+<div
+  class="min-h-screen bg-bg-base text-[#F5F5F7] flex flex-col"
+>
+  <header
+    class="h-14 bg-bg-elev2 border-b border-bg-elev1 flex items-center px-4 gap-4"
+  >
+    <span
+      class="font-display font-black tracking-tight text-2xl"
+    >
+      S
+      <span
+        class="text-soon-accent"
+        style="text-shadow: 0 0 6px currentColor;"
+      >
+        ON
+      </span>
+       
+      <span
+        class="text-soon-muted font-medium"
+      >
+        Board
+      </span>
+    </span>
+    <div
+      class="flex-1 text-soon-muted text-sm"
+    />
+  </header>
+  <main
+    class="flex-1 grid gap-2 p-2
+                   grid-cols-1 grid-rows-[1fr_1fr]
+                   lg:grid-cols-[60fr_40fr] lg:grid-rows-1"
+  >
+    <section
+      class="bg-bg-elev1 rounded-md min-h-0 overflow-hidden"
+    >
+      <div
+        class="flex items-center justify-center h-full text-soon-muted"
+      >
+        세션을 선택해 주세요
+      </div>
+    </section>
+    <section
+      class="bg-bg-elev1 rounded-md min-h-0 overflow-auto"
+    >
+      <div
+        class="bg-bg-elev1 rounded-md overflow-hidden"
+      >
+        <table
+          class="w-full text-left border-collapse"
+        >
+          <thead>
+            <tr
+              class="border-b border-white/10 text-soon-muted text-xs uppercase tracking-wide"
+            >
+              <th
+                class="px-3 py-2 font-medium"
+              >
+                Pos
+              </th>
+              <th
+                class="px-3 py-2 font-medium"
+              >
+                Driver
+              </th>
+              <th
+                class="px-3 py-2 font-medium"
+              >
+                Team
+              </th>
+              <th
+                class="px-3 py-2 font-medium"
+              >
+                Last Lap
+              </th>
+              <th
+                class="px-3 py-2 font-medium"
+              >
+                Interval
+              </th>
+              <th
+                class="px-3 py-2 font-medium"
+              >
+                Gap
+              </th>
+              <th
+                class="px-3 py-2 font-medium"
+              >
+                Tire
+              </th>
+              <th
+                class="px-3 py-2 font-medium"
+              >
+                Pits
+              </th>
+              <th
+                class="px-3 py-2 font-medium"
+              >
+                Trend
+              </th>
+            </tr>
+          </thead>
+          <tbody />
+        </table>
+      </div>
+    </section>
+  </main>
+  <div
+    aria-label="Calendar"
+    aria-modal="true"
+    class="fixed inset-0 z-40 flex items-center justify-center bg-black/60"
+    role="dialog"
+  >
+    <div
+      class="bg-bg-elev2 rounded-lg shadow-xl p-6 w-[640px] max-h-[80vh] flex flex-col gap-4"
+    >
+      <div
+        class="flex items-center justify-between"
+      >
+        <h2
+          class="text-white font-semibold"
+        >
+          Select Race
+        </h2>
+        <button
+          aria-label="Close calendar"
+          class="text-soon-muted hover:text-white text-lg leading-none"
+        >
+          ×
+        </button>
+      </div>
+      <div
+        class="flex gap-2"
+      >
+        <button
+          aria-pressed="false"
+          class="px-4 py-1.5 rounded-full text-sm font-medium transition-colors bg-bg-elev1 text-soon-muted hover:text-white"
+        >
+          2024
+        </button>
+        <button
+          aria-pressed="true"
+          class="px-4 py-1.5 rounded-full text-sm font-medium transition-colors bg-soon-accent text-white"
+        >
+          2025
+        </button>
+        <button
+          aria-pressed="false"
+          class="px-4 py-1.5 rounded-full text-sm font-medium transition-colors bg-bg-elev1 text-soon-muted hover:text-white"
+        >
+          2026
+        </button>
+      </div>
+      <p
+        class="text-soon-muted text-xs"
+      >
+        Loading meetings…
+      </p>
+    </div>
+  </div>
+</div>
+`;

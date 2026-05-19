@@ -1,0 +1,190 @@
+{
+  "task": "SOON Board — F1 Live Timing dashboard implementation per consensus plan",
+  "plan_path": ".omc/plans/soon-board-consensus-plan.md",
+  "spec_path": ".omc/specs/deep-interview-soon-board.md",
+  "started_at": "2026-05-19T08:23:00Z",
+  "stories": [
+    {
+      "id": "P0",
+      "title": "Phase 0 — Repo Bootstrap",
+      "priority": 0,
+      "complexity": "S",
+      "passes": true,
+      "acceptanceCriteria": [
+        "package.json with all required runtime + dev deps (react, react-dom, zustand, ml-matrix, lucide-react, vite, typescript, tailwindcss, postcss, autoprefixer, eslint, prettier, vitest, @testing-library/react, jsdom, @playwright/test, lighthouse, tsx, gh-pages)",
+        ".nvmrc declares Node 18.18+ and package.json engines.node matches",
+        "vite.config.ts sets base: '/soon_board/' for GH Pages subpath",
+        "tsconfig.json strict mode enabled, paths alias '@/*' → 'src/*'",
+        "tailwind.config.ts extends colors with soon-accent (#E10600), soon-neon (#00FF94), bg-base/elev1/elev2, tire-soft/medium/hard/inter/wet per spec §D.2",
+        ".eslintrc.cjs + .prettierrc set up, no lint errors on skeleton",
+        "vitest.config.ts + playwright.config.ts configured",
+        ".github/workflows/deploy.yml declares top-level permissions: contents/pages/id-token: write (M9)",
+        "src/main.tsx and src/App.tsx skeleton mount empty dark-themed shell",
+        "npm install completes, npm run typecheck && npm run lint && npm test all exit 0",
+        "git submodule add of bacinger/f1-circuits at vendor/bacinger-circuits is declared (lazy clone OK for now)"
+      ]
+    },
+    {
+      "id": "P1",
+      "title": "Phase 1 — OpenF1 API Client",
+      "priority": 1,
+      "complexity": "M",
+      "passes": true,
+      "acceptanceCriteria": [
+        "src/api/types.ts exports Meeting, Session, Driver, Lap, Stint, PitStop, Interval, RacePosition, LocationRow, Weather, RaceControl types matching OpenF1 schema",
+        "src/api/rateLimiter.ts implements token bucket: 3 tokens/s refill, 30 tokens/min ceiling; acquire() blocks until token available",
+        "src/api/client.ts fetchJson<T>() supports AbortController, shared queue, 429 backoff (2s start, 30s cap, 5 retries)",
+        "src/api/client.ts response interceptor reads Date header on first success and calls timelineStore.syncServerTime (wired in P2)",
+        "src/api/endpoints.ts exports typed wrappers for all key endpoints (meetings, sessions, drivers, location, intervals, laps, stints, pit, position, weather, race_control)",
+        "scripts/verify-cors.ts curl-checks api.openf1.org for access-control-allow-origin; npm run verify:cors exits 0 (or skips with note if offline)",
+        "tests src/api/rateLimiter.test.ts pass: 50 concurrent acquires, never bursts >3/s or >30/min",
+        "tests src/api/client.test.ts pass: mocked 429 sequence triggers exponential backoff 2,4,8,16,30s then throws after 5 retries"
+      ]
+    },
+    {
+      "id": "P2",
+      "title": "Phase 2 — Zustand Stores + Global Clock",
+      "priority": 2,
+      "complexity": "M",
+      "passes": true,
+      "acceptanceCriteria": [
+        "src/store/timelineStore.ts: mode, anchorWallTime, anchorSessionTime, playbackRate, isPaused, serverTimeOffsetMs, syncServerTime(), globalClockNow(), scrubTo(), setRate(), setMode()",
+        "syncServerTime computes offset = serverDate - (timeOrigin + perfNow) - 3000ms (M7); glossary in plan §2.0",
+        "globalClockNow() in live mode returns serverTime-aligned value (±50ms vs fake server response in test)",
+        "src/store/sessionStore.ts: meeting, session, drivers[], decorationAvailable (no calibrationMode branching), affineForDecoration",
+        "src/store/sessionStore.setSession() triggers telemetryStore.flush() when newKey !== currentKey (M8)",
+        "src/store/telemetryStore.ts: byDriver Map with ring buffer cap 200/driver, appendLocationBatch, appendLap, appendStint, appendPit, flush()",
+        "MAX_BUFFERED_SESSIONS = 1 enforced; flush test asserts byDriver.size===0 after setSession",
+        "src/store/leaderboardStore.ts: derived 1Hz snapshot of position-sorted rows",
+        "src/hooks/useGlobalClock.ts subscribes to rAF",
+        "all P2 tests pass: timelineStore.test.ts, telemetryStore.test.ts, timelineStore.serverSync.test.ts, telemetryStore.flush.test.ts"
+      ]
+    },
+    {
+      "id": "P3",
+      "title": "Phase 3 — Polling Scheduler",
+      "priority": 3,
+      "complexity": "M",
+      "passes": true,
+      "acceptanceCriteria": [
+        "src/scheduler/poller.ts tiered intervals matching LOCKED cadence: location 6s, intervals 6s, race_control 10s, position 30s, laps 60s, pit/stints/weather 180s; total 30.0 req/min",
+        "poller.start() / stop() / pause() / resume() / refetchWindow(start,end) API implemented",
+        "pause() aborts in-flight fetches via AbortController; resume() re-anchors timers from Date.now() (M2)",
+        "src/scheduler/interpolator.ts exports lerp (linear) and catmullRom (cubic) pure functions; extrapolation freezes at +1s",
+        "test src/scheduler/poller.test.ts pass: 5min simulated session, rolling 60s window ≤30, rolling 1s window ≤3",
+        "test src/scheduler/poller.pause-resume.test.ts pass: AbortError on pause, resume re-anchors, refetchWindow returns ordered samples",
+        "test src/scheduler/interpolator.test.ts pass: lerp endpoints exact, Catmull-Rom passes through control points"
+      ]
+    },
+    {
+      "id": "P4",
+      "title": "Phase 4 — Build-time Circuit SVG Pipeline",
+      "priority": 4,
+      "complexity": "M",
+      "passes": true,
+      "acceptanceCriteria": [
+        "git submodule at vendor/bacinger-circuits/ pinned to known-MIT commit; LICENSE SPDX = MIT asserted by script",
+        "scripts/build-circuits.ts projects GeoJSON LineString → SVG <path> via per-circuit equirectangular (5% pad, Y-flip)",
+        "Emits src/assets/circuits/{circuit_key}.svg files + circuits.json mapping",
+        "package.json prebuild hook runs scripts/build-circuits.ts before vite build",
+        "scripts/build-circuits.test.ts passes against fixture GeoJSON (snapshot)",
+        "Manual sanity: Monaco, Suzuka, Madrid SVG outputs render recognizable outlines",
+        "Audit log: any non-LineString geometry recorded in build log but does not fail build (cosmetic-only per M6)"
+      ]
+    },
+    {
+      "id": "P5",
+      "title": "Phase 5 — Coordinate Utilities + Telemetry Fallback Helpers",
+      "priority": 5,
+      "complexity": "S",
+      "passes": true,
+      "acceptanceCriteria": [
+        "src/utils/coordinates.ts: type Affine; applyAffine; fitAffine via ml-matrix 4-param similarity (scale + rotation + 2D translation); residual return",
+        "src/utils/fitting.ts: computeBbox, paddedViewBox(bbox, padPct=0.05), smoothPolyline(window=6), catmullRomToPath, pickCleanLap",
+        "test src/utils/coordinates.test.ts: synthetic affine (rotate 30°, scale 2, translate) recovered within 1e-6; residual=0 on noise-free",
+        "test src/utils/fitting.test.ts: bbox + paddedViewBox math; smoothing reduces variance; pickCleanLap skips pit_in/pit_out laps"
+      ]
+    },
+    {
+      "id": "P6",
+      "title": "Phase 6 — Circuit Map + rAF Imperative Markers (substrate-first)",
+      "priority": 6,
+      "complexity": "M",
+      "passes": true,
+      "acceptanceCriteria": [
+        "src/components/Map/CircuitMap.tsx: substrate <path> derived from one driver's first clean lap (always-on); decoration <path> from bacinger (optional, controlled by sessionStore.decorationAvailable)",
+        "viewBox computed from substrate bbox + 5% pad; markers position against substrate coord space (NO affine on critical path)",
+        "src/components/Map/Marker.tsx is forwardRef pure presentational; 20 driver <g> groups mounted with aria-label",
+        "src/hooks/useDriverMarker.ts registers refs into master rAF coordinator keyed by driver_number",
+        "src/hooks/useMasterRaf.ts is singleton rAF loop; each frame interpolates XY (linear v0 or catmull-rom v1) and calls ref.setAttribute('transform', ...); zero React renders during animation; honors isApplying ref to suppress writes during scrub",
+        "src/hooks/useFrameBudget.ts implements detectInitialFps() per M4: iPad Safari UA → 30Hz start, Chrome → 60Hz start, ?fps=N override; bidirectional drift detection (downgrade >10% drops at 60Hz, upgrade <2% drops at 30Hz)",
+        "src/components/Map/DecorationLayer.tsx computes affine fit residual; toggles decorationAvailable + aligned/unaligned badge",
+        "tests CircuitMap.test.tsx, useMasterRaf.test.ts, useFrameBudget.test.ts pass",
+        "Playwright e2e/map-smoke.spec.ts asserts markers visible and transform changes within 2s, substrate path always present",
+        "End-of-phase gate: npm run lighthouse:ci -- --device=mobile ≥ 80; if not, force 30Hz everywhere"
+      ]
+    },
+    {
+      "id": "P7",
+      "title": "Phase 7 — Leaderboard + Sparkline",
+      "priority": 7,
+      "complexity": "M",
+      "passes": true,
+      "acceptanceCriteria": [
+        "src/components/Leaderboard/Leaderboard.tsx renders 20 rows sorted by position with all AC3.2 columns",
+        "src/components/Leaderboard/Row.tsx is memoized, subscribes via Zustand selector",
+        "src/components/Leaderboard/Sparkline.tsx hand-rolled SVG <polyline> from 10 most recent laps in 60×16 box (if >60 LOC OR fails a11y, swap to recharts and update deps)",
+        "src/components/Leaderboard/TireDot.tsx uses tire-* color tokens",
+        "tests Leaderboard.test.tsx, Sparkline.test.tsx, TireDot.test.tsx pass",
+        "React Profiler test: sort toggle re-render ≤ 16ms (AC3.4)"
+      ]
+    },
+    {
+      "id": "P8",
+      "title": "Phase 8 — Playback / Calendar / Speed Toggle",
+      "priority": 8,
+      "complexity": "M",
+      "passes": true,
+      "acceptanceCriteria": [
+        "src/components/Playback/PlaybackBar.tsx hosts scrubber + speed-toggle + LiveDot",
+        "src/components/Playback/Calendar.tsx three tabs 2024/2025/2026, card grid",
+        "src/components/Playback/SessionPicker.tsx modal showing P1/P2/P3/Sprint/Q/R",
+        "src/components/Playback/Scrubber.tsx onCommit implements the 7-step scrub-backward sequence (isApplying=true → pause → refetchWindow → scrubTo → resume → isApplying=false) within 500ms (AC6.4, M2)",
+        "src/components/Playback/SpeedToggle.tsx 1×/2×/5× pills call timelineStore.setRate",
+        "tests PlaybackBar.test.tsx, Calendar.test.tsx, SessionPicker.test.tsx, Scrubber.test.tsx pass",
+        "Playwright e2e/playback-smoke.spec.ts: 2024 Monaco Race → 2× → global clock advances at 2× wall-time"
+      ]
+    },
+    {
+      "id": "P9",
+      "title": "Phase 9 — App Shell + Branding + Responsive Grid",
+      "priority": 9,
+      "complexity": "S",
+      "passes": true,
+      "acceptanceCriteria": [
+        "src/components/Shell/AppShell.tsx CSS grid: FHD ≥1440 → Map 60% / panel 40%; iPad landscape 1024×768 → 50/50 vertical; iPad portrait 768×1024 → stacked",
+        "src/components/Shell/Header.tsx contains Wordmark, session label, live dot, clock",
+        "src/components/Shell/Wordmark.tsx renders 'S<span class=\"text-soon-accent\">ON</span> <span class=\"text-soon-muted\">Board</span>' with text-soon-accent = #E10600",
+        "tailwind theme tokens match spec §D.2 (all bg-, text-, tire- colors)",
+        "tests AppShell.test.tsx with matchMedia mock for each breakpoint",
+        "Playwright visual snapshots at 1920×1080, 1024×768, 768×1024 (AC7.2–7.4)"
+      ]
+    },
+    {
+      "id": "P10",
+      "title": "Phase 10 — QA + Lighthouse + e2e + Deploy",
+      "priority": 10,
+      "complexity": "M",
+      "passes": true,
+      "acceptanceCriteria": [
+        ".github/workflows/deploy.yml runs verify:cors → test → lint → typecheck → e2e → lighthouse:ci → architecture-check → deploys dist/ to gh-pages",
+        "scripts/lighthouse-ci.ts asserts Performance ≥ 80, Accessibility ≥ 90 (AC7.6a, headless Chrome desktop)",
+        "scripts/architecture-check.ts greps for 'mode === \\'live\\'' outside src/store/timelineStore.ts and fails CI on match (AC6.5)",
+        "e2e/smoke.spec.ts full happy path passes",
+        "First gh-pages deploy succeeds (gh run list --workflow=deploy.yml --limit 1 shows success)",
+        "Stopwatch manual verification: P95 freshness ≤ 4s end-to-end (AC1.4)",
+        "AC7.6b manual gate documented but deferred to v1 release (not blocking initial implementation)"
+      ]
+    }
+  ]
+}
