@@ -20,3 +20,9 @@ test-results
 .vscode/*
 !.vscode/settings.json
 !.vscode/extensions.json
+
+# OMC internal session state (keep specs/plans/research)
+.omc/state/*
+!.omc/state/research-openf1-svg.md
+.omc/project-memory.json
+progress.txt
