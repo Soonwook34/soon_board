@@ -3,7 +3,7 @@ module.exports = {
     collect: {
       startServerCommand: 'npm run preview -- --port=4173',
       startServerReadyPattern: 'Local:',
-      url: ['http://localhost:4173/soon_board/'],
+      url: ['http://localhost:4173/'],
       numberOfRuns: 1,
     },
     assert: {

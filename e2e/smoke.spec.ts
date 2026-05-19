@@ -7,7 +7,7 @@ test.describe('@e2e SOON Board smoke', () => {
       if (msg.type() === 'error') consoleErrors.push(msg.text())
     })
 
-    await page.goto('/soon_board/')
+    await page.goto('/')
     await expect(page.getByText('Board')).toBeVisible()
     await expect(page.getByRole('dialog')).toBeVisible()
 
@@ -16,7 +16,7 @@ test.describe('@e2e SOON Board smoke', () => {
 
   // Requires live OpenF1 data — deferred network fixture
   test.skip('happy path: pick 2024 Monaco Race → markers move @network', async ({ page }) => {
-    await page.goto('/soon_board/')
+    await page.goto('/')
     // Select 2024 Monaco Race from Calendar, verify driver markers animate
   })
 })
