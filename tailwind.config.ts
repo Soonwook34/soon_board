@@ -20,11 +20,22 @@ const config: Config = {
       },
       fontFamily: {
         display: [
+          'Formula1 Wide',
+          'Formula1',
+          'Orbit',
           'system-ui',
           '-apple-system',
           'BlinkMacSystemFont',
           'Helvetica Neue',
-          'Pretendard',
+          'sans-serif',
+        ],
+        sans: [
+          'Formula1',
+          'Orbit',
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'Helvetica Neue',
           'sans-serif',
         ],
       },

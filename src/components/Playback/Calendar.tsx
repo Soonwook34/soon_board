@@ -64,7 +64,7 @@ export function Calendar({ client, onPick, onClose }: CalendarProps) {
         aria-modal="true"
         aria-label="Calendar"
       >
-        <div className="bg-bg-elev2 rounded-lg shadow-xl p-6 w-[640px] max-h-[80vh] flex flex-col gap-4">
+        <div className="bg-bg-elev2 rounded-lg p-6 w-[640px] max-h-[80vh] flex flex-col gap-4">
           {/* Header */}
           <div className="flex items-center justify-between">
             <h2 className="text-white font-semibold">Select Race</h2>

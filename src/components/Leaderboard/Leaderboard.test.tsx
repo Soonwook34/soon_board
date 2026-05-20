@@ -8,6 +8,7 @@ const fixtureRows: LeaderboardRow[] = [
   {
     driver_number: 1,
     name_acronym: 'VER',
+    team_name: 'Red Bull Racing',
     team_colour: '3671C6',
     position: 1,
     lastLapMs: 83456,
@@ -21,6 +22,7 @@ const fixtureRows: LeaderboardRow[] = [
   {
     driver_number: 44,
     name_acronym: 'HAM',
+    team_name: 'Mercedes',
     team_colour: '27F4D2',
     position: 2,
     lastLapMs: 83900,
@@ -34,6 +36,7 @@ const fixtureRows: LeaderboardRow[] = [
   {
     driver_number: 16,
     name_acronym: 'LEC',
+    team_name: 'Ferrari',
     team_colour: 'E8002D',
     position: 3,
     lastLapMs: 84200,

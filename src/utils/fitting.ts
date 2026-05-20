@@ -37,21 +37,54 @@ export function computeBbox(points: [number, number][]): {
 
 /**
  * Adds symmetric padding (as a fraction of the larger dimension) around a bbox
- * and returns SVG viewBox parameters plus a ready-to-use attribute string.
+ * and (optionally) extends the viewBox along one axis so its aspect ratio
+ * matches a target container aspect. This lets `preserveAspectRatio="xMidYMid meet"`
+ * fill the container without letterboxing — the extra padding fills what would
+ * otherwise be dead space, no crop, no distortion.
+ *
+ * When `containerAspect` is null/undefined/non-positive, only symmetric padding
+ * is applied (matches the original `paddedViewBox` behavior).
+ */
+export function paddedViewBoxForAspect(
+  bbox: ReturnType<typeof computeBbox>,
+  containerAspect: number | null,
+  padPct = 0.05,
+): { x: number; y: number; width: number; height: number; viewBox: string } {
+  const w = bbox.maxX - bbox.minX
+  const h = bbox.maxY - bbox.minY
+  const basePad = Math.max(w, h) * padPct
+  let x = bbox.minX - basePad
+  let y = bbox.minY - basePad
+  let width = w + 2 * basePad
+  let height = h + 2 * basePad
+
+  if (containerAspect !== null && containerAspect > 0 && width > 0 && height > 0) {
+    const contentAspect = width / height
+    if (containerAspect > contentAspect) {
+      // Container is wider than content — extend viewBox horizontally.
+      const extraW = height * containerAspect - width
+      x -= extraW / 2
+      width += extraW
+    } else if (containerAspect < contentAspect) {
+      // Container is taller than content — extend viewBox vertically.
+      const extraH = width / containerAspect - height
+      y -= extraH / 2
+      height += extraH
+    }
+  }
+  const viewBox = `${x} ${y} ${width} ${height}`
+  return { x, y, width, height, viewBox }
+}
+
+/**
+ * Backward-compatibility shim — symmetric padding only, no aspect awareness.
+ * New callers should use `paddedViewBoxForAspect` directly.
  */
 export function paddedViewBox(
   bbox: ReturnType<typeof computeBbox>,
   padPct = 0.05,
 ): { x: number; y: number; width: number; height: number; viewBox: string } {
-  const w = bbox.maxX - bbox.minX
-  const h = bbox.maxY - bbox.minY
-  const pad = Math.max(w, h) * padPct
-  const x = bbox.minX - pad
-  const y = bbox.minY - pad
-  const width = w + 2 * pad
-  const height = h + 2 * pad
-  const viewBox = `${x} ${y} ${width} ${height}`
-  return { x, y, width, height, viewBox }
+  return paddedViewBoxForAspect(bbox, null, padPct)
 }
 
 // ---------------------------------------------------------------------------

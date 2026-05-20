@@ -11,6 +11,8 @@ import { useTimelineStore, globalClockNow } from './store/timelineStore'
 import { useSessionStore } from './store/sessionStore'
 import { useTelemetryStore } from './store/telemetryStore'
 import { useLeaderboardStore, computeLeaderLap } from './store/leaderboardStore'
+import { useRaceControlStore } from './store/raceControlStore'
+import { RaceInfoPanel } from './components/Panels/RaceInfoPanel'
 import { getDrivers, getLocation } from './api/endpoints'
 import { getSessionStatus, parseOpenF1DateMs, toOpenF1Iso } from './utils/sessionStatus'
 import type { Interval, Meeting, RacePosition, Session } from './api/types'
@@ -93,7 +95,7 @@ export default function App() {
           latestIntervals.current = pickLatestPerDriver(rows)
           recompute()
         },
-        onRaceControl: () => {},
+        onRaceControl: (rows) => useRaceControlStore.getState().appendBatch(rows),
         onPosition: (rows) => {
           latestPositions.current = pickLatestPerDriver(rows)
           recompute()
@@ -175,7 +177,12 @@ export default function App() {
           <EmptyMap />
         )
       }
-      leaderboard={<Leaderboard />}
+      leaderboard={
+        <div className="flex flex-col h-full min-h-0">
+          <RaceInfoPanel />
+          <Leaderboard />
+        </div>
+      }
       footer={poller ? <PlaybackBar client={client} poller={poller} /> : null}
       overlay={
         calendarOpen ? (

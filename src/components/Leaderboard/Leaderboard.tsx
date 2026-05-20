@@ -5,7 +5,7 @@ export function Leaderboard() {
   const rows = useLeaderboardStore((s) => s.rows)
 
   return (
-    <div className="bg-bg-elev1 rounded-md overflow-hidden">
+    <div className="flex-1 min-h-0 overflow-auto">
       <table className="w-full text-left border-collapse">
         <thead>
           <tr className="border-b border-white/10 text-soon-muted text-xs uppercase tracking-wide">

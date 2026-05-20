@@ -45,21 +45,74 @@ export function catmullRomXY(
   }
 }
 
-// Given sorted samples[] and target t, return interpolated xy.
-// Returns null if samples is empty.
-// Clamps: t < first.t → first sample; t > last.t → last sample (no extrapolation).
+export interface SampleAtOptions {
+  mode?: 'lerp' | 'catmull'
+  // When both snapDivisor > 0 and trackLength > 0, a segment longer than
+  // trackLength / snapDivisor is treated as a teleport (lap wrap-around,
+  // replay seek). The interpolator snaps to the later sample instead of
+  // rubber-banding through the chord. Old_project uses snapDivisor=30 on
+  // a 3337 m Monaco lap — ~111 m gap before snapping kicks in.
+  snapDivisor?: number
+  trackLength?: number
+  // When extrapCapMs > 0 AND snap is configured, extrapolate from the last
+  // segment's velocity for up to extrapCapMs past the newest sample. Extrap
+  // is skipped if the last segment already looks like a teleport (segment
+  // length > snapDist). With trackLength=0 the freeze-at-last behavior is
+  // preserved so the function is safe to call before substrate is built.
+  extrapCapMs?: number
+}
+
+// Given sorted samples[] and target t, return interpolated xy. Returns null
+// if samples is empty. The third argument accepts either the legacy string
+// mode for backward compatibility, or an options object enabling snap and
+// extrapolation behavior.
 export function sampleAt(
   samples: { t: number; x: number; y: number }[],
   t: number,
-  mode: 'lerp' | 'catmull' = 'lerp',
+  mode?: 'lerp' | 'catmull',
+): { x: number; y: number } | null
+export function sampleAt(
+  samples: { t: number; x: number; y: number }[],
+  t: number,
+  opts: SampleAtOptions,
+): { x: number; y: number } | null
+export function sampleAt(
+  samples: { t: number; x: number; y: number }[],
+  t: number,
+  modeOrOpts?: 'lerp' | 'catmull' | SampleAtOptions,
 ): { x: number; y: number } | null {
   if (samples.length === 0) return null
+
+  const opts: SampleAtOptions =
+    typeof modeOrOpts === 'string'
+      ? { mode: modeOrOpts }
+      : modeOrOpts ?? {}
+  const mode = opts.mode ?? 'lerp'
+  const snapDivisor = opts.snapDivisor ?? 0
+  const trackLength = opts.trackLength ?? 0
+  const extrapCapMs = opts.extrapCapMs ?? 0
+  const haveSnap = snapDivisor > 0 && trackLength > 0
+  const snapDist = haveSnap ? trackLength / snapDivisor : 0
 
   const first = samples[0]
   const last = samples[samples.length - 1]
 
   if (t <= first.t) return { x: first.x, y: first.y }
-  if (t >= last.t) return { x: last.x, y: last.y }
+
+  if (t >= last.t) {
+    if (extrapCapMs > 0 && haveSnap && samples.length >= 2) {
+      const prev = samples[samples.length - 2]
+      const dx = last.x - prev.x
+      const dy = last.y - prev.y
+      const dt = last.t - prev.t
+      const ahead = t - last.t
+      if (ahead <= extrapCapMs && dt > 0 && Math.hypot(dx, dy) <= snapDist) {
+        const u = ahead / dt
+        return { x: last.x + dx * u, y: last.y + dy * u }
+      }
+    }
+    return { x: last.x, y: last.y }
+  }
 
   // Binary search for the interval [samples[lo], samples[lo+1]] containing t
   let lo = 0
@@ -75,6 +128,14 @@ export function sampleAt(
 
   const s1 = samples[lo]
   const s2 = samples[lo + 1]
+
+  if (haveSnap) {
+    const dx = s2.x - s1.x
+    const dy = s2.y - s1.y
+    if (Math.hypot(dx, dy) > snapDist) {
+      return { x: s2.x, y: s2.y }
+    }
+  }
 
   if (mode === 'catmull' && samples.length >= 4) {
     const s0 = samples[Math.max(0, lo - 1)]

@@ -8,15 +8,15 @@ exports[`App > matches empty-state snapshot 1`] = `
     class="h-14 bg-bg-elev2 border-b border-bg-elev1 flex items-center px-4 gap-4"
   >
     <span
-      class="font-display font-black tracking-tight text-2xl"
+      class="font-display font-black tracking-tight text-2xl lowercase"
     >
-      S
+      s
       <span
         class="text-soon-accent"
-        style="text-shadow: 0 0 6px currentColor;"
       >
-        ON
+        oo
       </span>
+      n
        
       <span
         class="text-soon-muted font-medium"
@@ -46,64 +46,99 @@ exports[`App > matches empty-state snapshot 1`] = `
       class="bg-bg-elev1 rounded-md min-h-0 overflow-auto"
     >
       <div
-        class="bg-bg-elev1 rounded-md overflow-hidden"
+        class="flex flex-col h-full min-h-0"
       >
-        <table
-          class="w-full text-left border-collapse"
+        <div
+          class="shrink-0 max-h-40 overflow-auto border-b border-white/10 p-2 text-xs"
+          data-testid="race-info-panel"
         >
-          <thead>
-            <tr
-              class="border-b border-white/10 text-soon-muted text-xs uppercase tracking-wide"
+          <div
+            class="flex items-center gap-2 mb-1.5"
+          >
+            <span
+              class="text-soon-muted uppercase tracking-wide"
             >
-              <th
-                class="px-3 py-2 font-medium"
+              Race Control
+            </span>
+            <span
+              class="px-1.5 py-0.5 rounded bg-bg-elev2 font-bold tracking-wide"
+              data-testid="rc-flag"
+            >
+              GREEN
+            </span>
+          </div>
+          <ol
+            class="space-y-0.5 m-0 p-0 list-none"
+            data-testid="rc-list"
+          >
+            <li
+              class="text-soon-muted"
+              data-testid="rc-empty"
+            >
+              No messages yet.
+            </li>
+          </ol>
+        </div>
+        <div
+          class="flex-1 min-h-0 overflow-auto"
+        >
+          <table
+            class="w-full text-left border-collapse"
+          >
+            <thead>
+              <tr
+                class="border-b border-white/10 text-soon-muted text-xs uppercase tracking-wide"
               >
-                Pos
-              </th>
-              <th
-                class="px-3 py-2 font-medium"
-              >
-                Driver
-              </th>
-              <th
-                class="px-3 py-2 font-medium"
-              >
-                Team
-              </th>
-              <th
-                class="px-3 py-2 font-medium"
-              >
-                Last Lap
-              </th>
-              <th
-                class="px-3 py-2 font-medium"
-              >
-                Interval
-              </th>
-              <th
-                class="px-3 py-2 font-medium"
-              >
-                Gap
-              </th>
-              <th
-                class="px-3 py-2 font-medium"
-              >
-                Tire
-              </th>
-              <th
-                class="px-3 py-2 font-medium"
-              >
-                Pits
-              </th>
-              <th
-                class="px-3 py-2 font-medium"
-              >
-                Trend
-              </th>
-            </tr>
-          </thead>
-          <tbody />
-        </table>
+                <th
+                  class="px-3 py-2 font-medium"
+                >
+                  Pos
+                </th>
+                <th
+                  class="px-3 py-2 font-medium"
+                >
+                  Driver
+                </th>
+                <th
+                  class="px-3 py-2 font-medium"
+                >
+                  Team
+                </th>
+                <th
+                  class="px-3 py-2 font-medium"
+                >
+                  Last Lap
+                </th>
+                <th
+                  class="px-3 py-2 font-medium"
+                >
+                  Interval
+                </th>
+                <th
+                  class="px-3 py-2 font-medium"
+                >
+                  Gap
+                </th>
+                <th
+                  class="px-3 py-2 font-medium"
+                >
+                  Tire
+                </th>
+                <th
+                  class="px-3 py-2 font-medium"
+                >
+                  Pits
+                </th>
+                <th
+                  class="px-3 py-2 font-medium"
+                >
+                  Trend
+                </th>
+              </tr>
+            </thead>
+            <tbody />
+          </table>
+        </div>
       </div>
     </section>
   </main>
@@ -114,7 +149,7 @@ exports[`App > matches empty-state snapshot 1`] = `
     role="dialog"
   >
     <div
-      class="bg-bg-elev2 rounded-lg shadow-xl p-6 w-[640px] max-h-[80vh] flex flex-col gap-4"
+      class="bg-bg-elev2 rounded-lg p-6 w-[640px] max-h-[80vh] flex flex-col gap-4"
     >
       <div
         class="flex items-center justify-between"

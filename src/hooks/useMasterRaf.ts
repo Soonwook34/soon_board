@@ -14,6 +14,12 @@ export interface MasterRafApi {
   isApplying: React.MutableRefObject<boolean>
   currentFps: () => 30 | 60
   setTargetFps(fps: 30 | 60): void
+  // Track perimeter (sum of segment euclidean distances) in scene units.
+  // CircuitMap publishes this once the substrate polyline is built. With
+  // trackLength > 0, the interpolator enables snap-on-teleport (segments
+  // longer than trackLength/30 snap to later sample) and 2 s extrapolation
+  // capping past the newest sample. Default 0 → freeze-at-last behavior.
+  setTrackLength(meters: number): void
   start(): void
   stop(): void
 }
@@ -28,6 +34,7 @@ function createMasterRaf(): MasterRafApi {
   let targetFps: 30 | 60 = 60
   let rafId: number | null = null
   let frameCount = 0
+  let trackLength = 0
 
   function tick() {
     rafId = requestAnimationFrame(tick)
@@ -46,7 +53,12 @@ function createMasterRaf(): MasterRafApi {
       const el = reg.ref.current
       if (!el) continue
       const samples = reg.getSamples()
-      const pos = sampleAt(samples, t, 'lerp')
+      const pos = sampleAt(samples, t, {
+        mode: 'lerp',
+        snapDivisor: 30,
+        trackLength,
+        extrapCapMs: 2000,
+      })
       if (pos === null) continue
       el.setAttribute('transform', `translate(${pos.x},${pos.y})`)
     }
@@ -65,6 +77,9 @@ function createMasterRaf(): MasterRafApi {
     },
     setTargetFps(fps: 30 | 60): void {
       targetFps = fps
+    },
+    setTrackLength(meters: number): void {
+      trackLength = meters > 0 ? meters : 0
     },
     start(): void {
       if (rafId !== null) return

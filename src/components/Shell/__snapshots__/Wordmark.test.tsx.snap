@@ -2,15 +2,15 @@
 
 exports[`Wordmark > matches snapshot 1`] = `
 <span
-  class="font-display font-black tracking-tight text-2xl"
+  class="font-display font-black tracking-tight text-2xl lowercase"
 >
-  S
+  s
   <span
     class="text-soon-accent"
-    style="text-shadow: 0 0 6px currentColor;"
   >
-    ON
+    oo
   </span>
+  n
    
   <span
     class="text-soon-muted font-medium"

@@ -44,7 +44,7 @@ export function SessionPicker({ client, meeting, onPick, onClose }: SessionPicke
       aria-modal="true"
       aria-label="Session picker"
     >
-      <div className="bg-bg-elev2 rounded-lg shadow-xl p-6 w-96 max-h-[80vh] flex flex-col gap-4">
+      <div className="bg-bg-elev2 rounded-lg p-6 w-96 max-h-[80vh] flex flex-col gap-4">
         <div className="flex items-center justify-between">
           <h2 className="text-white font-semibold text-sm">{meeting.meeting_name}</h2>
           <button

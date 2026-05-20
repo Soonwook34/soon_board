@@ -9,6 +9,7 @@ function makeRow(position: number): LeaderboardRow {
   return {
     driver_number: position,
     name_acronym: `D${String(position).padStart(2, '0')}`,
+    team_name: `Team ${position}`,
     team_colour: '3671C6',
     position,
     lastLapMs: 83000 + position * 100,

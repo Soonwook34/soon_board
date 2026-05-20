@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest'
 import {
   computeBbox,
   paddedViewBox,
+  paddedViewBoxForAspect,
   smoothPolyline,
   catmullRomToPath,
   pickCleanLap,
@@ -229,5 +230,61 @@ describe('filterSamplesToLap', () => {
       '2024-01-03T00:00:00.000Z',
     )
     expect(result).toHaveLength(0)
+  })
+})
+
+// ---------------------------------------------------------------------------
+// paddedViewBoxForAspect (AC2 — viewBox matches container aspect, no letterbox)
+// ---------------------------------------------------------------------------
+
+describe('paddedViewBoxForAspect', () => {
+  const square = { minX: 0, minY: 0, maxX: 100, maxY: 100 }
+  const wide = { minX: 0, minY: 0, maxX: 200, maxY: 50 }
+
+  it('is equivalent to paddedViewBox when containerAspect is null', () => {
+    const a = paddedViewBoxForAspect(square, null)
+    const b = paddedViewBox(square)
+    expect(a).toEqual(b)
+  })
+
+  it('extends viewBox horizontally when container is wider than content', () => {
+    // square padded → content is 110x110 (aspect 1). Container is wider (2.0).
+    // Need extraW = 110*2 - 110 = 110, split half each side.
+    const vb = paddedViewBoxForAspect(square, 2.0)
+    expect(vb.width / vb.height).toBeCloseTo(2.0, 5)
+    expect(vb.width).toBeGreaterThan(110)
+    expect(vb.height).toBeCloseTo(110, 5)
+  })
+
+  it('extends viewBox vertically when container is taller than content', () => {
+    // square padded → 110x110. Container is taller (0.5). Need extraH.
+    const vb = paddedViewBoxForAspect(square, 0.5)
+    expect(vb.width / vb.height).toBeCloseTo(0.5, 5)
+    expect(vb.height).toBeGreaterThan(110)
+    expect(vb.width).toBeCloseTo(110, 5)
+  })
+
+  it('produces viewBox whose aspect matches the container exactly', () => {
+    const aspects = [16 / 9, 4 / 3, 21 / 9, 1, 0.5]
+    for (const containerAspect of aspects) {
+      const vb = paddedViewBoxForAspect(wide, containerAspect)
+      expect(vb.width / vb.height).toBeCloseTo(containerAspect, 5)
+    }
+  })
+
+  it('does not crop the content bbox — viewBox fully encloses [minX..maxX, minY..maxY]', () => {
+    const vb = paddedViewBoxForAspect(square, 2.0)
+    expect(vb.x).toBeLessThanOrEqual(square.minX)
+    expect(vb.y).toBeLessThanOrEqual(square.minY)
+    expect(vb.x + vb.width).toBeGreaterThanOrEqual(square.maxX)
+    expect(vb.y + vb.height).toBeGreaterThanOrEqual(square.maxY)
+  })
+
+  it('ignores containerAspect <= 0 (falls back to symmetric padding)', () => {
+    const a = paddedViewBoxForAspect(square, 0)
+    const b = paddedViewBoxForAspect(square, -1)
+    const sym = paddedViewBox(square)
+    expect(a).toEqual(sym)
+    expect(b).toEqual(sym)
   })
 })

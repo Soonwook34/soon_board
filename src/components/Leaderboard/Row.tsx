@@ -1,6 +1,6 @@
 import React from 'react'
 import { useLeaderboardStore } from '../../store/leaderboardStore'
-import { TireDot } from './TireDot'
+import { TireChip } from './TireChip'
 import { Sparkline } from './Sparkline'
 import { formatLapTime, formatGap } from './format'
 
@@ -20,7 +20,7 @@ export const Row = React.memo(function Row({ driverNumber }: { driverNumber: num
         />
         <span className="font-mono font-bold text-sm">{row.name_acronym}</span>
       </td>
-      <td className="px-3 py-1.5 text-soon-muted text-xs">{row.name_acronym}</td>
+      <td className="px-3 py-1.5 text-soon-muted text-xs">{row.team_name}</td>
       <td className="px-3 py-1.5 tabular-nums text-sm">{formatLapTime(row.lastLapMs || null)}</td>
       <td className="px-3 py-1.5 tabular-nums text-sm text-soon-muted">
         {row.position === 1 ? '—' : formatGap(row.intervalAheadMs)}
@@ -29,7 +29,7 @@ export const Row = React.memo(function Row({ driverNumber }: { driverNumber: num
         {row.position === 1 ? '—' : formatGap(row.gapToLeaderMs)}
       </td>
       <td className="px-3 py-1.5">
-        <TireDot compound={row.tireCompound} ageLaps={row.tireAgeLaps} />
+        <TireChip compound={row.tireCompound} ageLaps={row.tireAgeLaps} />
       </td>
       <td className="px-3 py-1.5 tabular-nums text-sm text-soon-muted">{row.pitStops}</td>
       <td className="px-3 py-1.5">

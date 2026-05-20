@@ -107,4 +107,62 @@ describe('CircuitMap', () => {
     const svg = document.querySelector('svg')
     expect(svg).toBeTruthy()
   })
+
+  it('sets preserveAspectRatio explicitly to xMidYMid meet (AC2)', () => {
+    const { container } = render(
+      <CircuitMap session={session} drivers={drivers} substrateSamples={substrateSamples} />,
+    )
+    const svg = container.querySelector('svg')
+    expect(svg!.getAttribute('preserveAspectRatio')).toBe('xMidYMid meet')
+  })
+
+  it('mounts the SVG inside a container div so ResizeObserver has a target (AC2)', () => {
+    const { container } = render(
+      <CircuitMap session={session} drivers={drivers} substrateSamples={substrateSamples} />,
+    )
+    const wrapper = container.firstElementChild as HTMLElement
+    expect(wrapper.tagName.toLowerCase()).toBe('div')
+    expect(wrapper.querySelector('svg')).toBeTruthy()
+  })
+
+  it('expands the viewBox to match container aspect when ResizeObserver fires (AC2 / S5.1b)', () => {
+    // Capture the ResizeObserver callback so the test can drive it deterministically
+    let observerCallback: ResizeObserverCallback | null = null
+    class MockRO {
+      callback: ResizeObserverCallback
+      constructor(cb: ResizeObserverCallback) {
+        this.callback = cb
+        observerCallback = cb
+      }
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+    }
+    vi.stubGlobal('ResizeObserver', MockRO)
+
+    const { container, rerender } = render(
+      <CircuitMap session={session} drivers={drivers} substrateSamples={substrateSamples} />,
+    )
+
+    // Fire a resize with a known wide container (800x300, aspect ~2.67)
+    expect(observerCallback).not.toBeNull()
+    observerCallback!(
+      [
+        {
+          contentRect: { width: 800, height: 300 } as DOMRectReadOnly,
+        } as ResizeObserverEntry,
+      ],
+      {} as ResizeObserver,
+    )
+
+    // Force a re-render so state propagates to the SVG attribute
+    rerender(
+      <CircuitMap session={session} drivers={drivers} substrateSamples={substrateSamples} />,
+    )
+
+    const svg = container.querySelector('svg')
+    const [, , w, h] = svg!.getAttribute('viewBox')!.split(' ').map(Number)
+    // viewBox aspect should match the container aspect (~2.67) within tolerance
+    expect(w / h).toBeCloseTo(800 / 300, 2)
+  })
 })

@@ -140,4 +140,14 @@ describe('useMasterRaf', () => {
     // So after 2 ticks, exactly 1 setAttribute call
     expect(setAttr).toHaveBeenCalledTimes(1)
   })
+
+  it('exposes setTrackLength on the API', () => {
+    const { result } = renderHook(() => useMasterRaf())
+    const api = result.current
+    expect(typeof api.setTrackLength).toBe('function')
+    // Should not throw with valid input
+    expect(() => api.setTrackLength(1000)).not.toThrow()
+    // Negative values are clamped to 0 internally — should not throw
+    expect(() => api.setTrackLength(-5)).not.toThrow()
+  })
 })

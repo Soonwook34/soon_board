@@ -5,6 +5,7 @@ import type { DriverBuffer } from './telemetryStore'
 export interface LeaderboardRow {
   driver_number: number
   name_acronym: string
+  team_name: string
   team_colour: string
   position: number
   lastLapMs: number
@@ -114,6 +115,7 @@ export const useLeaderboardStore = create<LeaderboardState & LeaderboardActions>
       rows.push({
         driver_number: dn,
         name_acronym: driver.name_acronym,
+        team_name: driver.team_name ?? '',
         team_colour: driver.team_colour,
         position,
         lastLapMs,

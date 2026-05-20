@@ -123,4 +123,91 @@ describe('sampleAt', () => {
     expect(result!.x).toBeCloseTo(5)
     expect(result!.y).toBeCloseTo(5)
   })
+
+  describe('snap-on-teleport (options form)', () => {
+    // trackLength = 1000, snapDivisor = 30 → snapDist ≈ 33.33
+    const opts = { mode: 'lerp' as const, snapDivisor: 30, trackLength: 1000, extrapCapMs: 2000 }
+
+    it('lerps normally when segment distance is within snapDist', () => {
+      const samples = [
+        { t: 0, x: 0, y: 0 },
+        { t: 100, x: 20, y: 0 }, // segment length 20 < snapDist=33.33
+      ]
+      const result = sampleAt(samples, 50, opts)
+      expect(result!.x).toBeCloseTo(10)
+    })
+
+    it('snaps to later sample when segment distance exceeds snapDist', () => {
+      const samples = [
+        { t: 0, x: 0, y: 0 },
+        { t: 100, x: 500, y: 0 }, // segment length 500 > snapDist=33.33 — teleport
+      ]
+      const result = sampleAt(samples, 50, opts)
+      expect(result!.x).toBe(500)
+      expect(result!.y).toBe(0)
+    })
+
+    it('does not snap when snap is not configured (default behavior)', () => {
+      const samples = [
+        { t: 0, x: 0, y: 0 },
+        { t: 100, x: 500, y: 0 },
+      ]
+      const result = sampleAt(samples, 50)
+      expect(result!.x).toBeCloseTo(250)
+    })
+
+    it('does not snap when trackLength is 0 (preserves freeze-at-last)', () => {
+      const samples = [
+        { t: 0, x: 0, y: 0 },
+        { t: 100, x: 500, y: 0 },
+      ]
+      const result = sampleAt(samples, 50, { mode: 'lerp', snapDivisor: 30, trackLength: 0 })
+      expect(result!.x).toBeCloseTo(250)
+    })
+  })
+
+  describe('extrapolation cap', () => {
+    const opts = { mode: 'lerp' as const, snapDivisor: 30, trackLength: 1000, extrapCapMs: 2000 }
+
+    it('extrapolates along last segment when t is past last.t within cap', () => {
+      const samples = [
+        { t: 0, x: 0, y: 0 },
+        { t: 100, x: 20, y: 0 }, // last segment vx=20/100=0.2 px/ms
+      ]
+      // t = 100 + 50 = 150 → 50ms past last, so x = 20 + 20 * (50/100) = 30
+      const result = sampleAt(samples, 150, opts)
+      expect(result!.x).toBeCloseTo(30)
+      expect(result!.y).toBeCloseTo(0)
+    })
+
+    it('clamps to last sample when t exceeds extrapCapMs', () => {
+      const samples = [
+        { t: 0, x: 0, y: 0 },
+        { t: 100, x: 20, y: 0 },
+      ]
+      // t = 100 + 5000 → 5000ms past last, well beyond 2000ms cap
+      const result = sampleAt(samples, 5100, opts)
+      expect(result!.x).toBe(20)
+      expect(result!.y).toBe(0)
+    })
+
+    it('skips extrap when last segment looks like a teleport', () => {
+      const samples = [
+        { t: 0, x: 0, y: 0 },
+        { t: 100, x: 500, y: 0 }, // teleport segment
+      ]
+      // t = 150 → 50ms past last, but last segment exceeds snapDist → no extrap
+      const result = sampleAt(samples, 150, opts)
+      expect(result!.x).toBe(500) // clamped to last, not extrapolated
+    })
+
+    it('freezes at last sample when no extrapCapMs and no snap', () => {
+      const samples = [
+        { t: 0, x: 0, y: 0 },
+        { t: 100, x: 20, y: 0 },
+      ]
+      const result = sampleAt(samples, 150)
+      expect(result!.x).toBe(20)
+    })
+  })
 })

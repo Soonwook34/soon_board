@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbit&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,7 +9,7 @@
 }
 
 html {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Pretendard, sans-serif;
+  font-family: 'Formula1', 'Orbit', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
 }
 
 body {
