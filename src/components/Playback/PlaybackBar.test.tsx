@@ -69,9 +69,16 @@ describe('PlaybackBar', () => {
     expect(screen.queryByRole('slider', { name: 'Timeline scrubber' })).not.toBeInTheDocument()
   })
 
-  it('SpeedToggle is present', () => {
+  it('SpeedToggle is present in playback mode', () => {
+    useTimelineStore.setState({ mode: 'playback' })
     render(<PlaybackBar client={makeClient()} poller={makePoller()} />)
     expect(screen.getByRole('group', { name: 'Playback speed' })).toBeInTheDocument()
+  })
+
+  it('SpeedToggle is hidden in live mode', () => {
+    useTimelineStore.setState({ mode: 'live' })
+    render(<PlaybackBar client={makeClient()} poller={makePoller()} />)
+    expect(screen.queryByRole('group', { name: 'Playback speed' })).not.toBeInTheDocument()
   })
 
   it('clicking 2× speed updates store playbackRate', () => {

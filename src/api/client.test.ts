@@ -143,4 +143,49 @@ describe('OpenF1Client', () => {
     expect(result).toEqual({})
     expect(attempt).toBe(2)
   })
+
+  it('treats 404 as empty list (OpenF1 returns 404 on no-results queries)', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValueOnce(
+      makeResponse(404, { detail: 'No results found.' }),
+    )
+    const client = new OpenF1Client({ rateLimiter: noopLimiter() })
+    const result = await client.fetchJson('/intervals')
+    expect(result).toEqual([])
+  })
+
+  it('translates date_gte/date_lte to literal OpenF1 operator keys (date> / date<)', async () => {
+    const fetchSpy = vi
+      .spyOn(globalThis, 'fetch')
+      .mockResolvedValueOnce(makeResponse(200, []))
+
+    const client = new OpenF1Client({ rateLimiter: noopLimiter() })
+    await client.fetchJson('/location', {
+      session_key: 9523,
+      date_gte: '2024-05-26T13:00:00Z',
+      date_lte: '2024-05-26T13:10:00Z',
+    })
+
+    const calledUrl = fetchSpy.mock.calls[0]![0] as string
+    expect(calledUrl).toBe(
+      'https://api.openf1.org/v1/location?session_key=9523&date>=2024-05-26T13%3A00%3A00Z&date<=2024-05-26T13%3A10%3A00Z',
+    )
+    expect(calledUrl).not.toContain('date_gte')
+    expect(calledUrl).not.toContain('date_lte')
+  })
+
+  it('uses date_start>/date_start< for /laps (laps has no `date` field)', async () => {
+    const fetchSpy = vi
+      .spyOn(globalThis, 'fetch')
+      .mockResolvedValueOnce(makeResponse(200, []))
+
+    const client = new OpenF1Client({ rateLimiter: noopLimiter() })
+    await client.fetchJson('/laps', {
+      session_key: 9523,
+      date_gte: '2024-05-26T13:00:00Z',
+    })
+
+    const calledUrl = fetchSpy.mock.calls[0]![0] as string
+    expect(calledUrl).toContain('date_start>=2024-05-26T13%3A00%3A00Z')
+    expect(calledUrl).not.toContain('date_gte')
+  })
 })

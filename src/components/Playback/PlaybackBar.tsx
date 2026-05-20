@@ -5,6 +5,7 @@ import type { Poller } from '../../scheduler/poller'
 import { useTimelineStore } from '../../store/timelineStore'
 import { useSessionStore } from '../../store/sessionStore'
 import { useGlobalClock } from '../../hooks/useGlobalClock'
+import { parseOpenF1DateMs, getSessionStatus } from '../../utils/sessionStatus'
 import { LiveDot } from './LiveDot'
 import { SpeedToggle } from './SpeedToggle'
 import { Scrubber } from './Scrubber'
@@ -28,15 +29,21 @@ export function PlaybackBar({ client, poller }: PlaybackBarProps) {
   function handlePick(m: Meeting, s: Session) {
     useSessionStore.getState().setMeeting(m)
     useSessionStore.getState().setSession(s)
-    useTimelineStore.getState().setMode('playback')
+    const status = getSessionStatus(s.date_start, s.date_end)
+    if (status === 'live') {
+      useTimelineStore.getState().setMode('live')
+    } else {
+      useTimelineStore.getState().setMode('playback')
+      useTimelineStore.getState().scrubTo(parseOpenF1DateMs(s.date_start))
+    }
     setCalendarOpen(false)
   }
 
   const sessionLabel =
     meeting && session ? `${meeting.meeting_name} — ${session.session_name}` : 'No session'
 
-  const sessionStartMs = session ? new Date(session.date_start).getTime() : 0
-  const sessionEndMs = session ? new Date(session.date_end).getTime() : 0
+  const sessionStartMs = session ? parseOpenF1DateMs(session.date_start) : 0
+  const sessionEndMs = session ? parseOpenF1DateMs(session.date_end) : 0
 
   return (
     <>

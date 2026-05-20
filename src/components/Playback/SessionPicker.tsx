@@ -2,6 +2,14 @@ import { useState, useEffect } from 'react'
 import type { OpenF1Client } from '../../api/client'
 import type { Meeting, Session } from '../../api/types'
 import { getSessions } from '../../api/endpoints'
+import { useGlobalClock } from '../../hooks/useGlobalClock'
+import {
+  getSessionStatus,
+  formatCountdown,
+  formatLocalDateTime,
+  parseOpenF1DateMs,
+  type SessionStatus,
+} from '../../utils/sessionStatus'
 
 export interface SessionPickerProps {
   client: OpenF1Client
@@ -13,6 +21,7 @@ export interface SessionPickerProps {
 export function SessionPicker({ client, meeting, onPick, onClose }: SessionPickerProps) {
   const [sessions, setSessions] = useState<Session[] | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const nowMs = useGlobalClock(1)
 
   useEffect(() => {
     let cancelled = false
@@ -35,7 +44,7 @@ export function SessionPicker({ client, meeting, onPick, onClose }: SessionPicke
       aria-modal="true"
       aria-label="Session picker"
     >
-      <div className="bg-bg-elev2 rounded-lg shadow-xl p-6 w-80 max-h-[80vh] flex flex-col gap-4">
+      <div className="bg-bg-elev2 rounded-lg shadow-xl p-6 w-96 max-h-[80vh] flex flex-col gap-4">
         <div className="flex items-center justify-between">
           <h2 className="text-white font-semibold text-sm">{meeting.meeting_name}</h2>
           <button
@@ -55,18 +64,49 @@ export function SessionPicker({ client, meeting, onPick, onClose }: SessionPicke
 
         {sessions !== null && (
           <div className="flex flex-col gap-2 overflow-y-auto">
-            {sessions.map((s) => (
-              <button
-                key={s.session_key}
-                onClick={() => onPick(meeting, s)}
-                className="text-left px-3 py-2 rounded bg-bg-elev1 hover:bg-soon-accent/20 text-white text-sm transition-colors"
-              >
-                {s.session_name}
-              </button>
-            ))}
+            {[...sessions]
+              .sort((a, b) => parseOpenF1DateMs(a.date_start) - parseOpenF1DateMs(b.date_start))
+              .map((s) => {
+                const status = getSessionStatus(s.date_start, s.date_end, nowMs)
+                return (
+                  <button
+                    key={s.session_key}
+                    onClick={() => onPick(meeting, s)}
+                    className="text-left px-3 py-2 rounded bg-bg-elev1 hover:bg-soon-accent/20 transition-colors"
+                  >
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-white text-sm">{s.session_name}</span>
+                      <StatusBadge status={status} />
+                    </div>
+                    <p className="text-soon-muted text-xs mt-0.5">
+                      {formatLocalDateTime(s.date_start)}
+                    </p>
+                    {status === 'upcoming' && (
+                      <p className="text-soon-accent text-xs font-mono mt-0.5">
+                        {formatCountdown(parseOpenF1DateMs(s.date_start), nowMs)}
+                      </p>
+                    )}
+                  </button>
+                )
+              })}
           </div>
         )}
       </div>
     </div>
+  )
+}
+
+function StatusBadge({ status }: { status: SessionStatus }) {
+  const config = {
+    live: { label: 'LIVE', cls: 'bg-soon-accent text-white' },
+    upcoming: { label: 'UPCOMING', cls: 'bg-bg-elev2 text-soon-accent border border-soon-accent/50' },
+    past: { label: 'PAST', cls: 'bg-bg-elev2 text-soon-muted' },
+  }[status]
+  return (
+    <span
+      className={`text-[10px] font-bold tracking-wider px-1.5 py-0.5 rounded ${config.cls}`}
+    >
+      {config.label}
+    </span>
   )
 }

@@ -3,6 +3,14 @@ import type { OpenF1Client } from '../../api/client'
 import type { Meeting, Session } from '../../api/types'
 import { getMeetings } from '../../api/endpoints'
 import { SessionPicker } from './SessionPicker'
+import { useGlobalClock } from '../../hooks/useGlobalClock'
+import {
+  getMeetingStatus,
+  formatCountdown,
+  formatLocalDate,
+  parseOpenF1DateMs,
+  type SessionStatus,
+} from '../../utils/sessionStatus'
 
 export interface CalendarProps {
   client: OpenF1Client
@@ -19,6 +27,7 @@ export function Calendar({ client, onPick, onClose }: CalendarProps) {
   const [loading, setLoading] = useState<Year | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [pickerMeeting, setPickerMeeting] = useState<Meeting | null>(null)
+  const nowMs = useGlobalClock(1)
 
   function selectYear(year: Year) {
     setActiveYear(year)
@@ -97,22 +106,32 @@ export function Calendar({ client, onPick, onClose }: CalendarProps) {
           {meetings && (
             <div className="overflow-y-auto">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                {meetings.map((m) => (
-                  <button
-                    key={m.meeting_key}
-                    onClick={() => setPickerMeeting(m)}
-                    className="text-left p-3 rounded bg-bg-elev1 hover:bg-soon-accent/20 transition-colors"
-                  >
-                    <p className="text-white text-sm font-medium leading-snug">{m.meeting_name}</p>
-                    <p className="text-soon-muted text-xs mt-0.5">{m.circuit_short_name}</p>
-                    <p className="text-soon-muted text-xs">
-                      {new Date(m.date_start).toLocaleDateString(undefined, {
-                        month: 'short',
-                        day: 'numeric',
-                      })}
-                    </p>
-                  </button>
-                ))}
+                {[...meetings]
+                  .sort((a, b) => parseOpenF1DateMs(a.date_start) - parseOpenF1DateMs(b.date_start))
+                  .map((m) => {
+                    const status = getMeetingStatus(m.date_start, nowMs)
+                    return (
+                      <button
+                        key={m.meeting_key}
+                        onClick={() => setPickerMeeting(m)}
+                        className="text-left p-3 rounded bg-bg-elev1 hover:bg-soon-accent/20 transition-colors"
+                      >
+                        <div className="flex items-center justify-between gap-2">
+                          <p className="text-white text-sm font-medium leading-snug truncate">
+                            {m.meeting_name}
+                          </p>
+                          <StatusBadge status={status} />
+                        </div>
+                        <p className="text-soon-muted text-xs mt-0.5">{m.circuit_short_name}</p>
+                        <p className="text-soon-muted text-xs">{formatLocalDate(m.date_start)}</p>
+                        {status === 'upcoming' && (
+                          <p className="text-soon-accent text-xs font-mono mt-1">
+                            {formatCountdown(parseOpenF1DateMs(m.date_start), nowMs)}
+                          </p>
+                        )}
+                      </button>
+                    )
+                  })}
               </div>
             </div>
           )}
@@ -128,5 +147,20 @@ export function Calendar({ client, onPick, onClose }: CalendarProps) {
         />
       )}
     </>
+  )
+}
+
+function StatusBadge({ status }: { status: SessionStatus }) {
+  const config = {
+    live: { label: 'LIVE', cls: 'bg-soon-accent text-white' },
+    upcoming: { label: 'UPCOMING', cls: 'bg-bg-elev2 text-soon-accent border border-soon-accent/50' },
+    past: { label: 'PAST', cls: 'bg-bg-elev2 text-soon-muted' },
+  }[status]
+  return (
+    <span
+      className={`text-[10px] font-bold tracking-wider px-1.5 py-0.5 rounded ${config.cls}`}
+    >
+      {config.label}
+    </span>
   )
 }

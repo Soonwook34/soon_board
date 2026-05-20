@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import type { LocationRow, Lap, Stint, PitStop } from '../api/types'
+import { parseOpenF1DateMs } from '../utils/sessionStatus'
 
 export const MAX_BUFFERED_SESSIONS = 1
 
@@ -44,7 +45,7 @@ export const useTelemetryStore = create<TelemetryState & TelemetryActions>((set,
   appendLocationBatch(rows: LocationRow[]): void {
     const map = new Map(get().byDriver)
     for (const row of rows) {
-      const t = Date.parse(row.date)
+      const t = parseOpenF1DateMs(row.date)
       if (!map.has(row.driver_number)) {
         map.set(row.driver_number, emptyBuffer())
       }

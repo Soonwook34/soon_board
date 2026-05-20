@@ -22,16 +22,31 @@ function endpointFromPath(path: string): EndpointName {
   return segment
 }
 
+// OpenF1 uses operator-style filter keys (`date>value`) and silently returns
+// 404 for fully percent-encoded keys (`date%3E%3D=value`) that `URL.searchParams`
+// produces. Build the query string manually so keys pass through literally and
+// only values are percent-encoded. `/laps` has no `date` field — only
+// `date_start` — so it gets its own alias map.
+const FILTER_KEY_ALIAS_DEFAULT: Record<string, string> = {
+  date_gte: 'date>',
+  date_lte: 'date<',
+}
+
+const FILTER_KEY_ALIAS_LAPS: Record<string, string> = {
+  date_gte: 'date_start>',
+  date_lte: 'date_start<',
+}
+
 function buildUrl(baseUrl: string, path: string, params?: Record<string, string | number>): string {
-  const url = new URL(`${baseUrl}${path}`)
-  if (params) {
-    for (const [k, v] of Object.entries(params)) {
-      if (v !== undefined && v !== null && v !== '') {
-        url.searchParams.set(k, String(v))
-      }
-    }
+  if (!params) return `${baseUrl}${path}`
+  const alias = path === '/laps' ? FILTER_KEY_ALIAS_LAPS : FILTER_KEY_ALIAS_DEFAULT
+  const parts: string[] = []
+  for (const [k, v] of Object.entries(params)) {
+    if (v === undefined || v === null || v === '') continue
+    const key = alias[k] ?? k
+    parts.push(`${key}=${encodeURIComponent(String(v))}`)
   }
-  return url.toString()
+  return parts.length === 0 ? `${baseUrl}${path}` : `${baseUrl}${path}?${parts.join('&')}`
 }
 
 export class OpenF1Client {
@@ -79,6 +94,12 @@ export class OpenF1Client {
 
       if (res.ok) {
         return res.json() as Promise<T>
+      }
+
+      // OpenF1 returns 404 with `{"detail":"No results found."}` when a query
+      // matches no rows. Treat as an empty list rather than an error.
+      if (res.status === 404) {
+        return [] as unknown as T
       }
 
       if (res.status === 429 && retryOn429 && attempt < MAX_RETRIES) {

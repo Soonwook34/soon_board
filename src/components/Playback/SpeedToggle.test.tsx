@@ -4,12 +4,11 @@ import { SpeedToggle } from './SpeedToggle'
 import { useTimelineStore } from '../../store/timelineStore'
 
 beforeEach(() => {
-  // Reset store to live mode, rate 1
-  useTimelineStore.setState({ mode: 'live', playbackRate: 1 })
+  useTimelineStore.setState({ mode: 'playback', playbackRate: 1 })
 })
 
 describe('SpeedToggle', () => {
-  it('renders 1×, 2×, 5× buttons', () => {
+  it('renders 1×, 2×, 5× buttons in playback mode', () => {
     render(<SpeedToggle />)
     expect(screen.getByRole('button', { name: '1× speed' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: '2× speed' })).toBeInTheDocument()
@@ -24,18 +23,15 @@ describe('SpeedToggle', () => {
   })
 
   it('click 2× calls setRate(2)', () => {
-    useTimelineStore.setState({ mode: 'playback', playbackRate: 1 })
     const setRate = vi.spyOn(useTimelineStore.getState(), 'setRate')
     render(<SpeedToggle />)
     fireEvent.click(screen.getByRole('button', { name: '2× speed' }))
     expect(setRate).toHaveBeenCalledWith(2)
   })
 
-  it('live mode: 2× and 5× are disabled', () => {
+  it('live mode: renders nothing', () => {
     useTimelineStore.setState({ mode: 'live', playbackRate: 1 })
-    render(<SpeedToggle />)
-    expect(screen.getByRole('button', { name: '2× speed' })).toBeDisabled()
-    expect(screen.getByRole('button', { name: '5× speed' })).toBeDisabled()
-    expect(screen.getByRole('button', { name: '1× speed' })).not.toBeDisabled()
+    const { container } = render(<SpeedToggle />)
+    expect(container).toBeEmptyDOMElement()
   })
 })
