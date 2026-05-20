@@ -93,7 +93,7 @@ describe('CircuitMap', () => {
       (p) => p.getAttribute('fill') === 'none',
     )
     expect(substratePath).toBeTruthy()
-    expect(substratePath!.getAttribute('stroke')).toBe('#3A3A45')
+    expect(substratePath!.getAttribute('stroke')).toBe('#7A8290')
   })
 
   it('renders gracefully with empty substrate (no throw)', () => {

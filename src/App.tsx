@@ -7,15 +7,16 @@ import { CircuitMap } from './components/Map/CircuitMap'
 import { Leaderboard } from './components/Leaderboard/Leaderboard'
 import { OpenF1Client } from './api/client'
 import { Poller } from './scheduler/poller'
-import { useTimelineStore } from './store/timelineStore'
+import { useTimelineStore, globalClockNow } from './store/timelineStore'
 import { useSessionStore } from './store/sessionStore'
 import { useTelemetryStore } from './store/telemetryStore'
-import { useLeaderboardStore } from './store/leaderboardStore'
+import { useLeaderboardStore, computeLeaderLap } from './store/leaderboardStore'
 import { getDrivers, getLocation } from './api/endpoints'
 import { getSessionStatus, parseOpenF1DateMs, toOpenF1Iso } from './utils/sessionStatus'
 import type { Interval, Meeting, RacePosition, Session } from './api/types'
 
 const SUBSTRATE_WINDOW_MS = 10 * 60 * 1000
+const BOOTSTRAP_WINDOW_MS = 60 * 1000
 
 export default function App() {
   const [calendarOpen, setCalendarOpen] = useState(true)
@@ -44,7 +45,6 @@ export default function App() {
     const sessionStartIso = toOpenF1Iso(session.date_start)
     const sessionStartMs = parseOpenF1DateMs(session.date_start)
     const substrateEndIso = new Date(sessionStartMs + SUBSTRATE_WINDOW_MS).toISOString()
-    const isPlayback = useTimelineStore.getState().mode === 'playback'
 
     setSubstrateSamples([])
 
@@ -52,13 +52,15 @@ export default function App() {
     const latestPositions: { current: RacePosition[] } = { current: [] }
 
     const recompute = () => {
+      const telemetry = useTelemetryStore.getState().byDriver
       useLeaderboardStore
         .getState()
         .recompute(
           latestIntervals.current,
           latestPositions.current,
           useSessionStore.getState().drivers,
-          useTelemetryStore.getState().byDriver,
+          telemetry,
+          computeLeaderLap(telemetry),
         )
     }
 
@@ -68,7 +70,9 @@ export default function App() {
       const map = new Map<number, T>()
       for (const r of rows) {
         const prev = map.get(r.driver_number)
-        if (!prev || Date.parse(r.date) > Date.parse(prev.date)) map.set(r.driver_number, r)
+        if (!prev || parseOpenF1DateMs(r.date) > parseOpenF1DateMs(prev.date)) {
+          map.set(r.driver_number, r)
+        }
       }
       return Array.from(map.values())
     }
@@ -76,6 +80,11 @@ export default function App() {
     const p = new Poller({
       client,
       sessionKey: session.session_key,
+      // Playback head (or wall clock in live). Poller clips time-filterable
+      // fetches to [until - 2*interval, until] so we naturally get new slices
+      // as the global clock advances, and scrubbing past a buffered range
+      // triggers a fresh fetch on the next tick.
+      until: () => globalClockNow(useTimelineStore.getState()),
       handlers: {
         onLocation: (rows) => {
           useTelemetryStore.getState().appendLocationBatch(rows)
@@ -113,6 +122,7 @@ export default function App() {
       })
       .catch((err) => console.error('[drivers]', err))
 
+    // Substrate (track polyline outline) — small one-shot window from session start
     getLocation(client, {
       session_key: session.session_key,
       date_gte: sessionStartIso,
@@ -124,18 +134,19 @@ export default function App() {
         const lap = locs
           .filter((l) => l.driver_number === firstDriver)
           .slice(0, 500)
-          .map((l) => ({ t: Date.parse(l.date), x: l.x, y: l.y }))
+          .map((l) => ({ t: parseOpenF1DateMs(l.date), x: l.x, y: l.y }))
         setSubstrateSamples(lap)
       })
       .catch((err) => console.error('[substrate]', err))
 
-    if (isPlayback) {
-      p.refetchWindow(sessionStartMs, sessionStartMs + SUBSTRATE_WINDOW_MS).catch((err) =>
-        console.error('[refetch]', err),
-      )
-    } else {
-      p.start()
-    }
+    // Bootstrap: seed a small window around the playback anchor so the user
+    // sees data immediately instead of waiting one polling interval.
+    const anchorMs = globalClockNow(useTimelineStore.getState())
+    p.refetchWindow(anchorMs, anchorMs + BOOTSTRAP_WINDOW_MS).catch((err) =>
+      console.error('[bootstrap]', err),
+    )
+
+    p.start()
     setPoller(p)
 
     return () => p.stop()

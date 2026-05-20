@@ -54,6 +54,11 @@ export interface PollerOptions {
   handlers: PollerHandlers
   /** Optional override of intervals for tests */
   intervalsMs?: Partial<Record<EndpointName, number>>
+  /** Current playback time in ms. When set, time-filterable periodic fetches
+   *  use a sliding window [until() - 2*interval, until()] instead of
+   *  unbounded "latest" queries — this clips future rows in playback and is
+   *  a no-op in live mode (until() === Date.now()). */
+  until?: () => number
 }
 
 // LOCKED cadence — sums to exactly 30.0 req/min
@@ -99,6 +104,7 @@ export class Poller {
   private readonly sessionKey: number
   private readonly handlers: PollerHandlers
   private readonly intervalsMs: Record<PollerEndpoint, number>
+  private readonly until?: () => number
 
   private timers: Map<PollerEndpoint, ReturnType<typeof setInterval>> = new Map()
   private abortControllers: Map<PollerEndpoint, AbortController> = new Map()
@@ -109,6 +115,7 @@ export class Poller {
     this.client = opts.client
     this.sessionKey = opts.sessionKey
     this.handlers = opts.handlers
+    this.until = opts.until
 
     // Merge defaults with any test overrides
     this.intervalsMs = { ...DEFAULT_INTERVALS_MS }
@@ -232,11 +239,20 @@ export class Poller {
     const { signal, dateGte, dateLte } = opts
     const base: Record<string, string | number> = { session_key: this.sessionKey }
 
-    if (TIME_FILTERABLE.has(ep) && dateGte !== undefined) {
-      base['date_gte'] = dateGte
-    }
-    if (TIME_FILTERABLE.has(ep) && dateLte !== undefined) {
-      base['date_lte'] = dateLte
+    if (TIME_FILTERABLE.has(ep)) {
+      if (dateGte !== undefined || dateLte !== undefined) {
+        // Explicit window (refetchWindow path) takes precedence
+        if (dateGte !== undefined) base['date_gte'] = dateGte
+        if (dateLte !== undefined) base['date_lte'] = dateLte
+      } else if (this.until) {
+        // Periodic poll in playback or live: only fetch the slice between the
+        // last interval-worth of time and the playback head. Lookback = 2×
+        // interval to absorb mild timing drift / dropped polls.
+        const untilMs = this.until()
+        const lookbackMs = this.intervalsMs[ep] * 2
+        base['date_gte'] = new Date(untilMs - lookbackMs).toISOString()
+        base['date_lte'] = new Date(untilMs).toISOString()
+      }
     }
 
     const fetchOpts = signal ? { signal } : undefined
