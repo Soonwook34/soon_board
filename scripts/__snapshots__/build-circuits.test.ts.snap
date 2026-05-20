@@ -1,7 +1,0 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`buildCircuits fixture test > emits SVG and meta for LineString fixture 1`] = `
-"<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000">
-  <path d="M 200.00 950.00 L 800.00 950.00 L 800.00 350.00 L 500.00 50.00 L 200.00 350.00 L 200.00 950.00" fill="none" stroke="currentColor" stroke-width="2"/>
-</svg>"
-`;
