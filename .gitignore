@@ -1,0 +1,18 @@
+# OMC runtime (state, memory, logs, scratch)
+.omc/project-memory.json
+.omc/state/
+.omc/logs/
+.omc/notepad.md
+.omc/drafts/
+
+# macOS
+.DS_Store
+
+# Node / Vite
+node_modules/
+dist/
+.vite/
+
+# Local env
+.env
+.env.local
