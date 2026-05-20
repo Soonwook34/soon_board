@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import type { OpenF1Client } from '../../api/client'
 import type { Meeting, Session } from '../../api/types'
 import { getMeetings } from '../../api/endpoints'
@@ -11,25 +11,38 @@ import {
   parseOpenF1DateMs,
   type SessionStatus,
 } from '../../utils/sessionStatus'
+import { getAvailableYears, pickInitialYear } from '../../utils/seasonYears'
+import { getPreshippedMeetings } from '../../assets/meetings'
 
 export interface CalendarProps {
   client: OpenF1Client
   onPick: (meeting: Meeting, session: Session) => void
   onClose: () => void
+  /** Date_start of the session currently picked, used to seed the initial year. */
+  currentSessionDateStart?: string
 }
 
-const YEARS = [2024, 2025, 2026] as const
-type Year = (typeof YEARS)[number]
-
-export function Calendar({ client, onPick, onClose }: CalendarProps) {
-  const [activeYear, setActiveYear] = useState<Year>(2025)
-  const [cache, setCache] = useState<Partial<Record<Year, Meeting[]>>>({})
-  const [loading, setLoading] = useState<Year | null>(null)
+export function Calendar({ client, onPick, onClose, currentSessionDateStart }: CalendarProps) {
+  const years = useMemo(() => getAvailableYears(), [])
+  const [activeYear, setActiveYear] = useState<number>(() =>
+    pickInitialYear(currentSessionDateStart),
+  )
+  // Seed the cache from any pre-shipped JSON we have so the first paint of
+  // those years is synchronous (no network).
+  const [cache, setCache] = useState<Partial<Record<number, Meeting[]>>>(() => {
+    const seed: Partial<Record<number, Meeting[]>> = {}
+    for (const y of years) {
+      const pre = getPreshippedMeetings(y)
+      if (pre) seed[y] = pre
+    }
+    return seed
+  })
+  const [loading, setLoading] = useState<number | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [pickerMeeting, setPickerMeeting] = useState<Meeting | null>(null)
   const nowMs = useGlobalClock(1)
 
-  function selectYear(year: Year) {
+  function selectYear(year: number) {
     setActiveYear(year)
     setError(null)
     if (cache[year]) return
@@ -45,7 +58,7 @@ export function Calendar({ client, onPick, onClose }: CalendarProps) {
       })
   }
 
-  // Trigger initial fetch for default year on first render
+  // Trigger initial fetch for default year on first render if no pre-shipped data
   const meetings = cache[activeYear]
   if (meetings === undefined && loading !== activeYear && !error) {
     selectYear(activeYear)
@@ -78,8 +91,8 @@ export function Calendar({ client, onPick, onClose }: CalendarProps) {
           </div>
 
           {/* Year tabs */}
-          <div className="flex gap-2">
-            {YEARS.map((y) => (
+          <div className="flex gap-2 flex-wrap">
+            {years.map((y) => (
               <button
                 key={y}
                 onClick={() => selectYear(y)}

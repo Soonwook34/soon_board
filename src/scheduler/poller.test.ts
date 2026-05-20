@@ -62,39 +62,39 @@ describe('Poller cadence over 5 minutes', () => {
     expect(locationCalls).toBeGreaterThanOrEqual(50)
     expect(locationCalls).toBeLessThanOrEqual(52)
 
-    // intervals: same as location
-    expect(intervalsCalls).toBeGreaterThanOrEqual(50)
-    expect(intervalsCalls).toBeLessThanOrEqual(52)
+    // intervals: 1 initial + floor(300000/10000)=30 → 31, allow ±1
+    expect(intervalsCalls).toBeGreaterThanOrEqual(30)
+    expect(intervalsCalls).toBeLessThanOrEqual(32)
 
-    // race_control: 1 initial + floor(300000/10000)=30 → 31, allow ±1
-    expect(raceControlCalls).toBeGreaterThanOrEqual(30)
-    expect(raceControlCalls).toBeLessThanOrEqual(32)
+    // race_control: 1 initial + floor(300000/60000)=5 → 6, allow ±1
+    expect(raceControlCalls).toBeGreaterThanOrEqual(5)
+    expect(raceControlCalls).toBeLessThanOrEqual(7)
 
     // position: 1 initial + floor(300000/30000)=10 → 11, allow ±1
     expect(positionCalls).toBeGreaterThanOrEqual(10)
     expect(positionCalls).toBeLessThanOrEqual(12)
 
-    // laps: 1 initial + floor(300000/60000)=5 → 6, allow ±1
-    expect(lapsCalls).toBeGreaterThanOrEqual(5)
-    expect(lapsCalls).toBeLessThanOrEqual(7)
+    // laps: 1 initial + floor(300000/12000)=25 → 26, allow ±1
+    expect(lapsCalls).toBeGreaterThanOrEqual(25)
+    expect(lapsCalls).toBeLessThanOrEqual(27)
 
-    // pit: 1 initial + floor(300000/180000)=1 → 2, allow ±1
-    expect(pitCalls).toBeGreaterThanOrEqual(2)
-    expect(pitCalls).toBeLessThanOrEqual(3)
+    // pit: 1 initial + floor(300000/90000)=3 → 4, allow ±1
+    expect(pitCalls).toBeGreaterThanOrEqual(3)
+    expect(pitCalls).toBeLessThanOrEqual(5)
 
     // stints: same as pit
-    expect(stintsCalls).toBeGreaterThanOrEqual(2)
-    expect(stintsCalls).toBeLessThanOrEqual(3)
+    expect(stintsCalls).toBeGreaterThanOrEqual(3)
+    expect(stintsCalls).toBeLessThanOrEqual(5)
 
-    // weather: same as pit
+    // weather: 1 initial + floor(300000/120000)=2 → 3, allow ±1
     expect(weatherCalls).toBeGreaterThanOrEqual(2)
-    expect(weatherCalls).toBeLessThanOrEqual(3)
+    expect(weatherCalls).toBeLessThanOrEqual(4)
 
-    // Total ≈ 51+51+31+11+6+2+2+2 = 156 ≈ 30 req/min average
+    // Total ≈ 51+31+6+11+26+4+4+3 = 136 → ~27 req/min average
     const total = fetchJson.mock.calls.length
-    // 30 req/min × 5 min = 150, allow some for initial fetches
-    expect(total).toBeGreaterThanOrEqual(150)
-    expect(total).toBeLessThanOrEqual(165)
+    // ~26 req/min × 5 min = 130, allow some for initial fetches and rounding
+    expect(total).toBeGreaterThanOrEqual(128)
+    expect(total).toBeLessThanOrEqual(140)
 
     poller.stop()
   })

@@ -35,7 +35,18 @@ describe('App', () => {
   })
 
   it('matches empty-state snapshot', () => {
-    const { container } = render(<App />)
-    expect(container.firstChild).toMatchSnapshot()
+    // Pin both wall clock and performance.now so countdowns / status badges
+    // render deterministically. performance must be explicitly in `toFake`
+    // because globalClockNow() reads `performance.timeOrigin + performance.now()`.
+    vi.useFakeTimers({
+      toFake: ['Date', 'setTimeout', 'setInterval', 'performance'],
+    })
+    vi.setSystemTime(new Date('2026-05-20T00:00:00Z'))
+    try {
+      const { container } = render(<App />)
+      expect(container.firstChild).toMatchSnapshot()
+    } finally {
+      vi.useRealTimers()
+    }
   })
 })

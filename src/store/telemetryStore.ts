@@ -1,16 +1,13 @@
 import { create } from 'zustand'
-import type { LocationRow, Lap, Stint, PitStop } from '../api/types'
-import { parseOpenF1DateMs } from '../utils/sessionStatus'
+import type { Lap, Stint, PitStop } from '../api/types'
 
 export const MAX_BUFFERED_SESSIONS = 1
 
-const MAX_RING = 200
-
-// Raw per-driver buffer. Leaderboard derives its values from this at read
-// time, clipping to the current leader lap so scrubbing playback backward
-// hides future pit stops / stints / lap times.
+// Raw per-driver buffer for lap-keyed data. Live positions live in
+// carsPositionStore — keeping them out of this store prevents the
+// leaderboard recompute path from sharing change-detection with the hot
+// 60fps location feed.
 export interface DriverBuffer {
-  samples: { t: number; x: number; y: number }[]
   laps: Lap[]
   stints: Stint[]
   pitStops: PitStop[]
@@ -21,7 +18,6 @@ interface TelemetryState {
 }
 
 interface TelemetryActions {
-  appendLocationBatch(rows: LocationRow[]): void
   appendLap(lap: Lap): void
   appendStint(stint: Stint): void
   appendPit(pit: PitStop): void
@@ -29,7 +25,7 @@ interface TelemetryActions {
 }
 
 function emptyBuffer(): DriverBuffer {
-  return { samples: [], laps: [], stints: [], pitStops: [] }
+  return { laps: [], stints: [], pitStops: [] }
 }
 
 function upsertBy<T>(arr: T[], item: T, key: (t: T) => number, sortAsc = true): void {
@@ -42,20 +38,6 @@ function upsertBy<T>(arr: T[], item: T, key: (t: T) => number, sortAsc = true): 
 
 export const useTelemetryStore = create<TelemetryState & TelemetryActions>((set, get) => ({
   byDriver: new Map(),
-
-  appendLocationBatch(rows: LocationRow[]): void {
-    if (rows.length === 0) return
-    const map = new Map(get().byDriver)
-    for (const row of rows) {
-      const t = parseOpenF1DateMs(row.date)
-      if (!map.has(row.driver_number)) map.set(row.driver_number, emptyBuffer())
-      const buf = map.get(row.driver_number)!
-      if (buf.samples.some((s) => s.t === t)) continue
-      buf.samples.push({ t, x: row.x, y: row.y })
-      if (buf.samples.length > MAX_RING) buf.samples.shift()
-    }
-    set({ byDriver: map })
-  },
 
   appendLap(lap: Lap): void {
     const map = new Map(get().byDriver)

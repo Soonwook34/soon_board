@@ -1,7 +1,8 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { renderHook, act } from '@testing-library/react'
-import { useMasterRaf, _resetMasterRafInstance } from './useMasterRaf'
+import { useMasterRaf, _resetMasterRafInstance, RENDER_BUFFER_MS } from './useMasterRaf'
 import type { MarkerRefRegistration } from './useMasterRaf'
+import { useTimelineStore, globalClockNow } from '../store/timelineStore'
 import React from 'react'
 
 // We need to mock requestAnimationFrame manually
@@ -139,6 +140,41 @@ describe('useMasterRaf', () => {
     // frameCount starts at 0, then increments to 1 (odd, skip), 2 (even, run)
     // So after 2 ticks, exactly 1 setAttribute call
     expect(setAttr).toHaveBeenCalledTimes(1)
+  })
+
+  it('targets samples behind globalClockNow by RENDER_BUFFER_MS (lerp instead of freeze)', () => {
+    const { result } = renderHook(() => useMasterRaf())
+    const api = result.current
+
+    // The tick reads globalClockNow once and subtracts RENDER_BUFFER_MS.
+    // Place samples that bracket the *buffered* target — both behind wall
+    // clock. Without the buffer, both samples sit in the past → freeze at
+    // last sample (x=100). With the buffer, target ≈ midpoint → lerp x≈50.
+    const clockNow = globalClockNow(useTimelineStore.getState())
+    const target = clockNow - RENDER_BUFFER_MS
+    const samples = [
+      { t: target - 1000, x: 0, y: 0 },
+      { t: target + 1000, x: 100, y: 100 },
+    ]
+    const reg = makeReg(1, samples)
+
+    act(() => {
+      api.register(reg)
+    })
+
+    act(() => {
+      flushRaf(performance.now())
+    })
+
+    const setAttr = (reg.ref.current as unknown as { setAttribute: ReturnType<typeof vi.fn> }).setAttribute
+    expect(setAttr).toHaveBeenCalledTimes(1)
+    const transform = setAttr.mock.calls[0][1] as string
+    const match = transform.match(/translate\(([-\d.]+),([-\d.]+)\)/)
+    expect(match).not.toBeNull()
+    const x = parseFloat(match![1])
+    // Lerped x must be strictly between the two sample x values.
+    expect(x).toBeGreaterThan(10)
+    expect(x).toBeLessThan(90)
   })
 
   it('exposes setTrackLength on the API', () => {

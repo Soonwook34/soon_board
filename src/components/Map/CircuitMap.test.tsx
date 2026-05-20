@@ -49,6 +49,23 @@ const substrateSamples = [
 ]
 
 describe('CircuitMap', () => {
+  it('uses the pre-shipped circuit outline + fixed viewBox when circuitShortName matches the registry', () => {
+    const { container } = render(
+      <CircuitMap
+        session={session}
+        drivers={drivers}
+        substrateSamples={substrateSamples}
+        circuitShortName="Monaco"
+      />,
+    )
+    const svg = container.querySelector('svg')
+    expect(svg!.getAttribute('viewBox')).toBe('0 0 1000 600')
+    // Path d should start with the Monaco-baked M coordinates, not a Catmull-Rom
+    // smoothing of the substrate (which begins with 'M100' for our fixture).
+    const path = container.querySelector('path[fill="none"]')
+    expect(path!.getAttribute('d')!.startsWith('M 555.5 153.8')).toBe(true)
+  })
+
   it('renders an SVG with expected viewBox from substrate bbox', () => {
     const { container } = render(
       <CircuitMap session={session} drivers={drivers} substrateSamples={substrateSamples} />,

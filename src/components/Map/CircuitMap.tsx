@@ -10,12 +10,20 @@ import {
   smoothPolyline,
   catmullRomToPath,
 } from '../../utils/fitting'
+import {
+  getTrackByCircuitId,
+  resolveCircuitId,
+  TRACK_VIEW_BOX,
+} from '../../assets/tracks/registry'
 import type { Session, Driver } from '../../api/types'
 
 interface Props {
   session: Session
   drivers: Driver[]
   substrateSamples: { t: number; x: number; y: number }[]
+  /** OpenF1 `circuit_short_name` from the active meeting — drives pre-shipped
+   * outline lookup. Undefined falls back to substrate-driven rendering. */
+  circuitShortName?: string
 }
 
 // All visual sizes (track stroke, marker radius, label font) are expressed as
@@ -55,7 +63,7 @@ function DriverMarker({
   )
 }
 
-export function CircuitMap({ session, drivers, substrateSamples }: Props) {
+export function CircuitMap({ session, drivers, substrateSamples, circuitShortName }: Props) {
   const masterRaf = useMasterRaf()
   useFrameBudget(masterRaf)
 
@@ -76,12 +84,17 @@ export function CircuitMap({ session, drivers, substrateSamples }: Props) {
     return () => ro.disconnect()
   }, [])
 
+  // Pre-shipped outline takes priority when the circuit is in the registry;
+  // substrate-driven fallback only kicks in for circuits without a baked path.
+  const circuitId = resolveCircuitId(circuitShortName)
+  const preshipped = circuitId ? getTrackByCircuitId(circuitId) : null
+
   const containerAspect =
     containerSize.w > 0 && containerSize.h > 0 ? containerSize.w / containerSize.h : null
 
   const points = substrateSamples.map((s): [number, number] => [s.x, s.y])
   const bbox = computeBbox(points)
-  const vb = paddedViewBoxForAspect(bbox, containerAspect)
+  const fallbackVb = paddedViewBoxForAspect(bbox, containerAspect)
 
   // Close the substrate polyline back to its first sample when the gap is
   // small enough to look like a continuous lap. Otherwise leave it open so
@@ -100,24 +113,36 @@ export function CircuitMap({ session, drivers, substrateSamples }: Props) {
       ? [...points, points[0]]
       : points
 
-  const pathD = catmullRomToPath(smoothPolyline(closedPoints))
+  const fallbackPathD = catmullRomToPath(smoothPolyline(closedPoints))
 
-  // Polyline perimeter in scene units, computed from the (possibly closed)
-  // polyline so the closing segment is counted. Published to the master rAF
-  // so the interpolator can use trackLength/30 as the snap-on-teleport
-  // threshold (matches old_project's SAMPLE_GAP_SNAP_DIVISOR=30).
-  let trackLength = 0
+  // Polyline perimeter in scene units (only used in the fallback render path).
+  // For pre-shipped circuits the registry supplies a real lengthM that goes
+  // straight to the interpolator's snap-on-teleport threshold.
+  let substrateTrackLength = 0
   for (let i = 1; i < closedPoints.length; i++) {
     const dx = closedPoints[i][0] - closedPoints[i - 1][0]
     const dy = closedPoints[i][1] - closedPoints[i - 1][1]
-    trackLength += Math.hypot(dx, dy)
+    substrateTrackLength += Math.hypot(dx, dy)
   }
+
+  const usingPreshipped = preshipped !== null
+  const trackLength = usingPreshipped ? preshipped.lengthM : substrateTrackLength
+  const viewBox = usingPreshipped ? TRACK_VIEW_BOX : fallbackVb.viewBox
+  const pathD = usingPreshipped ? preshipped.pathD : fallbackPathD
 
   useEffect(() => {
     masterRaf.setTrackLength(trackLength)
   }, [masterRaf, trackLength])
 
-  const scale = Math.max(vb.width, vb.height) || 1
+  useEffect(() => {
+    masterRaf.setTransform(usingPreshipped ? preshipped.transform : null)
+    return () => masterRaf.setTransform(null)
+  }, [masterRaf, usingPreshipped, preshipped])
+
+  // Visual sizing: the pre-shipped viewBox is fixed at 1000×600; the fallback
+  // viewBox scales with substrate bbox. Take the larger dimension either way.
+  const [, , vbW, vbH] = viewBox.split(' ').map(Number)
+  const scale = Math.max(vbW, vbH) || 1
   const trackStroke = scale * TRACK_STROKE_PCT
   const markerRadius = scale * MARKER_RADIUS_PCT
   const markerStroke = scale * MARKER_STROKE_PCT
@@ -126,7 +151,7 @@ export function CircuitMap({ session, drivers, substrateSamples }: Props) {
   return (
     <div ref={containerRef} className="h-full w-full">
       <svg
-        viewBox={vb.viewBox}
+        viewBox={viewBox}
         preserveAspectRatio="xMidYMid meet"
         xmlns="http://www.w3.org/2000/svg"
         style={{ width: '100%', height: '100%' }}
@@ -134,7 +159,9 @@ export function CircuitMap({ session, drivers, substrateSamples }: Props) {
         {pathD && (
           <path d={pathD} fill="none" stroke="#7A8290" strokeWidth={trackStroke} />
         )}
-        <DecorationLayer session={session} substrateSamples={substrateSamples} />
+        {!usingPreshipped && (
+          <DecorationLayer session={session} substrateSamples={substrateSamples} />
+        )}
         {drivers.map((driver) => (
           <DriverMarker
             key={driver.driver_number}

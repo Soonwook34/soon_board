@@ -14,6 +14,7 @@ const stubMasterRaf: MasterRafApi = {
   currentFps: () => 60,
   setTargetFps: vi.fn(),
   setTrackLength: vi.fn(),
+  setTransform: vi.fn(),
   start: vi.fn(),
   stop: vi.fn(),
 }

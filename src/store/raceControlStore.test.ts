@@ -88,6 +88,30 @@ describe('raceControlStore', () => {
     expect(s.vscActive).toBe(false)
   })
 
+  it('dedupes by (date, category, message, driver_number) across overlapping polls', () => {
+    const row = msg('2024-03-02T13:00:00', 'YELLOW SECTOR 2', {
+      category: 'Flag',
+      driver_number: 1,
+      flag: 'YELLOW',
+    })
+    useRaceControlStore.getState().appendBatch([row])
+    useRaceControlStore.getState().appendBatch([row])
+    useRaceControlStore.getState().appendBatch([row, row])
+    expect(useRaceControlStore.getState().messages).toHaveLength(1)
+  })
+
+  it('does not re-trigger safety-car state when the same DEPLOYED row arrives twice', () => {
+    const deployed = msg('2024-03-02T13:00:00', 'SAFETY CAR DEPLOYED')
+    useRaceControlStore.getState().appendBatch([deployed])
+    useRaceControlStore
+      .getState()
+      .appendBatch([msg('2024-03-02T13:05:00', 'SAFETY CAR IN THIS LAP')])
+    expect(useRaceControlStore.getState().safetyCarActive).toBe(false)
+    // Re-deliver the original DEPLOYED row — it must not flip SC back on.
+    useRaceControlStore.getState().appendBatch([deployed])
+    expect(useRaceControlStore.getState().safetyCarActive).toBe(false)
+  })
+
   it('appendBatch with empty array is a no-op', () => {
     useRaceControlStore.getState().appendBatch([])
     const s = useRaceControlStore.getState()

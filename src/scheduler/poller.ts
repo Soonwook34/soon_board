@@ -3,7 +3,7 @@
 //     client,
 //     sessionKey: currentSession.session_key,
 //     handlers: {
-//       onLocation: (rows) => useTelemetryStore.getState().appendLocationBatch(rows),
+//       onLocation: (rows) => useCarsPositionStore.getState().apply(rows, globalClockNow(useTimelineStore.getState())),
 //       onIntervals: (rows) => useIntervalsStore.getState().appendBatch(rows),
 //       onRaceControl: (rows) => useRaceControlStore.getState().appendBatch(rows),
 //       onPosition: (rows) => usePositionStore.getState().appendBatch(rows),
@@ -61,16 +61,20 @@ export interface PollerOptions {
   until?: () => number
 }
 
-// LOCKED cadence — sums to exactly 30.0 req/min
+// Cadence aligned with old_project for the 30 req/min OpenF1 anonymous cap.
+// Sum ≈ 25.84 req/min leaves ~14% headroom for bootstrap bursts and 429
+// retries. Bumping any endpoint here without lowering another risks a 429.
+// race_control / pit / stints / weather are sparse → polling them more often
+// only inflates the 404 noise without delivering fresher data.
 const DEFAULT_INTERVALS_MS: Record<PollerEndpoint, number> = {
-  location: 6_000,
-  intervals: 6_000,
-  race_control: 10_000,
-  position: 30_000,
-  laps: 60_000,
-  pit: 180_000,
-  stints: 180_000,
-  weather: 180_000,
+  location: 6_000, // 10/min — marker smoothness floor with 20s render buffer
+  intervals: 10_000, // 6/min — leaderboard gaps + positions
+  race_control: 60_000, // 1/min — messages are sparse
+  position: 30_000, // 2/min — official position changes
+  laps: 12_000, // 5/min — last-lap + sector times during race
+  pit: 90_000, // 0.67/min — pit stops
+  stints: 90_000, // 0.67/min — tyre age recompute
+  weather: 120_000, // 0.5/min
 }
 
 // Endpoints managed by the poller (subset of EndpointName)

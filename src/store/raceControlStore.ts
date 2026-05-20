@@ -26,14 +26,31 @@ export const useRaceControlStore = create<RaceControlState & RaceControlActions>
 
     appendBatch(rows) {
       if (rows.length === 0) return
-      const next = [...get().messages, ...rows]
+      // Dedup against the existing buffer so overlapping polling windows do
+      // not push the same row twice. Key intentionally excludes mutable fields
+      // like `lap_number` so a late-arriving row with the same logical content
+      // collapses onto the original.
+      const keyOf = (m: RaceControl) =>
+        `${m.date}|${m.category ?? ''}|${m.message ?? ''}|${m.driver_number ?? ''}`
+      const existing = get().messages
+      const seen = new Set(existing.map(keyOf))
+      const fresh: RaceControl[] = []
+      for (const r of rows) {
+        const k = keyOf(r)
+        if (seen.has(k)) continue
+        seen.add(k)
+        fresh.push(r)
+      }
+      if (fresh.length === 0) return
+
+      const next = [...existing, ...fresh]
       next.sort((a, b) => Date.parse(a.date) - Date.parse(b.date))
       while (next.length > RACE_CONTROL_BUFFER) next.shift()
 
       let sc = get().safetyCarActive
       let vsc = get().vscActive
       let flag = get().activeFlag
-      for (const m of rows) {
+      for (const m of fresh) {
         const msg = (m.message ?? '').toUpperCase()
         if (msg.includes('SAFETY CAR DEPLOYED')) sc = true
         if (msg.includes('SAFETY CAR IN THIS LAP') || msg.includes('CLEAR')) sc = false

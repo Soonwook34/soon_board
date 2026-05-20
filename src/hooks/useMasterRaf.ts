@@ -2,12 +2,22 @@ import React from 'react'
 import { useTimelineStore } from '../store/timelineStore'
 import { globalClockNow } from '../store/timelineStore'
 import { sampleAt } from '../scheduler/interpolator'
+import { applyTransform, type AffineTransform } from '../utils/trackTransform'
 
 export type MarkerRefRegistration = {
   driverNumber: number
   ref: React.RefObject<SVGGElement>
   getSamples: () => { t: number; x: number; y: number }[]
 }
+
+// Render lag behind globalClockNow() for marker interpolation. Matches the
+// 20 s value validated in old_project's MarkerLayer; with carsPositionStore's
+// latest-anchor rescaling, the buffer covers ~3 missed polls at the 6 s
+// location cadence so markers stay inside the lerp bracket instead of
+// repeatedly extrap-then-freeze-then-jump. Only the marker render target
+// uses this delay; globalClockNow stays unchanged so leaderboard, race info,
+// etc. keep their current semantics.
+export const RENDER_BUFFER_MS = 20_000
 
 export interface MasterRafApi {
   register(reg: MarkerRefRegistration): () => void
@@ -20,6 +30,11 @@ export interface MasterRafApi {
   // longer than trackLength/30 snap to later sample) and 2 s extrapolation
   // capping past the newest sample. Default 0 → freeze-at-last behavior.
   setTrackLength(meters: number): void
+  // Optional affine mapping from OpenF1 raw location coords into the SVG
+  // viewBox coord space. Set when a pre-shipped circuit outline is in use;
+  // null/undefined when rendering substrate-driven polylines (markers and
+  // outline share the same coord space already).
+  setTransform(transform: AffineTransform | null): void
   start(): void
   stop(): void
 }
@@ -35,6 +50,7 @@ function createMasterRaf(): MasterRafApi {
   let rafId: number | null = null
   let frameCount = 0
   let trackLength = 0
+  let transform: AffineTransform | null = null
 
   function tick() {
     rafId = requestAnimationFrame(tick)
@@ -47,7 +63,7 @@ function createMasterRaf(): MasterRafApi {
     if (isApplying.current) return
 
     // Read clock once per frame — no subscription, no setState
-    const t = globalClockNow(useTimelineStore.getState())
+    const t = globalClockNow(useTimelineStore.getState()) - RENDER_BUFFER_MS
 
     for (const reg of registrations.values()) {
       const el = reg.ref.current
@@ -60,7 +76,8 @@ function createMasterRaf(): MasterRafApi {
         extrapCapMs: 2000,
       })
       if (pos === null) continue
-      el.setAttribute('transform', `translate(${pos.x},${pos.y})`)
+      const [tx, ty] = transform ? applyTransform(transform, pos.x, pos.y) : [pos.x, pos.y]
+      el.setAttribute('transform', `translate(${tx},${ty})`)
     }
   }
 
@@ -80,6 +97,9 @@ function createMasterRaf(): MasterRafApi {
     },
     setTrackLength(meters: number): void {
       trackLength = meters > 0 ? meters : 0
+    },
+    setTransform(t: AffineTransform | null): void {
+      transform = t
     },
     start(): void {
       if (rafId !== null) return

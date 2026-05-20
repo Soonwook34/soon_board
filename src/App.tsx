@@ -7,9 +7,11 @@ import { CircuitMap } from './components/Map/CircuitMap'
 import { Leaderboard } from './components/Leaderboard/Leaderboard'
 import { OpenF1Client } from './api/client'
 import { Poller } from './scheduler/poller'
+import { RENDER_BUFFER_MS } from './hooks/useMasterRaf'
 import { useTimelineStore, globalClockNow } from './store/timelineStore'
 import { useSessionStore } from './store/sessionStore'
 import { useTelemetryStore } from './store/telemetryStore'
+import { useCarsPositionStore } from './store/carsPositionStore'
 import { useLeaderboardStore, computeLeaderLap } from './store/leaderboardStore'
 import { useRaceControlStore } from './store/raceControlStore'
 import { RaceInfoPanel } from './components/Panels/RaceInfoPanel'
@@ -89,7 +91,9 @@ export default function App() {
       until: () => globalClockNow(useTimelineStore.getState()),
       handlers: {
         onLocation: (rows) => {
-          useTelemetryStore.getState().appendLocationBatch(rows)
+          useCarsPositionStore
+            .getState()
+            .apply(rows, globalClockNow(useTimelineStore.getState()))
         },
         onIntervals: (rows) => {
           latestIntervals.current = pickLatestPerDriver(rows)
@@ -141,10 +145,12 @@ export default function App() {
       })
       .catch((err) => console.error('[substrate]', err))
 
-    // Bootstrap: seed a small window around the playback anchor so the user
-    // sees data immediately instead of waiting one polling interval.
+    // Bootstrap: seed a window around the playback anchor so the user sees
+    // data immediately. Start RENDER_BUFFER_MS behind the anchor so the marker
+    // render target (anchor - RENDER_BUFFER_MS) lands inside the seeded buffer
+    // rather than at the empty left edge.
     const anchorMs = globalClockNow(useTimelineStore.getState())
-    p.refetchWindow(anchorMs, anchorMs + BOOTSTRAP_WINDOW_MS).catch((err) =>
+    p.refetchWindow(anchorMs - RENDER_BUFFER_MS, anchorMs + BOOTSTRAP_WINDOW_MS).catch((err) =>
       console.error('[bootstrap]', err),
     )
 
@@ -172,7 +178,12 @@ export default function App() {
       header={<Header meetingLabel={meeting?.meeting_name} sessionLabel={session?.session_name} />}
       map={
         session && substrateSamples.length > 0 ? (
-          <CircuitMap session={session} drivers={drivers} substrateSamples={substrateSamples} />
+          <CircuitMap
+            session={session}
+            drivers={drivers}
+            substrateSamples={substrateSamples}
+            circuitShortName={meeting?.circuit_short_name}
+          />
         ) : (
           <EmptyMap />
         )
@@ -190,6 +201,7 @@ export default function App() {
             client={client}
             onPick={pickSession}
             onClose={() => setCalendarOpen(false)}
+            currentSessionDateStart={session?.date_start}
           />
         ) : null
       }

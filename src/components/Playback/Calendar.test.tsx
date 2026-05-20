@@ -3,79 +3,86 @@ import { render, screen, waitFor, fireEvent } from '@testing-library/react'
 import { Calendar } from './Calendar'
 import type { OpenF1Client } from '../../api/client'
 import type { Meeting } from '../../api/types'
+import { PRESHIPPED_MEETINGS } from '../../assets/meetings'
+import { getAvailableYears } from '../../utils/seasonYears'
 
-const meetings2025: Meeting[] = [
-  { meeting_key: 1, year: 2025, circuit_short_name: 'Bahrain', country_name: 'Bahrain', date_start: '2025-03-16', meeting_name: 'Bahrain Grand Prix' },
-  { meeting_key: 2, year: 2025, circuit_short_name: 'Jeddah', country_name: 'Saudi Arabia', date_start: '2025-03-23', meeting_name: 'Saudi Arabian Grand Prix' },
-  { meeting_key: 3, year: 2025, circuit_short_name: 'Melbourne', country_name: 'Australia', date_start: '2025-03-30', meeting_name: 'Australian Grand Prix' },
-]
-
-const meetings2024: Meeting[] = [
-  { meeting_key: 10, year: 2024, circuit_short_name: 'Bahrain', country_name: 'Bahrain', date_start: '2024-03-02', meeting_name: '2024 Bahrain Grand Prix' },
-]
-
-function makeClient(): OpenF1Client {
+function makeClient(extra: Partial<Record<number, Meeting[]>> = {}): OpenF1Client {
   const fetchJson = vi.fn().mockImplementation((_path: string, params: Record<string, unknown>) => {
-    if (params?.year === 2024) return Promise.resolve(meetings2024)
-    if (params?.year === 2025) return Promise.resolve(meetings2025)
+    const y = params?.year as number
+    if (y in extra) return Promise.resolve(extra[y])
     return Promise.resolve([])
   })
   return { fetchJson } as unknown as OpenF1Client
 }
 
 describe('Calendar', () => {
-  it('renders 3 meeting cards for year 2025 on mount', async () => {
+  it('renders pre-shipped meeting cards for the initial year without hitting the API', async () => {
     const client = makeClient()
-    render(<Calendar client={client} onPick={vi.fn()} onClose={vi.fn()} />)
-
+    render(
+      <Calendar
+        client={client}
+        onPick={vi.fn()}
+        onClose={vi.fn()}
+        currentSessionDateStart="2024-05-26T13:00:00Z"
+      />,
+    )
+    const someMeetingName = PRESHIPPED_MEETINGS[2024][0]?.meeting_name
+    expect(someMeetingName).toBeDefined()
     await waitFor(() => {
-      expect(screen.getByText('Bahrain Grand Prix')).toBeInTheDocument()
-      expect(screen.getByText('Saudi Arabian Grand Prix')).toBeInTheDocument()
-      expect(screen.getByText('Australian Grand Prix')).toBeInTheDocument()
+      expect(screen.getAllByText(someMeetingName!).length).toBeGreaterThan(0)
     })
+    expect(client.fetchJson).not.toHaveBeenCalled()
   })
 
-  it('fetches year 2024 when 2024 tab is clicked', async () => {
+  it('renders a year tab for every year in getAvailableYears()', () => {
     const client = makeClient()
     render(<Calendar client={client} onPick={vi.fn()} onClose={vi.fn()} />)
+    for (const y of getAvailableYears()) {
+      expect(screen.getByText(String(y))).toBeInTheDocument()
+    }
+  })
 
-    // Wait for 2025 to load first
-    await waitFor(() => screen.getByText('Bahrain Grand Prix'))
-
-    // Click 2024 tab
-    fireEvent.click(screen.getByText('2024'))
-
+  it('falls back to the API when a year has no pre-shipped data', async () => {
+    const liveMeetings: Meeting[] = [
+      {
+        meeting_key: 999,
+        year: 9999,
+        circuit_short_name: 'Test',
+        country_name: 'Testland',
+        date_start: '9999-04-01',
+        meeting_name: '9999 Test Grand Prix',
+      },
+    ]
+    const client = makeClient({ 9999: liveMeetings })
+    render(
+      <Calendar
+        client={client}
+        onPick={vi.fn()}
+        onClose={vi.fn()}
+        currentSessionDateStart="9999-04-01T13:00:00Z"
+      />,
+    )
     await waitFor(() => {
-      expect(screen.getByText('2024 Bahrain Grand Prix')).toBeInTheDocument()
+      expect(screen.getByText('9999 Test Grand Prix')).toBeInTheDocument()
     })
-
-    // fetchJson called with year=2024
     expect(client.fetchJson).toHaveBeenCalledWith(
       '/meetings',
-      expect.objectContaining({ year: 2024 }),
+      expect.objectContaining({ year: 9999 }),
     )
   })
 
-  it('does not refetch when revisiting a cached year', async () => {
+  it('falls back to currentYear when no current session is supplied', () => {
     const client = makeClient()
     render(<Calendar client={client} onPick={vi.fn()} onClose={vi.fn()} />)
-
-    await waitFor(() => screen.getByText('Bahrain Grand Prix'))
-
-    const callsBefore = (client.fetchJson as ReturnType<typeof vi.fn>).mock.calls.length
-
-    // Click 2025 again
-    fireEvent.click(screen.getByText('2025'))
-
-    // No additional fetch
-    expect((client.fetchJson as ReturnType<typeof vi.fn>).mock.calls.length).toBe(callsBefore)
+    const expected = String(new Date().getUTCFullYear())
+    const tab = screen.getByText(expected)
+    expect(tab).toHaveAttribute('aria-pressed', 'true')
   })
 
   it('calls onClose when close button clicked', async () => {
     const client = makeClient()
     const onClose = vi.fn()
     render(<Calendar client={client} onPick={vi.fn()} onClose={onClose} />)
-
     fireEvent.click(screen.getByLabelText('Close calendar'))
     expect(onClose).toHaveBeenCalledTimes(1)
   })
