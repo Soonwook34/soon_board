@@ -1,0 +1,38 @@
+{
+  "name": "soon-board",
+  "version": "0.0.0",
+  "private": true,
+  "description": "SOON BOARD — unofficial F1 fan dashboard (OpenF1 + julesr0y track maps). Non-commercial, attribution required.",
+  "type": "module",
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20.11.0",
+    "pnpm": ">=9.0.0"
+  },
+  "scripts": {
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "test:visual": "pnpm --filter web test:visual",
+    "build": "pnpm --filter web build",
+    "dev": "pnpm --filter web dev",
+    "lint": "eslint . --ext .ts,.tsx --max-warnings 0",
+    "format": "prettier --write .",
+    "probe:openf1": "pnpm --filter @soon-board/scripts run probe:openf1",
+    "check:trademark": "pnpm --filter @soon-board/scripts run check:trademark"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.10.0",
+    "@types/node": "^20.11.0",
+    "eslint": "^9.10.0",
+    "prettier": "^3.3.0",
+    "prettier-plugin-astro": "^0.14.0",
+    "typescript": "^5.6.0",
+    "typescript-eslint": "^8.6.0",
+    "vitest": "^2.0.0"
+  },
+  "license": "SEE LICENSE IN THIRD_PARTY_LICENSES.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/soon-board"
+  }
+}

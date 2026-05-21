@@ -1,0 +1,19 @@
+{
+  "name": "@soon-board/scripts",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "probe:openf1": "tsx src/probe-openf1.ts",
+    "check:trademark": "tsx src/check-trademark-files.ts",
+    "fetch:fonts": "tsx src/fetch-fonts.ts",
+    "fetch:season-catalog": "tsx src/fetch-season-catalog.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.0.0"
+  }
+}

@@ -1,0 +1,77 @@
+---
+import '../design/fonts.css';
+import '../design/globals.css';
+
+import Footer from '../design/Footer.astro';
+
+export interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  prerender?: boolean;
+}
+
+const {
+  title,
+  description = 'SOON BOARD — unofficial F1 fan dashboard. Live timing + replay, powered by OpenF1.',
+  ogImage = '/og-image.png',
+} = Astro.props;
+
+const siteUrl = Astro.site?.toString() ?? 'https://soon-board.pages.dev';
+const canonical = new URL(Astro.url.pathname, siteUrl).toString();
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0A0A0F" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    {/* Open Graph */}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(ogImage, siteUrl).toString()} />
+    <meta property="og:site_name" content="SOON BOARD" />
+
+    {/* Twitter Card */}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(ogImage, siteUrl).toString()} />
+
+    {/* Disclaimer for compliance scanners */}
+    <meta
+      name="robots"
+      content="index, follow"
+    />
+    <meta
+      name="x-fan-project"
+      content="unofficial; not affiliated with Formula 1, FIA, or FOM"
+    />
+  </head>
+  <body>
+    <main class="layout-main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  .layout-main {
+    min-height: calc(100dvh - 96px);
+    display: flex;
+    flex-direction: column;
+  }
+</style>

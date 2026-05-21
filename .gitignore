@@ -1,18 +1,44 @@
 # OMC runtime (state, memory, logs, scratch)
 .omc/project-memory.json
 .omc/state/
+.omc/sessions/
 .omc/logs/
 .omc/notepad.md
 .omc/drafts/
+.omc/prd.json
+.omc/progress.txt
 
 # macOS
 .DS_Store
 
-# Node / Vite
+# Node / Vite / Astro / Cloudflare
 node_modules/
 dist/
 .vite/
+.astro/
+.wrangler/
+.dev.vars
+apps/*/dist/
+apps/*/.astro/
+apps/*/.wrangler/
+scripts/dist/
 
 # Local env
 .env
 .env.local
+.dev.vars.local
+
+# Trademark/proprietary assets — must NEVER be committed (Plan v2.3 §AC-5c)
+**/Formula1-*.ttf
+**/Formula1-*.otf
+**/Formula1-*.woff
+**/Formula1-*.woff2
+font/
+
+# Test/coverage artifacts
+coverage/
+playwright-report/
+test-results/
+
+# Allow fonts.lock.json (committed reproducibility artifact)
+!**/fonts.lock.json
