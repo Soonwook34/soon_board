@@ -1,0 +1,106 @@
+/* main-page-implementation.md §12 단계 0-g
+ * CSS variables는 src/style/tokens.ts와 동기. 컴포넌트는 var(--...) 또는 tokens.ts를
+ * import 해서 색상을 사용해야 함 (인수 19 — raw hex 금지). */
+
+:root {
+  color-scheme: dark;
+
+  --color-bg-base: #0a0d12;
+  --color-bg-surface: #13171f;
+  --color-bg-elevated: #1c2230;
+
+  --color-text-primary: #e8eaf0;
+  --color-text-secondary: #a3a9b9;
+  --color-text-muted: #5b6273;
+
+  --color-accent: #e10600;
+  --color-accent-hover: #ff1a14;
+  --color-text-on-accent: #ffffff;
+
+  --color-live: #ef4444;
+  --color-upcoming: #3b82f6;
+  --color-past: #6b7280;
+  --color-cancelled: #374151;
+
+  --color-border: #262d3a;
+  --color-border-strong: #3a4252;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-bg-base);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+@keyframes soon-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.narrow-screen-banner {
+  display: none;
+}
+@media (max-width: 1023.98px) {
+  .narrow-screen-banner {
+    display: block;
+  }
+}
+
+.gp-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  /* plan §6.2: spanner row(1/-1)가 expanded GP 카드 다음에 들어올 때 dense flow가
+     spanner 옆 빈 셀에 후속 카드를 채워 row 점프를 막음. */
+  grid-auto-flow: dense;
+}
+@media (max-width: 1279.98px) {
+  .gp-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 1023.98px) {
+  .gp-grid {
+    grid-template-columns: 1fr;
+  }
+}

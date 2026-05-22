@@ -40,5 +40,8 @@ coverage/
 playwright-report/
 test-results/
 
+# TS incremental build cache (per-machine)
+*.tsbuildinfo
+
 # Allow fonts.lock.json (committed reproducibility artifact)
 !**/fonts.lock.json

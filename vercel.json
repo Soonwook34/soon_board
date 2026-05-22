@@ -1,0 +1,12 @@
+{
+  "buildCommand": "vite build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "rewrites": [
+    { "source": "/live/:key*", "destination": "/index.html" },
+    { "source": "/replay/:key*", "destination": "/index.html" }
+  ],
+  "env": {
+    "VITE_VERCEL_ENV": "$VERCEL_ENV"
+  }
+}
