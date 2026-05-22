@@ -1,7 +1,11 @@
 # 대시보드 구현 계획 (pending approval)
 
-> 작성일: 2026-05-20 · 상태: **pending approval**
-> 전제: [openf1-api-reference.md](../../docs/openf1-api-reference.md) (엔드포인트 사실), [live-streaming-strategy.md](../../docs/live-streaming-strategy.md) (라이브 30s 버퍼), [replay-strategy.md](../../docs/replay-strategy.md) (재생 60s 윈도우), [live-map-implementation.md](./live-map-implementation.md) (맵 + DataSource 추상). 본 계획은 그 위에 올라가는 **대시보드 패널 구성과 시간 정렬**의 구현 전략이다.
+> 작성일: 2026-05-20 · 최종 수정: 2026-05-22 · 상태: **pending approval**
+> 전제: [openf1-api-reference.md](../../docs/openf1-api-reference.md) (엔드포인트 사실), [live-streaming-strategy.md](../../docs/live-streaming-strategy.md) (라이브 30s 버퍼, 브라우저 폴러), [replay-strategy.md](../../docs/replay-strategy.md) (재생 60s 윈도우, 메모리 캐시), [live-map-implementation.md](./live-map-implementation.md) (맵 + DataSource 추상), [deployment-architecture.md](../../docs/deployment-architecture.md). 본 계획은 그 위에 올라가는 **대시보드 패널 구성과 시간 정렬**의 구현 전략이다.
+>
+> **호스팅·MVP 컨텍스트 (2026-05-22 확정):** GitHub + Vercel 정적 호스팅 + 개인 사용(동접 1명). DataSource는 **브라우저에서 OpenF1 REST를 직접 폴**. 프레임워크 **Vite + React 18**, 라우팅 **wouter** 확정.
+>
+> **UI 컨텍스트 동기 ([main-page §0](./main-page-implementation.md) · [live-map §0](./live-map-implementation.md) 일치):** **Desktop only (1280px+)** — 1024 미만은 안내 배너. **다크 모드 only** — 디자인 토큰은 `src/style/tokens.ts` (전 plan 공유). **`raceDistance.json`은 `public/` + fetch** + GitHub Actions 일일 cron으로 자동 갱신.
 
 ---
 
@@ -103,10 +107,12 @@
 - 타이어 전략: 막대 두께 그대로, 좌우 여백 줄임. 정보 손실 없음.
 - 이벤트 티커: 메시지 텍스트 wrapping. 5건 유지.
 
-### 1.5 좁은 화면 fallback
+### 1.5 좁은 화면 fallback (Desktop only)
 
-- **1280px 미만:** 사이드 패널 열림 시 자동으로 우측 글로벌 column을 더 압축 (2 col로). 그래도 답답하면 사용자에게 "사이드 패널을 닫고 보세요" 토스트.
-- **1024px 미만:** "전체 정보를 한 번에 보기 어려움" 경고 + 핵심(맵 + 리더보드)만 표시. 사이드 패널은 1024 이하에선 overlay 모드로 fallback (push 모드는 화면 부족).
+본 MVP는 Desktop only (1280px+) 가정 ([main-page §1.3](./main-page-implementation.md) 동기). 그 미만 처리:
+
+- **1280px 미만:** 사이드 패널은 자동으로 닫힘 (push 모드 폭 부족). 다시 열려고 하면 토스트 "1280px 이상에서 사이드 패널을 사용하세요".
+- **1024px 미만:** 메인 페이지의 `NarrowScreenBanner`가 먼저 표시되어 대시보드 진입 자체를 차단 (정상 동작). 직접 URL 진입한 경우엔 핵심(맵 + 리더보드)만 표시 + 안내 배너.
 
 ---
 
@@ -133,7 +139,22 @@
 | 경과 시간 / 총 시간 (Practice/Qualifying) | `sessions.date_start`/`date_end` | display_time − date_start | 매 프레임 |
 | 적기/세이프티카 구간 (배경 색 segment) | `race_control` `RED`/`SafetyCar` 메시지 | display_time ≤ date 인 모든 활성 구간 | 이벤트 시 |
 
-**총 lap 수 문제:** OpenF1은 "예정된 race distance" 필드 없음 (참고: [openf1-api-reference.md §11](../../docs/openf1-api-reference.md)의 알려진 함정). 해결: 빌드 타임에 `src/data/raceDistance.json` 으로 (circuit_key, year) → total_laps 수동 룩업 테이블 유지. 매년 신규 항목 추가.
+**총 lap 수 문제:** OpenF1은 "예정된 race distance" 필드 없음 (참고: [openf1-api-reference.md §11](../../docs/openf1-api-reference.md)의 알려진 함정). 해결: **GitHub Actions 일일 cron이 종료된 PAST race 세션의 `laps` 최대 `lap_number`로 자동 계산**해 `public/raceDistance.json` 으로 commit. `(circuit_key, year) → total_laps` 매핑.
+
+```json
+{
+  "generated_at": "2026-05-22T01:00:00Z",
+  "method": "max(laps.lap_number) of completed race sessions",
+  "entries": [
+    { "circuit_key": 63, "year": 2024, "total_laps": 57 },
+    { "circuit_key": 30, "year": 2024, "total_laps": 58 }
+  ]
+}
+```
+
+**진행 중·예정 race 처리:** 종료 안 된 세션은 entries에 없음 → UI는 "L?? / ??" 표시. 세션 종료 후 다음 daily cron에서 자동 추가. 진행 중 표시가 필요하면 같은 서킷의 직전 시즌 값을 fallback으로 사용 (옵션, §13 미해결로 두지 않고 fallback 정책으로 결정).
+
+**런타임 사용:** 페이지 진입 시 `fetch('/raceDistance.json')` 1회 (~5KB) → in-memory Map 캐시.
 
 ### 2.3 ③ 라이브 맵
 [live-map-implementation.md](./live-map-implementation.md) 참조. 본 대시보드는 맵 인스턴스를 임베드만 함.
@@ -306,8 +327,9 @@
 
 - 닫기: 다시 클릭, X 버튼, ESC 키
 - 다른 드라이버 클릭 시: 같은 패널이 새 내용으로 슬라이드 트랜지션 (다시 안 열고 안 닫음)
-- 패널이 열린 동안 맵 마커의 해당 드라이버에 selected 표시 (외부 노란 링 1px)
+- 패널이 열린 동안 맵 마커의 해당 드라이버에 selected 표시 (외부 노란 링 1px — `tokens.accent.warning` 등)
 - 모드 전환(라이브↔리플레이)되면 닫기 (패널 데이터는 display_time에 의존하므로 모드 전환 시 의미가 달라질 수 있음)
+- **1280px 미만으로 viewport 축소 감지 시 자동 닫힘** (`window.resize` 이벤트 + 토스트 안내)
 
 ---
 
@@ -319,34 +341,19 @@
 - 라이브: `display_time = newest_received_date - 30s`
 - 재생: `display_time = playback_clock` (사용자 제어)
 
-### 4.2 데이터 쿼리 패턴 (DataSource 확장)
+### 4.2 데이터 쿼리 패턴 (DataSource SSOT)
 
-라이브맵 §3.1의 `DataSource.getSamplePair(driver, t)`에 더해 대시보드용 메서드 추가:
+> **단일 진실 원천 (critic M1):** `DataSource` 인터페이스는 [live-map §3.1](./live-map-implementation.md) 에 단일 정의되며 위치는 `src/shared/DataSource.ts`. 본 plan은 그 정의에서 import해 사용하고, 별도 확장하지 않음. 아래는 대시보드 패널이 사용하는 6개 메서드만 발췌 (전체 정의는 live-map §3.1 참고).
 
 ```ts
+// src/shared/DataSource.ts 에서 import — 발췌
 interface DataSource {
-  // (live-map과 공유)
-  getDisplayTime(): Date;
-  getStreamState(): "live" | "lagging" | "stalled" | "buffering";
-  getSamplePair(driverNum: number, t: Date): ...;  // location용
-
-  // (대시보드 신규)
-  /** date ≤ t 인 가장 최근 record (1건) */
+  // ── 대시보드 패널 전용 메서드 (live-map §3.1 의 SSOT 정의 일부) ──
   getLatestBefore<E>(endpoint: E, t: Date, filters?: object): Record<E> | null;
-
-  /** date ≤ t 인 모든 records (시간 역순) */
   getAllBefore<E>(endpoint: E, t: Date, filters?: object, limit?: number): Record<E>[];
-
-  /** lap이 t를 포함하는 record (lap_number 추론용) */
   getLapAt(driverNum: number, t: Date): LapRecord | null;
-
-  /** lap이 t 전에 "완료된" record 만 (date_start + lap_duration ≤ t). 5랩 테이블·리더보드 LAST 산출용 */
   getCompletedLapsBefore(driverNum: number, t: Date, limit?: number): LapRecord[];
-
-  /** stint이 lap을 포함하는 record */
   getStintForLap(driverNum: number, lap: number): StintRecord | null;
-
-  /** 누적 통계 (빠른 랩, 보라색 섹터) — t까지의 데이터로만 산출 */
   getAggregateBefore<A>(aggregate: A, t: Date): AggregateResult<A>;
 }
 ```
@@ -418,16 +425,16 @@ class LeaderboardPanel {
 ## 5. 데이터 흐름 통합 (라이브맵과 공유)
 
 ```
-OpenF1 API (REST 폴 or MQTT)
+OpenF1 API (REST, 무료/익명)
+  │
+  ▼  fetch (라이브: 26 req/min cadence / 재생: 60s 윈도우 prefetch)
+브라우저 폴러 (LiveDataSource / ReplayDataSource — [live-streaming-strategy.md §8.1](../../docs/live-streaming-strategy.md))
   │
   ▼
-백엔드 폴러/구독자 (live-streaming-strategy.md §8.1)
+브라우저 In-memory Buffer (라이브 30s ring / 재생 60s 윈도우 메모리 Map)
   │
-  ▼
-백엔드 In-memory Buffer (라이브 30s / 재생 60s 윈도우)
-  │
-  ▼ 자체 WebSocket
-브라우저: DataSource 구현체
+  ▼  in-process (단일 DataSource 인스턴스 구독)
+React 컴포넌트: 맵 + 대시보드 패널들
   │
   ├─ getDisplayTime(): subscribe
   ├─ getSamplePair → 맵
@@ -438,9 +445,9 @@ OpenF1 API (REST 폴 or MQTT)
   └─ getAggregateBefore → 빠른 랩 배지
 ```
 
-- **단 하나의 DataSource 인스턴스**가 맵과 모든 대시보드 패널을 동시에 서빙.
-- 동일 데이터를 중복 fetch하지 않음 (백엔드 팬아웃 구조).
-- 백엔드는 라이브맵 계획에서 정의한 동일 어댑터.
+- **단 하나의 DataSource 인스턴스**가 맵과 모든 대시보드 패널을 동시에 서빙 (React Context로 주입).
+- 동일 데이터를 중복 fetch하지 않음 (인스턴스 내부에서 ring buffer/캐시 공유).
+- **백엔드·WebSocket 없음** — 향후 외부 공개 시 어댑터 한 클래스만 백엔드 호출용으로 교체 (DataSource 추상화 덕).
 
 ---
 
@@ -467,36 +474,48 @@ src/dashboard/
 │   ├── PitHistory.tsx             # 3.4
 │   ├── StintHistory.tsx           # 3.5
 │   └── SessionResult.tsx          # 3.6
-├── shared/
+├── shared/                          # **대시보드 내부 공유** (src/shared/와 별개 — critic M1/M8)
 │   ├── useDisplayTime.ts          # display_time 구독 훅
 │   ├── useLatestBefore.ts         # getLatestBefore 훅
 │   ├── useAllBefore.ts            # getAllBefore 훅
 │   ├── useAggregate.ts            # getAggregateBefore 훅
 │   ├── selectionStore.ts          # 선택된 드라이버 (사이드 패널 트리거)
 │   ├── flagDecoder.ts             # race_control 활성/만료 판정
-│   ├── tyreColors.ts              # compound → 색상
-│   ├── sectorColors.ts            # sector (s, driver, t) → 보라/초록/노랑/회색 단일 판정
+│   ├── tyreColors.ts              # compound → F1 표준 색 (SOFT=빨강 등, raw hex 유지)
+│   ├── sectorColors.ts            # sector (s, driver, t) → F1 방송 표준 보라/초록/노랑/회색 (raw hex 유지)
 │   ├── SectorBar.tsx              # 2px·3등분 섹터 색 바 (리더보드 LAST, 디테일 §3.2 공용)
-│   └── flagIcons.ts               # category → 아이콘
-├── derived/
-│   ├── totalLaps.ts               # (circuit_key, year) → total_laps 룩업
-│   ├── currentLap.ts              # display_time → leader의 lap
-│   ├── activeFlags.ts             # 4.2.4 still-active 판정
-│   └── personalBests.ts           # 빠른 랩 / 섹터 누적 계산 (드라이버별·overall, sectorColors가 사용)
-└── data/
-    └── raceDistance.json          # (circuit_key, year) → total_laps 수동 큐레이션
+│   ├── flagIcons.ts               # category → 아이콘
+│   └── dashboardStyles.ts         # 패널 배경·텍스트·구분선 색 (src/style/tokens.ts에서 import)
+└── derived/
+    ├── totalLaps.ts               # fetch('/raceDistance.json') 후 (circuit_key, year) → total_laps 룩업
+    ├── currentLap.ts              # display_time → leader의 lap
+    ├── activeFlags.ts             # 4.2.4 still-active 판정
+    └── personalBests.ts           # 빠른 랩 / 섹터 누적 계산 (드라이버별·overall, sectorColors가 사용)
+
+src/shared/                        # cross-plan SSOT (live-map §7 정의, 본 plan은 import만)
+├── DataSource.ts                  # 인터페이스 SSOT (critic M1)
+├── openf1Types.ts                 # OpenF1 타입
+└── Footer.tsx                     # 단일 attribution + 라이선스 + F1 디스클레이머 (critic M8)
+
+public/                            # Vite가 빌드 시 dist/ 루트로 복사 (해시 없는 정적 자산)
+└── raceDistance.json              # GitHub Actions가 OpenF1 laps에서 자동 생성 (§2.2)
+
+scripts/
+└── fetch-race-distance.ts         # 일일 cron — completed race 세션의 max(lap_number)로 raceDistance.json 갱신
 ```
 
 ---
 
-## 7. 기술 스택 정합
+## 7. 기술 스택 정합 (2026-05-22 확정)
 
-라이브맵 계획 §8 결정사항 그대로:
-- TypeScript + Vite
-- framework-agnostic core가 가능하지만 대시보드는 React/Solid 등 컴포넌트 모델이 자연스러움 → 작성은 React 가정 (해당 프레임워크 확정은 라이브맵 §15-1 미해결 사항으로 동기화 필요)
-- 상태: DataSource 인스턴스 + selectionStore (드라이버 선택). 그 외 별도 글로벌 store 없음.
-- 스타일: CSS Modules 또는 Tailwind (미해결, §13)
+[라이브맵 §8](./live-map-implementation.md) 결정사항과 동기:
+- TypeScript (strict) + Vite
+- **React 18** (확정) — 대시보드 패널들은 React 컴포넌트, 맵은 framework-agnostic core를 React thin wrapper로 감싸서 임베드
+- **라우팅: wouter** (메인 페이지·라이브·리플레이 진입 경로)
+- 상태: DataSource 인스턴스 (React Context로 주입) + selectionStore (드라이버 선택, Zustand 또는 vanilla event emitter). 그 외 별도 글로벌 store 없음.
+- 스타일: CSS Modules 또는 Tailwind (§13 미해결)
 - 시각화 작은 차트 (스틴트 막대): 순수 SVG/Canvas. 외부 차트 라이브러리(Recharts/Chart.js) 미도입 — 본 대시보드의 차트 복잡도가 그 수준이 아님.
+- 호스팅: Vercel hobby 정적 SPA ([deployment-architecture.md](../../docs/deployment-architecture.md))
 
 ---
 
@@ -527,14 +546,26 @@ src/dashboard/
     - (f) **빠른 랩 배지** §2.8 — 시크 후 미래 best 가 표시되지 않음 (기존 인수 8 + 14 와 동일하지만 통합 검증)
     - (g) **결과 섹션** §3.6 — `display_time < session.date_end` 일 때 결과 섹션 미표시 (기존 인수 11 통합)
 18. **DataSource 메서드 단일 진입점** — 모든 패널이 raw `display_time` 비교 (예: `record.date <= dt`) 를 컴포넌트에서 직접 하지 않고 DataSource 메서드 (`getLatestBefore` / `getAllBefore` / `getCompletedLapsBefore` / `getAggregateBefore`) 만 사용 — 코드 리뷰 체크리스트 + (옵션) ESLint custom rule
+19. **다크 모드 토큰 일관성** — 패널 배경·텍스트·구분선은 `src/style/tokens.ts` 또는 `dashboardStyles.ts`에서만 import. raw hex는 F1 표준 색(섹터·컴파운드·팀)에만 허용 (코드 리뷰)
+20. **WCAG AA 콘트라스트** — 다크 배경 위 본문 텍스트 4.5:1, 아이콘·작은 텍스트 3:1 (axe-core/playwright)
+21. **`raceDistance.json` CDN 적중** — 페이지 진입 시 `fetch('/raceDistance.json')` 응답 < 100ms (재방문, CDN 적중 가정)
+22. **Desktop only 동작** — 1280px+ 풀 레이아웃, 1280 미만에서 사이드 패널 자동 닫힘 + 토스트 (Playwright viewport 테스트)
+23. **모드 전환 사이드 패널 닫기** — 라이브↔리플레이 전환 시 사이드 패널이 자동 닫힘 + selectionStore reset
 
 ---
 
 ## 9. 구현 단계
 
-### 단계 1: DataSource 확장
-- `src/map/DataSource.ts` 인터페이스에 `getLatestBefore` / `getAllBefore` / `getLapAt` / `getCompletedLapsBefore` / `getStintForLap` / `getAggregateBefore` 추가
-- 라이브/리플레이 구현체에 시간 인덱스 구조 추가 (각 엔드포인트별 timestamp 정렬 array + binary search)
+> **단계 0 (의존, critic P0-1/P0-2):**
+> - [main-page §12 단계 0](./main-page-implementation.md) — Vite/React/wouter 부트스트랩 + `src/style/tokens.ts` 디자인 토큰 + `vercel.json` SPA fallback.
+> - [live-map §10 단계 0.5](./live-map-implementation.md) — `src/shared/DataSource.ts` SSOT **인터페이스 파일** 생성.
+> - [live-map §10 단계 6](./live-map-implementation.md) — `LiveDataSource`·`ReplayDataSource` 시간 인덱스 구조 구현체.
+> - **단계 0의 destructive 작업(기존 `.github/workflows/ci.yml` 삭제·교체, `package.json` 신규 생성)은 main-page 작업자가 단독 수행한다. dashboard 작업자는 단계 0 완료 인수(새 ci.yml main 녹색 통과 + `npm run build` 성공 + `vercel.json` SPA fallback preview 동작)가 충족된 commit을 base로 단계 1에 진입.**
+> - 본 plan의 단계 1은 그 위에서 시작.
+
+### 단계 1: DataSource 확장 (SSOT)
+- **`src/shared/DataSource.ts` 인터페이스** ([live-map §3.1](./live-map-implementation.md) SSOT, **파일은 live-map §10 단계 0.5에서 생성됨**) 에 본 plan용 6개 메서드가 이미 정의됨 (live-map MVP에 미리 통합) — 본 단계에서는 인터페이스를 수정하지 않고 구현체에 미구현 메서드(`getLatestBefore` 등)를 implement
+- `src/map/LiveDataSource.ts`·`src/map/ReplayDataSource.ts` 구현체에 시간 인덱스 구조 추가 (각 엔드포인트별 timestamp 정렬 array + binary search)
 - **모든 메서드의 내부 컷에서 `< t` 또는 `≤ t` 경계 정밀 명세 + 합성 fixture (t 직후의 record 존재) 로 누설 zero 검증**
 - ✅ 단위 테스트로 시간 범위 쿼리 검증, 인수 17번/18번 (미래 누설 zero / 단일 진입점)
 
@@ -544,11 +575,14 @@ src/dashboard/
 - ✅ 인수 2번 (단일 시계 일관성)
 
 ### 단계 3: derived 모듈 (총 lap, 현재 lap, active flag, personal best) + 섹터 색 판정
-- `data/raceDistance.json` 초기 시드 (2026 시즌 기준)
-- `derived/totalLaps.ts`, `derived/currentLap.ts`, `derived/activeFlags.ts`, `derived/personalBests.ts`
-- `shared/sectorColors.ts` — `personalBests.ts` 를 기반으로 (driver, sector, t) → 보라/초록/노랑/회색 결정
+- `scripts/fetch-race-distance.ts` — GitHub Actions에서 OpenF1 `laps` 최대 lap_number로 `public/raceDistance.json` 생성 (§2.2)
+- 통합 `.github/workflows/daily-data-refresh.yml`의 step 2 — 시즌 카탈로그·맵과 함께 1개 commit ([deployment-architecture.md §3.1](../../docs/deployment-architecture.md))
+- `derived/totalLaps.ts` — `fetch('/raceDistance.json')` 1회 + 메모리 캐시 + (circuit_key, year) 룩업
+- `derived/currentLap.ts`, `derived/activeFlags.ts`, `derived/personalBests.ts`
+- `shared/sectorColors.ts` — `personalBests.ts` 를 기반으로 (driver, sector, t) → 보라/초록/노랑/회색 결정 (F1 표준 hex)
 - `shared/SectorBar.tsx` — 2px·3등분 SVG/Flex 바, props: `[s1, s2, s3] times + driver + t`
-- ✅ 인수 3번 (랩 카운터), 9번 (flag 활성 판정), 13번 (섹터 바 색 일관성), 16번 (null 섹터)
+- `shared/dashboardStyles.ts` — 패널 배경·텍스트·구분선 토큰 (다크 모드)
+- ✅ 인수 3번 (랩 카운터), 9번 (flag 활성 판정), 13번 (섹터 바 색 일관성), 16번 (null 섹터), 19번 (다크 토큰), 21번 (raceDistance CDN)
 
 ### 단계 4: 글로벌 패널 — 세션 헤더, 진행률 바, 날씨, Race Control 배너
 - `SessionHeader.tsx`, `SessionProgress.tsx`, `WeatherMini.tsx`, `RaceControlBanner.tsx`
@@ -601,7 +635,7 @@ src/dashboard/
 | 위험 | 영향 | 완화 |
 |---|---|---|
 | `intervals` historical 재생에서 비어 있어 리더보드 갭 칼럼 공백 | 정보 누락 | 칼럼은 "—" 표시, 보조로 `position`+`laps`로 갭 derive (옵션) |
-| `total_laps` 수동 룩업 누락 (신규 서킷/시즌) | 진행률 바 작동 안 함 | 누락 시 "?/? laps" 표시 + 콘솔 경고. `raceDistance.json` 갱신 운영 절차 (§13) |
+| `total_laps` 누락 (진행 중 race는 자동 fetch에 안 잡힘) | 진행률 바 "L?? / ??" 표시 | 같은 서킷 직전 시즌 fallback (옵션). 누락 자체는 의도된 동작 — 종료 후 다음 daily cron에 자동 보완. UI에 콘솔 경고만 |
 | `pit.stop_duration` null (2024 US GP 이전) | 사이드 패널 핏 히스토리 일부 — 표시 | 디자인상 의도된 상태 ("—"), 사용자가 lane_duration만으로도 이해 가능 |
 | `stints` 중복랩 버그 (Issue #89) | 타이어 막대 길이 +1 | `[lap_start, lap_end)` 반-개구간 합산 + 단위 테스트 |
 | race_control 메시지 자유 텍스트 파싱 부정확 | 활성 판정 잘못 → 배너가 잘못된 flag 표시 | `flag` / `category` 필드만 사용, `message` 텍스트는 표시용으로만 |
@@ -620,6 +654,12 @@ src/dashboard/
 | **버퍼 미래 데이터 누설** (가장 빈번한 함정) — 라이브 30s 버퍼나 재생 60s 윈도우에 `display_time` 이후의 record 가 적재되어 있는데 패널이 그대로 표시. 핏 히스토리에서 자주 관측됨 | 사용자 신뢰 손상 ("아직 안 일어난 일이 보임") | §4.5 의 단일 진입점 규칙. DataSource 메서드 외 직접 비교 금지. 인수 17번 시각 회귀로 검출 |
 | `laps.date_start ≤ display_time` 만 체크하고 lap 완료 여부 미체크 | 진행 중인 lap이 5랩 테이블에 절반 데이터로 표시 | `getCompletedLapsBefore` 사용 강제 (lap_duration 도 포함된 시점까지 기다림) |
 | 시크 후 incremental 누적 통계 reset 누락 | 미래 best 가 그대로 표시 | `personalBests.ts` 가 display_time 점프 감지 시 reset → t까지 재빌드 |
+| 다크 토큰 분산 — 패널마다 raw hex 직접 사용 | 다크 모드 일관성 깨짐 | `dashboardStyles.ts` 단일 정의 + CSS variables. F1 표준 색(섹터·컴파운드·팀)만 raw 허용. 인수 19번 |
+| Desktop viewport 축소 (1280 미만)에서 사이드 패널 클릭 | 사이드 패널이 좁아 정보 무력화 | 자동 닫힘 + 토스트 (§3.7). 인수 22번 |
+| `raceDistance.json` fetch 실패 (네트워크/CDN 장애) | 모든 진행률 바 "L?? / ??" | totalLaps 함수가 fetch 실패 시 빈 Map 반환 + 콘솔 경고. UI는 정상 동작 (degraded) |
+| 빌드 타임 OpenF1 429 / 5xx / abuse 차단 (critic C2) — race distance 빌드가 OpenF1 `laps` 다수 호출 | raceDistance.json stale 또는 일부 entry 누락 | `scripts/_lib/openf1Client.ts` 공통 wrapper에 token-bucket(25 req/min) + exponential backoff + jitter. 실패 시 이전 raceDistance.json 보존 ([deployment-architecture.md §3.1](../../docs/deployment-architecture.md)) |
+| 런타임 hydration cadence — 동시 다중 패널 첫 진입 시 OpenF1 3 req/s 초과 (critic M4) | 429 hit, 일부 패널 빈 화면 | 모든 패널의 첫 fetch를 token-bucket 또는 직렬화로 묶음. `LiveDataSource`/`ReplayDataSource`가 hydration 호출을 중앙에서 sequence ([live-streaming-strategy.md §6](../../docs/live-streaming-strategy.md)) |
+| **OpenF1 CORS 정책 변경 (critic P0-4)** | 대시보드 패널 전체 비활성 (라이브·리플레이 모두) | main-page 진입 시 CORS ping (1 req) 선행 → 실패 시 `CorsFailedNotice` 표시 + DashboardApp 마운트 보류. 본 plan은 main-page 정책에 따름 ([main-page §13 위험표](./main-page-implementation.md)) |
 
 ---
 
@@ -635,6 +675,9 @@ src/dashboard/
 | **단위 미래 누설** | DataSource 합성 fixture: t=10:00 일 때 t=10:05 의 pit/lap/race_control record 가 결과에 포함되지 않음을 각 메서드별로 검증 | Vitest |
 | 모드 전환 | 라이브 → 재생, 재생 → 라이브 (라이브 데이터 있는 경우만) | Playwright |
 | 성능 | 60분 라이브 운영 후 메모리, 평균 패널 재평가 비용 | Chrome DevTools |
+| **다크 모드 콘트라스트** | 모든 패널의 텍스트·아이콘이 WCAG AA 충족 (4.5:1 / 3:1) | `@axe-core/playwright` |
+| **Desktop viewport** | 1280px+ 풀 레이아웃, 1280 미만 사이드 패널 자동 닫힘 + 토스트 | Playwright viewport 시뮬레이션 |
+| **`raceDistance.json` CDN 적중** | 두 번째 페이지 진입 시 응답 < 100ms | Vercel preview Network 패널 (수동) |
 
 ---
 
@@ -646,21 +689,29 @@ src/dashboard/
 - 비교 모드 (드라이버 2명 나란히) — 후속.
 - 차트 (lap time 그래프, 갭 차트) — 후속.
 - 사이드 패널의 알림 기능 (북마크/팔로우) — 후속.
-- 모바일 우선 UX — 사용자 결정으로 desktop 우선
+- **모바일·태블릿 우선 UX** — Desktop only 확정 ([main-page §1.3](./main-page-implementation.md))
+- **라이트 모드 / 테마 토글** — 다크 모드 only 확정
+- **다중 사용자 / SNS 공유 / 임베드** — 외부 공개 시 [deployment-architecture.md §8](../../docs/deployment-architecture.md) 백엔드 도입 트리거
 - 다국어 (i18n) — 현재 한국어만 가정
 
 ---
 
 ## 13. 미해결 / 결정 필요 항목
 
-1. **프레임워크 선택** — 라이브맵 계획 §15-1과 동기화 필요. React vs Solid vs Svelte. 본 대시보드 코드는 React를 가정해 작성됨.
-2. **스타일링 방법** — CSS Modules / Tailwind / styled-components / Emotion. 디자인 토큰(색상/여백/타이포)은 어떻게 공유할지.
-3. **`raceDistance.json` 운영 절차** — 신규 시즌/서킷 추가 시 누가 어떻게 갱신할 것인지. 자동화 가능한가 (FastF1 등에서 가져오기)?
-4. **`intervals` historical derive 채택 여부** — 재생 모드에서 `intervals`가 비어 있을 때 `position`+`laps`로 갭을 계산할지. 라이브맵 미해결과 동일.
-5. **테이블 정렬 컨트롤 허용?** — 리더보드 기본 포지션 정렬. 사용자가 다른 기준으로 정렬 가능하게 할지.
-6. **이벤트 티커 클릭 시 동작** — 메시지를 클릭하면 그 시각으로 시크할지 (재생 모드).
-7. **드라이버 검색/필터** — 20명 중에서 빠르게 찾는 UI 필요할까.
-8. **사이드 패널 열림 시 리더보드 적응형 압축의 구체 칼럼** — `LAST` vs `Gap to leader` 중 어느 칼럼을 숨길지 (§1.4). 또는 모두 유지하며 폰트만 축소.
+(2026-05-22 확정 — 사용자 결정)
+- **프레임워크:** Vite + React 18
+- **라우팅:** wouter
+- **테마:** 다크 모드 only ([main-page §0](./main-page-implementation.md))
+- **타깃 디바이스:** Desktop only (1280px+)
+- **`raceDistance.json` 운영:** GitHub Actions 일일 cron에서 OpenF1 `laps` 최대 lap_number(또는 FastF1)로 자동 fetch → `public/raceDistance.json` 갱신 (§2.2)
+
+남은 미해결:
+1. **스타일링 방법** — 다크 토큰을 (a) CSS variables 직접 (b) Tailwind config `theme.extend` (c) styled-components 중 어느 방식으로 표현할지. [main-page §16-7](./main-page-implementation.md)과 통합 결정.
+2. **`intervals` historical derive 채택 여부** — 재생 모드에서 `intervals`가 비어 있을 때 `position`+`laps`로 갭을 계산할지. [live-map §15](./live-map-implementation.md)와 동일.
+3. **테이블 정렬 컨트롤 허용?** — 리더보드 기본 포지션 정렬. 사용자가 다른 기준으로 정렬 가능하게 할지.
+4. **이벤트 티커 클릭 시 동작** — 메시지를 클릭하면 그 시각으로 시크할지 (재생 모드).
+5. **드라이버 검색/필터** — 20명 중에서 빠르게 찾는 UI 필요할까.
+6. **사이드 패널 열림 시 리더보드 적응형 압축의 구체 칼럼** — `LAST` vs `Gap to leader` 중 어느 칼럼을 숨길지 (§1.4). 또는 모두 유지하며 폰트만 축소.
 
 ---
 
@@ -669,4 +720,6 @@ src/dashboard/
 - [openf1-api-reference.md](../../docs/openf1-api-reference.md) — 본 plan이 매핑하는 모든 엔드포인트의 사실
 - [live-streaming-strategy.md](../../docs/live-streaming-strategy.md) — 라이브 30s 버퍼 정책
 - [replay-strategy.md](../../docs/replay-strategy.md) — 재생 60s 윈도우 정책
+- [deployment-architecture.md](../../docs/deployment-architecture.md) — Vercel + GitHub Actions + `public/raceDistance.json` 정적 자산 정책
+- [main-page-implementation.md](./main-page-implementation.md) — 부트스트랩 (단계 0)·디자인 토큰·라우팅 동기 기준
 - [live-map-implementation.md](./live-map-implementation.md) — DataSource 추상, display_time 시계, 좌표/보간/오버레이
