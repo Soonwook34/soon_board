@@ -1,0 +1,3 @@
+[submodule "vendor/f1-circuits-svg"]
+	path = vendor/f1-circuits-svg
+	url = https://github.com/julesr0y/f1-circuits-svg.git

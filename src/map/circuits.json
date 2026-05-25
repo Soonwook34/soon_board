@@ -1,0 +1,14 @@
+{
+  "_comment": "live-map §1.3 (circuits.json seed). julesr0y/f1-circuits-svg 의 SVG 파일과 OpenF1 circuit_key/year 매핑. fetch-circuit-maps.ts 입력. Phase 1 은 Bahrain 만, Phase 14 에서 78서킷 일괄 확장.",
+  "default_variant": "minimal/white-outline",
+  "circuits": [
+    {
+      "circuit_key": 63,
+      "circuit_short_name": "Sakhir",
+      "country_name": "Bahrain",
+      "year": 2024,
+      "julesr0y_layout_id": "bahrain-1",
+      "direction": "clockwise"
+    }
+  ]
+}
