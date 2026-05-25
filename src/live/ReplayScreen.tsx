@@ -8,6 +8,7 @@ import { useLocation, useParams } from 'wouter';
 import { CorsFailedNotice } from './CorsFailedNotice';
 import { findSessionByKey } from './findSessionByKey';
 import { pingOpenF1 } from './corsPing';
+import { TrackMapPreview } from './TrackMapPreview';
 import { classify } from '../main/derived/sessionStatus';
 import { loadCatalogIndex, loadSeason } from '../main/stores/catalogStore';
 import { useNowSecond } from '../main/useNowSecond';
@@ -95,17 +96,27 @@ export function ReplayScreen({ pingImpl }: ReplayScreenProps = {}) {
   }
   if (shouldRedirectToLive) return null;
 
+  // live-map §10 단계 3 — Phase 1 산출물 시각 검증. 마커는 Phase 6+ 에서 LiveMapRenderer 가 통합.
+  const circuitKey = found.meeting.circuit_key;
+
   return (
     <main
-      data-testid="dashboard-placeholder"
+      data-testid="replay-screen"
       style={{ padding: '32px', color: 'var(--color-text-primary)' }}
     >
       <div style={{ fontSize: '18px', fontWeight: 600 }}>
         {found.meeting.meeting_name} · {found.session.session_name}
       </div>
       <div style={{ marginTop: '12px', color: 'var(--color-text-secondary)', fontSize: '14px' }}>
-        Replay placeholder — 대시보드 컴포넌트는 dashboard-implementation.md 책임 (후속 phase).
+        Static track preview (Phase 3) — 마커·대시보드는 후속 phase.
       </div>
+      {circuitKey !== undefined ? (
+        <TrackMapPreview circuitKey={circuitKey} year={currentYear} />
+      ) : (
+        <div style={{ marginTop: '12px', color: 'var(--color-text-secondary)' }}>
+          이 세션은 circuit_key 가 없어 트랙 미리보기를 표시할 수 없습니다.
+        </div>
+      )}
     </main>
   );
 }
