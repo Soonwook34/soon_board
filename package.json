@@ -14,6 +14,7 @@
     "fetch:catalog:year": "tsx scripts/fetch-season-catalog.ts",
     "fetch:race-distance": "echo \"fetch:race-distance: scripts/fetch-race-distance.ts not yet implemented\"",
     "fetch:maps": "tsx scripts/fetch-circuit-maps.ts",
+    "fetch:transform": "tsx scripts/extract-openf1-transform.ts",
     "refresh-data": "npm run fetch:catalog && npm run fetch:race-distance && npm run fetch:maps",
     "check:season-sizes": "tsx scripts/check-season-sizes.ts"
   },
