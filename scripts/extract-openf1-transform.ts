@@ -36,6 +36,14 @@ import {
   type FastLapResult,
 } from './_lib/openf1FastLap.js';
 import { upsertTrackOutlinesIndex } from './_lib/trackOutlinesIndex.js';
+import type {
+  OpenF1AffineJson,
+  TrackOutlineJson,
+} from './_lib/trackOutlinesSchema.js';
+export type {
+  OpenF1AffineJson,
+  TrackOutlineJson,
+} from './_lib/trackOutlinesSchema.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, '..');
@@ -44,48 +52,7 @@ const DEFAULT_OUTPUT_DIR = join(REPO_ROOT, 'public/trackOutlines');
 const DEFAULT_SAMPLE_COUNT = 200;
 const RESIDUAL_THRESHOLD = 5; // viewBox 단위. plan §2.2 fail-by-default.
 
-// ── data shapes (trackOutlines JSON) ────────────────────────────────────
-
-export interface OpenF1AffineJson {
-  scale: number;
-  rotation_deg: number;
-  translate: [number, number];
-  /** 미지정 시 false. */
-  reflection?: boolean;
-}
-
-export interface TrackOutlineJson {
-  circuit_key: number;
-  year: number;
-  circuit_short_name: string;
-  country_name: string;
-  source: string;
-  source_file: string;
-  license: string;
-  viewBox: [number, number, number, number];
-  polyline: [number, number][];
-  arc_length_table: number[];
-  total_length: number;
-  start_finish_index: number;
-  direction: 'clockwise' | 'counter-clockwise';
-  generated_at: string;
-  openf1_transform?: OpenF1AffineJson;
-  openf1_transform_confidence?: number;
-  openf1_transform_meta?: {
-    rmse: number;
-    sample_count: number;
-    source_session_key: number;
-    source_session_type: string;
-    source_driver_number: number;
-    source_lap_number: number;
-    source_lap_duration: number;
-    extracted_at: string;
-    /** 진단용: 최적 cyclic shift index (시작점 정합). */
-    shift_index?: number;
-    /** 진단용: OpenF1 polyline 역순으로 뒤집어 정합했는지 (CW/CCW 불일치 시 true). */
-    reversed?: boolean;
-  };
-}
+// (data shapes — trackOutlines JSON — see ./_lib/trackOutlinesSchema.ts, re-exported above)
 
 // ── pure: extractTransform (테스트 용이) ────────────────────────────────
 
@@ -279,7 +246,8 @@ export async function runExtract(opts: RunOptions): Promise<RunResult> {
   }
 
   const result = extractTransform({
-    svgPolyline: existing.polyline,
+    // readonly → mutable copy (schema 는 readonly, extractTransform 는 mutable Point2D[])
+    svgPolyline: [...existing.polyline],
     openf1Samples: fastLap.samples,
     sampleCount: opts.sampleCount,
     threshold: opts.threshold,

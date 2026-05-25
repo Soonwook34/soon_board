@@ -23,6 +23,8 @@ import { fileURLToPath } from 'node:url';
 import { writeJsonAtomicSync } from './_lib/atomicWrite.js';
 import { svgToPolyline } from './_lib/svgToPolyline.js';
 import { upsertTrackOutlinesIndex } from './_lib/trackOutlinesIndex.js';
+import type { TrackOutlineJson } from './_lib/trackOutlinesSchema.js';
+export type { TrackOutlineJson } from './_lib/trackOutlinesSchema.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, '..');
@@ -59,23 +61,6 @@ export interface BuildOptions {
 export interface BuildResult {
   built: { circuit_key: number; year: number; bytes: number }[];
   skipped: { circuit_key: number; year: number; reason: string }[];
-}
-
-export interface TrackOutlineJson {
-  circuit_key: number;
-  year: number;
-  circuit_short_name: string;
-  country_name: string;
-  source: string;
-  source_file: string;
-  license: string;
-  viewBox: readonly [number, number, number, number];
-  polyline: readonly (readonly [number, number])[];
-  arc_length_table: readonly number[];
-  total_length: number;
-  start_finish_index: number;
-  direction: 'clockwise' | 'counter-clockwise';
-  generated_at: string;
 }
 
 const SOURCE_LABEL = 'julesr0y/f1-circuits-svg';
