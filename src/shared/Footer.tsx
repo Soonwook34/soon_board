@@ -7,10 +7,20 @@
 //   3. F1 disclaimer — 비공식 fan project
 //   4. generated_at — 데이터 신선도 (seasons/index.json 의 일일 갱신 시각)
 
-import { useEffect } from 'react';
+import { useEffect, type ReactNode } from 'react';
 import { color, font, space } from '../style/tokens.js';
 import { loadCatalogIndex } from '../main/stores/catalogStore.js';
 import { useCatalogIndex } from '../main/stores/hooks.js';
+
+const linkStyle = { color: color.textSecondary, textDecoration: 'underline' } as const;
+
+function AttrLink({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" style={linkStyle}>
+      {children}
+    </a>
+  );
+}
 
 export function Footer() {
   const index = useCatalogIndex();
@@ -40,35 +50,15 @@ export function Footer() {
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: space['3'] }}>
         <span data-testid="footer-track-attr">
           Track maps ©{' '}
-          <a
-            href="https://github.com/julesr0y/f1-circuits-svg"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: color.textSecondary, textDecoration: 'underline' }}
-          >
+          <AttrLink href="https://github.com/julesr0y/f1-circuits-svg">
             julesr0y/f1-circuits-svg
-          </a>{' '}
+          </AttrLink>{' '}
           (
-          <a
-            href="https://creativecommons.org/licenses/by/4.0/"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: color.textSecondary, textDecoration: 'underline' }}
-          >
-            CC BY 4.0
-          </a>
+          <AttrLink href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</AttrLink>
           )
         </span>
         <span data-testid="footer-data-attr">
-          Data:{' '}
-          <a
-            href="https://openf1.org"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: color.textSecondary, textDecoration: 'underline' }}
-          >
-            OpenF1.org
-          </a>
+          Data: <AttrLink href="https://openf1.org">OpenF1.org</AttrLink>
         </span>
         <span data-testid="footer-disclaimer">
           Unofficial fan project. Not affiliated with Formula 1, FIA, or any F1 team.
