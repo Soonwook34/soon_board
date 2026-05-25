@@ -11,6 +11,7 @@ import { Hero } from './Hero';
 import { NarrowScreenBanner } from './NarrowScreenBanner';
 import { SeasonPicker } from './SeasonPicker';
 import { FilterChips, SearchBar } from './SearchFilter';
+import { SimBadge } from './SimBadge';
 import { Toast } from './Toast';
 import { selectInitialSeason } from './initialSeason';
 import { loadCatalogIndex, loadSeason } from './stores/catalogStore';
@@ -103,6 +104,8 @@ export function MainPage() {
       {toastMessage !== null && (
         <Toast message={toastMessage} onDismiss={() => setToastMessage(null)} />
       )}
+
+      <SimBadge />
 
       {/* Footer 자리 (deployment-architecture.md §6.2, critic M8) — 후속 phase */}
     </main>

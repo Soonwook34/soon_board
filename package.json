@@ -10,10 +10,12 @@
     "typecheck": "tsc --noEmit",
     "lint": "echo \"lint: placeholder for Phase 0 (ESLint config not yet wired)\"",
     "test": "vitest run --passWithNoTests",
-    "fetch:catalog": "tsx scripts/fetch-season-catalog.ts",
+    "fetch:catalog": "tsx scripts/fetch-season-catalog.ts --all",
+    "fetch:catalog:year": "tsx scripts/fetch-season-catalog.ts",
     "fetch:race-distance": "echo \"fetch:race-distance: scripts/fetch-race-distance.ts not yet implemented\"",
     "fetch:maps": "echo \"fetch:maps: scripts/fetch-circuit-maps.ts not yet implemented\"",
-    "refresh-data": "npm run fetch:catalog && npm run fetch:race-distance && npm run fetch:maps"
+    "refresh-data": "npm run fetch:catalog && npm run fetch:race-distance && npm run fetch:maps",
+    "check:season-sizes": "tsx scripts/check-season-sizes.ts"
   },
   "dependencies": {
     "react": "^18.3.1",

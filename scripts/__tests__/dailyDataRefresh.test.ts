@@ -32,13 +32,16 @@ describe('daily-data-refresh.yml', () => {
     expect(yml).toContain('npm ci');
   });
 
-  it('invokes fetch-season-catalog via tsx', () => {
-    expect(yml).toMatch(/Fetch season catalog[\s\S]*?npx tsx scripts\/fetch-season-catalog\.ts/);
+  it('invokes fetch-season-catalog via tsx with --all (batch mode for all known seasons)', () => {
+    expect(yml).toMatch(/Fetch season catalog[\s\S]*?npx tsx scripts\/fetch-season-catalog\.ts --all/);
   });
 
   it('guards race-distance and circuit-maps steps with hashFiles so missing scripts skip cleanly', () => {
     expect(yml).toMatch(/hashFiles\('scripts\/fetch-race-distance\.ts'\)\s*!=\s*''/);
-    expect(yml).toMatch(/hashFiles\('scripts\/fetch-circuit-maps\.ts'\)\s*!=\s*''/);
+    // circuit-maps 가드는 weekday step과 fetch step 양쪽에 존재 — 같이 skip되어 로그 직관성 ↑.
+    const circuitGuardCount = yml.match(/hashFiles\('scripts\/fetch-circuit-maps\.ts'\)\s*!=\s*''/g);
+    expect(circuitGuardCount).not.toBeNull();
+    expect(circuitGuardCount!.length).toBe(2);
   });
 
   it('gates circuit-maps step on Sunday via date -u +%u == 7', () => {

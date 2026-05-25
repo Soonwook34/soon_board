@@ -31,9 +31,9 @@ jobs:
           cache: npm
       - run: npm ci
 
-      # 1) 시즌 카탈로그 — main-page-implementation.md §3
-      - name: Fetch season catalog
-        run: npx tsx scripts/fetch-season-catalog.ts
+      # 1) 시즌 카탈로그 — main-page-implementation.md §3.2 (가용 시즌 전체 일괄 빌드)
+      - name: Fetch season catalog (all known seasons)
+        run: npx tsx scripts/fetch-season-catalog.ts --all
 
       # 2) race distance — dashboard-implementation.md §2.2
       # 스크립트가 존재할 때만 실행 (현재 미구현 → skip).
@@ -42,7 +42,9 @@ jobs:
         run: npx tsx scripts/fetch-race-distance.ts
 
       # 3) circuit maps — live-map-implementation.md §1.3 (일요일에만)
+      # 스크립트가 존재할 때만 weekday 감지 + fetch 실행 (둘 다 같이 skip 되어 로그 직관성 ↑).
       - name: Check weekday for circuit maps
+        if: hashFiles('scripts/fetch-circuit-maps.ts') != ''
         id: weekday
         run: |
           if [ "$(date -u +%u)" = "7" ]; then
