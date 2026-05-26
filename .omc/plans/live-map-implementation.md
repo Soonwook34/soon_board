@@ -800,10 +800,9 @@ THIRD_PARTY_LICENSES.md            # CC-BY-4.0 attribution                      
 - ✅ 인수: 2번 (시각 회귀), 17번 (파이프라인 자동화)
 
 ### 단계 15 [MVP]: 시각 회귀 + 메모리 + 탭 처리
-- Playwright 시각 회귀 (MVP 스코프: 메인 트랙 + 핏레인)
-- 메모리 누수 확인
-- 백그라운드 탭 복귀 테스트
-- ✅ 인수: 10번 (메모리), 12번 (탭 백그라운드)
+- **본 phase 완료 (vitest invariant):** [src/map/__tests__/LiveDataSourceMemory.test.ts](../../src/map/__tests__/LiveDataSourceMemory.test.ts) 가 sustained-input (200 cycle × 20 driver) 시 ring buffer / records / cursors / listeners 모두 bounded 임을 lock. [src/map/__tests__/LiveDataSourceTabResume.test.ts](../../src/map/__tests__/LiveDataSourceTabResume.test.ts) 가 wall-clock 60s gap → display_time anchor + drift 자연 진행 + 신규 sample 후 anchor 재설정 + freeze 분기 진입을 lock (§5.9 "별도 코드 불필요" 정책의 회귀 안전망).
+- **follow-up (별도 phase):** Playwright 시각 회귀 (메인 트랙 + 핏레인) — 브라우저 바이너리 ~300MB download 가 필요해 CI 인프라 갱신과 묶음. 60min wall-clock 메모리 profile (Chrome Task Manager) 는 수동 단계로 유지.
+- ✅ 인수 10 (메모리) + 12 (탭 백그라운드) 의 *deterministic core* 는 vitest 가 보호. wall-clock 실측은 follow-up.
 
 ---
 
