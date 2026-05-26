@@ -67,6 +67,12 @@ export interface LiveDataSourceOptions {
   ringBufferMs?: number;
   /** Sleep injection (테스트). 기본 setTimeout. */
   sleep?: (ms: number) => Promise<void>;
+  /**
+   * 신규 location sample 인입 시 호출 (sentinel filter 통과 후, buffer push 직후).
+   * UI bridge 가 raw LocationSample → projected DriverSample 변환 후 PerDriverBuffer 에 push 하는 hook.
+   * 같은 인입 cycle 의 여러 sample 은 각각 별도 호출.
+   */
+  onSample?: (driverNumber: number, sample: LocationSample) => void;
 }
 
 const defaultSleep = (ms: number): Promise<void> =>
@@ -292,6 +298,7 @@ export class LiveDataSource implements DataSource {
       if (Math.abs(x) + Math.abs(y) + Math.abs(z) < SENTINEL_THRESHOLD) continue;
       const sample: InternalLocationSample = { date, dateMs: date.valueOf(), x, y, z };
       this.insertLocation(drv, sample);
+      this.opts.onSample?.(drv, { date, x, y, z });
       if (!maxDate || date.valueOf() > maxDate.valueOf()) maxDate = date;
     }
     if (maxDate) {

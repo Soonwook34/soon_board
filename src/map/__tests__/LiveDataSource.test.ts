@@ -356,6 +356,63 @@ describe('LiveDataSource — onDisplayTimeChange', () => {
   });
 });
 
+describe('LiveDataSource — onSample callback (UI bridge hook)', () => {
+  it('sentinel 제외 모든 sample 마다 onSample 호출 (driver_number + LocationSample shape)', async () => {
+    const calls: Array<{ driver: number; sample: { date: Date; x: number; y: number; z: number } }> = [];
+    const fetchImpl = vi.fn(async (input: RequestInfo | URL) => {
+      const url = typeof input === 'string' ? input : input.toString();
+      if (url.includes('/v1/location')) {
+        return jsonResponse([
+          locationRecord(44, '2024-03-02T15:00:00.000Z', 100, 200, 10),
+          locationRecord(44, '2024-03-02T15:00:00.100Z', 5, 5, 5), // sentinel |x|+|y|+|z|=15 < 50
+          locationRecord(11, '2024-03-02T15:00:00.200Z', 300, 400, 20),
+        ]);
+      }
+      return jsonResponse([]);
+    });
+    const ds = new LiveDataSource({
+      sessionKey: 9472,
+      fetchImpl: fetchImpl as unknown as typeof fetch,
+      hydrationTokenIntervalMs: 0,
+      sleep: async () => {},
+      onSample: (driver, sample) => calls.push({ driver, sample }),
+    });
+    await ds.start();
+    // sentinel 제외 2 sample → onSample 2회
+    expect(calls).toHaveLength(2);
+    expect(calls[0]).toEqual({
+      driver: 44,
+      sample: { date: new Date('2024-03-02T15:00:00.000Z'), x: 100, y: 200, z: 10 },
+    });
+    expect(calls[1]).toEqual({
+      driver: 11,
+      sample: { date: new Date('2024-03-02T15:00:00.200Z'), x: 300, y: 400, z: 20 },
+    });
+    ds.stop();
+  });
+
+  it('onSample 미지정 시 정상 동작 (옵션, 회귀)', async () => {
+    const fetchImpl = vi.fn(async (input: RequestInfo | URL) => {
+      const url = typeof input === 'string' ? input : input.toString();
+      if (url.includes('/v1/location')) {
+        return jsonResponse([locationRecord(44, '2024-03-02T15:00:00.000Z', 100, 200)]);
+      }
+      return jsonResponse([]);
+    });
+    const ds = new LiveDataSource({
+      sessionKey: 9472,
+      fetchImpl: fetchImpl as unknown as typeof fetch,
+      hydrationTokenIntervalMs: 0,
+      sleep: async () => {},
+    });
+    await ds.start();
+    // 옵션 미지정에도 sample 정상 적재
+    const pair = ds.getSamplePair(44, new Date('2024-03-02T15:00:00.000Z'));
+    expect(pair?.s1.x).toBe(100);
+    ds.stop();
+  });
+});
+
 describe('LiveDataSource — ring buffer trim (60s)', () => {
   it('newestDate − 60s 이전 sample 자동 폐기', async () => {
     let firstCall = true;
