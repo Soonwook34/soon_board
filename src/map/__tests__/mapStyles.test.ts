@@ -36,4 +36,15 @@ describe('mapStyles', () => {
     expect(mapStyles.labelColor).toBe(color.textPrimary);
     expect(mapStyles.labelOffsetPx).toBe(6);
   });
+
+  it('Phase 7 trail 토큰 — alpha gradient + line 두께', () => {
+    expect(mapStyles.trailAlphaStart).toBe(0);
+    expect(mapStyles.trailAlphaEnd).toBe(0.3);
+    expect(mapStyles.trailLineWidth).toBeGreaterThan(0);
+  });
+
+  it('Phase 7 state 토큰 — disconnectedAlpha 0.5, retiredFill = textMuted (raw hex 없음)', () => {
+    expect(mapStyles.disconnectedAlpha).toBe(0.5);
+    expect(mapStyles.retiredFill).toBe(color.textMuted);
+  });
 });

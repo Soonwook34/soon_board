@@ -133,3 +133,46 @@ describe('drawSlmIndicator — placeholder (plan §4.5.2)', () => {
     expect(drawSlmIndicator(1, false)).toBe(false);
   });
 });
+
+describe('drawMarker — state 분기 (Phase 7)', () => {
+  it("state='disconnected' → globalAlpha 0.5 → 1.0 복원 시퀀스", () => {
+    const { ctx, calls } = makeMockCtx();
+    drawMarker(ctx, {
+      position: [100, 200],
+      teamColour: '#ff0000',
+      driverNumber: 44,
+      nameAcronym: 'HAM',
+      showLabel: false,
+      state: 'disconnected',
+    });
+    const alphas = calls
+      .filter((c) => c.method === 'set:globalAlpha')
+      .map((c) => c.args[0]);
+    expect(alphas).toEqual([mapStyles.disconnectedAlpha, 1]);
+  });
+  it("state='retired' → fill 이 retiredFill (textMuted), teamColour 무시", () => {
+    const { ctx, calls } = makeMockCtx();
+    drawMarker(ctx, {
+      position: [100, 200],
+      teamColour: '#ff0000',
+      driverNumber: 44,
+      nameAcronym: 'HAM',
+      showLabel: false,
+      state: 'retired',
+    });
+    const firstFillStyle = calls.find((c) => c.method === 'set:fillStyle');
+    expect(firstFillStyle?.args[0]).toBe(mapStyles.retiredFill);
+  });
+  it("state='normal' (default) → 기존 동작 유지, globalAlpha 미변경", () => {
+    const { ctx, calls } = makeMockCtx();
+    drawMarker(ctx, {
+      position: [100, 200],
+      teamColour: '#ff0000',
+      driverNumber: 44,
+      nameAcronym: 'HAM',
+      showLabel: false,
+    });
+    const alphas = calls.filter((c) => c.method === 'set:globalAlpha');
+    expect(alphas).toHaveLength(0);
+  });
+});

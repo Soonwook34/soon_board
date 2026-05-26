@@ -3,6 +3,7 @@
 
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { LiveMapRenderer } from '../LiveMapRenderer.js';
+import { mapStyles } from '../mapStyles.js';
 import { PerDriverBuffer } from '../PerDriverBuffer.js';
 import { SyntheticDataSource } from '../../shared/__tests__/SyntheticDataSource.js';
 import { computeViewport, type Point2D } from '../viewport.js';
@@ -237,6 +238,95 @@ describe('LiveMapRenderer.renderFrame — 가라지 sentinel (plan 인수 6)', (
     });
     r.renderFrame(500);
     expect(calls.filter((c) => c.method === 'arc')).toHaveLength(0);
+  });
+});
+
+describe('LiveMapRenderer.renderFrame — Phase 7 trail + state', () => {
+  it('trailsEnabled=true (default) + sample ≥ 2 → trail stroke (track + trail + marker stroke 등)', () => {
+    const buffer = new PerDriverBuffer();
+    buffer.push(44, sample(0, 100, 0, 100));
+    buffer.push(44, sample(500, 150, 0, 150));
+    buffer.push(44, sample(1000, 200, 0, 200));
+    const ds = new SyntheticDataSource();
+    const { ctx, calls } = makeMockCtx();
+    const r = makeRenderer({ ctx, buffer, ds }); // default trailsEnabled true
+    r.renderFrame(1000);
+    // stroke 호출 분류: 정적 트랙 1 + 트레일 segment N + 마커 stroke 1
+    const strokes = calls.filter((c) => c.method === 'stroke');
+    expect(strokes.length).toBeGreaterThanOrEqual(3); // 최소 track + 1 trail seg + marker
+  });
+
+  it('trailsEnabled=false 명시 → trail stroke 없음 (track + marker 만)', () => {
+    const buffer = new PerDriverBuffer();
+    buffer.push(44, sample(0, 100, 0, 100));
+    buffer.push(44, sample(500, 150, 0, 150));
+    buffer.push(44, sample(1000, 200, 0, 200));
+    const ds = new SyntheticDataSource();
+    const { ctx, calls } = makeMockCtx();
+    const drivers = new Map([[44, { teamColour: '#27f4d2', nameAcronym: 'HAM' }]]);
+    const r = new LiveMapRenderer({
+      ctx,
+      canvasWidth: 500,
+      canvasHeight: 500,
+      polyline: POLY,
+      arcLengthTable: POLY_S,
+      totalLength: 2000,
+      viewport: VIEWPORT,
+      dataSource: ds,
+      buffer,
+      getDriverMeta: (n) => drivers.get(n) ?? null,
+      showLabel: () => false,
+      trailsEnabled: false,
+    });
+    r.renderFrame(1000);
+    // 정적 트랙 stroke 1 + 마커 stroke 1 = 2. trail segment 없음.
+    const strokes = calls.filter((c) => c.method === 'stroke');
+    expect(strokes).toHaveLength(2);
+  });
+
+  it("latest sample > 1.5s 전 → disconnected → '?' 배지 fillText 호출 + globalAlpha 0.5", () => {
+    const buffer = new PerDriverBuffer();
+    buffer.push(44, sample(0, 100, 0, 100)); // latest at t=0
+    const ds = new SyntheticDataSource();
+    const { ctx, calls } = makeMockCtx();
+    const r = makeRenderer({ ctx, buffer, ds, showLabel: false });
+    r.renderFrame(2000); // 2000 - 0 = 2000 > 1500 → disconnected
+    // disconnected: globalAlpha 0.5 → marker → 1.0 복원
+    const alphas = calls
+      .filter((c) => c.method === 'set:globalAlpha')
+      .map((c) => c.args[0] as number);
+    expect(alphas.some((a) => a === 0.5)).toBe(true);
+    // '?' 배지 fillText
+    const questionMark = calls.find((c) => c.method === 'fillText' && c.args[0] === '?');
+    expect(questionMark).toBeDefined();
+  });
+
+  it('getDriverHints isDnf=true → retired → fill 이 retiredFill (textMuted)', () => {
+    const buffer = new PerDriverBuffer();
+    buffer.push(44, sample(0, 100, 0, 100));
+    buffer.push(44, sample(1000, 200, 0, 200));
+    const ds = new SyntheticDataSource();
+    const { ctx, calls } = makeMockCtx();
+    const drivers = new Map([[44, { teamColour: '#27f4d2', nameAcronym: 'HAM' }]]);
+    const r = new LiveMapRenderer({
+      ctx,
+      canvasWidth: 500,
+      canvasHeight: 500,
+      polyline: POLY,
+      arcLengthTable: POLY_S,
+      totalLength: 2000,
+      viewport: VIEWPORT,
+      dataSource: ds,
+      buffer,
+      getDriverMeta: (n) => drivers.get(n) ?? null,
+      showLabel: () => false,
+      getDriverHints: () => ({ isDnf: true }),
+    });
+    r.renderFrame(500);
+    // retired: 마커 fillStyle 이 retiredFill (gray), teamColour 무시. 또한 trail 비활성 (retired 면 skip).
+    const fillStyles = calls.filter((c) => c.method === 'set:fillStyle').map((c) => c.args[0]);
+    expect(fillStyles.some((v) => v === mapStyles.retiredFill)).toBe(true);
+    expect(fillStyles.every((v) => v !== '#27f4d2')).toBe(true); // teamColour 무시
   });
 });
 

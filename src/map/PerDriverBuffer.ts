@@ -86,6 +86,29 @@ export class PerDriverBuffer {
   size(driverNumber: number): number {
     return this.samples.get(driverNumber)?.length ?? 0;
   }
+
+  /** 가장 최근 sample 의 date (ms). 없으면 null. Phase 7 stateBadges 연결 끊김 판정. */
+  latestSampleDate(driverNumber: number): number | null {
+    const arr = this.samples.get(driverNumber);
+    if (!arr || arr.length === 0) return null;
+    return arr[arr.length - 1].date;
+  }
+
+  /**
+   * 최근 windowMs 안의 sample 목록 (date 오름차순). Phase 7 trails.collectTrailPoints 가 사용.
+   * displayTimeMs 보다 미래의 sample 은 제외.
+   */
+  recentSamples(driverNumber: number, displayTimeMs: number, windowMs: number): readonly import('./interpolation.js').DriverSample[] {
+    const arr = this.samples.get(driverNumber);
+    if (!arr || arr.length === 0) return [];
+    const minDate = displayTimeMs - windowMs;
+    const result: import('./interpolation.js').DriverSample[] = [];
+    for (const s of arr) {
+      if (s.date > displayTimeMs) break;
+      if (s.date >= minDate) result.push(s);
+    }
+    return result;
+  }
 }
 
 function isSentinel(sample: DriverSample): boolean {

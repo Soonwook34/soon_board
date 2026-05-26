@@ -6,9 +6,12 @@
 
 import type { DataSource } from '../shared/DataSource.js';
 import { interpolatePosition, type InterpolationContext } from './interpolation.js';
+import { mapStyles } from './mapStyles.js';
 import { drawMarker } from './markers.js';
 import { PerDriverBuffer } from './PerDriverBuffer.js';
+import { classifyDriverState, drawStateBadge, type ClassifyOpts } from './stateBadges.js';
 import { renderStaticTrack } from './trackRenderer.js';
+import { collectTrailPoints, drawTrail } from './trails.js';
 import { applyViewport, type Point2D, type ViewportTransform } from './viewport.js';
 
 export interface DriverMeta {
@@ -32,6 +35,10 @@ export interface LiveMapRendererConfig {
   showLabel: () => boolean;
   /** 선택: Phase 8 핏레인 polyline 등 정적 트랙 옵션. */
   pitlane?: readonly Point2D[];
+  /** Phase 7 — 트레일 ON/OFF (default true). plan §4.3 '비활성화 가능한 옵션'. */
+  trailsEnabled?: boolean;
+  /** Phase 12+ — dnf/pit hint. Phase 7 default 는 undefined (모두 normal/disconnected 만 판정). */
+  getDriverHints?: (driverNumber: number) => ClassifyOpts | undefined;
 }
 
 export class LiveMapRenderer {
@@ -48,7 +55,19 @@ export class LiveMapRenderer {
 
   /** 순수 frame 함수 — 테스트 가능. RAF 콜백에서도 동일하게 호출됨. */
   renderFrame(displayTimeMs: number): void {
-    const { ctx, canvasWidth, canvasHeight, polyline, viewport, buffer, getDriverMeta, showLabel, pitlane } = this.config;
+    const {
+      ctx,
+      canvasWidth,
+      canvasHeight,
+      polyline,
+      viewport,
+      buffer,
+      getDriverMeta,
+      showLabel,
+      pitlane,
+      trailsEnabled = true,
+      getDriverHints,
+    } = this.config;
 
     // 정적 트랙 재렌더 (Phase 6 MVP — offscreen cache 는 Phase 14)
     renderStaticTrack({ ctx, canvasWidth, canvasHeight, polyline, viewport, pitlane });
@@ -59,6 +78,19 @@ export class LiveMapRenderer {
       if (pair === null) continue;
       const meta = getDriverMeta(driverNumber);
       if (!meta) continue;
+      const state = classifyDriverState(buffer, driverNumber, displayTimeMs, getDriverHints?.(driverNumber));
+
+      // 트레일 (Phase 7 §4.3) — 마커 전에 그려야 마커가 위에 표시됨
+      if (trailsEnabled && state !== 'retired') {
+        const trailPoints = collectTrailPoints(buffer, driverNumber, displayTimeMs, viewport);
+        drawTrail(ctx, trailPoints, {
+          color: meta.teamColour,
+          lineWidth: mapStyles.trailLineWidth,
+          alphaStart: mapStyles.trailAlphaStart,
+          alphaEnd: mapStyles.trailAlphaEnd,
+        });
+      }
+
       const interp = interpolatePosition(pair.s1, pair.s2, displayTimeMs, this.interpolationCtx);
       const canvasPos = applyViewport(interp.position, viewport);
       drawMarker(ctx, {
@@ -67,7 +99,11 @@ export class LiveMapRenderer {
         driverNumber,
         nameAcronym: meta.nameAcronym,
         showLabel: labelOn,
+        state,
       });
+
+      // 상태 배지 (disconnected 만 '?' 그림)
+      drawStateBadge(ctx, canvasPos, state, { markerRadius: mapStyles.markerSizeMin / 2 });
     }
   }
 

@@ -3,6 +3,7 @@
 // SLM 활성화 placeholder 는 plan §4.5.2 — 데이터 입수 전 항상 false.
 
 import { mapStyles } from './mapStyles.js';
+import type { DriverState } from './stateBadges.js';
 import type { Point2D } from './viewport.js';
 
 export interface MarkerDrawOpts {
@@ -14,17 +15,24 @@ export interface MarkerDrawOpts {
   showLabel: boolean;
   /** 직경 px. 미지정 시 mapStyles.markerSizeMin. */
   size?: number;
+  /** plan §4.2 상태별 표현 — Phase 7. default 'normal'. */
+  state?: DriverState;
 }
 
 export function drawMarker(ctx: CanvasRenderingContext2D, opts: MarkerDrawOpts): void {
   const size = opts.size ?? mapStyles.markerSizeMin;
   const radius = size / 2;
   const [x, y] = opts.position;
+  const state = opts.state ?? 'normal';
+  const fillColor = state === 'retired' ? mapStyles.retiredFill : opts.teamColour;
 
-  // 원 (fill = teamColour, stroke = 흰 테두리)
+  // disconnected → dim 50% 동안만 (배지/라벨은 일반 alpha 로 그림)
+  if (state === 'disconnected') ctx.globalAlpha = mapStyles.disconnectedAlpha;
+
+  // 원 (fill = teamColour/grayscale, stroke = 흰 테두리)
   ctx.beginPath();
   ctx.arc(x, y, radius, 0, Math.PI * 2);
-  ctx.fillStyle = opts.teamColour;
+  ctx.fillStyle = fillColor;
   ctx.fill();
   ctx.strokeStyle = mapStyles.markerBorderColor;
   ctx.lineWidth = mapStyles.markerBorderWidth;
@@ -45,6 +53,8 @@ export function drawMarker(ctx: CanvasRenderingContext2D, opts: MarkerDrawOpts):
     ctx.textBaseline = 'top';
     ctx.fillText(opts.nameAcronym, x, y + radius + mapStyles.labelOffsetPx);
   }
+
+  if (state === 'disconnected') ctx.globalAlpha = 1;
 }
 
 /** plan §4.5.2 — OpenF1 X-mode 필드 입수 전까지 항상 false. */

@@ -39,4 +39,16 @@ export const mapStyles = {
   labelOffsetPx: 6,
   /** 라벨 색. */
   labelColor: color.textPrimary,
+
+  // ── Phase 7 trail + state 토큰 (live-map §4.2 + §4.3) ───────────────
+  /** 트레일 가장 오래된 점 alpha. */
+  trailAlphaStart: 0,
+  /** 트레일 가장 최근 점 alpha. */
+  trailAlphaEnd: 0.3,
+  /** 트레일 line 두께 (px). */
+  trailLineWidth: 2,
+  /** 연결 끊김 (disconnected) 마커 alpha. plan §4.2 "dim 50%". */
+  disconnectedAlpha: 0.5,
+  /** 리타이어 마커 fill (grayscale). plan §4.2 "마커 grayscale". */
+  retiredFill: color.textMuted,
 } as const;
