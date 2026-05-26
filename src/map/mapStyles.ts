@@ -51,4 +51,10 @@ export const mapStyles = {
   disconnectedAlpha: 0.5,
   /** 리타이어 마커 fill (grayscale). plan §4.2 "마커 grayscale". */
   retiredFill: color.textMuted,
+
+  // ── Phase 8 pit 상태 토큰 (plan §4.2) ───────────────────────────────
+  /** pit-in-progress 마커 보더 점선 패턴 [dash, gap]. plan §4.2 "마커 보더에 점선 효과". */
+  pitDashPattern: [3, 2] as const,
+  /** pit-stopped 마커 크기 배율. plan §4.2 "마커 살짝 축소". */
+  pitStoppedScale: 0.7,
 } as const;

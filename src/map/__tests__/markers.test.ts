@@ -175,4 +175,32 @@ describe('drawMarker — state 분기 (Phase 7)', () => {
     const alphas = calls.filter((c) => c.method === 'set:globalAlpha');
     expect(alphas).toHaveLength(0);
   });
+
+  it("state='pit-in-progress' → setLineDash([3,2]) 호출 + 종료 시 reset ([])", () => {
+    const { ctx, calls } = makeMockCtx();
+    drawMarker(ctx, {
+      position: [100, 200],
+      teamColour: '#ff0000',
+      driverNumber: 44,
+      nameAcronym: 'HAM',
+      showLabel: false,
+      state: 'pit-in-progress',
+    });
+    const dashCalls = calls.filter((c) => c.method === 'setLineDash').map((c) => c.args[0]);
+    expect(dashCalls).toEqual([[3, 2], []]);
+  });
+
+  it("state='pit-stopped' → arc radius = markerSizeMin × pitStoppedScale / 2", () => {
+    const { ctx, calls } = makeMockCtx();
+    drawMarker(ctx, {
+      position: [100, 200],
+      teamColour: '#ff0000',
+      driverNumber: 44,
+      nameAcronym: 'HAM',
+      showLabel: false,
+      state: 'pit-stopped',
+    });
+    const arc = calls.find((c) => c.method === 'arc');
+    expect(arc?.args[2]).toBeCloseTo((mapStyles.markerSizeMin * mapStyles.pitStoppedScale) / 2);
+  });
 });

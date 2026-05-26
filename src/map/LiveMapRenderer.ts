@@ -5,10 +5,11 @@
 // start()/stop() 만 requestAnimationFrame 의존.
 
 import type { DataSource } from '../shared/DataSource.js';
-import { interpolatePosition, type InterpolationContext } from './interpolation.js';
+import { interpolatePosition, type DriverSample, type InterpolationContext } from './interpolation.js';
 import { mapStyles } from './mapStyles.js';
 import { drawMarker } from './markers.js';
 import { PerDriverBuffer } from './PerDriverBuffer.js';
+import { projectToPolyline } from './pathProjection.js';
 import { classifyDriverState, drawStateBadge, type ClassifyOpts } from './stateBadges.js';
 import { renderStaticTrack } from './trackRenderer.js';
 import { collectTrailPoints, drawTrail } from './trails.js';
@@ -33,8 +34,12 @@ export interface LiveMapRendererConfig {
   getDriverMeta: (driverNumber: number) => DriverMeta | null;
   /** 라벨 표시 — 매 frame 평가 (Provider 반응성). */
   showLabel: () => boolean;
-  /** 선택: Phase 8 핏레인 polyline 등 정적 트랙 옵션. */
+  /** 선택: 정적 트랙 회색 파선 (Phase 3 trackRenderer 의 pitlane param). Phase 8 는 pitlanePolyline 으로 자동 채움. */
   pitlane?: readonly Point2D[];
+  /** Phase 8 — 핏레인 polyline (path-arc 보간 + 정적 트랙 회색 파선 둘 다용). 3개 필드 같이 제공 시 핏 보간 활성. */
+  pitlanePolyline?: readonly Point2D[];
+  pitlaneArcLengthTable?: readonly number[];
+  pitlaneTotalLength?: number;
   /** Phase 7 — 트레일 ON/OFF (default true). plan §4.3 '비활성화 가능한 옵션'. */
   trailsEnabled?: boolean;
   /** Phase 12+ — dnf/pit hint. Phase 7 default 는 undefined (모두 normal/disconnected 만 판정). */
@@ -44,6 +49,7 @@ export interface LiveMapRendererConfig {
 export class LiveMapRenderer {
   private rafId: number | null = null;
   private readonly interpolationCtx: InterpolationContext;
+  private readonly pitlaneCtx: InterpolationContext | null;
 
   constructor(private readonly config: LiveMapRendererConfig) {
     this.interpolationCtx = {
@@ -51,6 +57,14 @@ export class LiveMapRenderer {
       arcLengthTable: config.arcLengthTable,
       totalLength: config.totalLength,
     };
+    this.pitlaneCtx =
+      config.pitlanePolyline && config.pitlaneArcLengthTable && config.pitlaneTotalLength != null
+        ? {
+            polyline: config.pitlanePolyline,
+            arcLengthTable: config.pitlaneArcLengthTable,
+            totalLength: config.pitlaneTotalLength,
+          }
+        : null;
   }
 
   /** 순수 frame 함수 — 테스트 가능. RAF 콜백에서도 동일하게 호출됨. */
@@ -69,8 +83,9 @@ export class LiveMapRenderer {
       getDriverHints,
     } = this.config;
 
-    // 정적 트랙 재렌더 (Phase 6 MVP — offscreen cache 는 Phase 14)
-    renderStaticTrack({ ctx, canvasWidth, canvasHeight, polyline, viewport, pitlane });
+    // 정적 트랙 재렌더 (Phase 6 MVP — offscreen cache 는 Phase 14). Phase 8 pitlanePolyline 우선.
+    const staticPitlane = this.config.pitlanePolyline ?? pitlane;
+    renderStaticTrack({ ctx, canvasWidth, canvasHeight, polyline, viewport, pitlane: staticPitlane });
 
     const labelOn = showLabel();
     for (const driverNumber of buffer.drivers()) {
@@ -91,7 +106,13 @@ export class LiveMapRenderer {
         });
       }
 
-      const interp = interpolatePosition(pair.s1, pair.s2, displayTimeMs, this.interpolationCtx);
+      // Phase 8 — 핏 진행/정차 상태 + pitlane ctx 가 있으면 마커가 pitlane polyline 위로 흐름.
+      const usePitlane =
+        (state === 'pit-in-progress' || state === 'pit-stopped') && this.pitlaneCtx !== null;
+      const interpCtx = usePitlane ? this.pitlaneCtx! : this.interpolationCtx;
+      const s1ForInterp = usePitlane ? reproject(pair.s1, interpCtx) : pair.s1;
+      const s2ForInterp = usePitlane && pair.s2 ? reproject(pair.s2, interpCtx) : pair.s2;
+      const interp = interpolatePosition(s1ForInterp, s2ForInterp, displayTimeMs, interpCtx);
       const canvasPos = applyViewport(interp.position, viewport);
       drawMarker(ctx, {
         position: canvasPos,
@@ -122,4 +143,10 @@ export class LiveMapRenderer {
       this.rafId = null;
     }
   }
+}
+
+/** Phase 8 — pit 진입 시 rawXY 를 pitlane polyline 에 재투영해 s/n 재계산. */
+function reproject(sample: DriverSample, ctx: InterpolationContext): DriverSample {
+  const proj = projectToPolyline(sample.rawXY, ctx.polyline, ctx.arcLengthTable);
+  return { date: sample.date, rawXY: sample.rawXY, s: proj.s, n: proj.n };
 }

@@ -33,6 +33,34 @@ export interface OpenF1TransformMeta {
   reversed?: boolean;
 }
 
+/**
+ * Phase 8 — public/trackOutlines/pitlane_{key}-{year}.json (browser-facing 필드만).
+ * scripts/trace-pitlane.ts 가 산출하고 src/map/pitLane.ts 가 fetch 한다.
+ */
+export interface PitlaneJsonBase {
+  circuit_key: number;
+  year: number;
+  source: string;
+  license: string;
+  polyline: readonly (readonly [number, number])[];
+  arc_length_table: readonly number[];
+  total_length: number;
+  generated_at: string;
+}
+
+/** scripts/trace-pitlane.ts 가 추가로 기록하는 진단 메타 (browser 는 무시). */
+export interface PitlaneJson extends PitlaneJsonBase {
+  meta: {
+    source_session_key: number;
+    source_session_type: string;
+    pit_stop_count: number;
+    raw_sample_count: number;
+    filtered_sample_count: number;
+    bucket_width: number;
+    extracted_at: string;
+  };
+}
+
 export interface TrackOutlineJson {
   circuit_key: number;
   year: number;

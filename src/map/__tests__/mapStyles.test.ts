@@ -47,4 +47,9 @@ describe('mapStyles', () => {
     expect(mapStyles.disconnectedAlpha).toBe(0.5);
     expect(mapStyles.retiredFill).toBe(color.textMuted);
   });
+
+  it('Phase 8 pit 토큰 — pitDashPattern [3,2] + pitStoppedScale 0.7', () => {
+    expect(mapStyles.pitDashPattern).toEqual([3, 2]);
+    expect(mapStyles.pitStoppedScale).toBe(0.7);
+  });
 });

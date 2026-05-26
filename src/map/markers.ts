@@ -20,23 +20,26 @@ export interface MarkerDrawOpts {
 }
 
 export function drawMarker(ctx: CanvasRenderingContext2D, opts: MarkerDrawOpts): void {
-  const size = opts.size ?? mapStyles.markerSizeMin;
+  const state = opts.state ?? 'normal';
+  const baseSize = opts.size ?? mapStyles.markerSizeMin;
+  const size = state === 'pit-stopped' ? baseSize * mapStyles.pitStoppedScale : baseSize;
   const radius = size / 2;
   const [x, y] = opts.position;
-  const state = opts.state ?? 'normal';
   const fillColor = state === 'retired' ? mapStyles.retiredFill : opts.teamColour;
 
   // disconnected → dim 50% 동안만 (배지/라벨은 일반 alpha 로 그림)
   if (state === 'disconnected') ctx.globalAlpha = mapStyles.disconnectedAlpha;
 
-  // 원 (fill = teamColour/grayscale, stroke = 흰 테두리)
+  // 원 (fill = teamColour/grayscale, stroke = 흰 테두리 / pit-in-progress 면 점선)
   ctx.beginPath();
   ctx.arc(x, y, radius, 0, Math.PI * 2);
   ctx.fillStyle = fillColor;
   ctx.fill();
+  if (state === 'pit-in-progress') ctx.setLineDash([...mapStyles.pitDashPattern]);
   ctx.strokeStyle = mapStyles.markerBorderColor;
   ctx.lineWidth = mapStyles.markerBorderWidth;
   ctx.stroke();
+  if (state === 'pit-in-progress') ctx.setLineDash([]);
 
   // driver_number (중앙)
   ctx.fillStyle = mapStyles.markerBorderColor; // 흰색

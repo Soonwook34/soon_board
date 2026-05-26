@@ -330,6 +330,118 @@ describe('LiveMapRenderer.renderFrame — Phase 7 trail + state', () => {
   });
 });
 
+describe('LiveMapRenderer.renderFrame — Phase 8 pitlane 통합', () => {
+  // 메인 polyline: (0,0)→(500,0). 핏레인 polyline: (0,50)→(500,50) (메인 옆 평행).
+  const PIT_POLY: Point2D[] = [
+    [0, 50],
+    [500, 50],
+  ];
+  const PIT_S = [0, 500];
+
+  it('pitlane ctx 없을 때 normal 동작 (회귀)', () => {
+    const buffer = new PerDriverBuffer();
+    buffer.push(44, sample(0, 100, 0, 100));
+    buffer.push(44, sample(1000, 200, 0, 200));
+    const ds = new SyntheticDataSource();
+    const { ctx, calls } = makeMockCtx();
+    const r = makeRenderer({ ctx, buffer, ds });
+    r.renderFrame(500);
+    const arcs = calls.filter((c) => c.method === 'arc');
+    expect(arcs.length).toBeGreaterThan(0);
+    // 마커는 메인 polyline 위 (y=0 근방)
+    const markerArc = arcs[arcs.length - 1];
+    expect(markerArc.args[1] as number).toBeCloseTo(0);
+  });
+
+  it("pit-in-progress hint + pitlane ctx → 마커가 핏레인 polyline 위 (y≈50)", () => {
+    const buffer = new PerDriverBuffer();
+    // rawXY 를 핏레인 근처로 (y≈50) push
+    buffer.push(44, sample(0, 100, 50, 100));
+    buffer.push(44, sample(1000, 200, 50, 200));
+    const ds = new SyntheticDataSource();
+    const drivers = new Map([[44, { teamColour: '#27f4d2', nameAcronym: 'HAM' }]]);
+    const { ctx, calls } = makeMockCtx();
+    const r = new LiveMapRenderer({
+      ctx,
+      canvasWidth: 500,
+      canvasHeight: 500,
+      polyline: POLY,
+      arcLengthTable: POLY_S,
+      totalLength: 2000,
+      viewport: VIEWPORT,
+      dataSource: ds,
+      buffer,
+      getDriverMeta: (n) => drivers.get(n) ?? null,
+      showLabel: () => false,
+      pitlanePolyline: PIT_POLY,
+      pitlaneArcLengthTable: PIT_S,
+      pitlaneTotalLength: 500,
+      getDriverHints: () => ({ isInPit: true }),
+    });
+    r.renderFrame(500);
+    const arcs = calls.filter((c) => c.method === 'arc');
+    // 마커 arc 마지막 호출 (정적 트랙은 lineTo 만, marker 는 arc)
+    const markerArc = arcs[arcs.length - 1];
+    expect(markerArc.args[0] as number).toBeCloseTo(150); // x lerp
+    expect(markerArc.args[1] as number).toBeCloseTo(50); // y on pitlane
+  });
+
+  it('state normal 인 마커는 pitlane ctx 가 있어도 메인 polyline 위', () => {
+    const buffer = new PerDriverBuffer();
+    buffer.push(44, sample(0, 100, 0, 100));
+    buffer.push(44, sample(1000, 200, 0, 200));
+    const ds = new SyntheticDataSource();
+    const drivers = new Map([[44, { teamColour: '#27f4d2', nameAcronym: 'HAM' }]]);
+    const { ctx, calls } = makeMockCtx();
+    const r = new LiveMapRenderer({
+      ctx,
+      canvasWidth: 500,
+      canvasHeight: 500,
+      polyline: POLY,
+      arcLengthTable: POLY_S,
+      totalLength: 2000,
+      viewport: VIEWPORT,
+      dataSource: ds,
+      buffer,
+      getDriverMeta: (n) => drivers.get(n) ?? null,
+      showLabel: () => false,
+      pitlanePolyline: PIT_POLY,
+      pitlaneArcLengthTable: PIT_S,
+      pitlaneTotalLength: 500,
+      // getDriverHints 없음 → state normal
+    });
+    r.renderFrame(500);
+    const arcs = calls.filter((c) => c.method === 'arc');
+    const markerArc = arcs[arcs.length - 1];
+    expect(markerArc.args[1] as number).toBeCloseTo(0); // main polyline y
+  });
+
+  it('pitlanePolyline 제공 시 정적 트랙에 회색 파선 렌더 (setLineDash 호출)', () => {
+    const buffer = new PerDriverBuffer();
+    const ds = new SyntheticDataSource();
+    const { ctx, calls } = makeMockCtx();
+    const r = new LiveMapRenderer({
+      ctx,
+      canvasWidth: 500,
+      canvasHeight: 500,
+      polyline: POLY,
+      arcLengthTable: POLY_S,
+      totalLength: 2000,
+      viewport: VIEWPORT,
+      dataSource: ds,
+      buffer,
+      getDriverMeta: () => null,
+      showLabel: () => false,
+      pitlanePolyline: PIT_POLY,
+      pitlaneArcLengthTable: PIT_S,
+      pitlaneTotalLength: 500,
+    });
+    r.renderFrame(0);
+    const dashCalls = calls.filter((c) => c.method === 'setLineDash');
+    expect(dashCalls.length).toBeGreaterThanOrEqual(2); // pitlane dash + reset
+  });
+});
+
 describe('LiveMapRenderer.start/stop — RAF 라이프사이클', () => {
   let rafSpy: ReturnType<typeof vi.fn>;
   let cancelSpy: ReturnType<typeof vi.fn>;
