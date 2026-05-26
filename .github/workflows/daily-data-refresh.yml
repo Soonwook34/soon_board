@@ -45,10 +45,15 @@ jobs:
         if: hashFiles('scripts/fetch-race-distance.ts') != ''
         run: npx tsx scripts/fetch-race-distance.ts
 
-      # 3) circuit maps — live-map-implementation.md §1.3 (일요일에만)
-      # 스크립트가 존재할 때만 weekday 감지 + fetch 실행 (둘 다 같이 skip 되어 로그 직관성 ↑).
+      # 3) circuit maps — live-map-implementation.md §10 단계 14 (일요일에만)
+      # build-all-circuits.ts 가 내부에서 3 phase orchestrate:
+      #   Phase 1 (fetch-circuit-maps: SVG → polyline)
+      #   Phase 2 (extract-openf1-transform: affine + confidence)
+      #   Phase 8 (trace-pitlane: 핏레인 polyline)
+      # continue-on-error 라 단일 서킷의 affine/핏레인 실패가 전체 workflow 를 중단하지 않음 —
+      # 실패 사유는 residual-report.json 에 기록되고 `npm run curate:residual` 로 점검 가능.
       - name: Check weekday for circuit maps
-        if: hashFiles('scripts/fetch-circuit-maps.ts') != ''
+        if: hashFiles('scripts/build-all-circuits.ts') != ''
         id: weekday
         run: |
           if [ "$(date -u +%u)" = "7" ]; then
@@ -56,14 +61,12 @@ jobs:
           else
             echo "run=false" >> "$GITHUB_OUTPUT"
           fi
-      - name: Fetch circuit maps (Sunday only)
-        if: steps.weekday.outputs.run == 'true' && hashFiles('scripts/fetch-circuit-maps.ts') != ''
-        run: |
-          npx tsx scripts/fetch-circuit-maps.ts
-          npx tsx scripts/extract-openf1-transform.ts
-          npx tsx scripts/trace-pitlane.ts
+      - name: Build all circuits (Sunday only — Phase 14 bulk)
+        if: steps.weekday.outputs.run == 'true' && hashFiles('scripts/build-all-circuits.ts') != ''
+        run: npx tsx scripts/build-all-circuits.ts
 
       # 4) 통합 commit (1회) — Vercel은 main push 감지 시 자동 재배포 (별도 설정 불필요).
+      # residual-report.json 도 public/trackOutlines/ 아래라 자동 포함.
       - name: Commit if changed
         run: |
           git config user.name "github-actions[bot]"

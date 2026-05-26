@@ -38,8 +38,9 @@ describe('daily-data-refresh.yml', () => {
 
   it('guards race-distance and circuit-maps steps with hashFiles so missing scripts skip cleanly', () => {
     expect(yml).toMatch(/hashFiles\('scripts\/fetch-race-distance\.ts'\)\s*!=\s*''/);
-    // circuit-maps 가드는 weekday step과 fetch step 양쪽에 존재 — 같이 skip되어 로그 직관성 ↑.
-    const circuitGuardCount = yml.match(/hashFiles\('scripts\/fetch-circuit-maps\.ts'\)\s*!=\s*''/g);
+    // Phase 14 부터 일요일 maps step 은 build-all-circuits.ts 단일 호출 (Phase 1+2+8 orchestrate).
+    // 가드는 weekday step + bulk step 양쪽에 존재 — 같이 skip되어 로그 직관성 ↑.
+    const circuitGuardCount = yml.match(/hashFiles\('scripts\/build-all-circuits\.ts'\)\s*!=\s*''/g);
     expect(circuitGuardCount).not.toBeNull();
     expect(circuitGuardCount!.length).toBe(2);
   });

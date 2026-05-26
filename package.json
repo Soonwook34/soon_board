@@ -16,6 +16,9 @@
     "fetch:maps": "tsx scripts/fetch-circuit-maps.ts",
     "fetch:transform": "tsx scripts/extract-openf1-transform.ts",
     "trace:pitlane": "tsx scripts/trace-pitlane.ts",
+    "build:all": "tsx scripts/build-all-circuits.ts",
+    "build:catalog": "tsx scripts/build-circuits-catalog.ts",
+    "curate:residual": "tsx scripts/curate-residual.ts",
     "refresh-data": "npm run fetch:catalog && npm run fetch:race-distance && npm run fetch:maps",
     "check:season-sizes": "tsx scripts/check-season-sizes.ts"
   },
