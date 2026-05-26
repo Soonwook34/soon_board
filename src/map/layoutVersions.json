@@ -1,0 +1,53 @@
+[
+  {
+    "circuit_key": 70,
+    "circuit_short_name": "Yas Marina Circuit",
+    "country_name": "United Arab Emirates",
+    "ranges": [
+      { "year_start": 2019, "year_end": 2020, "layout_file": "70-2019.json" },
+      { "year_start": 2021, "year_end": null, "layout_file": "70-2021.json" }
+    ]
+  },
+  {
+    "circuit_key": 10,
+    "circuit_short_name": "Melbourne",
+    "country_name": "Australia",
+    "ranges": [
+      { "year_start": 2019, "year_end": 2019, "layout_file": "10-2019.json" },
+      { "year_start": 2022, "year_end": null, "layout_file": "10-2022.json" }
+    ]
+  },
+  {
+    "circuit_key": 55,
+    "circuit_short_name": "Zandvoort",
+    "country_name": "Netherlands",
+    "ranges": [
+      { "year_start": 2021, "year_end": null, "layout_file": "55-2021.json" }
+    ]
+  },
+  {
+    "circuit_key": 7,
+    "circuit_short_name": "Spa-Francorchamps",
+    "country_name": "Belgium",
+    "ranges": [
+      { "year_start": 2019, "year_end": 2021, "layout_file": "7-2019.json" },
+      { "year_start": 2022, "year_end": null, "layout_file": "7-2022.json" }
+    ]
+  },
+  {
+    "circuit_key": 152,
+    "circuit_short_name": "Las Vegas",
+    "country_name": "United States",
+    "ranges": [
+      { "year_start": 2023, "year_end": null, "layout_file": "152-2023.json" }
+    ]
+  },
+  {
+    "circuit_key": 153,
+    "circuit_short_name": "Madring",
+    "country_name": "Spain",
+    "ranges": [
+      { "year_start": 2026, "year_end": null, "layout_file": "153-2026.json" }
+    ]
+  }
+]
