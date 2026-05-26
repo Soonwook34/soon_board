@@ -3,7 +3,7 @@
 // 색상은 모두 src/style/tokens.ts 에서 import (live-map 인수 20: 다크 모드 토큰 일관).
 // F1 팀 색·OpenF1 raw hex 만 예외 (Phase 6 마커 컴포넌트에서 처리).
 
-import { color } from '../style/tokens.js';
+import { color, font } from '../style/tokens.js';
 
 export const mapStyles = {
   /** 캔버스 배경 (clearRect 후 fillRect). */
@@ -20,4 +20,23 @@ export const mapStyles = {
   pitlaneDashPattern: [4, 2] as const,
   /** 로딩 placeholder 텍스트 색. */
   loadingTextColor: color.textSecondary,
+
+  // ── Phase 6 marker 상수 (live-map §4.1) ──────────────────────────────
+  /** 마커 최소 크기 (직경 px). */
+  markerSizeMin: 18,
+  /** 마커 최대 크기 (직경 px). 동적 계산은 Phase 14. */
+  markerSizeMax: 32,
+  /** 마커 외곽 stroke 색 (흰 테두리). */
+  markerBorderColor: color.textPrimary,
+  /** 마커 외곽 stroke 두께. */
+  markerBorderWidth: 1.5,
+  /** 마커 중앙 driver_number 폰트. */
+  driverNumberFontFamily: font.family,
+  driverNumberFontWeight: font.weight.bold,
+  /** 라벨 (name_acronym) 폰트 크기. */
+  labelFontSize: font.size.xs,
+  /** 라벨 마커 아래 오프셋 (px). */
+  labelOffsetPx: 6,
+  /** 라벨 색. */
+  labelColor: color.textPrimary,
 } as const;
