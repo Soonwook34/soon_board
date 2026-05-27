@@ -14,6 +14,12 @@ export interface TrackOutlinesEntry {
   track: boolean;
   /** 핏레인 polyline 생성 여부. Phase 8 산출물. */
   pitlane: boolean;
+  /** Phase 9 sector boundaries 산출 여부. 미산출 시 undefined (backward compat). */
+  sectors?: boolean;
+  /** Phase 10 DRS zones 산출 여부 (historical 전용, 2023~2025). */
+  drs_zones?: boolean;
+  /** Phase 11 SLM zones 정적 입력 산출 여부 (2026~). */
+  slm_zones?: boolean;
   /** OpenF1 affine transform 잔차 품질 점수 (Phase 2 산출). 미산출 시 null. */
   openf1_transform_confidence: number | null;
   /** 해당 entry 산출 시각. */

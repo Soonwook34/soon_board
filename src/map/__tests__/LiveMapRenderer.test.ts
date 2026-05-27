@@ -64,6 +64,10 @@ function makeRenderer(opts: {
   ds: SyntheticDataSource;
   showLabel?: boolean;
   drivers?: Map<number, { teamColour: string; nameAcronym: string }>;
+  sectorBoundaries?: ConstructorParameters<typeof LiveMapRenderer>[0]['sectorBoundaries'];
+  drsZones?: ConstructorParameters<typeof LiveMapRenderer>[0]['drsZones'];
+  drsEnabled?: boolean;
+  slmZones?: ConstructorParameters<typeof LiveMapRenderer>[0]['slmZones'];
 }) {
   const drivers = opts.drivers ?? new Map([[44, { teamColour: '#27f4d2', nameAcronym: 'HAM' }]]);
   return new LiveMapRenderer({
@@ -78,6 +82,10 @@ function makeRenderer(opts: {
     buffer: opts.buffer,
     getDriverMeta: (n) => drivers.get(n) ?? null,
     showLabel: () => opts.showLabel ?? true,
+    sectorBoundaries: opts.sectorBoundaries,
+    drsZones: opts.drsZones,
+    drsEnabled: opts.drsEnabled,
+    slmZones: opts.slmZones,
   });
 }
 
@@ -480,5 +488,72 @@ describe('LiveMapRenderer.start/stop — RAF 라이프사이클', () => {
     r.start();
     r.stop();
     expect(cancelSpy).toHaveBeenCalledWith(1);
+  });
+});
+
+describe('LiveMapRenderer — Phase 9/10/11 overlays', () => {
+  it('sectorBoundaries 제공 시 drawSectorBoundaries 호출 (fill+stroke)', () => {
+    const buffer = new PerDriverBuffer();
+    const ds = new SyntheticDataSource();
+    const { ctx, calls } = makeMockCtx();
+    const r = makeRenderer({
+      ctx,
+      buffer,
+      ds,
+      sectorBoundaries: [
+        { sector: 1, end_xy: [200, 0], arc_length_s: 200 },
+        { sector: 2, end_xy: [500, 200], arc_length_s: 700 },
+        { sector: 3, end_xy: [0, 0], arc_length_s: 0 },
+      ],
+    });
+    r.renderFrame(0);
+    const arcCalls = calls.filter((c) => c.method === 'arc');
+    // each sector boundary draws an arc + fill — at least 3 arc calls from boundaries.
+    expect(arcCalls.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('drsZones + drsEnabled=true → DRS stroke 호출', () => {
+    const buffer = new PerDriverBuffer();
+    const ds = new SyntheticDataSource();
+    const { ctx, calls } = makeMockCtx();
+    const r = makeRenderer({
+      ctx,
+      buffer,
+      ds,
+      drsZones: [{ id: 1, detection_s: 100, activation_s_start: 200, activation_s_end: 700 }],
+      drsEnabled: true,
+    });
+    r.renderFrame(0);
+    // drsEnabled=true 시 strokeStyle 이 DRS 색 (#22d3ee) 으로 설정됨.
+    expect(calls.some((c) => c.method === 'set:strokeStyle' && c.args[0] === '#22d3ee')).toBe(true);
+  });
+
+  it('drsZones + drsEnabled=false (default) → DRS 미렌더 (게이트)', () => {
+    const buffer = new PerDriverBuffer();
+    const ds = new SyntheticDataSource();
+    const { ctx, calls } = makeMockCtx();
+    const r = makeRenderer({
+      ctx,
+      buffer,
+      ds,
+      drsZones: [{ id: 1, detection_s: 100, activation_s_start: 200, activation_s_end: 700 }],
+      // drsEnabled 미지정 = undefined → false 게이트
+    });
+    r.renderFrame(0);
+    expect(calls.some((c) => c.method === 'set:strokeStyle' && c.args[0] === '#22d3ee')).toBe(false);
+  });
+
+  it('slmZones 제공 시 SLM stroke 호출 (게이트 없음)', () => {
+    const buffer = new PerDriverBuffer();
+    const ds = new SyntheticDataSource();
+    const { ctx, calls } = makeMockCtx();
+    const r = makeRenderer({
+      ctx,
+      buffer,
+      ds,
+      slmZones: [{ id: 1, s_start: 300, s_end: 800 }],
+    });
+    r.renderFrame(0);
+    expect(calls.some((c) => c.method === 'set:strokeStyle' && c.args[0] === '#a855f7')).toBe(true);
   });
 });

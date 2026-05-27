@@ -14,6 +14,12 @@ import { classifyDriverState, drawStateBadge, type ClassifyOpts } from './stateB
 import { renderStaticTrack } from './trackRenderer.js';
 import { collectTrailPoints, drawTrail } from './trails.js';
 import { applyViewport, type Point2D, type ViewportTransform } from './viewport.js';
+import { drawSectorBoundaries } from './sectorBoundaries.js';
+import { drawDrsZones } from './drsZones.js';
+import { drawSlmZones } from './slmZones.js';
+import type { SectorBoundary } from './sectorBoundaries.js';
+import type { DrsZone } from './drsZones.js';
+import type { SlmZone } from './slmZones.js';
 
 export interface DriverMeta {
   teamColour: string;
@@ -44,6 +50,14 @@ export interface LiveMapRendererConfig {
   trailsEnabled?: boolean;
   /** Phase 12+ — dnf/pit hint. Phase 7 default 는 undefined (모두 normal/disconnected 만 판정). */
   getDriverHints?: (driverNumber: number) => ClassifyOpts | undefined;
+  /** Phase 9 — sector 경계 (i1/i2/start-finish). undefined 면 그리지 않음. */
+  sectorBoundaries?: readonly SectorBoundary[];
+  /** Phase 10 — DRS zone (historical 전용). undefined 또는 drsEnabled=false 면 그리지 않음. */
+  drsZones?: readonly DrsZone[];
+  /** plan §10 단계 10 — live mode 게이트. default false. ReplayScreen 마운트 시 true. */
+  drsEnabled?: boolean;
+  /** Phase 11 — SLM zone (정적 입력, 2026~). undefined 면 그리지 않음. */
+  slmZones?: readonly SlmZone[];
 }
 
 export class LiveMapRenderer {
@@ -86,6 +100,18 @@ export class LiveMapRenderer {
     // 정적 트랙 재렌더 (Phase 6 MVP — offscreen cache 는 Phase 14). Phase 8 pitlanePolyline 우선.
     const staticPitlane = this.config.pitlanePolyline ?? pitlane;
     renderStaticTrack({ ctx, canvasWidth, canvasHeight, polyline, viewport, pitlane: staticPitlane });
+
+    // Phase 9/10/11 overlays — track polyline 직후 + 마커 직전. 마커가 위에 표시되도록.
+    const { sectorBoundaries, drsZones, drsEnabled, slmZones } = this.config;
+    if (drsZones && drsZones.length > 0 && drsEnabled === true) {
+      drawDrsZones(ctx, drsZones, polyline, this.config.arcLengthTable, viewport);
+    }
+    if (slmZones && slmZones.length > 0) {
+      drawSlmZones(ctx, slmZones, polyline, this.config.arcLengthTable, viewport);
+    }
+    if (sectorBoundaries && sectorBoundaries.length > 0) {
+      drawSectorBoundaries(ctx, sectorBoundaries, viewport, { canvasWidth, canvasHeight });
+    }
 
     const labelOn = showLabel();
     for (const driverNumber of buffer.drivers()) {

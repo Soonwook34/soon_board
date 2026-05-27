@@ -61,6 +61,90 @@ export interface PitlaneJson extends PitlaneJsonBase {
   };
 }
 
+/**
+ * Phase 9 — public/trackOutlines/sectors_{key}-{year}.json.
+ * scripts/derive-sector-boundaries.ts 가 산출하고 src/map/sectorBoundaries.ts 가 fetch.
+ */
+export interface SectorBoundary {
+  /** 1 = S1 끝, 2 = S2 끝, 3 = S3 끝 (= 출발선, arc 0). */
+  sector: 1 | 2 | 3;
+  /** SVG viewBox 좌표. */
+  end_xy: readonly [number, number];
+  /** 트랙 polyline 의 arc-length 위치. */
+  arc_length_s: number;
+}
+
+export interface SectorsJsonBase {
+  circuit_key: number;
+  year: number;
+  boundaries: readonly SectorBoundary[];
+  method: string;
+  accuracy_note: string;
+  generated_at: string;
+}
+
+export interface SectorsJson extends SectorsJsonBase {
+  meta?: {
+    source_session_key: number;
+    source_session_type: string;
+    driver_count: number;
+    lap_count: number;
+    extracted_at: string;
+  };
+}
+
+/**
+ * Phase 10 — public/trackOutlines/drsZones_{key}-{year}.json (historical 전용).
+ */
+export interface DrsZone {
+  id: number;
+  /** detection point — arc-length 위치 (driver 가 통과 시 활성화 자격 판정). */
+  detection_s: number;
+  /** activation zone 시작 arc-length. */
+  activation_s_start: number;
+  /** activation zone 끝 arc-length (브레이킹 지점). */
+  activation_s_end: number;
+}
+
+export interface DrsZonesJsonBase {
+  circuit_key: number;
+  year: number;
+  zones: readonly DrsZone[];
+  method: string;
+  coverage_note: string;
+  generated_at: string;
+}
+
+export interface DrsZonesJson extends DrsZonesJsonBase {
+  meta?: {
+    source_session_key: number;
+    source_session_type: string;
+    driver_count: number;
+    transition_count: number;
+    extracted_at: string;
+  };
+}
+
+/**
+ * Phase 11 — public/trackOutlines/slmZones_{key}-{year}.json (정적 입력).
+ */
+export interface SlmZone {
+  id: number;
+  s_start: number;
+  s_end: number;
+  label?: string;
+}
+
+export interface SlmZonesJsonBase {
+  circuit_key: number;
+  year: number;
+  zones: readonly SlmZone[];
+  source: string;
+  generated_at: string;
+}
+
+export type SlmZonesJson = SlmZonesJsonBase;
+
 export interface TrackOutlineJson {
   circuit_key: number;
   year: number;

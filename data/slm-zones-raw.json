@@ -1,0 +1,18 @@
+{
+  "$comment": "live-map plan §1.3.5 — FIA 2026 SLM (X-mode) zone seed. 정성적 location 설명 + arc-length hint (수동 큐레이션). OpenF1 location 정합 후 scripts/load-slm-zones.ts 가 변환.",
+  "license": "FIA 공식 발표 (public)",
+  "circuits": [
+    {
+      "circuit_key": 63,
+      "year": 2026,
+      "zones": [
+        {
+          "description": "Turn 4 출구 ~ Turn 5 입구 (Bahrain 가상 시드)",
+          "s_start_hint": 1200,
+          "s_end_hint": 1800,
+          "label": "Zone A"
+        }
+      ]
+    }
+  ]
+}

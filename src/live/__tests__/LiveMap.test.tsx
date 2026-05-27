@@ -14,7 +14,13 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { LiveMap } from '../LiveMap';
 import type { LiveDataSource, LiveDataSourceOptions } from '../../map/LiveDataSource';
-import type { TrackOutlineJson, PitlaneJsonBase } from '../../../scripts/_lib/trackOutlinesSchema';
+import type {
+  DrsZonesJsonBase,
+  PitlaneJsonBase,
+  SectorsJsonBase,
+  SlmZonesJsonBase,
+  TrackOutlineJson,
+} from '../../../scripts/_lib/trackOutlinesSchema';
 
 // JSDOM 의 HTMLCanvasElement.prototype.getContext 는 null 반환 — 렌더러 마운트 effect 가
 // early-return 되어 factory 호출이 안 됨. Proxy 로 stub 해 모든 ctx 메서드가 호출 가능하게 함.
@@ -98,9 +104,24 @@ function makeFetch(opts: {
   trackOverride?: TrackOutlineJson | 'fail' | 'no-transform';
   pitlaneOverride?: PitlaneJsonBase | 'fail' | 404;
   driversOverride?: unknown[] | 'fail';
+  sectorsOverride?: SectorsJsonBase | null;
+  drsOverride?: DrsZonesJsonBase | null;
+  slmOverride?: SlmZonesJsonBase | null;
 }) {
   return vi.fn(async (input: RequestInfo | URL) => {
     const url = typeof input === 'string' ? input : input.toString();
+    if (url.includes('/trackOutlines/sectors_63-2024.json')) {
+      if (!opts.sectorsOverride) return new Response('', { status: 404 });
+      return jsonOk(opts.sectorsOverride);
+    }
+    if (url.includes('/trackOutlines/drsZones_63-2024.json')) {
+      if (!opts.drsOverride) return new Response('', { status: 404 });
+      return jsonOk(opts.drsOverride);
+    }
+    if (url.includes('/trackOutlines/slmZones_63-2024.json')) {
+      if (!opts.slmOverride) return new Response('', { status: 404 });
+      return jsonOk(opts.slmOverride);
+    }
     if (url.includes('/trackOutlines/63-2024.json')) {
       if (opts.trackOverride === 'fail') return new Response('', { status: 500 });
       if (opts.trackOverride === 'no-transform') {
@@ -121,6 +142,36 @@ function makeFetch(opts: {
     throw new Error(`unexpected fetch: ${url}`);
   });
 }
+
+const SAMPLE_SECTORS: SectorsJsonBase = {
+  circuit_key: 63,
+  year: 2024,
+  boundaries: [
+    { sector: 1, end_xy: [500, 0], arc_length_s: 500 },
+    { sector: 2, end_xy: [500, 500], arc_length_s: 1000 },
+    { sector: 3, end_xy: [0, 0], arc_length_s: 0 },
+  ],
+  method: 'i1_i2_speed_trap_derive',
+  accuracy_note: 'test',
+  generated_at: '2024-03-02T00:00:00Z',
+};
+
+const SAMPLE_DRS: DrsZonesJsonBase = {
+  circuit_key: 63,
+  year: 2024,
+  zones: [{ id: 1, detection_s: 100, activation_s_start: 200, activation_s_end: 700 }],
+  method: 'drs_state_transitions_clustering',
+  coverage_note: 'test',
+  generated_at: '2024-03-02T00:00:00Z',
+};
+
+const SAMPLE_SLM: SlmZonesJsonBase = {
+  circuit_key: 63,
+  year: 2024,
+  zones: [{ id: 1, s_start: 1200, s_end: 1600 }],
+  source: 'test',
+  generated_at: '2024-03-02T00:00:00Z',
+};
 
 interface StubDataSource extends Pick<LiveDataSource, 'getDisplayTime' | 'stop'> {
   start: () => Promise<void>;
@@ -156,7 +207,7 @@ function makeStubFactory(): {
 // ── tests ───────────────────────────────────────────────────────────────
 
 describe('LiveMap — asset loading', () => {
-  it('mount 시 trackOutlines + pitlane + drivers 3 fetch 병렬 호출', async () => {
+  it('mount 시 track + pitlane + drivers + sectors + drs + slm 6 fetch 병렬 호출', async () => {
     const fetchImpl = makeFetch({});
     const { factory } = makeStubFactory();
     render(
@@ -168,10 +219,13 @@ describe('LiveMap — asset loading', () => {
         dataSourceFactory={factory}
       />,
     );
-    await waitFor(() => expect(fetchImpl).toHaveBeenCalledTimes(3));
+    await waitFor(() => expect(fetchImpl).toHaveBeenCalledTimes(6));
     const urls = fetchImpl.mock.calls.map((c) => String(c[0]));
     expect(urls).toContain('/trackOutlines/63-2024.json');
     expect(urls).toContain('/trackOutlines/pitlane_63-2024.json');
+    expect(urls).toContain('/trackOutlines/sectors_63-2024.json');
+    expect(urls).toContain('/trackOutlines/drsZones_63-2024.json');
+    expect(urls).toContain('/trackOutlines/slmZones_63-2024.json');
     expect(urls.some((u) => u.includes('/v1/drivers?session_key=9472'))).toBe(true);
   });
 
@@ -345,6 +399,70 @@ describe('LiveMap — LiveDataSource onSample 콜백 (raw → projected → buff
         z: 5,
       }),
     ).not.toThrow();
+  });
+});
+
+describe('LiveMap — Phase 9/10/11 overlays', () => {
+  it('sectors/drs/slm 404 (없음) 시 정상 마운트 + 에러 없음', async () => {
+    const fetchImpl = makeFetch({});
+    const { factory, lastInstance } = makeStubFactory();
+    render(
+      <LiveMap
+        sessionKey={9472}
+        circuitKey={63}
+        year={2024}
+        fetchImpl={fetchImpl as unknown as typeof fetch}
+        dataSourceFactory={factory}
+      />,
+    );
+    await waitFor(() => expect(screen.queryByTestId('live-map-canvas')).toBeTruthy());
+    expect(lastInstance()?.startCalls).toBe(1);
+  });
+
+  it('sectors 200 + drs/slm 404 시 정상 마운트', async () => {
+    const fetchImpl = makeFetch({ sectorsOverride: SAMPLE_SECTORS });
+    const { factory } = makeStubFactory();
+    render(
+      <LiveMap
+        sessionKey={9472}
+        circuitKey={63}
+        year={2024}
+        fetchImpl={fetchImpl as unknown as typeof fetch}
+        dataSourceFactory={factory}
+      />,
+    );
+    await waitFor(() => expect(screen.queryByTestId('live-map-canvas')).toBeTruthy());
+  });
+
+  it('drs/slm 200 시 정상 마운트 (overlay 데이터 로드 성공)', async () => {
+    const fetchImpl = makeFetch({ drsOverride: SAMPLE_DRS, slmOverride: SAMPLE_SLM });
+    const { factory } = makeStubFactory();
+    render(
+      <LiveMap
+        sessionKey={9472}
+        circuitKey={63}
+        year={2024}
+        fetchImpl={fetchImpl as unknown as typeof fetch}
+        dataSourceFactory={factory}
+      />,
+    );
+    await waitFor(() => expect(screen.queryByTestId('live-map-canvas')).toBeTruthy());
+  });
+
+  it('isReplay=true 시에도 mount 동작 정상 (DRS 게이트 활성화)', async () => {
+    const fetchImpl = makeFetch({ drsOverride: SAMPLE_DRS });
+    const { factory } = makeStubFactory();
+    render(
+      <LiveMap
+        sessionKey={9472}
+        circuitKey={63}
+        year={2024}
+        fetchImpl={fetchImpl as unknown as typeof fetch}
+        dataSourceFactory={factory}
+        isReplay
+      />,
+    );
+    await waitFor(() => expect(screen.queryByTestId('live-map-canvas')).toBeTruthy());
   });
 });
 

@@ -16,9 +16,17 @@ import { applyOpenF1Transform } from '../map/transform.js';
 import { projectToPolyline } from '../map/pathProjection.js';
 import { computeViewport, type Point2D } from '../map/viewport.js';
 import { useMarkerLabel } from '../map/markerLabelToggle.js';
+import { loadSectorBoundaries } from '../map/sectorBoundaries.js';
+import { loadDrsZones } from '../map/drsZones.js';
+import { loadSlmZones } from '../map/slmZones.js';
 import type { DataSource } from '../shared/DataSource.js';
-import type { PitlaneJsonBase } from '../../scripts/_lib/trackOutlinesSchema.js';
-import type { TrackOutlineJson } from '../../scripts/_lib/trackOutlinesSchema.js';
+import type {
+  DrsZonesJsonBase,
+  PitlaneJsonBase,
+  SectorsJsonBase,
+  SlmZonesJsonBase,
+  TrackOutlineJson,
+} from '../../scripts/_lib/trackOutlinesSchema.js';
 
 /**
  * LiveMap 의 dataSource seam 이 받는 최소 표면. DataSource 인터페이스 + lifecycle.
@@ -42,6 +50,9 @@ interface LoadedAssets {
   track: TrackOutlineJson;
   pitlane: PitlaneJsonBase | null;
   drivers: Map<number, DriverMetaRow>;
+  sectors: SectorsJsonBase | null;
+  drsZones: DrsZonesJsonBase | null;
+  slmZones: SlmZonesJsonBase | null;
 }
 
 export interface LiveMapProps {
@@ -53,6 +64,8 @@ export interface LiveMapProps {
   fetchImpl?: typeof fetch;
   /** 테스트 seam — DataSource constructor override. default new LiveDataSource(opts). */
   dataSourceFactory?: (opts: LiveDataSourceOptions) => LiveMapDataSource;
+  /** Phase 10 게이트 — true 시 DRS zone 렌더링 (ReplayScreen 만). default false. */
+  isReplay?: boolean;
 }
 
 export function LiveMap({
@@ -62,6 +75,7 @@ export function LiveMap({
   onBack,
   fetchImpl,
   dataSourceFactory,
+  isReplay = false,
 }: LiveMapProps) {
   const [assets, setAssets] = useState<LoadedAssets | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -111,8 +125,12 @@ export function LiveMap({
             ? (r.json() as Promise<Array<Record<string, unknown>>>)
             : Promise.reject(new Error(`drivers HTTP ${r.status}`)),
       ),
+      // Phase 9/10/11 — 모두 optional (404 → null). 실패 (5xx) 는 null 로 흡수해 라이브맵 차단 안 함.
+      loadSectorBoundaries(circuitKey, year, fetcher).catch(() => null),
+      loadDrsZones(circuitKey, year, fetcher).catch(() => null),
+      loadSlmZones(circuitKey, year, fetcher).catch(() => null),
     ])
-      .then(([track, pitlane, driversList]) => {
+      .then(([track, pitlane, driversList, sectors, drsZones, slmZones]) => {
         if (!track.openf1_transform) {
           setError(
             'Track is missing openf1_transform — re-run extract-openf1-transform for this circuit.',
@@ -129,7 +147,7 @@ export function LiveMap({
           const acronym = typeof d.name_acronym === 'string' ? d.name_acronym : `D${num}`;
           drivers.set(num, { teamColour: colour, nameAcronym: acronym });
         }
-        setAssets({ track, pitlane, drivers });
+        setAssets({ track, pitlane, drivers, sectors, drsZones, slmZones });
       })
       .catch((err: Error & { name?: string }) => {
         if (err.name === 'AbortError') return;
@@ -192,6 +210,10 @@ export function LiveMap({
       pitlanePolyline,
       pitlaneArcLengthTable: assets.pitlane ? [...assets.pitlane.arc_length_table] : undefined,
       pitlaneTotalLength: assets.pitlane?.total_length,
+      sectorBoundaries: assets.sectors?.boundaries,
+      drsZones: assets.drsZones?.zones,
+      drsEnabled: isReplay,
+      slmZones: assets.slmZones?.zones,
     });
 
     void ds.start();
@@ -201,7 +223,7 @@ export function LiveMap({
       renderer.stop();
       ds.stop();
     };
-  }, [assets, sessionKey, factory, fetchImpl]);
+  }, [assets, sessionKey, factory, fetchImpl, isReplay]);
 
   const onRetry = useCallback(() => setReloadKey((k) => k + 1), []);
 
