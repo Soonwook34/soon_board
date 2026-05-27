@@ -16,8 +16,18 @@ import { applyOpenF1Transform } from '../map/transform.js';
 import { projectToPolyline } from '../map/pathProjection.js';
 import { computeViewport, type Point2D } from '../map/viewport.js';
 import { useMarkerLabel } from '../map/markerLabelToggle.js';
+import type { DataSource } from '../shared/DataSource.js';
 import type { PitlaneJsonBase } from '../../scripts/_lib/trackOutlinesSchema.js';
 import type { TrackOutlineJson } from '../../scripts/_lib/trackOutlinesSchema.js';
+
+/**
+ * LiveMap 의 dataSource seam 이 받는 최소 표면. DataSource 인터페이스 + lifecycle.
+ * SyntheticDataSource (test-rig) 와 LiveDataSource (production) 둘 다 만족.
+ */
+export type LiveMapDataSource = DataSource & {
+  start(): void | Promise<void>;
+  stop(): void;
+};
 
 const DEFAULT_CANVAS_WIDTH = 800;
 const DEFAULT_CANVAS_HEIGHT = 600;
@@ -41,8 +51,8 @@ export interface LiveMapProps {
   onBack?: () => void;
   /** 테스트 seam — fetch override (assets + drivers). default globalThis.fetch. */
   fetchImpl?: typeof fetch;
-  /** 테스트 seam — LiveDataSource constructor override. default new LiveDataSource(opts). */
-  dataSourceFactory?: (opts: LiveDataSourceOptions) => LiveDataSource;
+  /** 테스트 seam — DataSource constructor override. default new LiveDataSource(opts). */
+  dataSourceFactory?: (opts: LiveDataSourceOptions) => LiveMapDataSource;
 }
 
 export function LiveMap({
@@ -68,7 +78,9 @@ export function LiveMap({
     [fetchImpl],
   );
   const factory = useMemo(
-    () => dataSourceFactory ?? ((opts: LiveDataSourceOptions) => new LiveDataSource(opts)),
+    () =>
+      dataSourceFactory ??
+      ((opts: LiveDataSourceOptions): LiveMapDataSource => new LiveDataSource(opts)),
     [dataSourceFactory],
   );
 

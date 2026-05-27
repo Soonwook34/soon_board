@@ -6,6 +6,7 @@ import { Route, Switch } from 'wouter';
 import { MainPage } from './main/MainPage';
 import { LiveScreen } from './live/LiveScreen';
 import { ReplayScreen } from './live/ReplayScreen';
+import { TestRigScreen } from './live/TestRigScreen';
 import { Footer } from './shared/Footer';
 
 const NotFound = () => <main>Not found</main>;
@@ -17,6 +18,7 @@ export function App() {
         <Route path="/" component={MainPage} />
         <Route path="/live/:key">{() => <LiveScreen />}</Route>
         <Route path="/replay/:key">{() => <ReplayScreen />}</Route>
+        <Route path="/test-rig">{() => <TestRigScreen />}</Route>
         <Route component={NotFound} />
       </Switch>
       <Footer />

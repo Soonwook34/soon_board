@@ -39,6 +39,7 @@ font/
 coverage/
 playwright-report/
 test-results/
+playwright/.cache/
 
 # TS incremental build cache (per-machine)
 *.tsbuildinfo
