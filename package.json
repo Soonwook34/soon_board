@@ -23,6 +23,7 @@
     "derive:drs": "tsx scripts/derive-drs-zones.ts",
     "load:slm": "tsx scripts/load-slm-zones.ts",
     "build:all": "tsx scripts/build-all-circuits.ts",
+    "build:all:base": "tsx scripts/build-all-circuits.ts --skip-sectors --skip-drs --skip-slm",
     "build:catalog": "tsx scripts/build-circuits-catalog.ts",
     "curate:residual": "tsx scripts/curate-residual.ts",
     "refresh-data": "npm run fetch:catalog && npm run fetch:race-distance && npm run fetch:maps",

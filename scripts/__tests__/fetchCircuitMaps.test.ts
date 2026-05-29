@@ -291,4 +291,54 @@ describe('buildAll', () => {
     ) as TrackOutlineJson;
     expect(out.source_file).toBe(`circuits/${altVariant}/bahrain-1.svg`);
   });
+
+  // 회귀: buildAll 재실행 시 Phase 2 산출물 wipe 방지 (91/95 entry 가 transform 을 잃은 root cause).
+  it('preserves existing openf1_transform / _confidence / _meta on rebuild', () => {
+    writeVendorSvg('bahrain-1');
+    const cfg: CircuitsConfig = {
+      default_variant: VARIANT,
+      circuits: [
+        {
+          circuit_key: 63,
+          circuit_short_name: 'Sakhir',
+          country_name: 'Bahrain',
+          year: 2024,
+          julesr0y_layout_id: 'bahrain-1',
+        },
+      ],
+    };
+    // 1차 빌드 (Phase 1 only)
+    buildAll(cfg, { vendorRoot, outputDir, stepUnits: 10 }, NOW);
+    const outPath = join(outputDir, '63-2024.json');
+
+    // Phase 2 결과를 흉내내어 transform 필드 주입 (extract-openf1-transform 이 하듯이).
+    const phase1 = JSON.parse(readFileSync(outPath, 'utf8')) as TrackOutlineJson;
+    const phase2 = {
+      ...phase1,
+      openf1_transform: { scale: 1.5, rotation_deg: 90, translate: [10, 20] as [number, number] },
+      openf1_transform_confidence: 0.97,
+      openf1_transform_meta: {
+        rmse: 2.1,
+        sample_count: 1234,
+        source_session_key: 9472,
+        source_session_type: 'Race',
+        source_driver_number: 1,
+        source_lap_number: 5,
+        source_lap_duration: 92.3,
+        extracted_at: NOW.toISOString(),
+        shift_index: 0,
+        reversed: false,
+      },
+    };
+    writeFileSync(outPath, JSON.stringify(phase2));
+
+    // 2차 빌드 — Phase 1 만 다시 돌아도 transform 이 보존되어야 함.
+    buildAll(cfg, { vendorRoot, outputDir, stepUnits: 10 }, NOW);
+    const rebuilt = JSON.parse(readFileSync(outPath, 'utf8')) as TrackOutlineJson;
+    expect(rebuilt.openf1_transform).toEqual(phase2.openf1_transform);
+    expect(rebuilt.openf1_transform_confidence).toBe(0.97);
+    expect(rebuilt.openf1_transform_meta).toEqual(phase2.openf1_transform_meta);
+    // Phase 1 데이터 (polyline 등) 는 새로 계산된 값으로 갱신.
+    expect(rebuilt.polyline.length).toBeGreaterThan(0);
+  });
 });

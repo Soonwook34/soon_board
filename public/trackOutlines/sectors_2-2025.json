@@ -1,0 +1,40 @@
+{
+  "circuit_key": 2,
+  "year": 2025,
+  "boundaries": [
+    {
+      "sector": 1,
+      "end_xy": [
+        263.91412473366415,
+        122.40671849788214
+      ],
+      "arc_length_s": 359.1582661370708
+    },
+    {
+      "sector": 2,
+      "end_xy": [
+        285.6352983459314,
+        178.10020255954888
+      ],
+      "arc_length_s": 305.65570175898046
+    },
+    {
+      "sector": 3,
+      "end_xy": [
+        187.13,
+        258.58
+      ],
+      "arc_length_s": 0
+    }
+  ],
+  "method": "i1_i2_speed_trap_derive",
+  "accuracy_note": "speed trap position, not exact FIA sector boundary",
+  "generated_at": "2026-05-29T01:57:24.502Z",
+  "meta": {
+    "source_session_key": 9947,
+    "source_session_type": "Race",
+    "driver_count": 18,
+    "lap_count": 822,
+    "extracted_at": "2026-05-29T01:57:24.502Z"
+  }
+}

@@ -1,13 +1,765 @@
 {
-  "_comment": "live-map §1.3 (circuits.json seed). julesr0y/f1-circuits-svg 의 SVG 파일과 OpenF1 circuit_key/year 매핑. fetch-circuit-maps.ts 입력. Phase 1 은 Bahrain 만, Phase 14 에서 78서킷 일괄 확장.",
+  "_comment": "live-map §1.3 (circuits.json seed). julesr0y/f1-circuits-svg 의 SVG 파일과 OpenF1 circuit_key/year 매핑. fetch-circuit-maps.ts 입력. 2023-2026 OpenF1 active 95 entries — circuits-candidates.json 자동 enumeration + vendor circuits.json seasons match.",
   "default_variant": "minimal/white-outline",
   "circuits": [
+    {
+      "circuit_key": 2,
+      "circuit_short_name": "Silverstone",
+      "country_name": "United Kingdom",
+      "year": 2023,
+      "julesr0y_layout_id": "silverstone-8",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 2,
+      "circuit_short_name": "Silverstone",
+      "country_name": "United Kingdom",
+      "year": 2024,
+      "julesr0y_layout_id": "silverstone-8",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 2,
+      "circuit_short_name": "Silverstone",
+      "country_name": "United Kingdom",
+      "year": 2025,
+      "julesr0y_layout_id": "silverstone-8",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 2,
+      "circuit_short_name": "Silverstone",
+      "country_name": "United Kingdom",
+      "year": 2026,
+      "julesr0y_layout_id": "silverstone-8",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 4,
+      "circuit_short_name": "Hungaroring",
+      "country_name": "Hungary",
+      "year": 2023,
+      "julesr0y_layout_id": "hungaroring-3",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 4,
+      "circuit_short_name": "Hungaroring",
+      "country_name": "Hungary",
+      "year": 2024,
+      "julesr0y_layout_id": "hungaroring-3",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 4,
+      "circuit_short_name": "Hungaroring",
+      "country_name": "Hungary",
+      "year": 2025,
+      "julesr0y_layout_id": "hungaroring-3",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 4,
+      "circuit_short_name": "Hungaroring",
+      "country_name": "Hungary",
+      "year": 2026,
+      "julesr0y_layout_id": "hungaroring-3",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 6,
+      "circuit_short_name": "Imola",
+      "country_name": "Italy",
+      "year": 2023,
+      "julesr0y_layout_id": "imola-3",
+      "direction": "counter-clockwise"
+    },
+    {
+      "circuit_key": 6,
+      "circuit_short_name": "Imola",
+      "country_name": "Italy",
+      "year": 2024,
+      "julesr0y_layout_id": "imola-3",
+      "direction": "counter-clockwise"
+    },
+    {
+      "circuit_key": 6,
+      "circuit_short_name": "Imola",
+      "country_name": "Italy",
+      "year": 2025,
+      "julesr0y_layout_id": "imola-3",
+      "direction": "counter-clockwise"
+    },
+    {
+      "circuit_key": 7,
+      "circuit_short_name": "Spa-Francorchamps",
+      "country_name": "Belgium",
+      "year": 2023,
+      "julesr0y_layout_id": "spa-francorchamps-4",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 7,
+      "circuit_short_name": "Spa-Francorchamps",
+      "country_name": "Belgium",
+      "year": 2024,
+      "julesr0y_layout_id": "spa-francorchamps-4",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 7,
+      "circuit_short_name": "Spa-Francorchamps",
+      "country_name": "Belgium",
+      "year": 2025,
+      "julesr0y_layout_id": "spa-francorchamps-4",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 7,
+      "circuit_short_name": "Spa-Francorchamps",
+      "country_name": "Belgium",
+      "year": 2026,
+      "julesr0y_layout_id": "spa-francorchamps-4",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 9,
+      "circuit_short_name": "Austin",
+      "country_name": "United States",
+      "year": 2023,
+      "julesr0y_layout_id": "austin-1",
+      "direction": "counter-clockwise"
+    },
+    {
+      "circuit_key": 9,
+      "circuit_short_name": "Austin",
+      "country_name": "United States",
+      "year": 2024,
+      "julesr0y_layout_id": "austin-1",
+      "direction": "counter-clockwise"
+    },
+    {
+      "circuit_key": 9,
+      "circuit_short_name": "Austin",
+      "country_name": "United States",
+      "year": 2025,
+      "julesr0y_layout_id": "austin-1",
+      "direction": "counter-clockwise"
+    },
+    {
+      "circuit_key": 9,
+      "circuit_short_name": "Austin",
+      "country_name": "United States",
+      "year": 2026,
+      "julesr0y_layout_id": "austin-1",
+      "direction": "counter-clockwise"
+    },
+    {
+      "circuit_key": 10,
+      "circuit_short_name": "Melbourne",
+      "country_name": "Australia",
+      "year": 2023,
+      "julesr0y_layout_id": "melbourne-2",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 10,
+      "circuit_short_name": "Melbourne",
+      "country_name": "Australia",
+      "year": 2024,
+      "julesr0y_layout_id": "melbourne-2",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 10,
+      "circuit_short_name": "Melbourne",
+      "country_name": "Australia",
+      "year": 2025,
+      "julesr0y_layout_id": "melbourne-2",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 10,
+      "circuit_short_name": "Melbourne",
+      "country_name": "Australia",
+      "year": 2026,
+      "julesr0y_layout_id": "melbourne-2",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 14,
+      "circuit_short_name": "Interlagos",
+      "country_name": "Brazil",
+      "year": 2023,
+      "julesr0y_layout_id": "interlagos-2",
+      "direction": "counter-clockwise"
+    },
+    {
+      "circuit_key": 14,
+      "circuit_short_name": "Interlagos",
+      "country_name": "Brazil",
+      "year": 2024,
+      "julesr0y_layout_id": "interlagos-2",
+      "direction": "counter-clockwise"
+    },
+    {
+      "circuit_key": 14,
+      "circuit_short_name": "Interlagos",
+      "country_name": "Brazil",
+      "year": 2025,
+      "julesr0y_layout_id": "interlagos-2",
+      "direction": "counter-clockwise"
+    },
+    {
+      "circuit_key": 14,
+      "circuit_short_name": "Interlagos",
+      "country_name": "Brazil",
+      "year": 2026,
+      "julesr0y_layout_id": "interlagos-2",
+      "direction": "counter-clockwise"
+    },
+    {
+      "circuit_key": 15,
+      "circuit_short_name": "Catalunya",
+      "country_name": "Spain",
+      "year": 2023,
+      "julesr0y_layout_id": "catalunya-6",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 15,
+      "circuit_short_name": "Catalunya",
+      "country_name": "Spain",
+      "year": 2024,
+      "julesr0y_layout_id": "catalunya-6",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 15,
+      "circuit_short_name": "Catalunya",
+      "country_name": "Spain",
+      "year": 2025,
+      "julesr0y_layout_id": "catalunya-6",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 15,
+      "circuit_short_name": "Catalunya",
+      "country_name": "Spain",
+      "year": 2026,
+      "julesr0y_layout_id": "catalunya-6",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 19,
+      "circuit_short_name": "Spielberg",
+      "country_name": "Austria",
+      "year": 2023,
+      "julesr0y_layout_id": "spielberg-3",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 19,
+      "circuit_short_name": "Spielberg",
+      "country_name": "Austria",
+      "year": 2024,
+      "julesr0y_layout_id": "spielberg-3",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 19,
+      "circuit_short_name": "Spielberg",
+      "country_name": "Austria",
+      "year": 2025,
+      "julesr0y_layout_id": "spielberg-3",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 19,
+      "circuit_short_name": "Spielberg",
+      "country_name": "Austria",
+      "year": 2026,
+      "julesr0y_layout_id": "spielberg-3",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 22,
+      "circuit_short_name": "Monte Carlo",
+      "country_name": "Monaco",
+      "year": 2023,
+      "julesr0y_layout_id": "monaco-6",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 22,
+      "circuit_short_name": "Monte Carlo",
+      "country_name": "Monaco",
+      "year": 2024,
+      "julesr0y_layout_id": "monaco-6",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 22,
+      "circuit_short_name": "Monte Carlo",
+      "country_name": "Monaco",
+      "year": 2025,
+      "julesr0y_layout_id": "monaco-6",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 22,
+      "circuit_short_name": "Monte Carlo",
+      "country_name": "Monaco",
+      "year": 2026,
+      "julesr0y_layout_id": "monaco-6",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 23,
+      "circuit_short_name": "Montreal",
+      "country_name": "Canada",
+      "year": 2023,
+      "julesr0y_layout_id": "montreal-6",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 23,
+      "circuit_short_name": "Montreal",
+      "country_name": "Canada",
+      "year": 2024,
+      "julesr0y_layout_id": "montreal-6",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 23,
+      "circuit_short_name": "Montreal",
+      "country_name": "Canada",
+      "year": 2025,
+      "julesr0y_layout_id": "montreal-6",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 23,
+      "circuit_short_name": "Montreal",
+      "country_name": "Canada",
+      "year": 2026,
+      "julesr0y_layout_id": "montreal-6",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 39,
+      "circuit_short_name": "Monza",
+      "country_name": "Italy",
+      "year": 2023,
+      "julesr0y_layout_id": "monza-7",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 39,
+      "circuit_short_name": "Monza",
+      "country_name": "Italy",
+      "year": 2024,
+      "julesr0y_layout_id": "monza-7",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 39,
+      "circuit_short_name": "Monza",
+      "country_name": "Italy",
+      "year": 2025,
+      "julesr0y_layout_id": "monza-7",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 39,
+      "circuit_short_name": "Monza",
+      "country_name": "Italy",
+      "year": 2026,
+      "julesr0y_layout_id": "monza-7",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 46,
+      "circuit_short_name": "Suzuka",
+      "country_name": "Japan",
+      "year": 2023,
+      "julesr0y_layout_id": "suzuka-2",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 46,
+      "circuit_short_name": "Suzuka",
+      "country_name": "Japan",
+      "year": 2024,
+      "julesr0y_layout_id": "suzuka-2",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 46,
+      "circuit_short_name": "Suzuka",
+      "country_name": "Japan",
+      "year": 2025,
+      "julesr0y_layout_id": "suzuka-2",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 46,
+      "circuit_short_name": "Suzuka",
+      "country_name": "Japan",
+      "year": 2026,
+      "julesr0y_layout_id": "suzuka-2",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 49,
+      "circuit_short_name": "Shanghai",
+      "country_name": "China",
+      "year": 2024,
+      "julesr0y_layout_id": "shanghai-1",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 49,
+      "circuit_short_name": "Shanghai",
+      "country_name": "China",
+      "year": 2025,
+      "julesr0y_layout_id": "shanghai-1",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 49,
+      "circuit_short_name": "Shanghai",
+      "country_name": "China",
+      "year": 2026,
+      "julesr0y_layout_id": "shanghai-1",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 55,
+      "circuit_short_name": "Zandvoort",
+      "country_name": "Netherlands",
+      "year": 2023,
+      "julesr0y_layout_id": "zandvoort-5",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 55,
+      "circuit_short_name": "Zandvoort",
+      "country_name": "Netherlands",
+      "year": 2024,
+      "julesr0y_layout_id": "zandvoort-5",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 55,
+      "circuit_short_name": "Zandvoort",
+      "country_name": "Netherlands",
+      "year": 2025,
+      "julesr0y_layout_id": "zandvoort-5",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 55,
+      "circuit_short_name": "Zandvoort",
+      "country_name": "Netherlands",
+      "year": 2026,
+      "julesr0y_layout_id": "zandvoort-5",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 61,
+      "circuit_short_name": "Singapore",
+      "country_name": "Singapore",
+      "year": 2023,
+      "julesr0y_layout_id": "marina-bay-4",
+      "direction": "counter-clockwise"
+    },
+    {
+      "circuit_key": 61,
+      "circuit_short_name": "Singapore",
+      "country_name": "Singapore",
+      "year": 2024,
+      "julesr0y_layout_id": "marina-bay-4",
+      "direction": "counter-clockwise"
+    },
+    {
+      "circuit_key": 61,
+      "circuit_short_name": "Singapore",
+      "country_name": "Singapore",
+      "year": 2025,
+      "julesr0y_layout_id": "marina-bay-4",
+      "direction": "counter-clockwise"
+    },
+    {
+      "circuit_key": 61,
+      "circuit_short_name": "Singapore",
+      "country_name": "Singapore",
+      "year": 2026,
+      "julesr0y_layout_id": "marina-bay-4",
+      "direction": "counter-clockwise"
+    },
+    {
+      "circuit_key": 63,
+      "circuit_short_name": "Sakhir",
+      "country_name": "Bahrain",
+      "year": 2023,
+      "julesr0y_layout_id": "bahrain-1",
+      "direction": "clockwise"
+    },
     {
       "circuit_key": 63,
       "circuit_short_name": "Sakhir",
       "country_name": "Bahrain",
       "year": 2024,
       "julesr0y_layout_id": "bahrain-1",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 63,
+      "circuit_short_name": "Sakhir",
+      "country_name": "Bahrain",
+      "year": 2025,
+      "julesr0y_layout_id": "bahrain-1",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 63,
+      "circuit_short_name": "Sakhir",
+      "country_name": "Bahrain",
+      "year": 2026,
+      "julesr0y_layout_id": "bahrain-1",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 65,
+      "circuit_short_name": "Mexico City",
+      "country_name": "Mexico",
+      "year": 2023,
+      "julesr0y_layout_id": "mexico-city-3",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 65,
+      "circuit_short_name": "Mexico City",
+      "country_name": "Mexico",
+      "year": 2024,
+      "julesr0y_layout_id": "mexico-city-3",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 65,
+      "circuit_short_name": "Mexico City",
+      "country_name": "Mexico",
+      "year": 2025,
+      "julesr0y_layout_id": "mexico-city-3",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 65,
+      "circuit_short_name": "Mexico City",
+      "country_name": "Mexico",
+      "year": 2026,
+      "julesr0y_layout_id": "mexico-city-3",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 70,
+      "circuit_short_name": "Yas Marina Circuit",
+      "country_name": "United Arab Emirates",
+      "year": 2023,
+      "julesr0y_layout_id": "yas-marina-2",
+      "direction": "counter-clockwise"
+    },
+    {
+      "circuit_key": 70,
+      "circuit_short_name": "Yas Marina Circuit",
+      "country_name": "United Arab Emirates",
+      "year": 2024,
+      "julesr0y_layout_id": "yas-marina-2",
+      "direction": "counter-clockwise"
+    },
+    {
+      "circuit_key": 70,
+      "circuit_short_name": "Yas Marina Circuit",
+      "country_name": "United Arab Emirates",
+      "year": 2025,
+      "julesr0y_layout_id": "yas-marina-2",
+      "direction": "counter-clockwise"
+    },
+    {
+      "circuit_key": 70,
+      "circuit_short_name": "Yas Marina Circuit",
+      "country_name": "United Arab Emirates",
+      "year": 2026,
+      "julesr0y_layout_id": "yas-marina-2",
+      "direction": "counter-clockwise"
+    },
+    {
+      "circuit_key": 144,
+      "circuit_short_name": "Baku",
+      "country_name": "Azerbaijan",
+      "year": 2023,
+      "julesr0y_layout_id": "baku-1",
+      "direction": "counter-clockwise"
+    },
+    {
+      "circuit_key": 144,
+      "circuit_short_name": "Baku",
+      "country_name": "Azerbaijan",
+      "year": 2024,
+      "julesr0y_layout_id": "baku-1",
+      "direction": "counter-clockwise"
+    },
+    {
+      "circuit_key": 144,
+      "circuit_short_name": "Baku",
+      "country_name": "Azerbaijan",
+      "year": 2025,
+      "julesr0y_layout_id": "baku-1",
+      "direction": "counter-clockwise"
+    },
+    {
+      "circuit_key": 144,
+      "circuit_short_name": "Baku",
+      "country_name": "Azerbaijan",
+      "year": 2026,
+      "julesr0y_layout_id": "baku-1",
+      "direction": "counter-clockwise"
+    },
+    {
+      "circuit_key": 149,
+      "circuit_short_name": "Jeddah",
+      "country_name": "Saudi Arabia",
+      "year": 2023,
+      "julesr0y_layout_id": "jeddah-1",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 149,
+      "circuit_short_name": "Jeddah",
+      "country_name": "Saudi Arabia",
+      "year": 2024,
+      "julesr0y_layout_id": "jeddah-1",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 149,
+      "circuit_short_name": "Jeddah",
+      "country_name": "Saudi Arabia",
+      "year": 2025,
+      "julesr0y_layout_id": "jeddah-1",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 149,
+      "circuit_short_name": "Jeddah",
+      "country_name": "Saudi Arabia",
+      "year": 2026,
+      "julesr0y_layout_id": "jeddah-1",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 150,
+      "circuit_short_name": "Lusail",
+      "country_name": "Qatar",
+      "year": 2023,
+      "julesr0y_layout_id": "lusail-1",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 150,
+      "circuit_short_name": "Lusail",
+      "country_name": "Qatar",
+      "year": 2024,
+      "julesr0y_layout_id": "lusail-1",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 150,
+      "circuit_short_name": "Lusail",
+      "country_name": "Qatar",
+      "year": 2025,
+      "julesr0y_layout_id": "lusail-1",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 150,
+      "circuit_short_name": "Lusail",
+      "country_name": "Qatar",
+      "year": 2026,
+      "julesr0y_layout_id": "lusail-1",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 151,
+      "circuit_short_name": "Miami",
+      "country_name": "United States",
+      "year": 2023,
+      "julesr0y_layout_id": "miami-1",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 151,
+      "circuit_short_name": "Miami",
+      "country_name": "United States",
+      "year": 2024,
+      "julesr0y_layout_id": "miami-1",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 151,
+      "circuit_short_name": "Miami",
+      "country_name": "United States",
+      "year": 2025,
+      "julesr0y_layout_id": "miami-1",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 151,
+      "circuit_short_name": "Miami",
+      "country_name": "United States",
+      "year": 2026,
+      "julesr0y_layout_id": "miami-1",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 152,
+      "circuit_short_name": "Las Vegas",
+      "country_name": "United States",
+      "year": 2023,
+      "julesr0y_layout_id": "las-vegas-1",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 152,
+      "circuit_short_name": "Las Vegas",
+      "country_name": "United States",
+      "year": 2024,
+      "julesr0y_layout_id": "las-vegas-1",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 152,
+      "circuit_short_name": "Las Vegas",
+      "country_name": "United States",
+      "year": 2025,
+      "julesr0y_layout_id": "las-vegas-1",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 152,
+      "circuit_short_name": "Las Vegas",
+      "country_name": "United States",
+      "year": 2026,
+      "julesr0y_layout_id": "las-vegas-1",
+      "direction": "clockwise"
+    },
+    {
+      "circuit_key": 153,
+      "circuit_short_name": "Madring",
+      "country_name": "Spain",
+      "year": 2026,
+      "julesr0y_layout_id": "madring-1",
       "direction": "clockwise"
     }
   ]

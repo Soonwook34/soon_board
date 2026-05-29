@@ -1,0 +1,1544 @@
+{
+  "generated_at": "2026-05-28T23:19:37.926Z",
+  "entries": [
+    {
+      "circuit_key": 2,
+      "year": 2023,
+      "status": "ok",
+      "rmse": 1.0979220442317792,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 2,
+      "year": 2024,
+      "status": "ok",
+      "rmse": 1.0839596671831695,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 2,
+      "year": 2025,
+      "status": "ok",
+      "rmse": 1.089666120991712,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 2,
+      "year": 2026,
+      "status": "extract-failed",
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/laps?session_key=11321"
+    },
+    {
+      "circuit_key": 4,
+      "year": 2023,
+      "status": "ok",
+      "rmse": 0.9421706054512264,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 4,
+      "year": 2024,
+      "status": "ok",
+      "rmse": 0.9386763629274828,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 4,
+      "year": 2025,
+      "status": "ok",
+      "rmse": 0.9421440493392929,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 4,
+      "year": 2026,
+      "status": "extract-failed",
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/laps?session_key=11342"
+    },
+    {
+      "circuit_key": 6,
+      "year": 2023,
+      "status": "extract-failed",
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/laps?session_key=9086"
+    },
+    {
+      "circuit_key": 6,
+      "year": 2024,
+      "status": "ok",
+      "rmse": 0.8409884263819613,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 6,
+      "year": 2025,
+      "status": "ok",
+      "rmse": 0.8537202270092974,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 7,
+      "year": 2023,
+      "status": "ok",
+      "rmse": 0.87338253406799,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 7,
+      "year": 2024,
+      "status": "ok",
+      "rmse": 0.8726705418892323,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 7,
+      "year": 2025,
+      "status": "pitlane-failed",
+      "rmse": 0.8727865336076644,
+      "confidence": 1,
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/pit?session_key=9934"
+    },
+    {
+      "circuit_key": 7,
+      "year": 2026,
+      "status": "extract-failed",
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/laps?session_key=11334"
+    },
+    {
+      "circuit_key": 9,
+      "year": 2023,
+      "status": "pitlane-failed",
+      "rmse": 3.6541323586848753,
+      "confidence": 0.90766941130521,
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/pit?session_key=9212"
+    },
+    {
+      "circuit_key": 9,
+      "year": 2024,
+      "status": "pitlane-failed",
+      "rmse": 3.6917024018545317,
+      "confidence": 0.9046638078516375,
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/pit?session_key=9616"
+    },
+    {
+      "circuit_key": 9,
+      "year": 2025,
+      "status": "ok",
+      "rmse": 3.5401410274900873,
+      "confidence": 0.916788717800793,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 9,
+      "year": 2026,
+      "status": "extract-failed",
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/laps?session_key=11396"
+    },
+    {
+      "circuit_key": 10,
+      "year": 2023,
+      "status": "pitlane-failed",
+      "rmse": 0.8399104645094784,
+      "confidence": 1,
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/pit?session_key=7787"
+    },
+    {
+      "circuit_key": 10,
+      "year": 2024,
+      "status": "ok",
+      "rmse": 0.8629083228751868,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 10,
+      "year": 2025,
+      "status": "ok",
+      "rmse": 0.8399246593796584,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 10,
+      "year": 2026,
+      "status": "ok",
+      "rmse": 0.8495585623115354,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 14,
+      "year": 2023,
+      "status": "pitlane-failed",
+      "rmse": 1.3261031780242136,
+      "confidence": 1,
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/pit?session_key=9204"
+    },
+    {
+      "circuit_key": 14,
+      "year": 2024,
+      "status": "pitlane-failed",
+      "rmse": 1.3019877751741804,
+      "confidence": 1,
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/pit?session_key=9635"
+    },
+    {
+      "circuit_key": 14,
+      "year": 2025,
+      "status": "ok",
+      "rmse": 1.3384553109728097,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 14,
+      "year": 2026,
+      "status": "extract-failed",
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/laps?session_key=11412"
+    },
+    {
+      "circuit_key": 15,
+      "year": 2023,
+      "status": "ok",
+      "rmse": 0.8151622432273078,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 15,
+      "year": 2024,
+      "status": "ok",
+      "rmse": 0.8236092676756631,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 15,
+      "year": 2025,
+      "status": "ok",
+      "rmse": 0.8323319198755005,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 15,
+      "year": 2026,
+      "status": "extract-failed",
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/laps?session_key=11307"
+    },
+    {
+      "circuit_key": 19,
+      "year": 2023,
+      "status": "ok",
+      "rmse": 3.5522610210802146,
+      "confidence": 0.9158191183135829,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 19,
+      "year": 2024,
+      "status": "pitlane-failed",
+      "rmse": 3.5217227160564857,
+      "confidence": 0.9182621827154811,
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/pit?session_key=9549"
+    },
+    {
+      "circuit_key": 19,
+      "year": 2025,
+      "status": "ok",
+      "rmse": 3.4621880024176157,
+      "confidence": 0.9230249598065907,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 19,
+      "year": 2026,
+      "status": "extract-failed",
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/laps?session_key=11315"
+    },
+    {
+      "circuit_key": 22,
+      "year": 2023,
+      "status": "pitlane-failed",
+      "rmse": 1.361876745808416,
+      "confidence": 1,
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/pit?session_key=9094"
+    },
+    {
+      "circuit_key": 22,
+      "year": 2024,
+      "status": "ok",
+      "rmse": 1.386590861804675,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 22,
+      "year": 2025,
+      "status": "ok",
+      "rmse": 1.3501295028232039,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 22,
+      "year": 2026,
+      "status": "extract-failed",
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/laps?session_key=11299"
+    },
+    {
+      "circuit_key": 23,
+      "year": 2023,
+      "status": "ok",
+      "rmse": 0.5704016118972981,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 23,
+      "year": 2024,
+      "status": "ok",
+      "rmse": 0.5620468803326075,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 23,
+      "year": 2025,
+      "status": "ok",
+      "rmse": 0.5655671968571009,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 23,
+      "year": 2026,
+      "status": "ok",
+      "rmse": 0.5565673799957626,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 39,
+      "year": 2023,
+      "status": "ok",
+      "rmse": 0.5353081268107275,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 39,
+      "year": 2024,
+      "status": "ok",
+      "rmse": 0.5254345668667761,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 39,
+      "year": 2025,
+      "status": "ok",
+      "rmse": 0.5392244912485953,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 39,
+      "year": 2026,
+      "status": "extract-failed",
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/laps?session_key=11361"
+    },
+    {
+      "circuit_key": 46,
+      "year": 2023,
+      "status": "ok",
+      "rmse": 0.7034201387083677,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 46,
+      "year": 2024,
+      "status": "ok",
+      "rmse": 0.6820234010239752,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 46,
+      "year": 2025,
+      "status": "ok",
+      "rmse": 0.728149789874513,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 46,
+      "year": 2026,
+      "status": "ok",
+      "rmse": 0.7009978508423089,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 49,
+      "year": 2024,
+      "status": "ok",
+      "rmse": 4.875010919377276,
+      "confidence": 0.8099991264498179,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 49,
+      "year": 2025,
+      "status": "ok",
+      "rmse": 4.866571955281242,
+      "confidence": 0.8106742435775006,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 49,
+      "year": 2026,
+      "status": "ok",
+      "rmse": 4.994516489166988,
+      "confidence": 0.8004386808666409,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 55,
+      "year": 2023,
+      "status": "ok",
+      "rmse": 1.4212927335407919,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 55,
+      "year": 2024,
+      "status": "ok",
+      "rmse": 1.4444892287708864,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 55,
+      "year": 2025,
+      "status": "ok",
+      "rmse": 1.3192854887101106,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 55,
+      "year": 2026,
+      "status": "extract-failed",
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/laps?session_key=11348"
+    },
+    {
+      "circuit_key": 61,
+      "year": 2023,
+      "status": "ok",
+      "rmse": 1.7187077073273023,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 61,
+      "year": 2024,
+      "status": "ok",
+      "rmse": 1.6656538668982055,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 61,
+      "year": 2025,
+      "status": "ok",
+      "rmse": 1.6623704865924003,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 61,
+      "year": 2026,
+      "status": "extract-failed",
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/laps?session_key=11383"
+    },
+    {
+      "circuit_key": 63,
+      "year": 2023,
+      "status": "pitlane-failed",
+      "rmse": 5.63075194202224,
+      "confidence": 0.7495398446382209,
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/pit?session_key=7953"
+    },
+    {
+      "circuit_key": 63,
+      "year": 2024,
+      "status": "ok",
+      "rmse": 5.732654075685434,
+      "confidence": 0.7413876739451652,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 63,
+      "year": 2025,
+      "status": "ok",
+      "rmse": 5.85998289733847,
+      "confidence": 0.7312013682129224,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 63,
+      "year": 2026,
+      "status": "extract-failed",
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/laps?session_key=11261"
+    },
+    {
+      "circuit_key": 65,
+      "year": 2023,
+      "status": "ok",
+      "rmse": 2.0453249728960063,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 65,
+      "year": 2024,
+      "status": "ok",
+      "rmse": 1.9145276904515351,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 65,
+      "year": 2025,
+      "status": "ok",
+      "rmse": 2.093752354474032,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 65,
+      "year": 2026,
+      "status": "extract-failed",
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/laps?session_key=11404"
+    },
+    {
+      "circuit_key": 70,
+      "year": 2023,
+      "status": "ok",
+      "rmse": 0.8516916200496686,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 70,
+      "year": 2024,
+      "status": "ok",
+      "rmse": 0.8629635004645875,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 70,
+      "year": 2025,
+      "status": "ok",
+      "rmse": 0.8657823287537949,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 70,
+      "year": 2026,
+      "status": "extract-failed",
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/laps?session_key=11436"
+    },
+    {
+      "circuit_key": 144,
+      "year": 2023,
+      "status": "pitlane-failed",
+      "rmse": 6.8703703901574915,
+      "confidence": 0.6503703687874007,
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/pit?session_key=9069"
+    },
+    {
+      "circuit_key": 144,
+      "year": 2024,
+      "status": "ok",
+      "rmse": 6.925248754041841,
+      "confidence": 0.6459800996766527,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 144,
+      "year": 2025,
+      "status": "ok",
+      "rmse": 6.730246926597649,
+      "confidence": 0.6615802458721881,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 144,
+      "year": 2026,
+      "status": "extract-failed",
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/laps?session_key=11377"
+    },
+    {
+      "circuit_key": 149,
+      "year": 2023,
+      "status": "pitlane-failed",
+      "rmse": 0.4730727654399534,
+      "confidence": 1,
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/pit?session_key=7779"
+    },
+    {
+      "circuit_key": 149,
+      "year": 2024,
+      "status": "ok",
+      "rmse": 0.48209688959827646,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 149,
+      "year": 2025,
+      "status": "ok",
+      "rmse": 0.48719026264770726,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 149,
+      "year": 2026,
+      "status": "extract-failed",
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/laps?session_key=11269"
+    },
+    {
+      "circuit_key": 150,
+      "year": 2023,
+      "status": "ok",
+      "rmse": 1.0775663954789079,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 150,
+      "year": 2024,
+      "status": "ok",
+      "rmse": 1.0617107620232218,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 150,
+      "year": 2025,
+      "status": "ok",
+      "rmse": 1.0756905321274712,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 150,
+      "year": 2026,
+      "status": "extract-failed",
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/laps?session_key=11428"
+    },
+    {
+      "circuit_key": 151,
+      "year": 2023,
+      "status": "pitlane-failed",
+      "rmse": 2.8562669788967994,
+      "confidence": 0.9714986416882561,
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/pit?session_key=9078"
+    },
+    {
+      "circuit_key": 151,
+      "year": 2024,
+      "status": "ok",
+      "rmse": 2.796429806494345,
+      "confidence": 0.9762856154804525,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 151,
+      "year": 2025,
+      "status": "ok",
+      "rmse": 2.863654236379347,
+      "confidence": 0.9709076610896522,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 151,
+      "year": 2026,
+      "status": "ok",
+      "rmse": 2.8709093148589435,
+      "confidence": 0.9703272548112846,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 152,
+      "year": 2023,
+      "status": "ok",
+      "rmse": 1.5058383052386732,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 152,
+      "year": 2024,
+      "status": "ok",
+      "rmse": 1.4583204859120853,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 152,
+      "year": 2025,
+      "status": "ok",
+      "rmse": 1.4882626727399642,
+      "confidence": 1,
+      "overlays": {
+        "sectors": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "drs": {
+          "status": "skipped",
+          "reason": "flag"
+        },
+        "slm": {
+          "status": "skipped",
+          "reason": "flag"
+        }
+      }
+    },
+    {
+      "circuit_key": 152,
+      "year": 2026,
+      "status": "extract-failed",
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/laps?session_key=11420"
+    },
+    {
+      "circuit_key": 153,
+      "year": 2026,
+      "status": "extract-failed",
+      "error": "OpenF1 404 Not Found: https://api.openf1.org/v1/laps?session_key=11369"
+    }
+  ]
+}

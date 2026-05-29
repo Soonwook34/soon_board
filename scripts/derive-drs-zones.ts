@@ -57,19 +57,31 @@ export async function runDeriveDrs(opts: RunDeriveDrsOptions): Promise<RunDerive
   const client = opts.client ?? new OpenF1Client();
   const preferred = opts.preferredSessionTypes ?? ['Race', 'Qualifying'];
 
-  const sessions = await client.get<Array<{ session_key: number; session_type: string; year: number }>>(
-    '/v1/sessions',
-    { circuit_key: opts.circuit_key, year: opts.year },
-  );
+  const sessions = await client.get<
+    Array<{ session_key: number; session_type: string; year: number; date_start: string; date_end: string }>
+  >('/v1/sessions', { circuit_key: opts.circuit_key, year: opts.year });
   const picked = pickPreferredSession(sessions, preferred);
   if (!picked) {
     console.warn(`[derive:drs] no preferred session for ${opts.circuit_key}-${opts.year}`);
     return null;
   }
 
+  // OpenF1 /v1/location 과 /v1/car_data 는 session-wide 호출 시 422 ("too much data") 반환.
+  // session 시작 후 10분 = 약 4~6 lap (F1 lap ~1:20~2:00) — drs derive 에 충분.
+  const sessionStart = new Date(picked.date_start);
+  const sessionEnd = new Date(picked.date_end);
+  const windowEnd = new Date(
+    Math.min(sessionStart.getTime() + 10 * 60 * 1000, sessionEnd.getTime()),
+  );
+  const windowParams = {
+    session_key: picked.session_key,
+    'date>=': sessionStart.toISOString(),
+    'date<=': windowEnd.toISOString(),
+  };
+
   const [carDataRaw, locationsRaw] = await Promise.all([
-    client.get<Array<Record<string, unknown>>>('/v1/car_data', { session_key: picked.session_key }),
-    client.get<Array<Record<string, unknown>>>('/v1/location', { session_key: picked.session_key }),
+    client.get<Array<Record<string, unknown>>>('/v1/car_data', windowParams),
+    client.get<Array<Record<string, unknown>>>('/v1/location', windowParams),
   ]);
   const carData: CarDataDrsInput[] = carDataRaw
     .filter((r) => r.drs != null)

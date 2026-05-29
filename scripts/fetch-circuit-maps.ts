@@ -135,6 +135,19 @@ export function buildAll(
     }
 
     const sourceFileRel = `circuits/${variant}/${entry.julesr0y_layout_id}.svg`;
+    const outPath = join(outputDir, `${entry.circuit_key}-${entry.year}.json`);
+
+    // 기존 파일의 Phase 2 산출물 (openf1_transform*, 수동 보정된 start_finish_index) 보존.
+    // 누락 시 매 빌드마다 Phase 2 가 wipe → 라이브맵 전체 차단 (회귀 테스트 보호).
+    let existing: TrackOutlineJson | null = null;
+    if (existsSync(outPath)) {
+      try {
+        existing = JSON.parse(readFileSync(outPath, 'utf8')) as TrackOutlineJson;
+      } catch {
+        existing = null;
+      }
+    }
+
     const out: TrackOutlineJson = {
       circuit_key: entry.circuit_key,
       year: entry.year,
@@ -149,12 +162,19 @@ export function buildAll(
       total_length: extracted.total_length,
       // 출발선 마커는 minimal SVG 에 없음 — polyline[0] (path 시작점) 을 기본값으로.
       // Phase 2 의 OpenF1 transform 추출이 실제 출발선 좌표를 검증할 때 보정 가능.
-      start_finish_index: 0,
+      start_finish_index: existing?.start_finish_index ?? 0,
       direction: entry.direction ?? 'clockwise',
       generated_at: now.toISOString(),
+      // Phase 2 산출물 (이미 있으면 보존). 새로 빌드할 때는 추후 extract 가 채움.
+      ...(existing?.openf1_transform ? { openf1_transform: existing.openf1_transform } : {}),
+      ...(existing?.openf1_transform_confidence != null
+        ? { openf1_transform_confidence: existing.openf1_transform_confidence }
+        : {}),
+      ...(existing?.openf1_transform_meta
+        ? { openf1_transform_meta: existing.openf1_transform_meta }
+        : {}),
     };
 
-    const outPath = join(outputDir, `${entry.circuit_key}-${entry.year}.json`);
     const body = JSON.stringify(out);
     writeJsonAtomicSync(outPath, out);
 

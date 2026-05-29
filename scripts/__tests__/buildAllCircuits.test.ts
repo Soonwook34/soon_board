@@ -311,6 +311,226 @@ describe('parseCliArgs', () => {
   });
 });
 
+// ── Phase 14 — overlay (sectors/drs/slm) 통합 시나리오 ────────────────
+
+describe('build-all-circuits — overlay integration (Phase 14)', () => {
+  it('2024 ok entry → sectors ok / drs ok / slm skipped:no-seed', async () => {
+    const config = makeConfig([{ circuit_key: 90, year: 2024 }]);
+    const fetchModule = await import('../fetch-circuit-maps.js');
+    vi.spyOn(fetchModule, 'buildAll').mockReturnValue({
+      built: [{ circuit_key: 90, year: 2024, bytes: 1000 }],
+      skipped: [],
+    });
+    writeTrackOutline(90, 2024);
+
+    const sectorsMod = await import('../derive-sector-boundaries.js');
+    vi.spyOn(sectorsMod, 'runDeriveSectors').mockResolvedValue({
+      filePath: '/tmp/s.json',
+      boundaryCount: 3,
+      i1SampleCount: 5,
+      i2SampleCount: 5,
+    });
+    const drsMod = await import('../derive-drs-zones.js');
+    vi.spyOn(drsMod, 'runDeriveDrs').mockResolvedValue({
+      filePath: '/tmp/d.json',
+      zoneCount: 2,
+      detectionCount: 2,
+    });
+    const slmMod = await import('../load-slm-zones.js');
+    vi.spyOn(slmMod, 'runLoadSlm').mockResolvedValue(null); // no seed entry
+
+    const { client } = makeMockClient({});
+    const result = await buildAllCircuits(commonOpts(config, { client }));
+    expect(result.report.entries[0].status).toBe('ok');
+    expect(result.report.entries[0].overlays?.sectors).toEqual({ status: 'ok' });
+    expect(result.report.entries[0].overlays?.drs).toEqual({ status: 'ok' });
+    expect(result.report.entries[0].overlays?.slm).toEqual({
+      status: 'skipped',
+      reason: 'no-seed',
+    });
+    vi.restoreAllMocks();
+  });
+
+  it('2026 entry → drs auto-skip:future (deriveDrs not called)', async () => {
+    const config = makeConfig([{ circuit_key: 91, year: 2026 }]);
+    const fetchModule = await import('../fetch-circuit-maps.js');
+    vi.spyOn(fetchModule, 'buildAll').mockReturnValue({
+      built: [{ circuit_key: 91, year: 2026, bytes: 1000 }],
+      skipped: [],
+    });
+    writeTrackOutline(91, 2026);
+
+    const sectorsMod = await import('../derive-sector-boundaries.js');
+    vi.spyOn(sectorsMod, 'runDeriveSectors').mockResolvedValue({
+      filePath: '/tmp/s.json',
+      boundaryCount: 3,
+      i1SampleCount: 5,
+      i2SampleCount: 5,
+    });
+    const drsMod = await import('../derive-drs-zones.js');
+    const drsSpy = vi.spyOn(drsMod, 'runDeriveDrs');
+    const slmMod = await import('../load-slm-zones.js');
+    vi.spyOn(slmMod, 'runLoadSlm').mockResolvedValue(null);
+
+    const { client } = makeMockClient({});
+    const result = await buildAllCircuits(commonOpts(config, { client }));
+    expect(result.report.entries[0].overlays?.drs?.status).toBe('skipped');
+    expect(result.report.entries[0].overlays?.drs?.reason).toBe('future');
+    expect(drsSpy).not.toHaveBeenCalled();
+    vi.restoreAllMocks();
+  });
+
+  it('--skip-sectors --skip-drs --skip-slm → all skipped:flag, derivers not called', async () => {
+    const config = makeConfig([{ circuit_key: 92, year: 2024 }]);
+    const fetchModule = await import('../fetch-circuit-maps.js');
+    vi.spyOn(fetchModule, 'buildAll').mockReturnValue({
+      built: [{ circuit_key: 92, year: 2024, bytes: 1000 }],
+      skipped: [],
+    });
+    writeTrackOutline(92, 2024);
+
+    const sectorsMod = await import('../derive-sector-boundaries.js');
+    const sectorsSpy = vi.spyOn(sectorsMod, 'runDeriveSectors');
+    const drsMod = await import('../derive-drs-zones.js');
+    const drsSpy = vi.spyOn(drsMod, 'runDeriveDrs');
+    const slmMod = await import('../load-slm-zones.js');
+    const slmSpy = vi.spyOn(slmMod, 'runLoadSlm');
+
+    const { client } = makeMockClient({});
+    const result = await buildAllCircuits(
+      commonOpts(config, { client, skipSectors: true, skipDrs: true, skipSlm: true }),
+    );
+    expect(result.report.entries[0].status).toBe('ok');
+    expect(result.report.entries[0].overlays).toEqual({
+      sectors: { status: 'skipped', reason: 'flag' },
+      drs: { status: 'skipped', reason: 'flag' },
+      slm: { status: 'skipped', reason: 'flag' },
+    });
+    expect(sectorsSpy).not.toHaveBeenCalled();
+    expect(drsSpy).not.toHaveBeenCalled();
+    expect(slmSpy).not.toHaveBeenCalled();
+    vi.restoreAllMocks();
+  });
+
+  it('sectors throw → overlays.sectors.status=failed, main status stays ok', async () => {
+    const config = makeConfig([{ circuit_key: 93, year: 2024 }]);
+    const fetchModule = await import('../fetch-circuit-maps.js');
+    vi.spyOn(fetchModule, 'buildAll').mockReturnValue({
+      built: [{ circuit_key: 93, year: 2024, bytes: 1000 }],
+      skipped: [],
+    });
+    writeTrackOutline(93, 2024);
+
+    const sectorsMod = await import('../derive-sector-boundaries.js');
+    vi.spyOn(sectorsMod, 'runDeriveSectors').mockRejectedValue(new Error('boom-sectors'));
+    const drsMod = await import('../derive-drs-zones.js');
+    vi.spyOn(drsMod, 'runDeriveDrs').mockResolvedValue(null);
+    const slmMod = await import('../load-slm-zones.js');
+    vi.spyOn(slmMod, 'runLoadSlm').mockResolvedValue(null);
+
+    const { client } = makeMockClient({});
+    const result = await buildAllCircuits(commonOpts(config, { client }));
+    expect(result.report.entries[0].status).toBe('ok');
+    expect(result.report.entries[0].overlays?.sectors).toEqual({
+      status: 'failed',
+      reason: 'boom-sectors',
+    });
+    expect(result.builtCount).toBe(1);
+    expect(result.failedCount).toBe(0); // overlay failure does NOT count toward failedCount
+    vi.restoreAllMocks();
+  });
+
+  it('extract-failed entry → overlay block skipped (derivers not called)', async () => {
+    const config = makeConfig([{ circuit_key: 94, year: 2024 }]);
+    const fetchModule = await import('../fetch-circuit-maps.js');
+    vi.spyOn(fetchModule, 'buildAll').mockReturnValue({
+      built: [{ circuit_key: 94, year: 2024, bytes: 1000 }],
+      skipped: [],
+    });
+    writeTrackOutline(94, 2024);
+
+    const sectorsMod = await import('../derive-sector-boundaries.js');
+    const sectorsSpy = vi.spyOn(sectorsMod, 'runDeriveSectors');
+    const drsMod = await import('../derive-drs-zones.js');
+    const drsSpy = vi.spyOn(drsMod, 'runDeriveDrs');
+    const slmMod = await import('../load-slm-zones.js');
+    const slmSpy = vi.spyOn(slmMod, 'runLoadSlm');
+
+    // extract-failed via empty location response
+    const { client } = makeMockClient({ locationByCircuitKey: { 94: [] } });
+    const result = await buildAllCircuits(commonOpts(config, { client }));
+    expect(result.report.entries[0].status).toBe('extract-failed');
+    expect(result.report.entries[0].overlays).toBeUndefined();
+    expect(sectorsSpy).not.toHaveBeenCalled();
+    expect(drsSpy).not.toHaveBeenCalled();
+    expect(slmSpy).not.toHaveBeenCalled();
+    vi.restoreAllMocks();
+  });
+
+  it('slm raw seed has entry (slmRawPath override) → slm.status=ok', async () => {
+    const config = makeConfig([{ circuit_key: 95, year: 2024 }]);
+    const fetchModule = await import('../fetch-circuit-maps.js');
+    vi.spyOn(fetchModule, 'buildAll').mockReturnValue({
+      built: [{ circuit_key: 95, year: 2024, bytes: 1000 }],
+      skipped: [],
+    });
+    writeTrackOutline(95, 2024);
+
+    const sectorsMod = await import('../derive-sector-boundaries.js');
+    vi.spyOn(sectorsMod, 'runDeriveSectors').mockResolvedValue({
+      filePath: '/tmp/s.json',
+      boundaryCount: 3,
+      i1SampleCount: 5,
+      i2SampleCount: 5,
+    });
+    const drsMod = await import('../derive-drs-zones.js');
+    vi.spyOn(drsMod, 'runDeriveDrs').mockResolvedValue(null);
+
+    // write SLM raw with entry for (95, 2024) — slmRawPath wins over default seed
+    const rawPath = join(TMP, 'slm-raw.json');
+    writeFileSync(
+      rawPath,
+      JSON.stringify({
+        circuits: [
+          {
+            circuit_key: 95,
+            year: 2024,
+            zones: [{ s_start_hint: 100, s_end_hint: 200, label: 'Test Zone' }],
+          },
+        ],
+      }),
+    );
+
+    const { client } = makeMockClient({});
+    const result = await buildAllCircuits(commonOpts(config, { client, slmRawPath: rawPath }));
+    expect(result.report.entries[0].overlays?.slm?.status).toBe('ok');
+    vi.restoreAllMocks();
+  });
+});
+
+describe('parseCliArgs — Phase 14 overlay flags', () => {
+  it('--skip-sectors --skip-drs --skip-slm --slm-raw=path 모두 파싱', () => {
+    const a = parseCliArgs([
+      '--skip-sectors',
+      '--skip-drs',
+      '--skip-slm',
+      '--slm-raw=/custom/slm.json',
+    ]);
+    expect(a.skipSectors).toBe(true);
+    expect(a.skipDrs).toBe(true);
+    expect(a.skipSlm).toBe(true);
+    expect(a.slmRawPath).toBe('/custom/slm.json');
+  });
+
+  it('overlay flag 없음 → 모두 default false / undefined', () => {
+    const a = parseCliArgs([]);
+    expect(a.skipSectors).toBe(false);
+    expect(a.skipDrs).toBe(false);
+    expect(a.skipSlm).toBe(false);
+    expect(a.slmRawPath).toBeUndefined();
+  });
+});
+
 // ── helpers ─────────────────────────────────────────────────────────────
 
 function writeTrackOutline(circuitKey: number, year: number): void {

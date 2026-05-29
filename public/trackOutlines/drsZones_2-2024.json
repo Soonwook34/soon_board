@@ -1,0 +1,28 @@
+{
+  "circuit_key": 2,
+  "year": 2024,
+  "zones": [
+    {
+      "id": 1,
+      "detection_s": 173.93719920342463,
+      "activation_s_start": 266.1561428325806,
+      "activation_s_end": 407.3960253571142
+    },
+    {
+      "id": 2,
+      "detection_s": 998.9102890624611,
+      "activation_s_start": 1062.6568875679618,
+      "activation_s_end": 1254.261557532538
+    }
+  ],
+  "method": "drs_state_transitions_clustering",
+  "coverage_note": "2025 Dutch GP 이후 일부 세션에서 F1 이 DRS 데이터 제한 → 해당 세션은 부분 zone 만 산출 가능",
+  "generated_at": "2026-05-29T01:57:24.502Z",
+  "meta": {
+    "source_session_key": 9558,
+    "source_session_type": "Race",
+    "driver_count": 20,
+    "transition_count": 264,
+    "extracted_at": "2026-05-29T01:57:24.502Z"
+  }
+}
