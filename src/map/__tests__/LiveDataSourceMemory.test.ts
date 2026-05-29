@@ -20,8 +20,9 @@ function jsonResponse(body: unknown, status = 200): Response {
   });
 }
 
+// D1: LocationBuffer 공유 클래스로 추출됨 — totalSampleCount() / driverCount() API 사용.
 interface LiveInternals {
-  locationBuffer: Map<number, unknown[]>;
+  locationBuffer: { totalSampleCount(): number; driverCount(): number };
   records: Map<string, unknown[]>;
   cursors: Map<string, Date>;
   listeners: Set<unknown>;
@@ -30,7 +31,7 @@ interface LiveInternals {
 interface ReplayInternals {
   cache: Map<string, unknown[]>;
   inflight: Map<string, Promise<void>>;
-  locationByDriver: Map<number, unknown[]>;
+  locationBuffer: { totalSampleCount(): number; driverCount(): number };
 }
 
 describe('LiveDataSource — sustained-input 메모리 invariant (인수 10)', () => {
@@ -85,15 +86,12 @@ describe('LiveDataSource — sustained-input 메모리 invariant (인수 10)', (
     }
 
     const internals = ds as unknown as LiveInternals;
-    const totalSamples = Array.from(internals.locationBuffer.values()).reduce(
-      (sum, arr) => sum + arr.length,
-      0,
-    );
+    const totalSamples = internals.locationBuffer.totalSampleCount();
 
     // ring buffer trim 작동: 60s 안의 sample 만 보존 → 20 driver × ~24 samples = ~480.
     // 안전 상한 10000 (실제는 훨씬 작음 — leak 검출 sentinel).
     expect(totalSamples).toBeLessThanOrEqual(20 * 500);
-    expect(internals.locationBuffer.size).toBe(DRIVERS);
+    expect(internals.locationBuffer.driverCount()).toBe(DRIVERS);
 
     // non-location 7 endpoint: records map 에 적재 (빈 응답 ignore 라 0 일 수도 있음).
     // 실제 데이터가 적재된 endpoint 만 records 에 들어감.

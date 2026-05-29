@@ -21,20 +21,29 @@ describe('mapStyles', () => {
     expect(mapStyles.pitlaneDashPattern).toEqual([4, 2]);
   });
 
-  it('marker 크기 (live-map §4.1 — min 18, max 32)', () => {
-    expect(mapStyles.markerSizeMin).toBe(18);
-    expect(mapStyles.markerSizeMax).toBe(32);
+  it('marker 크기 — 가독성 우선 22~36px (재디자인)', () => {
+    expect(mapStyles.markerSizeMin).toBe(22);
+    expect(mapStyles.markerSizeMax).toBe(36);
     expect(mapStyles.markerSizeMin).toBeLessThan(mapStyles.markerSizeMax);
   });
 
-  it('marker 외곽 — color.textPrimary (흰 테두리) + 1.5px', () => {
+  it('marker 외곽 — color.textPrimary (흰 테두리) + 2px (재디자인)', () => {
     expect(mapStyles.markerBorderColor).toBe(color.textPrimary);
-    expect(mapStyles.markerBorderWidth).toBe(1.5);
+    expect(mapStyles.markerBorderWidth).toBe(2);
   });
 
-  it('label 토큰 — 라벨 색 = textPrimary, offset 6px (live-map §4.1)', () => {
+  it('marker drop shadow 토큰 — 깊이감 (재디자인)', () => {
+    expect(mapStyles.markerShadowColor).toMatch(/rgba/);
+    expect(mapStyles.markerShadowBlur).toBeGreaterThan(0);
+    expect(mapStyles.markerShadowOffsetY).toBeGreaterThan(0);
+  });
+
+  it('label 토큰 — 라벨 색 = textPrimary, chip 스타일 (재디자인)', () => {
     expect(mapStyles.labelColor).toBe(color.textPrimary);
-    expect(mapStyles.labelOffsetPx).toBe(6);
+    expect(mapStyles.labelOffsetPx).toBe(8);
+    expect(mapStyles.labelChipPaddingX).toBeGreaterThan(0);
+    expect(mapStyles.labelChipPaddingY).toBeGreaterThan(0);
+    expect(mapStyles.labelChipFill).toMatch(/rgba/);
   });
 
   it('Phase 7 trail 토큰 — alpha gradient + line 두께', () => {

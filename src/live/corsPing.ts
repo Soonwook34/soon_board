@@ -5,7 +5,9 @@
 // Access-Control-Allow-Origin 헤더 확인. OpenF1이 CORS 정책 바꾸면 여기서 false 반환.
 // 에러 정책: throw 금지 — 모든 실패는 boolean false + console.warn (Phase 10 revalidate와 동일 패턴).
 
-const DEFAULT_PING_URL = 'https://api.openf1.org/v1/sessions?session_key=latest&limit=1';
+// NOTE: OpenF1 v1 API는 `limit` 쿼리 파라미터를 인식하지 못하고 404 ("No results found")를 반환한다.
+// session_key=latest 단독으로 호출하여 단일 row만 응답받는다.
+const DEFAULT_PING_URL = 'https://api.openf1.org/v1/sessions?session_key=latest';
 const DEFAULT_TIMEOUT_MS = 5000;
 
 export interface PingOptions {

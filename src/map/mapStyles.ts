@@ -23,20 +23,34 @@ export const mapStyles = {
 
   // ── Phase 6 marker 상수 (live-map §4.1) ──────────────────────────────
   /** 마커 최소 크기 (직경 px). */
-  markerSizeMin: 18,
+  markerSizeMin: 22,
   /** 마커 최대 크기 (직경 px). 동적 계산은 Phase 14. */
-  markerSizeMax: 32,
+  markerSizeMax: 36,
   /** 마커 외곽 stroke 색 (흰 테두리). */
   markerBorderColor: color.textPrimary,
   /** 마커 외곽 stroke 두께. */
-  markerBorderWidth: 1.5,
+  markerBorderWidth: 2,
+  /** 마커 드롭 섀도우 색 (rgba). 깊이 + 트랙 대비. */
+  markerShadowColor: 'rgba(0, 0, 0, 0.55)',
+  /** 마커 드롭 섀도우 블러 (px). */
+  markerShadowBlur: 6,
+  /** 마커 드롭 섀도우 Y 오프셋 (px). */
+  markerShadowOffsetY: 1.5,
   /** 마커 중앙 driver_number 폰트. */
   driverNumberFontFamily: font.family,
   driverNumberFontWeight: font.weight.bold,
+  /** driver_number 색 (마커 fill 위 contrast). */
+  driverNumberColor: '#ffffff',
   /** 라벨 (name_acronym) 폰트 크기. */
   labelFontSize: font.size.xs,
   /** 라벨 마커 아래 오프셋 (px). */
-  labelOffsetPx: 6,
+  labelOffsetPx: 8,
+  /** 라벨 배경 chip 패딩 (좌우 px). */
+  labelChipPaddingX: 6,
+  /** 라벨 배경 chip 패딩 (상하 px). */
+  labelChipPaddingY: 2,
+  /** 라벨 배경 chip fill (살짝 투명). */
+  labelChipFill: 'rgba(15, 17, 22, 0.78)',
   /** 라벨 색. */
   labelColor: color.textPrimary,
 

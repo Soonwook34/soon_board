@@ -68,6 +68,7 @@ function makeRenderer(opts: {
   drsZones?: ConstructorParameters<typeof LiveMapRenderer>[0]['drsZones'];
   drsEnabled?: boolean;
   slmZones?: ConstructorParameters<typeof LiveMapRenderer>[0]['slmZones'];
+  staticLayerCanvas?: ConstructorParameters<typeof LiveMapRenderer>[0]['staticLayerCanvas'];
 }) {
   const drivers = opts.drivers ?? new Map([[44, { teamColour: '#27f4d2', nameAcronym: 'HAM' }]]);
   return new LiveMapRenderer({
@@ -86,6 +87,7 @@ function makeRenderer(opts: {
     drsZones: opts.drsZones,
     drsEnabled: opts.drsEnabled,
     slmZones: opts.slmZones,
+    staticLayerCanvas: opts.staticLayerCanvas,
   });
 }
 
@@ -555,5 +557,41 @@ describe('LiveMapRenderer — Phase 9/10/11 overlays', () => {
     });
     r.renderFrame(0);
     expect(calls.some((c) => c.method === 'set:strokeStyle' && c.args[0] === '#a855f7')).toBe(true);
+  });
+});
+
+describe('LiveMapRenderer — C2 static layer cache', () => {
+  it('staticLayerCanvas 제공 시 첫 frame 에서 cache 채우고, 이후 frame 은 drawImage 만 호출', () => {
+    const buffer = new PerDriverBuffer();
+    const ds = new SyntheticDataSource();
+    const { ctx, calls } = makeMockCtx();
+    const { ctx: cacheCtx, calls: cacheCalls } = makeMockCtx();
+    // mock canvas — getContext 만 있으면 됨
+    const staticLayerCanvas = { getContext: () => cacheCtx } as unknown as HTMLCanvasElement;
+
+    const r = makeRenderer({ ctx, buffer, ds, staticLayerCanvas });
+
+    // frame 1: cache 채움 + ctx 에는 drawImage (clearRect + drawImage)
+    r.renderFrame(0);
+    // 정적 트랙은 polyline → moveTo + lineTo 사용 (arc 아님). cache 에 lineTo 흔적 있어야.
+    const cacheLineTosAfterFrame1 = cacheCalls.filter((c) => c.method === 'lineTo').length;
+    expect(cacheLineTosAfterFrame1).toBeGreaterThan(0);
+    expect(calls.some((c) => c.method === 'drawImage')).toBe(true);
+    const cacheCallsLen = cacheCalls.length;
+
+    // frame 2: cache 재사용 — cacheCalls 는 더 이상 증가하지 않음
+    r.renderFrame(100);
+    expect(cacheCalls.length).toBe(cacheCallsLen); // cache 는 한 번만 채움
+    expect(calls.filter((c) => c.method === 'drawImage').length).toBe(2); // 매 frame drawImage
+  });
+
+  it('staticLayerCanvas 미제공 시 기존 per-frame 동작 (회귀)', () => {
+    const buffer = new PerDriverBuffer();
+    const ds = new SyntheticDataSource();
+    const { ctx, calls } = makeMockCtx();
+    const r = makeRenderer({ ctx, buffer, ds }); // no staticLayerCanvas
+    r.renderFrame(0);
+    expect(calls.some((c) => c.method === 'drawImage')).toBe(false);
+    expect(calls.some((c) => c.method === 'stroke')).toBe(true); // 정적 트랙 매 frame stroke
   });
 });

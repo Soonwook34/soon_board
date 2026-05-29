@@ -58,12 +58,20 @@ export interface LiveMapRendererConfig {
   drsEnabled?: boolean;
   /** Phase 11 — SLM zone (정적 입력, 2026~). undefined 면 그리지 않음. */
   slmZones?: readonly SlmZone[];
+  /**
+   * C2 (follow-up plan) — 정적 레이어 (트랙/핏레인/sector/DRS/SLM) 캐시 버퍼.
+   * 제공되면 한 번만 렌더 → 매 frame drawImage 로 blit (CPU 절약).
+   * 미제공 시 기존 per-frame 동작 (테스트 호환).
+   */
+  staticLayerCanvas?: HTMLCanvasElement | OffscreenCanvas;
 }
 
 export class LiveMapRenderer {
   private rafId: number | null = null;
   private readonly interpolationCtx: InterpolationContext;
   private readonly pitlaneCtx: InterpolationContext | null;
+  /** C2 — 정적 레이어 캐시 ready 여부. 첫 frame 에서 채워짐. */
+  private staticLayerReady = false;
 
   constructor(private readonly config: LiveMapRendererConfig) {
     this.interpolationCtx = {
@@ -81,36 +89,62 @@ export class LiveMapRenderer {
         : null;
   }
 
+  /** 정적 레이어 (트랙/핏레인/overlays) 를 주어진 ctx 에 그림. cache fill 과 fallback 둘 다 사용. */
+  private drawStaticLayer(targetCtx: CanvasRenderingContext2D): void {
+    const { canvasWidth, canvasHeight, polyline, viewport, pitlane, arcLengthTable } = this.config;
+    const { sectorBoundaries, drsZones, drsEnabled, slmZones } = this.config;
+    renderStaticTrack({
+      ctx: targetCtx,
+      canvasWidth,
+      canvasHeight,
+      polyline,
+      viewport,
+      pitlane: this.config.pitlanePolyline ?? pitlane,
+    });
+    if (drsZones && drsZones.length > 0 && drsEnabled === true) {
+      drawDrsZones(targetCtx, drsZones, polyline, arcLengthTable, viewport);
+    }
+    if (slmZones && slmZones.length > 0) {
+      drawSlmZones(targetCtx, slmZones, polyline, arcLengthTable, viewport);
+    }
+    if (sectorBoundaries && sectorBoundaries.length > 0) {
+      drawSectorBoundaries(targetCtx, sectorBoundaries, viewport, { canvasWidth, canvasHeight });
+    }
+  }
+
+  /** C2 — 정적 레이어를 캐시 캔버스에 1회 렌더. */
+  private renderStaticLayerToCache(): void {
+    const cache = this.config.staticLayerCanvas;
+    if (!cache) return;
+    const cacheCtx = cache.getContext('2d') as CanvasRenderingContext2D | null;
+    if (!cacheCtx) return;
+    this.drawStaticLayer(cacheCtx);
+    this.staticLayerReady = true;
+  }
+
   /** 순수 frame 함수 — 테스트 가능. RAF 콜백에서도 동일하게 호출됨. */
   renderFrame(displayTimeMs: number): void {
     const {
       ctx,
       canvasWidth,
       canvasHeight,
-      polyline,
       viewport,
       buffer,
       getDriverMeta,
       showLabel,
-      pitlane,
       trailsEnabled = true,
       getDriverHints,
     } = this.config;
 
-    // 정적 트랙 재렌더 (Phase 6 MVP — offscreen cache 는 Phase 14). Phase 8 pitlanePolyline 우선.
-    const staticPitlane = this.config.pitlanePolyline ?? pitlane;
-    renderStaticTrack({ ctx, canvasWidth, canvasHeight, polyline, viewport, pitlane: staticPitlane });
-
-    // Phase 9/10/11 overlays — track polyline 직후 + 마커 직전. 마커가 위에 표시되도록.
-    const { sectorBoundaries, drsZones, drsEnabled, slmZones } = this.config;
-    if (drsZones && drsZones.length > 0 && drsEnabled === true) {
-      drawDrsZones(ctx, drsZones, polyline, this.config.arcLengthTable, viewport);
-    }
-    if (slmZones && slmZones.length > 0) {
-      drawSlmZones(ctx, slmZones, polyline, this.config.arcLengthTable, viewport);
-    }
-    if (sectorBoundaries && sectorBoundaries.length > 0) {
-      drawSectorBoundaries(ctx, sectorBoundaries, viewport, { canvasWidth, canvasHeight });
+    // C2: 정적 레이어 캐시가 있으면 1회 채우고 매 frame blit. 없으면 직접 ctx 에 그림.
+    const cache = this.config.staticLayerCanvas;
+    if (cache) {
+      if (!this.staticLayerReady) this.renderStaticLayerToCache();
+      // jsdom mock 환경에서는 drawImage 가 no-op 이지만 호출 자체는 안전.
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+      ctx.drawImage(cache as CanvasImageSource, 0, 0, canvasWidth, canvasHeight);
+    } else {
+      this.drawStaticLayer(ctx);
     }
 
     const labelOn = showLabel();

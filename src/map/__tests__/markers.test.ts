@@ -110,7 +110,7 @@ describe('drawMarker — normal state', () => {
     expect(arcCall?.args[2]).toBe(14);
   });
 
-  it('라벨 위치 — 마커 아래 (y + radius + labelOffsetPx)', () => {
+  it('라벨 위치 — 마커 아래 chip 안 (y + radius + labelOffsetPx + labelChipPaddingY)', () => {
     const { ctx, calls } = makeMockCtx();
     drawMarker(ctx, {
       position: [100, 200],
@@ -122,8 +122,9 @@ describe('drawMarker — normal state', () => {
     });
     const fillTextCalls = calls.filter((c) => c.method === 'fillText');
     const labelCall = fillTextCalls[1];
-    // y = 200, radius = 10, offset = 6 → 216
-    expect(labelCall.args[2]).toBe(216);
+    // y=200, radius=10, labelOffsetPx + labelChipPaddingY → chip 내부 텍스트 baseline.
+    const expected = 200 + 10 + mapStyles.labelOffsetPx + mapStyles.labelChipPaddingY;
+    expect(labelCall.args[2]).toBe(expected);
   });
 });
 
@@ -135,7 +136,7 @@ describe('drawSlmIndicator — placeholder (plan §4.5.2)', () => {
 });
 
 describe('drawMarker — state 분기 (Phase 7)', () => {
-  it("state='disconnected' → globalAlpha 0.5 → 1.0 복원 시퀀스", () => {
+  it("state='disconnected' → globalAlpha=0.5 + save/restore 로 격리 (이전 'set 1' 패턴 대체)", () => {
     const { ctx, calls } = makeMockCtx();
     drawMarker(ctx, {
       position: [100, 200],
@@ -145,10 +146,13 @@ describe('drawMarker — state 분기 (Phase 7)', () => {
       showLabel: false,
       state: 'disconnected',
     });
-    const alphas = calls
-      .filter((c) => c.method === 'set:globalAlpha')
-      .map((c) => c.args[0]);
-    expect(alphas).toEqual([mapStyles.disconnectedAlpha, 1]);
+    const methods = calls.map((c) => c.method);
+    const alphas = calls.filter((c) => c.method === 'set:globalAlpha').map((c) => c.args[0]);
+    expect(alphas).toEqual([mapStyles.disconnectedAlpha]); // 0.5 만 set, 복원은 restore() 가 처리
+    expect(methods).toContain('save');
+    expect(methods).toContain('restore');
+    expect(methods.indexOf('save')).toBeLessThan(methods.indexOf('set:globalAlpha'));
+    expect(methods.lastIndexOf('restore')).toBeGreaterThan(methods.indexOf('set:globalAlpha'));
   });
   it("state='retired' → fill 이 retiredFill (textMuted), teamColour 무시", () => {
     const { ctx, calls } = makeMockCtx();
@@ -188,6 +192,23 @@ describe('drawMarker — state 분기 (Phase 7)', () => {
     });
     const dashCalls = calls.filter((c) => c.method === 'setLineDash').map((c) => c.args[0]);
     expect(dashCalls).toEqual([[3, 2], []]);
+  });
+
+  it('A1 회귀 — drawMarker 가 save/restore 로 ctx state 격리 (모든 state 에서)', () => {
+    for (const state of ['normal', 'disconnected', 'retired', 'pit-in-progress', 'pit-stopped'] as const) {
+      const { ctx, calls } = makeMockCtx();
+      drawMarker(ctx, {
+        position: [100, 200],
+        teamColour: '#ff0000',
+        driverNumber: 44,
+        nameAcronym: 'HAM',
+        showLabel: false,
+        state,
+      });
+      const methods = calls.map((c) => c.method);
+      expect(methods[0]).toBe('save');
+      expect(methods[methods.length - 1]).toBe('restore');
+    }
   });
 
   it("state='pit-stopped' → arc radius = markerSizeMin × pitStoppedScale / 2", () => {

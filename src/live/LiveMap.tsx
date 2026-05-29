@@ -35,11 +35,17 @@ import type {
 export type LiveMapDataSource = DataSource & {
   start(): void | Promise<void>;
   stop(): void;
+  /** B1: optional — replay-only. live source 는 wall-clock 시간이라 제어 불가. */
+  pause?(): void;
+  resume?(): void;
+  isPaused?(): boolean;
 };
 
 const DEFAULT_CANVAS_WIDTH = 800;
 const DEFAULT_CANVAS_HEIGHT = 600;
 const OPENF1_BASE = 'https://api.openf1.org';
+/** A3: asset fetch (track+pitlane+drivers+overlays) timeout — hang 방지. */
+const ASSET_FETCH_TIMEOUT_MS = 15_000;
 
 interface DriverMetaRow {
   teamColour: string;
@@ -80,7 +86,12 @@ export function LiveMap({
   const [assets, setAssets] = useState<LoadedAssets | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [reloadKey, setReloadKey] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  // B1: ds 가 pause() 를 지원하는지 — render 결정용. ref 만으론 re-render 안 트리거.
+  const [supportsPause, setSupportsPause] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  // B1: ds ref — toolbar 가 pause/resume 호출. renderer effect 안에서 set.
+  const dataSourceRef = useRef<LiveMapDataSource | null>(null);
   const { showLabel } = useMarkerLabel();
   const showLabelRef = useRef(showLabel);
   useEffect(() => {
@@ -103,22 +114,36 @@ export function LiveMap({
     setAssets(null);
     setError(null);
     const ctrl = new AbortController();
+    // A3: 15s 후 abort — 무한 "Loading track…" 방지. 정상 응답 시 cleanup 으로 cancel.
+    const timeoutId = setTimeout(() => {
+      ctrl.abort(new DOMException('Asset fetch timeout', 'TimeoutError'));
+    }, ASSET_FETCH_TIMEOUT_MS);
     const trackUrl = `/trackOutlines/${circuitKey}-${year}.json`;
     const pitlaneUrl = `/trackOutlines/pitlane_${circuitKey}-${year}.json`;
     const driversUrl = `${OPENF1_BASE}/v1/drivers?session_key=${sessionKey}`;
 
+    // dev server SPA fallback (`index.html`, status 200, text/html) 을 missing 으로 통합 처리 —
+    // 그대로 두면 r.json() 이 "Unexpected token '<'" 로 크래시. content-type 으로 sniff.
+    const isHtmlFallback = (r: Response) =>
+      (r.headers.get('content-type') ?? '').toLowerCase().includes('text/html');
+
     Promise.all([
-      fetcher(trackUrl, { signal: ctrl.signal }).then(
-        (r) =>
-          r.ok ? (r.json() as Promise<TrackOutlineJson>) : Promise.reject(new Error(`track HTTP ${r.status}`)),
-      ),
-      fetcher(pitlaneUrl, { signal: ctrl.signal }).then((r) =>
-        r.status === 404
-          ? null
-          : r.ok
-            ? (r.json() as Promise<PitlaneJsonBase>)
-            : Promise.reject(new Error(`pitlane HTTP ${r.status}`)),
-      ),
+      fetcher(trackUrl, { signal: ctrl.signal }).then((r) => {
+        if (r.status === 404 || isHtmlFallback(r)) {
+          return Promise.reject(
+            new Error(
+              `트랙 데이터 없음 (${trackUrl}) — \`npm run build:all:base\` 를 실행해 circuit ${circuitKey}/${year} 트랙 아웃라인을 생성하세요.`,
+            ),
+          );
+        }
+        if (!r.ok) return Promise.reject(new Error(`track HTTP ${r.status}`));
+        return r.json() as Promise<TrackOutlineJson>;
+      }),
+      fetcher(pitlaneUrl, { signal: ctrl.signal }).then((r) => {
+        if (r.status === 404 || isHtmlFallback(r)) return null;
+        if (!r.ok) return Promise.reject(new Error(`pitlane HTTP ${r.status}`));
+        return r.json() as Promise<PitlaneJsonBase>;
+      }),
       fetcher(driversUrl, { signal: ctrl.signal }).then(
         (r) =>
           r.ok
@@ -133,7 +158,10 @@ export function LiveMap({
       .then(([track, pitlane, driversList, sectors, drsZones, slmZones]) => {
         if (!track.openf1_transform) {
           setError(
-            'Track is missing openf1_transform — re-run extract-openf1-transform for this circuit.',
+            `이 트랙 (circuit ${circuitKey}/${year}) 의 OpenF1 좌표 매핑이 아직 준비되지 않았습니다. ` +
+              `터미널에서 \`npx tsx scripts/extract-openf1-transform.ts --key=${circuitKey} --year=${year}\` ` +
+              `또는 \`npm run build:all -- --key=${circuitKey} --year=${year}\` 를 실행하세요. ` +
+              `이게 끝나면 Retry 를 누르세요.`,
           );
           return;
         }
@@ -150,11 +178,21 @@ export function LiveMap({
         setAssets({ track, pitlane, drivers, sectors, drsZones, slmZones });
       })
       .catch((err: Error & { name?: string }) => {
+        if (err.name === 'TimeoutError') {
+          setError(
+            `자산 로드 시간 초과 (${ASSET_FETCH_TIMEOUT_MS / 1000}s) — 네트워크 확인 후 Retry 를 누르세요.`,
+          );
+          return;
+        }
         if (err.name === 'AbortError') return;
         setError(err.message ?? String(err));
-      });
+      })
+      .finally(() => clearTimeout(timeoutId));
 
-    return () => ctrl.abort();
+    return () => {
+      clearTimeout(timeoutId);
+      ctrl.abort();
+    };
   }, [sessionKey, circuitKey, year, reloadKey, fetcher]);
 
   // ── renderer mount ──────────────────────────────────────────────────
@@ -162,14 +200,30 @@ export function LiveMap({
     if (!assets || !canvasRef.current || !assets.track.openf1_transform) return;
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    if (!ctx) {
+      // A2: silent fallback 제거 — 브라우저가 2D context 미지원 시 사용자에 알림.
+      setError('이 브라우저는 Canvas 2D 를 지원하지 않습니다 — 다른 브라우저에서 다시 시도하세요.');
+      return;
+    }
+
+    // DPR (device pixel ratio) 스케일링 — 레티나에서 마커가 흐릿하게 보이는 문제 해결.
+    // canvas 내부 픽셀은 DPR 배수, CSS 크기는 logical (DEFAULT_CANVAS_WIDTH/HEIGHT).
+    // ctx.scale(dpr, dpr) 이후 모든 draw 는 logical 좌표로 호출 — viewport 도 logical 사이즈 기준.
+    const dpr = (typeof window !== 'undefined' && window.devicePixelRatio) || 1;
+    const logicalW = DEFAULT_CANVAS_WIDTH;
+    const logicalH = DEFAULT_CANVAS_HEIGHT;
+    if (canvas.width !== logicalW * dpr) canvas.width = logicalW * dpr;
+    if (canvas.height !== logicalH * dpr) canvas.height = logicalH * dpr;
+    canvas.style.width = `${logicalW}px`;
+    canvas.style.height = `${logicalH}px`;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     const polyline = assets.track.polyline.map((p) => [p[0], p[1]] as Point2D);
     const arcTable = [...assets.track.arc_length_table];
     const viewport = computeViewport({
       viewBox: assets.track.viewBox,
-      canvasWidth: canvas.width,
-      canvasHeight: canvas.height,
+      canvasWidth: logicalW,
+      canvasHeight: logicalH,
     });
     const buffer = new PerDriverBuffer();
     const transform = assets.track.openf1_transform;
@@ -195,10 +249,20 @@ export function LiveMap({
     const pitlanePolyline = assets.pitlane
       ? assets.pitlane.polyline.map((p) => [p[0], p[1]] as Point2D)
       : undefined;
+    // C2 — 정적 레이어 (트랙/오버레이) offscreen cache. 같은 DPR 비율로 buffer.
+    let staticLayerCanvas: HTMLCanvasElement | undefined;
+    if (typeof document !== 'undefined') {
+      staticLayerCanvas = document.createElement('canvas');
+      staticLayerCanvas.width = logicalW * dpr;
+      staticLayerCanvas.height = logicalH * dpr;
+      const offCtx = staticLayerCanvas.getContext('2d');
+      if (offCtx) offCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
     const renderer = new LiveMapRenderer({
       ctx,
-      canvasWidth: canvas.width,
-      canvasHeight: canvas.height,
+      canvasWidth: logicalW,
+      canvasHeight: logicalH,
       polyline,
       arcLengthTable: arcTable,
       totalLength: assets.track.total_length,
@@ -214,16 +278,34 @@ export function LiveMap({
       drsZones: assets.drsZones?.zones,
       drsEnabled: isReplay,
       slmZones: assets.slmZones?.zones,
+      staticLayerCanvas,
     });
 
+    dataSourceRef.current = ds;
+    setIsPaused(false);
+    setSupportsPause(typeof ds.pause === 'function');
     void ds.start();
     renderer.start();
 
     return () => {
       renderer.stop();
       ds.stop();
+      dataSourceRef.current = null;
+      setSupportsPause(false);
     };
   }, [assets, sessionKey, factory, fetchImpl, isReplay]);
+
+  const onTogglePause = useCallback(() => {
+    const ds = dataSourceRef.current;
+    if (!ds?.pause || !ds.resume || !ds.isPaused) return;
+    if (ds.isPaused()) {
+      ds.resume();
+      setIsPaused(false);
+    } else {
+      ds.pause();
+      setIsPaused(true);
+    }
+  }, []);
 
   const onRetry = useCallback(() => setReloadKey((k) => k + 1), []);
 
@@ -250,8 +332,11 @@ export function LiveMap({
       </main>
     );
   }
+  // B1: replay 일 때만 toolbar 노출 (ds.pause 존재로 판단 — LiveDataSource 는 안 가짐).
+  const showPauseButton = isReplay && supportsPause;
+
   return (
-    <main style={{ padding: '0', background: 'var(--color-bg-base)' }}>
+    <main style={{ padding: '0', background: 'var(--color-bg-base)', position: 'relative' }}>
       <canvas
         ref={canvasRef}
         width={DEFAULT_CANVAS_WIDTH}
@@ -265,6 +350,28 @@ export function LiveMap({
           style={{ position: 'absolute', top: '12px', left: '12px' }}
         >
           Back
+        </button>
+      )}
+      {showPauseButton && (
+        <button
+          onClick={onTogglePause}
+          data-testid="replay-pause-toggle"
+          aria-label={isPaused ? 'Resume' : 'Pause'}
+          style={{
+            position: 'absolute',
+            top: '12px',
+            right: '12px',
+            padding: '6px 14px',
+            background: 'rgba(15, 17, 22, 0.78)',
+            color: 'var(--color-text-primary)',
+            border: '1px solid rgba(255, 255, 255, 0.18)',
+            borderRadius: '6px',
+            cursor: 'pointer',
+            fontFamily: 'inherit',
+            fontSize: '13px',
+          }}
+        >
+          {isPaused ? '▶ Resume' : '⏸ Pause'}
         </button>
       )}
     </main>

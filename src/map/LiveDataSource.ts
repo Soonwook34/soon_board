@@ -22,6 +22,8 @@ import type {
   SamplePair,
   StreamState,
 } from '../shared/DataSource.js';
+import { LocationBuffer, parseDate } from './LocationBuffer.js';
+import { rateLimitedFetch } from './rateLimitedFetch.js';
 
 const DEFAULT_BASE_URL = 'https://api.openf1.org';
 const DEFAULT_DISPLAY_LAG_MS = 30_000;
@@ -31,7 +33,7 @@ const DEFAULT_HYDRATION_WINDOW_MS = 32_000; // 35s pre-now to 3s pre-now
 const DEFAULT_HYDRATION_END_LAG_MS = 3_000;
 const LAGGING_THRESHOLD_MS = 1_500;
 const STALLED_THRESHOLD_MS = 5_000;
-const SENTINEL_THRESHOLD = 50; // |x|+|y|+|z| < 임계 (raw OpenF1 좌표)
+// SENTINEL_THRESHOLD 는 LocationBuffer 내부에 통합 (D1) — 동일한 임계를 두 곳에 두지 않음.
 
 /**
  * live-streaming-strategy.md §3.1 cadence. 총 26 req/min.
@@ -65,6 +67,8 @@ export interface LiveDataSourceOptions {
   displayLagMs?: number;
   /** Ring buffer 깊이 (기본 60s = 30s 표시 + 30s margin). */
   ringBufferMs?: number;
+  /** Trim 호출 최소 간격 (ms). 기본 10s — 매 ingest 마다 trim 하지 않고 throttle. 0 = 매 ingest. */
+  trimMinIntervalMs?: number;
   /** Sleep injection (테스트). 기본 setTimeout. */
   sleep?: (ms: number) => Promise<void>;
   /**
@@ -78,11 +82,6 @@ export interface LiveDataSourceOptions {
 const defaultSleep = (ms: number): Promise<void> =>
   new Promise((r) => setTimeout(r, ms));
 
-interface InternalLocationSample extends LocationSample {
-  /** parse 한 ms (date.valueOf()) — binary search 비용 절감. */
-  dateMs: number;
-}
-
 export class LiveDataSource implements DataSource {
   private readonly baseUrl: string;
   private readonly fetchImpl: typeof fetch;
@@ -91,9 +90,11 @@ export class LiveDataSource implements DataSource {
   private readonly displayLagMs: number;
   private readonly ringBufferMs: number;
   private readonly hydrationTokenIntervalMs: number;
+  private readonly trimMinIntervalMs: number;
+  private lastTrimAtMs = 0;
 
-  /** 차량별 location sample (시간순). */
-  private readonly locationBuffer = new Map<number, InternalLocationSample[]>();
+  /** 차량별 location sample (시간순) — ReplayDataSource 와 공유 구현 (D1). */
+  private readonly locationBuffer = new LocationBuffer();
   /** 비-location endpoint 들의 raw record cache. dashboard 메서드는 stub 이라 미사용이지만
    *  cursor 진행 + 통계 위해 적재. */
   private readonly records = new Map<OpenF1EndpointName, OpenF1EndpointRecords[OpenF1EndpointName][]>();
@@ -117,6 +118,7 @@ export class LiveDataSource implements DataSource {
     this.sleep = opts.sleep ?? defaultSleep;
     this.displayLagMs = opts.displayLagMs ?? DEFAULT_DISPLAY_LAG_MS;
     this.ringBufferMs = opts.ringBufferMs ?? DEFAULT_RING_BUFFER_MS;
+    this.trimMinIntervalMs = opts.trimMinIntervalMs ?? 10_000;
     this.hydrationTokenIntervalMs =
       opts.hydrationTokenIntervalMs ?? DEFAULT_HYDRATION_TOKEN_INTERVAL_MS;
   }
@@ -154,22 +156,7 @@ export class LiveDataSource implements DataSource {
   }
 
   getSamplePair(driverNumber: number, t: Date): SamplePair {
-    const arr = this.locationBuffer.get(driverNumber);
-    if (!arr || arr.length === 0) return null;
-    const tMs = t.valueOf();
-    if (arr.length === 1) return { s1: toExternal(arr[0]), s2: null };
-    if (tMs < arr[0].dateMs) return { s1: toExternal(arr[0]), s2: null };
-    if (tMs >= arr[arr.length - 1].dateMs) {
-      return { s1: toExternal(arr[arr.length - 1]), s2: null };
-    }
-    let lo = 0;
-    let hi = arr.length - 1;
-    while (lo + 1 < hi) {
-      const mid = (lo + hi) >>> 1;
-      if (arr[mid].dateMs <= tMs) lo = mid;
-      else hi = mid;
-    }
-    return { s1: toExternal(arr[lo]), s2: toExternal(arr[lo + 1]) };
+    return this.locationBuffer.getSamplePair(driverNumber, t);
   }
 
   getStreamState(): StreamState {
@@ -266,7 +253,9 @@ export class LiveDataSource implements DataSource {
   private async runFetch(endpoint: OpenF1EndpointName, url: string): Promise<void> {
     let res: Response;
     try {
-      res = await this.fetchImpl(url);
+      // 429/5xx 시 Retry-After honor + exponential backoff. cadence 의 다음 tick 까지
+      // 막혀도 setInterval 이 따로 fire 하므로 무한 stack 위험 없음.
+      res = await rateLimitedFetch(this.fetchImpl, url, { sleep: this.opts.sleep });
     } catch (err) {
       console.warn(`[LiveDataSource] ${endpoint} fetch failed`, err);
       return;
@@ -287,25 +276,23 @@ export class LiveDataSource implements DataSource {
   private ingestLocation(raw: Array<Record<string, unknown>>): void {
     let maxDate: Date | null = null;
     for (const r of raw) {
-      const date = parseDate(r.date);
-      if (!date) continue;
-      const x = Number(r.x);
-      const y = Number(r.y);
-      const z = Number(r.z);
-      const drv = Number(r.driver_number);
-      if (!Number.isFinite(drv)) continue;
-      // plan §4.2 raw sentinel — drop silently.
-      if (Math.abs(x) + Math.abs(y) + Math.abs(z) < SENTINEL_THRESHOLD) continue;
-      const sample: InternalLocationSample = { date, dateMs: date.valueOf(), x, y, z };
-      this.insertLocation(drv, sample);
-      this.opts.onSample?.(drv, { date, x, y, z });
-      if (!maxDate || date.valueOf() > maxDate.valueOf()) maxDate = date;
+      const result = this.locationBuffer.ingestRaw(r);
+      if (!result) continue;
+      this.opts.onSample?.(result.driver, result.sample);
+      if (!maxDate || result.sample.date.valueOf() > maxDate.valueOf()) maxDate = result.sample.date;
     }
     if (maxDate) {
       this.cursors.set('location', maxDate);
       this.advanceNewest(maxDate);
     }
-    this.trimRingBuffer();
+    // C3: trim 호출 throttle — 매 ingest (20 driver × 6/min = 120/min) → 매 10s 로 감소.
+    // ring buffer upper bound 가 10s 만큼 늘어나지만 (60s+10s × 80 sample/s = ~5600), 기존
+    // memory invariant ≤ 10000 안에 충분히 들어옴.
+    const nowMs = this.now().valueOf();
+    if (nowMs - this.lastTrimAtMs >= this.trimMinIntervalMs) {
+      this.lastTrimAtMs = nowMs;
+      this.trimRingBuffer();
+    }
   }
 
   private ingestGeneric(
@@ -328,27 +315,6 @@ export class LiveDataSource implements DataSource {
     }
   }
 
-  private insertLocation(drv: number, sample: InternalLocationSample): void {
-    const arr = this.locationBuffer.get(drv);
-    if (!arr) {
-      this.locationBuffer.set(drv, [sample]);
-      return;
-    }
-    const last = arr[arr.length - 1];
-    if (sample.dateMs >= last.dateMs) {
-      arr.push(sample);
-      return;
-    }
-    let lo = 0;
-    let hi = arr.length;
-    while (lo < hi) {
-      const mid = (lo + hi) >>> 1;
-      if (arr[mid].dateMs <= sample.dateMs) lo = mid + 1;
-      else hi = mid;
-    }
-    arr.splice(lo, 0, sample);
-  }
-
   private advanceNewest(date: Date): void {
     if (!this.newestDate || date.valueOf() > this.newestDate.valueOf()) {
       this.newestDate = date;
@@ -362,12 +328,7 @@ export class LiveDataSource implements DataSource {
   private trimRingBuffer(): void {
     if (!this.newestDate) return;
     const cutoff = this.newestDate.valueOf() - this.ringBufferMs;
-    for (const arr of this.locationBuffer.values()) {
-      if (arr.length <= 1) continue;
-      let dropEnd = 0;
-      while (dropEnd < arr.length - 1 && arr[dropEnd].dateMs < cutoff) dropEnd++;
-      if (dropEnd > 0) arr.splice(0, dropEnd);
-    }
+    this.locationBuffer.trimBefore(cutoff);
   }
 
   private buildUrl(endpoint: OpenF1EndpointName, query: Record<string, string>): string {
@@ -381,13 +342,3 @@ export class LiveDataSource implements DataSource {
   }
 }
 
-function parseDate(v: unknown): Date | null {
-  if (typeof v !== 'string') return null;
-  const d = new Date(v);
-  if (Number.isNaN(d.valueOf())) return null;
-  return d;
-}
-
-function toExternal(s: InternalLocationSample): LocationSample {
-  return { date: s.date, x: s.x, y: s.y, z: s.z };
-}

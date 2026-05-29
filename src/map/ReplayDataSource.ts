@@ -23,11 +23,14 @@ import type {
   SamplePair,
   StreamState,
 } from '../shared/DataSource.js';
+import { LocationBuffer, parseDate } from './LocationBuffer.js';
+import { rateLimitedFetch } from './rateLimitedFetch.js';
 
 const DEFAULT_BASE_URL = 'https://api.openf1.org';
 const DEFAULT_WINDOW_MS = 60_000;
 const DEFAULT_LOOKAHEAD_BASE_MS = 60_000;
-const SENTINEL_THRESHOLD = 50;
+// OpenF1 burst limit 회피 — LiveDataSource hydration 과 동일 (3 req/s).
+const DEFAULT_REQUEST_SPREAD_MS = 334;
 
 /** replay-strategy.md §3.1 — session_key 만으로 1회 fetch (full session). */
 export const SPARSE_ENDPOINTS: readonly OpenF1EndpointName[] = [
@@ -56,10 +59,21 @@ export interface ReplayDataSourceOptions {
   fetchImpl?: typeof fetch;
   windowMs?: number;
   lookaheadBaseMs?: number;
-}
-
-interface InternalLocationSample extends LocationSample {
-  dateMs: number;
+  /**
+   * playback_clock 자동 증가 주기 (ms). 0 = 비활성 (테스트). 기본 100ms (renderer 의 RAF 와 독립).
+   * replay-strategy §4.1: playback_clock += dt × speed. 본 옵션이 그 dt 의 wall-clock 주기.
+   */
+  clockTickIntervalMs?: number;
+  /** burst 분산 간격 (ms). 기본 334 (≈3 req/s, OpenF1 burst limit 회피). 0 = 즉시 모두. */
+  requestSpreadMs?: number;
+  /** sleep injection (테스트). 기본 setTimeout. backoff/spread 둘 다에 사용. */
+  sleep?: (ms: number) => Promise<void>;
+  /**
+   * UI bridge 가 raw LocationSample → projected DriverSample 변환 후 PerDriverBuffer 에 push 하는 hook.
+   * LiveDataSource.onSample 과 동일 시맨틱 — dense location 윈도우 fetch 시 sample 마다 1회 호출.
+   * 같은 sample 이 중복 호출되지 않도록 호출 시점은 insertLocation 직후 1회로 한정.
+   */
+  onSample?: (driverNumber: number, sample: LocationSample) => void;
 }
 
 export class ReplayDataSource implements DataSource {
@@ -73,13 +87,20 @@ export class ReplayDataSource implements DataSource {
   private readonly cache = new Map<string, OpenF1EndpointRecords[OpenF1EndpointName][]>();
   /** in-flight dedup. 같은 key 의 동시 호출은 단일 Promise 로 합침 (replay-strategy §5.2). */
   private readonly inflight = new Map<string, Promise<void>>();
-  /** 차량별 location sample (시간순) — dense location window 통합. */
-  private readonly locationByDriver = new Map<number, InternalLocationSample[]>();
+  /** 차량별 location sample (시간순) — LiveDataSource 와 공유 구현 (D1). */
+  private readonly locationBuffer = new LocationBuffer();
 
   private playbackClock: Date;
   private speed = 1;
   private state: StreamState = 'buffering';
+  private paused = false;
   private readonly listeners = new Set<(t: Date) => void>();
+  /** 자동 clock 증가 timer (start 이후 활성). stop()/pause() 에서 정리. */
+  private tickTimer: ReturnType<typeof setInterval> | null = null;
+  /** advanceClock 의 wall-clock 기준 — 실 경과 × speed 로 playbackClock 진행. */
+  private lastTickWallMs = 0;
+  /** lookahead 재발사 throttle — 매 tick 마다 호출하면 cache hit 만 누적되지만 약간 비효율. */
+  private lastLookaheadAt = 0;
 
   constructor(private readonly opts: ReplayDataSourceOptions) {
     this.baseUrl = opts.baseUrl ?? DEFAULT_BASE_URL;
@@ -92,11 +113,93 @@ export class ReplayDataSource implements DataSource {
 
   // ── lifecycle ───────────────────────────────────────────────────────
 
-  /** sparse 6개 + 첫 lookahead 윈도우들 prefetch. */
+  /**
+   * sparse 6개 + 첫 lookahead 윈도우들 prefetch + playback_clock 자동 증가 시작.
+   * 시작 burst 분산 — 모두 동시 발사하면 OpenF1 burst limit (~3-5 req/s) 에서 429.
+   * sparse 6개를 requestSpreadMs 간격으로 launch (각자는 병렬 진행) → 평균 3 req/s.
+   */
   async start(): Promise<void> {
-    await Promise.all(SPARSE_ENDPOINTS.map((e) => this.fetchSparse(e)));
+    const spread = this.opts.requestSpreadMs ?? DEFAULT_REQUEST_SPREAD_MS;
+    const sleep = this.opts.sleep ?? ((ms) => new Promise<void>((r) => setTimeout(r, ms)));
+    const sparsePromises: Promise<void>[] = [];
+    for (let i = 0; i < SPARSE_ENDPOINTS.length; i++) {
+      if (i > 0 && spread > 0) await sleep(spread);
+      sparsePromises.push(this.fetchSparse(SPARSE_ENDPOINTS[i]));
+    }
+    await Promise.all(sparsePromises);
     await this.ensureLookahead();
     this.state = 'live';
+    this.startClockTick();
+  }
+
+  /**
+   * LiveMap unmount 시 호출 — tick timer + listener 정리 + state 표시.
+   * pull-based fetch 의 in-flight Promise 는 자연 resolve 되므로 별도 abort 불필요.
+   */
+  stop(): void {
+    if (this.tickTimer !== null) {
+      clearInterval(this.tickTimer);
+      this.tickTimer = null;
+    }
+    this.listeners.clear();
+    this.state = 'buffering';
+  }
+
+  /**
+   * B1: pause — tick timer 중단, playbackClock 동결.
+   * 이미 fetch 된 데이터로 마커는 그 자리에 멈춤. API 부하 추가 없음 (lookahead 도 멈춤).
+   */
+  pause(): void {
+    if (this.tickTimer !== null) {
+      clearInterval(this.tickTimer);
+      this.tickTimer = null;
+    }
+    this.paused = true;
+  }
+
+  /** B1: resume — tick timer 재시작. lastTickWallMs 를 now 로 재초기화해 시간 jump 방지. */
+  resume(): void {
+    if (!this.paused) return;
+    this.paused = false;
+    this.startClockTick();
+  }
+
+  /** B1: pause 상태 query (LiveMap toolbar UI 가 토글 표시 결정). */
+  isPaused(): boolean {
+    return this.paused;
+  }
+
+  /** start() 직후 호출 — 100ms 주기로 playback_clock 을 실 경과 × speed 만큼 진행. */
+  private startClockTick(): void {
+    const intervalMs = this.opts.clockTickIntervalMs ?? 100;
+    if (intervalMs <= 0) return;
+    this.lastTickWallMs = Date.now();
+    this.tickTimer = setInterval(() => this.advanceClock(), intervalMs);
+    // node 에서 process exit 을 막지 않도록 unref (browser timer 에는 없음 → optional chain).
+    const t = this.tickTimer as unknown as { unref?: () => void };
+    t.unref?.();
+  }
+
+  /**
+   * tick — wall-clock 으로 측정한 실 경과 × speed 만큼 playback_clock 증가.
+   * sessionDateEnd 를 넘으면 거기서 멈춤 + state='live' 유지 (재생 끝).
+   * window 경계 진입 시 ensureLookahead 호출 (매 tick 마다 호출하면 비효율).
+   */
+  private advanceClock(): void {
+    const now = Date.now();
+    const dtWall = now - this.lastTickWallMs;
+    this.lastTickWallMs = now;
+    if (dtWall <= 0) return;
+    const advanced = this.playbackClock.valueOf() + dtWall * this.speed;
+    const endMs = this.opts.sessionDateEnd?.valueOf() ?? Number.POSITIVE_INFINITY;
+    const clamped = Math.min(advanced, endMs);
+    this.playbackClock = new Date(clamped);
+    // lookahead: window 절반 주기로 throttle. cache hit 이면 즉시 resolve 라 부담 없음.
+    if (now - this.lastLookaheadAt > this.windowMs / 2) {
+      this.lastLookaheadAt = now;
+      void this.ensureLookahead();
+    }
+    for (const cb of this.listeners) cb(this.playbackClock);
   }
 
   // ── playback control ────────────────────────────────────────────────
@@ -124,22 +227,7 @@ export class ReplayDataSource implements DataSource {
   }
 
   getSamplePair(driverNumber: number, t: Date): SamplePair {
-    const arr = this.locationByDriver.get(driverNumber);
-    if (!arr || arr.length === 0) return null;
-    const tMs = t.valueOf();
-    if (arr.length === 1) return { s1: toExternal(arr[0]), s2: null };
-    if (tMs < arr[0].dateMs) return { s1: toExternal(arr[0]), s2: null };
-    if (tMs >= arr[arr.length - 1].dateMs) {
-      return { s1: toExternal(arr[arr.length - 1]), s2: null };
-    }
-    let lo = 0;
-    let hi = arr.length - 1;
-    while (lo + 1 < hi) {
-      const mid = (lo + hi) >>> 1;
-      if (arr[mid].dateMs <= tMs) lo = mid;
-      else hi = mid;
-    }
-    return { s1: toExternal(arr[lo]), s2: toExternal(arr[lo + 1]) };
+    return this.locationBuffer.getSamplePair(driverNumber, t);
   }
 
   getStreamState(): StreamState {
@@ -258,7 +346,8 @@ export class ReplayDataSource implements DataSource {
   ): Promise<void> {
     let res: Response;
     try {
-      res = await this.fetchImpl(url);
+      // 429/5xx 시 rateLimitedFetch 가 Retry-After honor + exponential backoff 자동 처리.
+      res = await rateLimitedFetch(this.fetchImpl, url, { sleep: this.opts.sleep });
     } catch (err) {
       console.warn(`[ReplayDataSource] ${endpoint} fetch failed`, err);
       return;
@@ -280,48 +369,10 @@ export class ReplayDataSource implements DataSource {
 
   private ingestLocation(raw: Array<Record<string, unknown>>): void {
     for (const r of raw) {
-      const date = parseDate(r.date);
-      if (!date) continue;
-      const x = Number(r.x);
-      const y = Number(r.y);
-      const z = Number(r.z);
-      const drv = Number(r.driver_number);
-      if (!Number.isFinite(drv)) continue;
-      // plan §4.2 sentinel.
-      if (Math.abs(x) + Math.abs(y) + Math.abs(z) < SENTINEL_THRESHOLD) continue;
-      this.insertLocation(drv, { date, dateMs: date.valueOf(), x, y, z });
+      const result = this.locationBuffer.ingestRaw(r);
+      if (!result) continue;
+      // LiveDataSource 와 동일 시맨틱 — UI bridge 가 PerDriverBuffer 에 push 하도록 알림.
+      this.opts.onSample?.(result.driver, result.sample);
     }
   }
-
-  private insertLocation(drv: number, sample: InternalLocationSample): void {
-    const arr = this.locationByDriver.get(drv);
-    if (!arr) {
-      this.locationByDriver.set(drv, [sample]);
-      return;
-    }
-    const last = arr[arr.length - 1];
-    if (sample.dateMs >= last.dateMs) {
-      arr.push(sample);
-      return;
-    }
-    let lo = 0;
-    let hi = arr.length;
-    while (lo < hi) {
-      const mid = (lo + hi) >>> 1;
-      if (arr[mid].dateMs <= sample.dateMs) lo = mid + 1;
-      else hi = mid;
-    }
-    arr.splice(lo, 0, sample);
-  }
-}
-
-function parseDate(v: unknown): Date | null {
-  if (typeof v !== 'string') return null;
-  const d = new Date(v);
-  if (Number.isNaN(d.valueOf())) return null;
-  return d;
-}
-
-function toExternal(s: InternalLocationSample): LocationSample {
-  return { date: s.date, x: s.x, y: s.y, z: s.z };
 }

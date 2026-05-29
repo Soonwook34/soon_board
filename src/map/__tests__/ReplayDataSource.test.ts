@@ -36,13 +36,20 @@ function makeDs(overrides: {
   fetchImpl?: typeof fetch;
   windowMs?: number;
   lookaheadBaseMs?: number;
+  clockTickIntervalMs?: number;
+  sessionDateEnd?: Date;
 } = {}) {
   return new ReplayDataSource({
     sessionKey: SESSION_KEY,
     sessionDateStart: SESSION_START,
+    sessionDateEnd: overrides.sessionDateEnd,
     fetchImpl: overrides.fetchImpl,
     windowMs: overrides.windowMs,
     lookaheadBaseMs: overrides.lookaheadBaseMs,
+    // 기본은 0 — 기존 단위 테스트가 자동 tick 으로 영향받지 않게.
+    clockTickIntervalMs: overrides.clockTickIntervalMs ?? 0,
+    // 기본은 0 — 기존 단위 테스트가 burst spread sleep 으로 느려지지 않게.
+    requestSpreadMs: 0,
   });
 }
 
@@ -306,5 +313,114 @@ describe('ReplayDataSource — dashboard stub', () => {
     expect(() => ds.getCompletedLapsBefore(44, t)).toThrow();
     expect(() => ds.getStintForLap(44, 1)).toThrow();
     expect(() => ds.getAggregateBefore('fastest_lap', t)).toThrow();
+  });
+});
+
+describe('ReplayDataSource — playback_clock 자동 진행 (replay-strategy §4.1)', () => {
+  it('clockTickIntervalMs > 0 → start() 후 시간이 흐르면 playbackClock 이 전진하고 listener 가 호출됨', async () => {
+    const fetchImpl = vi.fn(async () => jsonResponse([]));
+    const ds = makeDs({
+      fetchImpl: fetchImpl as unknown as typeof fetch,
+      clockTickIntervalMs: 20,
+    });
+    const observed: number[] = [];
+    ds.onDisplayTimeChange((t) => observed.push(t.valueOf()));
+    const initial = ds.getDisplayTime().valueOf();
+    await ds.start();
+    await new Promise((r) => setTimeout(r, 80)); // ~3-4 tick
+    ds.stop();
+    const final = ds.getDisplayTime().valueOf();
+    expect(final).toBeGreaterThan(initial);
+    expect(observed.length).toBeGreaterThan(0);
+    // 마지막 listener 값이 최종 playbackClock 과 일치
+    expect(observed[observed.length - 1]).toBe(final);
+  });
+
+  it('sessionDateEnd 를 넘지 않게 clamp', async () => {
+    const fetchImpl = vi.fn(async () => jsonResponse([]));
+    // 100ms 짧은 세션 → tick 으로 즉시 끝에 도달.
+    const sessionEnd = new Date(SESSION_START.valueOf() + 100);
+    const ds = makeDs({
+      fetchImpl: fetchImpl as unknown as typeof fetch,
+      clockTickIntervalMs: 20,
+      sessionDateEnd: sessionEnd,
+    });
+    await ds.start();
+    await new Promise((r) => setTimeout(r, 200));
+    ds.stop();
+    expect(ds.getDisplayTime().valueOf()).toBeLessThanOrEqual(sessionEnd.valueOf());
+  });
+
+  it('stop() 후 clock 이 더 이상 전진하지 않음', async () => {
+    const fetchImpl = vi.fn(async () => jsonResponse([]));
+    const ds = makeDs({
+      fetchImpl: fetchImpl as unknown as typeof fetch,
+      clockTickIntervalMs: 20,
+    });
+    await ds.start();
+    await new Promise((r) => setTimeout(r, 60));
+    ds.stop();
+    const afterStop = ds.getDisplayTime().valueOf();
+    await new Promise((r) => setTimeout(r, 60));
+    expect(ds.getDisplayTime().valueOf()).toBe(afterStop);
+  });
+
+  it('start() burst 가 requestSpreadMs 간격으로 분산 — OpenF1 burst limit 회피', async () => {
+    const fetchImpl = vi.fn(async () => jsonResponse([]));
+    const sleepCalls: number[] = [];
+    const ds = new ReplayDataSource({
+      sessionKey: SESSION_KEY,
+      sessionDateStart: SESSION_START,
+      fetchImpl: fetchImpl as unknown as typeof fetch,
+      clockTickIntervalMs: 0,
+      requestSpreadMs: 100,
+      sleep: async (ms) => {
+        sleepCalls.push(ms);
+      },
+    });
+    await ds.start();
+    // sparse 6개 → 5번 spread sleep (i=0 은 sleep 안 함)
+    expect(sleepCalls.filter((ms) => ms === 100).length).toBeGreaterThanOrEqual(5);
+  });
+
+  it('B1 pause() — clock 전진 멈춤, isPaused=true', async () => {
+    const fetchImpl = vi.fn(async () => jsonResponse([]));
+    const ds = makeDs({
+      fetchImpl: fetchImpl as unknown as typeof fetch,
+      clockTickIntervalMs: 20,
+    });
+    await ds.start();
+    await new Promise((r) => setTimeout(r, 60));
+    ds.pause();
+    expect(ds.isPaused()).toBe(true);
+    const afterPause = ds.getDisplayTime().valueOf();
+    await new Promise((r) => setTimeout(r, 60));
+    expect(ds.getDisplayTime().valueOf()).toBe(afterPause);
+  });
+
+  it('B1 resume() — pause 후 resume 시 clock 다시 진행', async () => {
+    const fetchImpl = vi.fn(async () => jsonResponse([]));
+    const ds = makeDs({
+      fetchImpl: fetchImpl as unknown as typeof fetch,
+      clockTickIntervalMs: 20,
+    });
+    await ds.start();
+    await new Promise((r) => setTimeout(r, 60));
+    ds.pause();
+    const afterPause = ds.getDisplayTime().valueOf();
+    ds.resume();
+    expect(ds.isPaused()).toBe(false);
+    await new Promise((r) => setTimeout(r, 60));
+    expect(ds.getDisplayTime().valueOf()).toBeGreaterThan(afterPause);
+    ds.stop();
+  });
+
+  it('clockTickIntervalMs=0 (default in test helper) → start() 후에도 clock 전진 없음', async () => {
+    const fetchImpl = vi.fn(async () => jsonResponse([]));
+    const ds = makeDs({ fetchImpl: fetchImpl as unknown as typeof fetch });
+    const initial = ds.getDisplayTime().valueOf();
+    await ds.start();
+    await new Promise((r) => setTimeout(r, 60));
+    expect(ds.getDisplayTime().valueOf()).toBe(initial);
   });
 });

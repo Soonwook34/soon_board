@@ -46,7 +46,9 @@ export function TrackMapPreview({ circuitKey, year, size, fetchImpl }: TrackMapP
     f(url)
       .then(async (res) => {
         if (cancelled) return;
-        if (res.status === 404) {
+        // dev server SPA fallback (text/html) 을 missing 으로 통합 — JSON parse 크래시 방지.
+        const isHtml = (res.headers.get('content-type') ?? '').toLowerCase().includes('text/html');
+        if (res.status === 404 || isHtml) {
           setState({ kind: 'missing' });
           return;
         }
@@ -112,7 +114,12 @@ export function TrackMapPreview({ circuitKey, year, size, fetchImpl }: TrackMapP
   if (state.kind === 'missing') {
     return (
       <div style={containerStyle} data-testid="trackmap-missing">
-        이 세션의 트랙 데이터가 아직 준비되지 않았습니다.
+        이 세션의 트랙 데이터가 아직 준비되지 않았습니다 (circuit {circuitKey}/{year}).
+        <br />
+        <code style={{ marginTop: '6px', display: 'inline-block', opacity: 0.8 }}>
+          npm run build:all:base
+        </code>{' '}
+        로 생성하세요.
       </div>
     );
   }

@@ -298,8 +298,11 @@ describe('LiveMap — 에러 처리', () => {
         dataSourceFactory={factory}
       />,
     );
+    // 메시지는 실행 가능한 build 명령 + circuit/year 를 포함해 사용자가 바로 조치 가능.
     await waitFor(() =>
-      expect(screen.getByText(/missing openf1_transform/)).toBeTruthy(),
+      expect(
+        screen.getByText(/OpenF1 좌표 매핑.*아직 준비.*extract-openf1-transform/s),
+      ).toBeTruthy(),
     );
   });
 

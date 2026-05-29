@@ -43,6 +43,10 @@ let indexInflight: Promise<SeasonsIndex> | null = null;
 const seasonCache = new Map<number, SeasonData>();
 const seasonInflight = new Map<number, Promise<SeasonData>>();
 const listeners = new Set<() => void>();
+// useSyncExternalStore 호환을 위해 cache 변경 시점에만 새 배열 발행 — getter 가 매번 새 배열을
+// 만들면 React 가 무한 리렌더로 인식한다.
+let cachedAllSeasons: SeasonData[] = [];
+let allSeasonsDirty = false;
 
 export function configureCatalogStore(custom: CatalogStoreOptions): void {
   opts = { ...opts, ...custom } as Required<CatalogStoreOptions>;
@@ -54,6 +58,16 @@ export function getCatalogIndex(): SeasonsIndex | null {
 
 export function getSeason(year: number): SeasonData | null {
   return seasonCache.get(year) ?? null;
+}
+
+/** 현재 메모리에 적재된 모든 시즌 — replay 가 다년도 session_key 검색 시 사용.
+ *  반환 reference 는 cache 변경 시점에만 바뀐다 (useSyncExternalStore 호환). */
+export function getAllSeasons(): SeasonData[] {
+  if (allSeasonsDirty) {
+    cachedAllSeasons = Array.from(seasonCache.values());
+    allSeasonsDirty = false;
+  }
+  return cachedAllSeasons;
 }
 
 export async function loadCatalogIndex(): Promise<SeasonsIndex> {
@@ -149,6 +163,7 @@ export function subscribeCatalog(listener: () => void): () => void {
 }
 
 function notify(): void {
+  allSeasonsDirty = true;
   for (const l of listeners) l();
 }
 
@@ -158,5 +173,7 @@ export function _resetCatalogStore(): void {
   seasonCache.clear();
   seasonInflight.clear();
   listeners.clear();
+  cachedAllSeasons = [];
+  allSeasonsDirty = false;
   opts = makeDefaultOpts();
 }
