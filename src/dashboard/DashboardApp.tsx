@@ -1,11 +1,16 @@
-// dashboard §1.1/§6 — 최상위 레이아웃 (CSS Grid). 단계 4 범위: ① 헤더 / ② 진행률 / ④ Race Control /
-// ⑨ 날씨 + ③ 맵 슬롯(prop) + ⑤⑥⑦⑧ placeholder(단계 5-7). DataSourceProvider 안에서 렌더 전제.
+// dashboard §1.1/§6 — 최상위 레이아웃 (CSS Grid, Hybrid B).
+// ① 헤더(전체폭) / ② 진행률 + ④ Race Control 행 / ③ 맵 슬롯(prop) + 우측열 ⑤⑥⑦(세로 stack, 스크롤) /
+// 하단 ⑧ 빠른 랩 배지 + ⑨ 날씨. DataSourceProvider + DriversProvider 안에서 렌더 전제(자체 provider 미포함).
 
 import type { ReactNode } from 'react';
 import { SessionHeader, type DashboardMode } from './panels/SessionHeader';
 import { SessionProgress } from './panels/SessionProgress';
 import { RaceControlBanner } from './panels/RaceControlBanner';
 import { WeatherMini } from './panels/WeatherMini';
+import { Leaderboard } from './panels/Leaderboard';
+import { TyreStrategy } from './panels/TyreStrategy';
+import { EventTicker } from './panels/EventTicker';
+import { FastestLapBadges } from './panels/FastestLapBadges';
 import { dashboardColors } from './shared/dashboardStyles';
 import type { MeetingData, SessionData } from '../shared/seasonData';
 
@@ -16,29 +21,6 @@ export interface DashboardAppProps {
   mode: DashboardMode;
   /** 임베드되는 라이브 맵 ③ (live-map-implementation.md). 미지정 시 placeholder. */
   map?: ReactNode;
-}
-
-function Placeholder({ label, area }: { label: string; area: string }) {
-  return (
-    <div
-      data-region={area}
-      style={{
-        gridArea: area,
-        border: `1px dashed ${dashboardColors.border}`,
-        borderRadius: '8px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: dashboardColors.textMuted,
-        fontSize: '12px',
-        minHeight: '60px',
-        textAlign: 'center',
-        padding: '8px',
-      }}
-    >
-      {label}
-    </div>
-  );
 }
 
 export function DashboardApp({ meeting, session, year, mode, map }: DashboardAppProps) {
@@ -89,8 +71,26 @@ export function DashboardApp({ meeting, session, year, mode, map }: DashboardApp
           </div>
         )}
       </div>
-      <Placeholder label="리더보드 ⑤ · 타이어 ⑥ · 이벤트 티커 ⑦ (단계 5-7)" area="s" />
-      <Placeholder label="빠른 랩 배지 ⑧ (단계 7)" area="b" />
+      {/* 우측열 — ⑤⑥⑦ 세로 stack. 정보량이 많아 내부 세로 스크롤 (§1.3). 정확한 1280×800 무스크롤
+          튜닝(인수1)은 dev-server 시각 게이트에서. */}
+      <div
+        style={{
+          gridArea: 's',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '12px',
+          maxHeight: 'calc(100vh - 160px)',
+          overflowY: 'auto',
+          minHeight: 0,
+        }}
+      >
+        <Leaderboard />
+        <TyreStrategy />
+        <EventTicker />
+      </div>
+      <div style={{ gridArea: 'b' }}>
+        <FastestLapBadges />
+      </div>
       <div style={{ gridArea: 'w' }}>
         <WeatherMini />
       </div>

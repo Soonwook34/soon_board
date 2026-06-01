@@ -8,7 +8,7 @@
 //
 // dataSourceFactory + fetchImpl 은 테스트 seam — production 은 default 사용.
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type MutableRefObject } from 'react';
 import { LiveDataSource, type LiveDataSourceOptions } from '../map/LiveDataSource.js';
 import { LiveMapRenderer } from '../map/LiveMapRenderer.js';
 import { PerDriverBuffer } from '../map/PerDriverBuffer.js';
@@ -19,7 +19,7 @@ import { useMarkerLabel } from '../map/markerLabelToggle.js';
 import { loadSectorBoundaries } from '../map/sectorBoundaries.js';
 import { loadDrsZones } from '../map/drsZones.js';
 import { loadSlmZones } from '../map/slmZones.js';
-import type { DataSource } from '../shared/DataSource.js';
+import type { DataSource, LocationSample } from '../shared/DataSource.js';
 import { openF1Client, type OpenF1Client } from '../shared/openf1Client.js';
 import type {
   DrsZonesJsonBase,
@@ -72,6 +72,17 @@ export interface LiveMapProps {
   client?: OpenF1Client;
   /** 테스트 seam — DataSource constructor override. default new LiveDataSource(opts). */
   dataSourceFactory?: (opts: LiveDataSourceOptions) => LiveMapDataSource;
+  /**
+   * §5 — 화면이 소유한 단일 DataSource 인스턴스 (맵 + 대시보드 패널 공유).
+   * 제공 시 factory 대신 이 인스턴스를 사용. lifecycle(start/stop)은 여전히 LiveMap 이 소유.
+   */
+  dataSource?: LiveMapDataSource;
+  /**
+   * §5 — dataSource 제공 시, 화면이 만든 ds 의 onSample 이 위임하는 ref.
+   * LiveMap 이 에셋 로드 후 raw→투영 함수를 여기 등록(start 직전)하고 unmount 시 해제한다.
+   * (투영은 에셋(transform/polyline)에 의존하므로 ds 생성 시점엔 만들 수 없어 ref 로 늦게 주입.)
+   */
+  onSampleRef?: MutableRefObject<((driverNumber: number, sample: LocationSample) => void) | null>;
   /** Phase 10 게이트 — true 시 DRS zone 렌더링 (ReplayScreen 만). default false. */
   isReplay?: boolean;
 }
@@ -84,6 +95,8 @@ export function LiveMap({
   fetchImpl,
   client = openF1Client,
   dataSourceFactory,
+  dataSource,
+  onSampleRef,
   isReplay = false,
 }: LiveMapProps) {
   const [assets, setAssets] = useState<LoadedAssets | null>(null);
@@ -237,22 +250,23 @@ export function LiveMap({
     const buffer = new PerDriverBuffer();
     const transform = assets.track.openf1_transform;
 
-    const ds = factory({
-      sessionKey,
-      // LiveDataSource 의 OpenF1 fetch 는 client 에 위임 (drivers fetch 와 동일 client).
-      // production 은 싱글톤, 테스트는 prop 으로 주입된 mock client 를 공유.
-      client,
-      onSample: (driver, sample) => {
-        const [x, y] = applyOpenF1Transform(sample.x, sample.y, transform);
-        const proj = projectToPolyline([x, y], polyline, arcTable);
-        buffer.push(driver, {
-          date: sample.date.valueOf(),
-          rawXY: [x, y],
-          s: proj.s,
-          n: proj.n,
-        });
-      },
-    });
+    // raw LocationSample → 투영 → PerDriverBuffer push. 맵 렌더러가 소비. 에셋(transform/polyline)에 의존.
+    const pushSample = (driver: number, sample: LocationSample): void => {
+      const [x, y] = applyOpenF1Transform(sample.x, sample.y, transform);
+      const proj = projectToPolyline([x, y], polyline, arcTable);
+      buffer.push(driver, {
+        date: sample.date.valueOf(),
+        rawXY: [x, y],
+        s: proj.s,
+        n: proj.n,
+      });
+    };
+
+    // §5: 화면이 ds 를 소유하면 그 인스턴스를 쓰고 투영은 onSampleRef 로 늦게 등록(생성자 onSample 이
+    // 이 ref 로 위임). 미제공이면 기존 factory 경로 — onSample 을 생성자에 직접 주입.
+    // LiveDataSource 의 OpenF1 fetch 는 client 에 위임 (drivers fetch 와 동일 client).
+    const ds = dataSource ?? factory({ sessionKey, client, onSample: pushSample });
+    if (dataSource && onSampleRef) onSampleRef.current = pushSample;
 
     const pitlanePolyline = assets.pitlane
       ? assets.pitlane.polyline.map((p) => [p[0], p[1]] as Point2D)
@@ -299,9 +313,10 @@ export function LiveMap({
       renderer.stop();
       ds.stop();
       dataSourceRef.current = null;
+      if (dataSource && onSampleRef) onSampleRef.current = null;
       setSupportsPause(false);
     };
-  }, [assets, sessionKey, factory, client, isReplay]);
+  }, [assets, sessionKey, factory, client, isReplay, dataSource, onSampleRef]);
 
   const onTogglePause = useCallback(() => {
     const ds = dataSourceRef.current;

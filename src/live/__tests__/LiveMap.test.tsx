@@ -15,12 +15,13 @@
 
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { LiveMap } from '../LiveMap';
+import { LiveMap, type LiveMapDataSource } from '../LiveMap';
 import {
   createMockOpenF1Client,
   type MockRoute,
 } from '../../shared/__tests__/createMockOpenF1Client.js';
 import type { LiveDataSource, LiveDataSourceOptions } from '../../map/LiveDataSource';
+import type { LocationSample } from '../../shared/DataSource';
 import type {
   DrsZonesJsonBase,
   PitlaneJsonBase,
@@ -554,5 +555,79 @@ describe('LiveMap — onBack 버튼', () => {
     await waitFor(() => expect(screen.queryByTestId('live-map-canvas')).toBeTruthy());
     fireEvent.click(screen.getByRole('button', { name: 'Back' }));
     expect(onBack).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('LiveMap — 외부 dataSource (§5 화면 소유)', () => {
+  // 화면이 ds 를 소유하는 경로: factory 대신 인스턴스를 받고, 맵 투영은 onSampleRef 로 늦게 등록.
+  function makeInstanceStub() {
+    const stub = {
+      startCalls: 0,
+      stopCalls: 0,
+      start: async () => {
+        stub.startCalls++;
+      },
+      stop: () => {
+        stub.stopCalls++;
+      },
+      getDisplayTime: () => new Date(0),
+    };
+    return stub;
+  }
+
+  it('dataSource 제공 시 factory 미사용 + 그 인스턴스 start + onSampleRef 에 투영 등록', async () => {
+    const fetchImpl = makeFetch({});
+    const { client } = makeDriversClient();
+    const { factory, lastInstance } = makeStubFactory();
+    const instance = makeInstanceStub();
+    const onSampleRef: { current: ((n: number, s: LocationSample) => void) | null } = {
+      current: null,
+    };
+    render(
+      <LiveMap
+        sessionKey={9472}
+        circuitKey={63}
+        year={2024}
+        fetchImpl={fetchImpl as unknown as typeof fetch}
+        client={client}
+        dataSourceFactory={factory}
+        dataSource={instance as unknown as LiveMapDataSource}
+        onSampleRef={onSampleRef}
+      />,
+    );
+    await waitFor(() => expect(screen.queryByTestId('live-map-canvas')).toBeTruthy());
+    // 외부 인스턴스가 start 되고, factory 는 호출되지 않음 (dataSource 우선).
+    expect(instance.startCalls).toBe(1);
+    expect(lastInstance()).toBeNull();
+    // 투영 함수가 ref 에 등록됨 — raw sample 호출이 buffer push 까지 throw 없이 완료.
+    expect(onSampleRef.current).toBeTypeOf('function');
+    expect(() =>
+      onSampleRef.current!(44, { date: new Date('2024-03-02T15:00:00.000Z'), x: 100, y: 200, z: 10 }),
+    ).not.toThrow();
+  });
+
+  it('unmount 시 외부 인스턴스 stop + onSampleRef 해제', async () => {
+    const fetchImpl = makeFetch({});
+    const { client } = makeDriversClient();
+    const instance = makeInstanceStub();
+    const onSampleRef: { current: ((n: number, s: LocationSample) => void) | null } = {
+      current: null,
+    };
+    const { unmount } = render(
+      <LiveMap
+        sessionKey={9472}
+        circuitKey={63}
+        year={2024}
+        fetchImpl={fetchImpl as unknown as typeof fetch}
+        client={client}
+        dataSource={instance as unknown as LiveMapDataSource}
+        onSampleRef={onSampleRef}
+      />,
+    );
+    await waitFor(() => expect(instance.startCalls).toBe(1));
+    expect(onSampleRef.current).not.toBeNull();
+    unmount();
+    expect(instance.stopCalls).toBe(1);
+    expect(onSampleRef.current).toBeNull();
   });
 });

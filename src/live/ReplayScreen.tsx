@@ -14,7 +14,8 @@ import { loadCatalogIndex, loadSeason } from '../main/stores/catalogStore';
 import { useNowSecond } from '../main/useNowSecond';
 import { useAllSeasons, useCatalogIndex } from '../main/stores/hooks';
 import { ReplayDataSource } from '../map/ReplayDataSource';
-import type { LiveDataSourceOptions } from '../map/LiveDataSource';
+import type { LocationSample } from '../shared/DataSource';
+import { DashboardApp, DataSourceProvider, DriversProvider, useSessionDrivers } from '../dashboard';
 
 type PingState = 'pending' | 'ok' | 'failed';
 
@@ -81,24 +82,22 @@ export function ReplayScreen({ pingImpl }: ReplayScreenProps = {}) {
     if (pingState === 'ok' && shouldRedirectToLive) setLocation(`/live/${sessionKey}`);
   }, [pingState, shouldRedirectToLive, sessionKey, setLocation]);
 
-  // ReplayDataSource factory — found.session.date_start 를 클로저로 캡처.
-  // LiveMap 의 dataSourceFactory 는 LiveDataSourceOptions 만 받으므로 sessionDateStart 는 외부 클로저.
+  // §5 — 화면이 단일 ReplayDataSource 를 소유: 맵 + 대시보드 패널이 같은 인스턴스 공유 (LiveScreen 과 형제 일관성).
+  // found.session.date_start/end 를 캡처. 투영 onSample 은 LiveMap 이 에셋 로드 후 onSampleRef 로 등록(여기선 위임만).
   const sessionDateStartIso = found?.session.date_start;
   const sessionDateEndIso = found?.session.date_end;
-  const replayFactory = useMemo(() => {
-    if (!sessionDateStartIso) return undefined;
-    const dateStart = new Date(sessionDateStartIso);
-    const dateEnd = sessionDateEndIso ? new Date(sessionDateEndIso) : undefined;
-    return (opts: LiveDataSourceOptions): LiveMapDataSource =>
-      new ReplayDataSource({
-        sessionKey: opts.sessionKey,
-        sessionDateStart: dateStart,
-        sessionDateEnd: dateEnd,
-        // LiveMap 이 넘긴 client 위임 (drivers/live 와 동일 싱글톤). production 은 싱글톤, 테스트는 mock.
-        client: opts.client,
-        onSample: opts.onSample,
-      });
-  }, [sessionDateStartIso, sessionDateEndIso]);
+  const onSampleRef = useRef<((driverNumber: number, sample: LocationSample) => void) | null>(null);
+  const ds = useMemo<LiveMapDataSource | null>(() => {
+    if (!sessionDateStartIso) return null;
+    return new ReplayDataSource({
+      sessionKey,
+      sessionDateStart: new Date(sessionDateStartIso),
+      sessionDateEnd: sessionDateEndIso ? new Date(sessionDateEndIso) : undefined,
+      onSample: (driverNumber, sample) => onSampleRef.current?.(driverNumber, sample),
+    });
+  }, [sessionKey, sessionDateStartIso, sessionDateEndIso]);
+  // §2.5 — 드라이버 메타 1회 fetch (LiveScreen 과 형제 일관). CORS ok 일 때만.
+  const drivers = useSessionDrivers(sessionKey, { enabled: pingState === 'ok' });
 
   if (pingState === 'pending') {
     return (
@@ -149,18 +148,34 @@ export function ReplayScreen({ pingImpl }: ReplayScreenProps = {}) {
     );
   }
 
-  // live-map plan §10 단계 13 — ReplayDataSource + LiveMap 통합.
-  // year 는 currentYear 가 아닌 found.year (세션이 속한 시즌) — 다년도 검색의 핵심.
+  // live-map plan §10 단계 13 + dashboard §5/§1.1 — DashboardApp 이 레이아웃을 소유하고 맵을 슬롯에 임베드.
+  // 같은 ds 를 provider 로 패널에 주입. year 는 currentYear 가 아닌 found.year (세션 시즌) — 다년도 검색의 핵심.
+  // replay-screen testid wrapper 유지(기존 테스트 + 형제 구조).
   return (
     <div data-testid="replay-screen">
-      <LiveMap
-        sessionKey={sessionKey}
-        circuitKey={circuitKey}
-        year={found.year}
-        dataSourceFactory={replayFactory}
-        isReplay={true}
-        onBack={() => setLocation('/')}
-      />
+      {ds ? (
+        <DataSourceProvider ds={ds}>
+          <DriversProvider drivers={drivers}>
+            <DashboardApp
+              meeting={found.meeting}
+              session={found.session}
+              year={found.year}
+              mode="replay"
+              map={
+                <LiveMap
+                  sessionKey={sessionKey}
+                  circuitKey={circuitKey}
+                  year={found.year}
+                  dataSource={ds}
+                  onSampleRef={onSampleRef}
+                  isReplay={true}
+                  onBack={() => setLocation('/')}
+                />
+              }
+            />
+          </DriversProvider>
+        </DataSourceProvider>
+      ) : null}
     </div>
   );
 }

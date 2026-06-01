@@ -144,6 +144,10 @@ describe('LiveScreen — status==="live" + circuit_key → LiveMap 마운트', (
       if (url.includes('/v1/drivers')) {
         return new Response(JSON.stringify([{ driver_number: 44, name_acronym: 'HAM', team_colour: '27f4d2' }]), { status: 200 });
       }
+      if (url.includes('/raceDistance.json')) {
+        // DashboardApp → SessionProgress 가 진입 시 1회 fetch. graceful degrade(404) → "LAP n / ??".
+        return new Response('not found', { status: 404 });
+      }
       throw new Error(`unexpected fetch in test: ${url}`);
     });
 
@@ -151,5 +155,11 @@ describe('LiveScreen — status==="live" + circuit_key → LiveMap 마운트', (
     renderAtLive(pingImpl);
 
     await waitFor(() => expect(screen.queryByTestId('live-map-canvas')).toBeTruthy(), { timeout: 3000 });
+
+    // §5 통합 — 단일 ds 가 맵(canvas) + 패널 양쪽에 도달함을 증명:
+    // 맵 canvas + DashboardApp + 패널(SessionHeader 'LIVE' 배지)이 같은 DataSourceProvider 아래 마운트.
+    // 패널은 useDataSource() 를 호출하므로 provider 없이는 throw → 이들이 보인다는 것이 ds 공유의 증거.
+    expect(screen.getByTestId('dashboard-app')).toBeTruthy();
+    expect(screen.getByText('LIVE')).toBeTruthy();
   });
 });

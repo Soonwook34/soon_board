@@ -21,10 +21,17 @@ import type {
   StintRecord,
 } from '../shared/openf1Types.js';
 
-/** record 의 파싱된 `date` 필드(있으면 Date, 없거나 미파싱이면 null). undated endpoint 는 null. */
+/**
+ * record 의 시간 좌표 — `date` 우선, 없으면 `date_start` fallback.
+ * laps 는 `date` 없이 `date_start` 만 가지므로(OpenF1) fallback 이 없으면 getAllBefore('laps')/
+ * latestBefore('laps') 가 전부 누락된다 (실제 DataSource 회귀 — 단위 stub 으론 안 잡힘).
+ * 둘 다 없는 endpoint(stints/session_result 등 lap-keyed)는 null → 시간 쿼리 대상 아님(호출처가 lap 기준 사용).
+ */
 function recDate(r: unknown): Date | null {
-  const d = (r as { date?: unknown }).date;
-  return d instanceof Date ? d : null;
+  const rec = r as { date?: unknown; date_start?: unknown };
+  if (rec.date instanceof Date) return rec.date;
+  if (rec.date_start instanceof Date) return rec.date_start;
+  return null;
 }
 
 function matchesFilters<T>(record: T, filters?: Partial<T>): boolean {

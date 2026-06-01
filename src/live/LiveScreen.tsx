@@ -20,6 +20,9 @@ import { classify } from '../main/derived/sessionStatus';
 import { loadCatalogIndex, loadSeason } from '../main/stores/catalogStore';
 import { useNowSecond } from '../main/useNowSecond';
 import { useCatalogIndex, useSeasonCatalog } from '../main/stores/hooks';
+import { LiveDataSource } from '../map/LiveDataSource';
+import type { LocationSample } from '../shared/DataSource';
+import { DashboardApp, DataSourceProvider, DriversProvider, useSessionDrivers } from '../dashboard';
 
 type PingState = 'pending' | 'ok' | 'failed';
 
@@ -81,6 +84,22 @@ export function LiveScreen({ pingImpl }: LiveScreenProps = {}) {
     if (shouldRedirectToReplay) setLocation(`/replay/${sessionKey}`);
   }, [shouldRedirectToReplay, sessionKey, setLocation]);
 
+  // §5 — 화면이 단일 DataSource 를 소유: 맵(LiveMap)과 대시보드 패널(useDataSource)이 같은 인스턴스 공유.
+  // 투영 onSample 은 LiveMap 이 에셋 로드 후 onSampleRef 로 등록(여기선 위임만). hooks 는 early-return 이전.
+  const onSampleRef = useRef<((driverNumber: number, sample: LocationSample) => void) | null>(null);
+  const ds = useMemo(
+    () =>
+      Number.isFinite(sessionKey)
+        ? new LiveDataSource({
+            sessionKey,
+            onSample: (driverNumber, sample) => onSampleRef.current?.(driverNumber, sample),
+          })
+        : null,
+    [sessionKey],
+  );
+  // §2.5 — 드라이버 메타(acronym·팀컬러) 1회 fetch → 패널이 useDrivers 로 join. CORS ok 일 때만.
+  const drivers = useSessionDrivers(sessionKey, { enabled: pingState === 'ok' });
+
   // ── 이하 conditional rendering (hook 호출 없음) ─────────────────────
   if (pingState === 'pending') {
     return (
@@ -115,14 +134,29 @@ export function LiveScreen({ pingImpl }: LiveScreenProps = {}) {
   // upcoming 또는 circuit_key 누락 (구버전 카탈로그) → CountdownOverlay fallback.
   const liveReady =
     status?.kind === 'live' && status.startedAgoMs >= 0 && found.meeting.circuit_key != null;
-  if (liveReady) {
+  if (liveReady && ds) {
+    // §5/§1.1 — DashboardApp 이 레이아웃을 소유하고 맵을 map 슬롯에 임베드. 같은 ds 를 provider 로 패널에 주입.
     return (
-      <LiveMap
-        sessionKey={sessionKey}
-        circuitKey={found.meeting.circuit_key!}
-        year={currentYear}
-        onBack={() => setLocation('/')}
-      />
+      <DataSourceProvider ds={ds}>
+        <DriversProvider drivers={drivers}>
+          <DashboardApp
+            meeting={found.meeting}
+            session={found.session}
+            year={currentYear}
+            mode="live"
+            map={
+              <LiveMap
+                sessionKey={sessionKey}
+                circuitKey={found.meeting.circuit_key!}
+                year={currentYear}
+                dataSource={ds}
+                onSampleRef={onSampleRef}
+                onBack={() => setLocation('/')}
+              />
+            }
+          />
+        </DriversProvider>
+      </DataSourceProvider>
     );
   }
 

@@ -107,6 +107,20 @@ describe('allBefore', () => {
     expect(allBefore(recs, at(40), undefined, 2).map((r) => r.position)).toEqual([1, 2]);
   });
 
+  it('date 없이 date_start 만 있는 record(laps)도 포함 — recDate date_start fallback (실 DataSource 회귀 가드)', () => {
+    // OpenF1 laps 는 date 없이 date_start 만 가짐. fallback 이 없으면 getAllBefore('laps') 가 전부
+    // 누락돼 빠른 랩 배지 스피드트랩 등이 항상 빈 값이 된다 (stub 통과·실 DataSource 회귀).
+    const laps = [lap(44, 1, 0, 90), lap(44, 2, 90, 91), lap(44, 3, 181, null)];
+    const got = allBefore(laps, at(200));
+    expect(got).toHaveLength(3); // 셋 다 date_start ≤ 200s (lap 3 은 진행 중이어도 date_start ≤ t)
+    expect(got.map((l) => l.lap_number)).toEqual([3, 2, 1]); // date_start 내림차순
+  });
+
+  it('date_start 미래(>t)는 제외 — laps 도 미래 누설 zero', () => {
+    const laps = [lap(44, 1, 0, 90), lap(44, 2, 300, 91)];
+    expect(allBefore(laps, at(100)).map((l) => l.lap_number)).toEqual([1]);
+  });
+
   it('미래 누설 zero — t=25s 면 30s record 제외', () => {
     expect(allBefore(recs, at(25)).map((r) => r.position)).toEqual([2, 3]);
   });

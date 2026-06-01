@@ -28,9 +28,9 @@ const session: SessionData = {
 };
 
 describe('DashboardApp', () => {
-  it('그리드 + 4 패널 + 맵 슬롯 + placeholder 마운트', () => {
+  it('그리드 + 글로벌 패널 + 맵 슬롯 + ⑤⑥⑦⑧ 데이터 패널 마운트', () => {
     const { ds } = makeFakeDs({ displayTime: new Date('2024-03-02T12:00:00Z') });
-    const { container } = render(
+    render(
       <DataSourceProvider ds={ds}>
         <DashboardApp
           meeting={meeting}
@@ -46,8 +46,11 @@ describe('DashboardApp', () => {
     expect(screen.getByText('Sakhir')).toBeTruthy(); // ① 헤더
     expect(screen.getByText('TRACK CLEAR')).toBeTruthy(); // ④ race control (빈 메시지)
     expect(screen.getByText('AIR')).toBeTruthy(); // ⑨ 날씨
-    expect(container.querySelector('[data-region="s"]')).toBeTruthy(); // ⑤⑥⑦ placeholder
-    expect(container.querySelector('[data-region="b"]')).toBeTruthy(); // ⑧ placeholder
+    // ⑤⑥⑦⑧ 실 패널 — DriversProvider 없이도 graceful(빈 상태)로 마운트.
+    expect(screen.getByTestId('leaderboard')).toBeTruthy(); // ⑤
+    expect(screen.getByTestId('tyre-strategy')).toBeTruthy(); // ⑥
+    expect(screen.getByTestId('event-ticker')).toBeTruthy(); // ⑦
+    expect(screen.getByTestId('fastest-badges')).toBeTruthy(); // ⑧
   });
 
   it('map prop 없으면 맵 placeholder', () => {

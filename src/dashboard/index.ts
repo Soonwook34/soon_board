@@ -3,4 +3,11 @@
 
 export { DashboardApp, type DashboardAppProps } from './DashboardApp';
 export { DataSourceProvider, useDataSource } from './shared/DataSourceContext';
+export {
+  DriversProvider,
+  useDrivers,
+  useSessionDrivers,
+  teamColorOf,
+  type DriversMap,
+} from './shared/DriversContext';
 export type { DashboardMode } from './panels/SessionHeader';
