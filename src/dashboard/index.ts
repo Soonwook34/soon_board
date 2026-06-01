@@ -11,3 +11,9 @@ export {
   type DriversMap,
 } from './shared/DriversContext';
 export type { DashboardMode } from './panels/SessionHeader';
+export {
+  selectDriver,
+  clearSelection,
+  getSelectedDriver,
+  useSelectedDriver,
+} from './shared/selectionStore';

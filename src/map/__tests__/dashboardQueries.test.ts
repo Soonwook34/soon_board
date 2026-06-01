@@ -11,11 +11,13 @@ import {
   computeAllAggregates,
   lapAt,
   latestBefore,
+  sessionResultFor,
   stintForLap,
 } from '../dashboardQueries.js';
 import type {
   LapRecord,
   PositionRecord,
+  SessionResultRecord,
   StintRecord,
 } from '../../shared/openf1Types.js';
 
@@ -186,6 +188,37 @@ describe('stintForLap', () => {
   it('범위 밖 / 다른 driver 면 null', () => {
     expect(stintForLap(stints, 44, 41)).toBeNull();
     expect(stintForLap(stints, 1, 5)).toBeNull();
+  });
+});
+
+describe('sessionResultFor (undated endpoint 전용 접근자)', () => {
+  function result(driver: number, dnf = false): SessionResultRecord {
+    return {
+      session_key: 1,
+      meeting_key: 1,
+      driver_number: driver,
+      position: 1,
+      number_of_laps: 57,
+      duration: 5400,
+      gap_to_leader: null,
+      dnf,
+      dns: false,
+      dsq: false,
+    };
+  }
+
+  it('driver_number 일치 record 반환', () => {
+    const recs = [result(44), result(1, true)];
+    expect(sessionResultFor(recs, 1)?.dnf).toBe(true);
+    expect(sessionResultFor(recs, 44)?.driver_number).toBe(44);
+  });
+
+  it('일치 없으면 null', () => {
+    expect(sessionResultFor([result(44)], 16)).toBeNull();
+  });
+
+  it('빈 배열이면 null (라이브 — session_result 미적재)', () => {
+    expect(sessionResultFor([], 44)).toBeNull();
   });
 });
 

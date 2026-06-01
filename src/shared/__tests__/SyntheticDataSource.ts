@@ -8,6 +8,7 @@ import type {
   LapRecord,
   OpenF1EndpointName,
   OpenF1EndpointRecords,
+  SessionResultRecord,
   StintRecord,
 } from '../openf1Types.js';
 import type { DataSource, LocationSample, SamplePair, StreamState } from '../DataSource.js';
@@ -90,5 +91,8 @@ export class SyntheticDataSource implements DataSource {
 
   getAggregateBefore<A extends AggregateName>(_aggregate: A, _t: Date): AggregateResults[A] {
     throw new Error('SyntheticDataSource: getAggregateBefore not implemented (Phase 12/13)');
+  }
+  getSessionResult(_driverNum: number): SessionResultRecord | null {
+    return null; // 합성 소스는 session_result 미생성.
   }
 }

@@ -29,6 +29,7 @@ export function makeFakeDs(
     getCompletedLapsBefore: () => [],
     getStintForLap: () => null,
     getAggregateBefore: () => null,
+    getSessionResult: () => null,
     ...methodOverrides,
   } as unknown as DataSource;
   return {

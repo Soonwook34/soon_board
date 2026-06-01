@@ -4,13 +4,13 @@ import { useMemo, type CSSProperties } from 'react';
 import { useDataSource } from '../shared/DataSourceContext';
 import { useDisplayTime } from '../shared/useDisplayTime';
 import { useDrivers, teamColorOf } from '../shared/DriversContext';
-import { useAggregate } from '../shared/useAggregate';
+import { useAggregateResults } from '../shared/useAggregateResults';
 import { tyreColor, tyreLetter } from '../shared/tyreColors';
 import { SectorBar } from '../shared/SectorBar';
 import { personalBestLap } from '../derived/personalBests';
 import { selectDriver } from '../shared/selectionStore';
 import { dashboardColors, panelStyle } from '../shared/dashboardStyles';
-import type { AggregateResults } from '../../shared/openf1Types';
+import { formatGap, formatLapTime } from '../shared/formatTime';
 
 const MONO = 'var(--font-mono, monospace)';
 const NO_VALUE = '—';
@@ -18,21 +18,6 @@ const NO_VALUE = '—';
 /** float 동등 비교 — fastest_lap 보유 판정 (sectorColors 와 동일 epsilon). */
 function approxEq(a: number, b: number): boolean {
   return Math.abs(a - b) < 1e-6;
-}
-
-/** 91.456 → '1:31.456'. 음수/NaN 은 '—'. */
-function formatLapTime(sec: number | null | undefined): string {
-  if (sec == null || !Number.isFinite(sec) || sec < 0) return NO_VALUE;
-  const min = Math.floor(sec / 60);
-  const rem = sec - min * 60;
-  return `${min}:${rem.toFixed(3).padStart(6, '0')}`;
-}
-
-/** interval/gap_to_leader 표시: 숫자 → '+s.mmm', 문자열 → 그대로, null → '—'. */
-function formatGap(value: number | string | null | undefined): string {
-  if (value == null) return NO_VALUE;
-  if (typeof value === 'number') return `+${value.toFixed(3)}`;
-  return value;
 }
 
 const headerCellStyle: CSSProperties = {
@@ -65,17 +50,8 @@ export function Leaderboard() {
   const t = useDisplayTime(1000);
   const drivers = useDrivers();
 
-  const fastest = useAggregate('fastest_lap');
-  const purple = useAggregate('purple_sectors');
-  const pbs = useAggregate('personal_bests');
-  const aggregate = useMemo<AggregateResults>(
-    () => ({
-      fastest_lap: fastest,
-      purple_sectors: purple ?? { s1: null, s2: null, s3: null },
-      personal_bests: pbs ?? new Map(),
-    }),
-    [fastest, purple, pbs],
-  );
+  const aggregate = useAggregateResults();
+  const fastest = aggregate.fastest_lap;
 
   const rows = useMemo(() => {
     const built = [];
@@ -92,7 +68,8 @@ export function Leaderboard() {
       const pbLap = personalBestLap(aggregate, driver_number);
       const isFastest =
         pbLap != null && fastest != null && approxEq(pbLap, fastest.lap_duration);
-      const dnf = ds.getLatestBefore('session_result', t, { driver_number })?.dnf ?? false;
+      // session_result 는 undated → getLatestBefore 로는 항상 null. 전용 접근자 사용(US-8A).
+      const dnf = ds.getSessionResult(driver_number)?.dnf ?? false;
       const latestPit = ds.getLatestBefore('pit', t, { driver_number });
       const justPitted = latestPit != null && lapNum != null && latestPit.lap_number === lapNum;
 

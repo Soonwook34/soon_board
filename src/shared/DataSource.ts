@@ -9,6 +9,7 @@ import type {
   LapRecord,
   OpenF1EndpointName,
   OpenF1EndpointRecords,
+  SessionResultRecord,
   StintRecord,
 } from './openf1Types';
 
@@ -128,4 +129,12 @@ export interface DataSource {
    * 시크 발생 시에도 미래 누설 없이 t 까지의 진실만 반영 (dashboard §4.4, §4.5).
    */
   getAggregateBefore<A extends AggregateName>(aggregate: A, t: Date): AggregateResults[A];
+
+  /**
+   * 드라이버의 세션 결과 record. 없으면 null. dashboard §3.6 결과 섹션에서 사용.
+   * session_result 는 date/date_start 가 없는 undated(세션 1회 산출) endpoint 이므로
+   * 시간 컷 메서드(getLatestBefore)로는 조회 불가 — 전용 접근자가 필요하다.
+   * 표시 게이트(라이브 중 숨김)는 호출처가 `display_time ≥ session.date_end` 로 판정 (§4.5 (g)).
+   */
+  getSessionResult(driverNum: number): SessionResultRecord | null;
 }

@@ -2,7 +2,7 @@
 // ① 헤더(전체폭) / ② 진행률 + ④ Race Control 행 / ③ 맵 슬롯(prop) + 우측열 ⑤⑥⑦(세로 stack, 스크롤) /
 // 하단 ⑧ 빠른 랩 배지 + ⑨ 날씨. DataSourceProvider + DriversProvider 안에서 렌더 전제(자체 provider 미포함).
 
-import type { ReactNode } from 'react';
+import { useEffect, type ReactNode } from 'react';
 import { SessionHeader, type DashboardMode } from './panels/SessionHeader';
 import { SessionProgress } from './panels/SessionProgress';
 import { RaceControlBanner } from './panels/RaceControlBanner';
@@ -11,8 +11,24 @@ import { Leaderboard } from './panels/Leaderboard';
 import { TyreStrategy } from './panels/TyreStrategy';
 import { EventTicker } from './panels/EventTicker';
 import { FastestLapBadges } from './panels/FastestLapBadges';
+import { DriverDetailPanel } from './detailPanel/DriverDetailPanel';
+import { useSelectedDriver, clearSelection } from './shared/selectionStore';
 import { dashboardColors } from './shared/dashboardStyles';
 import type { MeetingData, SessionData } from '../shared/seasonData';
+
+// 사이드 패널 닫힘: 맵 7 / 우측 5 (§1.3). 열림: 맵 6 / 우측(s) 3 / 디테일(d) 3 — push 모드.
+const GRID_CLOSED = [
+  '"h h h h h h h h h h h h"',
+  '"p p p p p p p r r r r r"',
+  '"m m m m m m m s s s s s"',
+  '"b b b b b b b b w w w w"',
+].join('\n');
+const GRID_OPEN = [
+  '"h h h h h h h h h h h h"',
+  '"p p p p p p r r r d d d"',
+  '"m m m m m m s s s d d d"',
+  '"b b b b b b w w w d d d"',
+].join('\n');
 
 export interface DashboardAppProps {
   meeting: MeetingData;
@@ -24,6 +40,15 @@ export interface DashboardAppProps {
 }
 
 export function DashboardApp({ meeting, session, year, mode, map }: DashboardAppProps) {
+  const selected = useSelectedDriver();
+  const detailOpen = selected != null;
+
+  // 인수23 — 모드(라이브↔리플레이) 전환 시 선택 해제(사이드 패널 닫힘). 화면 재마운트 간
+  // 모듈스코프 selectionStore 가 잔류하므로 mode 변화를 트리거로 reset.
+  useEffect(() => {
+    clearSelection();
+  }, [mode]);
+
   return (
     <div
       data-testid="dashboard-app"
@@ -34,12 +59,7 @@ export function DashboardApp({ meeting, session, year, mode, map }: DashboardApp
         minHeight: '100vh',
         background: 'var(--color-bg-base, #0a0d12)',
         gridTemplateColumns: 'repeat(12, 1fr)',
-        gridTemplateAreas: [
-          '"h h h h h h h h h h h h"',
-          '"p p p p p p p r r r r r"',
-          '"m m m m m m m s s s s s"',
-          '"b b b b b b b b w w w w"',
-        ].join('\n'),
+        gridTemplateAreas: detailOpen ? GRID_OPEN : GRID_CLOSED,
         gridAutoRows: 'min-content',
       }}
     >
@@ -94,6 +114,11 @@ export function DashboardApp({ meeting, session, year, mode, map }: DashboardApp
       <div style={{ gridArea: 'w' }}>
         <WeatherMini />
       </div>
+      {detailOpen && (
+        <div style={{ gridArea: 'd', minHeight: 0 }}>
+          <DriverDetailPanel session={session} />
+        </div>
+      )}
     </div>
   );
 }

@@ -18,6 +18,7 @@ import type {
   PersonalBestRow,
   PurpleSectorRow,
   PurpleSectorsAggregate,
+  SessionResultRecord,
   StintRecord,
 } from '../shared/openf1Types.js';
 
@@ -148,6 +149,22 @@ export function stintForLap(
     if (lap >= s.lap_start && lap <= s.lap_end) return s;
   }
   return null;
+}
+
+/**
+ * 드라이버의 세션 결과 record (없으면 null). session_result 는 driver 당 1건이며 date 가 없는
+ * undated endpoint 라 시간 컷(latestBefore)을 쓸 수 없다 — driver_number 일치하는 마지막 record 반환.
+ * 라이브 중 숨김 게이트(§4.5 (g))는 호출처(SessionResult)가 display_time ≥ session.date_end 로 판정.
+ */
+export function sessionResultFor(
+  records: readonly SessionResultRecord[],
+  driverNum: number,
+): SessionResultRecord | null {
+  let found: SessionResultRecord | null = null;
+  for (const r of records) {
+    if (r.driver_number === driverNum) found = r;
+  }
+  return found;
 }
 
 // ── 누적 통계 (getAggregateBefore) ──────────────────────────────────────

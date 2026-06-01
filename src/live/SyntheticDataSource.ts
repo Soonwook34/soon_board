@@ -8,6 +8,7 @@ import type {
   LapRecord,
   OpenF1EndpointName,
   OpenF1EndpointRecords,
+  SessionResultRecord,
   StintRecord,
 } from '../shared/openf1Types.js';
 import type {
@@ -158,6 +159,9 @@ export class SyntheticDataSource implements DataSource {
   }
   getAggregateBefore<A extends AggregateName>(_aggregate: A, _t: Date): AggregateResults[A] {
     throw new Error('SyntheticDataSource: getAggregateBefore not implemented (test-rig only)');
+  }
+  getSessionResult(_driverNum: number): SessionResultRecord | null {
+    return null; // 합성 소스는 session_result 미생성 (test-rig only).
   }
 
   // ── internals ───────────────────────────────────────────────────────

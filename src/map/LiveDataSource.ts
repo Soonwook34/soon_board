@@ -14,6 +14,7 @@ import type {
   LapRecord,
   OpenF1EndpointName,
   OpenF1EndpointRecords,
+  SessionResultRecord,
   StintRecord,
 } from '../shared/openf1Types.js';
 import type {
@@ -29,6 +30,7 @@ import {
   computeAggregateBefore,
   lapAt,
   latestBefore,
+  sessionResultFor,
   stintForLap,
 } from './dashboardQueries.js';
 import {
@@ -251,6 +253,11 @@ export class LiveDataSource implements DataSource {
   }
   getAggregateBefore<A extends AggregateName>(aggregate: A, t: Date): AggregateResults[A] {
     return computeAggregateBefore(this.recordsFor('laps'), aggregate, t);
+  }
+  getSessionResult(driverNum: number): SessionResultRecord | null {
+    // LiveDataSource 는 session_result 를 폴링하지 않는다(LIVE_CADENCE 미포함) → 항상 빈 배열 → null.
+    // 라이브 중에는 결과 섹션이 숨겨지는 게 정상(§3.6). 종료된 세션 회람은 ReplayDataSource 경로.
+    return sessionResultFor(this.recordsFor('session_result'), driverNum);
   }
 
   /** endpoint 의 적재된 raw record 배열 (insert 순서, upsert 반영). location 은 locationBuffer 별도. */

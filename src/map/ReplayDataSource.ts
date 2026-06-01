@@ -15,6 +15,7 @@ import type {
   LapRecord,
   OpenF1EndpointName,
   OpenF1EndpointRecords,
+  SessionResultRecord,
   StintRecord,
 } from '../shared/openf1Types.js';
 import type {
@@ -30,6 +31,7 @@ import {
   computeAggregateBefore,
   lapAt,
   latestBefore,
+  sessionResultFor,
   stintForLap,
 } from './dashboardQueries.js';
 import {
@@ -289,6 +291,10 @@ export class ReplayDataSource implements DataSource {
   }
   getAggregateBefore<A extends AggregateName>(aggregate: A, t: Date): AggregateResults[A] {
     return computeAggregateBefore(this.recordsFor('laps'), aggregate, t);
+  }
+  getSessionResult(driverNum: number): SessionResultRecord | null {
+    // session_result 는 SPARSE_ENDPOINTS 라 세션 1회 적재돼 있다 → driver 매칭 record 반환.
+    return sessionResultFor(this.recordsFor('session_result'), driverNum);
   }
 
   /**

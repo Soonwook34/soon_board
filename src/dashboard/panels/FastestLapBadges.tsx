@@ -7,18 +7,7 @@ import { dashboardColors, panelStyle } from '../shared/dashboardStyles';
 import { useDrivers, teamColorOf } from '../shared/DriversContext';
 import { useAggregate } from '../shared/useAggregate';
 import { SECTOR_COLORS } from '../shared/sectorColors';
-
-function formatLapTime(seconds: number): string {
-  const m = Math.floor(seconds / 60);
-  const rem = seconds - m * 60;
-  const s = Math.floor(rem);
-  const ms = Math.round((rem - s) * 1000);
-  return `${m}:${String(s).padStart(2, '0')}.${String(ms).padStart(3, '0')}`;
-}
-
-function formatSector(seconds: number): string {
-  return seconds.toFixed(3);
-}
+import { formatLapTime, formatSector } from '../shared/formatTime';
 
 interface BadgeCardProps {
   label: string;
