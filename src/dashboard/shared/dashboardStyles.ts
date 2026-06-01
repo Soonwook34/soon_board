@@ -14,6 +14,7 @@ export const dashboardColors = {
   textMuted: color.textMuted,
   border: color.border,
   borderStrong: color.borderStrong,
+  textOnAccent: color.textOnAccent, // accent/live 배경 위 텍스트 (WCAG AA 보장)
 } as const;
 
 /** 패널 컨테이너 기본 스타일 (배경·테두리·라운드·패딩). 패널별로 spread 후 override. */
