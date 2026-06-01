@@ -20,6 +20,7 @@ import { loadSectorBoundaries } from '../map/sectorBoundaries.js';
 import { loadDrsZones } from '../map/drsZones.js';
 import { loadSlmZones } from '../map/slmZones.js';
 import type { DataSource } from '../shared/DataSource.js';
+import { openF1Client, type OpenF1Client } from '../shared/openf1Client.js';
 import type {
   DrsZonesJsonBase,
   PitlaneJsonBase,
@@ -43,7 +44,6 @@ export type LiveMapDataSource = DataSource & {
 
 const DEFAULT_CANVAS_WIDTH = 800;
 const DEFAULT_CANVAS_HEIGHT = 600;
-const OPENF1_BASE = 'https://api.openf1.org';
 /** A3: asset fetch (track+pitlane+drivers+overlays) timeout — hang 방지. */
 const ASSET_FETCH_TIMEOUT_MS = 15_000;
 
@@ -66,8 +66,10 @@ export interface LiveMapProps {
   circuitKey: number;
   year: number;
   onBack?: () => void;
-  /** 테스트 seam — fetch override (assets + drivers). default globalThis.fetch. */
+  /** 테스트 seam — 동일-출처 asset(track/pitlane/overlays) fetch override. default globalThis.fetch. */
   fetchImpl?: typeof fetch;
+  /** 테스트 seam — OpenF1 drivers 호출용 client. default 모듈 싱글톤 openF1Client. */
+  client?: OpenF1Client;
   /** 테스트 seam — DataSource constructor override. default new LiveDataSource(opts). */
   dataSourceFactory?: (opts: LiveDataSourceOptions) => LiveMapDataSource;
   /** Phase 10 게이트 — true 시 DRS zone 렌더링 (ReplayScreen 만). default false. */
@@ -80,6 +82,7 @@ export function LiveMap({
   year,
   onBack,
   fetchImpl,
+  client = openF1Client,
   dataSourceFactory,
   isReplay = false,
 }: LiveMapProps) {
@@ -120,7 +123,6 @@ export function LiveMap({
     }, ASSET_FETCH_TIMEOUT_MS);
     const trackUrl = `/trackOutlines/${circuitKey}-${year}.json`;
     const pitlaneUrl = `/trackOutlines/pitlane_${circuitKey}-${year}.json`;
-    const driversUrl = `${OPENF1_BASE}/v1/drivers?session_key=${sessionKey}`;
 
     // dev server SPA fallback (`index.html`, status 200, text/html) 을 missing 으로 통합 처리 —
     // 그대로 두면 r.json() 이 "Unexpected token '<'" 로 크래시. content-type 으로 sniff.
@@ -144,12 +146,19 @@ export function LiveMap({
         if (!r.ok) return Promise.reject(new Error(`pitlane HTTP ${r.status}`));
         return r.json() as Promise<PitlaneJsonBase>;
       }),
-      fetcher(driversUrl, { signal: ctrl.signal }).then(
-        (r) =>
+      // drivers 만 OpenF1 — client 경유 (priority='high': user 가 "Loading track…" 에서 block).
+      client
+        .fetch({
+          path: '/v1/drivers',
+          params: { session_key: sessionKey },
+          priority: 'high',
+          signal: ctrl.signal,
+        })
+        .then((r) =>
           r.ok
             ? (r.json() as Promise<Array<Record<string, unknown>>>)
             : Promise.reject(new Error(`drivers HTTP ${r.status}`)),
-      ),
+        ),
       // Phase 9/10/11 — 모두 optional (404 → null). 실패 (5xx) 는 null 로 흡수해 라이브맵 차단 안 함.
       loadSectorBoundaries(circuitKey, year, fetcher).catch(() => null),
       loadDrsZones(circuitKey, year, fetcher).catch(() => null),
@@ -193,7 +202,7 @@ export function LiveMap({
       clearTimeout(timeoutId);
       ctrl.abort();
     };
-  }, [sessionKey, circuitKey, year, reloadKey, fetcher]);
+  }, [sessionKey, circuitKey, year, reloadKey, fetcher, client]);
 
   // ── renderer mount ──────────────────────────────────────────────────
   useEffect(() => {
@@ -230,10 +239,9 @@ export function LiveMap({
 
     const ds = factory({
       sessionKey,
-      // fetchImpl 미지정 시 LiveDataSource 가 globalThis.fetch 사용 — production 정상 경로.
-      // 본 컴포넌트의 asset fetch (assets useEffect) 와 LiveDataSource 의 OpenF1 fetch 는
-      // 같은 globalThis.fetch 를 공유. 테스트 시에만 prop 으로 격리된 mock 주입.
-      fetchImpl,
+      // LiveDataSource 의 OpenF1 fetch 는 client 에 위임 (drivers fetch 와 동일 client).
+      // production 은 싱글톤, 테스트는 prop 으로 주입된 mock client 를 공유.
+      client,
       onSample: (driver, sample) => {
         const [x, y] = applyOpenF1Transform(sample.x, sample.y, transform);
         const proj = projectToPolyline([x, y], polyline, arcTable);
@@ -293,7 +301,7 @@ export function LiveMap({
       dataSourceRef.current = null;
       setSupportsPause(false);
     };
-  }, [assets, sessionKey, factory, fetchImpl, isReplay]);
+  }, [assets, sessionKey, factory, client, isReplay]);
 
   const onTogglePause = useCallback(() => {
     const ds = dataSourceRef.current;

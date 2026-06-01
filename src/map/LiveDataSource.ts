@@ -23,12 +23,15 @@ import type {
   StreamState,
 } from '../shared/DataSource.js';
 import { LocationBuffer, parseDate } from './LocationBuffer.js';
-import { rateLimitedFetch } from './rateLimitedFetch.js';
+import {
+  openF1Client,
+  type OpenF1Client,
+  type OpenF1Params,
+  type RequestPriority,
+} from '../shared/openf1Client.js';
 
-const DEFAULT_BASE_URL = 'https://api.openf1.org';
 const DEFAULT_DISPLAY_LAG_MS = 30_000;
 const DEFAULT_RING_BUFFER_MS = 60_000;
-const DEFAULT_HYDRATION_TOKEN_INTERVAL_MS = 334; // 3 req/s
 const DEFAULT_HYDRATION_WINDOW_MS = 32_000; // 35s pre-now to 3s pre-now
 const DEFAULT_HYDRATION_END_LAG_MS = 3_000;
 const LAGGING_THRESHOLD_MS = 1_500;
@@ -51,26 +54,32 @@ export const LIVE_CADENCE: readonly { endpoint: OpenF1EndpointName; intervalMs: 
   { endpoint: 'weather', intervalMs: 60_000 },
 ];
 
+/**
+ * AC6 — location/position/intervals 는 사용자가 맵·리더보드·갭으로 직접 보는 데이터라 'high',
+ * 나머지(race_control/laps/pit/stints/weather)는 'normal'. ping/revalidate 의 'low' 와 구분.
+ */
+const HIGH_PRIORITY_ENDPOINTS = new Set<OpenF1EndpointName>(['location', 'position', 'intervals']);
+
+function priorityFor(endpoint: OpenF1EndpointName): RequestPriority {
+  return HIGH_PRIORITY_ENDPOINTS.has(endpoint) ? 'high' : 'normal';
+}
+
 export interface LiveDataSourceOptions {
   sessionKey: number;
-  baseUrl?: string;
-  fetchImpl?: typeof fetch;
+  /** 모든 OpenF1 fetch 를 위임하는 client (rate-limit/dedup/backoff 소유). 기본 싱글톤 openF1Client. */
+  client?: OpenF1Client;
   now?: () => Date;
   /** false 면 start() 가 cadence 등록 없이 onCorsFailed 콜백 발화 (critic P0-4). */
   corsAvailable?: boolean;
   onCorsFailed?: () => void;
   /** Cadence override (테스트). */
   cadenceMs?: Partial<Record<OpenF1EndpointName, number>>;
-  /** Token-bucket interval. 기본 334ms (3 req/s). */
-  hydrationTokenIntervalMs?: number;
   /** Display lag (기본 30s, live-streaming §2.1). */
   displayLagMs?: number;
   /** Ring buffer 깊이 (기본 60s = 30s 표시 + 30s margin). */
   ringBufferMs?: number;
   /** Trim 호출 최소 간격 (ms). 기본 10s — 매 ingest 마다 trim 하지 않고 throttle. 0 = 매 ingest. */
   trimMinIntervalMs?: number;
-  /** Sleep injection (테스트). 기본 setTimeout. */
-  sleep?: (ms: number) => Promise<void>;
   /**
    * 신규 location sample 인입 시 호출 (sentinel filter 통과 후, buffer push 직후).
    * UI bridge 가 raw LocationSample → projected DriverSample 변환 후 PerDriverBuffer 에 push 하는 hook.
@@ -79,17 +88,11 @@ export interface LiveDataSourceOptions {
   onSample?: (driverNumber: number, sample: LocationSample) => void;
 }
 
-const defaultSleep = (ms: number): Promise<void> =>
-  new Promise((r) => setTimeout(r, ms));
-
 export class LiveDataSource implements DataSource {
-  private readonly baseUrl: string;
-  private readonly fetchImpl: typeof fetch;
+  private readonly client: OpenF1Client;
   private readonly now: () => Date;
-  private readonly sleep: (ms: number) => Promise<void>;
   private readonly displayLagMs: number;
   private readonly ringBufferMs: number;
-  private readonly hydrationTokenIntervalMs: number;
   private readonly trimMinIntervalMs: number;
   private lastTrimAtMs = 0;
 
@@ -110,17 +113,15 @@ export class LiveDataSource implements DataSource {
   private readonly listeners = new Set<(t: Date) => void>();
   private intervalIds: ReturnType<typeof setInterval>[] = [];
   private started = false;
+  /** start() 에서 생성, stop() 에서 abort — queued/in-flight client 요청 취소용. */
+  private abortController: AbortController | null = null;
 
   constructor(private readonly opts: LiveDataSourceOptions) {
-    this.baseUrl = opts.baseUrl ?? DEFAULT_BASE_URL;
-    this.fetchImpl = opts.fetchImpl ?? globalThis.fetch.bind(globalThis);
+    this.client = opts.client ?? openF1Client;
     this.now = opts.now ?? (() => new Date());
-    this.sleep = opts.sleep ?? defaultSleep;
     this.displayLagMs = opts.displayLagMs ?? DEFAULT_DISPLAY_LAG_MS;
     this.ringBufferMs = opts.ringBufferMs ?? DEFAULT_RING_BUFFER_MS;
     this.trimMinIntervalMs = opts.trimMinIntervalMs ?? 10_000;
-    this.hydrationTokenIntervalMs =
-      opts.hydrationTokenIntervalMs ?? DEFAULT_HYDRATION_TOKEN_INTERVAL_MS;
   }
 
   // ── lifecycle ───────────────────────────────────────────────────────
@@ -135,14 +136,21 @@ export class LiveDataSource implements DataSource {
       return;
     }
 
+    this.abortController = new AbortController();
     // critic P0-5: hydration burst 완료 전까지 cadence setInterval 절대 등록 금지.
     await this.hydrate();
+    // hydration 도중 stop() 되면 (unmount) cadence 등록 skip — 이미 abort+started=false.
+    if (!this.started) return;
     this.startCadence();
   }
 
   stop(): void {
     for (const id of this.intervalIds) clearInterval(id);
     this.intervalIds = [];
+    // queued/in-flight client 요청 취소 — 싱글톤 client 의 late-bound fetch 가 unmount 후
+    // 발사되어 실 네트워크를 치는 것 방지 (구 per-instance fetchImpl 은 early-bound 라 무관했음).
+    this.abortController?.abort();
+    this.abortController = null;
     this.started = false;
   }
 
@@ -210,12 +218,11 @@ export class LiveDataSource implements DataSource {
     const nowMs = this.now().valueOf();
     const dateFrom = new Date(nowMs - DEFAULT_HYDRATION_WINDOW_MS).toISOString();
     const dateTo = new Date(nowMs - DEFAULT_HYDRATION_END_LAG_MS).toISOString();
-    const promises: Promise<void>[] = [];
-    for (let i = 0; i < LIVE_CADENCE.length; i++) {
-      if (i > 0) await this.sleep(this.hydrationTokenIntervalMs);
-      const { endpoint } = LIVE_CADENCE[i];
-      promises.push(this.fetchHydrationWindow(endpoint, dateFrom, dateTo));
-    }
+    // LIVE_CADENCE 순서대로 동기 enqueue → client 의 같은-priority FIFO 가 location→position→…
+    // 순서를 보존 (AC7b). 토큰버킷 분산은 client 소유라 자체 sleep spacing 제거 (AC13).
+    const promises = LIVE_CADENCE.map(({ endpoint }) =>
+      this.fetchHydrationWindow(endpoint, dateFrom, dateTo),
+    );
     await Promise.all(promises);
   }
 
@@ -236,27 +243,36 @@ export class LiveDataSource implements DataSource {
   ): Promise<void> {
     // hydration 은 bounded historical 윈도우 (now-35s, now-3s) 라 date<= (closed) 사용.
     // cadence 는 cursor 의 다음 sample 만 원하므로 date> (open) — 경계 record 가 cursor 와 같으면 skip OK.
-    const url = this.buildUrl(endpoint, { 'date>=': dateFrom, 'date<=': dateTo });
-    await this.runFetch(endpoint, url);
+    await this.runFetch(endpoint, {
+      session_key: this.opts.sessionKey,
+      'date>=': dateFrom,
+      'date<=': dateTo,
+    });
   }
 
   private async fetchCadence(endpoint: OpenF1EndpointName): Promise<void> {
     const cursor = this.cursors.get(endpoint);
-    const query: Record<string, string> = {};
+    const params: OpenF1Params = { session_key: this.opts.sessionKey };
     if (cursor) {
       // 마지막 수신 date 의 직후부터. live-streaming-strategy §4 (커서 폴링).
-      query['date>'] = cursor.toISOString();
+      params['date>'] = cursor.toISOString();
     }
-    await this.runFetch(endpoint, this.buildUrl(endpoint, query));
+    await this.runFetch(endpoint, params);
   }
 
-  private async runFetch(endpoint: OpenF1EndpointName, url: string): Promise<void> {
+  private async runFetch(endpoint: OpenF1EndpointName, params: OpenF1Params): Promise<void> {
     let res: Response;
     try {
-      // 429/5xx 시 Retry-After honor + exponential backoff. cadence 의 다음 tick 까지
-      // 막혀도 setInterval 이 따로 fire 하므로 무한 stack 위험 없음.
-      res = await rateLimitedFetch(this.fetchImpl, url, { sleep: this.opts.sleep });
+      // 429/5xx Retry-After honor + backoff 는 client 소유. client 가 URL/rate-limit/dedup 담당.
+      res = await this.client.fetch({
+        path: `/v1/${endpoint}`,
+        params,
+        priority: priorityFor(endpoint),
+        signal: this.abortController?.signal,
+      });
     } catch (err) {
+      // stop() 으로 취소된 요청은 정상 — 조용히 무시.
+      if (err instanceof Error && err.name === 'AbortError') return;
       console.warn(`[LiveDataSource] ${endpoint} fetch failed`, err);
       return;
     }
@@ -329,16 +345,6 @@ export class LiveDataSource implements DataSource {
     if (!this.newestDate) return;
     const cutoff = this.newestDate.valueOf() - this.ringBufferMs;
     this.locationBuffer.trimBefore(cutoff);
-  }
-
-  private buildUrl(endpoint: OpenF1EndpointName, query: Record<string, string>): string {
-    const params: string[] = [`session_key=${this.opts.sessionKey}`];
-    for (const [k, v] of Object.entries(query)) {
-      const value = encodeURIComponent(v);
-      // OpenF1 query operator-suffix: date>=, date<=, date> 는 키의 일부.
-      params.push(/[<>=]$/.test(k) ? `${k}${value}` : `${k}=${value}`);
-    }
-    return `${this.baseUrl}/v1/${endpoint}?${params.join('&')}`;
   }
 }
 

@@ -2,17 +2,24 @@
 //
 // LiveMap (live-map UI bridge) 통합 회귀 — Phase A.
 // 검증 포인트:
-//  1. mount 시 trackOutlines + pitlane + drivers 3 fetch 병렬 호출 (URL 정확)
+//  1. mount 시 trackOutlines + pitlane (assets, fetchImpl) + drivers (openF1Client) 병렬 호출
 //  2. trackOutline 의 openf1_transform 누락 시 에러 메시지 + 마운트 차단
 //  3. drivers 의 team_colour 가 '#' prefix 로 정규화
 //  4. 로드 성공 후 canvas mount + LiveDataSource start 호출
 //  5. onSample 콜백: raw OpenF1 (x,y) → applyOpenF1Transform → projectToPolyline → buffer.push
 //  6. unmount 시 ds.stop + renderer.stop
 //  7. 에러 상태 + 재시도
+//
+// Step 3 마이그레이션: drivers 만 OpenF1 → createMockOpenF1Client 로 주입. 나머지 5개
+// (track/pitlane/sectors/drs/slm) 는 동일-출처 asset 이라 fetchImpl 로 유지.
 
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { LiveMap } from '../LiveMap';
+import {
+  createMockOpenF1Client,
+  type MockRoute,
+} from '../../shared/__tests__/createMockOpenF1Client.js';
 import type { LiveDataSource, LiveDataSourceOptions } from '../../map/LiveDataSource';
 import type {
   DrsZonesJsonBase,
@@ -100,10 +107,10 @@ function jsonOk(body: unknown): Response {
   });
 }
 
+// 동일-출처 asset fetch mock (track/pitlane/sectors/drs/slm). drivers 는 client 가 담당.
 function makeFetch(opts: {
   trackOverride?: TrackOutlineJson | 'fail' | 'no-transform';
   pitlaneOverride?: PitlaneJsonBase | 'fail' | 404;
-  driversOverride?: unknown[] | 'fail';
   sectorsOverride?: SectorsJsonBase | null;
   drsOverride?: DrsZonesJsonBase | null;
   slmOverride?: SlmZonesJsonBase | null;
@@ -135,12 +142,20 @@ function makeFetch(opts: {
       if (opts.pitlaneOverride === 404) return new Response('', { status: 404 });
       return jsonOk(opts.pitlaneOverride ?? PITLANE_JSON);
     }
-    if (url.includes('/v1/drivers')) {
-      if (opts.driversOverride === 'fail') return new Response('', { status: 500 });
-      return jsonOk(opts.driversOverride ?? DRIVERS_JSON);
-    }
     throw new Error(`unexpected fetch: ${url}`);
   });
+}
+
+// drivers (OpenF1) 전용 mock client. default 성공, 'fail' → 500.
+// fail 케이스는 maxRetries:0 — LiveMap 의 에러 표시만 검증한다 (client 의 5xx 재시도는
+// openf1Client.test 가 cover). 재시도를 끄면 console.warn 노이즈도 없다.
+function makeDriversClient(override?: unknown[] | 'fail') {
+  const route: MockRoute = () =>
+    override === 'fail' ? new Response('', { status: 500 }) : jsonOk(override ?? DRIVERS_JSON);
+  return createMockOpenF1Client(
+    { '/v1/drivers': route },
+    override === 'fail' ? { maxRetries: 0 } : {},
+  );
 }
 
 const SAMPLE_SECTORS: SectorsJsonBase = {
@@ -207,8 +222,9 @@ function makeStubFactory(): {
 // ── tests ───────────────────────────────────────────────────────────────
 
 describe('LiveMap — asset loading', () => {
-  it('mount 시 track + pitlane + drivers + sectors + drs + slm 6 fetch 병렬 호출', async () => {
+  it('mount 시 track + pitlane + sectors + drs + slm 5 asset(fetchImpl) + drivers 1 (client) 병렬', async () => {
     const fetchImpl = makeFetch({});
+    const { client, fetchMock } = makeDriversClient();
     const { factory } = makeStubFactory();
     render(
       <LiveMap
@@ -216,21 +232,27 @@ describe('LiveMap — asset loading', () => {
         circuitKey={63}
         year={2024}
         fetchImpl={fetchImpl as unknown as typeof fetch}
+        client={client}
         dataSourceFactory={factory}
       />,
     );
-    await waitFor(() => expect(fetchImpl).toHaveBeenCalledTimes(6));
+    await waitFor(() => expect(fetchImpl).toHaveBeenCalledTimes(5));
     const urls = fetchImpl.mock.calls.map((c) => String(c[0]));
     expect(urls).toContain('/trackOutlines/63-2024.json');
     expect(urls).toContain('/trackOutlines/pitlane_63-2024.json');
     expect(urls).toContain('/trackOutlines/sectors_63-2024.json');
     expect(urls).toContain('/trackOutlines/drsZones_63-2024.json');
     expect(urls).toContain('/trackOutlines/slmZones_63-2024.json');
-    expect(urls.some((u) => u.includes('/v1/drivers?session_key=9472'))).toBe(true);
+    // drivers 는 client 경유 — fetchImpl 에는 안 잡힘.
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    const driversUrl = String(fetchMock.mock.calls[0][0]);
+    expect(driversUrl).toContain('/v1/drivers');
+    expect(driversUrl).toContain('session_key=9472');
   });
 
   it('pitlane 404 시 정상 마운트 (pitlane optional)', async () => {
     const fetchImpl = makeFetch({ pitlaneOverride: 404 });
+    const { client } = makeDriversClient();
     const { factory, lastInstance } = makeStubFactory();
     render(
       <LiveMap
@@ -238,6 +260,7 @@ describe('LiveMap — asset loading', () => {
         circuitKey={63}
         year={2024}
         fetchImpl={fetchImpl as unknown as typeof fetch}
+        client={client}
         dataSourceFactory={factory}
       />,
     );
@@ -253,6 +276,7 @@ describe('LiveMap — asset loading', () => {
           resolvers.push(() => r(jsonOk(TRACK_JSON)));
         }),
     );
+    const { client } = makeDriversClient();
     const { factory } = makeStubFactory();
     render(
       <LiveMap
@@ -260,6 +284,7 @@ describe('LiveMap — asset loading', () => {
         circuitKey={63}
         year={2024}
         fetchImpl={fetchImpl as unknown as typeof fetch}
+        client={client}
         dataSourceFactory={factory}
       />,
     );
@@ -271,6 +296,7 @@ describe('LiveMap — asset loading', () => {
 describe('LiveMap — 에러 처리', () => {
   it('trackOutline fetch 실패 → 에러 메시지 + Retry 버튼', async () => {
     const fetchImpl = makeFetch({ trackOverride: 'fail' });
+    const { client } = makeDriversClient();
     const { factory } = makeStubFactory();
     render(
       <LiveMap
@@ -278,6 +304,7 @@ describe('LiveMap — 에러 처리', () => {
         circuitKey={63}
         year={2024}
         fetchImpl={fetchImpl as unknown as typeof fetch}
+        client={client}
         dataSourceFactory={factory}
       />,
     );
@@ -288,6 +315,7 @@ describe('LiveMap — 에러 처리', () => {
 
   it('openf1_transform 누락 시 명시적 에러', async () => {
     const fetchImpl = makeFetch({ trackOverride: 'no-transform' });
+    const { client } = makeDriversClient();
     const { factory } = makeStubFactory();
     render(
       <LiveMap
@@ -295,6 +323,7 @@ describe('LiveMap — 에러 처리', () => {
         circuitKey={63}
         year={2024}
         fetchImpl={fetchImpl as unknown as typeof fetch}
+        client={client}
         dataSourceFactory={factory}
       />,
     );
@@ -307,7 +336,8 @@ describe('LiveMap — 에러 처리', () => {
   });
 
   it('drivers fetch 실패 → 에러 메시지', async () => {
-    const fetchImpl = makeFetch({ driversOverride: 'fail' });
+    const fetchImpl = makeFetch({});
+    const { client } = makeDriversClient('fail');
     const { factory } = makeStubFactory();
     render(
       <LiveMap
@@ -315,6 +345,7 @@ describe('LiveMap — 에러 처리', () => {
         circuitKey={63}
         year={2024}
         fetchImpl={fetchImpl as unknown as typeof fetch}
+        client={client}
         dataSourceFactory={factory}
       />,
     );
@@ -331,9 +362,9 @@ describe('LiveMap — 에러 처리', () => {
         return trackCalls === 1 ? new Response('', { status: 500 }) : jsonOk(TRACK_JSON);
       }
       if (url.includes('pitlane_')) return new Response('', { status: 404 });
-      if (url.includes('/v1/drivers')) return jsonOk(DRIVERS_JSON);
       throw new Error(`unexpected: ${url}`);
     });
+    const { client } = makeDriversClient();
     const { factory } = makeStubFactory();
     render(
       <LiveMap
@@ -341,6 +372,7 @@ describe('LiveMap — 에러 처리', () => {
         circuitKey={63}
         year={2024}
         fetchImpl={fetchImpl as unknown as typeof fetch}
+        client={client}
         dataSourceFactory={factory}
       />,
     );
@@ -354,6 +386,7 @@ describe('LiveMap — 에러 처리', () => {
 describe('LiveMap — LiveDataSource onSample 콜백 (raw → projected → buffer)', () => {
   it('factory 가 sessionKey + onSample 받아서 호출됨', async () => {
     const fetchImpl = makeFetch({});
+    const { client } = makeDriversClient();
     const { factory, lastInstance } = makeStubFactory();
     render(
       <LiveMap
@@ -361,6 +394,7 @@ describe('LiveMap — LiveDataSource onSample 콜백 (raw → projected → buff
         circuitKey={63}
         year={2024}
         fetchImpl={fetchImpl as unknown as typeof fetch}
+        client={client}
         dataSourceFactory={factory}
       />,
     );
@@ -373,6 +407,7 @@ describe('LiveMap — LiveDataSource onSample 콜백 (raw → projected → buff
 
   it('onSample 호출 시 transform + projection 적용 (raw=(100,200)는 정사각 polyline (500,500) 안)', async () => {
     const fetchImpl = makeFetch({});
+    const { client } = makeDriversClient();
     const { factory, lastInstance } = makeStubFactory();
     render(
       <LiveMap
@@ -380,6 +415,7 @@ describe('LiveMap — LiveDataSource onSample 콜백 (raw → projected → buff
         circuitKey={63}
         year={2024}
         fetchImpl={fetchImpl as unknown as typeof fetch}
+        client={client}
         dataSourceFactory={factory}
       />,
     );
@@ -408,6 +444,7 @@ describe('LiveMap — LiveDataSource onSample 콜백 (raw → projected → buff
 describe('LiveMap — Phase 9/10/11 overlays', () => {
   it('sectors/drs/slm 404 (없음) 시 정상 마운트 + 에러 없음', async () => {
     const fetchImpl = makeFetch({});
+    const { client } = makeDriversClient();
     const { factory, lastInstance } = makeStubFactory();
     render(
       <LiveMap
@@ -415,6 +452,7 @@ describe('LiveMap — Phase 9/10/11 overlays', () => {
         circuitKey={63}
         year={2024}
         fetchImpl={fetchImpl as unknown as typeof fetch}
+        client={client}
         dataSourceFactory={factory}
       />,
     );
@@ -424,6 +462,7 @@ describe('LiveMap — Phase 9/10/11 overlays', () => {
 
   it('sectors 200 + drs/slm 404 시 정상 마운트', async () => {
     const fetchImpl = makeFetch({ sectorsOverride: SAMPLE_SECTORS });
+    const { client } = makeDriversClient();
     const { factory } = makeStubFactory();
     render(
       <LiveMap
@@ -431,6 +470,7 @@ describe('LiveMap — Phase 9/10/11 overlays', () => {
         circuitKey={63}
         year={2024}
         fetchImpl={fetchImpl as unknown as typeof fetch}
+        client={client}
         dataSourceFactory={factory}
       />,
     );
@@ -439,6 +479,7 @@ describe('LiveMap — Phase 9/10/11 overlays', () => {
 
   it('drs/slm 200 시 정상 마운트 (overlay 데이터 로드 성공)', async () => {
     const fetchImpl = makeFetch({ drsOverride: SAMPLE_DRS, slmOverride: SAMPLE_SLM });
+    const { client } = makeDriversClient();
     const { factory } = makeStubFactory();
     render(
       <LiveMap
@@ -446,6 +487,7 @@ describe('LiveMap — Phase 9/10/11 overlays', () => {
         circuitKey={63}
         year={2024}
         fetchImpl={fetchImpl as unknown as typeof fetch}
+        client={client}
         dataSourceFactory={factory}
       />,
     );
@@ -454,6 +496,7 @@ describe('LiveMap — Phase 9/10/11 overlays', () => {
 
   it('isReplay=true 시에도 mount 동작 정상 (DRS 게이트 활성화)', async () => {
     const fetchImpl = makeFetch({ drsOverride: SAMPLE_DRS });
+    const { client } = makeDriversClient();
     const { factory } = makeStubFactory();
     render(
       <LiveMap
@@ -461,6 +504,7 @@ describe('LiveMap — Phase 9/10/11 overlays', () => {
         circuitKey={63}
         year={2024}
         fetchImpl={fetchImpl as unknown as typeof fetch}
+        client={client}
         dataSourceFactory={factory}
         isReplay
       />,
@@ -472,6 +516,7 @@ describe('LiveMap — Phase 9/10/11 overlays', () => {
 describe('LiveMap — unmount cleanup', () => {
   it('unmount 시 ds.stop 호출', async () => {
     const fetchImpl = makeFetch({});
+    const { client } = makeDriversClient();
     const { factory, lastInstance } = makeStubFactory();
     const { unmount } = render(
       <LiveMap
@@ -479,6 +524,7 @@ describe('LiveMap — unmount cleanup', () => {
         circuitKey={63}
         year={2024}
         fetchImpl={fetchImpl as unknown as typeof fetch}
+        client={client}
         dataSourceFactory={factory}
       />,
     );
@@ -491,6 +537,7 @@ describe('LiveMap — unmount cleanup', () => {
 describe('LiveMap — onBack 버튼', () => {
   it('onBack prop 제공 시 Back 버튼 렌더 + 클릭 시 호출', async () => {
     const fetchImpl = makeFetch({});
+    const { client } = makeDriversClient();
     const { factory } = makeStubFactory();
     const onBack = vi.fn();
     render(
@@ -499,6 +546,7 @@ describe('LiveMap — onBack 버튼', () => {
         circuitKey={63}
         year={2024}
         fetchImpl={fetchImpl as unknown as typeof fetch}
+        client={client}
         dataSourceFactory={factory}
         onBack={onBack}
       />,

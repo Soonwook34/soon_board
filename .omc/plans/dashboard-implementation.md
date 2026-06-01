@@ -424,6 +424,8 @@ class LeaderboardPanel {
 
 ## 5. 데이터 흐름 통합 (라이브맵과 공유)
 
+> **2026-06 update — OpenF1Client 도입**: 모든 브라우저 OpenF1 호출은 `src/shared/openf1Client.ts` 싱글톤을 통해 routing 된다 (token bucket 3 req/s + priority queue + dedup + 429 backoff). LiveDataSource/ReplayDataSource 는 fetch 디테일을 client 에 위임하며, DataSource 인터페이스와 panel 코드는 변경 없음. 자세한 내용은 [openf1-client.md](./openf1-client.md) 참고.
+
 ```
 OpenF1 API (REST, 무료/익명)
   │

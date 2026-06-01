@@ -16,6 +16,10 @@ import { LiveDataSource } from '../LiveDataSource.js';
 import { PerDriverBuffer } from '../PerDriverBuffer.js';
 import { DEFAULT_THRESHOLDS, interpolatePosition, type DriverSample } from '../interpolation.js';
 import type { Point2D } from '../viewport.js';
+import {
+  createMockOpenF1Client,
+  type MockRoute,
+} from '../../shared/__tests__/createMockOpenF1Client.js';
 
 function jsonResponse(body: unknown, status = 200): Response {
   return new Response(JSON.stringify(body), {
@@ -28,6 +32,12 @@ function locationRecord(driver: number, dateIso: string, x: number, y: number, z
   return { driver_number: driver, session_key: 9472, meeting_key: 1234, date: dateIso, x, y, z };
 }
 
+// fetch 는 client 에 위임 — mock client 에 URL-switching fallback 주입. maxConcurrent=8
+// (=LIVE_CADENCE 길이) 로 hydration 8건이 in-flight cap 없이 한 번에 나가게 한다.
+function makeClient(respond: MockRoute) {
+  return createMockOpenF1Client({}, { fallback: respond, maxConcurrent: 8 });
+}
+
 describe('LiveDataSource — wall-clock 60s gap + 복귀 (인수 12)', () => {
   it('초기 sample 후 wall-clock 60s 진행 → displayTime 가 anchor + drift 로 자연 진행', async () => {
     // 시각 모델:
@@ -38,8 +48,7 @@ describe('LiveDataSource — wall-clock 60s gap + 복귀 (인수 12)', () => {
     const now = () => new Date(wallMs);
 
     let firstCall = true;
-    const fetchImpl = vi.fn(async (input: RequestInfo | URL) => {
-      const url = typeof input === 'string' ? input : input.toString();
+    const { client } = makeClient((url) => {
       if (url.includes('/v1/location')) {
         if (firstCall) {
           firstCall = false;
@@ -52,13 +61,7 @@ describe('LiveDataSource — wall-clock 60s gap + 복귀 (인수 12)', () => {
       return jsonResponse([]);
     });
 
-    const ds = new LiveDataSource({
-      sessionKey: 9472,
-      fetchImpl: fetchImpl as unknown as typeof fetch,
-      hydrationTokenIntervalMs: 0,
-      sleep: async () => {},
-      now,
-    });
+    const ds = new LiveDataSource({ sessionKey: 9472, client, now });
     await ds.start();
 
     const initialDisplay = ds.getDisplayTime();
@@ -85,8 +88,7 @@ describe('LiveDataSource — wall-clock 60s gap + 복귀 (인수 12)', () => {
     let wallMs = 0;
     const now = () => new Date(wallMs);
 
-    const fetchImpl = vi.fn(async (input: RequestInfo | URL) => {
-      const url = typeof input === 'string' ? input : input.toString();
+    const { client } = makeClient((url) => {
       if (!url.includes('/v1/location')) return jsonResponse([]);
       // wall < 60_000: 초기 sample. wall ≥ 60_000: 신규 sample (gap 후 첫 cadence).
       if (wallMs === 0) {
@@ -98,13 +100,7 @@ describe('LiveDataSource — wall-clock 60s gap + 복귀 (인수 12)', () => {
       return jsonResponse([]);
     });
 
-    const ds = new LiveDataSource({
-      sessionKey: 9472,
-      fetchImpl: fetchImpl as unknown as typeof fetch,
-      hydrationTokenIntervalMs: 0,
-      sleep: async () => {},
-      now,
-    });
+    const ds = new LiveDataSource({ sessionKey: 9472, client, now });
     const startP = ds.start();
     for (let i = 0; i < 30; i++) await Promise.resolve();
     await startP;
@@ -172,8 +168,7 @@ describe('LiveDataSource — stream state 전이 (인수 12 보조)', () => {
     let wallMs = 0;
     const now = () => new Date(wallMs);
     let firstCall = true;
-    const fetchImpl = vi.fn(async (input: RequestInfo | URL) => {
-      const url = typeof input === 'string' ? input : input.toString();
+    const { client } = makeClient((url) => {
       if (url.includes('/v1/location')) {
         if (firstCall) {
           firstCall = false;
@@ -182,13 +177,7 @@ describe('LiveDataSource — stream state 전이 (인수 12 보조)', () => {
       }
       return jsonResponse([]);
     });
-    const ds = new LiveDataSource({
-      sessionKey: 9472,
-      fetchImpl: fetchImpl as unknown as typeof fetch,
-      hydrationTokenIntervalMs: 0,
-      sleep: async () => {},
-      now,
-    });
+    const ds = new LiveDataSource({ sessionKey: 9472, client, now });
     expect(ds.getStreamState()).toBe('buffering'); // start 전
     await ds.start();
     expect(ds.getStreamState()).toBe('live'); // sample 직후

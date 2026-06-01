@@ -94,7 +94,8 @@ export function ReplayScreen({ pingImpl }: ReplayScreenProps = {}) {
         sessionKey: opts.sessionKey,
         sessionDateStart: dateStart,
         sessionDateEnd: dateEnd,
-        fetchImpl: opts.fetchImpl,
+        // LiveMap 이 넘긴 client 위임 (drivers/live 와 동일 싱글톤). production 은 싱글톤, 테스트는 mock.
+        client: opts.client,
         onSample: opts.onSample,
       });
   }, [sessionDateStartIso, sessionDateEndIso]);

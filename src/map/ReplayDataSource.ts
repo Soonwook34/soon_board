@@ -24,13 +24,15 @@ import type {
   StreamState,
 } from '../shared/DataSource.js';
 import { LocationBuffer, parseDate } from './LocationBuffer.js';
-import { rateLimitedFetch } from './rateLimitedFetch.js';
+import {
+  openF1Client,
+  type OpenF1Client,
+  type OpenF1Params,
+  type RequestPriority,
+} from '../shared/openf1Client.js';
 
-const DEFAULT_BASE_URL = 'https://api.openf1.org';
 const DEFAULT_WINDOW_MS = 60_000;
 const DEFAULT_LOOKAHEAD_BASE_MS = 60_000;
-// OpenF1 burst limit 회피 — LiveDataSource hydration 과 동일 (3 req/s).
-const DEFAULT_REQUEST_SPREAD_MS = 334;
 
 /** replay-strategy.md §3.1 — session_key 만으로 1회 fetch (full session). */
 export const SPARSE_ENDPOINTS: readonly OpenF1EndpointName[] = [
@@ -49,14 +51,24 @@ export const DENSE_ENDPOINTS: readonly OpenF1EndpointName[] = [
   'intervals',
 ];
 
+/**
+ * dense 중 location/position 은 마커 위치라 'high' (사용자가 직접 보는 데이터), intervals 는 'normal'.
+ * sparse 6개는 전부 'normal'. ping/revalidate 의 'low' 와 구분 (plan §Step5).
+ */
+const DENSE_HIGH_PRIORITY = new Set<OpenF1EndpointName>(['location', 'position']);
+
+function densePriority(endpoint: OpenF1EndpointName): RequestPriority {
+  return DENSE_HIGH_PRIORITY.has(endpoint) ? 'high' : 'normal';
+}
+
 export interface ReplayDataSourceOptions {
   sessionKey: number;
   /** 윈도우 grid snap 기준 시각 (sessions.date_start). */
   sessionDateStart: Date;
   /** 세션 끝 (date_end). speed change/seek 시 윈도우 상한 bound (선택). */
   sessionDateEnd?: Date;
-  baseUrl?: string;
-  fetchImpl?: typeof fetch;
+  /** 모든 OpenF1 fetch 를 위임하는 client (rate-limit/dedup/backoff 소유). 기본 싱글톤 openF1Client. */
+  client?: OpenF1Client;
   windowMs?: number;
   lookaheadBaseMs?: number;
   /**
@@ -64,10 +76,6 @@ export interface ReplayDataSourceOptions {
    * replay-strategy §4.1: playback_clock += dt × speed. 본 옵션이 그 dt 의 wall-clock 주기.
    */
   clockTickIntervalMs?: number;
-  /** burst 분산 간격 (ms). 기본 334 (≈3 req/s, OpenF1 burst limit 회피). 0 = 즉시 모두. */
-  requestSpreadMs?: number;
-  /** sleep injection (테스트). 기본 setTimeout. backoff/spread 둘 다에 사용. */
-  sleep?: (ms: number) => Promise<void>;
   /**
    * UI bridge 가 raw LocationSample → projected DriverSample 변환 후 PerDriverBuffer 에 push 하는 hook.
    * LiveDataSource.onSample 과 동일 시맨틱 — dense location 윈도우 fetch 시 sample 마다 1회 호출.
@@ -77,8 +85,7 @@ export interface ReplayDataSourceOptions {
 }
 
 export class ReplayDataSource implements DataSource {
-  private readonly baseUrl: string;
-  private readonly fetchImpl: typeof fetch;
+  private readonly client: OpenF1Client;
   private readonly windowMs: number;
   private readonly lookaheadBaseMs: number;
   private readonly sessionStartMs: number;
@@ -101,10 +108,11 @@ export class ReplayDataSource implements DataSource {
   private lastTickWallMs = 0;
   /** lookahead 재발사 throttle — 매 tick 마다 호출하면 cache hit 만 누적되지만 약간 비효율. */
   private lastLookaheadAt = 0;
+  /** start() 에서 생성, stop() 에서 abort+null — queued/in-flight client 요청 취소 (싱글톤 공유). */
+  private abortController: AbortController | null = null;
 
   constructor(private readonly opts: ReplayDataSourceOptions) {
-    this.baseUrl = opts.baseUrl ?? DEFAULT_BASE_URL;
-    this.fetchImpl = opts.fetchImpl ?? globalThis.fetch.bind(globalThis);
+    this.client = opts.client ?? openF1Client;
     this.windowMs = opts.windowMs ?? DEFAULT_WINDOW_MS;
     this.lookaheadBaseMs = opts.lookaheadBaseMs ?? DEFAULT_LOOKAHEAD_BASE_MS;
     this.sessionStartMs = opts.sessionDateStart.valueOf();
@@ -115,32 +123,32 @@ export class ReplayDataSource implements DataSource {
 
   /**
    * sparse 6개 + 첫 lookahead 윈도우들 prefetch + playback_clock 자동 증가 시작.
-   * 시작 burst 분산 — 모두 동시 발사하면 OpenF1 burst limit (~3-5 req/s) 에서 429.
-   * sparse 6개를 requestSpreadMs 간격으로 launch (각자는 병렬 진행) → 평균 3 req/s.
+   * sparse 6개를 SPARSE_ENDPOINTS 순서대로 동기 enqueue → client token bucket 이 3 req/s 로
+   * 분산하므로 자체 spread sleep 불필요 (구 requestSpreadMs 제거, OpenF1 burst limit 회피는 client).
    */
   async start(): Promise<void> {
-    const spread = this.opts.requestSpreadMs ?? DEFAULT_REQUEST_SPREAD_MS;
-    const sleep = this.opts.sleep ?? ((ms) => new Promise<void>((r) => setTimeout(r, ms)));
-    const sparsePromises: Promise<void>[] = [];
-    for (let i = 0; i < SPARSE_ENDPOINTS.length; i++) {
-      if (i > 0 && spread > 0) await sleep(spread);
-      sparsePromises.push(this.fetchSparse(SPARSE_ENDPOINTS[i]));
-    }
-    await Promise.all(sparsePromises);
+    this.abortController = new AbortController();
+    await Promise.all(SPARSE_ENDPOINTS.map((ep) => this.fetchSparse(ep)));
+    // stop() 이 sparse 도중 호출되면 (unmount) lookahead/tick 등록 skip — abortController 가 null.
+    if (this.abortController === null) return;
     await this.ensureLookahead();
+    if (this.abortController === null) return;
     this.state = 'live';
     this.startClockTick();
   }
 
   /**
-   * LiveMap unmount 시 호출 — tick timer + listener 정리 + state 표시.
-   * pull-based fetch 의 in-flight Promise 는 자연 resolve 되므로 별도 abort 불필요.
+   * LiveMap unmount 시 호출 — tick timer + listener 정리 + in-flight client 요청 abort.
+   * 싱글톤 client 를 공유하므로, unmount 후 남은 lookahead 요청이 다음 세션 fetch 와 토큰을
+   * 경쟁하지 않도록 취소한다 (queued/in-flight 모두). LiveDataSource.stop() 과 대칭.
    */
   stop(): void {
     if (this.tickTimer !== null) {
       clearInterval(this.tickTimer);
       this.tickTimer = null;
     }
+    this.abortController?.abort();
+    this.abortController = null;
     this.listeners.clear();
     this.state = 'buffering';
   }
@@ -307,8 +315,7 @@ export class ReplayDataSource implements DataSource {
     if (this.cache.has(key)) return;
     const pending = this.inflight.get(key);
     if (pending) return pending;
-    const url = `${this.baseUrl}/v1/${endpoint}?session_key=${this.opts.sessionKey}`;
-    const p = this.runFetch(endpoint, key, url);
+    const p = this.runFetch(endpoint, key, { session_key: this.opts.sessionKey }, 'normal');
     this.inflight.set(key, p);
     try {
       await p;
@@ -324,13 +331,13 @@ export class ReplayDataSource implements DataSource {
     const pending = this.inflight.get(key);
     if (pending) return pending;
     const endIso = new Date(windowStart.valueOf() + this.windowMs).toISOString();
-    // OpenF1 operator-suffix key 규약 (openf1Client.ts 와 동일). 반-개구간 [T, T+W) — date<= 아닌 date<.
-    const url =
-      `${this.baseUrl}/v1/${endpoint}` +
-      `?session_key=${this.opts.sessionKey}` +
-      `&date>=${encodeURIComponent(iso)}` +
-      `&date<${encodeURIComponent(endIso)}`;
-    const p = this.runFetch(endpoint, key, url);
+    // 반-개구간 [T, T+W) — date<= 아닌 date< (우-열림). operator-suffix/URL/encoding 은 client 가 담당.
+    const params: OpenF1Params = {
+      session_key: this.opts.sessionKey,
+      'date>=': iso,
+      'date<': endIso,
+    };
+    const p = this.runFetch(endpoint, key, params, densePriority(endpoint));
     this.inflight.set(key, p);
     try {
       await p;
@@ -342,13 +349,21 @@ export class ReplayDataSource implements DataSource {
   private async runFetch(
     endpoint: OpenF1EndpointName,
     cacheKey: string,
-    url: string,
+    params: OpenF1Params,
+    priority: RequestPriority,
   ): Promise<void> {
     let res: Response;
     try {
-      // 429/5xx 시 rateLimitedFetch 가 Retry-After honor + exponential backoff 자동 처리.
-      res = await rateLimitedFetch(this.fetchImpl, url, { sleep: this.opts.sleep });
+      // 429/5xx Retry-After honor + backoff 는 client 소유. client 가 URL/rate-limit/dedup 담당.
+      res = await this.client.fetch({
+        path: `/v1/${endpoint}`,
+        params,
+        priority,
+        signal: this.abortController?.signal,
+      });
     } catch (err) {
+      // stop() 으로 취소된 요청은 정상 — 조용히 무시.
+      if (err instanceof Error && err.name === 'AbortError') return;
       console.warn(`[ReplayDataSource] ${endpoint} fetch failed`, err);
       return;
     }

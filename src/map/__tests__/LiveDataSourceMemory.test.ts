@@ -12,12 +12,27 @@
 import { describe, expect, it, vi } from 'vitest';
 import { LiveDataSource } from '../LiveDataSource.js';
 import { ReplayDataSource } from '../ReplayDataSource.js';
+import {
+  createMockOpenF1Client,
+  type MockRoute,
+} from '../../shared/__tests__/createMockOpenF1Client.js';
 
 function jsonResponse(body: unknown, status = 200): Response {
   return new Response(JSON.stringify(body), {
     status,
     headers: { 'content-type': 'application/json' },
   });
+}
+
+// LiveDataSource/ReplayDataSource 의 OpenF1 fetch 는 client 에 위임 — mock client 주입.
+// Live: maxConcurrent=8 (=LIVE_CADENCE 길이, hydration 8건 동시발사).
+// Replay: maxConcurrent=100 (sparse6+dense lookahead 동시발사가 in-flight cap 에 안 막히게).
+function makeLiveClient(respond: MockRoute) {
+  return createMockOpenF1Client({}, { fallback: respond, maxConcurrent: 8 });
+}
+
+function makeReplayClient() {
+  return createMockOpenF1Client({}, { fallback: () => jsonResponse([]), maxConcurrent: 100 });
 }
 
 // D1: LocationBuffer 공유 클래스로 추출됨 — totalSampleCount() / driverCount() API 사용.
@@ -44,8 +59,7 @@ describe('LiveDataSource — sustained-input 메모리 invariant (인수 10)', (
     const RING_BUFFER_MS = 60_000;
 
     let cycle = 0;
-    const fetchImpl = vi.fn(async (input: RequestInfo | URL) => {
-      const url = typeof input === 'string' ? input : input.toString();
+    const { client } = makeLiveClient((url) => {
       if (url.includes('/v1/location')) {
         const samples = [];
         for (let d = 1; d <= DRIVERS; d++) {
@@ -68,12 +82,7 @@ describe('LiveDataSource — sustained-input 메모리 invariant (인수 10)', (
     });
 
     vi.useFakeTimers();
-    const ds = new LiveDataSource({
-      sessionKey: 9472,
-      fetchImpl: fetchImpl as unknown as typeof fetch,
-      hydrationTokenIntervalMs: 0,
-      sleep: async () => {},
-    });
+    const ds = new LiveDataSource({ sessionKey: 9472, client });
     const startP = ds.start();
     // hydration flush
     for (let i = 0; i < 30; i++) await Promise.resolve();
@@ -117,10 +126,8 @@ describe('LiveDataSource — sustained-input 메모리 invariant (인수 10)', (
   });
 
   it('listener subscribe → unsubscribe → resubscribe 후 listeners Set 크기 1 (누적 leak 없음)', () => {
-    const ds = new LiveDataSource({
-      sessionKey: 9472,
-      fetchImpl: vi.fn() as unknown as typeof fetch,
-    });
+    const { client } = makeLiveClient(() => jsonResponse([]));
+    const ds = new LiveDataSource({ sessionKey: 9472, client });
     const internals = ds as unknown as LiveInternals;
     const unsub1 = ds.onDisplayTimeChange(() => {});
     const unsub2 = ds.onDisplayTimeChange(() => {});
@@ -136,15 +143,12 @@ describe('LiveDataSource — sustained-input 메모리 invariant (인수 10)', (
 
 describe('ReplayDataSource — seek 누적 invariant', () => {
   it('100 seek (각 다른 윈도우) 후 cache size = seek 수 × 3 dense endpoint, inflight = 0', async () => {
-    const fetchImpl = vi.fn(async (input: RequestInfo | URL) => {
-      void input;
-      return jsonResponse([]);
-    });
+    const { client } = makeReplayClient();
     const SESSION_START = new Date('2024-03-02T15:00:23.000Z');
     const ds = new ReplayDataSource({
       sessionKey: 9472,
       sessionDateStart: SESSION_START,
-      fetchImpl: fetchImpl as unknown as typeof fetch,
+      client,
       lookaheadBaseMs: 60_000,
       windowMs: 60_000,
     });
@@ -170,20 +174,17 @@ describe('ReplayDataSource — seek 누적 invariant', () => {
   });
 
   it('동일 윈도우 재seek 100회 후 cache 크기 baseline 그대로 (hit, 신규 fetch 없음)', async () => {
-    const fetchImpl = vi.fn(async (input: RequestInfo | URL) => {
-      void input;
-      return jsonResponse([]);
-    });
+    const { client, fetchMock } = makeReplayClient();
     const SESSION_START = new Date('2024-03-02T15:00:23.000Z');
     const ds = new ReplayDataSource({
       sessionKey: 9472,
       sessionDateStart: SESSION_START,
-      fetchImpl: fetchImpl as unknown as typeof fetch,
+      client,
       lookaheadBaseMs: 60_000,
       windowMs: 60_000,
     });
     await ds.start();
-    const baselineCalls = fetchImpl.mock.calls.length;
+    const baselineCalls = fetchMock.mock.calls.length;
 
     for (let i = 0; i < 100; i++) {
       ds.setPlaybackClock(SESSION_START);
@@ -191,6 +192,6 @@ describe('ReplayDataSource — seek 누적 invariant', () => {
     }
 
     // 같은 윈도우 재seek 는 cache hit — 신규 fetch 0 (cadence 가 정확히 일치).
-    expect(fetchImpl.mock.calls.length).toBe(baselineCalls);
+    expect(fetchMock.mock.calls.length).toBe(baselineCalls);
   });
 });

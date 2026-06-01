@@ -1,6 +1,10 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { _resetCatalogStore, configureCatalogStore, getSeason, loadSeason } from '../catalogStore';
 import { revalidateCurrentSeason } from '../revalidateSeason';
+import {
+  createMockOpenF1Client,
+  type MockRoute,
+} from '../../../shared/__tests__/createMockOpenF1Client';
 import type { SeasonData } from '../../../shared/seasonData';
 
 function jsonResponse(body: unknown, status = 200): Response {
@@ -44,28 +48,24 @@ afterEach(() => {
 
 describe('revalidateCurrentSeason', () => {
   it('returns [] immediately when no cached season exists (no fetch)', async () => {
-    const fetchImpl = vi.fn();
-    const result = await revalidateCurrentSeason(2026, { fetchImpl: fetchImpl as unknown as typeof fetch });
+    const { client, fetchMock } = createMockOpenF1Client();
+    const result = await revalidateCurrentSeason(2026, { client });
     expect(result).toEqual([]);
-    expect(fetchImpl).not.toHaveBeenCalled();
+    expect(fetchMock).not.toHaveBeenCalled();
   });
 
   it('returns [] when fresh data matches cached (no patch)', async () => {
     await primeSeasonCache();
-    const seenUrls: string[] = [];
-    const fetchImpl = vi.fn(async (url: RequestInfo | URL) => {
-      seenUrls.push(String(url));
-      return jsonResponse([
+    const respond: MockRoute = () =>
+      jsonResponse([
         { session_key: 9472, date_start: '2026-03-15T05:00:00Z', date_end: '2026-03-15T07:00:00Z' },
       ]);
-    });
-    const result = await revalidateCurrentSeason(2026, {
-      fetchImpl: fetchImpl as unknown as typeof fetch,
-      openf1Url: (y) => `https://example/sessions?year=${y}`,
-    });
+    const { client, fetchMock } = createMockOpenF1Client({}, { fallback: respond });
+    const result = await revalidateCurrentSeason(2026, { client });
     expect(result).toEqual([]);
-    expect(fetchImpl).toHaveBeenCalledTimes(1);
-    expect(seenUrls[0]).toBe('https://example/sessions?year=2026');
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    // client 가 path+params 로 빌드한 URL (구 openf1Url override 제거).
+    expect(String(fetchMock.mock.calls[0][0])).toBe('https://api.openf1.org/v1/sessions?year=2026');
     // cached object reference unchanged (no patch)
     expect(getSeason(2026)).toBeTruthy();
     expect(getSeason(2026)!.meetings[0].sessions[0].date_start).toBe('2026-03-15T05:00:00Z');
@@ -74,14 +74,12 @@ describe('revalidateCurrentSeason', () => {
   it('patches cached season and returns change list when fresh differs', async () => {
     await primeSeasonCache();
     const before = getSeason(2026)!;
-    const fetchImpl = vi.fn(async () =>
+    const respond: MockRoute = () =>
       jsonResponse([
         { session_key: 9472, date_start: '2026-03-15T06:00:00Z', is_cancelled: true },
-      ]),
-    );
-    const result = await revalidateCurrentSeason(2026, {
-      fetchImpl: fetchImpl as unknown as typeof fetch,
-    });
+      ]);
+    const { client } = createMockOpenF1Client({}, { fallback: respond });
+    const result = await revalidateCurrentSeason(2026, { client });
     expect(result).toHaveLength(2);
     expect(result.map((c) => c.field).sort()).toEqual(['date_start', 'is_cancelled']);
     const after = getSeason(2026)!;
@@ -93,12 +91,11 @@ describe('revalidateCurrentSeason', () => {
   it('returns [] silently on fetch rejection (no throw, no patch)', async () => {
     await primeSeasonCache();
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    const fetchImpl = vi.fn(async () => {
+    const respond: MockRoute = () => {
       throw new TypeError('network down');
-    });
-    const result = await revalidateCurrentSeason(2026, {
-      fetchImpl: fetchImpl as unknown as typeof fetch,
-    });
+    };
+    const { client } = createMockOpenF1Client({}, { fallback: respond });
+    const result = await revalidateCurrentSeason(2026, { client });
     expect(result).toEqual([]);
     expect(warn).toHaveBeenCalled();
   });
@@ -106,21 +103,17 @@ describe('revalidateCurrentSeason', () => {
   it('returns [] silently when fetch aborts due to timeout', async () => {
     await primeSeasonCache();
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    // never-resolving fetch that respects abort signal
-    const fetchImpl = vi.fn(
-      (_input: RequestInfo | URL, init?: RequestInit) =>
-        new Promise<Response>((_, reject) => {
-          init?.signal?.addEventListener('abort', () => {
-            const err = new Error('Aborted');
-            err.name = 'AbortError';
-            reject(err);
-          });
-        }),
-    );
-    const result = await revalidateCurrentSeason(2026, {
-      fetchImpl: fetchImpl as unknown as typeof fetch,
-      timeoutMs: 5,
-    });
+    // never-resolving fetch that respects the (client-internal) abort signal.
+    const respond: MockRoute = (_url, init) =>
+      new Promise<Response>((_, reject) => {
+        init.signal.addEventListener('abort', () => {
+          const err = new Error('Aborted');
+          err.name = 'AbortError';
+          reject(err);
+        });
+      });
+    const { client } = createMockOpenF1Client({}, { fallback: respond });
+    const result = await revalidateCurrentSeason(2026, { client, timeoutMs: 5 });
     expect(result).toEqual([]);
     expect(warn).toHaveBeenCalled();
   });
@@ -128,10 +121,10 @@ describe('revalidateCurrentSeason', () => {
   it('returns [] silently on non-2xx response', async () => {
     await primeSeasonCache();
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
-    const fetchImpl = vi.fn(async () => new Response('', { status: 503 }));
-    const result = await revalidateCurrentSeason(2026, {
-      fetchImpl: fetchImpl as unknown as typeof fetch,
-    });
+    // maxRetries:0 — 503 즉시 반환 (client 의 5xx 재시도는 openf1Client.test 가 cover).
+    const respond: MockRoute = () => new Response('', { status: 503 });
+    const { client } = createMockOpenF1Client({}, { fallback: respond, maxRetries: 0 });
+    const result = await revalidateCurrentSeason(2026, { client });
     expect(result).toEqual([]);
     expect(warn).toHaveBeenCalled();
   });
