@@ -34,6 +34,8 @@ export function makeFakeDs(
   } as unknown as DataSource;
   return {
     ds,
+    // 시크 시뮬레이션. useDisplayTime 은 onDisplayTimeChange 통지를 |delta| > 2s(또는 뒤로 점프)일
+    // 때만 즉시 반영하므로(나머지는 polling) — 시크 테스트는 2초 초과 점프로 setTime 할 것.
     setTime(t: Date) {
       current = t;
       for (const l of listeners) l(t);
