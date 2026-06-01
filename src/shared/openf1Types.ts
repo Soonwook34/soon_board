@@ -211,20 +211,21 @@ export type OpenF1EndpointName = keyof OpenF1EndpointRecords;
 
 // ── aggregate 결과 매핑 (DataSource.getAggregateBefore) ──────────────────
 //
-// dashboard §2.8 빠른 랩 배지 / 보라색 섹터 등 누적 통계. live-map 단독으로는 사용하지 않으나
-// SSOT 인터페이스가 dashboard 메서드까지 포괄해야 하므로 placeholder 형태로 정의.
-// 실제 산출 로직은 dashboard 단계 3 (`derived/personalBests.ts` 등) 에서 확정.
+// dashboard §2.8 빠른 랩 배지 / 보라색 섹터 / §2.5 섹터 색 판정용 누적 통계.
+// 산출 로직은 src/map/dashboardQueries.ts (computeAllAggregates) 가 SSOT 이며 두 DataSource
+// 구현체가 위임한다. 미래 누설 zero — t 까지 완료된 lap 만 반영 (§4.4/§4.5).
+//
+// name_acronym 은 본 레이어에 없다 (laps 에 미포함). 패널이 driver_number → acronym 을
+// drivers 맵으로 join 한다. 따라서 aggregate 는 driver_number 만 보유.
 
 export interface FastestLapAggregate {
   driver_number: number;
-  name_acronym: string;
   lap_number: number;
   lap_duration: number;
 }
 
 export interface PurpleSectorRow {
   driver_number: number;
-  name_acronym: string;
   sector_duration: number;
 }
 
@@ -234,19 +235,23 @@ export interface PurpleSectorsAggregate {
   s3: PurpleSectorRow | null;
 }
 
+/**
+ * 드라이버별 누적 personal best — 랩/섹터 각각 독립 최소값.
+ * §2.5 green(personal best sector) 판정은 섹터별 최소값이 필요하므로 "최고 랩의 섹터들" 이
+ * 아니라 각 섹터의 독립 최소값을 보유한다.
+ */
 export interface PersonalBestRow {
   driver_number: number;
-  lap_number: number;
-  lap_duration: number;
-  duration_sector_1: number | null;
-  duration_sector_2: number | null;
-  duration_sector_3: number | null;
+  best_lap_duration: number | null;
+  best_sector_1: number | null;
+  best_sector_2: number | null;
+  best_sector_3: number | null;
 }
 
 export interface AggregateResults {
   fastest_lap: FastestLapAggregate | null;
   purple_sectors: PurpleSectorsAggregate;
-  /** driver_number → PersonalBestRow 매핑. dashboard §3.3 / §2.8 보조. */
+  /** driver_number → PersonalBestRow 매핑. dashboard §2.5 섹터 색 / §2.8 / §3.3 보조. */
   personal_bests: Map<number, PersonalBestRow>;
 }
 

@@ -24,6 +24,14 @@ import type {
 } from '../shared/DataSource.js';
 import { LocationBuffer, parseDate } from './LocationBuffer.js';
 import {
+  allBefore,
+  completedLapsBefore,
+  computeAggregateBefore,
+  lapAt,
+  latestBefore,
+  stintForLap,
+} from './dashboardQueries.js';
+import {
   openF1Client,
   type OpenF1Client,
   type OpenF1Params,
@@ -64,6 +72,30 @@ function priorityFor(endpoint: OpenF1EndpointName): RequestPriority {
   return HIGH_PRIORITY_ENDPOINTS.has(endpoint) ? 'high' : 'normal';
 }
 
+/**
+ * record 의 안정 identity — cadence 재-fetch(특히 커서 없는 laps) 시 upsert key.
+ * 같은 논리 record(같은 lap/stint/시각)는 같은 key 로 매핑돼 중복 적재 없이 최신값으로 교체된다
+ * → allBefore / completedLapsBefore 가 중복 없이 정확. raw record(파싱 전 string date)로 계산.
+ */
+function recordKey(endpoint: OpenF1EndpointName, r: Record<string, unknown>): string {
+  const str = (v: unknown): string => (typeof v === 'string' ? v : '');
+  switch (endpoint) {
+    case 'laps':
+      return `${r.driver_number}:${r.lap_number}`;
+    case 'stints':
+      return `${r.driver_number}:${r.stint_number}`;
+    case 'session_result':
+      return `${r.driver_number}`;
+    case 'race_control':
+      return `${str(r.date)}:${r.category}:${r.message}`;
+    case 'weather':
+      return str(r.date);
+    default:
+      // position / intervals / pit 등 — (driver, 시각) 으로 유일.
+      return `${r.driver_number}:${str(r.date)}`;
+  }
+}
+
 export interface LiveDataSourceOptions {
   sessionKey: number;
   /** 모든 OpenF1 fetch 를 위임하는 client (rate-limit/dedup/backoff 소유). 기본 싱글톤 openF1Client. */
@@ -98,9 +130,15 @@ export class LiveDataSource implements DataSource {
 
   /** 차량별 location sample (시간순) — ReplayDataSource 와 공유 구현 (D1). */
   private readonly locationBuffer = new LocationBuffer();
-  /** 비-location endpoint 들의 raw record cache. dashboard 메서드는 stub 이라 미사용이지만
-   *  cursor 진행 + 통계 위해 적재. */
-  private readonly records = new Map<OpenF1EndpointName, OpenF1EndpointRecords[OpenF1EndpointName][]>();
+  /**
+   * 비-location endpoint 들의 raw record cache (dashboard 쿼리 메서드가 소비).
+   * endpoint 별로 **identity → record 의 Map** 이라 cadence 재-fetch (laps 처럼 date 커서가 없어
+   * 매번 full set 을 받는 endpoint) 가 중복 적재되지 않고 upsert(최신값 반영)된다.
+   */
+  private readonly records = new Map<
+    OpenF1EndpointName,
+    Map<string, OpenF1EndpointRecords[OpenF1EndpointName]>
+  >();
   /** 각 endpoint 의 마지막 수신 date — date>=cursor 폴링 위해. */
   private readonly cursors = new Map<OpenF1EndpointName, Date>();
 
@@ -182,34 +220,43 @@ export class LiveDataSource implements DataSource {
     };
   }
 
-  // ── DataSource impl (dashboard stub, plan §3.1 명시 허용) ────────────
+  // ── DataSource impl (dashboard 패널용, §4.2) ─────────────────────────
+  // 모든 메서드는 dashboardQueries.ts 의 공유 순수 함수에 위임 — 미래 누설 zero 단일 진입점.
+  // 비-location record 는 cadence 도착 순서대로 this.records 에 적재되며, 쿼리 함수가
+  // date ≤ t 컷 + 정렬을 담당한다 (ring buffer 크기가 작아 매 쿼리 정렬 비용 무시 가능).
 
   getLatestBefore<E extends OpenF1EndpointName>(
-    _endpoint: E,
-    _t: Date,
-    _filters?: Partial<OpenF1EndpointRecords[E]>,
+    endpoint: E,
+    t: Date,
+    filters?: Partial<OpenF1EndpointRecords[E]>,
   ): OpenF1EndpointRecords[E] | null {
-    throw new Error('LiveDataSource: getLatestBefore not implemented (dashboard phase)');
+    return latestBefore(this.recordsFor(endpoint), t, filters);
   }
   getAllBefore<E extends OpenF1EndpointName>(
-    _endpoint: E,
-    _t: Date,
-    _filters?: Partial<OpenF1EndpointRecords[E]>,
-    _limit?: number,
+    endpoint: E,
+    t: Date,
+    filters?: Partial<OpenF1EndpointRecords[E]>,
+    limit?: number,
   ): OpenF1EndpointRecords[E][] {
-    throw new Error('LiveDataSource: getAllBefore not implemented (dashboard phase)');
+    return allBefore(this.recordsFor(endpoint), t, filters, limit);
   }
-  getLapAt(_driverNum: number, _t: Date): LapRecord | null {
-    throw new Error('LiveDataSource: getLapAt not implemented (dashboard phase)');
+  getLapAt(driverNum: number, t: Date): LapRecord | null {
+    return lapAt(this.recordsFor('laps'), driverNum, t);
   }
-  getCompletedLapsBefore(_driverNum: number, _t: Date, _limit?: number): LapRecord[] {
-    throw new Error('LiveDataSource: getCompletedLapsBefore not implemented (dashboard phase)');
+  getCompletedLapsBefore(driverNum: number, t: Date, limit?: number): LapRecord[] {
+    return completedLapsBefore(this.recordsFor('laps'), driverNum, t, limit);
   }
-  getStintForLap(_driverNum: number, _lap: number): StintRecord | null {
-    throw new Error('LiveDataSource: getStintForLap not implemented (dashboard phase)');
+  getStintForLap(driverNum: number, lap: number): StintRecord | null {
+    return stintForLap(this.recordsFor('stints'), driverNum, lap);
   }
-  getAggregateBefore<A extends AggregateName>(_aggregate: A, _t: Date): AggregateResults[A] {
-    throw new Error('LiveDataSource: getAggregateBefore not implemented (dashboard phase)');
+  getAggregateBefore<A extends AggregateName>(aggregate: A, t: Date): AggregateResults[A] {
+    return computeAggregateBefore(this.recordsFor('laps'), aggregate, t);
+  }
+
+  /** endpoint 의 적재된 raw record 배열 (insert 순서, upsert 반영). location 은 locationBuffer 별도. */
+  private recordsFor<E extends OpenF1EndpointName>(endpoint: E): OpenF1EndpointRecords[E][] {
+    const inner = this.records.get(endpoint);
+    return inner ? (Array.from(inner.values()) as OpenF1EndpointRecords[E][]) : [];
   }
 
   // ── hydration + cadence internals ───────────────────────────────────
@@ -315,16 +362,23 @@ export class LiveDataSource implements DataSource {
     endpoint: OpenF1EndpointName,
     raw: Array<Record<string, unknown>>,
   ): void {
-    const bucket = this.records.get(endpoint) ?? [];
+    let bucket = this.records.get(endpoint);
+    if (!bucket) {
+      bucket = new Map();
+      this.records.set(endpoint, bucket);
+    }
     let maxDate: Date | null = null;
     for (const r of raw) {
       const date = parseDate(r.date);
       if (date) {
         if (!maxDate || date.valueOf() > maxDate.valueOf()) maxDate = date;
       }
-      bucket.push({ ...r, ...(date ? { date } : {}) } as OpenF1EndpointRecords[typeof endpoint]);
+      // date / date_start 둘 다 Date 로 정규화 (laps 는 date 없이 date_start 만 가짐).
+      const rec: Record<string, unknown> = { ...r };
+      if (date) rec.date = date;
+      if ('date_start' in r) rec.date_start = parseDate(r.date_start);
+      bucket.set(recordKey(endpoint, r), rec as unknown as OpenF1EndpointRecords[typeof endpoint]);
     }
-    this.records.set(endpoint, bucket);
     if (maxDate) {
       this.cursors.set(endpoint, maxDate);
       this.advanceNewest(maxDate);

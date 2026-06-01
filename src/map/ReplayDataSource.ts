@@ -25,6 +25,14 @@ import type {
 } from '../shared/DataSource.js';
 import { LocationBuffer, parseDate } from './LocationBuffer.js';
 import {
+  allBefore,
+  completedLapsBefore,
+  computeAggregateBefore,
+  lapAt,
+  latestBefore,
+  stintForLap,
+} from './dashboardQueries.js';
+import {
   openF1Client,
   type OpenF1Client,
   type OpenF1Params,
@@ -249,34 +257,54 @@ export class ReplayDataSource implements DataSource {
     };
   }
 
-  // ── DataSource impl (dashboard stub, plan §3.1 명시 허용) ────────────
+  // ── DataSource impl (dashboard 패널용, §4.2) ─────────────────────────
+  // dashboardQueries.ts 의 공유 순수 함수에 위임 — 미래 누설 zero 단일 진입점.
+  // dense endpoint(position/intervals)는 lookahead 가 미래 윈도우까지 prefetch 하므로 cache 에
+  // display_time 이후 record 가 적재돼 있다. recordsFor 가 모든 윈도우를 모으고, 쿼리 함수의
+  // `date ≤ t` 컷이 그 미래분을 잘라낸다 (§4.5 replay 60s 윈도우 누설 방어).
 
   getLatestBefore<E extends OpenF1EndpointName>(
-    _endpoint: E,
-    _t: Date,
-    _filters?: Partial<OpenF1EndpointRecords[E]>,
+    endpoint: E,
+    t: Date,
+    filters?: Partial<OpenF1EndpointRecords[E]>,
   ): OpenF1EndpointRecords[E] | null {
-    throw new Error('ReplayDataSource: getLatestBefore not implemented (dashboard phase)');
+    return latestBefore(this.recordsFor(endpoint), t, filters);
   }
   getAllBefore<E extends OpenF1EndpointName>(
-    _endpoint: E,
-    _t: Date,
-    _filters?: Partial<OpenF1EndpointRecords[E]>,
-    _limit?: number,
+    endpoint: E,
+    t: Date,
+    filters?: Partial<OpenF1EndpointRecords[E]>,
+    limit?: number,
   ): OpenF1EndpointRecords[E][] {
-    throw new Error('ReplayDataSource: getAllBefore not implemented (dashboard phase)');
+    return allBefore(this.recordsFor(endpoint), t, filters, limit);
   }
-  getLapAt(_driverNum: number, _t: Date): LapRecord | null {
-    throw new Error('ReplayDataSource: getLapAt not implemented (dashboard phase)');
+  getLapAt(driverNum: number, t: Date): LapRecord | null {
+    return lapAt(this.recordsFor('laps'), driverNum, t);
   }
-  getCompletedLapsBefore(_driverNum: number, _t: Date, _limit?: number): LapRecord[] {
-    throw new Error('ReplayDataSource: getCompletedLapsBefore not implemented (dashboard phase)');
+  getCompletedLapsBefore(driverNum: number, t: Date, limit?: number): LapRecord[] {
+    return completedLapsBefore(this.recordsFor('laps'), driverNum, t, limit);
   }
-  getStintForLap(_driverNum: number, _lap: number): StintRecord | null {
-    throw new Error('ReplayDataSource: getStintForLap not implemented (dashboard phase)');
+  getStintForLap(driverNum: number, lap: number): StintRecord | null {
+    return stintForLap(this.recordsFor('stints'), driverNum, lap);
   }
-  getAggregateBefore<A extends AggregateName>(_aggregate: A, _t: Date): AggregateResults[A] {
-    throw new Error('ReplayDataSource: getAggregateBefore not implemented (dashboard phase)');
+  getAggregateBefore<A extends AggregateName>(aggregate: A, t: Date): AggregateResults[A] {
+    return computeAggregateBefore(this.recordsFor('laps'), aggregate, t);
+  }
+
+  /**
+   * endpoint 의 적재된 record 배열. sparse 는 `${endpoint}:session` 단일 캐시, dense 는 모든
+   * 윈도우 캐시(`${endpoint}:<iso>`)를 concat. 윈도우는 disjoint [T,T+W) 라 중복 없음.
+   * location 은 getSamplePair(locationBuffer)가 별도 처리하므로 본 경로 대상 아님.
+   */
+  private recordsFor<E extends OpenF1EndpointName>(endpoint: E): OpenF1EndpointRecords[E][] {
+    const sparse = this.cache.get(`${endpoint}:session`);
+    if (sparse) return sparse as OpenF1EndpointRecords[E][];
+    const prefix = `${endpoint}:`;
+    const out: OpenF1EndpointRecords[OpenF1EndpointName][] = [];
+    for (const [key, recs] of this.cache) {
+      if (key.startsWith(prefix)) out.push(...recs);
+    }
+    return out as OpenF1EndpointRecords[E][];
   }
 
   // ── grid snap + lookahead internals ─────────────────────────────────
@@ -376,7 +404,11 @@ export class ReplayDataSource implements DataSource {
     const parsed: OpenF1EndpointRecords[typeof endpoint][] = [];
     for (const r of raw) {
       const date = parseDate(r.date);
-      parsed.push({ ...r, ...(date ? { date } : {}) } as OpenF1EndpointRecords[typeof endpoint]);
+      // date / date_start 둘 다 Date 로 정규화 (laps 는 date 없이 date_start 만 가짐).
+      const rec: Record<string, unknown> = { ...r };
+      if (date) rec.date = date;
+      if ('date_start' in r) rec.date_start = parseDate(r.date_start);
+      parsed.push(rec as unknown as OpenF1EndpointRecords[typeof endpoint]);
     }
     this.cache.set(cacheKey, parsed);
     if (endpoint === 'location') this.ingestLocation(raw);

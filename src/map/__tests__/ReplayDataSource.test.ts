@@ -284,16 +284,86 @@ describe('ReplayDataSource — getStreamState', () => {
   });
 });
 
-describe('ReplayDataSource — dashboard stub', () => {
-  it('dashboard 메서드 6종 모두 throw (Synthetic 동등)', async () => {
-    const { ds } = makeDs();
-    const t = new Date('2024-03-02T15:00:00.000Z');
-    expect(() => ds.getLatestBefore('laps', t)).toThrow();
-    expect(() => ds.getAllBefore('laps', t)).toThrow();
-    expect(() => ds.getLapAt(44, t)).toThrow();
-    expect(() => ds.getCompletedLapsBefore(44, t)).toThrow();
-    expect(() => ds.getStintForLap(44, 1)).toThrow();
-    expect(() => ds.getAggregateBefore('fastest_lap', t)).toThrow();
+describe('ReplayDataSource — dashboard 메서드 (cache 위임 + 미래 누설 컷)', () => {
+  // sparse(laps/stints) + dense(position) 를 mock 으로 적재한 뒤 display_time 컷 검증.
+  const LAPS = [
+    { driver_number: 44, session_key: SESSION_KEY, meeting_key: 1234, lap_number: 1, date_start: '2024-03-02T15:00:23.000Z', lap_duration: 90, duration_sector_1: 30, duration_sector_2: 30, duration_sector_3: 30 },
+    { driver_number: 44, session_key: SESSION_KEY, meeting_key: 1234, lap_number: 2, date_start: '2024-03-02T15:01:53.000Z', lap_duration: 88, duration_sector_1: 29, duration_sector_2: 29, duration_sector_3: 30 },
+    { driver_number: 44, session_key: SESSION_KEY, meeting_key: 1234, lap_number: 3, date_start: '2024-03-02T15:03:21.000Z', lap_duration: null, duration_sector_1: null, duration_sector_2: null, duration_sector_3: null },
+  ];
+  const STINTS = [
+    { driver_number: 44, session_key: SESSION_KEY, meeting_key: 1234, stint_number: 1, lap_start: 1, lap_end: 2, compound: 'MEDIUM', tyre_age_at_start: 0 },
+    { driver_number: 44, session_key: SESSION_KEY, meeting_key: 1234, stint_number: 2, lap_start: 3, lap_end: 30, compound: 'HARD', tyre_age_at_start: 1 },
+  ];
+  const POSITIONS = [
+    { driver_number: 44, session_key: SESSION_KEY, meeting_key: 1234, date: '2024-03-02T15:00:30.000Z', position: 5 },
+    { driver_number: 44, session_key: SESSION_KEY, meeting_key: 1234, date: '2024-03-02T15:01:30.000Z', position: 2 },
+  ];
+
+  /** dense 윈도우 fetch URL 의 date>= / date< 경계를 파싱 (operator-suffix 규약). */
+  function denseBounds(url: string): { start: number; end: number } {
+    const ge = url.match(/date>=([^&]+)/);
+    const lt = url.match(/date<([^&]+)/);
+    return {
+      start: ge ? Date.parse(decodeURIComponent(ge[1])) : Number.NEGATIVE_INFINITY,
+      end: lt ? Date.parse(decodeURIComponent(lt[1])) : Number.POSITIVE_INFINITY,
+    };
+  }
+
+  const respond: MockRoute = (url) => {
+    if (url.includes('/v1/laps')) return jsonResponse(LAPS);
+    if (url.includes('/v1/stints')) return jsonResponse(STINTS);
+    if (url.includes('/v1/position')) {
+      const { start, end } = denseBounds(url);
+      return jsonResponse(POSITIONS.filter((p) => {
+        const ms = Date.parse(p.date);
+        return ms >= start && ms < end;
+      }));
+    }
+    return jsonResponse([]);
+  };
+
+  async function setup() {
+    // lookaheadBaseMs 120s → start 시 윈도우 2개(15:00:23, 15:01:23) prefetch → POSITION 둘 다 cache.
+    const { ds } = makeDs({ respond, lookaheadBaseMs: 120_000 });
+    await ds.start();
+    return ds;
+  }
+
+  it('6 메서드 모두 throw 하지 않고 결과 반환', async () => {
+    const ds = await setup();
+    const t = new Date('2024-03-02T15:02:00.000Z');
+    expect(() => ds.getLatestBefore('position', t)).not.toThrow();
+    expect(() => ds.getAllBefore('position', t)).not.toThrow();
+    expect(() => ds.getLapAt(44, t)).not.toThrow();
+    expect(() => ds.getCompletedLapsBefore(44, t)).not.toThrow();
+    expect(() => ds.getStintForLap(44, 1)).not.toThrow();
+    expect(() => ds.getAggregateBefore('fastest_lap', t)).not.toThrow();
+  });
+
+  it('completedLapsBefore — t=15:02:00 면 lap1 만 (lap2 미완)', async () => {
+    const ds = await setup();
+    const laps = ds.getCompletedLapsBefore(44, new Date('2024-03-02T15:02:00.000Z'));
+    expect(laps.map((l) => l.lap_number)).toEqual([1]);
+  });
+
+  it('getLapAt — 진행 중 lap 도 시작했으면 반환', async () => {
+    const ds = await setup();
+    expect(ds.getLapAt(44, new Date('2024-03-02T15:04:00.000Z'))?.lap_number).toBe(3);
+  });
+
+  it('getStintForLap — lap 포함 stint', async () => {
+    const ds = await setup();
+    expect(ds.getStintForLap(44, 2)?.stint_number).toBe(1);
+    expect(ds.getStintForLap(44, 3)?.stint_number).toBe(2);
+  });
+
+  it('미래 누설 zero — lookahead 가 미리 적재한 미래 position(15:01:30)이 t=15:01:00 에 안 보임', async () => {
+    const ds = await setup();
+    const early = ds.getLatestBefore('position', new Date('2024-03-02T15:01:00.000Z'));
+    expect(early?.position).toBe(5); // 15:00:30 record (미래 15:01:30 아님)
+    const later = ds.getLatestBefore('position', new Date('2024-03-02T15:01:40.000Z'));
+    expect(later?.position).toBe(2);
   });
 });
 
