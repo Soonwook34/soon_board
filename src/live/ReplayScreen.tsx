@@ -161,6 +161,7 @@ export function ReplayScreen({ pingImpl }: ReplayScreenProps = {}) {
               session={found.session}
               year={found.year}
               mode="replay"
+              onBack={() => setLocation('/')}
               map={
                 <LiveMap
                   sessionKey={sessionKey}

@@ -1,7 +1,7 @@
 /// @vitest-environment jsdom
 // US-3 — SessionHeader ①.
-import { afterEach, describe, expect, it } from 'vitest';
-import { cleanup, render, screen } from '@testing-library/react';
+import { afterEach, describe, expect, it, vi } from 'vitest';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { SessionHeader } from '../SessionHeader';
 import { DataSourceProvider } from '../../shared/DataSourceContext';
 import { makeFakeDs } from '../../__tests__/fakeDataSource';
@@ -89,5 +89,28 @@ describe('SessionHeader', () => {
     );
     expect(screen.getByText('--:--:--')).toBeTruthy();
     expect(screen.getByText('REPLAY')).toBeTruthy();
+  });
+
+  it('E2-1 — onBack 제공 시 Back 버튼 렌더 + 클릭 시 콜백', () => {
+    const { ds } = makeFakeDs({ displayTime: new Date('2024-03-02T12:00:00Z') });
+    const onBack = vi.fn();
+    render(
+      <DataSourceProvider ds={ds}>
+        <SessionHeader meeting={meeting} session={session} year={2024} mode="live" onBack={onBack} />
+      </DataSourceProvider>,
+    );
+    const back = screen.getByTestId('header-back');
+    fireEvent.click(back);
+    expect(onBack).toHaveBeenCalledTimes(1);
+  });
+
+  it('E2-1 — onBack 미제공 시 Back 버튼 없음', () => {
+    const { ds } = makeFakeDs({ displayTime: new Date('2024-03-02T12:00:00Z') });
+    render(
+      <DataSourceProvider ds={ds}>
+        <SessionHeader meeting={meeting} session={session} year={2024} mode="live" />
+      </DataSourceProvider>,
+    );
+    expect(screen.queryByTestId('header-back')).toBeNull();
   });
 });

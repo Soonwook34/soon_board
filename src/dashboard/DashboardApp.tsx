@@ -1,5 +1,5 @@
 // dashboard §1.1/§6 — 최상위 레이아웃 (CSS Grid, Hybrid B).
-// ① 헤더(전체폭) / ② 진행률 + ④ Race Control 행 / ③ 맵 슬롯(prop) + 우측열 ⑤⑥⑦(세로 stack, 스크롤) /
+// ① 헤더(전체폭) / ②진행률+④Race Control 을 ③맵 위 좌측 한 행에 / ③ 맵 슬롯(prop) + 우측열 ⑤⑥⑦(s, 2행 점유·세로 스크롤) /
 // 하단 ⑧ 빠른 랩 배지 + ⑨ 날씨. DataSourceProvider + DriversProvider 안에서 렌더 전제(자체 provider 미포함).
 
 import { useEffect, useState, type ReactNode } from 'react';
@@ -20,16 +20,17 @@ import { NarrowScreenBanner } from '../main/NarrowScreenBanner';
 import { Toast } from '../main/Toast';
 import type { MeetingData, SessionData } from '../shared/seasonData';
 
-// 사이드 패널 닫힘: 맵 7 / 우측 5 (§1.3). 열림: 맵 6 / 우측(s) 3 / 디테일(d) 3 — push 모드.
+// 사이드 패널 닫힘: 좌블록 7(② p + ④ r 가 ③ m 위 한 행) / 우측 s 5 가 진행률행+맵행 2행 점유 (§1.3).
+// 열림: 맵 6 / 우측 s 3(2행) / 디테일 d 3 — push 모드. 하단 b/w 는 맵(7)/우측(5) 경계에 정렬.
 const GRID_CLOSED = [
   '"h h h h h h h h h h h h"',
-  '"p p p p p p p r r r r r"',
+  '"p p p p p r r s s s s s"',
   '"m m m m m m m s s s s s"',
-  '"b b b b b b b b w w w w"',
+  '"b b b b b b b w w w w w"',
 ].join('\n');
 const GRID_OPEN = [
   '"h h h h h h h h h h h h"',
-  '"p p p p p p r r r d d d"',
+  '"p p p p r r s s s d d d"',
   '"m m m m m m s s s d d d"',
   '"b b b b b b w w w d d d"',
 ].join('\n');
@@ -45,9 +46,11 @@ export interface DashboardAppProps {
   mode: DashboardMode;
   /** 임베드되는 라이브 맵 ③ (live-map-implementation.md). 미지정 시 placeholder. */
   map?: ReactNode;
+  /** 제공 시 ① 헤더 좌측에 Back 버튼(맵 오버레이 Back 을 헤더로 통합, E2). */
+  onBack?: () => void;
 }
 
-export function DashboardApp({ meeting, session, year, mode, map }: DashboardAppProps) {
+export function DashboardApp({ meeting, session, year, mode, map, onBack }: DashboardAppProps) {
   const selected = useSelectedDriver();
   const belowDesktop = useMediaQuery(BELOW_DESKTOP);
   const [toast, setToast] = useState<string | null>(null);
@@ -86,7 +89,7 @@ export function DashboardApp({ meeting, session, year, mode, map }: DashboardApp
         }}
       >
         <div style={{ gridArea: 'h' }}>
-          <SessionHeader meeting={meeting} session={session} year={year} mode={mode} />
+          <SessionHeader meeting={meeting} session={session} year={year} mode={mode} onBack={onBack} />
         </div>
         <div style={{ gridArea: 'p' }}>
           <SessionProgress session={session} circuitKey={meeting.circuit_key} year={year} />

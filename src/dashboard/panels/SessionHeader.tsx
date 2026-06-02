@@ -13,6 +13,8 @@ export interface SessionHeaderProps {
   session: SessionData;
   year: number;
   mode: DashboardMode;
+  /** 제공 시 좌측에 ← Back 버튼 렌더(맵 오버레이 Back 을 헤더로 통합, E2). */
+  onBack?: () => void;
 }
 
 /** "03:00:00" / "-05:00:00" → ms 오프셋. 파싱 실패 시 0. */
@@ -33,7 +35,7 @@ function formatLocalClock(t: Date, offsetMs: number): string {
   return `${hh}:${mm}:${ss}`;
 }
 
-export function SessionHeader({ meeting, session, year, mode }: SessionHeaderProps) {
+export function SessionHeader({ meeting, session, year, mode, onBack }: SessionHeaderProps) {
   const ds = useDataSource();
   const t = useDisplayTime(1000);
   const streamState = ds.getStreamState();
@@ -57,6 +59,26 @@ export function SessionHeader({ meeting, session, year, mode }: SessionHeaderPro
       }}
     >
       <div style={{ display: 'flex', alignItems: 'baseline', gap: '12px', minWidth: 0 }}>
+        {onBack ? (
+          <button
+            type="button"
+            data-testid="header-back"
+            aria-label="뒤로"
+            onClick={onBack}
+            style={{
+              alignSelf: 'center',
+              background: 'transparent',
+              border: 'none',
+              color: dashboardColors.textSecondary,
+              fontSize: '18px',
+              lineHeight: 1,
+              cursor: 'pointer',
+              padding: '2px 4px 2px 0',
+            }}
+          >
+            ←
+          </button>
+        ) : null}
         <span style={{ fontSize: '18px', fontWeight: 700, color: dashboardColors.text }}>
           {trackName}
         </span>

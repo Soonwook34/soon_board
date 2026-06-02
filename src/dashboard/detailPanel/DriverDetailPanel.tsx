@@ -2,7 +2,7 @@
 // 선택 없으면 렌더 null, 선택 시 슬라이드인. X 버튼·ESC 로 닫기(clearSelection).
 // 헤더(§3.1)+현재상태(§3.2)+최근5랩(§3.3)+핏(§3.4)+스틴트(§3.5)+세션결과(§3.6) 조립.
 
-import { useEffect } from 'react';
+import { useEffect, type ReactNode } from 'react';
 import { useSelectedDriver, clearSelection } from '../shared/selectionStore';
 import { panelStyle, dashboardColors } from '../shared/dashboardStyles';
 import { DriverHeader } from './DriverHeader';
@@ -15,6 +15,18 @@ import type { SessionData } from '../../shared/seasonData';
 
 // 자체 포함 슬라이드인 키프레임 (전역 CSS 비의존). 시각 검증은 사용자 게이트(US-V).
 const KEYFRAMES = '@keyframes driver-detail-in{from{transform:translateX(16px);opacity:0}to{transform:translateX(0);opacity:1}}';
+
+// §3 (G) — 섹션 간 상단 구분선(1px) + 일관 간격. 헤더 다음 섹션부터 감싼다(신규 색 없음, 토큰만).
+function DetailSection({ children }: { children: ReactNode }) {
+  return (
+    <div
+      data-testid="detail-section"
+      style={{ borderTop: `1px solid ${dashboardColors.border}`, paddingTop: '10px' }}
+    >
+      {children}
+    </div>
+  );
+}
 
 export function DriverDetailPanel({ session }: { session: SessionData }) {
   const selected = useSelectedDriver();
@@ -70,11 +82,11 @@ export function DriverDetailPanel({ session }: { session: SessionData }) {
         </button>
       </div>
       <DriverHeader driverNumber={selected} />
-      <CurrentState driverNumber={selected} />
-      <RecentLapsTable driverNumber={selected} />
-      <PitHistory driverNumber={selected} />
-      <StintHistory driverNumber={selected} />
-      <SessionResult driverNumber={selected} session={session} />
+      <DetailSection><CurrentState driverNumber={selected} /></DetailSection>
+      <DetailSection><RecentLapsTable driverNumber={selected} /></DetailSection>
+      <DetailSection><PitHistory driverNumber={selected} /></DetailSection>
+      <DetailSection><StintHistory driverNumber={selected} /></DetailSection>
+      <DetailSection><SessionResult driverNumber={selected} session={session} /></DetailSection>
     </aside>
   );
 }

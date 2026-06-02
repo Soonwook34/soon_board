@@ -367,14 +367,8 @@ export function LiveMap({
         data-testid="live-map-canvas"
         style={{ display: 'block', margin: '0 auto' }}
       />
-      {onBack && (
-        <button
-          onClick={onBack}
-          style={{ position: 'absolute', top: '12px', left: '12px' }}
-        >
-          Back
-        </button>
-      )}
+      {/* E2 — 성공 경로 Back 은 ① SessionHeader 좌측으로 통합(중복 제거). 에러 경로 Back 은 유지:
+          헤더 없는 standalone LiveMap 사용 + Retry 옆 복구 액션 co-location (임베드 후 에러 시 헤더 Back 과 의도된 이중 노출). */}
       {showPauseButton && (
         <button
           onClick={onTogglePause}

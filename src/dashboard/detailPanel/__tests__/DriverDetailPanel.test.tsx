@@ -55,6 +55,14 @@ describe('DriverDetailPanel', () => {
     expect(screen.getByText('Max Verstappen')).toBeTruthy();
   });
 
+  it('G — 헤더 다음 5섹션이 구분선 래퍼(detail-section)로 감싸짐', () => {
+    act(() => selectDriver(1));
+    renderPanel();
+    const sections = screen.getAllByTestId('detail-section');
+    expect(sections).toHaveLength(5); // CurrentState/RecentLaps/Pit/Stint/SessionResult
+    expect(sections[0].style.borderTop).toContain('1px'); // 상단 구분선
+  });
+
   it('X 버튼 클릭 → 닫힘', () => {
     act(() => selectDriver(1));
     renderPanel();

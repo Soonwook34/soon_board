@@ -144,6 +144,7 @@ export function LiveScreen({ pingImpl }: LiveScreenProps = {}) {
             session={found.session}
             year={currentYear}
             mode="live"
+            onBack={() => setLocation('/')}
             map={
               <LiveMap
                 sessionKey={sessionKey}

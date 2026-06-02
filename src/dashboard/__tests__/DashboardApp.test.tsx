@@ -1,7 +1,7 @@
 /// @vitest-environment jsdom
 // US-5 — DashboardApp 레이아웃 골격: provider + mock ds + map slot 으로 4 패널 + 슬롯 마운트.
-import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { act, cleanup, render, screen } from '@testing-library/react';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { act, cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { DashboardApp } from '../DashboardApp';
 import { DataSourceProvider } from '../shared/DataSourceContext';
 import { DriversProvider } from '../shared/DriversContext';
@@ -115,6 +115,28 @@ describe('DashboardApp', () => {
     expect(screen.queryByTestId('event-broadcast')).toBeNull(); // 마운트 시 없음
     act(() => handle.setTime(new Date(T0 + 45_000))); // 전진 → RED 크로스
     expect(screen.getByTestId('event-broadcast')).toBeTruthy();
+  });
+
+  it('E2-3 — onBack 전달 시 ① 헤더 Back 버튼 + 클릭 콜백', () => {
+    const { ds } = makeFakeDs({ displayTime: new Date('2024-03-02T12:00:00Z') });
+    const onBack = vi.fn();
+    render(
+      <DataSourceProvider ds={ds}>
+        <DashboardApp meeting={meeting} session={session} year={2024} mode="live" onBack={onBack} />
+      </DataSourceProvider>,
+    );
+    fireEvent.click(screen.getByTestId('header-back'));
+    expect(onBack).toHaveBeenCalledTimes(1);
+  });
+
+  it('E2-3 — onBack 미전달 시 헤더 Back 없음', () => {
+    const { ds } = makeFakeDs({ displayTime: new Date('2024-03-02T12:00:00Z') });
+    render(
+      <DataSourceProvider ds={ds}>
+        <DashboardApp meeting={meeting} session={session} year={2024} mode="live" />
+      </DataSourceProvider>,
+    );
+    expect(screen.queryByTestId('header-back')).toBeNull();
   });
 });
 

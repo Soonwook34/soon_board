@@ -535,8 +535,8 @@ describe('LiveMap — unmount cleanup', () => {
   });
 });
 
-describe('LiveMap — onBack 버튼', () => {
-  it('onBack prop 제공 시 Back 버튼 렌더 + 클릭 시 호출', async () => {
+describe('LiveMap — onBack 버튼 (E2: ① 헤더로 통합)', () => {
+  it('E2-2 — 성공 경로(canvas)에는 Back 버튼 없음(헤더로 통합·중복 제거)', async () => {
     const fetchImpl = makeFetch({});
     const { client } = makeDriversClient();
     const { factory } = makeStubFactory();
@@ -553,6 +553,26 @@ describe('LiveMap — onBack 버튼', () => {
       />,
     );
     await waitFor(() => expect(screen.queryByTestId('live-map-canvas')).toBeTruthy());
+    expect(screen.queryByRole('button', { name: 'Back' })).toBeNull();
+  });
+
+  it('E2-2 — 에러 경로에는 Back 버튼 유지 + 클릭 시 onBack 호출(회귀)', async () => {
+    const fetchImpl = makeFetch({ trackOverride: 'fail' });
+    const { client } = makeDriversClient();
+    const { factory } = makeStubFactory();
+    const onBack = vi.fn();
+    render(
+      <LiveMap
+        sessionKey={9472}
+        circuitKey={63}
+        year={2024}
+        fetchImpl={fetchImpl as unknown as typeof fetch}
+        client={client}
+        dataSourceFactory={factory}
+        onBack={onBack}
+      />,
+    );
+    await waitFor(() => expect(screen.getByRole('alert')).toBeTruthy());
     fireEvent.click(screen.getByRole('button', { name: 'Back' }));
     expect(onBack).toHaveBeenCalledTimes(1);
   });

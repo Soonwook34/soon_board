@@ -207,3 +207,11 @@
   - 검증: vitest **869/869 ✓**, tsc 0. architect(opus) **APPROVED-WITH-NITS** (인수18 clean — broadcast date 비교는 이벤트 간 전진 판정, 시간 컷은 getAllBefore). deslop = no-op.
   - 커밋 안 함(사용자 미요청 — A/C/F + B/D 누적 변경 working tree 대기).
   - **다음 = E(그리드 ②+④ 맵 위로 + Back 헤더 통합) + G(디테일 구분선) — dev-server 시각 게이트(인수1 무스크롤) 필수 → 시각 확인과 함께 진행 권장.**
+- 2026-06-02 **Phase 1-2 커밋 완료** — `f3825c3 feat(dashboard): 레이아웃 개선 (그룹 A·C·F·B·D)` (16파일, 사용자 "커밋 후 다음 phase" 지시).
+- 2026-06-02 **Phase 3 구현 완료 (그룹 E, G)** — ralph:
+  - **E1** GRID_CLOSED/GRID_OPEN 재배치 — ②진행률(p)+④RaceControl(r) 을 ③맵(m) 위 한 행, 우측열 s(⑤⑥⑦)가 진행률행+맵행 2행 점유. 템플릿 문자열만 교체(gridArea 매핑 불변), 모든 named area 직사각형(architect 프로그램 검증). 하단 b(7)/w(5) 를 맵/우측 경계에 정렬.
+  - **E2** Back 을 LiveMap 캔버스 오버레이 → ① SessionHeader 좌측(`header-back`, optional `onBack`)으로 통합. DashboardApp `onBack` 전달, LiveScreen/ReplayScreen 이 DashboardApp+LiveMap 양쪽에 `onBack` 주입(형제 일관). LiveMap 성공경로 Back 제거, **에러경로 Back 유지**(헤더 없는 standalone + Retry 옆 복구 co-location).
+  - **G** DriverDetailPanel 헤더 다음 5섹션을 `DetailSection` 래퍼(borderTop 1px `dashboardColors.border` + paddingTop, 5× 재사용)로 감싸 구분선. 신규 색/시간로직 없음(인수13/16/18 불변).
+  - 검증: vitest **875/875 ✓**(+6), tsc 0. architect(opus) **APPROVED-WITH-NITS** (양 그리드 직사각형 검증, 성공경로 단일 Back, 형제 일관, 인수18/섹터색 불변, 테스트 non-vacuous). nit 1(LiveMap 주석 부정확) 수정 완료. deslop = no-op(주석 외 genuine slop 없음).
+  - 커밋 안 함(E/G 는 **[V] dev-server 시각 게이트(USER) 후 커밋** — 인수1 무스크롤·E1-5·E2-5·G5).
+  - **[V] 사용자 확인 체크리스트(`/replay/9472`)**: ①②③④ 상단 배치(②+④ 맵 위 좌측, 우측 리더보드 세로 최대), 1280×800 무스크롤, 헤더 좌측 ← Back 동작(라이브·리플레이), 맵 코너 정돈(Pause 만 남음), 디테일 섹션 구분선 가독성.
