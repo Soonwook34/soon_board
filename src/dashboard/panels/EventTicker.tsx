@@ -5,6 +5,7 @@ import { useDataSource } from '../shared/DataSourceContext';
 import { useDisplayTime } from '../shared/useDisplayTime';
 import { flagIcon } from '../shared/flagIcons';
 import { dashboardColors, panelStyle } from '../shared/dashboardStyles';
+import { PanelHeading } from '../shared/PanelHeading';
 
 export function EventTicker() {
   const ds = useDataSource();
@@ -17,6 +18,7 @@ export function EventTicker() {
       aria-label="이벤트 티커"
       style={{ ...panelStyle, display: 'flex', flexDirection: 'column', gap: '4px' }}
     >
+      <PanelHeading>EVENTS</PanelHeading>
       {events.length === 0 ? (
         <span style={{ fontSize: '12px', color: dashboardColors.textMuted }}>이벤트 없음</span>
       ) : (
@@ -27,7 +29,20 @@ export function EventTicker() {
             style={{ display: 'flex', alignItems: 'baseline', gap: '6px', fontSize: '12px' }}
           >
             <span aria-hidden style={{ fontSize: '13px' }}>{flagIcon(rc)}</span>
-            <span style={{ color: dashboardColors.text, flex: 1 }}>{rc.message}</span>
+            {/* #5/D1 — 긴 메시지 1줄 클램프(minWidth:0 은 flex item ellipsis 필수), 전체는 hover title. */}
+            <span
+              title={rc.message}
+              style={{
+                color: dashboardColors.text,
+                flex: 1,
+                minWidth: 0,
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+              }}
+            >
+              {rc.message}
+            </span>
             {rc.lap_number != null && (
               <span style={{ fontSize: '11px', color: dashboardColors.textMuted }}>
                 L{rc.lap_number}

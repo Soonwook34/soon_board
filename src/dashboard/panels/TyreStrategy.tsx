@@ -2,13 +2,14 @@
 // Issue #89 (인수5): 인접 스틴트가 경계 lap 을 공유(A.lap_end == B.lap_start)하면 +1 중복.
 // stintLapSpans 가 [lap_start, lap_end+1) 반개구간으로 타일링해 공유 lap 없이 합산되게 한다.
 
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useDataSource } from '../shared/DataSourceContext';
 import { useDisplayTime } from '../shared/useDisplayTime';
 import { useDrivers } from '../shared/DriversContext';
 import { tyreColor, tyreLetter } from '../shared/tyreColors';
 import { leaderCurrentLap } from '../derived/currentLap';
 import { dashboardColors, panelStyle } from '../shared/dashboardStyles';
+import { PanelHeading } from '../shared/PanelHeading';
 import type { StintRecord } from '../../shared/openf1Types';
 
 export interface StintSpan {
@@ -46,6 +47,8 @@ interface DriverRow {
   spans: StintSpan[];
   pitLaps: number[];
   firstStart: number;
+  /** 현재 순위 정렬 키 (#1) — position 없으면 +Infinity 로 맨 뒤. */
+  sortKey: number;
 }
 
 export function TyreStrategy() {
@@ -53,6 +56,8 @@ export function TyreStrategy() {
   const t = useDisplayTime(1000);
   const drivers = useDrivers();
   const currentLap = leaderCurrentLap(ds, t) ?? 0;
+  // #2 — 리더보드를 주 패널로: ⑥ 타이어 전략은 기본 접힘(헤더 클릭 시 펼침).
+  const [collapsed, setCollapsed] = useState(true);
 
   const rows = useMemo<DriverRow[]>(() => {
     if (currentLap <= 0) return [];
@@ -70,13 +75,17 @@ export function TyreStrategy() {
       const spans = stintLapSpans([...byStint.values()], currentLap);
       if (spans.length === 0) continue;
       const pits = ds.getAllBefore('pit', t, { driver_number: driverNumber });
+      // #1 — 현재 순위대로 정렬 (리더보드와 동일). 시간 컷은 getLatestBefore 가 보장 → 미래 누설 zero.
+      const position = ds.getLatestBefore('position', t, { driver_number: driverNumber })?.position;
       out.push({
         driverNumber,
         spans,
         pitLaps: pits.map((p) => p.lap_number),
         firstStart: spans[0].startLap,
+        sortKey: position ?? Number.POSITIVE_INFINITY,
       });
     }
+    out.sort((a, b) => a.sortKey - b.sortKey);
     return out;
   }, [ds, t, drivers, currentLap]);
 
@@ -86,10 +95,32 @@ export function TyreStrategy() {
       aria-label="타이어 전략"
       style={{ ...panelStyle, display: 'flex', flexDirection: 'column', gap: '6px' }}
     >
-      {rows.length === 0 ? (
-        <span style={{ fontSize: '13px', color: dashboardColors.textMuted }}>데이터 없음</span>
-      ) : (
-        rows.map((row) => {
+      <button
+        type="button"
+        data-testid="tyre-strategy-toggle"
+        aria-expanded={!collapsed}
+        onClick={() => setCollapsed((c) => !c)}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '6px',
+          background: 'transparent',
+          border: 'none',
+          padding: 0,
+          cursor: 'pointer',
+          color: 'inherit',
+        }}
+      >
+        <span aria-hidden style={{ fontSize: '9px', color: dashboardColors.textMuted }}>
+          {collapsed ? '▸' : '▾'}
+        </span>
+        <PanelHeading>TYRE STRATEGY</PanelHeading>
+      </button>
+      {!collapsed &&
+        (rows.length === 0 ? (
+          <span style={{ fontSize: '13px', color: dashboardColors.textMuted }}>데이터 없음</span>
+        ) : (
+          rows.map((row) => {
           // 전체 lap 폭: 첫 스틴트 시작 → 현재랩. firstStart=1 이면 currentLap 와 동일.
           const totalLaps = Math.max(1, currentLap - row.firstStart + 1);
           return (
@@ -173,7 +204,7 @@ export function TyreStrategy() {
             </div>
           );
         })
-      )}
+        ))}
     </section>
   );
 }

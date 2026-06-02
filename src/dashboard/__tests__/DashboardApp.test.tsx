@@ -93,6 +93,29 @@ describe('DashboardApp', () => {
     );
     expect(screen.getByText('라이브 맵 ③')).toBeTruthy();
   });
+
+  it('상단 EventBroadcast 마운트 — 전진 시 중요 이벤트 알림 (#5/D3)', () => {
+    const T0 = new Date('2024-03-02T12:00:00Z').valueOf();
+    const red = {
+      date: new Date(T0 + 30_000), message: 'RED FLAG', flag: 'RED', category: 'Flag',
+      session_key: 1, meeting_key: 1, scope: null, sector: null, driver_number: null, lap_number: 3,
+    };
+    const handle = makeFakeDs({
+      displayTime: new Date(T0),
+      getAllBefore: (ep: string, t: Date, _f: unknown, limit?: number) => {
+        if (ep !== 'race_control') return [];
+        return red.date.valueOf() <= t.valueOf() ? [red].slice(0, limit ?? 5) : [];
+      },
+    });
+    render(
+      <DataSourceProvider ds={handle.ds}>
+        <DashboardApp meeting={meeting} session={session} year={2024} mode="replay" />
+      </DataSourceProvider>,
+    );
+    expect(screen.queryByTestId('event-broadcast')).toBeNull(); // 마운트 시 없음
+    act(() => handle.setTime(new Date(T0 + 45_000))); // 전진 → RED 크로스
+    expect(screen.getByTestId('event-broadcast')).toBeTruthy();
+  });
 });
 
 // US-12B — <1280px 사이드 패널 자동 닫힘 + 토스트(인수22/§3.7). query-aware matchMedia mock.

@@ -145,4 +145,9 @@ describe('Leaderboard', () => {
     expect(screen.getByTestId('leaderboard')).toBeTruthy();
     expect(screen.queryAllByTestId(/^lb-row-/).length).toBe(0);
   });
+
+  it('LEADERBOARD 타이틀 헤더 표시 (#6/B4)', () => {
+    renderLeaderboard(new Map());
+    expect(screen.getByText('LEADERBOARD')).toBeTruthy();
+  });
 });

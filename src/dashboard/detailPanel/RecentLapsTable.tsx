@@ -1,7 +1,7 @@
 // dashboard §3.3 — 최근 완료 5랩 테이블. getCompletedLapsBefore(미완료 랩 제외 = 인수17b 누설 zero).
 // S1/S2/S3 는 sectorColor SSOT 색(보라/초록/노랑/회색, 인수13/16). Speed Trap = st_speed.
 
-import { useMemo, type CSSProperties } from 'react';
+import { useMemo, useState, type CSSProperties } from 'react';
 import { useDataSource } from '../shared/DataSourceContext';
 import { useDisplayTime } from '../shared/useDisplayTime';
 import { useAggregateResults } from '../shared/useAggregateResults';
@@ -27,10 +27,11 @@ export function RecentLapsTable({ driverNumber }: { driverNumber: number }) {
   const t = useDisplayTime(500);
   const aggregate = useAggregateResults();
 
-  const laps = useMemo(
-    () => ds.getCompletedLapsBefore(driverNumber, t, 5),
-    [ds, t, driverNumber],
-  );
+  const [expanded, setExpanded] = useState(false);
+  // #3 — 전체 완료랩을 한 번 조회(미완료 랩 제외는 getCompletedLapsBefore 가 보장, 인수17b).
+  // 기본은 최근 5랩, "더 보기" 로 전체 펼침.
+  const all = useMemo(() => ds.getCompletedLapsBefore(driverNumber, t), [ds, t, driverNumber]);
+  const laps = expanded ? all : all.slice(0, 5);
 
   return (
     <section data-testid="recent-laps" aria-label="최근 5랩" style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
@@ -79,6 +80,25 @@ export function RecentLapsTable({ driverNumber }: { driverNumber: number }) {
             })}
           </tbody>
         </table>
+      )}
+      {all.length > 5 && (
+        <button
+          type="button"
+          data-testid="recent-laps-toggle"
+          onClick={() => setExpanded((e) => !e)}
+          style={{
+            alignSelf: 'flex-start',
+            marginTop: '2px',
+            background: 'transparent',
+            border: 'none',
+            color: dashboardColors.textSecondary,
+            fontSize: '11px',
+            cursor: 'pointer',
+            padding: '2px 0',
+          }}
+        >
+          {expanded ? '접기' : `더 보기 (+${all.length - 5})`}
+        </button>
       )}
     </section>
   );

@@ -10,6 +10,7 @@ import { SectorBar } from '../shared/SectorBar';
 import { personalBestLap } from '../derived/personalBests';
 import { selectDriver } from '../shared/selectionStore';
 import { dashboardColors, panelStyle } from '../shared/dashboardStyles';
+import { PanelHeading } from '../shared/PanelHeading';
 import { formatGap, formatLapTime } from '../shared/formatTime';
 
 const MONO = 'var(--font-mono, monospace)';
@@ -97,8 +98,9 @@ export function Leaderboard() {
     <section
       data-testid="leaderboard"
       aria-label="Leaderboard"
-      style={{ ...panelStyle, overflowX: 'auto' }}
+      style={{ ...panelStyle, display: 'flex', flexDirection: 'column', gap: '6px', overflowX: 'auto' }}
     >
+      <PanelHeading>LEADERBOARD</PanelHeading>
       <table style={{ width: '100%', borderCollapse: 'collapse' }}>
         <thead>
           <tr>

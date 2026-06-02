@@ -107,4 +107,31 @@ describe('EventTicker', () => {
     expect(screen.getByText('L42')).toBeTruthy();
     expect(screen.getByText('Yellow flag sector 3')).toBeTruthy();
   });
+
+  it('EVENTS 타이틀 헤더 표시 (#6/B4)', () => {
+    const { ds } = makeFakeDs({ getAllBefore: () => [] });
+    render(
+      <DataSourceProvider ds={ds}>
+        <EventTicker />
+      </DataSourceProvider>,
+    );
+    expect(screen.getByText('EVENTS')).toBeTruthy();
+  });
+
+  it('긴 메시지 1줄 클램프 + title 전체 보유 (#5/D1)', () => {
+    const long = 'WAVED BLUE FLAG FOR CAR 77 (BOT) TIMED AT 14:00:09';
+    const records = [makeRc({ message: long })];
+    const { ds } = makeFakeDs({
+      getAllBefore: (ep: string) => (ep === 'race_control' ? records : []),
+    });
+    render(
+      <DataSourceProvider ds={ds}>
+        <EventTicker />
+      </DataSourceProvider>,
+    );
+    const msg = screen.getByText(long);
+    expect(msg.getAttribute('title')).toBe(long);
+    expect(msg.style.whiteSpace).toBe('nowrap');
+    expect(msg.style.textOverflow).toBe('ellipsis');
+  });
 });

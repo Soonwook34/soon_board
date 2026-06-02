@@ -26,6 +26,19 @@ export interface DriverMeta {
   nameAcronym: string;
 }
 
+/** F — 라벨 declutter 용 축 정렬 사각형(화면 px). */
+interface LabelRect {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+}
+
+/** AABB 교차 판정 — 라벨 chip 겹침 declutter. */
+function labelRectsOverlap(a: LabelRect, b: LabelRect): boolean {
+  return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+}
+
 export interface LiveMapRendererConfig {
   ctx: CanvasRenderingContext2D;
   canvasWidth: number;
@@ -122,6 +135,20 @@ export class LiveMapRenderer {
     this.staticLayerReady = true;
   }
 
+  /**
+   * F — 마커 라벨 chip 의 화면 사각형 추정(declutter 용). markers.ts 의 chip geometry 를
+   * 미러링하되 ctx.measureText 를 쓰지 않아(font 상태 불변) 동일한 fallback 폭 추정식
+   * (글자수 × px × 0.6)을 사용한다.
+   */
+  private labelRectFor(position: Point2D, acronym: string): LabelRect {
+    const labelPx = parseInt(mapStyles.labelFontSize, 10) || 11;
+    const textWidth = acronym.length * labelPx * 0.6;
+    const w = textWidth + mapStyles.labelChipPaddingX * 2;
+    const h = labelPx + mapStyles.labelChipPaddingY * 2;
+    const radius = mapStyles.markerSizeMin / 2;
+    return { x: position[0] - w / 2, y: position[1] + radius + mapStyles.labelOffsetPx, w, h };
+  }
+
   /** 순수 frame 함수 — 테스트 가능. RAF 콜백에서도 동일하게 호출됨. */
   renderFrame(displayTimeMs: number): void {
     const {
@@ -148,6 +175,8 @@ export class LiveMapRenderer {
     }
 
     const labelOn = showLabel();
+    // F — 라벨 겹침 declutter: 이미 배치된 라벨과 겹치면 이 마커 라벨은 생략(원·번호는 항상).
+    const placedLabelRects: LabelRect[] = [];
     for (const driverNumber of buffer.drivers()) {
       const pair = buffer.findPair(driverNumber, displayTimeMs);
       if (pair === null) continue;
@@ -174,12 +203,18 @@ export class LiveMapRenderer {
       const s2ForInterp = usePitlane && pair.s2 ? reproject(pair.s2, interpCtx) : pair.s2;
       const interp = interpolatePosition(s1ForInterp, s2ForInterp, displayTimeMs, interpCtx);
       const canvasPos = applyViewport(interp.position, viewport);
+      let markerShowLabel = labelOn;
+      if (markerShowLabel) {
+        const rect = this.labelRectFor(canvasPos, meta.nameAcronym);
+        if (placedLabelRects.some((r) => labelRectsOverlap(r, rect))) markerShowLabel = false;
+        else placedLabelRects.push(rect);
+      }
       drawMarker(ctx, {
         position: canvasPos,
         teamColour: meta.teamColour,
         driverNumber,
         nameAcronym: meta.nameAcronym,
-        showLabel: labelOn,
+        showLabel: markerShowLabel,
         state,
       });
 

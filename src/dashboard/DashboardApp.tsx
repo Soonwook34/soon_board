@@ -11,6 +11,7 @@ import { Leaderboard } from './panels/Leaderboard';
 import { TyreStrategy } from './panels/TyreStrategy';
 import { EventTicker } from './panels/EventTicker';
 import { FastestLapBadges } from './panels/FastestLapBadges';
+import { EventBroadcast } from './panels/EventBroadcast';
 import { DriverDetailPanel } from './detailPanel/DriverDetailPanel';
 import { useSelectedDriver, clearSelection } from './shared/selectionStore';
 import { useMediaQuery } from './shared/useMediaQuery';
@@ -70,6 +71,7 @@ export function DashboardApp({ meeting, session, year, mode, map }: DashboardApp
   return (
     <>
       <NarrowScreenBanner />
+      <EventBroadcast />{/* #5 — 중요 이벤트 상단 브로드캐스트(라이브/리플레이 공통, 단일 ds 구독). */}
       <div
         data-testid="dashboard-app"
         style={{

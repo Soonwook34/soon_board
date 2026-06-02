@@ -200,11 +200,12 @@ describe('LiveMapRenderer.renderFrame — 다중 driver + 라벨 토글', () => 
     const fillTexts = calls.filter((c) => c.method === 'fillText');
     expect(fillTexts).toHaveLength(3); // driverNumber only, no labels
   });
-  it('showLabel=true 시 fillText 는 6회 (3 number + 3 label)', () => {
+  it('showLabel=true + 충분히 떨어진 마커 → fillText 6회 (3 number + 3 label) (F2)', () => {
     const buffer = new PerDriverBuffer();
+    // F declutter: 라벨 chip 이 겹치지 않도록 충분히 떨어뜨림(s 간격 150 → x≈100/250/400).
     [44, 1, 11].forEach((d, i) => {
-      buffer.push(d, sample(0, 50 + i * 10, 0, 50 + i * 10));
-      buffer.push(d, sample(1000, 150 + i * 10, 0, 150 + i * 10));
+      buffer.push(d, sample(0, 50 + i * 150, 0, 50 + i * 150));
+      buffer.push(d, sample(1000, 150 + i * 150, 0, 150 + i * 150));
     });
     const ds = new SyntheticDataSource();
     const drivers = new Map([
@@ -217,6 +218,26 @@ describe('LiveMapRenderer.renderFrame — 다중 driver + 라벨 토글', () => 
     r.renderFrame(500);
     const fillTexts = calls.filter((c) => c.method === 'fillText');
     expect(fillTexts).toHaveLength(6);
+  });
+
+  it('겹치는 위치의 두 마커 → 라벨 declutter (fillText 3 = 번호 2 + 라벨 1) (F1)', () => {
+    const buffer = new PerDriverBuffer();
+    // 두 드라이버를 동일 위치(동일 s)로 → 라벨 chip 겹침 → 라벨은 하나만.
+    [44, 1].forEach((d) => {
+      buffer.push(d, sample(0, 100, 0, 100));
+      buffer.push(d, sample(1000, 200, 0, 200));
+    });
+    const ds = new SyntheticDataSource();
+    const drivers = new Map([
+      [44, { teamColour: '#27f4d2', nameAcronym: 'HAM' }],
+      [1, { teamColour: '#3671c6', nameAcronym: 'VER' }],
+    ]);
+    const { ctx, calls } = makeMockCtx();
+    const r = makeRenderer({ ctx, buffer, ds, drivers, showLabel: true });
+    r.renderFrame(500);
+    const fillTexts = calls.filter((c) => c.method === 'fillText');
+    expect(fillTexts).toHaveLength(3); // 번호 2 + 겹치지 않은 라벨 1
+    expect(calls.filter((c) => c.method === 'arc')).toHaveLength(2); // 마커 원은 둘 다 표시
   });
 });
 

@@ -1,7 +1,7 @@
 /// @vitest-environment jsdom
 // US-6 — TyreStrategy ⑥ + Issue #89 (인수5) 반개구간 타일링 단위 테스트.
 import { afterEach, describe, expect, it } from 'vitest';
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { TyreStrategy, stintLapSpans } from '../TyreStrategy';
 import { DataSourceProvider } from '../../shared/DataSourceContext';
 import { DriversProvider, type DriversMap } from '../../shared/DriversContext';
@@ -99,6 +99,8 @@ describe('TyreStrategy', () => {
         </DriversProvider>
       </DataSourceProvider>,
     );
+    // ⑥ 기본 접힘(B1) — 본문(rows/데이터 없음) 단언 전 토글로 펼친다.
+    fireEvent.click(screen.getByTestId('tyre-strategy-toggle'));
 
     expect(screen.getByTestId('tyre-row-1')).toBeTruthy();
     expect(screen.getByTestId('tyre-row-16')).toBeTruthy();
@@ -125,6 +127,7 @@ describe('TyreStrategy', () => {
         </DriversProvider>
       </DataSourceProvider>,
     );
+    fireEvent.click(screen.getByTestId('tyre-strategy-toggle'));
     const seg = container.querySelector('[data-compound]') as HTMLElement;
     expect(seg.getAttribute('data-compound')).toBe('SOFT');
   });
@@ -154,6 +157,7 @@ describe('TyreStrategy', () => {
         </DriversProvider>
       </DataSourceProvider>,
     );
+    fireEvent.click(screen.getByTestId('tyre-strategy-toggle'));
     expect(screen.getByTestId('tyre-pit-1')).toBeTruthy();
   });
 
@@ -171,6 +175,7 @@ describe('TyreStrategy', () => {
         </DriversProvider>
       </DataSourceProvider>,
     );
+    fireEvent.click(screen.getByTestId('tyre-strategy-toggle'));
     expect(screen.getByTestId('tyre-strategy')).toBeTruthy();
     expect(screen.getByText('데이터 없음')).toBeTruthy();
   });
@@ -188,6 +193,79 @@ describe('TyreStrategy', () => {
         </DriversProvider>
       </DataSourceProvider>,
     );
+    fireEvent.click(screen.getByTestId('tyre-strategy-toggle'));
     expect(screen.getByText('데이터 없음')).toBeTruthy();
+  });
+
+  it('현재 순위(position)대로 정렬 — 삽입순과 무관 (#1/A)', () => {
+    const stints = [
+      stint({ driver_number: 1, stint_number: 1, lap_start: 1, lap_end: 20, compound: 'SOFT' }),
+      stint({ driver_number: 16, stint_number: 1, lap_start: 1, lap_end: 20, compound: 'HARD' }),
+    ];
+    // 삽입순 [1, 16] 이지만 position 은 16=P1, 1=P2 → tyre-row 순서는 [16, 1].
+    const { ds } = makeFakeDs({
+      displayTime: T,
+      getLatestBefore: (
+        _ep: string,
+        _t: Date,
+        filters?: { position?: number; driver_number?: number },
+      ) => {
+        if (filters?.position === 1) return { driver_number: 16, position: 1 }; // leaderCurrentLap
+        if (filters?.driver_number === 1) return { driver_number: 1, position: 2 };
+        if (filters?.driver_number === 16) return { driver_number: 16, position: 1 };
+        return null;
+      },
+      getLapAt: () => ({ lap_number: 20 }),
+      getStintForLap: stintForLapOf(stints),
+    });
+    const drivers = driversOf(
+      mkDriver({ driver_number: 1, name_acronym: 'VER' }),
+      mkDriver({ driver_number: 16, name_acronym: 'LEC' }),
+    );
+    const { container } = render(
+      <DataSourceProvider ds={ds}>
+        <DriversProvider drivers={drivers}>
+          <TyreStrategy />
+        </DriversProvider>
+      </DataSourceProvider>,
+    );
+    fireEvent.click(screen.getByTestId('tyre-strategy-toggle'));
+    const order = [...container.querySelectorAll('[data-testid^="tyre-row-"]')].map((el) =>
+      el.getAttribute('data-testid'),
+    );
+    expect(order).toEqual(['tyre-row-16', 'tyre-row-1']);
+  });
+
+  it('기본 접힘 — 초기엔 tyre-row 없고 토글만 보임 (#2/B1)', () => {
+    const stints = [stint({ driver_number: 1, stint_number: 1, lap_start: 1, lap_end: 20, compound: 'SOFT' })];
+    const { ds } = makeFakeDs({ displayTime: T, ...leaderOverrides(20), getStintForLap: stintForLapOf(stints) });
+    const drivers = driversOf(mkDriver({ driver_number: 1, name_acronym: 'VER' }));
+    const { container } = render(
+      <DataSourceProvider ds={ds}>
+        <DriversProvider drivers={drivers}>
+          <TyreStrategy />
+        </DriversProvider>
+      </DataSourceProvider>,
+    );
+    expect(screen.getByTestId('tyre-strategy-toggle')).toBeTruthy();
+    expect(container.querySelectorAll('[data-testid^="tyre-row-"]')).toHaveLength(0);
+  });
+
+  it('토글 클릭 → tyre-row 표시, 재클릭 → 숨김 (#2/B2)', () => {
+    const stints = [stint({ driver_number: 1, stint_number: 1, lap_start: 1, lap_end: 20, compound: 'SOFT' })];
+    const { ds } = makeFakeDs({ displayTime: T, ...leaderOverrides(20), getStintForLap: stintForLapOf(stints) });
+    const drivers = driversOf(mkDriver({ driver_number: 1, name_acronym: 'VER' }));
+    const { container } = render(
+      <DataSourceProvider ds={ds}>
+        <DriversProvider drivers={drivers}>
+          <TyreStrategy />
+        </DriversProvider>
+      </DataSourceProvider>,
+    );
+    const toggle = screen.getByTestId('tyre-strategy-toggle');
+    fireEvent.click(toggle);
+    expect(container.querySelectorAll('[data-testid^="tyre-row-"]')).toHaveLength(1);
+    fireEvent.click(toggle);
+    expect(container.querySelectorAll('[data-testid^="tyre-row-"]')).toHaveLength(0);
   });
 });

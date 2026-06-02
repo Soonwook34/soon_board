@@ -1,7 +1,7 @@
 /// @vitest-environment jsdom
 // US-9 — RecentLapsTable §3.3: getCompletedLapsBefore(미완료 제외) + 섹터/스피드 표시.
 import { afterEach, describe, expect, it } from 'vitest';
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { RecentLapsTable } from '../RecentLapsTable';
 import { DataSourceProvider } from '../../shared/DataSourceContext';
 import { makeFakeDs } from '../../__tests__/fakeDataSource';
@@ -52,5 +52,32 @@ describe('RecentLapsTable', () => {
   it('완료 랩 없으면 기록 없음', () => {
     renderRLT({ getCompletedLapsBefore: () => [] });
     expect(screen.getByText('기록 없음')).toBeTruthy();
+  });
+
+  // #3 — getCompletedLapsBefore 는 limit 생략 시 전체 완료랩 반환. 컴포넌트가 기본 5랩만 표시하고
+  // "더 보기" 로 전체 펼침 (미완료 랩 제외는 getCompletedLapsBefore 가 보장 → 인수17b).
+  const eightLaps = () => Array.from({ length: 8 }, (_, i) => lap({ lap_number: 8 - i, lap_duration: 90 + i }));
+  const rowCount = (c: HTMLElement) => c.querySelectorAll('[data-testid^="recent-lap-"]').length;
+
+  it('완료랩 8개 → 기본 5행 + "더 보기" 토글 (C1)', () => {
+    const { container } = renderRLT({ getCompletedLapsBefore: () => eightLaps() });
+    expect(rowCount(container)).toBe(5);
+    expect(screen.getByTestId('recent-laps-toggle').textContent).toContain('더 보기');
+  });
+
+  it('토글 클릭 → 전체 8행, 재클릭 → 5행 (C2)', () => {
+    const { container } = renderRLT({ getCompletedLapsBefore: () => eightLaps() });
+    fireEvent.click(screen.getByTestId('recent-laps-toggle'));
+    expect(rowCount(container)).toBe(8);
+    expect(screen.getByTestId('recent-laps-toggle').textContent).toContain('접기');
+    fireEvent.click(screen.getByTestId('recent-laps-toggle'));
+    expect(rowCount(container)).toBe(5);
+  });
+
+  it('완료랩 ≤5 → 토글 미표시 (C3)', () => {
+    const five = Array.from({ length: 5 }, (_, i) => lap({ lap_number: 5 - i, lap_duration: 90 + i }));
+    const { container } = renderRLT({ getCompletedLapsBefore: () => five });
+    expect(rowCount(container)).toBe(5);
+    expect(screen.queryByTestId('recent-laps-toggle')).toBeNull();
   });
 });
