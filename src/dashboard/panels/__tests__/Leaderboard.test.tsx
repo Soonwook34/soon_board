@@ -1,13 +1,13 @@
 /// @vitest-environment jsdom
 // dashboard §2.5 — 리더보드 ⑤ 테스트. 정렬 / LAST·섹터바 / interval 누락 graceful / 클릭 선택 / 빈 맵.
 import { afterEach, describe, expect, it } from 'vitest';
-import { cleanup, render, screen, fireEvent } from '@testing-library/react';
+import { act, cleanup, render, screen, fireEvent } from '@testing-library/react';
 import { Leaderboard } from '../Leaderboard';
 import { DataSourceProvider } from '../../shared/DataSourceContext';
 import { DriversProvider } from '../../shared/DriversContext';
-import { makeFakeDs } from '../../__tests__/fakeDataSource';
+import { makeFakeDs, type FakeDsHandle } from '../../__tests__/fakeDataSource';
 import { _resetSelection, getSelectedDriver } from '../../shared/selectionStore';
-import type { DriverRecord, LapRecord, PositionRecord } from '../../../shared/openf1Types';
+import type { DriverRecord, LapRecord, PositionRecord, SessionResultRecord } from '../../../shared/openf1Types';
 
 afterEach(() => {
   cleanup();
@@ -62,8 +62,8 @@ const positions: Record<number, number> = { 1: 1, 44: 2 };
 function renderLeaderboard(
   drivers: ReadonlyMap<number, DriverRecord>,
   overrides: Record<string, unknown> = {},
-) {
-  const { ds } = makeFakeDs({
+): FakeDsHandle {
+  const handle = makeFakeDs({
     displayTime: new Date('2024-03-02T15:30:00Z'),
     getAggregateBefore: (name: string) => {
       if (name === 'fastest_lap') return { driver_number: 1, lap_number: 5, lap_duration: 90 };
@@ -73,12 +73,13 @@ function renderLeaderboard(
     ...overrides,
   });
   render(
-    <DataSourceProvider ds={ds}>
+    <DataSourceProvider ds={handle.ds}>
       <DriversProvider drivers={drivers}>
         <Leaderboard />
       </DriversProvider>
     </DataSourceProvider>,
   );
+  return handle;
 }
 
 describe('Leaderboard', () => {
@@ -149,5 +150,44 @@ describe('Leaderboard', () => {
   it('LEADERBOARD 타이틀 헤더 표시 (#6/B4)', () => {
     renderLeaderboard(new Map());
     expect(screen.getByText('LEADERBOARD')).toBeTruthy();
+  });
+
+  const positionLatest =
+    (endpoint: string, _t: Date, filters?: { driver_number?: number }) =>
+      endpoint === 'position' && filters?.driver_number != null
+        ? ({
+            driver_number: filters.driver_number,
+            position: positions[filters.driver_number],
+            date: new Date(),
+            session_key: 1,
+            meeting_key: 1,
+          } as PositionRecord)
+        : null;
+
+  it('DNF ✕ 는 리타이어 랩(number_of_laps) 이후에만 — 전진 등장·후진 재소멸(미래 누설 zero)', () => {
+    const tRetire = new Date('2024-03-02T15:40:00Z').valueOf();
+    const handle = renderLeaderboard(driversMap, {
+      getLatestBefore: positionLatest,
+      getSessionResult: (n: number): SessionResultRecord | null =>
+        n === 44
+          ? {
+              session_key: 1, meeting_key: 1, driver_number: 44, position: 18,
+              number_of_laps: 10, duration: null, gap_to_leader: null,
+              dnf: true, dns: false, dsq: false,
+            }
+          : null,
+      getCompletedLapsBefore: (n: number, t: Date) =>
+        n === 44 ? [mkLap(44, t.valueOf() >= tRetire ? 10 : 8, 90)] : [],
+    });
+    expect(screen.queryByTestId('lb-out-44')).toBeNull(); // 15:30 리타이어 전
+    act(() => handle.setTime(new Date('2024-03-02T15:45:00Z'))); // 전진 → 리타이어 후
+    expect(screen.getByTestId('lb-out-44')).toBeTruthy();
+    act(() => handle.setTime(new Date('2024-03-02T15:30:00Z'))); // 후진 시크
+    expect(screen.queryByTestId('lb-out-44')).toBeNull(); // 재소멸
+  });
+
+  it('라이브(getSessionResult=null) → out 마커 절대 미표시', () => {
+    renderLeaderboard(driversMap, { getLatestBefore: positionLatest });
+    expect(screen.queryAllByTestId(/^lb-out-/).length).toBe(0);
   });
 });

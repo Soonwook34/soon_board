@@ -12,6 +12,7 @@ import { selectDriver } from '../shared/selectionStore';
 import { dashboardColors, panelStyle } from '../shared/dashboardStyles';
 import { PanelHeading } from '../shared/PanelHeading';
 import { formatGap, formatLapTime } from '../shared/formatTime';
+import { driverOutAt } from '../derived/driverOutStatus';
 
 const MONO = 'var(--font-mono, monospace)';
 const NO_VALUE = '—';
@@ -69,8 +70,9 @@ export function Leaderboard() {
       const pbLap = personalBestLap(aggregate, driver_number);
       const isFastest =
         pbLap != null && fastest != null && approxEq(pbLap, fastest.lap_duration);
-      // session_result 는 undated → getLatestBefore 로는 항상 null. 전용 접근자 사용(US-8A).
-      const dnf = ds.getSessionResult(driver_number)?.dnf ?? false;
+      // out(DNF/DNS/DSQ) — driverOutAt 가 undated session_result 를 시간 컷된 완료 랩과 결합해
+      // 실제 리타이어 시점 이후에만 non-null (미래 누설 zero, 인수18). 직접 getSessionResult 금지.
+      const out = driverOutAt(ds, driver_number, t);
       const latestPit = ds.getLatestBefore('pit', t, { driver_number });
       const justPitted = latestPit != null && lapNum != null && latestPit.lap_number === lapNum;
 
@@ -85,7 +87,7 @@ export function Leaderboard() {
         stint,
         tyreAge,
         isFastest,
-        dnf,
+        out,
         justPitted,
         sortKey: pos?.position ?? Number.POSITIVE_INFINITY,
       });
@@ -144,8 +146,15 @@ export function Leaderboard() {
                   {row.isFastest && (
                     <span style={{ ...markerStyle, color: dashboardColors.text }}>ⓕ</span>
                   )}
-                  {row.dnf && (
-                    <span style={{ ...markerStyle, color: dashboardColors.textMuted }}>✕</span>
+                  {row.out && (
+                    <span
+                      data-testid={`lb-out-${row.driver_number}`}
+                      title={row.out === 'dns' ? 'DNS' : row.out === 'dsq' ? 'DSQ' : 'DNF'}
+                      aria-label={row.out === 'dns' ? 'DNS' : row.out === 'dsq' ? 'DSQ' : 'DNF'}
+                      style={{ ...markerStyle, color: dashboardColors.textMuted }}
+                    >
+                      ✕
+                    </span>
                   )}
                   {row.justPitted && (
                     <span style={{ ...markerStyle, color: dashboardColors.textSecondary }}>ⓟ</span>
