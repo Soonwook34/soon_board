@@ -15,7 +15,7 @@ const at = (sec: number) => new Date(T0 + sec * 1000);
 function rc(sec: number, p: Partial<RaceControlRecord>): RaceControlRecord {
   return {
     date: at(sec), session_key: 1, meeting_key: 1, category: '', flag: null,
-    scope: null, sector: null, driver_number: null, lap_number: null, message: '', ...p,
+    scope: null, sector: null, driver_number: null, lap_number: null, message: '', qualifying_phase: null, ...p,
   };
 }
 

@@ -22,6 +22,7 @@ function makeRc(partial: Partial<RaceControlRecord> & { message: string }): Race
     sector: null,
     driver_number: null,
     lap_number: null,
+    qualifying_phase: null,
     ...partial,
   };
 }

@@ -124,6 +124,8 @@ export interface RaceControlRecord {
   driver_number: number | null;
   lap_number: number | null;
   message: string;
+  /** 예선에서만 1/2/3 (Q1/Q2/Q3), 그 외 null. (docs/openf1-api-reference.md §8.11) */
+  qualifying_phase: number | null;
 }
 
 export interface SessionRecord {
@@ -148,9 +150,9 @@ export interface SessionResultRecord {
   driver_number: number;
   position: number | null;
   number_of_laps: number | null;
-  /** 라이브 중 또는 미완 시 null. */
-  duration: number | number[] | null;
-  gap_to_leader: number | string | number[] | null;
+  /** 라이브 중 또는 미완 시 null. 예선은 [Q1,Q2,Q3] 배열이며 비도달 세그먼트는 null 패딩(실데이터 확인). */
+  duration: number | Array<number | null> | null;
+  gap_to_leader: number | string | Array<number | null> | null;
   dnf: boolean;
   dns: boolean;
   dsq: boolean;

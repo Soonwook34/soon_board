@@ -4,14 +4,11 @@
 
 import { useEffect, useState, type ReactNode } from 'react';
 import { SessionHeader, type DashboardMode } from './panels/SessionHeader';
-import { SessionProgress } from './panels/SessionProgress';
 import { RaceControlBanner } from './panels/RaceControlBanner';
 import { WeatherMini } from './panels/WeatherMini';
-import { Leaderboard } from './panels/Leaderboard';
-import { TyreStrategy } from './panels/TyreStrategy';
-import { EventTicker } from './panels/EventTicker';
-import { FastestLapBadges } from './panels/FastestLapBadges';
 import { EventBroadcast } from './panels/EventBroadcast';
+import { resolveProfile } from './profiles';
+import { resolveSessionKind } from '../shared/sessionKind';
 import { DriverDetailPanel } from './detailPanel/DriverDetailPanel';
 import { useSelectedDriver, clearSelection } from './shared/selectionStore';
 import { useMediaQuery } from './shared/useMediaQuery';
@@ -57,6 +54,10 @@ export function DashboardApp({ meeting, session, year, mode, map, onBack }: Dash
   // <1280px 에서는 push 폭 부족 → 디테일 영역 미렌더(자동 닫힘과 정합, §3.7).
   const detailOpen = selected != null && !belowDesktop;
 
+  // 세션 종류별 패널 구성(요구 B). 비-퀄리는 default 프로파일 = 현 레이아웃 1:1(회귀 0).
+  const profile = resolveProfile(resolveSessionKind(session.session_type, session.session_name));
+  const profileCtx = { meeting, session, year };
+
   // 인수23 — 모드(라이브↔리플레이) 전환 시 선택 해제(사이드 패널 닫힘). 화면 재마운트 간
   // 모듈스코프 selectionStore 가 잔류하므로 mode 변화를 트리거로 reset.
   useEffect(() => {
@@ -91,9 +92,7 @@ export function DashboardApp({ meeting, session, year, mode, map, onBack }: Dash
         <div style={{ gridArea: 'h' }}>
           <SessionHeader meeting={meeting} session={session} year={year} mode={mode} onBack={onBack} />
         </div>
-        <div style={{ gridArea: 'p' }}>
-          <SessionProgress session={session} circuitKey={meeting.circuit_key} year={year} />
-        </div>
+        <div style={{ gridArea: 'p' }}>{profile.renderProgress(profileCtx)}</div>
         <div style={{ gridArea: 'r' }}>
           <RaceControlBanner />
         </div>
@@ -129,13 +128,9 @@ export function DashboardApp({ meeting, session, year, mode, map, onBack }: Dash
             minHeight: 0,
           }}
         >
-          <Leaderboard />
-          <TyreStrategy />
-          <EventTicker />
+          {profile.renderSidebar(profileCtx)}
         </div>
-        <div style={{ gridArea: 'b' }}>
-          <FastestLapBadges />
-        </div>
+        <div style={{ gridArea: 'b' }}>{profile.renderBadges(profileCtx)}</div>
         <div style={{ gridArea: 'w' }}>
           <WeatherMini />
         </div>

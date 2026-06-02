@@ -10,6 +10,7 @@
 
 import type { MeetingData, SessionData } from '../../shared/seasonData';
 import type { SessionTypeFilter, StatusFilter, UiState } from '../stores/uiStore';
+import { resolveSessionKind } from '../../shared/sessionKind';
 import { classifyMeeting } from './meetingStatus';
 
 export function matchSearch(meeting: MeetingData, query: string): boolean {
@@ -24,14 +25,11 @@ export function matchSearch(meeting: MeetingData, query: string): boolean {
   return fields.some((f) => typeof f === 'string' && f.toLowerCase().includes(q));
 }
 
+// SessionKind 와 SessionTypeFilter 는 구조적으로 동일한 문자열 유니온. 정규화 SSOT 는
+// resolveSessionKind(session_type, session_name). 본 래퍼는 단일 인자 하위호환용으로,
+// session_type 을 두 필드에 동일 전달한다(과거 호출부가 'Sprint' 등을 type 인자로 넘기던 패턴 유지).
 export function normalizeSessionType(sessionType: string): SessionTypeFilter | null {
-  const t = sessionType.trim().toLowerCase();
-  if (t === 'race') return 'race';
-  if (t === 'qualifying') return 'qualifying';
-  if (t === 'sprint') return 'sprint';
-  if (t === 'sprint qualifying' || t === 'sprint shootout') return 'sprint_qualifying';
-  if (t === 'practice') return 'practice';
-  return null;
+  return resolveSessionKind(sessionType, sessionType);
 }
 
 export function matchSessionType(
@@ -39,7 +37,7 @@ export function matchSessionType(
   selected: ReadonlySet<SessionTypeFilter>,
 ): boolean {
   if (selected.size === 0) return false;
-  const norm = normalizeSessionType(session.session_type);
+  const norm = resolveSessionKind(session.session_type, session.session_name);
   return norm !== null && selected.has(norm);
 }
 

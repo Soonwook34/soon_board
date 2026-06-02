@@ -19,6 +19,7 @@ function rc(sec: number, partial: Partial<RaceControlRecord>): RaceControlRecord
     driver_number: null,
     lap_number: null,
     message: '',
+    qualifying_phase: null,
     ...partial,
   };
 }
