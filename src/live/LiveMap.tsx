@@ -85,6 +85,27 @@ export interface LiveMapProps {
   onSampleRef?: MutableRefObject<((driverNumber: number, sample: LocationSample) => void) | null>;
   /** Phase 10 게이트 — true 시 DRS zone 렌더링 (ReplayScreen 만). default false. */
   isReplay?: boolean;
+  /** 퀄리파잉 — true 면 아웃랩 마커를 디밍(qualifying-session-dashboard.md §3.5). default false. */
+  dimOutLaps?: boolean;
+}
+
+/** 퀄리파잉 아웃랩 디머 — 500ms 버킷 캐시로 프레임당 getLapAt 호출을 막는다(핫패스 비용 최소화). */
+function createOutLapDimmer(ds: Pick<DataSource, 'getLapAt'>): (n: number, tMs: number) => boolean {
+  let bucket = -1;
+  const cache = new Map<number, boolean>();
+  return (n, tMs) => {
+    const b = Math.floor(tMs / 500);
+    if (b !== bucket) {
+      bucket = b;
+      cache.clear();
+    }
+    let v = cache.get(n);
+    if (v === undefined) {
+      v = ds.getLapAt(n, new Date(tMs))?.is_pit_out_lap === true;
+      cache.set(n, v);
+    }
+    return v;
+  };
 }
 
 export function LiveMap({
@@ -98,6 +119,7 @@ export function LiveMap({
   dataSource,
   onSampleRef,
   isReplay = false,
+  dimOutLaps = false,
 }: LiveMapProps) {
   const [assets, setAssets] = useState<LoadedAssets | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -281,6 +303,7 @@ export function LiveMap({
       if (offCtx) offCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
+    const getDriverDim = dimOutLaps ? createOutLapDimmer(ds) : undefined;
     const renderer = new LiveMapRenderer({
       ctx,
       canvasWidth: logicalW,
@@ -292,6 +315,7 @@ export function LiveMap({
       dataSource: ds,
       buffer,
       getDriverMeta: (n) => assets.drivers.get(n) ?? null,
+      getDriverDim,
       showLabel: () => showLabelRef.current,
       pitlanePolyline,
       pitlaneArcLengthTable: assets.pitlane ? [...assets.pitlane.arc_length_table] : undefined,
@@ -316,7 +340,7 @@ export function LiveMap({
       if (dataSource && onSampleRef) onSampleRef.current = null;
       setSupportsPause(false);
     };
-  }, [assets, sessionKey, factory, client, isReplay, dataSource, onSampleRef]);
+  }, [assets, sessionKey, factory, client, isReplay, dataSource, onSampleRef, dimOutLaps]);
 
   const onTogglePause = useCallback(() => {
     const ds = dataSourceRef.current;

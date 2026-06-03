@@ -9,6 +9,7 @@ import { CorsFailedNotice } from './CorsFailedNotice';
 import { findSessionAcrossSeasons } from './findSessionByKey';
 import { pingOpenF1 } from './corsPing';
 import { LiveMap, type LiveMapDataSource } from './LiveMap';
+import { resolveSessionKind, isQualifyingFamily } from '../shared/sessionKind';
 import { classify } from '../main/derived/sessionStatus';
 import { loadCatalogIndex, loadSeason } from '../main/stores/catalogStore';
 import { useNowSecond } from '../main/useNowSecond';
@@ -170,6 +171,9 @@ export function ReplayScreen({ pingImpl }: ReplayScreenProps = {}) {
                   dataSource={ds}
                   onSampleRef={onSampleRef}
                   isReplay={true}
+                  dimOutLaps={isQualifyingFamily(
+                    resolveSessionKind(found.session.session_type, found.session.session_name),
+                  )}
                   onBack={() => setLocation('/')}
                 />
               }

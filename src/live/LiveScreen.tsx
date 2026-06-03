@@ -14,6 +14,7 @@ import { useLocation, useParams } from 'wouter';
 import { CorsFailedNotice } from './CorsFailedNotice';
 import { CountdownOverlay } from './CountdownOverlay';
 import { LiveMap } from './LiveMap';
+import { resolveSessionKind, isQualifyingFamily } from '../shared/sessionKind';
 import { findSessionByKey } from './findSessionByKey';
 import { pingOpenF1 } from './corsPing';
 import { classify } from '../main/derived/sessionStatus';
@@ -152,6 +153,9 @@ export function LiveScreen({ pingImpl }: LiveScreenProps = {}) {
                 year={currentYear}
                 dataSource={ds}
                 onSampleRef={onSampleRef}
+                dimOutLaps={isQualifyingFamily(
+                  resolveSessionKind(found.session.session_type, found.session.session_name),
+                )}
                 onBack={() => setLocation('/')}
               />
             }

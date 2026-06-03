@@ -63,6 +63,8 @@ export const mapStyles = {
   trailLineWidth: 2,
   /** 연결 끊김 (disconnected) 마커 alpha. plan §4.2 "dim 50%". */
   disconnectedAlpha: 0.5,
+  /** 퀄리파잉 아웃랩 마커 dim alpha — 플라잉 랩 대비 디밍(qualifying-session-dashboard.md §3.5). */
+  outLapAlpha: 0.4,
   /** 리타이어 마커 fill (grayscale). plan §4.2 "마커 grayscale". */
   retiredFill: color.textMuted,
 

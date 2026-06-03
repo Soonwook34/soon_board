@@ -63,6 +63,8 @@ export interface LiveMapRendererConfig {
   trailsEnabled?: boolean;
   /** Phase 12+ — dnf/pit hint. Phase 7 default 는 undefined (모두 normal/disconnected 만 판정). */
   getDriverHints?: (driverNumber: number) => ClassifyOpts | undefined;
+  /** 퀄리파잉 — 시각별 드라이버 아웃랩 여부(true 면 마커 디밍). 미제공/undefined 면 디밍 없음(회귀 0). */
+  getDriverDim?: (driverNumber: number, displayTimeMs: number) => boolean;
   /** Phase 9 — sector 경계 (i1/i2/start-finish). undefined 면 그리지 않음. */
   sectorBoundaries?: readonly SectorBoundary[];
   /** Phase 10 — DRS zone (historical 전용). undefined 또는 drsEnabled=false 면 그리지 않음. */
@@ -161,6 +163,7 @@ export class LiveMapRenderer {
       showLabel,
       trailsEnabled = true,
       getDriverHints,
+      getDriverDim,
     } = this.config;
 
     // C2: 정적 레이어 캐시가 있으면 1회 채우고 매 frame blit. 없으면 직접 ctx 에 그림.
@@ -216,6 +219,7 @@ export class LiveMapRenderer {
         nameAcronym: meta.nameAcronym,
         showLabel: markerShowLabel,
         state,
+        dim: getDriverDim?.(driverNumber, displayTimeMs) ?? false,
       });
 
       // 상태 배지 (disconnected 만 '?' 그림)

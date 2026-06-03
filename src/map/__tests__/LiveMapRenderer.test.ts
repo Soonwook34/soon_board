@@ -359,6 +359,41 @@ describe('LiveMapRenderer.renderFrame — Phase 7 trail + state', () => {
     expect(fillStyles.some((v) => v === mapStyles.retiredFill)).toBe(true);
     expect(fillStyles.every((v) => v !== '#27f4d2')).toBe(true); // teamColour 무시
   });
+
+  it('getDriverDim=true → 마커 alpha 가 outLapAlpha 로 디밍 (퀄리 아웃랩)', () => {
+    const buffer = new PerDriverBuffer();
+    buffer.push(44, sample(0, 100, 0, 100));
+    buffer.push(44, sample(1000, 200, 0, 200));
+    const ds = new SyntheticDataSource();
+    const drivers = new Map([[44, { teamColour: '#27f4d2', nameAcronym: 'HAM' }]]);
+    const { ctx, calls } = makeMockCtx();
+    const r = new LiveMapRenderer({
+      ctx, canvasWidth: 500, canvasHeight: 500, polyline: POLY, arcLengthTable: POLY_S,
+      totalLength: 2000, viewport: VIEWPORT, dataSource: ds, buffer,
+      getDriverMeta: (n) => drivers.get(n) ?? null, showLabel: () => false,
+      getDriverDim: () => true,
+    });
+    r.renderFrame(500);
+    const alphaSets = calls.filter((c) => c.method === 'set:globalAlpha').map((c) => c.args[0]);
+    expect(alphaSets).toContain(mapStyles.outLapAlpha);
+  });
+
+  it('getDriverDim 미제공 → globalAlpha 디밍 없음 (회귀 0)', () => {
+    const buffer = new PerDriverBuffer();
+    buffer.push(44, sample(0, 100, 0, 100));
+    buffer.push(44, sample(1000, 200, 0, 200));
+    const ds = new SyntheticDataSource();
+    const drivers = new Map([[44, { teamColour: '#27f4d2', nameAcronym: 'HAM' }]]);
+    const { ctx, calls } = makeMockCtx();
+    const r = new LiveMapRenderer({
+      ctx, canvasWidth: 500, canvasHeight: 500, polyline: POLY, arcLengthTable: POLY_S,
+      totalLength: 2000, viewport: VIEWPORT, dataSource: ds, buffer,
+      getDriverMeta: (n) => drivers.get(n) ?? null, showLabel: () => false,
+    });
+    r.renderFrame(500);
+    const alphaSets = calls.filter((c) => c.method === 'set:globalAlpha').map((c) => c.args[0]);
+    expect(alphaSets).not.toContain(mapStyles.outLapAlpha);
+  });
 });
 
 describe('LiveMapRenderer.renderFrame — Phase 8 pitlane 통합', () => {

@@ -17,6 +17,8 @@ export interface MarkerDrawOpts {
   size?: number;
   /** plan §4.2 상태별 표현. default 'normal'. */
   state?: DriverState;
+  /** 퀄리파잉 아웃랩 디밍 — true 면 마커 alpha 를 outLapAlpha 로 낮춘다. default false. */
+  dim?: boolean;
 }
 
 export function drawMarker(ctx: CanvasRenderingContext2D, opts: MarkerDrawOpts): void {
@@ -31,7 +33,10 @@ export function drawMarker(ctx: CanvasRenderingContext2D, opts: MarkerDrawOpts):
   // disconnected/pit-in-progress 분기에서 cleanup 누락 가능성 (예외/리팩터링) 차단.
   ctx.save();
   try {
-    if (state === 'disconnected') ctx.globalAlpha = mapStyles.disconnectedAlpha;
+    let markerAlpha = 1;
+    if (state === 'disconnected') markerAlpha = mapStyles.disconnectedAlpha;
+    if (opts.dim) markerAlpha = Math.min(markerAlpha, mapStyles.outLapAlpha);
+    if (markerAlpha !== 1) ctx.globalAlpha = markerAlpha;
 
     // 드롭 섀도우는 fill 에만 적용 → stroke/text 는 선명하게 (shadow 끄고 다시 그림).
     ctx.beginPath();

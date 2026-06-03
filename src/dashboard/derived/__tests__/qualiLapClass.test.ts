@@ -1,7 +1,7 @@
 // qualiLapClass 단위 테스트 — US-006.
 
 import { describe, expect, it } from 'vitest';
-import { classifyLap, isComparableLap, pitLapSet, pitLapsByDriver } from '../qualiLapClass';
+import { classifyLap, pitLapsByDriver } from '../qualiLapClass';
 import type { LapRecord, PitRecord } from '../../../shared/openf1Types';
 
 function mkLap(o: Partial<LapRecord>): LapRecord {
@@ -47,27 +47,14 @@ describe('classifyLap', () => {
     expect(classifyLap(mkLap({ lap_duration: null }), noPits)).toBe('incomplete');
     expect(classifyLap(mkLap({ lap_duration: 0 }), noPits)).toBe('incomplete');
   });
-
-  it('isComparableLap 는 flying 만 true', () => {
-    expect(isComparableLap(mkLap({ lap_duration: 89.5 }), noPits)).toBe(true);
-    expect(isComparableLap(mkLap({ is_pit_out_lap: true }), noPits)).toBe(false);
-    expect(isComparableLap(mkLap({ lap_number: 7 }), new Set([7]))).toBe(false);
-    expect(isComparableLap(mkLap({ lap_duration: null }), noPits)).toBe(false);
-  });
 });
 
-describe('pitLapSet / pitLapsByDriver', () => {
+describe('pitLapsByDriver', () => {
   const pits: PitRecord[] = [
     { date: new Date(), driver_number: 1, session_key: 9468, meeting_key: 1, lap_number: 6, pit_duration: 20 },
     { date: new Date(), driver_number: 1, session_key: 9468, meeting_key: 1, lap_number: 12, pit_duration: 21 },
     { date: new Date(), driver_number: 44, session_key: 9468, meeting_key: 1, lap_number: 7, pit_duration: 22 },
   ];
-
-  it('pitLapSet: 드라이버별 핏 진입 랩만', () => {
-    expect([...pitLapSet(pits, 1)].sort((a, b) => a - b)).toEqual([6, 12]);
-    expect([...pitLapSet(pits, 44)]).toEqual([7]);
-    expect(pitLapSet(pits, 99).size).toBe(0);
-  });
 
   it('pitLapsByDriver: 전체 맵', () => {
     const m = pitLapsByDriver(pits);

@@ -21,7 +21,10 @@ export interface CutlineInfo {
 /** 세그먼트의 컷라인 정보. 진출 인원은 다음 세그먼트 멤버십 크기로 파생(하드코딩 없음). */
 export function cutlineFor(model: SegmentModel, part: QualiPart): CutlineInfo {
   const participants = model.membership.get(part)?.size ?? 0;
-  const advancing = part < 3 ? (model.membership.get((part + 1) as QualiPart)?.size ?? 0) : null;
+  // 다음 세그먼트 멤버십이 아직 비어 있으면(라이브: getSessionResult=null, 또는 마지막 세그먼트)
+  // 컷라인 **미확정(null)**. 0 으로 두면 knockoutZone 이 전원을 탈락권으로 표시하는 버그.
+  const next = part < 3 ? (model.membership.get((part + 1) as QualiPart)?.size ?? 0) : 0;
+  const advancing = next > 0 ? next : null;
   const cutlinePosition = advancing;
   const eliminated = advancing != null ? participants - advancing : null;
   return { part, participants, advancing, cutlinePosition, eliminated };

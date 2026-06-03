@@ -35,6 +35,16 @@ describe('cutlineFor — 데이터 파생 (하드코딩 금지)', () => {
     expect(cutlineFor(m, 1).cutlinePosition).toBe(16);
     expect(cutlineFor(m, 2).cutlinePosition).toBe(8);
   });
+
+  it('다음 세그먼트 멤버십이 비면(라이브 getSessionResult=null) 컷라인 미확정 → 전원 탈락권 표시 안 함', () => {
+    const m = modelWithSizes(20, 0, 0); // 라이브: 아직 진출자 데이터 없음
+    const cut = cutlineFor(m, 1);
+    expect(cut.advancing).toBeNull();
+    expect(cut.cutlinePosition).toBeNull();
+    expect(cut.eliminated).toBeNull();
+    const ordered = Array.from({ length: 20 }, (_, i) => i + 1);
+    expect(knockoutZone(ordered, cut.cutlinePosition).size).toBe(0); // 전원 red 아님
+  });
 });
 
 describe('knockoutZone', () => {
