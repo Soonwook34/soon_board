@@ -1,0 +1,766 @@
+{
+  "generated_at": "2026-05-28T23:11:05.235Z",
+  "source": "OpenF1 sessions",
+  "entries": [
+    {
+      "circuit_key": 2,
+      "year": 2023,
+      "circuit_short_name": "Silverstone",
+      "country_name": "United Kingdom",
+      "first_session_key": 9119,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 2,
+      "year": 2024,
+      "circuit_short_name": "Silverstone",
+      "country_name": "United Kingdom",
+      "first_session_key": 9551,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 2,
+      "year": 2025,
+      "circuit_short_name": "Silverstone",
+      "country_name": "United Kingdom",
+      "first_session_key": 9940,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 2,
+      "year": 2026,
+      "circuit_short_name": "Silverstone",
+      "country_name": "United Kingdom",
+      "first_session_key": 11316,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 4,
+      "year": 2023,
+      "circuit_short_name": "Hungaroring",
+      "country_name": "Hungary",
+      "first_session_key": 9127,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 4,
+      "year": 2024,
+      "circuit_short_name": "Hungaroring",
+      "country_name": "Hungary",
+      "first_session_key": 9559,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 4,
+      "year": 2025,
+      "circuit_short_name": "Hungaroring",
+      "country_name": "Hungary",
+      "first_session_key": 9921,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 4,
+      "year": 2026,
+      "circuit_short_name": "Hungaroring",
+      "country_name": "Hungary",
+      "first_session_key": 11335,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 6,
+      "year": 2023,
+      "circuit_short_name": "Imola",
+      "country_name": "Italy",
+      "first_session_key": 9079,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 6,
+      "year": 2024,
+      "circuit_short_name": "Imola",
+      "country_name": "Italy",
+      "first_session_key": 9508,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 6,
+      "year": 2025,
+      "circuit_short_name": "Imola",
+      "country_name": "Italy",
+      "first_session_key": 9980,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 7,
+      "year": 2023,
+      "circuit_short_name": "Spa-Francorchamps",
+      "country_name": "Belgium",
+      "first_session_key": 9134,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 7,
+      "year": 2024,
+      "circuit_short_name": "Spa-Francorchamps",
+      "country_name": "Belgium",
+      "first_session_key": 9567,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 7,
+      "year": 2025,
+      "circuit_short_name": "Spa-Francorchamps",
+      "country_name": "Belgium",
+      "first_session_key": 9929,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 7,
+      "year": 2026,
+      "circuit_short_name": "Spa-Francorchamps",
+      "country_name": "Belgium",
+      "first_session_key": 11327,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 9,
+      "year": 2023,
+      "circuit_short_name": "Austin",
+      "country_name": "United States",
+      "first_session_key": 9206,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 9,
+      "year": 2024,
+      "circuit_short_name": "Austin",
+      "country_name": "United States",
+      "first_session_key": 9607,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 9,
+      "year": 2025,
+      "circuit_short_name": "Austin",
+      "country_name": "United States",
+      "first_session_key": 9878,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 9,
+      "year": 2026,
+      "circuit_short_name": "Austin",
+      "country_name": "United States",
+      "first_session_key": 11389,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 10,
+      "year": 2023,
+      "circuit_short_name": "Melbourne",
+      "country_name": "Australia",
+      "first_session_key": 7780,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 10,
+      "year": 2024,
+      "circuit_short_name": "Melbourne",
+      "country_name": "Australia",
+      "first_session_key": 9481,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 10,
+      "year": 2025,
+      "circuit_short_name": "Melbourne",
+      "country_name": "Australia",
+      "first_session_key": 9686,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 10,
+      "year": 2026,
+      "circuit_short_name": "Melbourne",
+      "country_name": "Australia",
+      "first_session_key": 11227,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 14,
+      "year": 2023,
+      "circuit_short_name": "Interlagos",
+      "country_name": "Brazil",
+      "first_session_key": 9198,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 14,
+      "year": 2024,
+      "circuit_short_name": "Interlagos",
+      "country_name": "Brazil",
+      "first_session_key": 9626,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 14,
+      "year": 2025,
+      "circuit_short_name": "Interlagos",
+      "country_name": "Brazil",
+      "first_session_key": 9859,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 14,
+      "year": 2026,
+      "circuit_short_name": "Interlagos",
+      "country_name": "Brazil",
+      "first_session_key": 11405,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 15,
+      "year": 2023,
+      "circuit_short_name": "Catalunya",
+      "country_name": "Spain",
+      "first_session_key": 9095,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 15,
+      "year": 2024,
+      "circuit_short_name": "Catalunya",
+      "country_name": "Spain",
+      "first_session_key": 9532,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 15,
+      "year": 2025,
+      "circuit_short_name": "Catalunya",
+      "country_name": "Spain",
+      "first_session_key": 9964,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 15,
+      "year": 2026,
+      "circuit_short_name": "Catalunya",
+      "country_name": "Spain",
+      "first_session_key": 11300,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 19,
+      "year": 2023,
+      "circuit_short_name": "Spielberg",
+      "country_name": "Austria",
+      "first_session_key": 9111,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 19,
+      "year": 2024,
+      "circuit_short_name": "Spielberg",
+      "country_name": "Austria",
+      "first_session_key": 9540,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 19,
+      "year": 2025,
+      "circuit_short_name": "Spielberg",
+      "country_name": "Austria",
+      "first_session_key": 9948,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 19,
+      "year": 2026,
+      "circuit_short_name": "Spielberg",
+      "country_name": "Austria",
+      "first_session_key": 11308,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 22,
+      "year": 2023,
+      "circuit_short_name": "Monte Carlo",
+      "country_name": "Monaco",
+      "first_session_key": 9087,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 22,
+      "year": 2024,
+      "circuit_short_name": "Monte Carlo",
+      "country_name": "Monaco",
+      "first_session_key": 9516,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 22,
+      "year": 2025,
+      "circuit_short_name": "Monte Carlo",
+      "country_name": "Monaco",
+      "first_session_key": 9972,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 22,
+      "year": 2026,
+      "circuit_short_name": "Monte Carlo",
+      "country_name": "Monaco",
+      "first_session_key": 11292,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 23,
+      "year": 2023,
+      "circuit_short_name": "Montreal",
+      "country_name": "Canada",
+      "first_session_key": 9103,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 23,
+      "year": 2024,
+      "circuit_short_name": "Montreal",
+      "country_name": "Canada",
+      "first_session_key": 9524,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 23,
+      "year": 2025,
+      "circuit_short_name": "Montreal",
+      "country_name": "Canada",
+      "first_session_key": 9956,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 23,
+      "year": 2026,
+      "circuit_short_name": "Montreal",
+      "country_name": "Canada",
+      "first_session_key": 11281,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 39,
+      "year": 2023,
+      "circuit_short_name": "Monza",
+      "country_name": "Italy",
+      "first_session_key": 9150,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 39,
+      "year": 2024,
+      "circuit_short_name": "Monza",
+      "country_name": "Italy",
+      "first_session_key": 9583,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 39,
+      "year": 2025,
+      "circuit_short_name": "Monza",
+      "country_name": "Italy",
+      "first_session_key": 9905,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 39,
+      "year": 2026,
+      "circuit_short_name": "Monza",
+      "country_name": "Italy",
+      "first_session_key": 11354,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 46,
+      "year": 2023,
+      "circuit_short_name": "Suzuka",
+      "country_name": "Japan",
+      "first_session_key": 9166,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 46,
+      "year": 2024,
+      "circuit_short_name": "Suzuka",
+      "country_name": "Japan",
+      "first_session_key": 9489,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 46,
+      "year": 2025,
+      "circuit_short_name": "Suzuka",
+      "country_name": "Japan",
+      "first_session_key": 9999,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 46,
+      "year": 2026,
+      "circuit_short_name": "Suzuka",
+      "country_name": "Japan",
+      "first_session_key": 11246,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 49,
+      "year": 2024,
+      "circuit_short_name": "Shanghai",
+      "country_name": "China",
+      "first_session_key": 9663,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 49,
+      "year": 2025,
+      "circuit_short_name": "Shanghai",
+      "country_name": "China",
+      "first_session_key": 9988,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 49,
+      "year": 2026,
+      "circuit_short_name": "Shanghai",
+      "country_name": "China",
+      "first_session_key": 11235,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 55,
+      "year": 2023,
+      "circuit_short_name": "Zandvoort",
+      "country_name": "Netherlands",
+      "first_session_key": 9142,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 55,
+      "year": 2024,
+      "circuit_short_name": "Zandvoort",
+      "country_name": "Netherlands",
+      "first_session_key": 9575,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 55,
+      "year": 2025,
+      "circuit_short_name": "Zandvoort",
+      "country_name": "Netherlands",
+      "first_session_key": 9913,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 55,
+      "year": 2026,
+      "circuit_short_name": "Zandvoort",
+      "country_name": "Netherlands",
+      "first_session_key": 11343,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 61,
+      "year": 2023,
+      "circuit_short_name": "Singapore",
+      "country_name": "Singapore",
+      "first_session_key": 9158,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 61,
+      "year": 2024,
+      "circuit_short_name": "Singapore",
+      "country_name": "Singapore",
+      "first_session_key": 9599,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 61,
+      "year": 2025,
+      "circuit_short_name": "Singapore",
+      "country_name": "Singapore",
+      "first_session_key": 9889,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 61,
+      "year": 2026,
+      "circuit_short_name": "Singapore",
+      "country_name": "Singapore",
+      "first_session_key": 11378,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 63,
+      "year": 2023,
+      "circuit_short_name": "Sakhir",
+      "country_name": "Bahrain",
+      "first_session_key": 7763,
+      "session_count": 8
+    },
+    {
+      "circuit_key": 63,
+      "year": 2024,
+      "circuit_short_name": "Sakhir",
+      "country_name": "Bahrain",
+      "first_session_key": 9462,
+      "session_count": 8
+    },
+    {
+      "circuit_key": 63,
+      "year": 2025,
+      "circuit_short_name": "Sakhir",
+      "country_name": "Bahrain",
+      "first_session_key": 9683,
+      "session_count": 8
+    },
+    {
+      "circuit_key": 63,
+      "year": 2026,
+      "circuit_short_name": "Sakhir",
+      "country_name": "Bahrain",
+      "first_session_key": 11254,
+      "session_count": 11
+    },
+    {
+      "circuit_key": 65,
+      "year": 2023,
+      "circuit_short_name": "Mexico City",
+      "country_name": "Mexico",
+      "first_session_key": 9174,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 65,
+      "year": 2024,
+      "circuit_short_name": "Mexico City",
+      "country_name": "Mexico",
+      "first_session_key": 9618,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 65,
+      "year": 2025,
+      "circuit_short_name": "Mexico City",
+      "country_name": "Mexico",
+      "first_session_key": 9870,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 65,
+      "year": 2026,
+      "circuit_short_name": "Mexico City",
+      "country_name": "Mexico",
+      "first_session_key": 11397,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 70,
+      "year": 2023,
+      "circuit_short_name": "Yas Marina Circuit",
+      "country_name": "United Arab Emirates",
+      "first_session_key": 9190,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 70,
+      "year": 2024,
+      "circuit_short_name": "Yas Marina Circuit",
+      "country_name": "United Arab Emirates",
+      "first_session_key": 9461,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 70,
+      "year": 2025,
+      "circuit_short_name": "Yas Marina Circuit",
+      "country_name": "United Arab Emirates",
+      "first_session_key": 9832,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 70,
+      "year": 2026,
+      "circuit_short_name": "Yas Marina Circuit",
+      "country_name": "United Arab Emirates",
+      "first_session_key": 11429,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 144,
+      "year": 2023,
+      "circuit_short_name": "Baku",
+      "country_name": "Azerbaijan",
+      "first_session_key": 9063,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 144,
+      "year": 2024,
+      "circuit_short_name": "Baku",
+      "country_name": "Azerbaijan",
+      "first_session_key": 9591,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 144,
+      "year": 2025,
+      "circuit_short_name": "Baku",
+      "country_name": "Azerbaijan",
+      "first_session_key": 9897,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 144,
+      "year": 2026,
+      "circuit_short_name": "Baku",
+      "country_name": "Azerbaijan",
+      "first_session_key": 11370,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 149,
+      "year": 2023,
+      "circuit_short_name": "Jeddah",
+      "country_name": "Saudi Arabia",
+      "first_session_key": 7772,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 149,
+      "year": 2024,
+      "circuit_short_name": "Jeddah",
+      "country_name": "Saudi Arabia",
+      "first_session_key": 9473,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 149,
+      "year": 2025,
+      "circuit_short_name": "Jeddah",
+      "country_name": "Saudi Arabia",
+      "first_session_key": 10015,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 149,
+      "year": 2026,
+      "circuit_short_name": "Jeddah",
+      "country_name": "Saudi Arabia",
+      "first_session_key": 11262,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 150,
+      "year": 2023,
+      "circuit_short_name": "Lusail",
+      "country_name": "Qatar",
+      "first_session_key": 9214,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 150,
+      "year": 2024,
+      "circuit_short_name": "Lusail",
+      "country_name": "Qatar",
+      "first_session_key": 9645,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 150,
+      "year": 2025,
+      "circuit_short_name": "Lusail",
+      "country_name": "Qatar",
+      "first_session_key": 9840,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 150,
+      "year": 2026,
+      "circuit_short_name": "Lusail",
+      "country_name": "Qatar",
+      "first_session_key": 11421,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 151,
+      "year": 2023,
+      "circuit_short_name": "Miami",
+      "country_name": "United States",
+      "first_session_key": 9071,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 151,
+      "year": 2024,
+      "circuit_short_name": "Miami",
+      "country_name": "United States",
+      "first_session_key": 9497,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 151,
+      "year": 2025,
+      "circuit_short_name": "Miami",
+      "country_name": "United States",
+      "first_session_key": 10023,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 151,
+      "year": 2026,
+      "circuit_short_name": "Miami",
+      "country_name": "United States",
+      "first_session_key": 11270,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 152,
+      "year": 2023,
+      "circuit_short_name": "Las Vegas",
+      "country_name": "United States",
+      "first_session_key": 9182,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 152,
+      "year": 2024,
+      "circuit_short_name": "Las Vegas",
+      "country_name": "United States",
+      "first_session_key": 9637,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 152,
+      "year": 2025,
+      "circuit_short_name": "Las Vegas",
+      "country_name": "United States",
+      "first_session_key": 9851,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 152,
+      "year": 2026,
+      "circuit_short_name": "Las Vegas",
+      "country_name": "United States",
+      "first_session_key": 11413,
+      "session_count": 5
+    },
+    {
+      "circuit_key": 153,
+      "year": 2026,
+      "circuit_short_name": "Madring",
+      "country_name": "Spain",
+      "first_session_key": 11362,
+      "session_count": 5
+    }
+  ]
+}
