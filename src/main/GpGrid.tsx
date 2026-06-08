@@ -7,7 +7,6 @@
 import { Fragment, useCallback, useMemo } from 'react';
 import { ExpandedSessions } from './ExpandedSessions';
 import { GpCard } from './GpCard';
-import { classifyMeeting } from './derived/meetingStatus';
 import { filterMeetings } from './derived/searchFilter';
 import { resetFilters } from './stores/uiStore';
 import type { MeetingData } from '../shared/seasonData';
@@ -32,16 +31,11 @@ export function GpGrid({
   statuses,
   now,
 }: GpGridProps) {
-  // meetings === null(로딩) 케이스는 아래 early return에서 처리. filtered는 항상 array —
-  // useMemo의 deps가 동일한 한 [] 참조도 안정적이므로 non-null assertion이 불필요.
-  const filtered = useMemo(
+  // meetings === null(로딩) 케이스는 아래 early return에서 처리. 결과는 항상 array.
+  // filterMeetings 가 GP 당 classifyMeeting 을 1회 계산해 {meeting, status} 로 반환 — 카드 렌더가 재사용.
+  const statusesByMeeting = useMemo(
     () => (meetings ? filterMeetings(meetings, { search, sessionTypes, statuses }, now) : []),
     [meetings, search, sessionTypes, statuses, now],
-  );
-
-  const statusesByMeeting = useMemo(
-    () => filtered.map((m) => ({ meeting: m, status: classifyMeeting(m, now) })),
-    [filtered, now],
   );
 
   // ExpandedSessions의 keydown 리스너가 매 렌더마다 add/remove 반복하지 않도록 ref 안정화.
@@ -77,7 +71,7 @@ export function GpGrid({
     );
   }
 
-  if (filtered.length === 0) {
+  if (statusesByMeeting.length === 0) {
     return (
       <div
         style={{

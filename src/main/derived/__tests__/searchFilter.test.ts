@@ -3,7 +3,6 @@
 import { describe, expect, it } from 'vitest';
 import {
   filterMeetings,
-  matchMeetingStatus,
   matchSearch,
   matchSessionType,
 } from '../searchFilter';
@@ -81,18 +80,6 @@ describe('matchSessionType', () => {
   });
 });
 
-describe('matchMeetingStatus', () => {
-  it('returns false when selected set is empty', () => {
-    expect(matchMeetingStatus(mkMeeting({}), new Set<StatusFilter>(), NOW)).toBe(false);
-  });
-
-  it('matches GP-level kind (live when mid-race)', () => {
-    const sel = new Set<StatusFilter>(['live']);
-    expect(matchMeetingStatus(mkMeeting({}), sel, NOW)).toBe(true);
-    expect(matchMeetingStatus(mkMeeting({}), new Set<StatusFilter>(['past']), NOW)).toBe(false);
-  });
-});
-
 describe('filterMeetings', () => {
   const allTypes = new Set<SessionTypeFilter>(['race', 'qualifying', 'sprint', 'sprint_qualifying', 'practice']);
   const defaultStatuses = new Set<StatusFilter>(['past', 'live', 'upcoming']);
@@ -101,13 +88,15 @@ describe('filterMeetings', () => {
     const m = mkMeeting({});
     const res = filterMeetings([m], { search: '', sessionTypes: allTypes, statuses: defaultStatuses }, NOW);
     expect(res).toHaveLength(1);
+    expect(res[0].meeting.meeting_key).toBe(100);
+    expect(res[0].status.kind).toBe('live'); // NOW 3/2 16:00 → Race(15:00-17:00) live
   });
 
   it('drops meetings whose name does not match search', () => {
     const monaco = mkMeeting({ meeting_key: 2, meeting_name: 'Monaco GP', location: 'Monte Carlo', country_name: 'Monaco', circuit_short_name: 'Monaco' });
     const res = filterMeetings([mkMeeting({}), monaco], { search: 'monaco', sessionTypes: allTypes, statuses: defaultStatuses }, NOW);
     expect(res).toHaveLength(1);
-    expect(res[0].meeting_key).toBe(2);
+    expect(res[0].meeting.meeting_key).toBe(2);
   });
 
   it('drops meetings whose GP-level status is not in statuses filter', () => {
@@ -136,6 +125,12 @@ describe('filterMeetings', () => {
   it('returns empty when all filters intersect to zero', () => {
     const empty = new Set<SessionTypeFilter>();
     const res = filterMeetings([mkMeeting({})], { search: '', sessionTypes: empty, statuses: defaultStatuses }, NOW);
+    expect(res).toHaveLength(0);
+  });
+
+  it('drops everything when statuses set is empty (inlined matchMeetingStatus guard)', () => {
+    const noStatuses = new Set<StatusFilter>();
+    const res = filterMeetings([mkMeeting({})], { search: '', sessionTypes: allTypes, statuses: noStatuses }, NOW);
     expect(res).toHaveLength(0);
   });
 });

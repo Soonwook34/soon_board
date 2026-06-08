@@ -5,13 +5,13 @@
 //   - search: meeting.meeting_name / location / country_name / circuit_short_name 4필드 OR (case-insensitive substring)
 //   - session_types: session.session_type → 정규화(SessionTypeFilter) → ui.sessionTypes 멤버십. set이 비면 어떤 세션도 통과 X
 //   - status: GP 단위 status (classifyMeeting) → ui.statuses 멤버십 (plan §7.2 "GP 단위로 판정")
-//   - 필터 통과 조건: matchSearch ∧ matchMeetingStatus ∧ (visible session 1개 이상)
+//   - 필터 통과 조건: matchSearch ∧ status 멤버십(statuses.has) ∧ (visible session 1개 이상) — filterMeetings 가 결합
 //   - visible session = matchSessionTypes (현재 phase는 GP 가시성만 영향; ExpandedSessions 내부 세션 필터링은 스코프 밖)
 
 import type { MeetingData, SessionData } from '../../shared/seasonData';
-import type { SessionTypeFilter, StatusFilter, UiState } from '../stores/uiStore';
+import type { SessionTypeFilter, UiState } from '../stores/uiStore';
 import { resolveSessionKind } from '../../shared/sessionKind';
-import { classifyMeeting } from './meetingStatus';
+import { classifyMeeting, type MeetingStatus } from './meetingStatus';
 
 export function matchSearch(meeting: MeetingData, query: string): boolean {
   const q = query.trim().toLowerCase();
@@ -34,25 +34,29 @@ export function matchSessionType(
   return norm !== null && selected.has(norm);
 }
 
-export function matchMeetingStatus(
-  meeting: MeetingData,
-  selected: ReadonlySet<StatusFilter>,
-  now: Date,
-): boolean {
-  if (selected.size === 0) return false;
-  const kind = classifyMeeting(meeting, now).kind;
-  return selected.has(kind);
+export interface MeetingWithStatus {
+  meeting: MeetingData;
+  status: MeetingStatus;
 }
 
+/**
+ * 검색·세션타입·status 필터를 통과한 GP를 그 status 와 함께 반환.
+ * classifyMeeting 을 살아남은 GP 당 1회만 계산해 GpGrid 가 카드 렌더에 재사용(틱당 중복 분류 제거).
+ * status 멤버십: 빈 set → 통과 0건(statuses.has 가 항상 false), 아니면 statuses.has(kind) 판정.
+ */
 export function filterMeetings(
   meetings: readonly MeetingData[],
   ui: Pick<UiState, 'search' | 'sessionTypes' | 'statuses'>,
   now: Date,
-): MeetingData[] {
-  return meetings.filter((m) => {
-    if (!matchSearch(m, ui.search)) return false;
-    if (!matchMeetingStatus(m, ui.statuses, now)) return false;
+): MeetingWithStatus[] {
+  const out: MeetingWithStatus[] = [];
+  for (const m of meetings) {
+    if (!matchSearch(m, ui.search)) continue;
     // visible session 1개 이상 — session type 필터에 부합하는 세션이 있어야 GP 카드 노출
-    return m.sessions.some((s) => matchSessionType(s, ui.sessionTypes));
-  });
+    if (!m.sessions.some((s) => matchSessionType(s, ui.sessionTypes))) continue;
+    const status = classifyMeeting(m, now);
+    if (!ui.statuses.has(status.kind)) continue;
+    out.push({ meeting: m, status });
+  }
+  return out;
 }

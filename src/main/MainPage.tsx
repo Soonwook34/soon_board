@@ -18,6 +18,7 @@ import { loadCatalogIndex, loadSeason } from './stores/catalogStore';
 import { revalidateCurrentSeason } from './stores/revalidateSeason';
 import { setExpandedGp, setSeason } from './stores/uiStore';
 import { useCatalogIndex, useSeasonCatalog, useUiState } from './stores/hooks';
+import { useNowSecond } from './useNowSecond';
 
 export function MainPage() {
   const index = useCatalogIndex();
@@ -51,7 +52,10 @@ export function MainPage() {
       });
   }, [effectiveSeason]);
 
-  const now = useMemo(() => new Date(), []);
+  // GP 그리드 status 를 1Hz 갱신 — Hero·ExpandedSessions 와 동일 패턴(useNowSecond).
+  // 세션 경계(live/upcoming/past) 자동 전환 + ?now= 시뮬레이션 정합(이전엔 raw new Date()라 무시됨).
+  const nowMs = useNowSecond();
+  const now = useMemo(() => new Date(nowMs), [nowMs]);
 
   return (
     <main style={{ minHeight: '100%' }}>
