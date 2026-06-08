@@ -9,6 +9,7 @@ import { fileURLToPath } from 'node:url';
 import { writeJsonAtomicSync } from './_lib/atomicWrite.js';
 import { OpenF1Client } from './_lib/openf1Client.js';
 import { pickPreferredSession } from './_lib/openf1FastLap.js';
+import { sessionWindowEnd } from './_lib/dataUtils.js';
 import {
   deriveDrsZones,
   type CarDataDrsInput,
@@ -70,9 +71,7 @@ export async function runDeriveDrs(opts: RunDeriveDrsOptions): Promise<RunDerive
   // session 시작 후 10분 = 약 4~6 lap (F1 lap ~1:20~2:00) — drs derive 에 충분.
   const sessionStart = new Date(picked.date_start);
   const sessionEnd = new Date(picked.date_end);
-  const windowEnd = new Date(
-    Math.min(sessionStart.getTime() + 10 * 60 * 1000, sessionEnd.getTime()),
-  );
+  const windowEnd = sessionWindowEnd(sessionStart, sessionEnd);
   const windowParams = {
     session_key: picked.session_key,
     'date>=': sessionStart.toISOString(),

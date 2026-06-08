@@ -15,6 +15,7 @@ import { applyOpenF1Transform, type OpenF1Transform } from '../../src/map/transf
 import type { Point2D } from '../../src/map/viewport.js';
 import { projectToPolyline } from '../../src/map/pathProjection.js';
 import type { OpenF1Client } from './openf1Client.js';
+import { isSentinelLocation, medianPoint } from './dataUtils.js';
 
 export interface PitStop {
   driver_number: number;
@@ -44,8 +45,6 @@ interface RawLocationRecord {
   y: number;
   z: number;
 }
-
-const SENTINEL_THRESHOLD = 50;
 
 export async function fetchPitStops(opts: {
   client: OpenF1Client;
@@ -103,7 +102,7 @@ export function applyTransformAndFilter(
 ): Point2D[] {
   const out: Point2D[] = [];
   for (const loc of locations) {
-    if (Math.abs(loc.x) + Math.abs(loc.y) + Math.abs(loc.z) < SENTINEL_THRESHOLD) continue;
+    if (isSentinelLocation(loc)) continue;
     const [sx, sy] = applyOpenF1Transform(loc.x, loc.y, transform);
     out.push([sx, sy]);
   }
@@ -163,13 +162,4 @@ export function tracePitlanePolyline(
     arc.push(total);
   }
   return { polyline, arcLengthTable: arc, totalLength: total };
-}
-
-function medianPoint(points: readonly Point2D[]): Point2D {
-  const xs = points.map((p) => p[0]).sort((a, b) => a - b);
-  const ys = points.map((p) => p[1]).sort((a, b) => a - b);
-  const mid = Math.floor(points.length / 2);
-  const mx = points.length % 2 === 1 ? xs[mid] : (xs[mid - 1] + xs[mid]) / 2;
-  const my = points.length % 2 === 1 ? ys[mid] : (ys[mid - 1] + ys[mid]) / 2;
-  return [mx, my];
 }

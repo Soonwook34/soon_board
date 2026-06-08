@@ -19,6 +19,7 @@ import { applyOpenF1Transform, type OpenF1Transform } from '../../src/map/transf
 import { projectToPolyline } from '../../src/map/pathProjection.js';
 import type { Point2D } from '../../src/map/viewport.js';
 import type { DrsZone } from './trackOutlinesSchema.js';
+import { groupByDriver, isSentinelLocation } from './dataUtils.js';
 
 export interface CarDataDrsInput {
   driver_number: number;
@@ -68,7 +69,6 @@ interface TransitionSample {
 
 const DEFAULT_LOC_WINDOW = 150;
 const DEFAULT_CLUSTER_RATIO = 0.05;
-const SENTINEL_THRESHOLD = 50;
 
 export function deriveDrsZones(opts: DeriveDrsZonesOptions): DrsZoneDerivation | null {
   const locWindow = opts.locationNearestWindowMs ?? DEFAULT_LOC_WINDOW;
@@ -95,7 +95,7 @@ export function deriveDrsZones(opts: DeriveDrsZonesOptions): DrsZoneDerivation |
       const ms = carRows[i].date.valueOf();
       const loc = nearestLocation(locRows, ms, locWindow);
       if (!loc) continue;
-      if (Math.abs(loc.x) + Math.abs(loc.y) + Math.abs(loc.z) < SENTINEL_THRESHOLD) continue;
+      if (isSentinelLocation(loc)) continue;
       const [sx, sy] = applyOpenF1Transform(loc.x, loc.y, opts.transform);
       const proj = projectToPolyline([sx, sy], opts.polyline, opts.arcLengthTable);
       transitions.push({ type, driver, ms, s: proj.s });
@@ -204,14 +204,4 @@ function median1D(arr: readonly number[]): number {
  */
 function zoneWraps(later: number, earlier: number, total: number): boolean {
   return Math.abs(later + total - earlier) < total / 4;
-}
-
-function groupByDriver<T extends { driver_number: number }>(rows: readonly T[]): Map<number, T[]> {
-  const out = new Map<number, T[]>();
-  for (const r of rows) {
-    const arr = out.get(r.driver_number) ?? [];
-    arr.push(r);
-    out.set(r.driver_number, arr);
-  }
-  return out;
 }

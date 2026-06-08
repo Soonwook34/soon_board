@@ -13,6 +13,7 @@ import { applyOpenF1Transform, type OpenF1Transform } from '../../src/map/transf
 import { projectToPolyline } from '../../src/map/pathProjection.js';
 import type { Point2D } from '../../src/map/viewport.js';
 import type { SectorBoundary } from './trackOutlinesSchema.js';
+import { groupByDriver, isSentinelLocation, medianPoint } from './dataUtils.js';
 
 export interface LapInput {
   driver_number: number;
@@ -58,7 +59,6 @@ export interface SectorBoundaryDerivation {
 }
 
 const DEFAULT_LOCATION_WINDOW_MS = 200;
-const SENTINEL_THRESHOLD = 50;
 
 export function deriveSectorBoundaries(
   opts: DeriveSectorBoundariesOptions,
@@ -174,28 +174,9 @@ function matchLocationForSpeed(
     }
   }
   if (!bestLoc) return null;
-  if (Math.abs(bestLoc.x) + Math.abs(bestLoc.y) + Math.abs(bestLoc.z) < SENTINEL_THRESHOLD) {
+  if (isSentinelLocation(bestLoc)) {
     return null;
   }
   const [sx, sy] = applyOpenF1Transform(bestLoc.x, bestLoc.y, transform);
   return [sx, sy];
-}
-
-function groupByDriver<T extends { driver_number: number }>(rows: readonly T[]): Map<number, T[]> {
-  const out = new Map<number, T[]>();
-  for (const r of rows) {
-    const arr = out.get(r.driver_number) ?? [];
-    arr.push(r);
-    out.set(r.driver_number, arr);
-  }
-  return out;
-}
-
-function medianPoint(points: readonly Point2D[]): Point2D {
-  const xs = points.map((p) => p[0]).sort((a, b) => a - b);
-  const ys = points.map((p) => p[1]).sort((a, b) => a - b);
-  const mid = Math.floor(points.length / 2);
-  const mx = points.length % 2 === 1 ? xs[mid] : (xs[mid - 1] + xs[mid]) / 2;
-  const my = points.length % 2 === 1 ? ys[mid] : (ys[mid - 1] + ys[mid]) / 2;
-  return [mx, my];
 }

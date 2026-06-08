@@ -9,6 +9,15 @@
 //  - is_cancelled 세션은 result_preview 제외
 
 import type { OpenF1Client } from './openf1Client.js';
+// 카탈로그 산출 타입의 SSOT — 프런트(src/shared/seasonData.ts)가 런타임에 읽는 schema와 동일.
+// 이전엔 이 파일에서 동일 interface 5개를 중복 정의했음(최적화 감사 step 5에서 정본화).
+import type {
+  MeetingData,
+  ResultPreview,
+  ResultPreviewDriverRow,
+  SeasonData,
+  SessionData,
+} from '../../src/shared/seasonData.js';
 
 export interface OpenF1Meeting {
   meeting_key: number;
@@ -63,60 +72,6 @@ export interface OpenF1Lap {
   lap_duration: number | null;
 }
 
-export interface ResultPreviewDriverRow {
-  position: number;
-  driver_number: number;
-  name_acronym: string;
-  team_colour: string;
-}
-
-export interface ResultPreview {
-  podium: ResultPreviewDriverRow[];
-  fastest_lap: {
-    driver_number: number;
-    name_acronym: string;
-    lap_duration: number;
-  } | null;
-  rainfall_any: boolean;
-}
-
-// plan §2.2 schema 그대로 — outer year/meeting_key 등 부모 레벨에 있는 필드는 inner에서 제외.
-export interface SessionCatalogEntry {
-  session_key: number;
-  session_name: string;
-  session_type: string;
-  date_start: string;
-  date_end: string;
-  is_cancelled?: boolean;
-  result_preview?: ResultPreview;
-}
-
-export interface MeetingCatalogEntry {
-  meeting_key: number;
-  meeting_name: string;
-  meeting_official_name?: string;
-  location?: string;
-  country_code?: string;
-  country_name?: string;
-  country_flag?: string;
-  circuit_key?: number;
-  circuit_short_name?: string;
-  circuit_type?: string;
-  circuit_image?: string;
-  gmt_offset?: string;
-  date_start?: string;
-  date_end?: string;
-  is_cancelled?: boolean;
-  sessions: SessionCatalogEntry[];
-}
-
-export interface SeasonCatalog {
-  year: number;
-  generated_at: string;
-  source: string;
-  meetings: MeetingCatalogEntry[];
-}
-
 export interface BuildSeasonCatalogArgs {
   client: OpenF1Client;
   year: number;
@@ -138,7 +93,7 @@ export async function buildSeasonCatalog({
   now = new Date(),
   meetingLimit,
   log = () => {},
-}: BuildSeasonCatalogArgs): Promise<SeasonCatalog | null> {
+}: BuildSeasonCatalogArgs): Promise<SeasonData | null> {
   log(`[fetch-season-catalog] year=${year} — GET /v1/meetings`);
   const meetingsRaw = await client.get<OpenF1Meeting[]>('/v1/meetings', { year });
   if (meetingsRaw.length === 0) {
@@ -149,7 +104,7 @@ export async function buildSeasonCatalog({
   const meetings = meetingLimit ? meetingsRaw.slice(0, meetingLimit) : meetingsRaw;
   log(`[fetch-season-catalog] year=${year} — ${meetings.length} meetings`);
 
-  const catalog: MeetingCatalogEntry[] = [];
+  const catalog: MeetingData[] = [];
   for (const m of meetings) {
     const sessions = await client.get<OpenF1Session[]>('/v1/sessions', {
       meeting_key: m.meeting_key,
@@ -158,7 +113,7 @@ export async function buildSeasonCatalog({
       `[fetch-season-catalog] meeting ${m.meeting_key} (${m.meeting_name}) — ${sessions.length} sessions`,
     );
 
-    const sessionEntries: SessionCatalogEntry[] = [];
+    const sessionEntries: SessionData[] = [];
     for (const s of sessions) {
       const isPast = !s.is_cancelled && new Date(s.date_end).getTime() < now.getTime();
       if (!isPast) {
@@ -276,7 +231,7 @@ function round3(n: number): number {
 // plan §2.2 schema에 맞춰 OpenF1 raw 응답의 잡 필드를 제거. 크기 예산(한 시즌 ≤ 100KB)을
 // 지키려면 raw spread는 안 됨 — meeting별 ~7개, session별 ~6개 필드만 유지.
 // year/meeting_key 등 부모 레벨에 있는 필드는 inner에서 제외.
-function normalizeMeeting(m: OpenF1Meeting): Omit<MeetingCatalogEntry, 'sessions'> {
+function normalizeMeeting(m: OpenF1Meeting): Omit<MeetingData, 'sessions'> {
   return {
     meeting_key: m.meeting_key,
     meeting_name: m.meeting_name,
@@ -296,7 +251,7 @@ function normalizeMeeting(m: OpenF1Meeting): Omit<MeetingCatalogEntry, 'sessions
   };
 }
 
-function normalizeSession(s: OpenF1Session): SessionCatalogEntry {
+function normalizeSession(s: OpenF1Session): SessionData {
   return {
     session_key: s.session_key,
     session_name: s.session_name,
