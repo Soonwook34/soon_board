@@ -6,26 +6,20 @@ import { useMemo } from 'react';
 import { useDataSource } from '../shared/DataSourceContext';
 import { useDisplayTime } from '../shared/useDisplayTime';
 import { leaderCurrentLap } from '../derived/currentLap';
+import { collectStints } from '../derived/stints';
 import { tyreColor, tyreLetter } from '../shared/tyreColors';
-import { dashboardColors } from '../shared/dashboardStyles';
+import { dashboardColors, MONO } from '../shared/dashboardStyles';
 import type { StintRecord } from '../../shared/openf1Types';
-
-const MONO = 'var(--font-mono, monospace)';
 
 export function StintHistory({ driverNumber }: { driverNumber: number }) {
   const ds = useDataSource();
   const t = useDisplayTime(1000);
   const currentLap = leaderCurrentLap(ds, t) ?? 0;
 
-  const stints = useMemo<StintRecord[]>(() => {
-    if (currentLap <= 0) return [];
-    const byStint = new Map<number, StintRecord>();
-    for (let lap = 1; lap <= currentLap; lap++) {
-      const s = ds.getStintForLap(driverNumber, lap);
-      if (s && !byStint.has(s.stint_number)) byStint.set(s.stint_number, s);
-    }
-    return [...byStint.values()].sort((a, b) => a.stint_number - b.stint_number);
-  }, [ds, driverNumber, currentLap]);
+  const stints = useMemo<StintRecord[]>(
+    () => collectStints(ds, driverNumber, currentLap).sort((a, b) => a.stint_number - b.stint_number),
+    [ds, driverNumber, currentLap],
+  );
 
   return (
     <section data-testid="stint-history" aria-label="스틴트 히스토리" style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>

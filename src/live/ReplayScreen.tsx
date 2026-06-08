@@ -3,11 +3,11 @@
 //       성공 시 인덱스 + 모든 시즌 로드 → findSessionAcrossSeasons 로 년도 무관 검색 →
 //       past 아니면 /live 리다이렉트 → past 면 LiveMap + ReplayDataSource (live-map plan §10 단계 13).
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useLocation, useParams } from 'wouter';
 import { CorsFailedNotice } from './CorsFailedNotice';
 import { findSessionAcrossSeasons } from './findSessionByKey';
-import { pingOpenF1 } from './corsPing';
+import { usePing } from './usePing';
 import { LiveMap, type LiveMapDataSource } from './LiveMap';
 import { resolveSessionKind, isQualifyingFamily } from '../shared/sessionKind';
 import { classify } from '../main/derived/sessionStatus';
@@ -18,8 +18,6 @@ import { ReplayDataSource } from '../map/ReplayDataSource';
 import type { LocationSample } from '../shared/DataSource';
 import { DashboardApp, DataSourceProvider, DriversProvider, useSessionDrivers } from '../dashboard';
 
-type PingState = 'pending' | 'ok' | 'failed';
-
 interface ReplayScreenProps {
   pingImpl?: () => Promise<boolean>;
 }
@@ -28,27 +26,7 @@ export function ReplayScreen({ pingImpl }: ReplayScreenProps = {}) {
   const params = useParams<{ key: string }>();
   const sessionKey = Number(params.key);
   const [, setLocation] = useLocation();
-  const [pingState, setPingState] = useState<PingState>('pending');
-  const pingRunIdRef = useRef(0);
-
-  const runPing = useCallback(() => {
-    const myRun = ++pingRunIdRef.current;
-    setPingState('pending');
-    const exec = pingImpl ?? (() => pingOpenF1());
-    exec()
-      .then((ok) => {
-        if (myRun !== pingRunIdRef.current) return;
-        setPingState(ok ? 'ok' : 'failed');
-      })
-      .catch(() => {
-        if (myRun !== pingRunIdRef.current) return;
-        setPingState('failed');
-      });
-  }, [pingImpl]);
-
-  useEffect(() => {
-    runPing();
-  }, [runPing]);
+  const { pingState, runPing } = usePing(pingImpl);
 
   const index = useCatalogIndex();
   const allSeasons = useAllSeasons();

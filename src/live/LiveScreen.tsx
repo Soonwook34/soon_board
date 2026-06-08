@@ -9,14 +9,14 @@
 //
 // pingImpl prop: 테스트 주입용 (기본 pingOpenF1). msw 없이 단순한 dependency injection.
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useLocation, useParams } from 'wouter';
 import { CorsFailedNotice } from './CorsFailedNotice';
 import { CountdownOverlay } from './CountdownOverlay';
 import { LiveMap } from './LiveMap';
 import { resolveSessionKind, isQualifyingFamily } from '../shared/sessionKind';
 import { findSessionByKey } from './findSessionByKey';
-import { pingOpenF1 } from './corsPing';
+import { usePing } from './usePing';
 import { classify } from '../main/derived/sessionStatus';
 import { loadCatalogIndex, loadSeason } from '../main/stores/catalogStore';
 import { useNowSecond } from '../main/useNowSecond';
@@ -24,8 +24,6 @@ import { useCatalogIndex, useSeasonCatalog } from '../main/stores/hooks';
 import { LiveDataSource } from '../map/LiveDataSource';
 import type { LocationSample } from '../shared/DataSource';
 import { DashboardApp, DataSourceProvider, DriversProvider, useSessionDrivers } from '../dashboard';
-
-type PingState = 'pending' | 'ok' | 'failed';
 
 interface LiveScreenProps {
   pingImpl?: () => Promise<boolean>;
@@ -35,28 +33,7 @@ export function LiveScreen({ pingImpl }: LiveScreenProps = {}) {
   const params = useParams<{ key: string }>();
   const sessionKey = Number(params.key);
   const [, setLocation] = useLocation();
-  const [pingState, setPingState] = useState<PingState>('pending');
-  const pingRunIdRef = useRef(0);
-
-  const runPing = useCallback(() => {
-    const myRun = ++pingRunIdRef.current;
-    setPingState('pending');
-    const exec = pingImpl ?? (() => pingOpenF1());
-    exec()
-      .then((ok) => {
-        if (myRun !== pingRunIdRef.current) return;
-        setPingState(ok ? 'ok' : 'failed');
-      })
-      .catch(() => {
-        // pingImpl이 throw하더라도 'pending' 영구 멈춤 방지 (pingOpenF1 자체는 throw 안 함).
-        if (myRun !== pingRunIdRef.current) return;
-        setPingState('failed');
-      });
-  }, [pingImpl]);
-
-  useEffect(() => {
-    runPing();
-  }, [runPing]);
+  const { pingState, runPing } = usePing(pingImpl);
 
   // ping 성공한 후에만 카탈로그 로드 — 실패 시 OpenF1 무관 정적 자산이지만 라이브 의도 명확화 위해 gate.
   const currentYear = useMemo(() => new Date().getFullYear(), []);

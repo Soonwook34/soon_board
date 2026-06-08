@@ -12,6 +12,7 @@ import { SegmentProgress } from '../SegmentProgress';
 import { QualifyingTower } from '../QualifyingTower';
 import { SegmentBestBoard } from '../SegmentBestBoard';
 import { KnockoutPanel } from '../KnockoutPanel';
+import { QualifyingModelProvider } from '../useQualifyingModel';
 import type {
   DriverRecord,
   LapRecord,
@@ -86,7 +87,9 @@ function makeDs() {
 function renderPanel(node: React.ReactNode) {
   render(
     <DataSourceProvider ds={makeDs()}>
-      <DriversProvider drivers={drivers}>{node}</DriversProvider>
+      <DriversProvider drivers={drivers}>
+        <QualifyingModelProvider>{node}</QualifyingModelProvider>
+      </DriversProvider>
     </DataSourceProvider>,
   );
 }

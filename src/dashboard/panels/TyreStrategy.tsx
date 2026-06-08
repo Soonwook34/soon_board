@@ -8,6 +8,7 @@ import { useDisplayTime } from '../shared/useDisplayTime';
 import { useDrivers } from '../shared/DriversContext';
 import { tyreColor, tyreLetter } from '../shared/tyreColors';
 import { leaderCurrentLap } from '../derived/currentLap';
+import { collectStints } from '../derived/stints';
 import { dashboardColors, panelStyle } from '../shared/dashboardStyles';
 import { PanelHeading } from '../shared/PanelHeading';
 import type { StintRecord } from '../../shared/openf1Types';
@@ -63,16 +64,8 @@ export function TyreStrategy() {
     if (currentLap <= 0) return [];
     const out: DriverRow[] = [];
     for (const driverNumber of drivers.keys()) {
-      // stints 는 date 없는 lap-keyed endpoint → getAllBefore(date 컷)로는 못 가져온다 (실 DataSource 회귀:
-      // StintRecord 에 date/date_start 없음 → allBefore 가 전부 누락). lap 기준 getStintForLap 을
-      // 1..currentLap 순회해 거쳐온 스틴트를 모은다. currentLap 자체가 시간 컷이라 미래 누설 zero
-      // (lap_start > currentLap 스틴트는 조회되지 않음).
-      const byStint = new Map<number, StintRecord>();
-      for (let lap = 1; lap <= currentLap; lap++) {
-        const s = ds.getStintForLap(driverNumber, lap);
-        if (s && !byStint.has(s.stint_number)) byStint.set(s.stint_number, s);
-      }
-      const spans = stintLapSpans([...byStint.values()], currentLap);
+      // stints 는 undated lap-keyed endpoint → collectStints 가 1..currentLap 순회 수집(미래 누설 zero).
+      const spans = stintLapSpans(collectStints(ds, driverNumber, currentLap), currentLap);
       if (spans.length === 0) continue;
       const pits = ds.getAllBefore('pit', t, { driver_number: driverNumber });
       // #1 — 현재 순위대로 정렬 (리더보드와 동일). 시간 컷은 getLatestBefore 가 보장 → 미래 누설 zero.
