@@ -35,14 +35,6 @@ export interface SegmentModel {
 
 const PARTS: readonly QualiPart[] = [1, 2, 3];
 
-/** session_result.duration 의 part k(1-based) 베스트랩(초). 비도달/비배열 시 null. */
-export function segmentBestFromResult(res: SessionResultRecord, part: QualiPart): number | null {
-  const dur = res.duration;
-  if (!Array.isArray(dur)) return null;
-  const v = dur[part - 1];
-  return typeof v === 'number' ? v : null;
-}
-
 /** 드라이버가 도달한 가장 깊은 세그먼트(non-null 항목 수). 0=기록 없음. */
 export function reachedPart(res: SessionResultRecord): 0 | QualiPart {
   const dur = res.duration;

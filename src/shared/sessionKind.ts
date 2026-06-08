@@ -2,7 +2,6 @@
 // OpenF1 /sessions 의 session_type(Practice/Qualifying/Race) 와 session_name(Practice 1/2/3,
 // Qualifying, Sprint Qualifying|Sprint Shootout, Sprint, Race) 을 **함께** 보고 5종으로 정규화한다.
 // session_type 단독으로는 Sprint→Race, Sprint Qualifying→Qualifying 로 병합되므로 두 필드가 모두 필요.
-// 기존 searchFilter.normalizeSessionType 이 본 함수에 위임(중복 제거).
 
 export type SessionKind = 'practice' | 'qualifying' | 'sprint_qualifying' | 'sprint' | 'race';
 

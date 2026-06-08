@@ -1,6 +1,6 @@
 // US-7 보강 — personalBests selector (getAggregateBefore 결과 위 접근자).
 import { describe, expect, it } from 'vitest';
-import { personalBestFor, personalBestLap, personalBestSector } from '../personalBests';
+import { personalBestLap } from '../personalBests';
 import type { AggregateResults } from '../../../shared/openf1Types';
 
 const agg: AggregateResults = {
@@ -12,20 +12,8 @@ const agg: AggregateResults = {
 };
 
 describe('personalBests selectors', () => {
-  it('personalBestFor — 존재/미존재', () => {
-    expect(personalBestFor(agg, 44)?.best_lap_duration).toBe(88.1);
-    expect(personalBestFor(agg, 1)).toBeNull();
-  });
-
   it('personalBestLap', () => {
     expect(personalBestLap(agg, 44)).toBe(88.1);
     expect(personalBestLap(agg, 1)).toBeNull();
-  });
-
-  it('personalBestSector — 섹터별', () => {
-    expect(personalBestSector(agg, 44, 1)).toBe(29);
-    expect(personalBestSector(agg, 44, 2)).toBe(29.5);
-    expect(personalBestSector(agg, 44, 3)).toBe(30);
-    expect(personalBestSector(agg, 1, 1)).toBeNull();
   });
 });

@@ -6,7 +6,6 @@ import {
   matchMeetingStatus,
   matchSearch,
   matchSessionType,
-  normalizeSessionType,
 } from '../searchFilter';
 import type { MeetingData, SessionData } from '../../../shared/seasonData';
 import type { SessionTypeFilter, StatusFilter } from '../../stores/uiStore';
@@ -66,27 +65,6 @@ describe('matchSearch', () => {
     const m: MeetingData = { meeting_key: 1, meeting_name: 'Monaco Grand Prix', sessions: [] };
     expect(matchSearch(m, 'monaco')).toBe(true);
     expect(matchSearch(m, 'sakhir')).toBe(false);
-  });
-});
-
-describe('normalizeSessionType', () => {
-  it('maps known F1 session_type strings to filter tokens', () => {
-    expect(normalizeSessionType('Race')).toBe('race');
-    expect(normalizeSessionType('Qualifying')).toBe('qualifying');
-    expect(normalizeSessionType('Sprint')).toBe('sprint');
-    expect(normalizeSessionType('Sprint Qualifying')).toBe('sprint_qualifying');
-    expect(normalizeSessionType('Sprint Shootout')).toBe('sprint_qualifying');
-    expect(normalizeSessionType('Practice')).toBe('practice');
-  });
-
-  it('is case-insensitive and trims whitespace', () => {
-    expect(normalizeSessionType('  RACE  ')).toBe('race');
-    expect(normalizeSessionType('qualifying')).toBe('qualifying');
-  });
-
-  it('returns null for unknown types', () => {
-    expect(normalizeSessionType('Warmup')).toBeNull();
-    expect(normalizeSessionType('')).toBeNull();
   });
 });
 

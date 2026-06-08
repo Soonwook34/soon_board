@@ -25,13 +25,6 @@ export function matchSearch(meeting: MeetingData, query: string): boolean {
   return fields.some((f) => typeof f === 'string' && f.toLowerCase().includes(q));
 }
 
-// SessionKind 와 SessionTypeFilter 는 구조적으로 동일한 문자열 유니온. 정규화 SSOT 는
-// resolveSessionKind(session_type, session_name). 본 래퍼는 단일 인자 하위호환용으로,
-// session_type 을 두 필드에 동일 전달한다(과거 호출부가 'Sprint' 등을 type 인자로 넘기던 패턴 유지).
-export function normalizeSessionType(sessionType: string): SessionTypeFilter | null {
-  return resolveSessionKind(sessionType, sessionType);
-}
-
 export function matchSessionType(
   session: SessionData,
   selected: ReadonlySet<SessionTypeFilter>,

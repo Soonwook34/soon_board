@@ -72,11 +72,3 @@ export const font = {
     normal: 1.5,
   },
 } as const;
-
-export const breakpoint = {
-  narrow: '1024px',
-  desktop: '1280px',
-} as const;
-
-export const tokens = { color, space, radius, font, breakpoint } as const;
-export type Tokens = typeof tokens;

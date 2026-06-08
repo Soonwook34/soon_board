@@ -6,7 +6,6 @@ import {
   reconstructSegments,
   lapPhaseOf,
   progressiveSegmentBests,
-  segmentBestFromResult,
   reachedPart,
 } from '../qualifyingSegments';
 import type { LapRecord, RaceControlRecord, SessionResultRecord } from '../../../shared/openf1Types';
@@ -64,7 +63,7 @@ describe('reconstructSegments — 멤버십(session_result non-null 수)', () =>
   });
 });
 
-describe('reachedPart / segmentBestFromResult', () => {
+describe('reachedPart', () => {
   const byNum = new Map(sessionResult.map((r) => [r.driver_number, r]));
 
   it('reachedPart: P1(#1)=3, 어떤 Q2 탈락자=2, 어떤 Q1 탈락자=1', () => {
@@ -76,19 +75,6 @@ describe('reachedPart / segmentBestFromResult', () => {
       return acc;
     }, {});
     expect(dist).toEqual({ 1: 5, 2: 5, 3: 10 });
-  });
-
-  it('segmentBestFromResult: 폴포지션(#1) 세그먼트 베스트가 duration[] 값과 일치', () => {
-    const r = byNum.get(1)!;
-    expect(segmentBestFromResult(r, 1)).toBeCloseTo(90.031, 3);
-    expect(segmentBestFromResult(r, 2)).toBeCloseTo(89.374, 3);
-    expect(segmentBestFromResult(r, 3)).toBeCloseTo(89.179, 3);
-  });
-
-  it('비도달 세그먼트는 null', () => {
-    const q1out = sessionResult.find((r) => reachedPart(r) === 1)!;
-    expect(segmentBestFromResult(q1out, 2)).toBeNull();
-    expect(segmentBestFromResult(q1out, 3)).toBeNull();
   });
 });
 
