@@ -6,6 +6,9 @@ import { color, font, radius, space } from '../../style/tokens';
 // 패널별 제목/세부 스타일은 각 패널(단계 4+)이 actual 디자인에 맞춰 정의한다. 본 모듈은
 // 모든 패널이 공유하는 최소 primitive(색 토큰 + 컨테이너)만 노출 — 추측성 composite 미포함.
 
+/** 대시보드 전반의 monospace 폰트 패밀리(CSS 변수 + 폴백). 숫자/시간 정렬용. */
+export const MONO = 'var(--font-mono, monospace)';
+
 export const dashboardColors = {
   panelBg: color.bgSurface,
   panelBgElevated: color.bgElevated,

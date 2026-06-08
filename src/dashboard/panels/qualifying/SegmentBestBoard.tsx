@@ -3,7 +3,7 @@
 
 import { useMemo } from 'react';
 import { useDrivers, teamColorOf } from '../../shared/DriversContext';
-import { dashboardColors, panelStyle } from '../../shared/dashboardStyles';
+import { dashboardColors, MONO, panelStyle } from '../../shared/dashboardStyles';
 import { PanelHeading } from '../../shared/PanelHeading';
 import { formatLapTime } from '../../shared/formatTime';
 import { resolveSessionKind, segmentPrefix } from '../../../shared/sessionKind';
@@ -13,7 +13,6 @@ import type { QualiPart } from '../../derived/qualifyingSegments';
 import type { SessionData } from '../../../shared/seasonData';
 
 const PARTS: readonly QualiPart[] = [1, 2, 3];
-const MONO = 'var(--font-mono, monospace)';
 const TOP_N = 5;
 
 export function SegmentBestBoard({ session }: { session: SessionData }) {

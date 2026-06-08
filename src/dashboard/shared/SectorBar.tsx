@@ -3,7 +3,7 @@
 
 import type { CSSProperties } from 'react';
 import type { AggregateResults } from '../../shared/openf1Types';
-import { sectorColor, type SectorIndex } from './sectorColors';
+import { sectorColor, SECTOR_INDICES } from './sectorColors';
 
 export interface SectorBarProps {
   /** [s1, s2, s3] 섹터 시간(초). null 은 미주행/데이터 없음 → 회색. */
@@ -14,8 +14,6 @@ export interface SectorBarProps {
   height?: number;
 }
 
-const SECTORS: readonly SectorIndex[] = [1, 2, 3];
-
 export function SectorBar({ sectors, aggregate, driverNumber, height = 2 }: SectorBarProps) {
   const containerStyle: CSSProperties = {
     display: 'flex',
@@ -25,7 +23,7 @@ export function SectorBar({ sectors, aggregate, driverNumber, height = 2 }: Sect
   };
   return (
     <div role="img" aria-label="섹터 시간 색상" style={containerStyle}>
-      {SECTORS.map((s) => (
+      {SECTOR_INDICES.map((s) => (
         <span
           key={s}
           data-sector={s}

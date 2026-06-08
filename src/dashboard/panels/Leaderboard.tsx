@@ -9,18 +9,11 @@ import { tyreColor, tyreLetter } from '../shared/tyreColors';
 import { SectorBar } from '../shared/SectorBar';
 import { personalBestLap } from '../derived/personalBests';
 import { selectDriver } from '../shared/selectionStore';
-import { dashboardColors, panelStyle } from '../shared/dashboardStyles';
+import { dashboardColors, MONO, panelStyle } from '../shared/dashboardStyles';
 import { PanelHeading } from '../shared/PanelHeading';
-import { formatGap, formatLapTime } from '../shared/formatTime';
+import { formatGap, formatLapTime, NO_VALUE } from '../shared/formatTime';
+import { approxEq } from '../shared/sectorColors';
 import { driverOutAt } from '../derived/driverOutStatus';
-
-const MONO = 'var(--font-mono, monospace)';
-const NO_VALUE = '—';
-
-/** float 동등 비교 — fastest_lap 보유 판정 (sectorColors 와 동일 epsilon). */
-function approxEq(a: number, b: number): boolean {
-  return Math.abs(a - b) < 1e-6;
-}
 
 const headerCellStyle: CSSProperties = {
   color: dashboardColors.textMuted,

@@ -4,9 +4,7 @@
 import { useMemo } from 'react';
 import { useDataSource } from '../shared/DataSourceContext';
 import { useDisplayTime } from '../shared/useDisplayTime';
-import { dashboardColors } from '../shared/dashboardStyles';
-
-const MONO = 'var(--font-mono, monospace)';
+import { dashboardColors, MONO } from '../shared/dashboardStyles';
 
 export function PitHistory({ driverNumber }: { driverNumber: number }) {
   const ds = useDataSource();

@@ -22,8 +22,11 @@ export const SECTOR_COLORS = {
 export type SectorColorKind = keyof typeof SECTOR_COLORS;
 export type SectorIndex = 1 | 2 | 3;
 
+/** 섹터 인덱스 [1,2,3] SSOT — 섹터바·디테일 테이블이 공유. */
+export const SECTOR_INDICES: readonly SectorIndex[] = [1, 2, 3];
+
 /** float 동등 비교 — best 는 같은 lap 의 같은 float 이라 정확히 일치하지만 재파생 대비 epsilon. */
-function approxEq(a: number, b: number): boolean {
+export function approxEq(a: number, b: number): boolean {
   return Math.abs(a - b) < 1e-6;
 }
 

@@ -3,15 +3,13 @@
 
 import { useMemo } from 'react';
 import { useDrivers, teamColorOf } from '../../shared/DriversContext';
-import { dashboardColors, panelStyle } from '../../shared/dashboardStyles';
+import { dashboardColors, MONO, panelStyle } from '../../shared/dashboardStyles';
 import { PanelHeading } from '../../shared/PanelHeading';
 import { resolveSessionKind, segmentPrefix } from '../../../shared/sessionKind';
 import { color, space } from '../../../style/tokens';
 import { cutlineFor, knockoutZone, gapToCutline } from '../../derived/knockout';
 import { useQualifyingModel } from './useQualifyingModel';
 import type { SessionData } from '../../../shared/seasonData';
-
-const MONO = 'var(--font-mono, monospace)';
 
 export function KnockoutPanel({ session }: { session: SessionData }) {
   const drivers = useDrivers();

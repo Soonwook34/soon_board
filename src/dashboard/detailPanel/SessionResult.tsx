@@ -5,10 +5,8 @@
 import { useDisplayTime } from '../shared/useDisplayTime';
 import { useDataSource } from '../shared/DataSourceContext';
 import { formatLapTime, formatGap } from '../shared/formatTime';
-import { dashboardColors } from '../shared/dashboardStyles';
+import { dashboardColors, MONO } from '../shared/dashboardStyles';
 import type { SessionData } from '../../shared/seasonData';
-
-const MONO = 'var(--font-mono, monospace)';
 
 function statusLabel(r: { dnf: boolean; dns: boolean; dsq: boolean }): string | null {
   if (r.dsq) return 'DSQ';

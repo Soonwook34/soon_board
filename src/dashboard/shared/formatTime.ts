@@ -1,7 +1,7 @@
 // dashboard — 시간/갭 표시 포맷 SSOT. 리더보드 ⑤·빠른랩 배지 ⑧·디테일 §3.2/§3.3 공용.
 // 패널마다 중복 정의되던 lap/sector/gap 포맷을 한 곳에 모은다 (동작 보존).
 
-const NO_VALUE = '—';
+export const NO_VALUE = '—';
 
 /** 91.456 → '1:31.456'. 음수/NaN/null 은 '—'. */
 export function formatLapTime(sec: number | null | undefined): string {

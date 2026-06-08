@@ -5,13 +5,9 @@ import { useMemo, useState, type CSSProperties } from 'react';
 import { useDataSource } from '../shared/DataSourceContext';
 import { useDisplayTime } from '../shared/useDisplayTime';
 import { useAggregateResults } from '../shared/useAggregateResults';
-import { sectorColor, type SectorIndex } from '../shared/sectorColors';
-import { formatLapTime, formatSector } from '../shared/formatTime';
-import { dashboardColors } from '../shared/dashboardStyles';
-
-const MONO = 'var(--font-mono, monospace)';
-const NO_VALUE = '—';
-const SECTORS: readonly SectorIndex[] = [1, 2, 3];
+import { sectorColor, SECTOR_INDICES } from '../shared/sectorColors';
+import { formatLapTime, formatSector, NO_VALUE } from '../shared/formatTime';
+import { dashboardColors, MONO } from '../shared/dashboardStyles';
 
 const headCell: CSSProperties = {
   fontSize: '10px',
@@ -63,7 +59,7 @@ export function RecentLapsTable({ driverNumber }: { driverNumber: number }) {
                     {lap.lap_number}
                   </td>
                   <td style={{ ...cell, color: dashboardColors.text }}>{formatLapTime(lap.lap_duration)}</td>
-                  {SECTORS.map((s) => (
+                  {SECTOR_INDICES.map((s) => (
                     <td
                       key={s}
                       data-sector={s}

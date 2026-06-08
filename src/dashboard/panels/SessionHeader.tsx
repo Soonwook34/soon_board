@@ -3,7 +3,7 @@
 
 import { useDataSource } from '../shared/DataSourceContext';
 import { useDisplayTime } from '../shared/useDisplayTime';
-import { dashboardColors, panelStyle } from '../shared/dashboardStyles';
+import { dashboardColors, MONO, panelStyle } from '../shared/dashboardStyles';
 import type { MeetingData, SessionData } from '../../shared/seasonData';
 
 export type DashboardMode = 'live' | 'replay';
@@ -95,7 +95,7 @@ export function SessionHeader({ meeting, session, year, mode, onBack }: SessionH
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
         <span
           aria-label="현지 시각"
-          style={{ fontFamily: 'var(--font-mono, monospace)', fontSize: '15px', color: dashboardColors.text }}
+          style={{ fontFamily: MONO, fontSize: '15px', color: dashboardColors.text }}
         >
           {clock}
         </span>

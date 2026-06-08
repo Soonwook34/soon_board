@@ -3,7 +3,7 @@
 import { useMemo } from 'react';
 import { useDataSource } from '../shared/DataSourceContext';
 import { useDisplayTime } from '../shared/useDisplayTime';
-import { dashboardColors, panelStyle } from '../shared/dashboardStyles';
+import { dashboardColors, MONO, panelStyle } from '../shared/dashboardStyles';
 import { useDrivers, teamColorOf } from '../shared/DriversContext';
 import { useAggregate } from '../shared/useAggregate';
 import { SECTOR_COLORS } from '../shared/sectorColors';
@@ -48,7 +48,7 @@ function BadgeCard({ label, value, acronym, teamColor, accentColor, testId }: Ba
       <span
         style={{
           fontSize: '13px',
-          fontFamily: 'var(--font-mono, monospace)',
+          fontFamily: MONO,
           color: dashboardColors.text,
         }}
       >

@@ -8,15 +8,11 @@ import { useDataSource } from '../shared/DataSourceContext';
 import { useDisplayTime } from '../shared/useDisplayTime';
 import { useAggregateResults } from '../shared/useAggregateResults';
 import { SectorBar } from '../shared/SectorBar';
-import { sectorColor, type SectorIndex } from '../shared/sectorColors';
+import { sectorColor, SECTOR_INDICES } from '../shared/sectorColors';
 import { tyreColor, tyreLetter } from '../shared/tyreColors';
-import { formatGap, formatLapTime, formatSector } from '../shared/formatTime';
-import { dashboardColors } from '../shared/dashboardStyles';
+import { formatGap, formatLapTime, formatSector, NO_VALUE } from '../shared/formatTime';
+import { dashboardColors, MONO } from '../shared/dashboardStyles';
 import type { LapRecord } from '../../shared/openf1Types';
-
-const MONO = 'var(--font-mono, monospace)';
-const NO_VALUE = '—';
-const SECTORS: readonly SectorIndex[] = [1, 2, 3];
 
 function StatItem({ label, children }: { label: string; children: ReactNode }) {
   return (
@@ -64,7 +60,7 @@ export function CurrentState({ driverNumber }: { driverNumber: number }) {
           driverNumber={driverNumber}
         />
         <div style={{ display: 'flex', gap: '10px', marginTop: '3px' }}>
-          {SECTORS.map((s) => (
+          {SECTOR_INDICES.map((s) => (
             <span
               key={s}
               style={{ ...sectorTextStyle, color: sectorColor(aggregate, driverNumber, s, vals[s - 1]) }}

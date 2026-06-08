@@ -7,12 +7,11 @@ import { useDataSource } from '../../shared/DataSourceContext';
 import { useDisplayTime } from '../../shared/useDisplayTime';
 import { reconstructSegments, activePartAt } from '../../derived/qualifyingSegments';
 import { resolveSessionKind, segmentPrefix, SEGMENT_DURATIONS_MIN } from '../../../shared/sessionKind';
-import { dashboardColors, panelStyle } from '../../shared/dashboardStyles';
+import { dashboardColors, MONO, panelStyle } from '../../shared/dashboardStyles';
 import { color, radius, space } from '../../../style/tokens';
 import type { SessionData } from '../../../shared/seasonData';
 
 const PARTS = [1, 2, 3] as const;
-const MONO = 'var(--font-mono, monospace)';
 
 function fmtClock(ms: number): string {
   const s = Math.max(0, Math.floor(ms / 1000));
