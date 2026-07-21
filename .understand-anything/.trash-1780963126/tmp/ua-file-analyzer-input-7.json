@@ -1,0 +1,43 @@
+{
+  "projectRoot": "/Users/a453498/Downloads/project/soon_board",
+  "batchFiles": [
+    {"path": "src/dashboard/panels/WeatherMini.tsx", "language": "typescript", "sizeLines": 41, "fileCategory": "code"},
+    {"path": "src/dashboard/panels/__tests__/EventBroadcast.test.tsx", "language": "typescript", "sizeLines": 88, "fileCategory": "code"},
+    {"path": "src/dashboard/panels/__tests__/EventTicker.test.tsx", "language": "typescript", "sizeLines": 138, "fileCategory": "code"},
+    {"path": "src/dashboard/panels/__tests__/RaceControlBanner.test.tsx", "language": "typescript", "sizeLines": 45, "fileCategory": "code"},
+    {"path": "src/dashboard/panels/__tests__/SessionHeader.test.tsx", "language": "typescript", "sizeLines": 116, "fileCategory": "code"},
+    {"path": "src/dashboard/panels/__tests__/SessionProgress.test.tsx", "language": "typescript", "sizeLines": 72, "fileCategory": "code"},
+    {"path": "src/dashboard/panels/__tests__/WeatherMini.test.tsx", "language": "typescript", "sizeLines": 56, "fileCategory": "code"},
+    {"path": "src/dashboard/shared/DataSourceContext.tsx", "language": "typescript", "sizeLines": 18, "fileCategory": "code"},
+    {"path": "src/dashboard/shared/__tests__/DataSourceContext.test.tsx", "language": "typescript", "sizeLines": 31, "fileCategory": "code"},
+    {"path": "src/dashboard/shared/__tests__/flagIcons.test.ts", "language": "typescript", "sizeLines": 23, "fileCategory": "code"},
+    {"path": "src/dashboard/shared/__tests__/queryHooks.test.tsx", "language": "typescript", "sizeLines": 96, "fileCategory": "code"},
+    {"path": "src/dashboard/shared/__tests__/useDisplayTime.test.tsx", "language": "typescript", "sizeLines": 108, "fileCategory": "code"},
+    {"path": "src/dashboard/shared/flagIcons.ts", "language": "typescript", "sizeLines": 25, "fileCategory": "code"},
+    {"path": "src/dashboard/shared/useAggregate.ts", "language": "typescript", "sizeLines": 16, "fileCategory": "code"},
+    {"path": "src/dashboard/shared/useAllBefore.ts", "language": "typescript", "sizeLines": 20, "fileCategory": "code"},
+    {"path": "src/dashboard/shared/useDisplayTime.ts", "language": "typescript", "sizeLines": 43, "fileCategory": "code"},
+    {"path": "src/dashboard/shared/useLatestBefore.ts", "language": "typescript", "sizeLines": 20, "fileCategory": "code"},
+    {"path": "src/shared/DataSource.ts", "language": "typescript", "sizeLines": 140, "fileCategory": "code"}
+  ],
+  "batchImportData": {
+    "src/dashboard/panels/WeatherMini.tsx": ["src/dashboard/shared/dashboardStyles.ts","src/dashboard/shared/useLatestBefore.ts"],
+    "src/dashboard/panels/__tests__/EventBroadcast.test.tsx": ["src/dashboard/__tests__/fakeDataSource.ts","src/dashboard/panels/EventBroadcast.tsx","src/dashboard/shared/DataSourceContext.tsx","src/shared/openf1Types.ts"],
+    "src/dashboard/panels/__tests__/EventTicker.test.tsx": ["src/dashboard/__tests__/fakeDataSource.ts","src/dashboard/panels/EventTicker.tsx","src/dashboard/shared/DataSourceContext.tsx","src/shared/openf1Types.ts"],
+    "src/dashboard/panels/__tests__/RaceControlBanner.test.tsx": ["src/dashboard/__tests__/fakeDataSource.ts","src/dashboard/panels/RaceControlBanner.tsx","src/dashboard/shared/DataSourceContext.tsx","src/shared/openf1Types.ts"],
+    "src/dashboard/panels/__tests__/SessionHeader.test.tsx": ["src/dashboard/__tests__/fakeDataSource.ts","src/dashboard/panels/SessionHeader.tsx","src/dashboard/shared/DataSourceContext.tsx","src/shared/seasonData.ts"],
+    "src/dashboard/panels/__tests__/SessionProgress.test.tsx": ["src/dashboard/__tests__/fakeDataSource.ts","src/dashboard/panels/SessionProgress.tsx","src/dashboard/shared/DataSourceContext.tsx","src/shared/seasonData.ts"],
+    "src/dashboard/panels/__tests__/WeatherMini.test.tsx": ["src/dashboard/__tests__/fakeDataSource.ts","src/dashboard/panels/WeatherMini.tsx","src/dashboard/shared/DataSourceContext.tsx","src/shared/openf1Types.ts"],
+    "src/dashboard/shared/DataSourceContext.tsx": ["src/shared/DataSource.ts"],
+    "src/dashboard/shared/__tests__/DataSourceContext.test.tsx": ["src/dashboard/shared/DataSourceContext.tsx","src/shared/DataSource.ts"],
+    "src/dashboard/shared/__tests__/flagIcons.test.ts": ["src/dashboard/shared/flagIcons.ts"],
+    "src/dashboard/shared/__tests__/queryHooks.test.tsx": ["src/dashboard/shared/DataSourceContext.tsx","src/dashboard/shared/useAggregate.ts","src/dashboard/shared/useAllBefore.ts","src/dashboard/shared/useLatestBefore.ts","src/shared/DataSource.ts"],
+    "src/dashboard/shared/__tests__/useDisplayTime.test.tsx": ["src/dashboard/shared/DataSourceContext.tsx","src/dashboard/shared/useDisplayTime.ts","src/shared/DataSource.ts"],
+    "src/dashboard/shared/flagIcons.ts": [],
+    "src/dashboard/shared/useAggregate.ts": ["src/dashboard/shared/DataSourceContext.tsx","src/dashboard/shared/useDisplayTime.ts","src/shared/openf1Types.ts"],
+    "src/dashboard/shared/useAllBefore.ts": ["src/dashboard/shared/DataSourceContext.tsx","src/dashboard/shared/useDisplayTime.ts","src/shared/openf1Types.ts"],
+    "src/dashboard/shared/useDisplayTime.ts": ["src/dashboard/shared/DataSourceContext.tsx"],
+    "src/dashboard/shared/useLatestBefore.ts": ["src/dashboard/shared/DataSourceContext.tsx","src/dashboard/shared/useDisplayTime.ts","src/shared/openf1Types.ts"],
+    "src/shared/DataSource.ts": ["src/shared/openf1Types.ts"]
+  }
+}

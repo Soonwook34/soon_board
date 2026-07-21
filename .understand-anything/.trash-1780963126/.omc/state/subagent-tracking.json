@@ -1,0 +1,135 @@
+{
+  "agents": [
+    {
+      "agent_id": "a6d40e7b1751c35d4",
+      "agent_type": "understand-anything:file-analyzer",
+      "started_at": "2026-06-08T06:58:45.776Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-06-08T07:02:33.170Z",
+      "duration_ms": 227394
+    },
+    {
+      "agent_id": "a2554298e8efe71ff",
+      "agent_type": "understand-anything:file-analyzer",
+      "started_at": "2026-06-08T06:58:58.144Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-06-08T07:02:21.211Z",
+      "duration_ms": 203067
+    },
+    {
+      "agent_id": "aea4b797115b686a2",
+      "agent_type": "understand-anything:file-analyzer",
+      "started_at": "2026-06-08T06:59:07.070Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-06-08T07:02:17.574Z",
+      "duration_ms": 190504
+    },
+    {
+      "agent_id": "a5cb38f49564381f7",
+      "agent_type": "understand-anything:file-analyzer",
+      "started_at": "2026-06-08T06:59:15.484Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-06-08T07:01:36.369Z",
+      "duration_ms": 140885
+    },
+    {
+      "agent_id": "aed17cf01f5413108",
+      "agent_type": "understand-anything:file-analyzer",
+      "started_at": "2026-06-08T06:59:21.754Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-06-08T07:00:52.902Z",
+      "duration_ms": 91148
+    },
+    {
+      "agent_id": "ac2d1daa7b21ffd35",
+      "agent_type": "understand-anything:file-analyzer",
+      "started_at": "2026-06-08T07:02:49.264Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-06-08T07:04:27.897Z",
+      "duration_ms": 98633
+    },
+    {
+      "agent_id": "afa68232c0fdefa2f",
+      "agent_type": "understand-anything:file-analyzer",
+      "started_at": "2026-06-08T07:02:56.638Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-06-08T07:05:37.015Z",
+      "duration_ms": 160377
+    },
+    {
+      "agent_id": "a28d391a422fc18cf",
+      "agent_type": "understand-anything:file-analyzer",
+      "started_at": "2026-06-08T07:03:04.007Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-06-08T07:04:58.447Z",
+      "duration_ms": 114440
+    },
+    {
+      "agent_id": "a3a4d53a7093806f5",
+      "agent_type": "understand-anything:file-analyzer",
+      "started_at": "2026-06-08T07:03:11.022Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-06-08T07:05:16.503Z",
+      "duration_ms": 125481
+    },
+    {
+      "agent_id": "a1f4f4d25369407fe",
+      "agent_type": "understand-anything:file-analyzer",
+      "started_at": "2026-06-08T07:03:19.168Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-06-08T07:05:11.022Z",
+      "duration_ms": 111854
+    },
+    {
+      "agent_id": "a66cdcc4c70834e51",
+      "agent_type": "understand-anything:file-analyzer",
+      "started_at": "2026-06-08T07:06:03.444Z",
+      "parent_mode": "none",
+      "status": "running"
+    },
+    {
+      "agent_id": "ac636d1598ff4bb11",
+      "agent_type": "understand-anything:file-analyzer",
+      "started_at": "2026-06-08T07:06:20.907Z",
+      "parent_mode": "none",
+      "status": "running"
+    },
+    {
+      "agent_id": "a9f6a3a715f728364",
+      "agent_type": "understand-anything:file-analyzer",
+      "started_at": "2026-06-08T07:06:36.445Z",
+      "parent_mode": "none",
+      "status": "running"
+    },
+    {
+      "agent_id": "a32151f9b3b28601c",
+      "agent_type": "understand-anything:file-analyzer",
+      "started_at": "2026-06-08T07:06:51.457Z",
+      "parent_mode": "none",
+      "status": "running"
+    },
+    {
+      "agent_id": "a2adada7456c85e29",
+      "agent_type": "understand-anything:file-analyzer",
+      "started_at": "2026-06-08T07:06:55.946Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-06-08T07:07:52.090Z",
+      "duration_ms": 56144
+    }
+  ],
+  "total_spawned": 15,
+  "total_completed": 98,
+  "total_failed": 0,
+  "last_updated": "2026-06-08T07:07:52.194Z"
+}

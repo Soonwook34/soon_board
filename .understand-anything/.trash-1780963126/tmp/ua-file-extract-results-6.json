@@ -1,0 +1,1547 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 19,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "src/dashboard/__tests__/DashboardSeek.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 88,
+      "nonEmptyLines": 77,
+      "functions": [
+        {
+          "name": "at",
+          "startLine": 28,
+          "endLine": 28,
+          "params": [
+            "sec"
+          ]
+        },
+        {
+          "name": "makeTimeDependentDs",
+          "startLine": 36,
+          "endLine": 58,
+          "params": [
+            "initial"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "makeTimeDependentDs",
+          "callee": "makeFakeDs",
+          "lineNumber": 37
+        },
+        {
+          "caller": "makeTimeDependentDs",
+          "callee": "events\n          .filter((e) => e.date.valueOf() <= t.valueOf())\n          .sort((a, b) => b.date.valueOf() - a.date.valueOf())\n          .slice",
+          "lineNumber": 41
+        },
+        {
+          "caller": "makeTimeDependentDs",
+          "callee": "events\n          .filter((e) => e.date.valueOf() <= t.valueOf())\n          .sort",
+          "lineNumber": 41
+        },
+        {
+          "caller": "makeTimeDependentDs",
+          "callee": "events\n          .filter",
+          "lineNumber": 41
+        },
+        {
+          "caller": "makeTimeDependentDs",
+          "callee": "e.date.valueOf",
+          "lineNumber": 42
+        },
+        {
+          "caller": "makeTimeDependentDs",
+          "callee": "t.valueOf",
+          "lineNumber": 42
+        },
+        {
+          "caller": "makeTimeDependentDs",
+          "callee": "b.date.valueOf",
+          "lineNumber": 43
+        },
+        {
+          "caller": "makeTimeDependentDs",
+          "callee": "a.date.valueOf",
+          "lineNumber": 43
+        },
+        {
+          "caller": "makeTimeDependentDs",
+          "callee": "t.valueOf",
+          "lineNumber": 50
+        },
+        {
+          "caller": "makeTimeDependentDs",
+          "callee": "at(60).valueOf",
+          "lineNumber": 50
+        },
+        {
+          "caller": "makeTimeDependentDs",
+          "callee": "at",
+          "lineNumber": 50
+        },
+        {
+          "caller": "ticker",
+          "callee": "within",
+          "lineNumber": 70
+        },
+        {
+          "caller": "ticker",
+          "callee": "screen.getByTestId",
+          "lineNumber": 70
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/__tests__/fakeDataSource.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 44,
+      "nonEmptyLines": 41,
+      "functions": [
+        {
+          "name": "makeFakeDs",
+          "startLine": 12,
+          "endLine": 44,
+          "params": [
+            "overrides"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "makeFakeDs",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "makeFakeDs",
+          "callee": "listeners.add",
+          "lineNumber": 21
+        },
+        {
+          "caller": "makeFakeDs",
+          "callee": "listeners.delete",
+          "lineNumber": 22
+        },
+        {
+          "caller": "setTime",
+          "callee": "l",
+          "lineNumber": 41
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/derived/__tests__/currentLap.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 46,
+      "nonEmptyLines": 42,
+      "functions": [
+        {
+          "name": "makeFakeDs",
+          "startLine": 8,
+          "endLine": 23,
+          "params": [
+            "spec"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "makeFakeDs",
+          "callee": "spec.leaderAt",
+          "lineNumber": 15
+        },
+        {
+          "caller": "makeFakeDs",
+          "callee": "spec.lapAt",
+          "lineNumber": 19
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/derived/__tests__/stints.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 39,
+      "nonEmptyLines": 33,
+      "functions": [
+        {
+          "name": "stint",
+          "startLine": 7,
+          "endLine": 9,
+          "params": [
+            "p"
+          ]
+        },
+        {
+          "name": "stintForLapOf",
+          "startLine": 11,
+          "endLine": 14,
+          "params": [
+            "all"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "stintForLapOf",
+          "callee": "all.find",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/derived/__tests__/totalLaps.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 54,
+      "nonEmptyLines": 48,
+      "functions": [
+        {
+          "name": "jsonResponse",
+          "startLine": 10,
+          "endLine": 12,
+          "params": [
+            "body",
+            "status"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "jsonResponse",
+          "callee": "JSON.stringify",
+          "lineNumber": 11
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/derived/currentLap.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 19,
+      "nonEmptyLines": 16,
+      "functions": [
+        {
+          "name": "leaderDriverNumber",
+          "startLine": 8,
+          "endLine": 11,
+          "params": [
+            "ds",
+            "t"
+          ]
+        },
+        {
+          "name": "leaderCurrentLap",
+          "startLine": 14,
+          "endLine": 19,
+          "params": [
+            "ds",
+            "t"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "leaderDriverNumber",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "leaderCurrentLap",
+          "line": 14,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "leaderDriverNumber",
+          "callee": "ds.getLatestBefore",
+          "lineNumber": 9
+        },
+        {
+          "caller": "leaderCurrentLap",
+          "callee": "leaderDriverNumber",
+          "lineNumber": 15
+        },
+        {
+          "caller": "leaderCurrentLap",
+          "callee": "ds.getLapAt",
+          "lineNumber": 17
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/derived/stints.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 20,
+      "nonEmptyLines": 18,
+      "functions": [
+        {
+          "name": "collectStints",
+          "startLine": 9,
+          "endLine": 20,
+          "params": [
+            "ds",
+            "driverNumber",
+            "currentLap"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "collectStints",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "collectStints",
+          "callee": "ds.getStintForLap",
+          "lineNumber": 16
+        },
+        {
+          "caller": "collectStints",
+          "callee": "byStint.has",
+          "lineNumber": 17
+        },
+        {
+          "caller": "collectStints",
+          "callee": "byStint.set",
+          "lineNumber": 17
+        },
+        {
+          "caller": "collectStints",
+          "callee": "byStint.values",
+          "lineNumber": 19
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/derived/totalLaps.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 69,
+      "nonEmptyLines": 61,
+      "functions": [
+        {
+          "name": "keyOf",
+          "startLine": 24,
+          "endLine": 26,
+          "params": [
+            "circuitKey",
+            "year"
+          ]
+        },
+        {
+          "name": "loadRaceDistance",
+          "startLine": 29,
+          "endLine": 58,
+          "params": [
+            "fetchImpl"
+          ]
+        },
+        {
+          "name": "totalLapsFor",
+          "startLine": 61,
+          "endLine": 63,
+          "params": [
+            "map",
+            "circuitKey",
+            "year"
+          ]
+        },
+        {
+          "name": "_resetRaceDistanceCache",
+          "startLine": 66,
+          "endLine": 69,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "loadRaceDistance",
+          "line": 29,
+          "isDefault": false
+        },
+        {
+          "name": "totalLapsFor",
+          "line": 61,
+          "isDefault": false
+        },
+        {
+          "name": "_resetRaceDistanceCache",
+          "line": 66,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "loadRaceDistance",
+          "callee": "Promise.resolve",
+          "lineNumber": 30
+        },
+        {
+          "caller": "loadRaceDistance",
+          "callee": "(async (): Promise<Map<string, number>> => {\n    const map = new Map<string, number>();\n    try {\n      const res = await fetchImpl(RACE_DISTANCE_URL);\n      if (res.ok) {\n        const data = (await res.json()) as RaceDistanceFile;\n        for (const e of data.entries ?? []) {\n          if (\n            Number.isFinite(e.circuit_key) &&\n            Number.isFinite(e.year) &&\n            Number.isFinite(e.total_laps)\n          ) {\n            map.set(keyOf(e.circuit_key, e.year), e.total_laps);\n          }\n        }\n      } else {\n        console.warn(`[totalLaps] ${RACE_DISTANCE_URL} HTTP ${res.status} — degraded (L?? 표시)`);\n      }\n    } catch (err) {\n      console.warn(`[totalLaps] ${RACE_DISTANCE_URL} load failed — degraded (L?? 표시)`, err);\n    }\n    cache = map;\n    inflight = null;\n    return map;\n  })",
+          "lineNumber": 32
+        },
+        {
+          "caller": "loadRaceDistance",
+          "callee": "fetchImpl",
+          "lineNumber": 35
+        },
+        {
+          "caller": "loadRaceDistance",
+          "callee": "res.json",
+          "lineNumber": 37
+        },
+        {
+          "caller": "loadRaceDistance",
+          "callee": "Number.isFinite",
+          "lineNumber": 40
+        },
+        {
+          "caller": "loadRaceDistance",
+          "callee": "Number.isFinite",
+          "lineNumber": 41
+        },
+        {
+          "caller": "loadRaceDistance",
+          "callee": "Number.isFinite",
+          "lineNumber": 42
+        },
+        {
+          "caller": "loadRaceDistance",
+          "callee": "map.set",
+          "lineNumber": 44
+        },
+        {
+          "caller": "loadRaceDistance",
+          "callee": "keyOf",
+          "lineNumber": 44
+        },
+        {
+          "caller": "loadRaceDistance",
+          "callee": "console.warn",
+          "lineNumber": 48
+        },
+        {
+          "caller": "loadRaceDistance",
+          "callee": "console.warn",
+          "lineNumber": 51
+        },
+        {
+          "caller": "totalLapsFor",
+          "callee": "map.get",
+          "lineNumber": 62
+        },
+        {
+          "caller": "totalLapsFor",
+          "callee": "keyOf",
+          "lineNumber": 62
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/detailPanel/PitHistory.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 32,
+      "functions": [
+        {
+          "name": "PitHistory",
+          "startLine": 9,
+          "endLine": 36,
+          "params": [
+            "{ driverNumber }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "PitHistory",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "PitHistory",
+          "callee": "useDataSource",
+          "lineNumber": 10
+        },
+        {
+          "caller": "PitHistory",
+          "callee": "useDisplayTime",
+          "lineNumber": 11
+        },
+        {
+          "caller": "PitHistory",
+          "callee": "useMemo",
+          "lineNumber": 13
+        },
+        {
+          "caller": "PitHistory",
+          "callee": "ds.getAllBefore",
+          "lineNumber": 14
+        },
+        {
+          "caller": "PitHistory",
+          "callee": "pits.map",
+          "lineNumber": 24
+        },
+        {
+          "caller": "PitHistory",
+          "callee": "pit.pit_duration.toFixed",
+          "lineNumber": 30
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/detailPanel/SessionResult.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 74,
+      "nonEmptyLines": 67,
+      "functions": [
+        {
+          "name": "statusLabel",
+          "startLine": 11,
+          "endLine": 16,
+          "params": [
+            "r"
+          ]
+        },
+        {
+          "name": "SessionResult",
+          "startLine": 18,
+          "endLine": 74,
+          "params": [
+            "{\n  driverNumber,\n  session,\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SessionResult",
+          "line": 18,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "SessionResult",
+          "callee": "useDataSource",
+          "lineNumber": 25
+        },
+        {
+          "caller": "SessionResult",
+          "callee": "useDisplayTime",
+          "lineNumber": 26
+        },
+        {
+          "caller": "SessionResult",
+          "callee": "t.valueOf",
+          "lineNumber": 29
+        },
+        {
+          "caller": "SessionResult",
+          "callee": "Date.parse",
+          "lineNumber": 29
+        },
+        {
+          "caller": "SessionResult",
+          "callee": "ds.getSessionResult",
+          "lineNumber": 32
+        },
+        {
+          "caller": "SessionResult",
+          "callee": "session.session_type.toLowerCase().includes",
+          "lineNumber": 34
+        },
+        {
+          "caller": "SessionResult",
+          "callee": "session.session_type.toLowerCase",
+          "lineNumber": 34
+        },
+        {
+          "caller": "SessionResult",
+          "callee": "statusLabel",
+          "lineNumber": 35
+        },
+        {
+          "caller": "SessionResult",
+          "callee": "Array.isArray",
+          "lineNumber": 54
+        },
+        {
+          "caller": "SessionResult",
+          "callee": "result.duration.map",
+          "lineNumber": 56
+        },
+        {
+          "caller": "SessionResult",
+          "callee": "formatLapTime",
+          "lineNumber": 58
+        },
+        {
+          "caller": "SessionResult",
+          "callee": "Array.isArray",
+          "lineNumber": 65
+        },
+        {
+          "caller": "SessionResult",
+          "callee": "formatGap",
+          "lineNumber": 66
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/detailPanel/StintHistory.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 55,
+      "nonEmptyLines": 51,
+      "functions": [
+        {
+          "name": "StintHistory",
+          "startLine": 14,
+          "endLine": 55,
+          "params": [
+            "{ driverNumber }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "StintHistory",
+          "line": 14,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "StintHistory",
+          "callee": "useDataSource",
+          "lineNumber": 15
+        },
+        {
+          "caller": "StintHistory",
+          "callee": "useDisplayTime",
+          "lineNumber": 16
+        },
+        {
+          "caller": "StintHistory",
+          "callee": "leaderCurrentLap",
+          "lineNumber": 17
+        },
+        {
+          "caller": "StintHistory",
+          "callee": "useMemo",
+          "lineNumber": 19
+        },
+        {
+          "caller": "StintHistory",
+          "callee": "collectStints(ds, driverNumber, currentLap).sort",
+          "lineNumber": 20
+        },
+        {
+          "caller": "StintHistory",
+          "callee": "collectStints",
+          "lineNumber": 20
+        },
+        {
+          "caller": "StintHistory",
+          "callee": "stints.map",
+          "lineNumber": 30
+        },
+        {
+          "caller": "StintHistory",
+          "callee": "tyreColor",
+          "lineNumber": 39
+        },
+        {
+          "caller": "StintHistory",
+          "callee": "tyreLetter",
+          "lineNumber": 40
+        }
+      ],
+      "metrics": {
+        "importCount": 7,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/detailPanel/__tests__/PitHistory.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 44,
+      "nonEmptyLines": 38,
+      "functions": [
+        {
+          "name": "pit",
+          "startLine": 13,
+          "endLine": 15,
+          "params": [
+            "p"
+          ]
+        },
+        {
+          "name": "renderPH",
+          "startLine": 17,
+          "endLine": 23,
+          "params": [
+            "overrides"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "renderPH",
+          "callee": "render",
+          "lineNumber": 18
+        },
+        {
+          "caller": "renderPH",
+          "callee": "makeFakeDs",
+          "lineNumber": 19
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/detailPanel/__tests__/SessionResult.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 63,
+      "nonEmptyLines": 55,
+      "functions": [
+        {
+          "name": "race",
+          "startLine": 14,
+          "endLine": 16,
+          "params": []
+        },
+        {
+          "name": "quali",
+          "startLine": 17,
+          "endLine": 19,
+          "params": []
+        },
+        {
+          "name": "result",
+          "startLine": 20,
+          "endLine": 22,
+          "params": [
+            "p"
+          ]
+        },
+        {
+          "name": "renderSR",
+          "startLine": 24,
+          "endLine": 30,
+          "params": [
+            "displayTime",
+            "session",
+            "res"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "renderSR",
+          "callee": "render",
+          "lineNumber": 25
+        },
+        {
+          "caller": "renderSR",
+          "callee": "makeFakeDs",
+          "lineNumber": 26
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 0,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/detailPanel/__tests__/StintHistory.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 64,
+      "nonEmptyLines": 58,
+      "functions": [
+        {
+          "name": "stint",
+          "startLine": 14,
+          "endLine": 16,
+          "params": [
+            "p"
+          ]
+        },
+        {
+          "name": "stintForLapOf",
+          "startLine": 19,
+          "endLine": 22,
+          "params": [
+            "all"
+          ]
+        },
+        {
+          "name": "renderSH",
+          "startLine": 24,
+          "endLine": 37,
+          "params": [
+            "stints",
+            "currentLap"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "stintForLapOf",
+          "callee": "all.find",
+          "lineNumber": 21
+        },
+        {
+          "caller": "renderSH",
+          "callee": "makeFakeDs",
+          "lineNumber": 25
+        },
+        {
+          "caller": "renderSH",
+          "callee": "stintForLapOf",
+          "lineNumber": 30
+        },
+        {
+          "caller": "renderSH",
+          "callee": "render",
+          "lineNumber": 32
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 0,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/panels/EventBroadcast.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 115,
+      "nonEmptyLines": 103,
+      "functions": [
+        {
+          "name": "importantKindOf",
+          "startLine": 21,
+          "endLine": 24,
+          "params": [
+            "rc"
+          ]
+        },
+        {
+          "name": "EventBroadcast",
+          "startLine": 42,
+          "endLine": 115,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "EventBroadcast",
+          "line": 42,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "importantKindOf",
+          "callee": "flagKind",
+          "lineNumber": 22
+        },
+        {
+          "caller": "importantKindOf",
+          "callee": "IMPORTANT.has",
+          "lineNumber": 23
+        },
+        {
+          "caller": "EventBroadcast",
+          "callee": "useDataSource",
+          "lineNumber": 43
+        },
+        {
+          "caller": "EventBroadcast",
+          "callee": "useDisplayTime",
+          "lineNumber": 44
+        },
+        {
+          "caller": "EventBroadcast",
+          "callee": "useMemo",
+          "lineNumber": 45
+        },
+        {
+          "caller": "EventBroadcast",
+          "callee": "ds.getAllBefore",
+          "lineNumber": 46
+        },
+        {
+          "caller": "EventBroadcast",
+          "callee": "latest.date.valueOf",
+          "lineNumber": 49
+        },
+        {
+          "caller": "EventBroadcast",
+          "callee": "useRef",
+          "lineNumber": 51
+        },
+        {
+          "caller": "EventBroadcast",
+          "callee": "useRef",
+          "lineNumber": 54
+        },
+        {
+          "caller": "EventBroadcast",
+          "callee": "useRef",
+          "lineNumber": 55
+        },
+        {
+          "caller": "EventBroadcast",
+          "callee": "useState",
+          "lineNumber": 56
+        },
+        {
+          "caller": "EventBroadcast",
+          "callee": "useEffect",
+          "lineNumber": 58
+        },
+        {
+          "caller": "EventBroadcast",
+          "callee": "importantKindOf",
+          "lineNumber": 65
+        },
+        {
+          "caller": "EventBroadcast",
+          "callee": "setActive",
+          "lineNumber": 70
+        },
+        {
+          "caller": "EventBroadcast",
+          "callee": "clearTimeout",
+          "lineNumber": 71
+        },
+        {
+          "caller": "EventBroadcast",
+          "callee": "setTimeout",
+          "lineNumber": 72
+        },
+        {
+          "caller": "EventBroadcast",
+          "callee": "setActive",
+          "lineNumber": 72
+        },
+        {
+          "caller": "EventBroadcast",
+          "callee": "useEffect",
+          "lineNumber": 77
+        },
+        {
+          "caller": "EventBroadcast",
+          "callee": "clearTimeout",
+          "lineNumber": 78
+        },
+        {
+          "caller": "EventBroadcast",
+          "callee": "flagIcon",
+          "lineNumber": 110
+        },
+        {
+          "caller": "EventBroadcast",
+          "callee": "active.kind.toUpperCase",
+          "lineNumber": 112
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/panels/EventTicker.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 56,
+      "nonEmptyLines": 53,
+      "functions": [
+        {
+          "name": "EventTicker",
+          "startLine": 10,
+          "endLine": 56,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "EventTicker",
+          "line": 10,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "EventTicker",
+          "callee": "useDataSource",
+          "lineNumber": 11
+        },
+        {
+          "caller": "EventTicker",
+          "callee": "useDisplayTime",
+          "lineNumber": 12
+        },
+        {
+          "caller": "EventTicker",
+          "callee": "useMemo",
+          "lineNumber": 13
+        },
+        {
+          "caller": "EventTicker",
+          "callee": "ds.getAllBefore",
+          "lineNumber": 13
+        },
+        {
+          "caller": "EventTicker",
+          "callee": "events.map",
+          "lineNumber": 25
+        },
+        {
+          "caller": "EventTicker",
+          "callee": "flagIcon",
+          "lineNumber": 31
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/panels/RaceControlBanner.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 53,
+      "nonEmptyLines": 49,
+      "functions": [
+        {
+          "name": "RaceControlBanner",
+          "startLine": 23,
+          "endLine": 53,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "RaceControlBanner",
+          "line": 23,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "RaceControlBanner",
+          "callee": "useDataSource",
+          "lineNumber": 24
+        },
+        {
+          "caller": "RaceControlBanner",
+          "callee": "useDisplayTime",
+          "lineNumber": 25
+        },
+        {
+          "caller": "RaceControlBanner",
+          "callee": "useMemo",
+          "lineNumber": 26
+        },
+        {
+          "caller": "RaceControlBanner",
+          "callee": "ds.getAllBefore",
+          "lineNumber": 26
+        },
+        {
+          "caller": "RaceControlBanner",
+          "callee": "useMemo",
+          "lineNumber": 27
+        },
+        {
+          "caller": "RaceControlBanner",
+          "callee": "activeFlag",
+          "lineNumber": 27
+        },
+        {
+          "caller": "RaceControlBanner",
+          "callee": "flagIcon",
+          "lineNumber": 43
+        },
+        {
+          "caller": "RaceControlBanner",
+          "callee": "active.kind.toUpperCase",
+          "lineNumber": 45
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/panels/SessionHeader.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 130,
+      "nonEmptyLines": 120,
+      "functions": [
+        {
+          "name": "parseGmtOffsetMs",
+          "startLine": 21,
+          "endLine": 27,
+          "params": [
+            "off"
+          ]
+        },
+        {
+          "name": "formatLocalClock",
+          "startLine": 29,
+          "endLine": 36,
+          "params": [
+            "t",
+            "offsetMs"
+          ]
+        },
+        {
+          "name": "SessionHeader",
+          "startLine": 38,
+          "endLine": 130,
+          "params": [
+            "{ meeting, session, year, mode, onBack }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SessionHeader",
+          "line": 38,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "parseGmtOffsetMs",
+          "callee": "off.match",
+          "lineNumber": 23
+        },
+        {
+          "caller": "parseGmtOffsetMs",
+          "callee": "Number",
+          "lineNumber": 26
+        },
+        {
+          "caller": "parseGmtOffsetMs",
+          "callee": "Number",
+          "lineNumber": 26
+        },
+        {
+          "caller": "parseGmtOffsetMs",
+          "callee": "Number",
+          "lineNumber": 26
+        },
+        {
+          "caller": "formatLocalClock",
+          "callee": "t.valueOf",
+          "lineNumber": 30
+        },
+        {
+          "caller": "formatLocalClock",
+          "callee": "t.valueOf",
+          "lineNumber": 31
+        },
+        {
+          "caller": "formatLocalClock",
+          "callee": "String(d.getUTCHours()).padStart",
+          "lineNumber": 32
+        },
+        {
+          "caller": "formatLocalClock",
+          "callee": "String",
+          "lineNumber": 32
+        },
+        {
+          "caller": "formatLocalClock",
+          "callee": "d.getUTCHours",
+          "lineNumber": 32
+        },
+        {
+          "caller": "formatLocalClock",
+          "callee": "String(d.getUTCMinutes()).padStart",
+          "lineNumber": 33
+        },
+        {
+          "caller": "formatLocalClock",
+          "callee": "String",
+          "lineNumber": 33
+        },
+        {
+          "caller": "formatLocalClock",
+          "callee": "d.getUTCMinutes",
+          "lineNumber": 33
+        },
+        {
+          "caller": "formatLocalClock",
+          "callee": "String(d.getUTCSeconds()).padStart",
+          "lineNumber": 34
+        },
+        {
+          "caller": "formatLocalClock",
+          "callee": "String",
+          "lineNumber": 34
+        },
+        {
+          "caller": "formatLocalClock",
+          "callee": "d.getUTCSeconds",
+          "lineNumber": 34
+        },
+        {
+          "caller": "SessionHeader",
+          "callee": "useDataSource",
+          "lineNumber": 39
+        },
+        {
+          "caller": "SessionHeader",
+          "callee": "useDisplayTime",
+          "lineNumber": 40
+        },
+        {
+          "caller": "SessionHeader",
+          "callee": "ds.getStreamState",
+          "lineNumber": 41
+        },
+        {
+          "caller": "SessionHeader",
+          "callee": "formatLocalClock",
+          "lineNumber": 44
+        },
+        {
+          "caller": "SessionHeader",
+          "callee": "parseGmtOffsetMs",
+          "lineNumber": 44
+        },
+        {
+          "caller": "SessionHeader",
+          "callee": "streamState.toUpperCase",
+          "lineNumber": 49
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/panels/SessionProgress.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 102,
+      "nonEmptyLines": 92,
+      "functions": [
+        {
+          "name": "fmtDuration",
+          "startLine": 24,
+          "endLine": 29,
+          "params": [
+            "ms"
+          ]
+        },
+        {
+          "name": "SessionProgress",
+          "startLine": 31,
+          "endLine": 102,
+          "params": [
+            "{ session, circuitKey, year, loadRaceDistanceImpl }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SessionProgress",
+          "line": 31,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "fmtDuration",
+          "callee": "Math.max",
+          "lineNumber": 25
+        },
+        {
+          "caller": "fmtDuration",
+          "callee": "Math.floor",
+          "lineNumber": 25
+        },
+        {
+          "caller": "fmtDuration",
+          "callee": "Math.floor",
+          "lineNumber": 26
+        },
+        {
+          "caller": "fmtDuration",
+          "callee": "String(Math.floor((s % 3600) / 60)).padStart",
+          "lineNumber": 27
+        },
+        {
+          "caller": "fmtDuration",
+          "callee": "String",
+          "lineNumber": 27
+        },
+        {
+          "caller": "fmtDuration",
+          "callee": "Math.floor",
+          "lineNumber": 27
+        },
+        {
+          "caller": "fmtDuration",
+          "callee": "String(s % 60).padStart",
+          "lineNumber": 27
+        },
+        {
+          "caller": "fmtDuration",
+          "callee": "String",
+          "lineNumber": 27
+        },
+        {
+          "caller": "SessionProgress",
+          "callee": "useDataSource",
+          "lineNumber": 32
+        },
+        {
+          "caller": "SessionProgress",
+          "callee": "useDisplayTime",
+          "lineNumber": 33
+        },
+        {
+          "caller": "SessionProgress",
+          "callee": "useState",
+          "lineNumber": 34
+        },
+        {
+          "caller": "SessionProgress",
+          "callee": "LAP_SESSION_TYPES.has",
+          "lineNumber": 36
+        },
+        {
+          "caller": "SessionProgress",
+          "callee": "session.session_type.toLowerCase",
+          "lineNumber": 36
+        },
+        {
+          "caller": "SessionProgress",
+          "callee": "useEffect",
+          "lineNumber": 38
+        },
+        {
+          "caller": "SessionProgress",
+          "callee": "loadRaceDistance",
+          "lineNumber": 41
+        },
+        {
+          "caller": "SessionProgress",
+          "callee": "loader()\n      .then((m) => {\n        if (!cancelled) setRaceDistance(m);\n      })\n      .catch",
+          "lineNumber": 42
+        },
+        {
+          "caller": "SessionProgress",
+          "callee": "loader()\n      .then",
+          "lineNumber": 42
+        },
+        {
+          "caller": "SessionProgress",
+          "callee": "loader",
+          "lineNumber": 42
+        },
+        {
+          "caller": "SessionProgress",
+          "callee": "setRaceDistance",
+          "lineNumber": 44
+        },
+        {
+          "caller": "SessionProgress",
+          "callee": "setRaceDistance",
+          "lineNumber": 47
+        },
+        {
+          "caller": "SessionProgress",
+          "callee": "useMemo",
+          "lineNumber": 54
+        },
+        {
+          "caller": "SessionProgress",
+          "callee": "leaderCurrentLap",
+          "lineNumber": 54
+        },
+        {
+          "caller": "SessionProgress",
+          "callee": "totalLapsFor",
+          "lineNumber": 56
+        },
+        {
+          "caller": "SessionProgress",
+          "callee": "Date.parse",
+          "lineNumber": 58
+        },
+        {
+          "caller": "SessionProgress",
+          "callee": "Date.parse",
+          "lineNumber": 59
+        },
+        {
+          "caller": "SessionProgress",
+          "callee": "t.valueOf",
+          "lineNumber": 61
+        },
+        {
+          "caller": "SessionProgress",
+          "callee": "Math.min",
+          "lineNumber": 62
+        },
+        {
+          "caller": "SessionProgress",
+          "callee": "Math.max",
+          "lineNumber": 62
+        },
+        {
+          "caller": "SessionProgress",
+          "callee": "t.valueOf",
+          "lineNumber": 63
+        },
+        {
+          "caller": "SessionProgress",
+          "callee": "Number.isFinite",
+          "lineNumber": 63
+        },
+        {
+          "caller": "SessionProgress",
+          "callee": "fmtDuration",
+          "lineNumber": 84
+        },
+        {
+          "caller": "SessionProgress",
+          "callee": "Math.max",
+          "lineNumber": 84
+        },
+        {
+          "caller": "SessionProgress",
+          "callee": "Number.isFinite",
+          "lineNumber": 85
+        },
+        {
+          "caller": "SessionProgress",
+          "callee": "fmtDuration",
+          "lineNumber": 85
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    }
+  ]
+}

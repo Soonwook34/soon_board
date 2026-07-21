@@ -1,0 +1,1867 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 28,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "src/dashboard/derived/__tests__/driverOutStatus.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 75,
+      "nonEmptyLines": 63,
+      "functions": [
+        {
+          "name": "result",
+          "startLine": 11,
+          "endLine": 18,
+          "params": [
+            "over"
+          ]
+        },
+        {
+          "name": "dsWith",
+          "startLine": 21,
+          "endLine": 29,
+          "params": [
+            "res",
+            "lastLap"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "dsWith",
+          "callee": "makeFakeDs",
+          "lineNumber": 22
+        },
+        {
+          "caller": "dsWith",
+          "callee": "lastLap",
+          "lineNumber": 25
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/derived/__tests__/knockout.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 84,
+      "nonEmptyLines": 73,
+      "functions": [
+        {
+          "name": "modelWithSizes",
+          "startLine": 8,
+          "endLine": 14,
+          "params": [
+            "s1",
+            "s2",
+            "s3"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "modelWithSizes",
+          "callee": "membership.set",
+          "lineNumber": 10
+        },
+        {
+          "caller": "modelWithSizes",
+          "callee": "Array.from",
+          "lineNumber": 10
+        },
+        {
+          "caller": "modelWithSizes",
+          "callee": "membership.set",
+          "lineNumber": 11
+        },
+        {
+          "caller": "modelWithSizes",
+          "callee": "Array.from",
+          "lineNumber": 11
+        },
+        {
+          "caller": "modelWithSizes",
+          "callee": "membership.set",
+          "lineNumber": 12
+        },
+        {
+          "caller": "modelWithSizes",
+          "callee": "Array.from",
+          "lineNumber": 12
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/derived/__tests__/personalBests.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 19,
+      "nonEmptyLines": 17,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/derived/__tests__/qualiLapClass.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 65,
+      "nonEmptyLines": 56,
+      "functions": [
+        {
+          "name": "mkLap",
+          "startLine": 7,
+          "endLine": 27,
+          "params": [
+            "o"
+          ]
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/derived/__tests__/qualifyingSegments.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 120,
+      "nonEmptyLines": 101,
+      "functions": [
+        {
+          "name": "loadFixture",
+          "startLine": 13,
+          "endLine": 15,
+          "params": [
+            "name"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "loadFixture",
+          "callee": "JSON.parse",
+          "lineNumber": 14
+        },
+        {
+          "caller": "loadFixture",
+          "callee": "readFileSync",
+          "lineNumber": 14
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/derived/activeFlags.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 42,
+      "nonEmptyLines": 38,
+      "functions": [
+        {
+          "name": "activeFlag",
+          "startLine": 20,
+          "endLine": 42,
+          "params": [
+            "messages",
+            "t"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "activeFlag",
+          "line": 20,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "activeFlag",
+          "callee": "t.valueOf",
+          "lineNumber": 21
+        },
+        {
+          "caller": "activeFlag",
+          "callee": "m.date.valueOf",
+          "lineNumber": 24
+        },
+        {
+          "caller": "activeFlag",
+          "callee": "flagKind",
+          "lineNumber": 25
+        },
+        {
+          "caller": "activeFlag",
+          "callee": "m.date.valueOf",
+          "lineNumber": 26
+        },
+        {
+          "caller": "activeFlag",
+          "callee": "latest.date.valueOf",
+          "lineNumber": 26
+        },
+        {
+          "caller": "activeFlag",
+          "callee": "flagKind",
+          "lineNumber": 30
+        },
+        {
+          "caller": "activeFlag",
+          "callee": "latest.date.valueOf",
+          "lineNumber": 36
+        },
+        {
+          "caller": "activeFlag",
+          "callee": "isSafetyCarEnding",
+          "lineNumber": 38
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/derived/driverOutStatus.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 27,
+      "nonEmptyLines": 24,
+      "functions": [
+        {
+          "name": "driverOutAt",
+          "startLine": 18,
+          "endLine": 27,
+          "params": [
+            "ds",
+            "driverNumber",
+            "t"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "driverOutAt",
+          "line": 18,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "driverOutAt",
+          "callee": "ds.getSessionResult",
+          "lineNumber": 19
+        },
+        {
+          "caller": "driverOutAt",
+          "callee": "ds.getCompletedLapsBefore",
+          "lineNumber": 23
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/derived/knockout.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 60,
+      "nonEmptyLines": 55,
+      "functions": [
+        {
+          "name": "cutlineFor",
+          "startLine": 22,
+          "endLine": 31,
+          "params": [
+            "model",
+            "part"
+          ]
+        },
+        {
+          "name": "knockoutZone",
+          "startLine": 37,
+          "endLine": 45,
+          "params": [
+            "orderedDrivers",
+            "cutlinePosition"
+          ]
+        },
+        {
+          "name": "gapToCutline",
+          "startLine": 51,
+          "endLine": 60,
+          "params": [
+            "ordered",
+            "cutlinePosition"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "cutlineFor",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "knockoutZone",
+          "line": 37,
+          "isDefault": false
+        },
+        {
+          "name": "gapToCutline",
+          "line": 51,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "cutlineFor",
+          "callee": "model.membership.get",
+          "lineNumber": 23
+        },
+        {
+          "caller": "cutlineFor",
+          "callee": "model.membership.get",
+          "lineNumber": 26
+        },
+        {
+          "caller": "knockoutZone",
+          "callee": "zone.add",
+          "lineNumber": 43
+        },
+        {
+          "caller": "gapToCutline",
+          "callee": "m.set",
+          "lineNumber": 58
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/derived/personalBests.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 9,
+      "nonEmptyLines": 7,
+      "functions": [
+        {
+          "name": "personalBestLap",
+          "startLine": 7,
+          "endLine": 9,
+          "params": [
+            "agg",
+            "driverNumber"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "personalBestLap",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "personalBestLap",
+          "callee": "agg.personal_bests.get",
+          "lineNumber": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/derived/qualiLapClass.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 32,
+      "nonEmptyLines": 28,
+      "functions": [
+        {
+          "name": "pitLapsByDriver",
+          "startLine": 10,
+          "endLine": 21,
+          "params": [
+            "pitRecords"
+          ]
+        },
+        {
+          "name": "classifyLap",
+          "startLine": 27,
+          "endLine": 32,
+          "params": [
+            "lap",
+            "pitLaps"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "pitLapsByDriver",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "classifyLap",
+          "line": 27,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "pitLapsByDriver",
+          "callee": "m.get",
+          "lineNumber": 13
+        },
+        {
+          "caller": "pitLapsByDriver",
+          "callee": "m.set",
+          "lineNumber": 16
+        },
+        {
+          "caller": "pitLapsByDriver",
+          "callee": "s.add",
+          "lineNumber": 18
+        },
+        {
+          "caller": "classifyLap",
+          "callee": "pitLaps.has",
+          "lineNumber": 29
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/derived/qualifyingModel.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 44,
+      "nonEmptyLines": 41,
+      "functions": [
+        {
+          "name": "buildQualifyingModel",
+          "startLine": 28,
+          "endLine": 44,
+          "params": [
+            "ds",
+            "driverNumbers",
+            "t"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "buildQualifyingModel",
+          "line": 28,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "buildQualifyingModel",
+          "callee": "ds.getAllBefore",
+          "lineNumber": 33
+        },
+        {
+          "caller": "buildQualifyingModel",
+          "callee": "ds.getSessionResult",
+          "lineNumber": 37
+        },
+        {
+          "caller": "buildQualifyingModel",
+          "callee": "results.push",
+          "lineNumber": 38
+        },
+        {
+          "caller": "buildQualifyingModel",
+          "callee": "allLaps.push",
+          "lineNumber": 39
+        },
+        {
+          "caller": "buildQualifyingModel",
+          "callee": "ds.getCompletedLapsBefore",
+          "lineNumber": 39
+        },
+        {
+          "caller": "buildQualifyingModel",
+          "callee": "reconstructSegments",
+          "lineNumber": 41
+        },
+        {
+          "caller": "buildQualifyingModel",
+          "callee": "progressiveSegmentBests",
+          "lineNumber": 42
+        },
+        {
+          "caller": "buildQualifyingModel",
+          "callee": "pitLapsByDriver",
+          "lineNumber": 42
+        },
+        {
+          "caller": "buildQualifyingModel",
+          "callee": "ds.getAllBefore",
+          "lineNumber": 42
+        },
+        {
+          "caller": "buildQualifyingModel",
+          "callee": "activePartAt",
+          "lineNumber": 43
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/derived/qualifyingSegments.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 148,
+      "nonEmptyLines": 133,
+      "functions": [
+        {
+          "name": "reachedPart",
+          "startLine": 39,
+          "endLine": 45,
+          "params": [
+            "res"
+          ]
+        },
+        {
+          "name": "reconstructSegments",
+          "startLine": 52,
+          "endLine": 94,
+          "params": [
+            "raceControl",
+            "sessionResult"
+          ]
+        },
+        {
+          "name": "lapPhaseOf",
+          "startLine": 97,
+          "endLine": 106,
+          "params": [
+            "lap",
+            "boundaries"
+          ]
+        },
+        {
+          "name": "activePartAt",
+          "startLine": 109,
+          "endLine": 114,
+          "params": [
+            "boundaries",
+            "t"
+          ]
+        },
+        {
+          "name": "progressiveSegmentBests",
+          "startLine": 124,
+          "endLine": 148,
+          "params": [
+            "laps",
+            "boundaries",
+            "t",
+            "pitLapsByDriver"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "reachedPart",
+          "line": 39,
+          "isDefault": false
+        },
+        {
+          "name": "reconstructSegments",
+          "line": 52,
+          "isDefault": false
+        },
+        {
+          "name": "lapPhaseOf",
+          "line": 97,
+          "isDefault": false
+        },
+        {
+          "name": "activePartAt",
+          "line": 109,
+          "isDefault": false
+        },
+        {
+          "name": "progressiveSegmentBests",
+          "line": 124,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "reachedPart",
+          "callee": "Array.isArray",
+          "lineNumber": 41
+        },
+        {
+          "caller": "reachedPart",
+          "callee": "Math.min",
+          "lineNumber": 44
+        },
+        {
+          "caller": "reconstructSegments",
+          "callee": "membership.set",
+          "lineNumber": 57
+        },
+        {
+          "caller": "reconstructSegments",
+          "callee": "reachedPart",
+          "lineNumber": 59
+        },
+        {
+          "caller": "reconstructSegments",
+          "callee": "membership.get(part)!.add",
+          "lineNumber": 61
+        },
+        {
+          "caller": "reconstructSegments",
+          "callee": "membership.get",
+          "lineNumber": 61
+        },
+        {
+          "caller": "reconstructSegments",
+          "callee": "raceControl.filter",
+          "lineNumber": 69
+        },
+        {
+          "caller": "reconstructSegments",
+          "callee": "phaseEvents\n      .filter((r) => r.flag === 'GREEN')\n      .map((r) => r.date.getTime())\n      .sort",
+          "lineNumber": 70
+        },
+        {
+          "caller": "reconstructSegments",
+          "callee": "phaseEvents\n      .filter((r) => r.flag === 'GREEN')\n      .map",
+          "lineNumber": 70
+        },
+        {
+          "caller": "reconstructSegments",
+          "callee": "phaseEvents\n      .filter",
+          "lineNumber": 70
+        },
+        {
+          "caller": "reconstructSegments",
+          "callee": "r.date.getTime",
+          "lineNumber": 72
+        },
+        {
+          "caller": "reconstructSegments",
+          "callee": "phaseEvents\n      .filter((r) => r.flag === 'CHEQUERED')\n      .map((r) => r.date.getTime())\n      .sort",
+          "lineNumber": 74
+        },
+        {
+          "caller": "reconstructSegments",
+          "callee": "phaseEvents\n      .filter((r) => r.flag === 'CHEQUERED')\n      .map",
+          "lineNumber": 74
+        },
+        {
+          "caller": "reconstructSegments",
+          "callee": "phaseEvents\n      .filter",
+          "lineNumber": 74
+        },
+        {
+          "caller": "reconstructSegments",
+          "callee": "r.date.getTime",
+          "lineNumber": 76
+        },
+        {
+          "caller": "reconstructSegments",
+          "callee": "membership.get",
+          "lineNumber": 79
+        },
+        {
+          "caller": "reconstructSegments",
+          "callee": "boundaries.push",
+          "lineNumber": 86
+        },
+        {
+          "caller": "lapPhaseOf",
+          "callee": "lap.date_start.getTime",
+          "lineNumber": 99
+        },
+        {
+          "caller": "activePartAt",
+          "callee": "t.getTime",
+          "lineNumber": 110
+        },
+        {
+          "caller": "progressiveSegmentBests",
+          "callee": "t.getTime",
+          "lineNumber": 130
+        },
+        {
+          "caller": "progressiveSegmentBests",
+          "callee": "lap.date_start.getTime",
+          "lineNumber": 133
+        },
+        {
+          "caller": "progressiveSegmentBests",
+          "callee": "pitLapsByDriver?.get",
+          "lineNumber": 134
+        },
+        {
+          "caller": "progressiveSegmentBests",
+          "callee": "classifyLap",
+          "lineNumber": 135
+        },
+        {
+          "caller": "progressiveSegmentBests",
+          "callee": "lapPhaseOf",
+          "lineNumber": 136
+        },
+        {
+          "caller": "progressiveSegmentBests",
+          "callee": "out.get",
+          "lineNumber": 139
+        },
+        {
+          "caller": "progressiveSegmentBests",
+          "callee": "out.set",
+          "lineNumber": 142
+        },
+        {
+          "caller": "progressiveSegmentBests",
+          "callee": "byPart.get",
+          "lineNumber": 144
+        },
+        {
+          "caller": "progressiveSegmentBests",
+          "callee": "byPart.set",
+          "lineNumber": 145
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 5,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/detailPanel/CurrentState.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 117,
+      "nonEmptyLines": 108,
+      "functions": [
+        {
+          "name": "StatItem",
+          "startLine": 17,
+          "endLine": 26,
+          "params": [
+            "{ label, children }"
+          ]
+        },
+        {
+          "name": "CurrentState",
+          "startLine": 30,
+          "endLine": 117,
+          "params": [
+            "{ driverNumber }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "CurrentState",
+          "line": 30,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "CurrentState",
+          "callee": "useDataSource",
+          "lineNumber": 31
+        },
+        {
+          "caller": "CurrentState",
+          "callee": "useDisplayTime",
+          "lineNumber": 32
+        },
+        {
+          "caller": "CurrentState",
+          "callee": "useAggregateResults",
+          "lineNumber": 33
+        },
+        {
+          "caller": "CurrentState",
+          "callee": "useMemo",
+          "lineNumber": 35
+        },
+        {
+          "caller": "CurrentState",
+          "callee": "ds.getCompletedLapsBefore",
+          "lineNumber": 36
+        },
+        {
+          "caller": "CurrentState",
+          "callee": "ds.getLapAt",
+          "lineNumber": 37
+        },
+        {
+          "caller": "CurrentState",
+          "callee": "ds.getLatestBefore",
+          "lineNumber": 39
+        },
+        {
+          "caller": "CurrentState",
+          "callee": "ds.getLatestBefore",
+          "lineNumber": 40
+        },
+        {
+          "caller": "CurrentState",
+          "callee": "ds.getStintForLap",
+          "lineNumber": 41
+        },
+        {
+          "caller": "renderSectors",
+          "callee": "SECTOR_INDICES.map",
+          "lineNumber": 63
+        },
+        {
+          "caller": "renderSectors",
+          "callee": "sectorColor",
+          "lineNumber": 66
+        },
+        {
+          "caller": "renderSectors",
+          "callee": "formatSector",
+          "lineNumber": 68
+        },
+        {
+          "caller": "CurrentState",
+          "callee": "formatGap",
+          "lineNumber": 81
+        },
+        {
+          "caller": "CurrentState",
+          "callee": "formatGap",
+          "lineNumber": 82
+        },
+        {
+          "caller": "CurrentState",
+          "callee": "tyreColor",
+          "lineNumber": 86
+        },
+        {
+          "caller": "CurrentState",
+          "callee": "tyreLetter",
+          "lineNumber": 87
+        },
+        {
+          "caller": "CurrentState",
+          "callee": "formatLapTime",
+          "lineNumber": 103
+        },
+        {
+          "caller": "CurrentState",
+          "callee": "renderSectors",
+          "lineNumber": 106
+        },
+        {
+          "caller": "CurrentState",
+          "callee": "renderSectors",
+          "lineNumber": 112
+        }
+      ],
+      "metrics": {
+        "importCount": 9,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/detailPanel/RecentLapsTable.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 101,
+      "nonEmptyLines": 96,
+      "functions": [
+        {
+          "name": "RecentLapsTable",
+          "startLine": 21,
+          "endLine": 101,
+          "params": [
+            "{ driverNumber }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "RecentLapsTable",
+          "line": 21,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "RecentLapsTable",
+          "callee": "useDataSource",
+          "lineNumber": 22
+        },
+        {
+          "caller": "RecentLapsTable",
+          "callee": "useDisplayTime",
+          "lineNumber": 23
+        },
+        {
+          "caller": "RecentLapsTable",
+          "callee": "useAggregateResults",
+          "lineNumber": 24
+        },
+        {
+          "caller": "RecentLapsTable",
+          "callee": "useState",
+          "lineNumber": 26
+        },
+        {
+          "caller": "RecentLapsTable",
+          "callee": "useMemo",
+          "lineNumber": 29
+        },
+        {
+          "caller": "RecentLapsTable",
+          "callee": "ds.getCompletedLapsBefore",
+          "lineNumber": 29
+        },
+        {
+          "caller": "RecentLapsTable",
+          "callee": "all.slice",
+          "lineNumber": 30
+        },
+        {
+          "caller": "RecentLapsTable",
+          "callee": "laps.map",
+          "lineNumber": 50
+        },
+        {
+          "caller": "RecentLapsTable",
+          "callee": "formatLapTime",
+          "lineNumber": 61
+        },
+        {
+          "caller": "RecentLapsTable",
+          "callee": "SECTOR_INDICES.map",
+          "lineNumber": 62
+        },
+        {
+          "caller": "RecentLapsTable",
+          "callee": "sectorColor",
+          "lineNumber": 66
+        },
+        {
+          "caller": "RecentLapsTable",
+          "callee": "formatSector",
+          "lineNumber": 68
+        },
+        {
+          "caller": "RecentLapsTable",
+          "callee": "setExpanded",
+          "lineNumber": 84
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/detailPanel/__tests__/CurrentState.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 93,
+      "nonEmptyLines": 84,
+      "functions": [
+        {
+          "name": "lap",
+          "startLine": 15,
+          "endLine": 22,
+          "params": [
+            "p"
+          ]
+        },
+        {
+          "name": "drivers1",
+          "startLine": 24,
+          "endLine": 31,
+          "params": []
+        },
+        {
+          "name": "renderCS",
+          "startLine": 33,
+          "endLine": 41,
+          "params": [
+            "overrides"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "renderCS",
+          "callee": "render",
+          "lineNumber": 34
+        },
+        {
+          "caller": "renderCS",
+          "callee": "makeFakeDs",
+          "lineNumber": 35
+        },
+        {
+          "caller": "renderCS",
+          "callee": "drivers1",
+          "lineNumber": 36
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 0,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/detailPanel/__tests__/RecentLapsTable.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 83,
+      "nonEmptyLines": 73,
+      "functions": [
+        {
+          "name": "lap",
+          "startLine": 13,
+          "endLine": 20,
+          "params": [
+            "p"
+          ]
+        },
+        {
+          "name": "renderRLT",
+          "startLine": 22,
+          "endLine": 28,
+          "params": [
+            "overrides"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "renderRLT",
+          "callee": "render",
+          "lineNumber": 23
+        },
+        {
+          "caller": "renderRLT",
+          "callee": "makeFakeDs",
+          "lineNumber": 24
+        },
+        {
+          "caller": "eightLaps",
+          "callee": "Array.from",
+          "lineNumber": 59
+        },
+        {
+          "caller": "eightLaps",
+          "callee": "lap",
+          "lineNumber": 59
+        },
+        {
+          "caller": "rowCount",
+          "callee": "c.querySelectorAll",
+          "lineNumber": 60
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/panels/Leaderboard.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 193,
+      "nonEmptyLines": 182,
+      "functions": [
+        {
+          "name": "Leaderboard",
+          "startLine": 43,
+          "endLine": 193,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Leaderboard",
+          "line": 43,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Leaderboard",
+          "callee": "useDataSource",
+          "lineNumber": 44
+        },
+        {
+          "caller": "Leaderboard",
+          "callee": "useDisplayTime",
+          "lineNumber": 45
+        },
+        {
+          "caller": "Leaderboard",
+          "callee": "useDrivers",
+          "lineNumber": 46
+        },
+        {
+          "caller": "Leaderboard",
+          "callee": "useAggregateResults",
+          "lineNumber": 48
+        },
+        {
+          "caller": "Leaderboard",
+          "callee": "useMemo",
+          "lineNumber": 51
+        },
+        {
+          "caller": "Leaderboard",
+          "callee": "drivers.keys",
+          "lineNumber": 53
+        },
+        {
+          "caller": "Leaderboard",
+          "callee": "drivers.get",
+          "lineNumber": 54
+        },
+        {
+          "caller": "Leaderboard",
+          "callee": "ds.getLatestBefore",
+          "lineNumber": 55
+        },
+        {
+          "caller": "Leaderboard",
+          "callee": "ds.getLatestBefore",
+          "lineNumber": 56
+        },
+        {
+          "caller": "Leaderboard",
+          "callee": "ds.getCompletedLapsBefore",
+          "lineNumber": 57
+        },
+        {
+          "caller": "Leaderboard",
+          "callee": "ds.getStintForLap",
+          "lineNumber": 59
+        },
+        {
+          "caller": "Leaderboard",
+          "callee": "personalBestLap",
+          "lineNumber": 63
+        },
+        {
+          "caller": "Leaderboard",
+          "callee": "approxEq",
+          "lineNumber": 65
+        },
+        {
+          "caller": "Leaderboard",
+          "callee": "driverOutAt",
+          "lineNumber": 68
+        },
+        {
+          "caller": "Leaderboard",
+          "callee": "ds.getLatestBefore",
+          "lineNumber": 69
+        },
+        {
+          "caller": "Leaderboard",
+          "callee": "built.push",
+          "lineNumber": 72
+        },
+        {
+          "caller": "Leaderboard",
+          "callee": "teamColorOf",
+          "lineNumber": 75
+        },
+        {
+          "caller": "Leaderboard",
+          "callee": "built.sort",
+          "lineNumber": 88
+        },
+        {
+          "caller": "Leaderboard",
+          "callee": "rows.map",
+          "lineNumber": 118
+        },
+        {
+          "caller": "Leaderboard",
+          "callee": "selectDriver",
+          "lineNumber": 123
+        },
+        {
+          "caller": "Leaderboard",
+          "callee": "formatGap",
+          "lineNumber": 156
+        },
+        {
+          "caller": "Leaderboard",
+          "callee": "formatGap",
+          "lineNumber": 157
+        },
+        {
+          "caller": "Leaderboard",
+          "callee": "formatLapTime",
+          "lineNumber": 159
+        },
+        {
+          "caller": "Leaderboard",
+          "callee": "tyreColor",
+          "lineNumber": 175
+        },
+        {
+          "caller": "Leaderboard",
+          "callee": "tyreLetter",
+          "lineNumber": 176
+        }
+      ],
+      "metrics": {
+        "importCount": 13,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/panels/__tests__/Leaderboard.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 193,
+      "nonEmptyLines": 178,
+      "functions": [
+        {
+          "name": "mkDriver",
+          "startLine": 17,
+          "endLine": 32,
+          "params": [
+            "driver_number",
+            "name_acronym",
+            "team_colour"
+          ]
+        },
+        {
+          "name": "mkLap",
+          "startLine": 34,
+          "endLine": 53,
+          "params": [
+            "driver_number",
+            "lap_number",
+            "lap_duration"
+          ]
+        },
+        {
+          "name": "renderLeaderboard",
+          "startLine": 62,
+          "endLine": 83,
+          "params": [
+            "drivers",
+            "overrides"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "renderLeaderboard",
+          "callee": "makeFakeDs",
+          "lineNumber": 66
+        },
+        {
+          "caller": "renderLeaderboard",
+          "callee": "render",
+          "lineNumber": 75
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 0,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/shared/SectorBar.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 35,
+      "nonEmptyLines": 32,
+      "functions": [
+        {
+          "name": "SectorBar",
+          "startLine": 17,
+          "endLine": 35,
+          "params": [
+            "{ sectors, aggregate, driverNumber, height = 2 }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SectorBar",
+          "line": 17,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "SectorBar",
+          "callee": "SECTOR_INDICES.map",
+          "lineNumber": 26
+        },
+        {
+          "caller": "SectorBar",
+          "callee": "sectorColor",
+          "lineNumber": 30
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/shared/__tests__/SectorBar.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 43,
+      "nonEmptyLines": 37,
+      "functions": [
+        {
+          "name": "bg",
+          "startLine": 17,
+          "endLine": 19,
+          "params": [
+            "el"
+          ]
+        },
+        {
+          "name": "hexToRgb",
+          "startLine": 22,
+          "endLine": 25,
+          "params": [
+            "hex"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "hexToRgb",
+          "callee": "parseInt",
+          "lineNumber": 23
+        },
+        {
+          "caller": "hexToRgb",
+          "callee": "hex.slice",
+          "lineNumber": 23
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/shared/__tests__/flagDecoder.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 81,
+      "nonEmptyLines": 70,
+      "functions": [
+        {
+          "name": "at",
+          "startLine": 8,
+          "endLine": 8,
+          "params": [
+            "sec"
+          ]
+        },
+        {
+          "name": "rc",
+          "startLine": 10,
+          "endLine": 25,
+          "params": [
+            "sec",
+            "partial"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "rc",
+          "callee": "at",
+          "lineNumber": 12
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/shared/__tests__/sectorColors.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 51,
+      "nonEmptyLines": 47,
+      "functions": [
+        {
+          "name": "pb",
+          "startLine": 6,
+          "endLine": 8,
+          "params": [
+            "driver",
+            "s1",
+            "s2",
+            "s3"
+          ]
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/shared/__tests__/tyreColors.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 29,
+      "nonEmptyLines": 27,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/shared/flagDecoder.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 35,
+      "nonEmptyLines": 30,
+      "functions": [
+        {
+          "name": "flagKind",
+          "startLine": 18,
+          "endLine": 29,
+          "params": [
+            "rc"
+          ]
+        },
+        {
+          "name": "isSafetyCarEnding",
+          "startLine": 32,
+          "endLine": 35,
+          "params": [
+            "rc"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "GREEN_CLEAR_TTL_MS",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "flagKind",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "isSafetyCarEnding",
+          "line": 32,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "flagKind",
+          "callee": "(rc.flag ?? '').toUpperCase",
+          "lineNumber": 19
+        },
+        {
+          "caller": "flagKind",
+          "callee": "(rc.category ?? '').toLowerCase",
+          "lineNumber": 20
+        },
+        {
+          "caller": "flagKind",
+          "callee": "(rc.message ?? '').toUpperCase",
+          "lineNumber": 21
+        },
+        {
+          "caller": "flagKind",
+          "callee": "msg.includes",
+          "lineNumber": 22
+        },
+        {
+          "caller": "flagKind",
+          "callee": "cat.includes",
+          "lineNumber": 23
+        },
+        {
+          "caller": "flagKind",
+          "callee": "cat.includes",
+          "lineNumber": 23
+        },
+        {
+          "caller": "flagKind",
+          "callee": "msg.includes",
+          "lineNumber": 23
+        },
+        {
+          "caller": "isSafetyCarEnding",
+          "callee": "(rc.message ?? '').toUpperCase",
+          "lineNumber": 33
+        },
+        {
+          "caller": "isSafetyCarEnding",
+          "callee": "msg.includes",
+          "lineNumber": 34
+        },
+        {
+          "caller": "isSafetyCarEnding",
+          "callee": "msg.includes",
+          "lineNumber": 34
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/shared/sectorColors.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 64,
+      "nonEmptyLines": 55,
+      "functions": [
+        {
+          "name": "approxEq",
+          "startLine": 29,
+          "endLine": 31,
+          "params": [
+            "a",
+            "b"
+          ]
+        },
+        {
+          "name": "overallSector",
+          "startLine": 33,
+          "endLine": 35,
+          "params": [
+            "agg",
+            "s"
+          ]
+        },
+        {
+          "name": "personalSector",
+          "startLine": 37,
+          "endLine": 41,
+          "params": [
+            "agg",
+            "driver",
+            "s"
+          ]
+        },
+        {
+          "name": "sectorColorKind",
+          "startLine": 43,
+          "endLine": 55,
+          "params": [
+            "agg",
+            "driverNumber",
+            "sector",
+            "value"
+          ]
+        },
+        {
+          "name": "sectorColor",
+          "startLine": 57,
+          "endLine": 64,
+          "params": [
+            "agg",
+            "driverNumber",
+            "sector",
+            "value"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SECTOR_COLORS",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "SECTOR_INDICES",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "approxEq",
+          "line": 29,
+          "isDefault": false
+        },
+        {
+          "name": "sectorColorKind",
+          "line": 43,
+          "isDefault": false
+        },
+        {
+          "name": "sectorColor",
+          "line": 57,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "approxEq",
+          "callee": "Math.abs",
+          "lineNumber": 30
+        },
+        {
+          "caller": "personalSector",
+          "callee": "agg.personal_bests.get",
+          "lineNumber": 38
+        },
+        {
+          "caller": "sectorColorKind",
+          "callee": "overallSector",
+          "lineNumber": 50
+        },
+        {
+          "caller": "sectorColorKind",
+          "callee": "approxEq",
+          "lineNumber": 51
+        },
+        {
+          "caller": "sectorColorKind",
+          "callee": "personalSector",
+          "lineNumber": 52
+        },
+        {
+          "caller": "sectorColorKind",
+          "callee": "approxEq",
+          "lineNumber": 53
+        },
+        {
+          "caller": "sectorColor",
+          "callee": "sectorColorKind",
+          "lineNumber": 63
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 5,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/shared/tyreColors.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 28,
+      "nonEmptyLines": 23,
+      "functions": [
+        {
+          "name": "tyreColor",
+          "startLine": 16,
+          "endLine": 20,
+          "params": [
+            "compound"
+          ]
+        },
+        {
+          "name": "tyreLetter",
+          "startLine": 23,
+          "endLine": 28,
+          "params": [
+            "compound"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "tyreColor",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "tyreLetter",
+          "line": 23,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "tyreColor",
+          "callee": "compound.toUpperCase",
+          "lineNumber": 18
+        },
+        {
+          "caller": "tyreLetter",
+          "callee": "compound.toUpperCase",
+          "lineNumber": 25
+        },
+        {
+          "caller": "tyreLetter",
+          "callee": "c.charAt",
+          "lineNumber": 27
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/shared/useAggregateResults.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 21,
+      "nonEmptyLines": 19,
+      "functions": [
+        {
+          "name": "useAggregateResults",
+          "startLine": 9,
+          "endLine": 21,
+          "params": [
+            "intervalMs"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useAggregateResults",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useAggregateResults",
+          "callee": "useAggregate",
+          "lineNumber": 10
+        },
+        {
+          "caller": "useAggregateResults",
+          "callee": "useAggregate",
+          "lineNumber": 11
+        },
+        {
+          "caller": "useAggregateResults",
+          "callee": "useAggregate",
+          "lineNumber": 12
+        },
+        {
+          "caller": "useAggregateResults",
+          "callee": "useMemo",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/shared/openf1Types.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 260,
+      "nonEmptyLines": 233,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

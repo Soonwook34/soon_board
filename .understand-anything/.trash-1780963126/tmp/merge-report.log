@@ -1,0 +1,52 @@
+Found 23 batch files (20 logical batches, 3 multi-part):
+  batch-1-part-2.json: 37 nodes, 66 edges
+  batch-1-part-1.json: 32 nodes, 87 edges
+  batch-2.json: 49 nodes, 153 edges
+  batch-3-part-1.json: 23 nodes, 117 edges
+  batch-3-part-2.json: 17 nodes, 38 edges
+  batch-4.json: 38 nodes, 97 edges
+  batch-5.json: 39 nodes, 76 edges
+  batch-6.json: 35 nodes, 118 edges
+  batch-7.json: 28 nodes, 86 edges
+  batch-8.json: 22 nodes, 72 edges
+  batch-9.json: 17 nodes, 32 edges
+  batch-10.json: 8 nodes, 10 edges
+  batch-11.json: 3 nodes, 4 edges
+  batch-12.json: 9 nodes, 81 edges
+  batch-13.json: 6 nodes, 12 edges
+  batch-14.json: 5 nodes, 19 edges
+  batch-15.json: 4 nodes, 3 edges
+  batch-16.json: 32 nodes, 39 edges
+  batch-17-part-1.json: 36 nodes, 71 edges
+  batch-17-part-2.json: 39 nodes, 63 edges
+  batch-18.json: 36 nodes, 71 edges
+  batch-19.json: 54 nodes, 87 edges
+  batch-20.json: 1 nodes, 0 edges
+
+Input: 570 nodes, 1402 edges
+
+Fixed (5 corrections):
+     5 × tested_by edges dropped (orphan endpoint or test↔test / prod↔prod pair)
+
+Tested-by linker:
+     1 × tested_by edges produced (path-convention supplement, production → test)
+   118 × production nodes tagged "tested"
+
+Could not fix (9 issues — needs agent review):
+  - Edge function:src/dashboard/panels/Leaderboard.tsx:Leaderboard → function:src/dashboard/derived/personalBests.ts:personalBestLap (calls): dropped, missing target 'function:src/dashboard/derived/personalBests.ts:personalBestLap'
+  - Edge function:src/dashboard/profiles/index.ts:resolveProfile → function:src/shared/sessionKind.ts:isQualifyingFamily (calls): dropped, missing target 'function:src/shared/sessionKind.ts:isQualifyingFamily'
+  - Edge function:src/main/stores/hooks.ts:useSeasonCatalog → function:src/main/stores/catalogStore.ts:getSeason (calls): dropped, missing target 'function:src/main/stores/catalogStore.ts:getSeason'
+  - Edge function:src/dashboard/detailPanel/SessionResult.tsx:SessionResult → function:src/dashboard/shared/formatTime.ts:formatGap (calls): dropped, missing target 'function:src/dashboard/shared/formatTime.ts:formatGap'
+  - Edge function:src/dashboard/panels/EventBroadcast.tsx:EventBroadcast → function:src/dashboard/shared/flagIcons.ts:flagIcon (calls): dropped, missing target 'function:src/dashboard/shared/flagIcons.ts:flagIcon'
+  - Edge function:src/dashboard/panels/EventTicker.tsx:EventTicker → function:src/dashboard/shared/flagIcons.ts:flagIcon (calls): dropped, missing target 'function:src/dashboard/shared/flagIcons.ts:flagIcon'
+  - Edge function:src/dashboard/panels/RaceControlBanner.tsx:RaceControlBanner → function:src/dashboard/shared/flagIcons.ts:flagIcon (calls): dropped, missing target 'function:src/dashboard/shared/flagIcons.ts:flagIcon'
+  - Edge pipeline:.github/workflows/playwright.yml → config:playwright.config.ts (triggers): dropped, missing target 'config:playwright.config.ts'
+  - Edge file:src/dashboard/__tests__/futureLeakGuard.test.ts → function:src/dashboard/__tests__/futureLeakGuard.test.ts:collectSources (contains): dropped, missing target 'function:src/dashboard/__tests__/futureLeakGuard.test.ts:collectSources'
+
+Output: 570 nodes, 1389 edges
+
+Imports edge recovery:
+  Recovered 0 `imports` edges from importMap (311 entries scanned)
+  Skipped 1 importMap target paths with no `file:` node in graph
+
+Written to /Users/a453498/Downloads/project/soon_board/.understand-anything/intermediate/assembled-graph.json (592 KB)

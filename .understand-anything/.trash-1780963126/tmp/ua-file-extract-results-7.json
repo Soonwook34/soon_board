@@ -1,0 +1,943 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 18,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "src/dashboard/panels/WeatherMini.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 41,
+      "nonEmptyLines": 35,
+      "functions": [
+        {
+          "name": "windArrow",
+          "startLine": 9,
+          "endLine": 13,
+          "params": [
+            "deg"
+          ]
+        },
+        {
+          "name": "temp",
+          "startLine": 15,
+          "endLine": 17,
+          "params": [
+            "v"
+          ]
+        },
+        {
+          "name": "Stat",
+          "startLine": 19,
+          "endLine": 26,
+          "params": [
+            "{ label, value }"
+          ]
+        },
+        {
+          "name": "WeatherMini",
+          "startLine": 28,
+          "endLine": 41,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "WeatherMini",
+          "line": 28,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "windArrow",
+          "callee": "Number.isNaN",
+          "lineNumber": 10
+        },
+        {
+          "caller": "windArrow",
+          "callee": "Math.round",
+          "lineNumber": 12
+        },
+        {
+          "caller": "temp",
+          "callee": "Math.round",
+          "lineNumber": 16
+        },
+        {
+          "caller": "WeatherMini",
+          "callee": "useLatestBefore",
+          "lineNumber": 29
+        },
+        {
+          "caller": "WeatherMini",
+          "callee": "temp",
+          "lineNumber": 32
+        },
+        {
+          "caller": "WeatherMini",
+          "callee": "temp",
+          "lineNumber": 33
+        },
+        {
+          "caller": "WeatherMini",
+          "callee": "Math.round",
+          "lineNumber": 37
+        },
+        {
+          "caller": "WeatherMini",
+          "callee": "windArrow",
+          "lineNumber": 37
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/panels/__tests__/EventBroadcast.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 88,
+      "nonEmptyLines": 77,
+      "functions": [
+        {
+          "name": "at",
+          "startLine": 14,
+          "endLine": 14,
+          "params": [
+            "sec"
+          ]
+        },
+        {
+          "name": "rc",
+          "startLine": 16,
+          "endLine": 21,
+          "params": [
+            "p"
+          ]
+        },
+        {
+          "name": "latestBefore",
+          "startLine": 24,
+          "endLine": 29,
+          "params": [
+            "events",
+            "t",
+            "limit"
+          ]
+        },
+        {
+          "name": "mount",
+          "startLine": 31,
+          "endLine": 43,
+          "params": [
+            "initial",
+            "events"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "latestBefore",
+          "callee": "events\n    .filter((e) => e.date instanceof Date && e.date.valueOf() <= t.valueOf())\n    .sort((a, b) => (b.date as Date).valueOf() - (a.date as Date).valueOf())\n    .slice",
+          "lineNumber": 25
+        },
+        {
+          "caller": "latestBefore",
+          "callee": "events\n    .filter((e) => e.date instanceof Date && e.date.valueOf() <= t.valueOf())\n    .sort",
+          "lineNumber": 25
+        },
+        {
+          "caller": "latestBefore",
+          "callee": "events\n    .filter",
+          "lineNumber": 25
+        },
+        {
+          "caller": "latestBefore",
+          "callee": "e.date.valueOf",
+          "lineNumber": 26
+        },
+        {
+          "caller": "latestBefore",
+          "callee": "t.valueOf",
+          "lineNumber": 26
+        },
+        {
+          "caller": "latestBefore",
+          "callee": "(b.date as Date).valueOf",
+          "lineNumber": 27
+        },
+        {
+          "caller": "latestBefore",
+          "callee": "(a.date as Date).valueOf",
+          "lineNumber": 27
+        },
+        {
+          "caller": "mount",
+          "callee": "makeFakeDs",
+          "lineNumber": 32
+        },
+        {
+          "caller": "mount",
+          "callee": "latestBefore",
+          "lineNumber": 35
+        },
+        {
+          "caller": "mount",
+          "callee": "render",
+          "lineNumber": 37
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 0,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/panels/__tests__/EventTicker.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 138,
+      "nonEmptyLines": 121,
+      "functions": [
+        {
+          "name": "makeRc",
+          "startLine": 14,
+          "endLine": 28,
+          "params": [
+            "partial"
+          ]
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/panels/__tests__/RaceControlBanner.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 45,
+      "nonEmptyLines": 38,
+      "functions": [
+        {
+          "name": "at",
+          "startLine": 13,
+          "endLine": 13,
+          "params": [
+            "sec"
+          ]
+        },
+        {
+          "name": "rc",
+          "startLine": 15,
+          "endLine": 20,
+          "params": [
+            "sec",
+            "p"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "rc",
+          "callee": "at",
+          "lineNumber": 17
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/panels/__tests__/SessionHeader.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 116,
+      "nonEmptyLines": 106,
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/panels/__tests__/SessionProgress.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 72,
+      "nonEmptyLines": 66,
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/panels/__tests__/WeatherMini.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 56,
+      "nonEmptyLines": 50,
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/shared/DataSourceContext.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "DataSourceProvider",
+          "startLine": 10,
+          "endLine": 12,
+          "params": [
+            "{ ds, children }"
+          ]
+        },
+        {
+          "name": "useDataSource",
+          "startLine": 14,
+          "endLine": 18,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "DataSourceProvider",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "useDataSource",
+          "line": 14,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useDataSource",
+          "callee": "useContext",
+          "lineNumber": 15
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/shared/__tests__/DataSourceContext.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 31,
+      "nonEmptyLines": 25,
+      "functions": [
+        {
+          "name": "Probe",
+          "startLine": 11,
+          "endLine": 14,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Probe",
+          "callee": "useDataSource",
+          "lineNumber": 12
+        },
+        {
+          "caller": "Probe",
+          "callee": "String",
+          "lineNumber": 13
+        },
+        {
+          "caller": "Probe",
+          "callee": "ds.getDisplayTime().valueOf",
+          "lineNumber": 13
+        },
+        {
+          "caller": "Probe",
+          "callee": "ds.getDisplayTime",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/shared/__tests__/flagIcons.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 23,
+      "nonEmptyLines": 21,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/shared/__tests__/queryHooks.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 96,
+      "nonEmptyLines": 89,
+      "functions": [
+        {
+          "name": "makeFakeDs",
+          "startLine": 17,
+          "endLine": 42,
+          "params": [
+            "startMs"
+          ]
+        },
+        {
+          "name": "LatestProbe",
+          "startLine": 44,
+          "endLine": 48,
+          "params": [
+            "{ onValue }"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "makeFakeDs",
+          "callee": "listeners.add",
+          "lineNumber": 23
+        },
+        {
+          "caller": "makeFakeDs",
+          "callee": "listeners.delete",
+          "lineNumber": 24
+        },
+        {
+          "caller": "makeFakeDs",
+          "callee": "t.valueOf",
+          "lineNumber": 29
+        },
+        {
+          "caller": "makeFakeDs",
+          "callee": "t.valueOf",
+          "lineNumber": 32
+        },
+        {
+          "caller": "makeFakeDs",
+          "callee": "t.valueOf",
+          "lineNumber": 33
+        },
+        {
+          "caller": "set",
+          "callee": "l",
+          "lineNumber": 39
+        },
+        {
+          "caller": "LatestProbe",
+          "callee": "useLatestBefore",
+          "lineNumber": 45
+        },
+        {
+          "caller": "LatestProbe",
+          "callee": "onValue",
+          "lineNumber": 46
+        },
+        {
+          "caller": "Both",
+          "callee": "all.push",
+          "lineNumber": 84
+        },
+        {
+          "caller": "Both",
+          "callee": "useAllBefore",
+          "lineNumber": 84
+        },
+        {
+          "caller": "Both",
+          "callee": "agg.push",
+          "lineNumber": 85
+        },
+        {
+          "caller": "Both",
+          "callee": "useAggregate",
+          "lineNumber": 85
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/shared/__tests__/useDisplayTime.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 108,
+      "nonEmptyLines": 100,
+      "functions": [
+        {
+          "name": "makeFakeDs",
+          "startLine": 15,
+          "endLine": 32,
+          "params": [
+            "startMs"
+          ]
+        },
+        {
+          "name": "Probe",
+          "startLine": 34,
+          "endLine": 38,
+          "params": [
+            "{ onValue, intervalMs }"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "makeFakeDs",
+          "callee": "listeners.add",
+          "lineNumber": 21
+        },
+        {
+          "caller": "makeFakeDs",
+          "callee": "listeners.delete",
+          "lineNumber": 22
+        },
+        {
+          "caller": "set",
+          "callee": "l",
+          "lineNumber": 29
+        },
+        {
+          "caller": "Probe",
+          "callee": "useDisplayTime",
+          "lineNumber": 35
+        },
+        {
+          "caller": "Probe",
+          "callee": "onValue",
+          "lineNumber": 36
+        },
+        {
+          "caller": "Probe",
+          "callee": "t.valueOf",
+          "lineNumber": 36
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/shared/flagIcons.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 25,
+      "nonEmptyLines": 21,
+      "functions": [
+        {
+          "name": "flagIconCategory",
+          "startLine": 13,
+          "endLine": 21,
+          "params": [
+            "rc"
+          ]
+        },
+        {
+          "name": "flagIcon",
+          "startLine": 23,
+          "endLine": 25,
+          "params": [
+            "rc"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "FLAG_ICONS",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "flagIconCategory",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "flagIcon",
+          "line": 23,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "flagIconCategory",
+          "callee": "(rc.category ?? '').toLowerCase",
+          "lineNumber": 14
+        },
+        {
+          "caller": "flagIconCategory",
+          "callee": "(rc.flag ?? '').toLowerCase",
+          "lineNumber": 15
+        },
+        {
+          "caller": "flagIconCategory",
+          "callee": "cat.includes",
+          "lineNumber": 16
+        },
+        {
+          "caller": "flagIconCategory",
+          "callee": "cat.includes",
+          "lineNumber": 16
+        },
+        {
+          "caller": "flagIconCategory",
+          "callee": "cat.includes",
+          "lineNumber": 17
+        },
+        {
+          "caller": "flagIconCategory",
+          "callee": "cat.includes",
+          "lineNumber": 19
+        },
+        {
+          "caller": "flagIcon",
+          "callee": "flagIconCategory",
+          "lineNumber": 24
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/shared/useAggregate.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 16,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "useAggregate",
+          "startLine": 9,
+          "endLine": 16,
+          "params": [
+            "aggregate",
+            "intervalMs"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useAggregate",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useAggregate",
+          "callee": "useDataSource",
+          "lineNumber": 13
+        },
+        {
+          "caller": "useAggregate",
+          "callee": "useDisplayTime",
+          "lineNumber": 14
+        },
+        {
+          "caller": "useAggregate",
+          "callee": "useMemo",
+          "lineNumber": 15
+        },
+        {
+          "caller": "useAggregate",
+          "callee": "ds.getAggregateBefore",
+          "lineNumber": 15
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/shared/useAllBefore.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 20,
+      "nonEmptyLines": 18,
+      "functions": [
+        {
+          "name": "useAllBefore",
+          "startLine": 12,
+          "endLine": 20,
+          "params": [
+            "endpoint",
+            "options"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useAllBefore",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useAllBefore",
+          "callee": "useDataSource",
+          "lineNumber": 16
+        },
+        {
+          "caller": "useAllBefore",
+          "callee": "useDisplayTime",
+          "lineNumber": 17
+        },
+        {
+          "caller": "useAllBefore",
+          "callee": "useMemo",
+          "lineNumber": 19
+        },
+        {
+          "caller": "useAllBefore",
+          "callee": "ds.getAllBefore",
+          "lineNumber": 19
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/shared/useDisplayTime.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 43,
+      "nonEmptyLines": 38,
+      "functions": [
+        {
+          "name": "useDisplayTime",
+          "startLine": 13,
+          "endLine": 43,
+          "params": [
+            "intervalMs"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useDisplayTime",
+          "line": 13,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useDisplayTime",
+          "callee": "useDataSource",
+          "lineNumber": 14
+        },
+        {
+          "caller": "useDisplayTime",
+          "callee": "useState",
+          "lineNumber": 15
+        },
+        {
+          "caller": "useDisplayTime",
+          "callee": "ds.getDisplayTime",
+          "lineNumber": 15
+        },
+        {
+          "caller": "useDisplayTime",
+          "callee": "useEffect",
+          "lineNumber": 17
+        },
+        {
+          "caller": "useDisplayTime",
+          "callee": "ds.getDisplayTime().valueOf",
+          "lineNumber": 18
+        },
+        {
+          "caller": "useDisplayTime",
+          "callee": "ds.getDisplayTime",
+          "lineNumber": 18
+        },
+        {
+          "caller": "apply",
+          "callee": "d.valueOf",
+          "lineNumber": 20
+        },
+        {
+          "caller": "apply",
+          "callee": "setT",
+          "lineNumber": 21
+        },
+        {
+          "caller": "poll",
+          "callee": "ds.getDisplayTime",
+          "lineNumber": 25
+        },
+        {
+          "caller": "poll",
+          "callee": "d.valueOf",
+          "lineNumber": 26
+        },
+        {
+          "caller": "poll",
+          "callee": "apply",
+          "lineNumber": 26
+        },
+        {
+          "caller": "useDisplayTime",
+          "callee": "setInterval",
+          "lineNumber": 28
+        },
+        {
+          "caller": "useDisplayTime",
+          "callee": "ds.onDisplayTimeChange",
+          "lineNumber": 30
+        },
+        {
+          "caller": "useDisplayTime",
+          "callee": "d.valueOf",
+          "lineNumber": 31
+        },
+        {
+          "caller": "useDisplayTime",
+          "callee": "apply",
+          "lineNumber": 32
+        },
+        {
+          "caller": "useDisplayTime",
+          "callee": "poll",
+          "lineNumber": 35
+        },
+        {
+          "caller": "useDisplayTime",
+          "callee": "clearInterval",
+          "lineNumber": 37
+        },
+        {
+          "caller": "useDisplayTime",
+          "callee": "unsub",
+          "lineNumber": 38
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/shared/useLatestBefore.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 20,
+      "nonEmptyLines": 18,
+      "functions": [
+        {
+          "name": "useLatestBefore",
+          "startLine": 12,
+          "endLine": 20,
+          "params": [
+            "endpoint",
+            "options"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useLatestBefore",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useLatestBefore",
+          "callee": "useDataSource",
+          "lineNumber": 16
+        },
+        {
+          "caller": "useLatestBefore",
+          "callee": "useDisplayTime",
+          "lineNumber": 17
+        },
+        {
+          "caller": "useLatestBefore",
+          "callee": "useMemo",
+          "lineNumber": 19
+        },
+        {
+          "caller": "useLatestBefore",
+          "callee": "ds.getLatestBefore",
+          "lineNumber": 19
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/shared/DataSource.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 140,
+      "nonEmptyLines": 120,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

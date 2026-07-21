@@ -1,0 +1,650 @@
+{
+  "nodes": [
+    {
+      "id": "file:src/dashboard/derived/__tests__/driverOutStatus.test.ts",
+      "type": "file",
+      "name": "driverOutStatus.test.ts",
+      "filePath": "src/dashboard/derived/__tests__/driverOutStatus.test.ts",
+      "summary": "driverOutAt 파생 함수가 session_result 의 DNF/DSQ 와 완주 랩 수를 근거로 드라이버의 리타이어 시점을 판정하는지 검증하는 단위 테스트.",
+      "tags": ["test", "derived", "fixture", "leaderboard"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/derived/__tests__/knockout.test.ts",
+      "type": "file",
+      "name": "knockout.test.ts",
+      "filePath": "src/dashboard/derived/__tests__/knockout.test.ts",
+      "summary": "퀄리파잉 컷라인 계산(cutlineFor)·녹아웃 존(knockoutZone)·컷라인 갭(gapToCutline) 파생 로직을 세그먼트 인원 구성별로 검증하는 단위 테스트.",
+      "tags": ["test", "derived", "qualifying", "knockout"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/derived/__tests__/personalBests.test.ts",
+      "type": "file",
+      "name": "personalBests.test.ts",
+      "filePath": "src/dashboard/derived/__tests__/personalBests.test.ts",
+      "summary": "personalBestLap 헬퍼가 aggregate 결과에서 드라이버별 개인 최고 랩을 조회하는지 확인하는 소규모 단위 테스트.",
+      "tags": ["test", "derived", "personal-best"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/derived/__tests__/qualiLapClass.test.ts",
+      "type": "file",
+      "name": "qualiLapClass.test.ts",
+      "filePath": "src/dashboard/derived/__tests__/qualiLapClass.test.ts",
+      "summary": "pit 기록으로 인-/아웃-랩을 식별하고 flying 랩을 분류하는 qualiLapClass 파생 로직을 mkLap 픽스처로 검증하는 단위 테스트.",
+      "tags": ["test", "derived", "qualifying", "lap-classification"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/derived/__tests__/qualifyingSegments.test.ts",
+      "type": "file",
+      "name": "qualifyingSegments.test.ts",
+      "filePath": "src/dashboard/derived/__tests__/qualifyingSegments.test.ts",
+      "summary": "race_control·session_result 픽스처를 로드해 세그먼트 재구성(reconstructSegments)과 progressive 베스트 계산의 미래 누설 zero 보장을 검증하는 단위 테스트.",
+      "tags": ["test", "derived", "qualifying", "fixture"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/dashboard/derived/activeFlags.ts",
+      "type": "file",
+      "name": "activeFlags.ts",
+      "filePath": "src/dashboard/derived/activeFlags.ts",
+      "summary": "race_control 메시지 시퀀스에서 특정 시각 t 에 활성화된 깃발 상태(SC/VSC/yellow 등)를 flagKind 로 디코드해 산출하는 파생 함수.",
+      "tags": ["derived", "race-control", "flag", "live"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/derived/driverOutStatus.ts",
+      "type": "file",
+      "name": "driverOutStatus.ts",
+      "filePath": "src/dashboard/derived/driverOutStatus.ts",
+      "summary": "session_result 와 완주 랩 수를 결합해 특정 시각 t 에 드라이버가 이미 리타이어/실격 상태인지 판정하는 파생 함수.",
+      "tags": ["derived", "data-source", "leaderboard", "status"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/derived/knockout.ts",
+      "type": "file",
+      "name": "knockout.ts",
+      "filePath": "src/dashboard/derived/knockout.ts",
+      "summary": "세그먼트 모델에서 퀄리파잉 컷라인 위치(cutlineFor)·녹아웃 존(knockoutZone)·컷라인 대비 갭(gapToCutline)을 산출하는 파생 함수 모음.",
+      "tags": ["derived", "qualifying", "knockout", "utility"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/derived/personalBests.ts",
+      "type": "file",
+      "name": "personalBests.ts",
+      "filePath": "src/dashboard/derived/personalBests.ts",
+      "summary": "aggregate 결과의 personal_bests 맵에서 드라이버별 개인 최고 랩을 조회하는 소형 파생 헬퍼.",
+      "tags": ["derived", "personal-best", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/derived/qualiLapClass.ts",
+      "type": "file",
+      "name": "qualiLapClass.ts",
+      "filePath": "src/dashboard/derived/qualiLapClass.ts",
+      "summary": "pit 기록을 드라이버별 인/아웃 랩 집합으로 색인(pitLapsByDriver)하고 각 랩을 flying/pit 랩으로 분류(classifyLap)하는 파생 함수.",
+      "tags": ["derived", "qualifying", "lap-classification", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/derived/qualifyingModel.ts",
+      "type": "file",
+      "name": "qualifyingModel.ts",
+      "filePath": "src/dashboard/derived/qualifyingModel.ts",
+      "summary": "DataSource 에서 race_control·session_result·랩·pit 데이터를 모아 세그먼트 모델과 progressive 베스트를 조립한 QualifyingModel 을 구성하는 파생 와이어링.",
+      "tags": ["derived", "qualifying", "data-source", "model"],
+      "complexity": "moderate",
+      "languageNotes": "미래 누설(future leak) zero 를 보장하기 위해 progressiveSegmentBests 는 date_start ≤ t flying 랩만 사용한다."
+    },
+    {
+      "id": "file:src/dashboard/derived/qualifyingSegments.ts",
+      "type": "file",
+      "name": "qualifyingSegments.ts",
+      "filePath": "src/dashboard/derived/qualifyingSegments.ts",
+      "summary": "race_control 깃발 이벤트로 Q1/Q2/Q3 세그먼트 경계를 재구성하고(reconstructSegments) 시각별 progressive 세그먼트 베스트를 누설 없이 누적 계산하는(progressiveSegmentBests) 퀄리파잉 코어 파생 모듈.",
+      "tags": ["derived", "qualifying", "segment", "race-control"],
+      "complexity": "complex",
+      "languageNotes": "GREEN/CHEQUERED 깃발 시퀀스로 세그먼트 경계를 도출하고, lapPhaseOf 로 랩이 속한 세그먼트를 매핑한다."
+    },
+    {
+      "id": "file:src/dashboard/detailPanel/CurrentState.tsx",
+      "type": "file",
+      "name": "CurrentState.tsx",
+      "filePath": "src/dashboard/detailPanel/CurrentState.tsx",
+      "summary": "선택된 드라이버의 현재 랩·섹터·갭·타이어 등 실시간 상태를 stat 항목과 섹터 색상으로 표시하는 detail panel 컴포넌트.",
+      "tags": ["component", "detail-panel", "react", "live"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/detailPanel/RecentLapsTable.tsx",
+      "type": "file",
+      "name": "RecentLapsTable.tsx",
+      "filePath": "src/dashboard/detailPanel/RecentLapsTable.tsx",
+      "summary": "선택 드라이버의 최근 완주 랩들을 랩 타임·섹터 색상과 함께 표 형태로 표시하고 펼치기 토글을 지원하는 detail panel 컴포넌트.",
+      "tags": ["component", "detail-panel", "react", "table"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/detailPanel/__tests__/CurrentState.test.tsx",
+      "type": "file",
+      "name": "CurrentState.test.tsx",
+      "filePath": "src/dashboard/detailPanel/__tests__/CurrentState.test.tsx",
+      "summary": "fakeDataSource 와 Drivers/DataSource provider 로 CurrentState 컴포넌트를 렌더링하고 현재 상태 표시를 검증하는 컴포넌트 테스트.",
+      "tags": ["test", "component", "detail-panel", "react"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/detailPanel/__tests__/RecentLapsTable.test.tsx",
+      "type": "file",
+      "name": "RecentLapsTable.test.tsx",
+      "filePath": "src/dashboard/detailPanel/__tests__/RecentLapsTable.test.tsx",
+      "summary": "fakeDataSource 로 RecentLapsTable 을 렌더링해 랩 행 개수·펼치기 동작 등 표 표시 로직을 검증하는 컴포넌트 테스트.",
+      "tags": ["test", "component", "detail-panel", "table"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/panels/Leaderboard.tsx",
+      "type": "file",
+      "name": "Leaderboard.tsx",
+      "filePath": "src/dashboard/panels/Leaderboard.tsx",
+      "summary": "전 드라이버의 위치·갭·최근 랩·타이어·개인 베스트·리타이어 상태를 집계해 정렬된 리더보드를 렌더링하고 행 클릭으로 드라이버를 선택하는 핵심 패널 컴포넌트.",
+      "tags": ["component", "panel", "react", "leaderboard"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/dashboard/panels/__tests__/Leaderboard.test.tsx",
+      "type": "file",
+      "name": "Leaderboard.test.tsx",
+      "filePath": "src/dashboard/panels/__tests__/Leaderboard.test.tsx",
+      "summary": "mkDriver·mkLap 픽스처와 fakeDataSource 로 Leaderboard 를 렌더링해 정렬·갭 표시·드라이버 선택 연동을 검증하는 컴포넌트 테스트.",
+      "tags": ["test", "component", "panel", "leaderboard"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/dashboard/shared/SectorBar.tsx",
+      "type": "file",
+      "name": "SectorBar.tsx",
+      "filePath": "src/dashboard/shared/SectorBar.tsx",
+      "summary": "섹터 값과 aggregate 결과로 각 섹터의 색상(overall/personal best)을 결정해 가로 막대로 그리는 공용 시각화 컴포넌트.",
+      "tags": ["component", "shared", "react", "visualization"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/shared/__tests__/SectorBar.test.tsx",
+      "type": "file",
+      "name": "SectorBar.test.tsx",
+      "filePath": "src/dashboard/shared/__tests__/SectorBar.test.tsx",
+      "summary": "SectorBar 가 섹터 베스트에 따라 올바른 배경색(hexToRgb 비교)을 칠하는지 검증하는 공용 컴포넌트 테스트.",
+      "tags": ["test", "component", "shared", "visualization"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/shared/__tests__/flagDecoder.test.ts",
+      "type": "file",
+      "name": "flagDecoder.test.ts",
+      "filePath": "src/dashboard/shared/__tests__/flagDecoder.test.ts",
+      "summary": "flagKind·isSafetyCarEnding·activeFlag 의 깃발 디코딩과 SC 종료 판정 로직을 race_control 픽스처로 검증하는 단위 테스트.",
+      "tags": ["test", "shared", "flag", "race-control"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/shared/__tests__/sectorColors.test.ts",
+      "type": "file",
+      "name": "sectorColors.test.ts",
+      "filePath": "src/dashboard/shared/__tests__/sectorColors.test.ts",
+      "summary": "overall/personal best 비교에 따른 섹터 색상 분류(sectorColorKind/sectorColor)를 pb 픽스처로 검증하는 단위 테스트.",
+      "tags": ["test", "shared", "sector-color", "visualization"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/shared/__tests__/tyreColors.test.ts",
+      "type": "file",
+      "name": "tyreColors.test.ts",
+      "filePath": "src/dashboard/shared/__tests__/tyreColors.test.ts",
+      "summary": "타이어 컴파운드별 색상(tyreColor)과 약자(tyreLetter) 매핑을 검증하는 소규모 단위 테스트.",
+      "tags": ["test", "shared", "tyre", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/shared/flagDecoder.ts",
+      "type": "file",
+      "name": "flagDecoder.ts",
+      "filePath": "src/dashboard/shared/flagDecoder.ts",
+      "summary": "race_control 레코드의 flag/category/message 를 정규화해 깃발 종류(flagKind)와 세이프티카 종료 여부(isSafetyCarEnding)를 판정하는 공용 디코더.",
+      "tags": ["shared", "flag", "race-control", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/shared/sectorColors.ts",
+      "type": "file",
+      "name": "sectorColors.ts",
+      "filePath": "src/dashboard/shared/sectorColors.ts",
+      "summary": "섹터 값을 overall best·personal best 와 비교해 색상 종류(purple/green/yellow)를 결정하는 색상 매핑 상수와 헬퍼 모음.",
+      "tags": ["shared", "sector-color", "visualization", "utility"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/shared/tyreColors.ts",
+      "type": "file",
+      "name": "tyreColors.ts",
+      "filePath": "src/dashboard/shared/tyreColors.ts",
+      "summary": "타이어 컴파운드(SOFT/MEDIUM/HARD 등)를 표시 색상과 한 글자 약자로 변환하는 공용 유틸리티.",
+      "tags": ["shared", "tyre", "utility", "visualization"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/shared/useAggregateResults.ts",
+      "type": "file",
+      "name": "useAggregateResults.ts",
+      "filePath": "src/dashboard/shared/useAggregateResults.ts",
+      "summary": "useAggregate 를 조합해 세션 전체의 overall/personal best 집계 결과를 주기적으로 제공하는 공용 React hook.",
+      "tags": ["hook", "shared", "react", "aggregate"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/shared/openf1Types.ts",
+      "type": "file",
+      "name": "openf1Types.ts",
+      "filePath": "src/shared/openf1Types.ts",
+      "summary": "OpenF1 v1 API 의 엔드포인트별 응답 레코드(Location/CarData/Driver/Lap/SessionResult 등) 인터페이스를 cross-plan SSOT 로 정의하는 타입 모듈.",
+      "tags": ["type-definition", "openf1", "data-model", "shared"],
+      "complexity": "complex",
+      "languageNotes": "OpenF1 의 date 필드는 ISO 8601 문자열이지만, 어댑터가 fetch 직후 Date 인스턴스로 변환하므로 본 타입에서는 Date 로 선언한다."
+    },
+    {
+      "id": "function:src/dashboard/derived/activeFlags.ts:activeFlag",
+      "type": "function",
+      "name": "activeFlag",
+      "filePath": "src/dashboard/derived/activeFlags.ts",
+      "lineRange": [20, 42],
+      "summary": "시각 t 까지의 race_control 메시지를 훑어 flagKind 로 디코드하고 SC 종료 시점을 반영해 현재 활성 깃발 상태를 산출한다.",
+      "tags": ["derived", "flag", "race-control"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/dashboard/derived/driverOutStatus.ts:driverOutAt",
+      "type": "function",
+      "name": "driverOutAt",
+      "filePath": "src/dashboard/derived/driverOutStatus.ts",
+      "lineRange": [18, 27],
+      "summary": "session_result 의 DNF/DSQ 와 완주 랩 수를 결합해 시각 t 에 드라이버가 리타이어 상태인지 판정한다.",
+      "tags": ["derived", "status", "data-source"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/derived/knockout.ts:cutlineFor",
+      "type": "function",
+      "name": "cutlineFor",
+      "filePath": "src/dashboard/derived/knockout.ts",
+      "lineRange": [22, 31],
+      "summary": "세그먼트 모델의 part 별 진출 인원으로 해당 퀄리파잉 세그먼트의 컷라인 순위를 계산한다.",
+      "tags": ["derived", "qualifying", "knockout"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/derived/knockout.ts:knockoutZone",
+      "type": "function",
+      "name": "knockoutZone",
+      "filePath": "src/dashboard/derived/knockout.ts",
+      "lineRange": [37, 45],
+      "summary": "정렬된 드라이버 목록과 컷라인 위치로 탈락 위험 구간(knockout zone)에 속한 드라이버 집합을 산출한다.",
+      "tags": ["derived", "qualifying", "knockout"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/derived/knockout.ts:gapToCutline",
+      "type": "function",
+      "name": "gapToCutline",
+      "filePath": "src/dashboard/derived/knockout.ts",
+      "lineRange": [51, 60],
+      "summary": "정렬 순위와 컷라인 위치를 기준으로 드라이버별 컷라인 통과/탈락까지의 타임 갭을 계산한다.",
+      "tags": ["derived", "qualifying", "knockout"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/derived/qualiLapClass.ts:pitLapsByDriver",
+      "type": "function",
+      "name": "pitLapsByDriver",
+      "filePath": "src/dashboard/derived/qualiLapClass.ts",
+      "lineRange": [10, 21],
+      "summary": "pit 기록을 드라이버별 인/아웃 랩 번호 집합으로 색인해 Map 으로 반환한다.",
+      "tags": ["derived", "qualifying", "lap-classification"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/derived/qualiLapClass.ts:classifyLap",
+      "type": "function",
+      "name": "classifyLap",
+      "filePath": "src/dashboard/derived/qualiLapClass.ts",
+      "lineRange": [27, 32],
+      "summary": "랩 번호가 pit 랩 집합에 포함되는지로 해당 랩을 flying 랩과 pit(인/아웃) 랩으로 분류한다.",
+      "tags": ["derived", "qualifying", "lap-classification"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/derived/qualifyingModel.ts:buildQualifyingModel",
+      "type": "function",
+      "name": "buildQualifyingModel",
+      "filePath": "src/dashboard/derived/qualifyingModel.ts",
+      "lineRange": [28, 44],
+      "summary": "DataSource 에서 race_control·session_result·랩·pit 데이터를 모아 세그먼트 모델·progressive 베스트·활성 part 를 조립한 QualifyingModel 을 반환한다.",
+      "tags": ["derived", "qualifying", "model", "data-source"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/dashboard/derived/qualifyingSegments.ts:reconstructSegments",
+      "type": "function",
+      "name": "reconstructSegments",
+      "filePath": "src/dashboard/derived/qualifyingSegments.ts",
+      "lineRange": [52, 94],
+      "summary": "race_control 의 GREEN/CHEQUERED 깃발 시퀀스와 session_result 로 Q1/Q2/Q3 세그먼트 경계와 참가 로스터를 재구성한다.",
+      "tags": ["derived", "qualifying", "segment", "race-control"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/dashboard/derived/qualifyingSegments.ts:progressiveSegmentBests",
+      "type": "function",
+      "name": "progressiveSegmentBests",
+      "filePath": "src/dashboard/derived/qualifyingSegments.ts",
+      "lineRange": [124, 148],
+      "summary": "date_start ≤ t flying 랩만 사용해 시각별 세그먼트(part) 베스트를 미래 누설 없이 누적 계산한다.",
+      "tags": ["derived", "qualifying", "segment", "progressive"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/dashboard/derived/qualifyingSegments.ts:lapPhaseOf",
+      "type": "function",
+      "name": "lapPhaseOf",
+      "filePath": "src/dashboard/derived/qualifyingSegments.ts",
+      "lineRange": [97, 106],
+      "summary": "랩의 date_start 와 세그먼트 경계를 비교해 해당 랩이 속한 퀄리파잉 part 를 판정한다.",
+      "tags": ["derived", "qualifying", "segment"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/detailPanel/CurrentState.tsx:CurrentState",
+      "type": "function",
+      "name": "CurrentState",
+      "filePath": "src/dashboard/detailPanel/CurrentState.tsx",
+      "lineRange": [30, 117],
+      "summary": "선택 드라이버의 현재 랩·섹터·갭·타이어 상태를 DataSource·aggregate 에서 읽어 stat 항목과 섹터 색상으로 렌더링하는 컴포넌트.",
+      "tags": ["component", "detail-panel", "react", "live"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/dashboard/detailPanel/RecentLapsTable.tsx:RecentLapsTable",
+      "type": "function",
+      "name": "RecentLapsTable",
+      "filePath": "src/dashboard/detailPanel/RecentLapsTable.tsx",
+      "lineRange": [21, 101],
+      "summary": "선택 드라이버의 최근 완주 랩들을 랩 타임·섹터 색상과 함께 표로 렌더링하고 펼치기 토글을 제공하는 컴포넌트.",
+      "tags": ["component", "detail-panel", "react", "table"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/dashboard/panels/Leaderboard.tsx:Leaderboard",
+      "type": "function",
+      "name": "Leaderboard",
+      "filePath": "src/dashboard/panels/Leaderboard.tsx",
+      "lineRange": [43, 193],
+      "summary": "전 드라이버의 위치·갭·랩·타이어·개인 베스트·리타이어 상태를 집계·정렬해 리더보드 행을 렌더링하고 클릭으로 드라이버를 선택하는 패널 컴포넌트.",
+      "tags": ["component", "panel", "react", "leaderboard"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/dashboard/shared/SectorBar.tsx:SectorBar",
+      "type": "function",
+      "name": "SectorBar",
+      "filePath": "src/dashboard/shared/SectorBar.tsx",
+      "lineRange": [17, 35],
+      "summary": "섹터 값과 aggregate 로 각 섹터 색상을 결정해 가로 막대로 그리는 공용 시각화 컴포넌트.",
+      "tags": ["component", "shared", "react", "visualization"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/shared/flagDecoder.ts:flagKind",
+      "type": "function",
+      "name": "flagKind",
+      "filePath": "src/dashboard/shared/flagDecoder.ts",
+      "lineRange": [18, 29],
+      "summary": "race_control 레코드의 flag/category/message 를 정규화해 깃발 종류(green/yellow/SC/VSC/red 등)를 판정한다.",
+      "tags": ["shared", "flag", "race-control"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/dashboard/shared/sectorColors.ts:sectorColorKind",
+      "type": "function",
+      "name": "sectorColorKind",
+      "filePath": "src/dashboard/shared/sectorColors.ts",
+      "lineRange": [43, 55],
+      "summary": "섹터 값을 overall best·personal best 와 비교해 색상 종류(purple/green/yellow)를 결정한다.",
+      "tags": ["shared", "sector-color", "visualization"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/dashboard/shared/sectorColors.ts:sectorColor",
+      "type": "function",
+      "name": "sectorColor",
+      "filePath": "src/dashboard/shared/sectorColors.ts",
+      "lineRange": [57, 64],
+      "summary": "sectorColorKind 의 분류 결과를 실제 표시용 hex 색상 문자열로 변환하는 공용 헬퍼.",
+      "tags": ["shared", "sector-color", "visualization"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/shared/tyreColors.ts:tyreColor",
+      "type": "function",
+      "name": "tyreColor",
+      "filePath": "src/dashboard/shared/tyreColors.ts",
+      "lineRange": [16, 20],
+      "summary": "타이어 컴파운드 문자열을 대응하는 표시 색상으로 변환하는 공용 유틸리티.",
+      "tags": ["shared", "tyre", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/shared/tyreColors.ts:tyreLetter",
+      "type": "function",
+      "name": "tyreLetter",
+      "filePath": "src/dashboard/shared/tyreColors.ts",
+      "lineRange": [23, 28],
+      "summary": "타이어 컴파운드 문자열을 한 글자 약자(S/M/H 등)로 변환하는 공용 유틸리티.",
+      "tags": ["shared", "tyre", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/shared/useAggregateResults.ts:useAggregateResults",
+      "type": "function",
+      "name": "useAggregateResults",
+      "filePath": "src/dashboard/shared/useAggregateResults.ts",
+      "lineRange": [9, 21],
+      "summary": "useAggregate 를 조합해 세션의 overall/personal best 집계 결과를 주기적으로 제공하는 React hook.",
+      "tags": ["hook", "shared", "react", "aggregate"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {"source": "file:src/dashboard/derived/__tests__/driverOutStatus.test.ts", "target": "file:src/dashboard/__tests__/fakeDataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/__tests__/driverOutStatus.test.ts", "target": "file:src/dashboard/derived/driverOutStatus.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/__tests__/driverOutStatus.test.ts", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/driverOutStatus.ts", "target": "file:src/dashboard/derived/__tests__/driverOutStatus.test.ts", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/derived/__tests__/knockout.test.ts", "target": "file:src/dashboard/derived/knockout.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/__tests__/knockout.test.ts", "target": "file:src/dashboard/derived/qualifyingSegments.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/knockout.ts", "target": "file:src/dashboard/derived/__tests__/knockout.test.ts", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/derived/__tests__/personalBests.test.ts", "target": "file:src/dashboard/derived/personalBests.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/__tests__/personalBests.test.ts", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/personalBests.ts", "target": "file:src/dashboard/derived/__tests__/personalBests.test.ts", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/derived/__tests__/qualiLapClass.test.ts", "target": "file:src/dashboard/derived/qualiLapClass.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/__tests__/qualiLapClass.test.ts", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/qualiLapClass.ts", "target": "file:src/dashboard/derived/__tests__/qualiLapClass.test.ts", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/derived/__tests__/qualifyingSegments.test.ts", "target": "file:src/dashboard/derived/qualifyingSegments.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/__tests__/qualifyingSegments.test.ts", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/qualifyingSegments.ts", "target": "file:src/dashboard/derived/__tests__/qualifyingSegments.test.ts", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/derived/activeFlags.ts", "target": "file:src/dashboard/shared/flagDecoder.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/activeFlags.ts", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/activeFlags.ts", "target": "function:src/dashboard/derived/activeFlags.ts:activeFlag", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/derived/activeFlags.ts", "target": "function:src/dashboard/derived/activeFlags.ts:activeFlag", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/derived/activeFlags.ts:activeFlag", "target": "function:src/dashboard/shared/flagDecoder.ts:flagKind", "type": "calls", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/dashboard/derived/driverOutStatus.ts", "target": "file:src/shared/DataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/driverOutStatus.ts", "target": "function:src/dashboard/derived/driverOutStatus.ts:driverOutAt", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/derived/driverOutStatus.ts", "target": "function:src/dashboard/derived/driverOutStatus.ts:driverOutAt", "type": "exports", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/dashboard/derived/knockout.ts", "target": "file:src/dashboard/derived/qualifyingSegments.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/knockout.ts", "target": "function:src/dashboard/derived/knockout.ts:cutlineFor", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/derived/knockout.ts", "target": "function:src/dashboard/derived/knockout.ts:knockoutZone", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/derived/knockout.ts", "target": "function:src/dashboard/derived/knockout.ts:gapToCutline", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/derived/knockout.ts", "target": "function:src/dashboard/derived/knockout.ts:cutlineFor", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/dashboard/derived/knockout.ts", "target": "function:src/dashboard/derived/knockout.ts:knockoutZone", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/dashboard/derived/knockout.ts", "target": "function:src/dashboard/derived/knockout.ts:gapToCutline", "type": "exports", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/dashboard/derived/personalBests.ts", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+
+    {"source": "file:src/dashboard/derived/qualiLapClass.ts", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/qualiLapClass.ts", "target": "function:src/dashboard/derived/qualiLapClass.ts:pitLapsByDriver", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/derived/qualiLapClass.ts", "target": "function:src/dashboard/derived/qualiLapClass.ts:classifyLap", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/derived/qualiLapClass.ts", "target": "function:src/dashboard/derived/qualiLapClass.ts:pitLapsByDriver", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/dashboard/derived/qualiLapClass.ts", "target": "function:src/dashboard/derived/qualiLapClass.ts:classifyLap", "type": "exports", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/dashboard/derived/qualifyingModel.ts", "target": "file:src/dashboard/derived/qualifyingSegments.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/qualifyingModel.ts", "target": "file:src/dashboard/derived/qualiLapClass.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/qualifyingModel.ts", "target": "file:src/shared/DataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/qualifyingModel.ts", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/qualifyingModel.ts", "target": "function:src/dashboard/derived/qualifyingModel.ts:buildQualifyingModel", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/derived/qualifyingModel.ts", "target": "function:src/dashboard/derived/qualifyingModel.ts:buildQualifyingModel", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/derived/qualifyingModel.ts:buildQualifyingModel", "target": "function:src/dashboard/derived/qualifyingSegments.ts:reconstructSegments", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/derived/qualifyingModel.ts:buildQualifyingModel", "target": "function:src/dashboard/derived/qualifyingSegments.ts:progressiveSegmentBests", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/derived/qualifyingModel.ts:buildQualifyingModel", "target": "function:src/dashboard/derived/qualiLapClass.ts:pitLapsByDriver", "type": "calls", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/dashboard/derived/qualifyingSegments.ts", "target": "file:src/dashboard/derived/qualiLapClass.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/qualifyingSegments.ts", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/qualifyingSegments.ts", "target": "function:src/dashboard/derived/qualifyingSegments.ts:reconstructSegments", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/derived/qualifyingSegments.ts", "target": "function:src/dashboard/derived/qualifyingSegments.ts:progressiveSegmentBests", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/derived/qualifyingSegments.ts", "target": "function:src/dashboard/derived/qualifyingSegments.ts:lapPhaseOf", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/derived/qualifyingSegments.ts", "target": "function:src/dashboard/derived/qualifyingSegments.ts:reconstructSegments", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/dashboard/derived/qualifyingSegments.ts", "target": "function:src/dashboard/derived/qualifyingSegments.ts:progressiveSegmentBests", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/dashboard/derived/qualifyingSegments.ts", "target": "function:src/dashboard/derived/qualifyingSegments.ts:lapPhaseOf", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/derived/qualifyingSegments.ts:progressiveSegmentBests", "target": "function:src/dashboard/derived/qualiLapClass.ts:classifyLap", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/derived/qualifyingSegments.ts:progressiveSegmentBests", "target": "function:src/dashboard/derived/qualifyingSegments.ts:lapPhaseOf", "type": "calls", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/dashboard/detailPanel/CurrentState.tsx", "target": "file:src/dashboard/shared/dashboardStyles.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/CurrentState.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/CurrentState.tsx", "target": "file:src/dashboard/shared/formatTime.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/CurrentState.tsx", "target": "file:src/dashboard/shared/SectorBar.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/CurrentState.tsx", "target": "file:src/dashboard/shared/sectorColors.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/CurrentState.tsx", "target": "file:src/dashboard/shared/tyreColors.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/CurrentState.tsx", "target": "file:src/dashboard/shared/useAggregateResults.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/CurrentState.tsx", "target": "file:src/dashboard/shared/useDisplayTime.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/CurrentState.tsx", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/CurrentState.tsx", "target": "function:src/dashboard/detailPanel/CurrentState.tsx:CurrentState", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/detailPanel/CurrentState.tsx", "target": "function:src/dashboard/detailPanel/CurrentState.tsx:CurrentState", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/detailPanel/CurrentState.tsx:CurrentState", "target": "function:src/dashboard/shared/useAggregateResults.ts:useAggregateResults", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/detailPanel/CurrentState.tsx:CurrentState", "target": "function:src/dashboard/shared/sectorColors.ts:sectorColor", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/detailPanel/CurrentState.tsx:CurrentState", "target": "function:src/dashboard/shared/tyreColors.ts:tyreColor", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/dashboard/detailPanel/CurrentState.tsx", "target": "file:src/dashboard/detailPanel/__tests__/CurrentState.test.tsx", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/detailPanel/RecentLapsTable.tsx", "target": "file:src/dashboard/shared/dashboardStyles.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/RecentLapsTable.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/RecentLapsTable.tsx", "target": "file:src/dashboard/shared/formatTime.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/RecentLapsTable.tsx", "target": "file:src/dashboard/shared/sectorColors.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/RecentLapsTable.tsx", "target": "file:src/dashboard/shared/useAggregateResults.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/RecentLapsTable.tsx", "target": "file:src/dashboard/shared/useDisplayTime.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/RecentLapsTable.tsx", "target": "function:src/dashboard/detailPanel/RecentLapsTable.tsx:RecentLapsTable", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/detailPanel/RecentLapsTable.tsx", "target": "function:src/dashboard/detailPanel/RecentLapsTable.tsx:RecentLapsTable", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/detailPanel/RecentLapsTable.tsx:RecentLapsTable", "target": "function:src/dashboard/shared/useAggregateResults.ts:useAggregateResults", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/detailPanel/RecentLapsTable.tsx:RecentLapsTable", "target": "function:src/dashboard/shared/sectorColors.ts:sectorColor", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/dashboard/detailPanel/RecentLapsTable.tsx", "target": "file:src/dashboard/detailPanel/__tests__/RecentLapsTable.test.tsx", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/detailPanel/__tests__/CurrentState.test.tsx", "target": "file:src/dashboard/__tests__/fakeDataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/__tests__/CurrentState.test.tsx", "target": "file:src/dashboard/detailPanel/CurrentState.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/__tests__/CurrentState.test.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/__tests__/CurrentState.test.tsx", "target": "file:src/dashboard/shared/DriversContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/__tests__/CurrentState.test.tsx", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+
+    {"source": "file:src/dashboard/detailPanel/__tests__/RecentLapsTable.test.tsx", "target": "file:src/dashboard/__tests__/fakeDataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/__tests__/RecentLapsTable.test.tsx", "target": "file:src/dashboard/detailPanel/RecentLapsTable.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/__tests__/RecentLapsTable.test.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/__tests__/RecentLapsTable.test.tsx", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+
+    {"source": "file:src/dashboard/panels/Leaderboard.tsx", "target": "file:src/dashboard/derived/driverOutStatus.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/Leaderboard.tsx", "target": "file:src/dashboard/derived/personalBests.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/Leaderboard.tsx", "target": "file:src/dashboard/shared/dashboardStyles.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/Leaderboard.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/Leaderboard.tsx", "target": "file:src/dashboard/shared/DriversContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/Leaderboard.tsx", "target": "file:src/dashboard/shared/formatTime.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/Leaderboard.tsx", "target": "file:src/dashboard/shared/PanelHeading.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/Leaderboard.tsx", "target": "file:src/dashboard/shared/SectorBar.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/Leaderboard.tsx", "target": "file:src/dashboard/shared/sectorColors.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/Leaderboard.tsx", "target": "file:src/dashboard/shared/selectionStore.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/Leaderboard.tsx", "target": "file:src/dashboard/shared/tyreColors.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/Leaderboard.tsx", "target": "file:src/dashboard/shared/useAggregateResults.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/Leaderboard.tsx", "target": "file:src/dashboard/shared/useDisplayTime.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/Leaderboard.tsx", "target": "function:src/dashboard/panels/Leaderboard.tsx:Leaderboard", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/panels/Leaderboard.tsx", "target": "function:src/dashboard/panels/Leaderboard.tsx:Leaderboard", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/panels/Leaderboard.tsx:Leaderboard", "target": "function:src/dashboard/derived/personalBests.ts:personalBestLap", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/panels/Leaderboard.tsx:Leaderboard", "target": "function:src/dashboard/derived/driverOutStatus.ts:driverOutAt", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/panels/Leaderboard.tsx:Leaderboard", "target": "function:src/dashboard/shared/useAggregateResults.ts:useAggregateResults", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/panels/Leaderboard.tsx:Leaderboard", "target": "function:src/dashboard/shared/tyreColors.ts:tyreColor", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/dashboard/panels/Leaderboard.tsx", "target": "file:src/dashboard/panels/__tests__/Leaderboard.test.tsx", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/panels/__tests__/Leaderboard.test.tsx", "target": "file:src/dashboard/__tests__/fakeDataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/__tests__/Leaderboard.test.tsx", "target": "file:src/dashboard/panels/Leaderboard.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/__tests__/Leaderboard.test.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/__tests__/Leaderboard.test.tsx", "target": "file:src/dashboard/shared/DriversContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/__tests__/Leaderboard.test.tsx", "target": "file:src/dashboard/shared/selectionStore.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/__tests__/Leaderboard.test.tsx", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+
+    {"source": "file:src/dashboard/shared/SectorBar.tsx", "target": "file:src/dashboard/shared/sectorColors.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/SectorBar.tsx", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/SectorBar.tsx", "target": "function:src/dashboard/shared/SectorBar.tsx:SectorBar", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/shared/SectorBar.tsx", "target": "function:src/dashboard/shared/SectorBar.tsx:SectorBar", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/shared/SectorBar.tsx:SectorBar", "target": "function:src/dashboard/shared/sectorColors.ts:sectorColor", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/dashboard/shared/SectorBar.tsx", "target": "file:src/dashboard/shared/__tests__/SectorBar.test.tsx", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/shared/__tests__/SectorBar.test.tsx", "target": "file:src/dashboard/shared/SectorBar.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/__tests__/SectorBar.test.tsx", "target": "file:src/dashboard/shared/sectorColors.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/__tests__/SectorBar.test.tsx", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+
+    {"source": "file:src/dashboard/shared/__tests__/flagDecoder.test.ts", "target": "file:src/dashboard/derived/activeFlags.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/__tests__/flagDecoder.test.ts", "target": "file:src/dashboard/shared/flagDecoder.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/__tests__/flagDecoder.test.ts", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/flagDecoder.ts", "target": "file:src/dashboard/shared/__tests__/flagDecoder.test.ts", "type": "tested_by", "direction": "forward", "weight": 0.5},
+    {"source": "file:src/dashboard/derived/activeFlags.ts", "target": "file:src/dashboard/shared/__tests__/flagDecoder.test.ts", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/shared/__tests__/sectorColors.test.ts", "target": "file:src/dashboard/shared/sectorColors.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/__tests__/sectorColors.test.ts", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/sectorColors.ts", "target": "file:src/dashboard/shared/__tests__/sectorColors.test.ts", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/shared/__tests__/tyreColors.test.ts", "target": "file:src/dashboard/shared/tyreColors.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/tyreColors.ts", "target": "file:src/dashboard/shared/__tests__/tyreColors.test.ts", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/shared/flagDecoder.ts", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/flagDecoder.ts", "target": "function:src/dashboard/shared/flagDecoder.ts:flagKind", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/shared/flagDecoder.ts", "target": "function:src/dashboard/shared/flagDecoder.ts:flagKind", "type": "exports", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/dashboard/shared/sectorColors.ts", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/sectorColors.ts", "target": "function:src/dashboard/shared/sectorColors.ts:sectorColorKind", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/shared/sectorColors.ts", "target": "function:src/dashboard/shared/sectorColors.ts:sectorColor", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/shared/sectorColors.ts", "target": "function:src/dashboard/shared/sectorColors.ts:sectorColorKind", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/dashboard/shared/sectorColors.ts", "target": "function:src/dashboard/shared/sectorColors.ts:sectorColor", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/shared/sectorColors.ts:sectorColor", "target": "function:src/dashboard/shared/sectorColors.ts:sectorColorKind", "type": "calls", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/dashboard/shared/tyreColors.ts", "target": "function:src/dashboard/shared/tyreColors.ts:tyreColor", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/shared/tyreColors.ts", "target": "function:src/dashboard/shared/tyreColors.ts:tyreLetter", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/shared/tyreColors.ts", "target": "function:src/dashboard/shared/tyreColors.ts:tyreColor", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/dashboard/shared/tyreColors.ts", "target": "function:src/dashboard/shared/tyreColors.ts:tyreLetter", "type": "exports", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/dashboard/shared/useAggregateResults.ts", "target": "file:src/dashboard/shared/useAggregate.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/useAggregateResults.ts", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/useAggregateResults.ts", "target": "function:src/dashboard/shared/useAggregateResults.ts:useAggregateResults", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/shared/useAggregateResults.ts", "target": "function:src/dashboard/shared/useAggregateResults.ts:useAggregateResults", "type": "exports", "direction": "forward", "weight": 0.8}
+  ]
+}

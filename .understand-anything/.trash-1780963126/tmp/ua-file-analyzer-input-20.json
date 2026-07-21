@@ -1,0 +1,9 @@
+{
+  "projectRoot": "/Users/a453498/Downloads/project/soon_board",
+  "batchFiles": [
+    {"path": "vitest.setup.ts", "language": "typescript", "sizeLines": 3, "fileCategory": "code"}
+  ],
+  "batchImportData": {
+    "vitest.setup.ts": []
+  }
+}

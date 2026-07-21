@@ -1,0 +1,31 @@
+{
+  "projectRoot": "/Users/a453498/Downloads/project/soon_board",
+  "batchFiles": [
+    {"path": "scripts/_lib/seasonCatalog.ts", "language": "typescript", "sizeLines": 263, "fileCategory": "code"},
+    {"path": "scripts/_lib/seasonsIndex.ts", "language": "typescript", "sizeLines": 48, "fileCategory": "code"},
+    {"path": "scripts/_lib/sectorBoundariesDeriver.ts", "language": "typescript", "sizeLines": 182, "fileCategory": "code"},
+    {"path": "scripts/_lib/slmZonesLoader.ts", "language": "typescript", "sizeLines": 57, "fileCategory": "code"},
+    {"path": "scripts/_lib/svgToPolyline.ts", "language": "typescript", "sizeLines": 127, "fileCategory": "code"},
+    {"path": "scripts/_lib/trackOutlinesIndex.ts", "language": "typescript", "sizeLines": 86, "fileCategory": "code"},
+    {"path": "scripts/build-all-circuits.ts", "language": "typescript", "sizeLines": 386, "fileCategory": "code"},
+    {"path": "scripts/build-circuits-catalog.ts", "language": "typescript", "sizeLines": 135, "fileCategory": "code"},
+    {"path": "scripts/check-season-sizes.ts", "language": "typescript", "sizeLines": 91, "fileCategory": "code"},
+    {"path": "scripts/curate-residual.ts", "language": "typescript", "sizeLines": 144, "fileCategory": "code"},
+    {"path": "scripts/derive-drs-zones.ts", "language": "typescript", "sizeLines": 190, "fileCategory": "code"},
+    {"path": "scripts/derive-sector-boundaries.ts", "language": "typescript", "sizeLines": 210, "fileCategory": "code"}
+  ],
+  "batchImportData": {
+    "scripts/_lib/seasonCatalog.ts": [],
+    "scripts/_lib/seasonsIndex.ts": [],
+    "scripts/_lib/sectorBoundariesDeriver.ts": [],
+    "scripts/_lib/slmZonesLoader.ts": [],
+    "scripts/_lib/svgToPolyline.ts": [],
+    "scripts/_lib/trackOutlinesIndex.ts": [],
+    "scripts/build-all-circuits.ts": [],
+    "scripts/build-circuits-catalog.ts": [],
+    "scripts/check-season-sizes.ts": [],
+    "scripts/curate-residual.ts": [],
+    "scripts/derive-drs-zones.ts": [],
+    "scripts/derive-sector-boundaries.ts": []
+  }
+}

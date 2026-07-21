@@ -1,0 +1,372 @@
+{
+  "nodes": [
+    {
+      "id": "file:src/dashboard/panels/WeatherMini.tsx",
+      "type": "file",
+      "name": "WeatherMini.tsx",
+      "filePath": "src/dashboard/panels/WeatherMini.tsx",
+      "summary": "날씨 정보를 간략히 표시하는 대시보드 패널 컴포넌트로, useLatestBefore hook으로 t 시점 이전의 최신 weather record를 조회해 기온·체감온도·풍향을 렌더링한다.",
+      "tags": ["component", "dashboard", "panel", "weather", "ui"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/panels/WeatherMini.tsx:WeatherMini",
+      "type": "function",
+      "name": "WeatherMini",
+      "filePath": "src/dashboard/panels/WeatherMini.tsx",
+      "lineRange": [28, 41],
+      "summary": "weather endpoint의 최신 record를 조회해 air/track 온도와 풍향 화살표를 Stat 행으로 표시하는 React 함수 컴포넌트.",
+      "tags": ["component", "weather", "ui", "hook-consumer"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/panels/__tests__/EventBroadcast.test.tsx",
+      "type": "file",
+      "name": "EventBroadcast.test.tsx",
+      "filePath": "src/dashboard/panels/__tests__/EventBroadcast.test.tsx",
+      "summary": "EventBroadcast 패널의 단위 테스트로, fake DataSource를 mount해 race_control 이벤트가 display_time 기준으로 올바르게 방송 표시되는지 검증한다.",
+      "tags": ["test", "dashboard", "panel", "event"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/dashboard/panels/__tests__/EventBroadcast.test.tsx:mount",
+      "type": "function",
+      "name": "mount",
+      "filePath": "src/dashboard/panels/__tests__/EventBroadcast.test.tsx",
+      "lineRange": [31, 43],
+      "summary": "fake DataSource를 생성하고 DataSourceProvider로 감싼 EventBroadcast를 render하는 테스트 헬퍼.",
+      "tags": ["test", "helper", "render"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/panels/__tests__/EventTicker.test.tsx",
+      "type": "file",
+      "name": "EventTicker.test.tsx",
+      "filePath": "src/dashboard/panels/__tests__/EventTicker.test.tsx",
+      "summary": "EventTicker 패널의 단위 테스트로, race_control 메시지를 fake DataSource에 주입하고 티커가 깃발·이벤트를 시간순으로 표시하는지 검증한다.",
+      "tags": ["test", "dashboard", "panel", "event"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/panels/__tests__/RaceControlBanner.test.tsx",
+      "type": "file",
+      "name": "RaceControlBanner.test.tsx",
+      "filePath": "src/dashboard/panels/__tests__/RaceControlBanner.test.tsx",
+      "summary": "RaceControlBanner 패널의 단위 테스트로, race_control 이벤트가 배너에 우선순위에 맞게 표시되는지 fake DataSource로 검증한다.",
+      "tags": ["test", "dashboard", "panel", "race-control"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/panels/__tests__/SessionHeader.test.tsx",
+      "type": "file",
+      "name": "SessionHeader.test.tsx",
+      "filePath": "src/dashboard/panels/__tests__/SessionHeader.test.tsx",
+      "summary": "SessionHeader 패널의 단위 테스트로, seasonData와 fake DataSource를 사용해 세션 이름·서킷·상태 헤더 표시를 검증한다.",
+      "tags": ["test", "dashboard", "panel", "session"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/panels/__tests__/SessionProgress.test.tsx",
+      "type": "file",
+      "name": "SessionProgress.test.tsx",
+      "filePath": "src/dashboard/panels/__tests__/SessionProgress.test.tsx",
+      "summary": "SessionProgress 패널의 단위 테스트로, 세션 진행률·남은 시간·랩 카운트가 display_time에 맞게 갱신되는지 fake DataSource로 검증한다.",
+      "tags": ["test", "dashboard", "panel", "session"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/panels/__tests__/WeatherMini.test.tsx",
+      "type": "file",
+      "name": "WeatherMini.test.tsx",
+      "filePath": "src/dashboard/panels/__tests__/WeatherMini.test.tsx",
+      "summary": "WeatherMini 패널의 단위 테스트로, fake DataSource에 weather record를 주입해 기온·풍향 표시가 올바른지 검증한다.",
+      "tags": ["test", "dashboard", "panel", "weather"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/shared/DataSourceContext.tsx",
+      "type": "file",
+      "name": "DataSourceContext.tsx",
+      "filePath": "src/dashboard/shared/DataSourceContext.tsx",
+      "summary": "DataSource 인스턴스를 React Context로 제공하는 Provider와 useDataSource hook을 정의해, 모든 대시보드 패널이 동일한 데이터 어댑터에 접근하도록 한다.",
+      "tags": ["context", "provider", "hook", "dashboard", "data-access"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/shared/DataSourceContext.tsx:useDataSource",
+      "type": "function",
+      "name": "useDataSource",
+      "filePath": "src/dashboard/shared/DataSourceContext.tsx",
+      "lineRange": [14, 18],
+      "summary": "Context에서 현재 DataSource 인스턴스를 꺼내오고 Provider 외부 사용 시 throw하는 접근자 hook.",
+      "tags": ["hook", "context", "data-access"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/shared/__tests__/DataSourceContext.test.tsx",
+      "type": "file",
+      "name": "DataSourceContext.test.tsx",
+      "filePath": "src/dashboard/shared/__tests__/DataSourceContext.test.tsx",
+      "summary": "DataSourceContext의 단위 테스트로, Provider가 주입한 DataSource를 useDataSource가 정확히 반환하는지 Probe 컴포넌트로 검증한다.",
+      "tags": ["test", "context", "hook", "data-access"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/shared/__tests__/flagIcons.test.ts",
+      "type": "file",
+      "name": "flagIcons.test.ts",
+      "filePath": "src/dashboard/shared/__tests__/flagIcons.test.ts",
+      "summary": "flagIcons 모듈의 단위 테스트로, race_control category/flag에 따라 올바른 깃발 아이콘 카테고리와 아이콘이 매핑되는지 검증한다.",
+      "tags": ["test", "utility", "race-control"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/shared/__tests__/queryHooks.test.tsx",
+      "type": "file",
+      "name": "queryHooks.test.tsx",
+      "filePath": "src/dashboard/shared/__tests__/queryHooks.test.tsx",
+      "summary": "useLatestBefore·useAllBefore·useAggregate query hook들의 단위 테스트로, fake DataSource로 display_time 변화 시 hook이 올바른 t 컷 데이터를 반환하는지 검증한다.",
+      "tags": ["test", "hook", "query", "data-access"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/dashboard/shared/__tests__/queryHooks.test.tsx:makeFakeDs",
+      "type": "function",
+      "name": "makeFakeDs",
+      "filePath": "src/dashboard/shared/__tests__/queryHooks.test.tsx",
+      "lineRange": [17, 42],
+      "summary": "display_time 구독·변경을 모사하는 최소 DataSource stub을 만들어 query hook 테스트에 주입하는 테스트 팩토리.",
+      "tags": ["test", "factory", "mock", "data-access"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/shared/__tests__/useDisplayTime.test.tsx",
+      "type": "file",
+      "name": "useDisplayTime.test.tsx",
+      "filePath": "src/dashboard/shared/__tests__/useDisplayTime.test.tsx",
+      "summary": "useDisplayTime hook의 단위 테스트로, display_time 구독 이벤트와 폴링 interval이 결합되어 상태가 올바르게 갱신되는지 fake DataSource로 검증한다.",
+      "tags": ["test", "hook", "display-time", "data-access"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/dashboard/shared/__tests__/useDisplayTime.test.tsx:makeFakeDs",
+      "type": "function",
+      "name": "makeFakeDs",
+      "filePath": "src/dashboard/shared/__tests__/useDisplayTime.test.tsx",
+      "lineRange": [15, 32],
+      "summary": "display_time getter와 구독 리스너를 흉내내는 최소 DataSource stub을 만드는 테스트 팩토리.",
+      "tags": ["test", "factory", "mock", "data-access"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/shared/flagIcons.ts",
+      "type": "file",
+      "name": "flagIcons.ts",
+      "filePath": "src/dashboard/shared/flagIcons.ts",
+      "summary": "race_control 이벤트의 category/flag 문자열을 검사해 표시용 깃발 아이콘 카테고리와 이모지 아이콘을 반환하는 유틸리티 모듈.",
+      "tags": ["utility", "race-control", "flag", "mapping"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/shared/flagIcons.ts:flagIconCategory",
+      "type": "function",
+      "name": "flagIconCategory",
+      "filePath": "src/dashboard/shared/flagIcons.ts",
+      "lineRange": [13, 21],
+      "summary": "race_control record의 category/flag를 소문자 비교해 yellow/red/green 등 깃발 아이콘 카테고리를 결정하는 분류 함수.",
+      "tags": ["utility", "race-control", "classification"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/shared/useAggregate.ts",
+      "type": "file",
+      "name": "useAggregate.ts",
+      "filePath": "src/dashboard/shared/useAggregate.ts",
+      "summary": "현재 display_time까지의 누적 통계를 DataSource.getAggregateBefore로 조회해 메모이즈된 결과를 반환하는 query hook.",
+      "tags": ["hook", "query", "aggregate", "data-access"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/shared/useAggregate.ts:useAggregate",
+      "type": "function",
+      "name": "useAggregate",
+      "filePath": "src/dashboard/shared/useAggregate.ts",
+      "lineRange": [9, 16],
+      "summary": "useDataSource·useDisplayTime를 조합해 t 시점까지의 aggregate 결과를 useMemo로 계산하는 hook.",
+      "tags": ["hook", "query", "aggregate", "memoization"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/shared/useAllBefore.ts",
+      "type": "file",
+      "name": "useAllBefore.ts",
+      "filePath": "src/dashboard/shared/useAllBefore.ts",
+      "summary": "현재 display_time 이전의 모든 endpoint record를 DataSource.getAllBefore로 조회해 메모이즈된 배열을 반환하는 query hook.",
+      "tags": ["hook", "query", "data-access", "endpoint"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/shared/useAllBefore.ts:useAllBefore",
+      "type": "function",
+      "name": "useAllBefore",
+      "filePath": "src/dashboard/shared/useAllBefore.ts",
+      "lineRange": [12, 20],
+      "summary": "useDataSource·useDisplayTime를 조합해 t 시점 이전의 전체 record를 useMemo로 조회하는 hook.",
+      "tags": ["hook", "query", "memoization", "endpoint"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/shared/useDisplayTime.ts",
+      "type": "file",
+      "name": "useDisplayTime.ts",
+      "filePath": "src/dashboard/shared/useDisplayTime.ts",
+      "summary": "DataSource의 display_time을 구독 이벤트와 interval 폴링을 결합해 추적하고 React state로 노출하는 핵심 시계 hook으로, 모든 시간 기반 패널 갱신의 기반이 된다.",
+      "tags": ["hook", "display-time", "data-access", "polling", "subscription"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/dashboard/shared/useDisplayTime.ts:useDisplayTime",
+      "type": "function",
+      "name": "useDisplayTime",
+      "filePath": "src/dashboard/shared/useDisplayTime.ts",
+      "lineRange": [13, 43],
+      "summary": "onDisplayTimeChange 구독과 setInterval 폴링을 동시에 사용해 display_time을 동기화하고, 언마운트 시 구독·interval을 정리하는 hook.",
+      "tags": ["hook", "display-time", "subscription", "polling", "cleanup"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/shared/useLatestBefore.ts",
+      "type": "file",
+      "name": "useLatestBefore.ts",
+      "filePath": "src/dashboard/shared/useLatestBefore.ts",
+      "summary": "현재 display_time 이전의 최신 endpoint record 1건을 DataSource.getLatestBefore로 조회해 메모이즈해 반환하는 query hook.",
+      "tags": ["hook", "query", "data-access", "endpoint"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/shared/useLatestBefore.ts:useLatestBefore",
+      "type": "function",
+      "name": "useLatestBefore",
+      "filePath": "src/dashboard/shared/useLatestBefore.ts",
+      "lineRange": [12, 20],
+      "summary": "useDataSource·useDisplayTime를 조합해 t 시점 이전의 최신 record 1건을 useMemo로 조회하는 hook.",
+      "tags": ["hook", "query", "memoization", "endpoint"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/shared/DataSource.ts",
+      "type": "file",
+      "name": "DataSource.ts",
+      "filePath": "src/shared/DataSource.ts",
+      "summary": "라이브/리플레이 공용 데이터 어댑터 계약을 정의하는 SSOT 인터페이스 파일로, display_time·sample 보간·시간 컷(date ≤ t) 조회 메서드를 선언해 패널과 렌더러가 모드 차이를 알 필요 없도록 추상화한다.",
+      "tags": ["type-definition", "interface", "data-access", "contract", "ssot"],
+      "complexity": "moderate",
+      "languageNotes": "구현 없이 인터페이스·타입(DataSource, LocationSample, SamplePair, StreamState)만 선언하는 계약 파일로, generic 메서드(getLatestBefore<E>, getAggregateBefore<A>)로 endpoint별 record 타입을 보존한다."
+    }
+  ],
+  "edges": [
+    {"source": "file:src/dashboard/panels/WeatherMini.tsx", "target": "function:src/dashboard/panels/WeatherMini.tsx:WeatherMini", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/panels/WeatherMini.tsx", "target": "function:src/dashboard/panels/WeatherMini.tsx:WeatherMini", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/dashboard/panels/WeatherMini.tsx", "target": "file:src/dashboard/shared/dashboardStyles.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/WeatherMini.tsx", "target": "file:src/dashboard/shared/useLatestBefore.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/WeatherMini.tsx", "target": "function:src/dashboard/shared/useLatestBefore.ts:useLatestBefore", "type": "calls", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/dashboard/panels/__tests__/EventBroadcast.test.tsx", "target": "function:src/dashboard/panels/__tests__/EventBroadcast.test.tsx:mount", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/panels/__tests__/EventBroadcast.test.tsx", "target": "file:src/dashboard/__tests__/fakeDataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/__tests__/EventBroadcast.test.tsx", "target": "file:src/dashboard/panels/EventBroadcast.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/__tests__/EventBroadcast.test.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/__tests__/EventBroadcast.test.tsx", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/EventBroadcast.tsx", "target": "file:src/dashboard/panels/__tests__/EventBroadcast.test.tsx", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/panels/__tests__/EventTicker.test.tsx", "target": "file:src/dashboard/__tests__/fakeDataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/__tests__/EventTicker.test.tsx", "target": "file:src/dashboard/panels/EventTicker.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/__tests__/EventTicker.test.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/__tests__/EventTicker.test.tsx", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/EventTicker.tsx", "target": "file:src/dashboard/panels/__tests__/EventTicker.test.tsx", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/panels/__tests__/RaceControlBanner.test.tsx", "target": "file:src/dashboard/__tests__/fakeDataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/__tests__/RaceControlBanner.test.tsx", "target": "file:src/dashboard/panels/RaceControlBanner.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/__tests__/RaceControlBanner.test.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/__tests__/RaceControlBanner.test.tsx", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/RaceControlBanner.tsx", "target": "file:src/dashboard/panels/__tests__/RaceControlBanner.test.tsx", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/panels/__tests__/SessionHeader.test.tsx", "target": "file:src/dashboard/__tests__/fakeDataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/__tests__/SessionHeader.test.tsx", "target": "file:src/dashboard/panels/SessionHeader.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/__tests__/SessionHeader.test.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/__tests__/SessionHeader.test.tsx", "target": "file:src/shared/seasonData.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/SessionHeader.tsx", "target": "file:src/dashboard/panels/__tests__/SessionHeader.test.tsx", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/panels/__tests__/SessionProgress.test.tsx", "target": "file:src/dashboard/__tests__/fakeDataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/__tests__/SessionProgress.test.tsx", "target": "file:src/dashboard/panels/SessionProgress.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/__tests__/SessionProgress.test.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/__tests__/SessionProgress.test.tsx", "target": "file:src/shared/seasonData.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/SessionProgress.tsx", "target": "file:src/dashboard/panels/__tests__/SessionProgress.test.tsx", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/panels/__tests__/WeatherMini.test.tsx", "target": "file:src/dashboard/__tests__/fakeDataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/__tests__/WeatherMini.test.tsx", "target": "file:src/dashboard/panels/WeatherMini.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/__tests__/WeatherMini.test.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/__tests__/WeatherMini.test.tsx", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/WeatherMini.tsx", "target": "file:src/dashboard/panels/__tests__/WeatherMini.test.tsx", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/shared/DataSourceContext.tsx", "target": "function:src/dashboard/shared/DataSourceContext.tsx:useDataSource", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/shared/DataSourceContext.tsx", "target": "function:src/dashboard/shared/DataSourceContext.tsx:useDataSource", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/dashboard/shared/DataSourceContext.tsx", "target": "file:src/shared/DataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+
+    {"source": "file:src/dashboard/shared/__tests__/DataSourceContext.test.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/__tests__/DataSourceContext.test.tsx", "target": "file:src/shared/DataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/DataSourceContext.tsx", "target": "file:src/dashboard/shared/__tests__/DataSourceContext.test.tsx", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/shared/__tests__/flagIcons.test.ts", "target": "file:src/dashboard/shared/flagIcons.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/flagIcons.ts", "target": "file:src/dashboard/shared/__tests__/flagIcons.test.ts", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/shared/__tests__/queryHooks.test.tsx", "target": "function:src/dashboard/shared/__tests__/queryHooks.test.tsx:makeFakeDs", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/shared/__tests__/queryHooks.test.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/__tests__/queryHooks.test.tsx", "target": "file:src/dashboard/shared/useAggregate.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/__tests__/queryHooks.test.tsx", "target": "file:src/dashboard/shared/useAllBefore.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/__tests__/queryHooks.test.tsx", "target": "file:src/dashboard/shared/useLatestBefore.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/__tests__/queryHooks.test.tsx", "target": "file:src/shared/DataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/useLatestBefore.ts", "target": "file:src/dashboard/shared/__tests__/queryHooks.test.tsx", "type": "tested_by", "direction": "forward", "weight": 0.5},
+    {"source": "file:src/dashboard/shared/useAllBefore.ts", "target": "file:src/dashboard/shared/__tests__/queryHooks.test.tsx", "type": "tested_by", "direction": "forward", "weight": 0.5},
+    {"source": "file:src/dashboard/shared/useAggregate.ts", "target": "file:src/dashboard/shared/__tests__/queryHooks.test.tsx", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/shared/__tests__/useDisplayTime.test.tsx", "target": "function:src/dashboard/shared/__tests__/useDisplayTime.test.tsx:makeFakeDs", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/shared/__tests__/useDisplayTime.test.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/__tests__/useDisplayTime.test.tsx", "target": "file:src/dashboard/shared/useDisplayTime.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/__tests__/useDisplayTime.test.tsx", "target": "file:src/shared/DataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/useDisplayTime.ts", "target": "file:src/dashboard/shared/__tests__/useDisplayTime.test.tsx", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/shared/flagIcons.ts", "target": "function:src/dashboard/shared/flagIcons.ts:flagIconCategory", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/shared/flagIcons.ts", "target": "function:src/dashboard/shared/flagIcons.ts:flagIconCategory", "type": "exports", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/dashboard/shared/useAggregate.ts", "target": "function:src/dashboard/shared/useAggregate.ts:useAggregate", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/shared/useAggregate.ts", "target": "function:src/dashboard/shared/useAggregate.ts:useAggregate", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/dashboard/shared/useAggregate.ts", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/useAggregate.ts", "target": "file:src/dashboard/shared/useDisplayTime.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/useAggregate.ts", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/useAggregate.ts", "target": "function:src/dashboard/shared/DataSourceContext.tsx:useDataSource", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/dashboard/shared/useAggregate.ts", "target": "function:src/dashboard/shared/useDisplayTime.ts:useDisplayTime", "type": "calls", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/dashboard/shared/useAllBefore.ts", "target": "function:src/dashboard/shared/useAllBefore.ts:useAllBefore", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/shared/useAllBefore.ts", "target": "function:src/dashboard/shared/useAllBefore.ts:useAllBefore", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/dashboard/shared/useAllBefore.ts", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/useAllBefore.ts", "target": "file:src/dashboard/shared/useDisplayTime.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/useAllBefore.ts", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/useAllBefore.ts", "target": "function:src/dashboard/shared/DataSourceContext.tsx:useDataSource", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/dashboard/shared/useAllBefore.ts", "target": "function:src/dashboard/shared/useDisplayTime.ts:useDisplayTime", "type": "calls", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/dashboard/shared/useDisplayTime.ts", "target": "function:src/dashboard/shared/useDisplayTime.ts:useDisplayTime", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/shared/useDisplayTime.ts", "target": "function:src/dashboard/shared/useDisplayTime.ts:useDisplayTime", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/dashboard/shared/useDisplayTime.ts", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/useDisplayTime.ts", "target": "function:src/dashboard/shared/DataSourceContext.tsx:useDataSource", "type": "calls", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/dashboard/shared/useLatestBefore.ts", "target": "function:src/dashboard/shared/useLatestBefore.ts:useLatestBefore", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/shared/useLatestBefore.ts", "target": "function:src/dashboard/shared/useLatestBefore.ts:useLatestBefore", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/dashboard/shared/useLatestBefore.ts", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/useLatestBefore.ts", "target": "file:src/dashboard/shared/useDisplayTime.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/useLatestBefore.ts", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/useLatestBefore.ts", "target": "function:src/dashboard/shared/DataSourceContext.tsx:useDataSource", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/dashboard/shared/useLatestBefore.ts", "target": "function:src/dashboard/shared/useDisplayTime.ts:useDisplayTime", "type": "calls", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/shared/DataSource.ts", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7}
+  ]
+}

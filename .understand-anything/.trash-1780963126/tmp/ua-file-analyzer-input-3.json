@@ -1,0 +1,30 @@
+{
+  "projectRoot": "/Users/a453498/Downloads/project/soon_board",
+  "batchFiles": [
+    {"path": "src/dashboard/detailPanel/DriverHeader.tsx", "language": "typescript", "sizeLines": 60, "fileCategory": "code"},
+    {"path": "src/dashboard/panels/FastestLapBadges.tsx", "language": "typescript", "sizeLines": 154, "fileCategory": "code"},
+    {"path": "src/dashboard/panels/TyreStrategy.tsx", "language": "typescript", "sizeLines": 203, "fileCategory": "code"},
+    {"path": "src/dashboard/panels/__tests__/FastestLapBadges.test.tsx", "language": "typescript", "sizeLines": 121, "fileCategory": "code"},
+    {"path": "src/dashboard/panels/__tests__/TyreStrategy.test.tsx", "language": "typescript", "sizeLines": 271, "fileCategory": "code"},
+    {"path": "src/dashboard/panels/qualifying/KnockoutPanel.tsx", "language": "typescript", "sizeLines": 86, "fileCategory": "code"},
+    {"path": "src/dashboard/panels/qualifying/QualifyingTower.tsx", "language": "typescript", "sizeLines": 128, "fileCategory": "code"},
+    {"path": "src/dashboard/panels/qualifying/SegmentBestBoard.tsx", "language": "typescript", "sizeLines": 80, "fileCategory": "code"},
+    {"path": "src/dashboard/panels/qualifying/SegmentProgress.tsx", "language": "typescript", "sizeLines": 86, "fileCategory": "code"},
+    {"path": "src/dashboard/panels/qualifying/__tests__/qualifyingPanels.test.tsx", "language": "typescript", "sizeLines": 138, "fileCategory": "code"},
+    {"path": "src/dashboard/panels/qualifying/useQualifyingModel.tsx", "language": "typescript", "sizeLines": 30, "fileCategory": "code"},
+    {"path": "src/dashboard/profiles/__tests__/dashboardProfile.test.ts", "language": "typescript", "sizeLines": 38, "fileCategory": "code"},
+    {"path": "src/dashboard/profiles/defaultProfile.tsx", "language": "typescript", "sizeLines": 24, "fileCategory": "code"},
+    {"path": "src/dashboard/profiles/index.ts", "language": "typescript", "sizeLines": 19, "fileCategory": "code"},
+    {"path": "src/dashboard/profiles/qualifyingProfile.tsx", "language": "typescript", "sizeLines": 24, "fileCategory": "code"},
+    {"path": "src/dashboard/profiles/types.ts", "language": "typescript", "sizeLines": 24, "fileCategory": "code"},
+    {"path": "src/dashboard/shared/DriversContext.tsx", "language": "typescript", "sizeLines": 73, "fileCategory": "code"},
+    {"path": "src/dashboard/shared/PanelHeading.tsx", "language": "typescript", "sizeLines": 18, "fileCategory": "code"},
+    {"path": "src/dashboard/shared/__tests__/formatTime.test.ts", "language": "typescript", "sizeLines": 50, "fileCategory": "code"},
+    {"path": "src/dashboard/shared/dashboardStyles.ts", "language": "typescript", "sizeLines": 31, "fileCategory": "code"},
+    {"path": "src/dashboard/shared/formatTime.ts", "language": "typescript", "sizeLines": 25, "fileCategory": "code"},
+    {"path": "src/shared/__tests__/sessionKind.test.ts", "language": "typescript", "sizeLines": 66, "fileCategory": "code"},
+    {"path": "src/shared/sessionKind.ts", "language": "typescript", "sizeLines": 51, "fileCategory": "code"},
+    {"path": "src/style/tokens.ts", "language": "typescript", "sizeLines": 74, "fileCategory": "code"}
+  ],
+  "batchImportData": {}
+}

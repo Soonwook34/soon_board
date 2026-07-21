@@ -1,0 +1,1134 @@
+{
+  "nodes": [
+    {
+      "id": "file:src/main/derived/__tests__/resultPreviewFormat.test.ts",
+      "type": "file",
+      "name": "resultPreviewFormat.test.ts",
+      "filePath": "src/main/derived/__tests__/resultPreviewFormat.test.ts",
+      "summary": "formatLapDuration의 랩타임 포맷팅(분:초.밀리초, 무효값 처리)을 검증하는 Vitest 단위 테스트.",
+      "tags": [
+        "test",
+        "unit-test",
+        "formatting",
+        "validation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/derived/__tests__/searchFilter.test.ts",
+      "type": "file",
+      "name": "searchFilter.test.ts",
+      "filePath": "src/main/derived/__tests__/searchFilter.test.ts",
+      "summary": "filterMeetings의 검색어/세션타입/상태 필터링 로직을 mkSession·mkMeeting 픽스처로 검증하는 단위 테스트.",
+      "tags": [
+        "test",
+        "unit-test",
+        "search",
+        "filtering"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/main/derived/__tests__/sessionRoute.test.ts",
+      "type": "file",
+      "name": "sessionRoute.test.ts",
+      "filePath": "src/main/derived/__tests__/sessionRoute.test.ts",
+      "summary": "sessionRoute가 세션 상태에 따라 live/replay 라우트 경로를 올바르게 생성하는지 검증하는 단위 테스트.",
+      "tags": [
+        "test",
+        "unit-test",
+        "routing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/derived/__tests__/sessionStatus.test.ts",
+      "type": "file",
+      "name": "sessionStatus.test.ts",
+      "filePath": "src/main/derived/__tests__/sessionStatus.test.ts",
+      "summary": "classify가 preroll/postroll 윈도우를 기준으로 세션을 upcoming/live/past로 분류하는 경계 조건을 검증하는 단위 테스트.",
+      "tags": [
+        "test",
+        "unit-test",
+        "status",
+        "boundary-test"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/main/derived/countdownFormat.ts",
+      "type": "file",
+      "name": "countdownFormat.ts",
+      "filePath": "src/main/derived/countdownFormat.ts",
+      "summary": "남은 밀리초를 일/시/분/초 단위의 사람이 읽기 쉬운 카운트다운 문자열로 변환하는 순수 포맷팅 헬퍼.",
+      "tags": [
+        "utility",
+        "formatting",
+        "date",
+        "pure-function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/derived/meetingStatus.ts",
+      "type": "file",
+      "name": "meetingStatus.ts",
+      "filePath": "src/main/derived/meetingStatus.ts",
+      "summary": "미팅(GP) 내 세션들의 상태를 집계하여 미팅 전체의 live/upcoming/past 상태를 분류하는 파생 로직.",
+      "tags": [
+        "derived-state",
+        "status",
+        "aggregation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/derived/nextUpcoming.ts",
+      "type": "file",
+      "name": "nextUpcoming.ts",
+      "filePath": "src/main/derived/nextUpcoming.ts",
+      "summary": "전체 시즌의 세션 중 Hero 영역에 표시할 다음 세션(진행 중 우선, 없으면 임박 세션)을 선택하는 파생 로직.",
+      "tags": [
+        "derived-state",
+        "selection",
+        "sorting"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/main/derived/resultPreviewFormat.ts",
+      "type": "file",
+      "name": "resultPreviewFormat.ts",
+      "filePath": "src/main/derived/resultPreviewFormat.ts",
+      "summary": "초 단위 랩타임을 분:초.밀리초 형식 문자열로 변환하는 순수 포맷팅 헬퍼.",
+      "tags": [
+        "utility",
+        "formatting",
+        "pure-function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/derived/searchFilter.ts",
+      "type": "file",
+      "name": "searchFilter.ts",
+      "filePath": "src/main/derived/searchFilter.ts",
+      "summary": "UI 상태(검색어, 세션타입, 상태)에 따라 미팅 목록을 필터링하는 파생 로직 모음.",
+      "tags": [
+        "derived-state",
+        "search",
+        "filtering",
+        "validation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/main/derived/sessionRoute.ts",
+      "type": "file",
+      "name": "sessionRoute.ts",
+      "filePath": "src/main/derived/sessionRoute.ts",
+      "summary": "세션과 그 상태로부터 라이브/리플레이 화면 라우트 경로를 생성하는 순수 헬퍼.",
+      "tags": [
+        "utility",
+        "routing",
+        "pure-function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/derived/sessionStatus.ts",
+      "type": "file",
+      "name": "sessionStatus.ts",
+      "filePath": "src/main/derived/sessionStatus.ts",
+      "summary": "현재 시각과 세션 시작/종료 시각을 preroll·postroll 윈도우와 비교해 upcoming/live/past 상태로 분류하는 핵심 파생 로직.",
+      "tags": [
+        "derived-state",
+        "status",
+        "time-window"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/initialSeason.ts",
+      "type": "file",
+      "name": "initialSeason.ts",
+      "filePath": "src/main/initialSeason.ts",
+      "summary": "URL의 시즌 파라미터와 카탈로그 인덱스를 바탕으로 메인 페이지 초기 표시 시즌을 결정하는 헬퍼.",
+      "tags": [
+        "utility",
+        "selection",
+        "initialization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/stores/__tests__/uiStore.test.ts",
+      "type": "file",
+      "name": "uiStore.test.ts",
+      "filePath": "src/main/stores/__tests__/uiStore.test.ts",
+      "summary": "uiStore의 URL 직렬화/역직렬화, 토글 액션, 구독 알림, 리셋 동작을 주입 env로 검증하는 단위 테스트.",
+      "tags": [
+        "test",
+        "unit-test",
+        "store",
+        "url-state"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/main/stores/hooks.ts",
+      "type": "file",
+      "name": "hooks.ts",
+      "filePath": "src/main/stores/hooks.ts",
+      "summary": "useSyncExternalStore로 catalogStore와 uiStore의 외부 상태를 React 컴포넌트에 구독시키는 커스텀 hook 모음.",
+      "tags": [
+        "hook",
+        "store",
+        "react",
+        "subscription"
+      ],
+      "complexity": "simple",
+      "languageNotes": "useSyncExternalStore를 사용해 외부 store를 React 동시성 렌더링과 안전하게 연동."
+    },
+    {
+      "id": "file:src/main/stores/uiStore.ts",
+      "type": "file",
+      "name": "uiStore.ts",
+      "filePath": "src/main/stores/uiStore.ts",
+      "summary": "메인 페이지의 UI 상태(시즌·검색·세션타입·상태 필터)를 URL 쿼리스트링과 동기화하는 외부 store. 주입 가능한 env로 테스트 가능하게 설계됨.",
+      "tags": [
+        "store",
+        "state-management",
+        "url-state",
+        "singleton"
+      ],
+      "complexity": "complex",
+      "languageNotes": "useSyncExternalStore 호환 store 패턴: subscribe/getSnapshot + 브라우저 env 주입으로 SSR·테스트 분리."
+    },
+    {
+      "id": "file:src/main/useNowSecond.ts",
+      "type": "file",
+      "name": "useNowSecond.ts",
+      "filePath": "src/main/useNowSecond.ts",
+      "summary": "1초 간격으로 현재 시각을 갱신하는 React hook. 시뮬레이션 시각(?now=)이 있으면 고정값을 반환하고 visibilitychange에 반응한다.",
+      "tags": [
+        "hook",
+        "react",
+        "timer",
+        "clock"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/shared/__tests__/simulatedNow.test.ts",
+      "type": "file",
+      "name": "simulatedNow.test.ts",
+      "filePath": "src/shared/__tests__/simulatedNow.test.ts",
+      "summary": "readSimulatedNowMs가 ?now= 쿼리 파라미터를 파싱하고 비프로덕션 환경에서만 시뮬레이션 시각을 적용하는지 검증하는 단위 테스트.",
+      "tags": [
+        "test",
+        "unit-test",
+        "simulation",
+        "env"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/shared/env.ts",
+      "type": "file",
+      "name": "env.ts",
+      "filePath": "src/shared/env.ts",
+      "summary": "Vercel 배포 환경(production/preview)을 식별하는 상수 플래그를 제공하는 공유 환경 모듈.",
+      "tags": [
+        "config",
+        "environment",
+        "constants",
+        "shared"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/shared/seasonData.ts",
+      "type": "file",
+      "name": "seasonData.ts",
+      "filePath": "src/shared/seasonData.ts",
+      "summary": "런타임에 fetch하는 시즌 카탈로그 JSON의 구조를 정의하는 공유 타입 모듈(SeasonData·MeetingData·SessionData 등).",
+      "tags": [
+        "type-definition",
+        "data-model",
+        "shared",
+        "schema-definition"
+      ],
+      "complexity": "simple",
+      "languageNotes": "순수 TypeScript interface 모음으로 빌드 시 소거됨(런타임 코드 없음)."
+    },
+    {
+      "id": "file:src/shared/simulatedNow.ts",
+      "type": "file",
+      "name": "simulatedNow.ts",
+      "filePath": "src/shared/simulatedNow.ts",
+      "summary": "?now= 쿼리 파라미터를 파싱해 비프로덕션 환경에서 시뮬레이션 현재 시각(ms)을 반환하는 공유 헬퍼.",
+      "tags": [
+        "utility",
+        "simulation",
+        "shared",
+        "pure-function"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/main/derived/countdownFormat.ts:formatCountdown",
+      "type": "function",
+      "name": "formatCountdown",
+      "filePath": "src/main/derived/countdownFormat.ts",
+      "summary": "남은 밀리초를 받아 일·시·분·초 단위 카운트다운 문자열로 포맷팅한다.",
+      "tags": [
+        "formatting",
+        "utility",
+        "date"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        12,
+        35
+      ]
+    },
+    {
+      "id": "function:src/main/derived/meetingStatus.ts:classifyMeeting",
+      "type": "function",
+      "name": "classifyMeeting",
+      "filePath": "src/main/derived/meetingStatus.ts",
+      "summary": "미팅의 세션들을 classify로 분류·집계하여 미팅 전체 상태(live/upcoming/past)를 반환한다.",
+      "tags": [
+        "derived-state",
+        "status",
+        "aggregation"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        13,
+        38
+      ]
+    },
+    {
+      "id": "function:src/main/derived/nextUpcoming.ts:nextHeroSession",
+      "type": "function",
+      "name": "nextHeroSession",
+      "filePath": "src/main/derived/nextUpcoming.ts",
+      "summary": "모든 시즌의 세션을 분류·정렬하여 Hero에 표시할 다음 세션(진행 중 우선)을 선택한다.",
+      "tags": [
+        "derived-state",
+        "selection",
+        "sorting"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        17,
+        58
+      ]
+    },
+    {
+      "id": "function:src/main/derived/resultPreviewFormat.ts:formatLapDuration",
+      "type": "function",
+      "name": "formatLapDuration",
+      "filePath": "src/main/derived/resultPreviewFormat.ts",
+      "summary": "초 단위 랩타임을 분:초.밀리초 형식 문자열로 변환한다(무효값은 '—').",
+      "tags": [
+        "formatting",
+        "utility"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        6,
+        14
+      ]
+    },
+    {
+      "id": "function:src/main/derived/searchFilter.ts:matchSearch",
+      "type": "function",
+      "name": "matchSearch",
+      "filePath": "src/main/derived/searchFilter.ts",
+      "summary": "검색어를 미팅명·위치·서킷명 등 필드와 대소문자 무시로 부분 일치 검사한다.",
+      "tags": [
+        "search",
+        "filtering",
+        "validation"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        16,
+        26
+      ]
+    },
+    {
+      "id": "function:src/main/derived/searchFilter.ts:matchSessionType",
+      "type": "function",
+      "name": "matchSessionType",
+      "filePath": "src/main/derived/searchFilter.ts",
+      "summary": "세션의 종류를 resolveSessionKind로 판별하여 선택된 세션타입 집합에 포함되는지 검사한다.",
+      "tags": [
+        "filtering",
+        "validation"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        28,
+        35
+      ]
+    },
+    {
+      "id": "function:src/main/derived/searchFilter.ts:filterMeetings",
+      "type": "function",
+      "name": "filterMeetings",
+      "filePath": "src/main/derived/searchFilter.ts",
+      "summary": "검색어·세션타입·상태 필터를 모두 적용하여 표시할 미팅 목록을 산출한다.",
+      "tags": [
+        "filtering",
+        "derived-state",
+        "search"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        47,
+        62
+      ]
+    },
+    {
+      "id": "function:src/main/derived/sessionStatus.ts:classify",
+      "type": "function",
+      "name": "classify",
+      "filePath": "src/main/derived/sessionStatus.ts",
+      "summary": "현재 시각과 세션 시작/종료 시각을 preroll·postroll 윈도우와 비교해 upcoming/live/past 상태를 판정한다.",
+      "tags": [
+        "derived-state",
+        "status",
+        "time-window"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        16,
+        38
+      ]
+    },
+    {
+      "id": "function:src/main/initialSeason.ts:selectInitialSeason",
+      "type": "function",
+      "name": "selectInitialSeason",
+      "filePath": "src/main/initialSeason.ts",
+      "summary": "카탈로그 인덱스와 UI 시즌 값으로부터 초기 표시 시즌(유효하지 않으면 최신 시즌)을 결정한다.",
+      "tags": [
+        "selection",
+        "initialization"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        9,
+        16
+      ]
+    },
+    {
+      "id": "function:src/main/stores/hooks.ts:useSeasonCatalog",
+      "type": "function",
+      "name": "useSeasonCatalog",
+      "filePath": "src/main/stores/hooks.ts",
+      "summary": "지정 연도의 시즌 카탈로그를 useSyncExternalStore로 구독하는 hook.",
+      "tags": [
+        "hook",
+        "store",
+        "subscription"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        14,
+        20
+      ]
+    },
+    {
+      "id": "function:src/main/stores/uiStore.ts:parseSearchParams",
+      "type": "function",
+      "name": "parseSearchParams",
+      "filePath": "src/main/stores/uiStore.ts",
+      "summary": "URL 쿼리스트링을 파싱하여 시즌·검색어·세션타입·상태 필터를 포함한 UI 상태 객체로 복원한다.",
+      "tags": [
+        "serialization",
+        "url-state",
+        "parsing"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        48,
+        84
+      ]
+    },
+    {
+      "id": "function:src/main/stores/uiStore.ts:stringifyUiState",
+      "type": "function",
+      "name": "stringifyUiState",
+      "filePath": "src/main/stores/uiStore.ts",
+      "summary": "UI 상태를 URL 쿼리스트링으로 직렬화하며 기본값과 동일한 필터는 생략한다.",
+      "tags": [
+        "serialization",
+        "url-state"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        86,
+        104
+      ]
+    },
+    {
+      "id": "function:src/main/stores/uiStore.ts:makeBrowserEnv",
+      "type": "function",
+      "name": "makeBrowserEnv",
+      "filePath": "src/main/stores/uiStore.ts",
+      "summary": "window.history와 popstate를 사용하는 기본 브라우저 env(readSearch/writeSearch/onPopState)를 생성한다.",
+      "tags": [
+        "factory",
+        "environment",
+        "url-state"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        129,
+        143
+      ]
+    },
+    {
+      "id": "function:src/main/stores/uiStore.ts:initUiStore",
+      "type": "function",
+      "name": "initUiStore",
+      "filePath": "src/main/stores/uiStore.ts",
+      "summary": "store를 한 번만 초기화하여 현재 URL에서 UI 상태를 읽고 popstate 핸들러를 등록한다.",
+      "tags": [
+        "initialization",
+        "store",
+        "url-state"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        149,
+        157
+      ]
+    },
+    {
+      "id": "function:src/main/stores/uiStore.ts:mutate",
+      "type": "function",
+      "name": "mutate",
+      "filePath": "src/main/stores/uiStore.ts",
+      "summary": "updater로 상태를 변경하고 URL에 직렬화 반영한 뒤 구독자에게 알리는 핵심 변경 함수.",
+      "tags": [
+        "store",
+        "state-management",
+        "url-state"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        164,
+        170
+      ]
+    },
+    {
+      "id": "function:src/main/stores/uiStore.ts:toggleSessionType",
+      "type": "function",
+      "name": "toggleSessionType",
+      "filePath": "src/main/stores/uiStore.ts",
+      "summary": "세션타입 필터 집합에서 지정 타입을 토글한다.",
+      "tags": [
+        "store",
+        "state-management",
+        "toggle"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        184,
+        191
+      ]
+    },
+    {
+      "id": "function:src/main/stores/uiStore.ts:toggleStatus",
+      "type": "function",
+      "name": "toggleStatus",
+      "filePath": "src/main/stores/uiStore.ts",
+      "summary": "상태 필터 집합에서 지정 상태를 토글한다.",
+      "tags": [
+        "store",
+        "state-management",
+        "toggle"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        193,
+        200
+      ]
+    },
+    {
+      "id": "function:src/main/useNowSecond.ts:useNowSecond",
+      "type": "function",
+      "name": "useNowSecond",
+      "filePath": "src/main/useNowSecond.ts",
+      "summary": "1초 간격 setInterval과 visibilitychange로 현재 시각(초 단위)을 갱신하는 hook. 시뮬레이션 시각이 있으면 고정값 반환.",
+      "tags": [
+        "hook",
+        "react",
+        "timer",
+        "clock"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        18,
+        51
+      ]
+    },
+    {
+      "id": "function:src/shared/simulatedNow.ts:readSimulatedNowMs",
+      "type": "function",
+      "name": "readSimulatedNowMs",
+      "filePath": "src/shared/simulatedNow.ts",
+      "summary": "?now= 쿼리를 파싱해 비프로덕션 환경에서만 시뮬레이션 현재 시각(ms)을 반환한다.",
+      "tags": [
+        "simulation",
+        "parsing",
+        "env"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        14,
+        22
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:src/main/derived/countdownFormat.ts",
+      "target": "function:src/main/derived/countdownFormat.ts:formatCountdown",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/derived/countdownFormat.ts",
+      "target": "function:src/main/derived/countdownFormat.ts:formatCountdown",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/derived/meetingStatus.ts",
+      "target": "function:src/main/derived/meetingStatus.ts:classifyMeeting",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/derived/meetingStatus.ts",
+      "target": "function:src/main/derived/meetingStatus.ts:classifyMeeting",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/derived/nextUpcoming.ts",
+      "target": "function:src/main/derived/nextUpcoming.ts:nextHeroSession",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/derived/nextUpcoming.ts",
+      "target": "function:src/main/derived/nextUpcoming.ts:nextHeroSession",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/derived/resultPreviewFormat.ts",
+      "target": "function:src/main/derived/resultPreviewFormat.ts:formatLapDuration",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/derived/resultPreviewFormat.ts",
+      "target": "function:src/main/derived/resultPreviewFormat.ts:formatLapDuration",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/derived/searchFilter.ts",
+      "target": "function:src/main/derived/searchFilter.ts:matchSearch",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/derived/searchFilter.ts",
+      "target": "function:src/main/derived/searchFilter.ts:matchSearch",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/derived/searchFilter.ts",
+      "target": "function:src/main/derived/searchFilter.ts:matchSessionType",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/derived/searchFilter.ts",
+      "target": "function:src/main/derived/searchFilter.ts:matchSessionType",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/derived/searchFilter.ts",
+      "target": "function:src/main/derived/searchFilter.ts:filterMeetings",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/derived/searchFilter.ts",
+      "target": "function:src/main/derived/searchFilter.ts:filterMeetings",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/derived/sessionStatus.ts",
+      "target": "function:src/main/derived/sessionStatus.ts:classify",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/derived/sessionStatus.ts",
+      "target": "function:src/main/derived/sessionStatus.ts:classify",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/initialSeason.ts",
+      "target": "function:src/main/initialSeason.ts:selectInitialSeason",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/initialSeason.ts",
+      "target": "function:src/main/initialSeason.ts:selectInitialSeason",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/stores/hooks.ts",
+      "target": "function:src/main/stores/hooks.ts:useSeasonCatalog",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/stores/hooks.ts",
+      "target": "function:src/main/stores/hooks.ts:useSeasonCatalog",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/stores/uiStore.ts",
+      "target": "function:src/main/stores/uiStore.ts:parseSearchParams",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/stores/uiStore.ts",
+      "target": "function:src/main/stores/uiStore.ts:parseSearchParams",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/stores/uiStore.ts",
+      "target": "function:src/main/stores/uiStore.ts:stringifyUiState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/stores/uiStore.ts",
+      "target": "function:src/main/stores/uiStore.ts:stringifyUiState",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/stores/uiStore.ts",
+      "target": "function:src/main/stores/uiStore.ts:makeBrowserEnv",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/stores/uiStore.ts",
+      "target": "function:src/main/stores/uiStore.ts:initUiStore",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/stores/uiStore.ts",
+      "target": "function:src/main/stores/uiStore.ts:initUiStore",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/stores/uiStore.ts",
+      "target": "function:src/main/stores/uiStore.ts:mutate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/stores/uiStore.ts",
+      "target": "function:src/main/stores/uiStore.ts:toggleSessionType",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/stores/uiStore.ts",
+      "target": "function:src/main/stores/uiStore.ts:toggleSessionType",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/stores/uiStore.ts",
+      "target": "function:src/main/stores/uiStore.ts:toggleStatus",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/stores/uiStore.ts",
+      "target": "function:src/main/stores/uiStore.ts:toggleStatus",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/useNowSecond.ts",
+      "target": "function:src/main/useNowSecond.ts:useNowSecond",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/main/useNowSecond.ts",
+      "target": "function:src/main/useNowSecond.ts:useNowSecond",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/shared/simulatedNow.ts",
+      "target": "function:src/shared/simulatedNow.ts:readSimulatedNowMs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/shared/simulatedNow.ts",
+      "target": "function:src/shared/simulatedNow.ts:readSimulatedNowMs",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/derived/__tests__/resultPreviewFormat.test.ts",
+      "target": "file:src/main/derived/resultPreviewFormat.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/derived/__tests__/searchFilter.test.ts",
+      "target": "file:src/main/derived/searchFilter.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/derived/__tests__/searchFilter.test.ts",
+      "target": "file:src/main/stores/uiStore.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/derived/__tests__/searchFilter.test.ts",
+      "target": "file:src/shared/seasonData.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/derived/__tests__/sessionRoute.test.ts",
+      "target": "file:src/main/derived/sessionRoute.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/derived/__tests__/sessionRoute.test.ts",
+      "target": "file:src/main/derived/sessionStatus.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/derived/__tests__/sessionRoute.test.ts",
+      "target": "file:src/shared/seasonData.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/derived/__tests__/sessionStatus.test.ts",
+      "target": "file:src/main/derived/sessionStatus.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/derived/__tests__/sessionStatus.test.ts",
+      "target": "file:src/shared/seasonData.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/derived/meetingStatus.ts",
+      "target": "file:src/main/derived/sessionStatus.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/derived/meetingStatus.ts",
+      "target": "file:src/shared/seasonData.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/derived/nextUpcoming.ts",
+      "target": "file:src/main/derived/sessionStatus.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/derived/nextUpcoming.ts",
+      "target": "file:src/shared/seasonData.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/derived/searchFilter.ts",
+      "target": "file:src/main/derived/meetingStatus.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/derived/searchFilter.ts",
+      "target": "file:src/main/stores/uiStore.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/derived/searchFilter.ts",
+      "target": "file:src/shared/seasonData.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/derived/searchFilter.ts",
+      "target": "file:src/shared/sessionKind.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/derived/sessionRoute.ts",
+      "target": "file:src/main/derived/sessionStatus.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/derived/sessionRoute.ts",
+      "target": "file:src/shared/seasonData.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/derived/sessionStatus.ts",
+      "target": "file:src/shared/seasonData.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/initialSeason.ts",
+      "target": "file:src/shared/seasonData.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/stores/__tests__/uiStore.test.ts",
+      "target": "file:src/main/stores/uiStore.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/stores/hooks.ts",
+      "target": "file:src/main/stores/catalogStore.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/stores/hooks.ts",
+      "target": "file:src/main/stores/uiStore.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/stores/hooks.ts",
+      "target": "file:src/shared/seasonData.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/useNowSecond.ts",
+      "target": "file:src/shared/env.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/main/useNowSecond.ts",
+      "target": "file:src/shared/simulatedNow.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/shared/__tests__/simulatedNow.test.ts",
+      "target": "file:src/shared/simulatedNow.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "function:src/main/derived/meetingStatus.ts:classifyMeeting",
+      "target": "function:src/main/derived/sessionStatus.ts:classify",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/main/derived/nextUpcoming.ts:nextHeroSession",
+      "target": "function:src/main/derived/sessionStatus.ts:classify",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/main/derived/searchFilter.ts:matchSessionType",
+      "target": "function:src/shared/sessionKind.ts:resolveSessionKind",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/main/derived/searchFilter.ts:filterMeetings",
+      "target": "function:src/main/derived/meetingStatus.ts:classifyMeeting",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/main/useNowSecond.ts:useNowSecond",
+      "target": "function:src/shared/simulatedNow.ts:readSimulatedNowMs",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/main/stores/hooks.ts:useSeasonCatalog",
+      "target": "function:src/main/stores/catalogStore.ts:getSeason",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/main/derived/resultPreviewFormat.ts",
+      "target": "file:src/main/derived/__tests__/resultPreviewFormat.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/main/derived/searchFilter.ts",
+      "target": "file:src/main/derived/__tests__/searchFilter.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/main/derived/sessionRoute.ts",
+      "target": "file:src/main/derived/__tests__/sessionRoute.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/main/derived/sessionStatus.ts",
+      "target": "file:src/main/derived/__tests__/sessionStatus.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/main/stores/uiStore.ts",
+      "target": "file:src/main/stores/__tests__/uiStore.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/shared/simulatedNow.ts",
+      "target": "file:src/shared/__tests__/simulatedNow.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

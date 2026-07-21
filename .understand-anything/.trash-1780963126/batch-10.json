@@ -1,0 +1,154 @@
+{
+  "nodes": [
+    {
+      "id": "file:scripts/__tests__/fetchSeasonCatalogArgs.test.ts",
+      "type": "file",
+      "name": "fetchSeasonCatalogArgs.test.ts",
+      "filePath": "scripts/__tests__/fetchSeasonCatalogArgs.test.ts",
+      "summary": "fetch-season-catalog의 parseArgs CLI 인자 파서를 검증하는 Vitest 테스트로, --year/--years/--all 모드 상호배타성, 연도 유효성, --smoke/--out 옵션 통과를 다룬다.",
+      "tags": ["test", "cli", "validation", "vitest"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scripts/__tests__/seasonsList.test.ts",
+      "type": "file",
+      "name": "seasonsList.test.ts",
+      "filePath": "scripts/__tests__/seasonsList.test.ts",
+      "summary": "_lib/seasonsList의 KNOWN_SEASONS 상수가 기대하는 시즌 연도 목록을 담고 있는지 검증하는 Vitest 테스트.",
+      "tags": ["test", "data-model", "vitest"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scripts/_lib/seasonsList.ts",
+      "type": "file",
+      "name": "seasonsList.ts",
+      "filePath": "scripts/_lib/seasonsList.ts",
+      "summary": "카탈로그 빌드 도구가 사용하는 알려진 F1 시즌 연도 목록(KNOWN_SEASONS) 상수를 정의하는 SSOT 모듈.",
+      "tags": ["data-model", "utility", "type-definition"],
+      "complexity": "simple",
+      "languageNotes": "단일 const 배열을 named export 하는 SSOT 정본 모듈."
+    },
+    {
+      "id": "file:scripts/fetch-season-catalog.ts",
+      "type": "file",
+      "name": "fetch-season-catalog.ts",
+      "filePath": "scripts/fetch-season-catalog.ts",
+      "summary": "OpenF1 API에서 시즌 카탈로그를 빌드해 public/seasons/{year}.json과 index.json으로 atomic write 하는 tsx CLI entry로, --year/--years/--all/--smoke/--out 인자를 파싱·처리한다.",
+      "tags": ["entry-point", "cli", "data-pipeline", "service"],
+      "complexity": "moderate",
+      "languageNotes": "tsx shebang 기반 CLI 스크립트로, parseArgs만 named export 하여 테스트 가능성을 확보했다."
+    },
+    {
+      "id": "function:scripts/fetch-season-catalog.ts:parseArgs",
+      "type": "function",
+      "name": "parseArgs",
+      "filePath": "scripts/fetch-season-catalog.ts",
+      "lineRange": [34, 75],
+      "summary": "argv를 파싱해 --year/--years/--all 모드의 상호배타성을 강제하고 연도 목록·outDir·smoke 옵션을 담은 ParsedArgs를 반환하는 export된 CLI 파서.",
+      "tags": ["cli", "validation", "parsing"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/fetch-season-catalog.ts:parseYear",
+      "type": "function",
+      "name": "parseYear",
+      "filePath": "scripts/fetch-season-catalog.ts",
+      "lineRange": [77, 83],
+      "summary": "원시 연도 문자열을 정수로 변환하고 2023 이상의 유효한 정수인지 검증하는 헬퍼.",
+      "tags": ["validation", "parsing", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/fetch-season-catalog.ts:processYear",
+      "type": "function",
+      "name": "processYear",
+      "filePath": "scripts/fetch-season-catalog.ts",
+      "lineRange": [85, 115],
+      "summary": "단일 연도에 대해 buildSeasonCatalog를 호출하고 결과를 atomic write 한 뒤 seasons index를 upsert하며 소요 시간을 로깅하는 처리 단위.",
+      "tags": ["data-pipeline", "serialization", "service"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/fetch-season-catalog.ts:main",
+      "type": "function",
+      "name": "main",
+      "filePath": "scripts/fetch-season-catalog.ts",
+      "lineRange": [117, 140],
+      "summary": "CLI 진입 함수로 parseArgs로 인자를 파싱하고 각 연도에 processYear를 순차 실행하며 오류 시 stderr 로깅 후 process.exit으로 종료한다.",
+      "tags": ["entry-point", "cli", "event-handler"],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:scripts/fetch-season-catalog.ts",
+      "target": "function:scripts/fetch-season-catalog.ts:parseArgs",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/fetch-season-catalog.ts",
+      "target": "function:scripts/fetch-season-catalog.ts:parseYear",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/fetch-season-catalog.ts",
+      "target": "function:scripts/fetch-season-catalog.ts:processYear",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/fetch-season-catalog.ts",
+      "target": "function:scripts/fetch-season-catalog.ts:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/fetch-season-catalog.ts",
+      "target": "function:scripts/fetch-season-catalog.ts:parseArgs",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:scripts/__tests__/fetchSeasonCatalogArgs.test.ts",
+      "target": "file:scripts/_lib/seasonsList.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/__tests__/fetchSeasonCatalogArgs.test.ts",
+      "target": "file:scripts/fetch-season-catalog.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/__tests__/seasonsList.test.ts",
+      "target": "file:scripts/_lib/seasonsList.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/fetch-season-catalog.ts",
+      "target": "file:scripts/__tests__/fetchSeasonCatalogArgs.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/_lib/seasonsList.ts",
+      "target": "file:scripts/__tests__/seasonsList.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

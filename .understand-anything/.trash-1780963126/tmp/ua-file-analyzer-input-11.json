@@ -1,0 +1,13 @@
+{
+  "projectRoot": "/Users/a453498/Downloads/project/soon_board",
+  "batchFiles": [
+    {"path": ".github/workflows/ci.yml", "language": "yaml", "sizeLines": 22, "fileCategory": "infra"},
+    {"path": ".github/workflows/daily-data-refresh.yml", "language": "yaml", "sizeLines": 76, "fileCategory": "infra"},
+    {"path": ".github/workflows/playwright.yml", "language": "yaml", "sizeLines": 77, "fileCategory": "infra"}
+  ],
+  "batchImportData": {
+    ".github/workflows/ci.yml": [],
+    ".github/workflows/daily-data-refresh.yml": [],
+    ".github/workflows/playwright.yml": []
+  }
+}

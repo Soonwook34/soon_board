@@ -1,0 +1,445 @@
+{
+  "nodes": [
+    {
+      "id": "file:src/live/corsPing.ts",
+      "type": "file",
+      "name": "corsPing.ts",
+      "filePath": "src/live/corsPing.ts",
+      "summary": "OpenF1 API 의 CORS/연결 가능 여부를 가벼운 요청으로 확인하는 ping 유틸로, 타임아웃·abort 를 처리하고 성공 여부를 boolean 으로 반환한다.",
+      "tags": ["utility", "cors", "network", "live"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/live/corsPing.ts:pingOpenF1",
+      "type": "function",
+      "name": "pingOpenF1",
+      "filePath": "src/live/corsPing.ts",
+      "lineRange": [18, 44],
+      "summary": "AbortController 타임아웃을 걸고 OpenF1 client 로 가벼운 요청을 보내 CORS/연결 가능 여부를 판정하는 비동기 ping 함수.",
+      "tags": ["utility", "network", "cors", "async"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/live/findSessionByKey.ts",
+      "type": "file",
+      "name": "findSessionByKey.ts",
+      "filePath": "src/live/findSessionByKey.ts",
+      "summary": "시즌 카탈로그에서 세션 키로 특정 세션을 찾고, 여러 시즌에 걸쳐 검색하는 조회 헬퍼 모듈.",
+      "tags": ["utility", "session-lookup", "live"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/live/findSessionByKey.ts:findSessionByKey",
+      "type": "function",
+      "name": "findSessionByKey",
+      "filePath": "src/live/findSessionByKey.ts",
+      "lineRange": [17, 25],
+      "summary": "단일 시즌의 미팅·세션을 순회해 주어진 세션 키와 일치하는 세션과 미팅 컨텍스트를 반환한다.",
+      "tags": ["utility", "session-lookup"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/live/findSessionByKey.ts:findSessionAcrossSeasons",
+      "type": "function",
+      "name": "findSessionAcrossSeasons",
+      "filePath": "src/live/findSessionByKey.ts",
+      "lineRange": [31, 40],
+      "summary": "여러 시즌을 순회하며 findSessionByKey 로 세션을 검색해 첫 일치 결과를 반환하는 리플레이용 조회 함수.",
+      "tags": ["utility", "session-lookup", "replay"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/live/usePing.ts",
+      "type": "file",
+      "name": "usePing.ts",
+      "filePath": "src/live/usePing.ts",
+      "summary": "pingOpenF1 을 호출해 idle/ok/failed 상태를 관리하고 재시도 콜백을 제공하는 React hook 으로, 라이브/리플레이 화면의 CORS 게이트에 쓰인다.",
+      "tags": ["hook", "cors", "live", "state"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/live/usePing.ts:usePing",
+      "type": "function",
+      "name": "usePing",
+      "filePath": "src/live/usePing.ts",
+      "lineRange": [10, 38],
+      "summary": "주입 가능한 ping 구현으로 OpenF1 연결 상태를 체크하고 run id 로 경쟁 조건을 방어하며 상태·재실행 콜백을 노출하는 hook.",
+      "tags": ["hook", "cors", "async", "state"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/derived/__tests__/openf1ToSessionMap.test.ts",
+      "type": "file",
+      "name": "openf1ToSessionMap.test.ts",
+      "filePath": "src/main/derived/__tests__/openf1ToSessionMap.test.ts",
+      "summary": "openf1ToSessionMap 이 OpenF1 row 배열을 세션키→세션 Map 으로 올바르게 변환하는지 검증하는 단위 테스트.",
+      "tags": ["test", "derived", "session-map"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/derived/__tests__/seasonDiff.test.ts",
+      "type": "file",
+      "name": "seasonDiff.test.ts",
+      "filePath": "src/main/derived/__tests__/seasonDiff.test.ts",
+      "summary": "diffSessions 가 캐시된 시즌과 신규 시즌 데이터 간 세션 변경(시간·취소 등)을 정확히 산출하는지 검증하는 단위 테스트.",
+      "tags": ["test", "derived", "diff", "season"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/main/derived/__tests__/seasonDiff.test.ts:makeSeason",
+      "type": "function",
+      "name": "makeSeason",
+      "filePath": "src/main/derived/__tests__/seasonDiff.test.ts",
+      "lineRange": [5, 47],
+      "summary": "diff 검증용 시즌·미팅·세션 픽스처를 구성하는 테스트 빌더.",
+      "tags": ["test", "fixture", "season"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/main/derived/openf1ToSessionMap.ts",
+      "type": "file",
+      "name": "openf1ToSessionMap.ts",
+      "filePath": "src/main/derived/openf1ToSessionMap.ts",
+      "summary": "OpenF1 세션 row 배열을 세션 키를 키로 하는 세션 변경 Map 으로 변환해 시즌 재검증(revalidate)에서 diff 입력으로 쓰이는 파생 헬퍼.",
+      "tags": ["utility", "derived", "session-map", "transformation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/main/derived/openf1ToSessionMap.ts:openf1ToSessionMap",
+      "type": "function",
+      "name": "openf1ToSessionMap",
+      "filePath": "src/main/derived/openf1ToSessionMap.ts",
+      "lineRange": [15, 29],
+      "summary": "OpenF1 row 배열을 검증·정규화해 세션키→세션 정보 Map 으로 만드는 변환 함수.",
+      "tags": ["utility", "transformation", "session-map"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/derived/seasonDiff.ts",
+      "type": "file",
+      "name": "seasonDiff.ts",
+      "filePath": "src/main/derived/seasonDiff.ts",
+      "summary": "캐시된 시즌 세션과 신규 데이터 간 시간·취소 상태 변경을 비교해 패치 가능한 변경 목록을 산출하는 시즌 diff 파생 모듈.",
+      "tags": ["utility", "derived", "diff", "season"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/main/derived/seasonDiff.ts:diffSessions",
+      "type": "function",
+      "name": "diffSessions",
+      "filePath": "src/main/derived/seasonDiff.ts",
+      "lineRange": [30, 70],
+      "summary": "캐시·신규 세션 Map 을 비교해 시작/종료 시간·취소 상태 변경을 changes 배열로 모으는 핵심 diff 함수.",
+      "tags": ["utility", "diff", "session"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/main/stores/__tests__/catalogStore.test.ts",
+      "type": "file",
+      "name": "catalogStore.test.ts",
+      "filePath": "src/main/stores/__tests__/catalogStore.test.ts",
+      "summary": "catalogStore 의 인덱스/시즌 로드·인플라이트 dedup·세션 패치·구독 알림 동작을 mock fetch 로 검증하는 단위 테스트.",
+      "tags": ["test", "store", "catalog", "caching"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/main/stores/__tests__/revalidateSeason.test.ts",
+      "type": "file",
+      "name": "revalidateSeason.test.ts",
+      "filePath": "src/main/stores/__tests__/revalidateSeason.test.ts",
+      "summary": "revalidateCurrentSeason 이 OpenF1 응답으로 캐시된 시즌 세션을 diff·패치하는 흐름을 mock client 로 검증하는 단위 테스트.",
+      "tags": ["test", "store", "revalidation", "season"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/main/stores/__tests__/revalidateSeason.test.ts:primeSeasonCache",
+      "type": "function",
+      "name": "primeSeasonCache",
+      "filePath": "src/main/stores/__tests__/revalidateSeason.test.ts",
+      "lineRange": [38, 42],
+      "summary": "catalogStore 를 mock fetch 로 설정하고 시즌 캐시를 미리 채워 재검증 테스트 전제를 만드는 헬퍼.",
+      "tags": ["test", "fixture", "store"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/main/stores/catalogStore.ts",
+      "type": "file",
+      "name": "catalogStore.ts",
+      "filePath": "src/main/stores/catalogStore.ts",
+      "summary": "시즌 인덱스·시즌 카탈로그를 fetch 로 로드·캐싱하고 인플라이트 요청을 dedup 하며 세션 패치·구독 알림을 제공하는 메인 페이지용 외부 store.",
+      "tags": ["store", "catalog", "caching", "data-fetching", "singleton"],
+      "complexity": "complex",
+      "languageNotes": "subscribe/notify 기반 옵저버 store + inflight Promise 캐시로 중복 fetch 차단. fetchImpl 주입으로 테스트 가능."
+    },
+    {
+      "id": "function:src/main/stores/catalogStore.ts:loadCatalogIndex",
+      "type": "function",
+      "name": "loadCatalogIndex",
+      "filePath": "src/main/stores/catalogStore.ts",
+      "lineRange": [73, 89],
+      "summary": "시즌 인덱스를 fetch 로 로드해 캐싱하고 인플라이트 Promise 로 동시 호출을 dedup 한 뒤 구독자에게 알린다.",
+      "tags": ["data-fetching", "caching", "store"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/main/stores/catalogStore.ts:loadSeason",
+      "type": "function",
+      "name": "loadSeason",
+      "filePath": "src/main/stores/catalogStore.ts",
+      "lineRange": [91, 110],
+      "summary": "특정 연도 시즌 데이터를 fetch 로 로드·캐싱하고 인플라이트 dedup 후 구독자에게 변경을 알린다.",
+      "tags": ["data-fetching", "caching", "store"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/main/stores/catalogStore.ts:_patchSessions",
+      "type": "function",
+      "name": "_patchSessions",
+      "filePath": "src/main/stores/catalogStore.ts",
+      "lineRange": [116, 158],
+      "summary": "캐시된 시즌의 미팅·세션을 신규 데이터로 in-place 패치해 시간·취소 상태를 갱신하고 알림을 발생시킨다.",
+      "tags": ["store", "patching", "caching"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/main/stores/revalidateSeason.ts",
+      "type": "file",
+      "name": "revalidateSeason.ts",
+      "filePath": "src/main/stores/revalidateSeason.ts",
+      "summary": "현재 시즌을 OpenF1 client 로 재조회해 캐시된 세션과 diff 한 변경을 catalogStore 에 패치하는 백그라운드 재검증 로직.",
+      "tags": ["store", "revalidation", "data-fetching", "season"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/main/stores/revalidateSeason.ts:revalidateCurrentSeason",
+      "type": "function",
+      "name": "revalidateCurrentSeason",
+      "filePath": "src/main/stores/revalidateSeason.ts",
+      "lineRange": [29, 63],
+      "summary": "OpenF1 세션을 가져와 openf1ToSessionMap·diffSessions 로 변경을 산출하고 _patchSessions 로 캐시를 갱신하는 시즌 재검증 함수.",
+      "tags": ["revalidation", "data-fetching", "diff"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/map/LiveDataSource.ts",
+      "type": "file",
+      "name": "LiveDataSource.ts",
+      "filePath": "src/map/LiveDataSource.ts",
+      "summary": "OpenF1 라이브 엔드포인트를 cadence 별로 폴링해 위치·랩·스틴트 등 레코드를 ring buffer 에 수집하고 표시 시간 기준으로 샘플·집계를 제공하는 라이브 DataSource 구현.",
+      "tags": ["data-source", "live", "polling", "ring-buffer", "service"],
+      "complexity": "complex",
+      "languageNotes": "endpoint 별 우선순위(priorityFor)·cursor 기반 증분 폴링 + ring buffer 트림. dashboardQueries 헬퍼로 집계 위임."
+    },
+    {
+      "id": "class:src/map/LiveDataSource.ts:LiveDataSource",
+      "type": "class",
+      "name": "LiveDataSource",
+      "filePath": "src/map/LiveDataSource.ts",
+      "lineRange": [125, 410],
+      "summary": "라이브 OpenF1 데이터를 hydrate·cadence 폴링으로 수집하고 위치 버퍼·레코드 캐시를 관리하며 DataSource 인터페이스 쿼리를 구현하는 핵심 클래스.",
+      "tags": ["data-source", "live", "polling", "service"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/map/ReplayDataSource.ts",
+      "type": "file",
+      "name": "ReplayDataSource.ts",
+      "filePath": "src/map/ReplayDataSource.ts",
+      "summary": "세션 시작 시각 기준 playback clock 을 구동해 sparse/dense 엔드포인트를 윈도우 단위로 미리 fetch 하고 재생 속도·일시정지를 지원하는 리플레이 DataSource 구현.",
+      "tags": ["data-source", "replay", "playback", "prefetch", "service"],
+      "complexity": "complex",
+      "languageNotes": "lookahead 윈도우 prefetch + inflight dedup, playbackClock 가속/일시정지 제어. LiveDataSource 와 동일 DataSource 쿼리 표면 공유."
+    },
+    {
+      "id": "class:src/map/ReplayDataSource.ts:ReplayDataSource",
+      "type": "class",
+      "name": "ReplayDataSource",
+      "filePath": "src/map/ReplayDataSource.ts",
+      "lineRange": [97, 431],
+      "summary": "playback clock 으로 재생 위치를 진행하며 dense/sparse 윈도우를 lookahead fetch·캐싱하고 속도·일시정지를 제어하는 리플레이 데이터 소스 클래스.",
+      "tags": ["data-source", "replay", "playback", "service"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/shared/Footer.tsx",
+      "type": "file",
+      "name": "Footer.tsx",
+      "filePath": "src/shared/Footer.tsx",
+      "summary": "OpenF1 출처 표기·데이터 생성 시각을 표시하는 전역 공통 푸터 컴포넌트로, 카탈로그 인덱스의 generatedAt 를 포맷해 노출한다.",
+      "tags": ["component", "footer", "shared", "ui"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/shared/Footer.tsx:Footer",
+      "type": "function",
+      "name": "Footer",
+      "filePath": "src/shared/Footer.tsx",
+      "lineRange": [25, 70],
+      "summary": "카탈로그 인덱스를 로드해 데이터 생성 시각과 출처 링크를 렌더링하는 전역 푸터 컴포넌트.",
+      "tags": ["component", "footer", "shared"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/shared/Footer.tsx:formatGeneratedAt",
+      "type": "function",
+      "name": "formatGeneratedAt",
+      "filePath": "src/shared/Footer.tsx",
+      "lineRange": [72, 83],
+      "summary": "ISO 문자열을 UTC 기준 'YYYY-MM-DD HH:MM' 형태로 포맷하는 푸터용 날짜 헬퍼.",
+      "tags": ["utility", "date", "formatting"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/shared/__tests__/createMockOpenF1Client.ts",
+      "type": "file",
+      "name": "createMockOpenF1Client.ts",
+      "filePath": "src/shared/__tests__/createMockOpenF1Client.ts",
+      "summary": "경로별 라우트 핸들러를 받아 OpenF1Client.fetch 를 모사하는 테스트용 mock client 팩토리로, 여러 테스트에서 공유되는 픽스처 헬퍼.",
+      "tags": ["test", "fixture", "mock", "openf1-client"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/shared/__tests__/createMockOpenF1Client.ts:createMockOpenF1Client",
+      "type": "function",
+      "name": "createMockOpenF1Client",
+      "filePath": "src/shared/__tests__/createMockOpenF1Client.ts",
+      "lineRange": [32, 51],
+      "summary": "경로→핸들러 라우트 맵으로 OpenF1Client.fetch 를 모사하는 vi.fn 기반 mock client 를 생성하는 헬퍼.",
+      "tags": ["test", "mock", "fixture"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/shared/openf1Client.ts",
+      "type": "file",
+      "name": "openf1Client.ts",
+      "filePath": "src/shared/openf1Client.ts",
+      "summary": "토큰 버킷 레이트 리미팅·우선순위 큐·재시도/백오프·요청 dedup 을 갖춘 OpenF1 API HTTP 클라이언트로, 전역 싱글턴 openF1Client 를 제공한다.",
+      "tags": ["service", "api-client", "rate-limiting", "singleton", "network"],
+      "complexity": "complex",
+      "languageNotes": "TokenBucket 레이트 리미터 + priority queue + canonicalKey 기반 inflight dedup + Retry-After 파싱 백오프. 모든 데이터 소스의 OpenF1 접근 단일 관문."
+    },
+    {
+      "id": "class:src/shared/openf1Client.ts:OpenF1Client",
+      "type": "class",
+      "name": "OpenF1Client",
+      "filePath": "src/shared/openf1Client.ts",
+      "lineRange": [214, 458],
+      "summary": "우선순위 큐·토큰 버킷·재시도·요청 dedup 을 관리하며 OpenF1 API 요청을 직렬화·디스패치하고 요청 이벤트를 발행하는 핵심 HTTP 클라이언트 클래스.",
+      "tags": ["service", "api-client", "rate-limiting", "network"],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:src/shared/openf1Client.ts:TokenBucket",
+      "type": "class",
+      "name": "TokenBucket",
+      "filePath": "src/shared/openf1Client.ts",
+      "lineRange": [164, 212],
+      "summary": "용량·리필 주기 기반 토큰 버킷으로 요청 디스패치 속도를 제어하고 타이머로 토큰을 보충하는 레이트 리미터.",
+      "tags": ["rate-limiting", "utility", "token-bucket"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/shared/openf1Client.ts:computeWaitMs",
+      "type": "function",
+      "name": "computeWaitMs",
+      "filePath": "src/shared/openf1Client.ts",
+      "lineRange": [130, 142],
+      "summary": "Retry-After 헤더와 지수 백오프를 결합해 재시도 대기 시간을 산출하는 헬퍼.",
+      "tags": ["utility", "backoff", "retry"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/shared/openf1Client.ts:defaultSleep",
+      "type": "function",
+      "name": "defaultSleep",
+      "filePath": "src/shared/openf1Client.ts",
+      "lineRange": [83, 99],
+      "summary": "abort signal 을 존중하며 지정 시간 대기하는 취소 가능한 sleep 유틸.",
+      "tags": ["utility", "async", "abort"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {"source": "file:src/live/corsPing.ts", "target": "function:src/live/corsPing.ts:pingOpenF1", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/live/corsPing.ts", "target": "function:src/live/corsPing.ts:pingOpenF1", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/live/corsPing.ts", "target": "file:src/live/__tests__/corsPing.test.ts", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/live/findSessionByKey.ts", "target": "file:src/shared/seasonData.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/findSessionByKey.ts", "target": "function:src/live/findSessionByKey.ts:findSessionByKey", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/live/findSessionByKey.ts", "target": "function:src/live/findSessionByKey.ts:findSessionByKey", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/live/findSessionByKey.ts", "target": "function:src/live/findSessionByKey.ts:findSessionAcrossSeasons", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/live/findSessionByKey.ts", "target": "function:src/live/findSessionByKey.ts:findSessionAcrossSeasons", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/live/findSessionByKey.ts:findSessionAcrossSeasons", "target": "function:src/live/findSessionByKey.ts:findSessionByKey", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/live/findSessionByKey.ts", "target": "file:src/live/__tests__/findSessionByKey.test.ts", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/live/usePing.ts", "target": "file:src/live/corsPing.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/usePing.ts", "target": "function:src/live/usePing.ts:usePing", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/live/usePing.ts", "target": "function:src/live/usePing.ts:usePing", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/live/usePing.ts:usePing", "target": "function:src/live/corsPing.ts:pingOpenF1", "type": "calls", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/main/derived/__tests__/openf1ToSessionMap.test.ts", "target": "file:src/main/derived/openf1ToSessionMap.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+
+    {"source": "file:src/main/derived/__tests__/seasonDiff.test.ts", "target": "file:src/main/derived/seasonDiff.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/main/derived/__tests__/seasonDiff.test.ts", "target": "file:src/shared/seasonData.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/main/derived/__tests__/seasonDiff.test.ts", "target": "function:src/main/derived/__tests__/seasonDiff.test.ts:makeSeason", "type": "contains", "direction": "forward", "weight": 1.0},
+
+    {"source": "file:src/main/derived/openf1ToSessionMap.ts", "target": "file:src/main/derived/seasonDiff.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/main/derived/openf1ToSessionMap.ts", "target": "function:src/main/derived/openf1ToSessionMap.ts:openf1ToSessionMap", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/main/derived/openf1ToSessionMap.ts", "target": "function:src/main/derived/openf1ToSessionMap.ts:openf1ToSessionMap", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/main/derived/openf1ToSessionMap.ts", "target": "file:src/main/derived/__tests__/openf1ToSessionMap.test.ts", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/main/derived/seasonDiff.ts", "target": "file:src/shared/seasonData.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/main/derived/seasonDiff.ts", "target": "function:src/main/derived/seasonDiff.ts:diffSessions", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/main/derived/seasonDiff.ts", "target": "function:src/main/derived/seasonDiff.ts:diffSessions", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/main/derived/seasonDiff.ts", "target": "file:src/main/derived/__tests__/seasonDiff.test.ts", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/main/stores/__tests__/catalogStore.test.ts", "target": "file:src/main/stores/catalogStore.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/main/stores/__tests__/catalogStore.test.ts", "target": "file:src/shared/seasonData.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+
+    {"source": "file:src/main/stores/__tests__/revalidateSeason.test.ts", "target": "file:src/main/stores/catalogStore.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/main/stores/__tests__/revalidateSeason.test.ts", "target": "file:src/main/stores/revalidateSeason.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/main/stores/__tests__/revalidateSeason.test.ts", "target": "file:src/shared/__tests__/createMockOpenF1Client.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/main/stores/__tests__/revalidateSeason.test.ts", "target": "file:src/shared/seasonData.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/main/stores/__tests__/revalidateSeason.test.ts", "target": "function:src/main/stores/__tests__/revalidateSeason.test.ts:primeSeasonCache", "type": "contains", "direction": "forward", "weight": 1.0},
+
+    {"source": "file:src/main/stores/catalogStore.ts", "target": "file:src/main/derived/seasonDiff.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/main/stores/catalogStore.ts", "target": "file:src/shared/seasonData.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/main/stores/catalogStore.ts", "target": "function:src/main/stores/catalogStore.ts:loadCatalogIndex", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/main/stores/catalogStore.ts", "target": "function:src/main/stores/catalogStore.ts:loadCatalogIndex", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/main/stores/catalogStore.ts", "target": "function:src/main/stores/catalogStore.ts:loadSeason", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/main/stores/catalogStore.ts", "target": "function:src/main/stores/catalogStore.ts:loadSeason", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/main/stores/catalogStore.ts", "target": "function:src/main/stores/catalogStore.ts:_patchSessions", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "function:src/main/stores/catalogStore.ts:_patchSessions", "target": "function:src/main/derived/seasonDiff.ts:diffSessions", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/main/stores/catalogStore.ts", "target": "file:src/main/stores/__tests__/catalogStore.test.ts", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/main/stores/revalidateSeason.ts", "target": "file:src/main/derived/openf1ToSessionMap.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/main/stores/revalidateSeason.ts", "target": "file:src/main/derived/seasonDiff.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/main/stores/revalidateSeason.ts", "target": "file:src/main/stores/catalogStore.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/main/stores/revalidateSeason.ts", "target": "file:src/shared/openf1Client.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/main/stores/revalidateSeason.ts", "target": "function:src/main/stores/revalidateSeason.ts:revalidateCurrentSeason", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/main/stores/revalidateSeason.ts", "target": "function:src/main/stores/revalidateSeason.ts:revalidateCurrentSeason", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/main/stores/revalidateSeason.ts:revalidateCurrentSeason", "target": "function:src/main/derived/openf1ToSessionMap.ts:openf1ToSessionMap", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/main/stores/revalidateSeason.ts:revalidateCurrentSeason", "target": "function:src/main/derived/seasonDiff.ts:diffSessions", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/main/stores/revalidateSeason.ts:revalidateCurrentSeason", "target": "function:src/main/stores/catalogStore.ts:_patchSessions", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/main/stores/revalidateSeason.ts", "target": "file:src/main/stores/__tests__/revalidateSeason.test.ts", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/map/LiveDataSource.ts", "target": "class:src/map/LiveDataSource.ts:LiveDataSource", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/map/LiveDataSource.ts", "target": "class:src/map/LiveDataSource.ts:LiveDataSource", "type": "exports", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/map/ReplayDataSource.ts", "target": "class:src/map/ReplayDataSource.ts:ReplayDataSource", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/map/ReplayDataSource.ts", "target": "class:src/map/ReplayDataSource.ts:ReplayDataSource", "type": "exports", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/shared/Footer.tsx", "target": "function:src/shared/Footer.tsx:Footer", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/shared/Footer.tsx", "target": "function:src/shared/Footer.tsx:Footer", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/shared/Footer.tsx", "target": "function:src/shared/Footer.tsx:formatGeneratedAt", "type": "contains", "direction": "forward", "weight": 1.0},
+
+    {"source": "file:src/shared/__tests__/createMockOpenF1Client.ts", "target": "function:src/shared/__tests__/createMockOpenF1Client.ts:createMockOpenF1Client", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/shared/__tests__/createMockOpenF1Client.ts", "target": "function:src/shared/__tests__/createMockOpenF1Client.ts:createMockOpenF1Client", "type": "exports", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/shared/openf1Client.ts", "target": "class:src/shared/openf1Client.ts:OpenF1Client", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/shared/openf1Client.ts", "target": "class:src/shared/openf1Client.ts:OpenF1Client", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/shared/openf1Client.ts", "target": "class:src/shared/openf1Client.ts:TokenBucket", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/shared/openf1Client.ts", "target": "function:src/shared/openf1Client.ts:computeWaitMs", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/shared/openf1Client.ts", "target": "function:src/shared/openf1Client.ts:defaultSleep", "type": "contains", "direction": "forward", "weight": 1.0}
+  ]
+}

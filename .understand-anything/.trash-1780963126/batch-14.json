@@ -1,0 +1,188 @@
+{
+  "nodes": [
+    {
+      "id": "document:docs/deployment-architecture.md",
+      "type": "document",
+      "name": "deployment-architecture.md",
+      "filePath": "docs/deployment-architecture.md",
+      "summary": "Vercel 정적 호스팅 + GitHub Actions daily cron 기반 배포 토폴로지 문서로, repo 구조·워크플로(daily-data-refresh.yml, ci.yml)·vercel.json rewrite·VERCEL_ENV 게이트·hobby 한도 예산·정적/동적 데이터 흐름을 정리한다.",
+      "tags": ["documentation", "deployment", "infrastructure", "ci-cd", "architecture"],
+      "complexity": "complex",
+      "languageNotes": "백엔드 없는 SPA를 GitHub Actions 빌드타임 정적 JSON 산출(시즌 카탈로그·트랙 아웃라인·race distance)로 운영하는 serverless 배포 패턴을 설명."
+    },
+    {
+      "id": "document:docs/live-streaming-strategy.md",
+      "type": "document",
+      "name": "live-streaming-strategy.md",
+      "filePath": "docs/live-streaming-strategy.md",
+      "summary": "OpenF1 무료 한도(30 req/min) 내에서 라이브 타이밍을 구현하기 위한 운영 전략 문서로, 데이터 시계 기반 30초 플레이아웃 버퍼·hydration 직렬화·중앙 token-bucket fetch·보간 방식을 규정한다.",
+      "tags": ["documentation", "strategy", "live-streaming", "rate-limiting", "architecture"],
+      "complexity": "complex",
+      "languageNotes": "LiveDataSource.start()가 hydration Promise.all 완료 후에만 cadence setInterval을 등록하는 직렬성 강제 등 한도 초과 방지 규약이 핵심."
+    },
+    {
+      "id": "document:docs/openf1-api-reference.md",
+      "type": "document",
+      "name": "openf1-api-reference.md",
+      "filePath": "docs/openf1-api-reference.md",
+      "summary": "OpenF1 REST API의 인증·rate limit·CORS·쿼리 문법·시간/좌표/단위 약속과 15개 엔드포인트 상세를 정리한 레퍼런스로, openf1Client·openf1Types 구현의 근거 자료 역할을 한다.",
+      "tags": ["documentation", "api-reference", "openf1", "data-model", "reference"],
+      "complexity": "complex",
+      "languageNotes": "엔드포인트별 라이브/포스트세션 가용성·known pitfalls·데이터 볼륨 가이드를 포함해 클라이언트 fetch 전략 설계의 1차 출처로 사용됨."
+    },
+    {
+      "id": "document:docs/playwright-memory-profile.md",
+      "type": "document",
+      "name": "playwright-memory-profile.md",
+      "filePath": "docs/playwright-memory-profile.md",
+      "summary": "LiveMap의 메모리 누수 검증 프로파일 문서로, e2e/memory.spec.ts가 SyntheticDataSource를 /test-rig에 마운트해 usedJSHeapSize를 샘플링하고 ring buffer 평형 이후 heap 증가를 leak으로 판정하는 기준과 근거를 기술한다.",
+      "tags": ["documentation", "testing", "memory-profiling", "monitoring", "live-map"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:docs/replay-strategy.md",
+      "type": "document",
+      "name": "replay-strategy.md",
+      "filePath": "docs/replay-strategy.md",
+      "summary": "과거 경기 재생(Replay) 운영 전략 문서로, 반-개구간 윈도우 폴링([T1,T2))·엔드포인트별 fetch 전략·재생 시계와 룩어헤드 버퍼·시크/배속·브라우저 세션 메모리 캐시·요청 수 계산을 ReplayDataSource 어댑터 설계 기준으로 정리한다.",
+      "tags": ["documentation", "strategy", "replay", "caching", "architecture"],
+      "complexity": "complex",
+      "languageNotes": "좌-닫힘/우-열림 윈도우 규약으로 세션 경계 중복·누락을 피하고, 라이브와 공통 DataSource 추상을 통해 ReplayDataSource 어댑터만 교체하는 설계를 권고."
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:docs/deployment-architecture.md",
+      "target": "file:scripts/_lib/openf1Client.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/deployment-architecture.md",
+      "target": "file:vite.config.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/deployment-architecture.md",
+      "target": "file:src/shared/env.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/deployment-architecture.md",
+      "target": "document:docs/openf1-api-reference.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/live-streaming-strategy.md",
+      "target": "file:src/map/LiveDataSource.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/live-streaming-strategy.md",
+      "target": "file:src/map/interpolation.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/live-streaming-strategy.md",
+      "target": "file:src/live/LiveMap.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/live-streaming-strategy.md",
+      "target": "document:docs/openf1-api-reference.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/openf1-api-reference.md",
+      "target": "file:src/shared/openf1Client.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/openf1-api-reference.md",
+      "target": "file:src/shared/openf1Types.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/openf1-api-reference.md",
+      "target": "file:src/live/corsPing.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/playwright-memory-profile.md",
+      "target": "file:e2e/memory.spec.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/playwright-memory-profile.md",
+      "target": "file:src/live/SyntheticDataSource.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/playwright-memory-profile.md",
+      "target": "file:src/map/LiveMapRenderer.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/playwright-memory-profile.md",
+      "target": "file:src/map/LiveDataSource.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/replay-strategy.md",
+      "target": "file:src/map/ReplayDataSource.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/replay-strategy.md",
+      "target": "file:src/map/LiveDataSource.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/replay-strategy.md",
+      "target": "document:docs/live-streaming-strategy.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:docs/replay-strategy.md",
+      "target": "document:docs/openf1-api-reference.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

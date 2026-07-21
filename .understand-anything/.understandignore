@@ -1,0 +1,55 @@
+# .understandignore — patterns for files/dirs to exclude from analysis
+# Syntax: same as .gitignore (globs, # comments, ! negation, trailing / for dirs)
+# Lines below are suggestions — uncomment to activate.
+# Use ! prefix to force-include something excluded by defaults.
+#
+# Built-in defaults (always excluded unless negated):
+#   node_modules/, .git/, dist/, build/, obj/, *.lock, *.min.js, etc.
+#
+# --- From .gitignore (uncomment to exclude) ---
+
+# .omc/project-memory.json
+# .omc/state/
+# .omc/sessions/
+# .omc/logs/
+# .omc/notepad.md
+# .omc/drafts/
+# .omc/prd.json
+# .omc/progress.txt
+# .DS_Store
+# .vite/
+# .astro/
+# .wrangler/
+# .dev.vars
+# apps/*/dist/
+# apps/*/.astro/
+# apps/*/.wrangler/
+# scripts/dist/
+# .env
+# .env.local
+# .dev.vars.local
+# **/Formula1-*.ttf
+# **/Formula1-*.otf
+# **/Formula1-*.woff
+# **/Formula1-*.woff2
+# font/
+# playwright-report/
+# test-results/
+# playwright/.cache/
+# *.tsbuildinfo
+# !**/fonts.lock.json
+
+# --- Detected directories (uncomment to exclude) ---
+
+# docs/
+# scripts/
+
+# --- Test file patterns (uncomment to exclude) ---
+
+# *.test.*
+# *.spec.*
+# *.snap
+
+# --- Active exclusions (data assets — confirmed by user) ---
+public/trackOutlines/
+public/seasons/

@@ -1,0 +1,2339 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "src/map/__tests__/viewport.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 135,
+      "nonEmptyLines": 122,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/arcLength.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 50,
+      "nonEmptyLines": 46,
+      "functions": [
+        {
+          "name": "sampleAtArcLength",
+          "startLine": 10,
+          "endLine": 40,
+          "params": [
+            "polyline",
+            "arcLengthTable",
+            "s"
+          ]
+        },
+        {
+          "name": "wrapArcLength",
+          "startLine": 46,
+          "endLine": 50,
+          "params": [
+            "s",
+            "totalLength"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "sampleAtArcLength",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "wrapArcLength",
+          "line": 46,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/circuits.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 766,
+      "nonEmptyLines": 766,
+      "sections": [
+        {
+          "heading": "_comment",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "default_variant",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "circuits",
+          "level": 1,
+          "line": 4
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 3
+      }
+    },
+    {
+      "path": "src/map/dashboardQueries.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 266,
+      "nonEmptyLines": 249,
+      "functions": [
+        {
+          "name": "recDate",
+          "startLine": 31,
+          "endLine": 36,
+          "params": [
+            "r"
+          ]
+        },
+        {
+          "name": "matchesFilters",
+          "startLine": 38,
+          "endLine": 45,
+          "params": [
+            "record",
+            "filters"
+          ]
+        },
+        {
+          "name": "latestBefore",
+          "startLine": 52,
+          "endLine": 68,
+          "params": [
+            "records",
+            "t",
+            "filters"
+          ]
+        },
+        {
+          "name": "allBefore",
+          "startLine": 74,
+          "endLine": 86,
+          "params": [
+            "records",
+            "t",
+            "filters",
+            "limit"
+          ]
+        },
+        {
+          "name": "lapEndMs",
+          "startLine": 89,
+          "endLine": 92,
+          "params": [
+            "lap"
+          ]
+        },
+        {
+          "name": "lapAt",
+          "startLine": 99,
+          "endLine": 114,
+          "params": [
+            "laps",
+            "driverNum",
+            "t"
+          ]
+        },
+        {
+          "name": "completedLapsBefore",
+          "startLine": 120,
+          "endLine": 136,
+          "params": [
+            "laps",
+            "driverNum",
+            "t",
+            "limit"
+          ]
+        },
+        {
+          "name": "stintForLap",
+          "startLine": 142,
+          "endLine": 152,
+          "params": [
+            "stints",
+            "driverNum",
+            "lap"
+          ]
+        },
+        {
+          "name": "sessionResultFor",
+          "startLine": 159,
+          "endLine": 168,
+          "params": [
+            "records",
+            "driverNum"
+          ]
+        },
+        {
+          "name": "completedForAggregate",
+          "startLine": 173,
+          "endLine": 182,
+          "params": [
+            "laps",
+            "t"
+          ]
+        },
+        {
+          "name": "fastestLapOf",
+          "startLine": 184,
+          "endLine": 199,
+          "params": [
+            "completed"
+          ]
+        },
+        {
+          "name": "purpleSectorsOf",
+          "startLine": 201,
+          "endLine": 221,
+          "params": [
+            "completed"
+          ]
+        },
+        {
+          "name": "personalBestsOf",
+          "startLine": 223,
+          "endLine": 247,
+          "params": [
+            "completed"
+          ]
+        },
+        {
+          "name": "computeAllAggregates",
+          "startLine": 250,
+          "endLine": 257,
+          "params": [
+            "laps",
+            "t"
+          ]
+        },
+        {
+          "name": "computeAggregateBefore",
+          "startLine": 260,
+          "endLine": 266,
+          "params": [
+            "laps",
+            "aggregate",
+            "t"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "latestBefore",
+          "line": 52,
+          "isDefault": false
+        },
+        {
+          "name": "allBefore",
+          "line": 74,
+          "isDefault": false
+        },
+        {
+          "name": "lapAt",
+          "line": 99,
+          "isDefault": false
+        },
+        {
+          "name": "completedLapsBefore",
+          "line": 120,
+          "isDefault": false
+        },
+        {
+          "name": "stintForLap",
+          "line": 142,
+          "isDefault": false
+        },
+        {
+          "name": "sessionResultFor",
+          "line": 159,
+          "isDefault": false
+        },
+        {
+          "name": "computeAllAggregates",
+          "line": 250,
+          "isDefault": false
+        },
+        {
+          "name": "computeAggregateBefore",
+          "line": 260,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "matchesFilters",
+          "callee": "Object.keys",
+          "lineNumber": 41
+        },
+        {
+          "caller": "latestBefore",
+          "callee": "t.valueOf",
+          "lineNumber": 53
+        },
+        {
+          "caller": "latestBefore",
+          "callee": "recDate",
+          "lineNumber": 57
+        },
+        {
+          "caller": "latestBefore",
+          "callee": "d.valueOf",
+          "lineNumber": 59
+        },
+        {
+          "caller": "latestBefore",
+          "callee": "matchesFilters",
+          "lineNumber": 61
+        },
+        {
+          "caller": "allBefore",
+          "callee": "t.valueOf",
+          "lineNumber": 75
+        },
+        {
+          "caller": "allBefore",
+          "callee": "recDate",
+          "lineNumber": 78
+        },
+        {
+          "caller": "allBefore",
+          "callee": "d.valueOf",
+          "lineNumber": 79
+        },
+        {
+          "caller": "allBefore",
+          "callee": "matchesFilters",
+          "lineNumber": 80
+        },
+        {
+          "caller": "allBefore",
+          "callee": "out.push",
+          "lineNumber": 81
+        },
+        {
+          "caller": "allBefore",
+          "callee": "out.sort",
+          "lineNumber": 84
+        },
+        {
+          "caller": "allBefore",
+          "callee": "(recDate(b) as Date).valueOf",
+          "lineNumber": 84
+        },
+        {
+          "caller": "allBefore",
+          "callee": "recDate",
+          "lineNumber": 84
+        },
+        {
+          "caller": "allBefore",
+          "callee": "(recDate(a) as Date).valueOf",
+          "lineNumber": 84
+        },
+        {
+          "caller": "allBefore",
+          "callee": "recDate",
+          "lineNumber": 84
+        },
+        {
+          "caller": "allBefore",
+          "callee": "out.slice",
+          "lineNumber": 85
+        },
+        {
+          "caller": "lapEndMs",
+          "callee": "lap.date_start.valueOf",
+          "lineNumber": 91
+        },
+        {
+          "caller": "lapAt",
+          "callee": "t.valueOf",
+          "lineNumber": 100
+        },
+        {
+          "caller": "lapAt",
+          "callee": "lap.date_start.valueOf",
+          "lineNumber": 106
+        },
+        {
+          "caller": "completedLapsBefore",
+          "callee": "t.valueOf",
+          "lineNumber": 126
+        },
+        {
+          "caller": "completedLapsBefore",
+          "callee": "lapEndMs",
+          "lineNumber": 130
+        },
+        {
+          "caller": "completedLapsBefore",
+          "callee": "out.push",
+          "lineNumber": 132
+        },
+        {
+          "caller": "completedLapsBefore",
+          "callee": "out.sort",
+          "lineNumber": 134
+        },
+        {
+          "caller": "completedLapsBefore",
+          "callee": "(b.date_start as Date).valueOf",
+          "lineNumber": 134
+        },
+        {
+          "caller": "completedLapsBefore",
+          "callee": "(a.date_start as Date).valueOf",
+          "lineNumber": 134
+        },
+        {
+          "caller": "completedLapsBefore",
+          "callee": "out.slice",
+          "lineNumber": 135
+        },
+        {
+          "caller": "completedForAggregate",
+          "callee": "t.valueOf",
+          "lineNumber": 174
+        },
+        {
+          "caller": "completedForAggregate",
+          "callee": "lapEndMs",
+          "lineNumber": 177
+        },
+        {
+          "caller": "completedForAggregate",
+          "callee": "out.push",
+          "lineNumber": 179
+        },
+        {
+          "caller": "purpleSectorsOf",
+          "callee": "sectorKeys.map",
+          "lineNumber": 207
+        },
+        {
+          "caller": "personalBestsOf",
+          "callee": "map.get",
+          "lineNumber": 231
+        },
+        {
+          "caller": "personalBestsOf",
+          "callee": "map.set",
+          "lineNumber": 238
+        },
+        {
+          "caller": "personalBestsOf",
+          "callee": "min",
+          "lineNumber": 240
+        },
+        {
+          "caller": "personalBestsOf",
+          "callee": "min",
+          "lineNumber": 241
+        },
+        {
+          "caller": "personalBestsOf",
+          "callee": "min",
+          "lineNumber": 242
+        },
+        {
+          "caller": "personalBestsOf",
+          "callee": "min",
+          "lineNumber": 243
+        },
+        {
+          "caller": "computeAllAggregates",
+          "callee": "completedForAggregate",
+          "lineNumber": 251
+        },
+        {
+          "caller": "computeAllAggregates",
+          "callee": "fastestLapOf",
+          "lineNumber": 253
+        },
+        {
+          "caller": "computeAllAggregates",
+          "callee": "purpleSectorsOf",
+          "lineNumber": 254
+        },
+        {
+          "caller": "computeAllAggregates",
+          "callee": "personalBestsOf",
+          "lineNumber": 255
+        },
+        {
+          "caller": "computeAggregateBefore",
+          "callee": "computeAllAggregates",
+          "lineNumber": 265
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 8,
+        "functionCount": 15,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/interpolation.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 94,
+      "nonEmptyLines": 79,
+      "functions": [
+        {
+          "name": "interpolatePosition",
+          "startLine": 56,
+          "endLine": 86,
+          "params": [
+            "s1",
+            "s2",
+            "displayTimeMs",
+            "ctx"
+          ]
+        },
+        {
+          "name": "clamp01",
+          "startLine": 88,
+          "endLine": 90,
+          "params": [
+            "x"
+          ]
+        },
+        {
+          "name": "lerpPoint",
+          "startLine": 92,
+          "endLine": 94,
+          "params": [
+            "a",
+            "b",
+            "u"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "DEFAULT_THRESHOLDS",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "interpolatePosition",
+          "line": 56,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "interpolatePosition",
+          "callee": "clamp01",
+          "lineNumber": 70
+        },
+        {
+          "caller": "interpolatePosition",
+          "callee": "Math.abs",
+          "lineNumber": 73
+        },
+        {
+          "caller": "interpolatePosition",
+          "callee": "Math.abs",
+          "lineNumber": 73
+        },
+        {
+          "caller": "interpolatePosition",
+          "callee": "lerpPoint",
+          "lineNumber": 74
+        },
+        {
+          "caller": "interpolatePosition",
+          "callee": "wrapArcLength",
+          "lineNumber": 79
+        },
+        {
+          "caller": "interpolatePosition",
+          "callee": "sampleAtArcLength",
+          "lineNumber": 80
+        },
+        {
+          "caller": "interpolatePosition",
+          "callee": "sampleAtArcLength",
+          "lineNumber": 85
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 2,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/layoutVersions.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 53,
+      "nonEmptyLines": 53,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 0
+      }
+    },
+    {
+      "path": "src/map/layoutVersions.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 31,
+      "nonEmptyLines": 26,
+      "functions": [
+        {
+          "name": "resolveLayout",
+          "startLine": 24,
+          "endLine": 31,
+          "params": [
+            "circuitKey",
+            "year"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "LAYOUT_VERSIONS",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "resolveLayout",
+          "line": 24,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "resolveLayout",
+          "callee": "LAYOUT_VERSIONS.find",
+          "lineNumber": 25
+        },
+        {
+          "caller": "resolveLayout",
+          "callee": "entry.ranges.find",
+          "lineNumber": 27
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/LiveMapRenderer.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 251,
+      "nonEmptyLines": 232,
+      "functions": [
+        {
+          "name": "labelRectsOverlap",
+          "startLine": 38,
+          "endLine": 40,
+          "params": [
+            "a",
+            "b"
+          ]
+        },
+        {
+          "name": "reproject",
+          "startLine": 248,
+          "endLine": 251,
+          "params": [
+            "sample",
+            "ctx"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "LiveMapRenderer",
+          "startLine": 84,
+          "endLine": 245,
+          "methods": [
+            "constructor",
+            "drawStaticLayer",
+            "renderStaticLayerToCache",
+            "labelRectFor",
+            "renderFrame",
+            "start",
+            "stop"
+          ],
+          "properties": [
+            "rafId",
+            "interpolationCtx",
+            "pitlaneCtx",
+            "staticLayerReady"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "LiveMapRenderer",
+          "line": 84,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "drawStaticLayer",
+          "callee": "renderStaticTrack",
+          "lineNumber": 111
+        },
+        {
+          "caller": "drawStaticLayer",
+          "callee": "drawDrsZones",
+          "lineNumber": 120
+        },
+        {
+          "caller": "drawStaticLayer",
+          "callee": "drawSlmZones",
+          "lineNumber": 123
+        },
+        {
+          "caller": "drawStaticLayer",
+          "callee": "drawSectorBoundaries",
+          "lineNumber": 126
+        },
+        {
+          "caller": "renderStaticLayerToCache",
+          "callee": "cache.getContext",
+          "lineNumber": 134
+        },
+        {
+          "caller": "renderStaticLayerToCache",
+          "callee": "this.drawStaticLayer",
+          "lineNumber": 136
+        },
+        {
+          "caller": "labelRectFor",
+          "callee": "parseInt",
+          "lineNumber": 146
+        },
+        {
+          "caller": "renderFrame",
+          "callee": "this.renderStaticLayerToCache",
+          "lineNumber": 172
+        },
+        {
+          "caller": "renderFrame",
+          "callee": "ctx.clearRect",
+          "lineNumber": 174
+        },
+        {
+          "caller": "renderFrame",
+          "callee": "ctx.drawImage",
+          "lineNumber": 175
+        },
+        {
+          "caller": "renderFrame",
+          "callee": "this.drawStaticLayer",
+          "lineNumber": 177
+        },
+        {
+          "caller": "renderFrame",
+          "callee": "showLabel",
+          "lineNumber": 180
+        },
+        {
+          "caller": "renderFrame",
+          "callee": "buffer.drivers",
+          "lineNumber": 183
+        },
+        {
+          "caller": "renderFrame",
+          "callee": "buffer.findPair",
+          "lineNumber": 184
+        },
+        {
+          "caller": "renderFrame",
+          "callee": "getDriverMeta",
+          "lineNumber": 186
+        },
+        {
+          "caller": "renderFrame",
+          "callee": "classifyDriverState",
+          "lineNumber": 188
+        },
+        {
+          "caller": "renderFrame",
+          "callee": "getDriverHints",
+          "lineNumber": 188
+        },
+        {
+          "caller": "renderFrame",
+          "callee": "collectTrailPoints",
+          "lineNumber": 192
+        },
+        {
+          "caller": "renderFrame",
+          "callee": "drawTrail",
+          "lineNumber": 193
+        },
+        {
+          "caller": "renderFrame",
+          "callee": "reproject",
+          "lineNumber": 205
+        },
+        {
+          "caller": "renderFrame",
+          "callee": "reproject",
+          "lineNumber": 206
+        },
+        {
+          "caller": "renderFrame",
+          "callee": "interpolatePosition",
+          "lineNumber": 207
+        },
+        {
+          "caller": "renderFrame",
+          "callee": "applyViewport",
+          "lineNumber": 208
+        },
+        {
+          "caller": "renderFrame",
+          "callee": "this.labelRectFor",
+          "lineNumber": 211
+        },
+        {
+          "caller": "renderFrame",
+          "callee": "placedLabelRects.some",
+          "lineNumber": 212
+        },
+        {
+          "caller": "renderFrame",
+          "callee": "labelRectsOverlap",
+          "lineNumber": 212
+        },
+        {
+          "caller": "renderFrame",
+          "callee": "placedLabelRects.push",
+          "lineNumber": 213
+        },
+        {
+          "caller": "renderFrame",
+          "callee": "drawMarker",
+          "lineNumber": 215
+        },
+        {
+          "caller": "renderFrame",
+          "callee": "getDriverDim",
+          "lineNumber": 222
+        },
+        {
+          "caller": "renderFrame",
+          "callee": "drawStateBadge",
+          "lineNumber": 226
+        },
+        {
+          "caller": "tick",
+          "callee": "this.renderFrame",
+          "lineNumber": 233
+        },
+        {
+          "caller": "tick",
+          "callee": "this.config.dataSource.getDisplayTime().valueOf",
+          "lineNumber": 233
+        },
+        {
+          "caller": "tick",
+          "callee": "this.config.dataSource.getDisplayTime",
+          "lineNumber": 233
+        },
+        {
+          "caller": "tick",
+          "callee": "requestAnimationFrame",
+          "lineNumber": 234
+        },
+        {
+          "caller": "start",
+          "callee": "requestAnimationFrame",
+          "lineNumber": 236
+        },
+        {
+          "caller": "stop",
+          "callee": "cancelAnimationFrame",
+          "lineNumber": 241
+        },
+        {
+          "caller": "reproject",
+          "callee": "projectToPolyline",
+          "lineNumber": 249
+        }
+      ],
+      "metrics": {
+        "importCount": 16,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/map/LocationBuffer.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 124,
+      "nonEmptyLines": 111,
+      "functions": [
+        {
+          "name": "parseDate",
+          "startLine": 115,
+          "endLine": 120,
+          "params": [
+            "v"
+          ]
+        },
+        {
+          "name": "toExternal",
+          "startLine": 122,
+          "endLine": 124,
+          "params": [
+            "s"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "LocationBuffer",
+          "startLine": 16,
+          "endLine": 113,
+          "methods": [
+            "ingestRaw",
+            "insertOrdered",
+            "getSamplePair",
+            "trimBefore",
+            "driverCount",
+            "totalSampleCount",
+            "size"
+          ],
+          "properties": [
+            "byDriver"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "LocationBuffer",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "parseDate",
+          "line": 115,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ingestRaw",
+          "callee": "parseDate",
+          "lineNumber": 22
+        },
+        {
+          "caller": "ingestRaw",
+          "callee": "Number",
+          "lineNumber": 24
+        },
+        {
+          "caller": "ingestRaw",
+          "callee": "Number",
+          "lineNumber": 25
+        },
+        {
+          "caller": "ingestRaw",
+          "callee": "Number",
+          "lineNumber": 26
+        },
+        {
+          "caller": "ingestRaw",
+          "callee": "Number",
+          "lineNumber": 27
+        },
+        {
+          "caller": "ingestRaw",
+          "callee": "Number.isFinite",
+          "lineNumber": 28
+        },
+        {
+          "caller": "ingestRaw",
+          "callee": "Math.abs",
+          "lineNumber": 29
+        },
+        {
+          "caller": "ingestRaw",
+          "callee": "Math.abs",
+          "lineNumber": 29
+        },
+        {
+          "caller": "ingestRaw",
+          "callee": "Math.abs",
+          "lineNumber": 29
+        },
+        {
+          "caller": "ingestRaw",
+          "callee": "this.insertOrdered",
+          "lineNumber": 30
+        },
+        {
+          "caller": "ingestRaw",
+          "callee": "date.valueOf",
+          "lineNumber": 30
+        },
+        {
+          "caller": "insertOrdered",
+          "callee": "this.byDriver.get",
+          "lineNumber": 36
+        },
+        {
+          "caller": "insertOrdered",
+          "callee": "this.byDriver.set",
+          "lineNumber": 38
+        },
+        {
+          "caller": "insertOrdered",
+          "callee": "arr.push",
+          "lineNumber": 43
+        },
+        {
+          "caller": "insertOrdered",
+          "callee": "arr.splice",
+          "lineNumber": 53
+        },
+        {
+          "caller": "getSamplePair",
+          "callee": "this.byDriver.get",
+          "lineNumber": 58
+        },
+        {
+          "caller": "getSamplePair",
+          "callee": "t.valueOf",
+          "lineNumber": 60
+        },
+        {
+          "caller": "getSamplePair",
+          "callee": "toExternal",
+          "lineNumber": 61
+        },
+        {
+          "caller": "getSamplePair",
+          "callee": "toExternal",
+          "lineNumber": 62
+        },
+        {
+          "caller": "getSamplePair",
+          "callee": "toExternal",
+          "lineNumber": 64
+        },
+        {
+          "caller": "getSamplePair",
+          "callee": "toExternal",
+          "lineNumber": 73
+        },
+        {
+          "caller": "getSamplePair",
+          "callee": "toExternal",
+          "lineNumber": 73
+        },
+        {
+          "caller": "trimBefore",
+          "callee": "this.byDriver.set",
+          "lineNumber": 81
+        },
+        {
+          "caller": "trimBefore",
+          "callee": "arr.splice",
+          "lineNumber": 93
+        },
+        {
+          "caller": "totalSampleCount",
+          "callee": "this.byDriver.values",
+          "lineNumber": 105
+        },
+        {
+          "caller": "size",
+          "callee": "this.byDriver.get",
+          "lineNumber": 111
+        },
+        {
+          "caller": "parseDate",
+          "callee": "Number.isNaN",
+          "lineNumber": 118
+        },
+        {
+          "caller": "parseDate",
+          "callee": "d.valueOf",
+          "lineNumber": 118
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/map/mapStyles.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 76,
+      "nonEmptyLines": 71,
+      "exports": [
+        {
+          "name": "mapStyles",
+          "line": 8,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/markerLabelToggle.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 65,
+      "nonEmptyLines": 54,
+      "functions": [
+        {
+          "name": "readInitial",
+          "startLine": 25,
+          "endLine": 34,
+          "params": []
+        },
+        {
+          "name": "MarkerLabelProvider",
+          "startLine": 36,
+          "endLine": 61,
+          "params": [
+            "{ children }"
+          ]
+        },
+        {
+          "name": "useMarkerLabel",
+          "startLine": 63,
+          "endLine": 65,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "MARKER_LABEL_STORAGE_KEY",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "MarkerLabelContext",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "MarkerLabelProvider",
+          "line": 36,
+          "isDefault": false
+        },
+        {
+          "name": "useMarkerLabel",
+          "line": 63,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "readInitial",
+          "callee": "window.localStorage.getItem",
+          "lineNumber": 28
+        },
+        {
+          "caller": "MarkerLabelProvider",
+          "callee": "useState",
+          "lineNumber": 37
+        },
+        {
+          "caller": "MarkerLabelProvider",
+          "callee": "useCallback",
+          "lineNumber": 39
+        },
+        {
+          "caller": "MarkerLabelProvider",
+          "callee": "setShowLabelState",
+          "lineNumber": 40
+        },
+        {
+          "caller": "MarkerLabelProvider",
+          "callee": "window.localStorage.setItem",
+          "lineNumber": 43
+        },
+        {
+          "caller": "MarkerLabelProvider",
+          "callee": "useEffect",
+          "lineNumber": 50
+        },
+        {
+          "caller": "onStorage",
+          "callee": "setShowLabelState",
+          "lineNumber": 54
+        },
+        {
+          "caller": "MarkerLabelProvider",
+          "callee": "window.addEventListener",
+          "lineNumber": 56
+        },
+        {
+          "caller": "MarkerLabelProvider",
+          "callee": "window.removeEventListener",
+          "lineNumber": 57
+        },
+        {
+          "caller": "MarkerLabelProvider",
+          "callee": "createElement",
+          "lineNumber": 60
+        },
+        {
+          "caller": "useMarkerLabel",
+          "callee": "useContext",
+          "lineNumber": 64
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/markers.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 119,
+      "nonEmptyLines": 110,
+      "functions": [
+        {
+          "name": "drawMarker",
+          "startLine": 24,
+          "endLine": 88,
+          "params": [
+            "ctx",
+            "opts"
+          ]
+        },
+        {
+          "name": "drawRoundRect",
+          "startLine": 91,
+          "endLine": 114,
+          "params": [
+            "ctx",
+            "x",
+            "y",
+            "w",
+            "h",
+            "r",
+            "fill"
+          ]
+        },
+        {
+          "name": "drawSlmIndicator",
+          "startLine": 117,
+          "endLine": 119,
+          "params": [
+            "_driverNum",
+            "_isActive"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "drawMarker",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "drawSlmIndicator",
+          "line": 117,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "drawMarker",
+          "callee": "ctx.save",
+          "lineNumber": 34
+        },
+        {
+          "caller": "drawMarker",
+          "callee": "Math.min",
+          "lineNumber": 38
+        },
+        {
+          "caller": "drawMarker",
+          "callee": "ctx.beginPath",
+          "lineNumber": 42
+        },
+        {
+          "caller": "drawMarker",
+          "callee": "ctx.arc",
+          "lineNumber": 43
+        },
+        {
+          "caller": "drawMarker",
+          "callee": "ctx.fill",
+          "lineNumber": 49
+        },
+        {
+          "caller": "drawMarker",
+          "callee": "ctx.setLineDash",
+          "lineNumber": 55
+        },
+        {
+          "caller": "drawMarker",
+          "callee": "ctx.stroke",
+          "lineNumber": 58
+        },
+        {
+          "caller": "drawMarker",
+          "callee": "ctx.setLineDash",
+          "lineNumber": 59
+        },
+        {
+          "caller": "drawMarker",
+          "callee": "Math.round",
+          "lineNumber": 63
+        },
+        {
+          "caller": "drawMarker",
+          "callee": "ctx.fillText",
+          "lineNumber": 66
+        },
+        {
+          "caller": "drawMarker",
+          "callee": "String",
+          "lineNumber": 66
+        },
+        {
+          "caller": "drawMarker",
+          "callee": "parseInt",
+          "lineNumber": 70
+        },
+        {
+          "caller": "drawMarker",
+          "callee": "ctx.measureText",
+          "lineNumber": 73
+        },
+        {
+          "caller": "drawMarker",
+          "callee": "drawRoundRect",
+          "lineNumber": 79
+        },
+        {
+          "caller": "drawMarker",
+          "callee": "ctx.fillText",
+          "lineNumber": 83
+        },
+        {
+          "caller": "drawMarker",
+          "callee": "ctx.restore",
+          "lineNumber": 86
+        },
+        {
+          "caller": "drawRoundRect",
+          "callee": "Math.min",
+          "lineNumber": 100
+        },
+        {
+          "caller": "drawRoundRect",
+          "callee": "ctx.beginPath",
+          "lineNumber": 101
+        },
+        {
+          "caller": "drawRoundRect",
+          "callee": "ctx.moveTo",
+          "lineNumber": 102
+        },
+        {
+          "caller": "drawRoundRect",
+          "callee": "ctx.lineTo",
+          "lineNumber": 103
+        },
+        {
+          "caller": "drawRoundRect",
+          "callee": "ctx.arcTo",
+          "lineNumber": 104
+        },
+        {
+          "caller": "drawRoundRect",
+          "callee": "ctx.lineTo",
+          "lineNumber": 105
+        },
+        {
+          "caller": "drawRoundRect",
+          "callee": "ctx.arcTo",
+          "lineNumber": 106
+        },
+        {
+          "caller": "drawRoundRect",
+          "callee": "ctx.lineTo",
+          "lineNumber": 107
+        },
+        {
+          "caller": "drawRoundRect",
+          "callee": "ctx.arcTo",
+          "lineNumber": 108
+        },
+        {
+          "caller": "drawRoundRect",
+          "callee": "ctx.lineTo",
+          "lineNumber": 109
+        },
+        {
+          "caller": "drawRoundRect",
+          "callee": "ctx.arcTo",
+          "lineNumber": 110
+        },
+        {
+          "caller": "drawRoundRect",
+          "callee": "ctx.closePath",
+          "lineNumber": 111
+        },
+        {
+          "caller": "drawRoundRect",
+          "callee": "ctx.fill",
+          "lineNumber": 113
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 2,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/pathProjection.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 74,
+      "nonEmptyLines": 69,
+      "functions": [
+        {
+          "name": "projectToPolyline",
+          "startLine": 23,
+          "endLine": 74,
+          "params": [
+            "point",
+            "polyline",
+            "arcLengthTable"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "projectToPolyline",
+          "line": 23,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "projectToPolyline",
+          "callee": "Math.sqrt",
+          "lineNumber": 63
+        },
+        {
+          "caller": "projectToPolyline",
+          "callee": "Math.sqrt",
+          "lineNumber": 71
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/PerDriverBuffer.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 117,
+      "nonEmptyLines": 105,
+      "functions": [
+        {
+          "name": "isSentinel",
+          "startLine": 114,
+          "endLine": 117,
+          "params": [
+            "sample"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "PerDriverBuffer",
+          "startLine": 20,
+          "endLine": 112,
+          "methods": [
+            "push",
+            "findPair",
+            "trim",
+            "drivers",
+            "size",
+            "latestSampleDate",
+            "recentSamples"
+          ],
+          "properties": [
+            "samples"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SENTINEL_THRESHOLD",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "PerDriverBuffer",
+          "line": 20,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "push",
+          "callee": "isSentinel",
+          "lineNumber": 25
+        },
+        {
+          "caller": "push",
+          "callee": "this.samples.get",
+          "lineNumber": 26
+        },
+        {
+          "caller": "push",
+          "callee": "this.samples.set",
+          "lineNumber": 28
+        },
+        {
+          "caller": "push",
+          "callee": "arr.push",
+          "lineNumber": 33
+        },
+        {
+          "caller": "push",
+          "callee": "arr.splice",
+          "lineNumber": 44
+        },
+        {
+          "caller": "findPair",
+          "callee": "this.samples.get",
+          "lineNumber": 49
+        },
+        {
+          "caller": "trim",
+          "callee": "this.samples.values",
+          "lineNumber": 72
+        },
+        {
+          "caller": "trim",
+          "callee": "arr.splice",
+          "lineNumber": 76
+        },
+        {
+          "caller": "drivers",
+          "callee": "Array.from",
+          "lineNumber": 82
+        },
+        {
+          "caller": "drivers",
+          "callee": "this.samples.keys",
+          "lineNumber": 82
+        },
+        {
+          "caller": "size",
+          "callee": "this.samples.get",
+          "lineNumber": 87
+        },
+        {
+          "caller": "latestSampleDate",
+          "callee": "this.samples.get",
+          "lineNumber": 92
+        },
+        {
+          "caller": "recentSamples",
+          "callee": "import",
+          "lineNumber": 101
+        },
+        {
+          "caller": "recentSamples",
+          "callee": "this.samples.get",
+          "lineNumber": 102
+        },
+        {
+          "caller": "recentSamples",
+          "callee": "import",
+          "lineNumber": 105
+        },
+        {
+          "caller": "recentSamples",
+          "callee": "result.push",
+          "lineNumber": 108
+        },
+        {
+          "caller": "isSentinel",
+          "callee": "Math.abs",
+          "lineNumber": 116
+        },
+        {
+          "caller": "isSentinel",
+          "callee": "Math.abs",
+          "lineNumber": 116
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/map/pitLane.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 42,
+      "nonEmptyLines": 37,
+      "functions": [
+        {
+          "name": "loadPitlane",
+          "startLine": 18,
+          "endLine": 30,
+          "params": [
+            "circuitKey",
+            "year",
+            "fetchImpl"
+          ]
+        },
+        {
+          "name": "isInPitlane",
+          "startLine": 33,
+          "endLine": 42,
+          "params": [
+            "point",
+            "pitlanePolyline",
+            "pitlaneArcTable",
+            "threshold"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "PitlaneJsonBase",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "PITLANE_PROXIMITY",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "loadPitlane",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "isInPitlane",
+          "line": 33,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "loadPitlane",
+          "callee": "globalThis.fetch?.bind",
+          "lineNumber": 23
+        },
+        {
+          "caller": "loadPitlane",
+          "callee": "f",
+          "lineNumber": 26
+        },
+        {
+          "caller": "loadPitlane",
+          "callee": "res.json",
+          "lineNumber": 29
+        },
+        {
+          "caller": "isInPitlane",
+          "callee": "projectToPolyline",
+          "lineNumber": 40
+        },
+        {
+          "caller": "isInPitlane",
+          "callee": "Math.abs",
+          "lineNumber": 41
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 4,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/stateBadges.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 64,
+      "nonEmptyLines": 57,
+      "functions": [
+        {
+          "name": "classifyDriverState",
+          "startLine": 26,
+          "endLine": 41,
+          "params": [
+            "buffer",
+            "driverNumber",
+            "displayTimeMs",
+            "opts"
+          ]
+        },
+        {
+          "name": "drawStateBadge",
+          "startLine": 44,
+          "endLine": 64,
+          "params": [
+            "ctx",
+            "markerPosition",
+            "state",
+            "opts"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "GAP_DISCONNECT_MS",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "classifyDriverState",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "drawStateBadge",
+          "line": 44,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "classifyDriverState",
+          "callee": "buffer.latestSampleDate",
+          "lineNumber": 37
+        },
+        {
+          "caller": "drawStateBadge",
+          "callee": "ctx.beginPath",
+          "lineNumber": 55
+        },
+        {
+          "caller": "drawStateBadge",
+          "callee": "ctx.arc",
+          "lineNumber": 56
+        },
+        {
+          "caller": "drawStateBadge",
+          "callee": "ctx.fill",
+          "lineNumber": 58
+        },
+        {
+          "caller": "drawStateBadge",
+          "callee": "Math.round",
+          "lineNumber": 60
+        },
+        {
+          "caller": "drawStateBadge",
+          "callee": "ctx.fillText",
+          "lineNumber": 63
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/trackRenderer.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 88,
+      "nonEmptyLines": 79,
+      "functions": [
+        {
+          "name": "renderStaticTrack",
+          "startLine": 32,
+          "endLine": 60,
+          "params": [
+            "input"
+          ]
+        },
+        {
+          "name": "strokePolyline",
+          "startLine": 68,
+          "endLine": 88,
+          "params": [
+            "ctx",
+            "polyline",
+            "viewport",
+            "style"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "renderStaticTrack",
+          "line": 32,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "renderStaticTrack",
+          "callee": "ctx.clearRect",
+          "lineNumber": 41
+        },
+        {
+          "caller": "renderStaticTrack",
+          "callee": "ctx.fillRect",
+          "lineNumber": 43
+        },
+        {
+          "caller": "renderStaticTrack",
+          "callee": "strokePolyline",
+          "lineNumber": 46
+        },
+        {
+          "caller": "renderStaticTrack",
+          "callee": "strokePolyline",
+          "lineNumber": 54
+        },
+        {
+          "caller": "strokePolyline",
+          "callee": "ctx.beginPath",
+          "lineNumber": 74
+        },
+        {
+          "caller": "strokePolyline",
+          "callee": "applyViewport",
+          "lineNumber": 75
+        },
+        {
+          "caller": "strokePolyline",
+          "callee": "ctx.moveTo",
+          "lineNumber": 76
+        },
+        {
+          "caller": "strokePolyline",
+          "callee": "applyViewport",
+          "lineNumber": 78
+        },
+        {
+          "caller": "strokePolyline",
+          "callee": "ctx.lineTo",
+          "lineNumber": 79
+        },
+        {
+          "caller": "strokePolyline",
+          "callee": "ctx.setLineDash",
+          "lineNumber": 85
+        },
+        {
+          "caller": "strokePolyline",
+          "callee": "ctx.stroke",
+          "lineNumber": 86
+        },
+        {
+          "caller": "strokePolyline",
+          "callee": "ctx.setLineDash",
+          "lineNumber": 87
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/trails.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 71,
+      "nonEmptyLines": 65,
+      "functions": [
+        {
+          "name": "drawTrail",
+          "startLine": 28,
+          "endLine": 51,
+          "params": [
+            "ctx",
+            "points",
+            "opts"
+          ]
+        },
+        {
+          "name": "collectTrailPoints",
+          "startLine": 57,
+          "endLine": 67,
+          "params": [
+            "buffer",
+            "driverNumber",
+            "displayTimeMs",
+            "viewport",
+            "projectSamplePosition"
+          ]
+        },
+        {
+          "name": "lerp",
+          "startLine": 69,
+          "endLine": 71,
+          "params": [
+            "a",
+            "b",
+            "t"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "TRAIL_WINDOW_MS",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "drawTrail",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "collectTrailPoints",
+          "line": 57,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "drawTrail",
+          "callee": "lerp",
+          "lineNumber": 42
+        },
+        {
+          "caller": "drawTrail",
+          "callee": "lerp",
+          "lineNumber": 43
+        },
+        {
+          "caller": "drawTrail",
+          "callee": "ctx.beginPath",
+          "lineNumber": 45
+        },
+        {
+          "caller": "drawTrail",
+          "callee": "ctx.moveTo",
+          "lineNumber": 46
+        },
+        {
+          "caller": "drawTrail",
+          "callee": "ctx.lineTo",
+          "lineNumber": 47
+        },
+        {
+          "caller": "drawTrail",
+          "callee": "ctx.stroke",
+          "lineNumber": 48
+        },
+        {
+          "caller": "collectTrailPoints",
+          "callee": "import",
+          "lineNumber": 63
+        },
+        {
+          "caller": "collectTrailPoints",
+          "callee": "buffer.recentSamples",
+          "lineNumber": 65
+        },
+        {
+          "caller": "collectTrailPoints",
+          "callee": "recent.map",
+          "lineNumber": 66
+        },
+        {
+          "caller": "collectTrailPoints",
+          "callee": "applyViewport",
+          "lineNumber": 66
+        },
+        {
+          "caller": "collectTrailPoints",
+          "callee": "projectSamplePosition",
+          "lineNumber": 66
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/transform.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 39,
+      "nonEmptyLines": 36,
+      "functions": [
+        {
+          "name": "applyOpenF1Transform",
+          "startLine": 26,
+          "endLine": 39,
+          "params": [
+            "x",
+            "y",
+            "t"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "applyOpenF1Transform",
+          "line": 26,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "applyOpenF1Transform",
+          "callee": "Math.cos",
+          "lineNumber": 33
+        },
+        {
+          "caller": "applyOpenF1Transform",
+          "callee": "Math.sin",
+          "lineNumber": 34
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/shared/__tests__/createMockOpenF1Client.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 43,
+      "nonEmptyLines": 38,
+      "functions": [
+        {
+          "name": "json",
+          "startLine": 6,
+          "endLine": 11,
+          "params": [
+            "body",
+            "status"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "json",
+          "callee": "JSON.stringify",
+          "lineNumber": 7
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/shared/__tests__/Footer.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 83,
+      "nonEmptyLines": 73,
+      "functions": [
+        {
+          "name": "jsonResponse",
+          "startLine": 13,
+          "endLine": 18,
+          "params": [
+            "body",
+            "status"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "jsonResponse",
+          "callee": "JSON.stringify",
+          "lineNumber": 14
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/shared/__tests__/openf1Client.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 532,
+      "nonEmptyLines": 471,
+      "functions": [
+        {
+          "name": "res",
+          "startLine": 14,
+          "endLine": 16,
+          "params": [
+            "status",
+            "body",
+            "headers"
+          ]
+        },
+        {
+          "name": "abortErr",
+          "startLine": 19,
+          "endLine": 23,
+          "params": []
+        },
+        {
+          "name": "makeClient",
+          "startLine": 26,
+          "endLine": 28,
+          "params": [
+            "opts"
+          ]
+        },
+        {
+          "name": "flush",
+          "startLine": 31,
+          "endLine": 31,
+          "params": []
+        },
+        {
+          "name": "asFetch",
+          "startLine": 33,
+          "endLine": 33,
+          "params": [
+            "fn"
+          ]
+        },
+        {
+          "name": "recordSleep",
+          "startLine": 36,
+          "endLine": 36,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "flush",
+          "callee": "setTimeout",
+          "lineNumber": 31
+        },
+        {
+          "caller": "recordSleep",
+          "callee": "vi.fn",
+          "lineNumber": 36
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 6,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/shared/__tests__/SyntheticDataSource.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 98,
+      "nonEmptyLines": 84,
+      "classes": [
+        {
+          "name": "SyntheticDataSource",
+          "startLine": 16,
+          "endLine": 98,
+          "methods": [
+            "setDisplayTime",
+            "pushSample",
+            "getDisplayTime",
+            "getSamplePair",
+            "getStreamState",
+            "onDisplayTimeChange",
+            "getLatestBefore",
+            "getAllBefore",
+            "getLapAt",
+            "getCompletedLapsBefore",
+            "getStintForLap",
+            "getAggregateBefore",
+            "getSessionResult"
+          ],
+          "properties": [
+            "displayTime",
+            "samples",
+            "listeners"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SyntheticDataSource",
+          "line": 16,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "setDisplayTime",
+          "callee": "cb",
+          "lineNumber": 23
+        },
+        {
+          "caller": "pushSample",
+          "callee": "this.samples.get",
+          "lineNumber": 27
+        },
+        {
+          "caller": "pushSample",
+          "callee": "arr.push",
+          "lineNumber": 28
+        },
+        {
+          "caller": "pushSample",
+          "callee": "this.samples.set",
+          "lineNumber": 29
+        },
+        {
+          "caller": "getSamplePair",
+          "callee": "this.samples.get",
+          "lineNumber": 37
+        },
+        {
+          "caller": "getSamplePair",
+          "callee": "t.valueOf",
+          "lineNumber": 40
+        },
+        {
+          "caller": "getSamplePair",
+          "callee": "arr[0].date.valueOf",
+          "lineNumber": 41
+        },
+        {
+          "caller": "getSamplePair",
+          "callee": "arr[arr.length - 1].date.valueOf",
+          "lineNumber": 42
+        },
+        {
+          "caller": "getSamplePair",
+          "callee": "arr[i].date.valueOf",
+          "lineNumber": 46
+        },
+        {
+          "caller": "getSamplePair",
+          "callee": "arr[i + 1].date.valueOf",
+          "lineNumber": 46
+        },
+        {
+          "caller": "onDisplayTimeChange",
+          "callee": "this.listeners.add",
+          "lineNumber": 58
+        },
+        {
+          "caller": "onDisplayTimeChange",
+          "callee": "this.listeners.delete",
+          "lineNumber": 59
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/style/global.css",
+      "language": "css",
+      "fileCategory": "markup",
+      "totalLines": 106,
+      "nonEmptyLines": 90,
+      "metrics": {}
+    },
+    {
+      "path": "vite.config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 20,
+      "nonEmptyLines": 19,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

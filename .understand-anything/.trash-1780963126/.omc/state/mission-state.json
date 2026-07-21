@@ -1,0 +1,273 @@
+{
+  "updatedAt": "2026-06-08T07:07:52.090Z",
+  "missions": [
+    {
+      "id": "session:d3a2f848-8d90-4db6-8f3a-78cafac83447:none",
+      "source": "session",
+      "name": "none",
+      "objective": "Session mission",
+      "createdAt": "2026-06-08T06:58:45.776Z",
+      "updatedAt": "2026-06-08T07:07:52.090Z",
+      "status": "running",
+      "workerCount": 15,
+      "taskCounts": {
+        "total": 15,
+        "pending": 0,
+        "blocked": 0,
+        "inProgress": 4,
+        "completed": 11,
+        "failed": 0
+      },
+      "agents": [
+        {
+          "name": "understand-anything:file-analyzer:a6d40e7",
+          "role": "understand-anything:file-analyzer",
+          "ownership": "a6d40e7b1751c35d4",
+          "status": "done",
+          "currentStep": null,
+          "latestUpdate": "completed",
+          "completedSummary": null,
+          "updatedAt": "2026-06-08T07:02:33.170Z"
+        },
+        {
+          "name": "understand-anything:file-analyzer:a255429",
+          "role": "understand-anything:file-analyzer",
+          "ownership": "a2554298e8efe71ff",
+          "status": "done",
+          "currentStep": null,
+          "latestUpdate": "completed",
+          "completedSummary": null,
+          "updatedAt": "2026-06-08T07:02:21.211Z"
+        },
+        {
+          "name": "understand-anything:file-analyzer:aea4b79",
+          "role": "understand-anything:file-analyzer",
+          "ownership": "aea4b797115b686a2",
+          "status": "done",
+          "currentStep": null,
+          "latestUpdate": "completed",
+          "completedSummary": null,
+          "updatedAt": "2026-06-08T07:02:17.574Z"
+        },
+        {
+          "name": "understand-anything:file-analyzer:a5cb38f",
+          "role": "understand-anything:file-analyzer",
+          "ownership": "a5cb38f49564381f7",
+          "status": "done",
+          "currentStep": null,
+          "latestUpdate": "completed",
+          "completedSummary": null,
+          "updatedAt": "2026-06-08T07:01:36.369Z"
+        },
+        {
+          "name": "understand-anything:file-analyzer:aed17cf",
+          "role": "understand-anything:file-analyzer",
+          "ownership": "aed17cf01f5413108",
+          "status": "done",
+          "currentStep": null,
+          "latestUpdate": "completed",
+          "completedSummary": null,
+          "updatedAt": "2026-06-08T07:00:52.902Z"
+        },
+        {
+          "name": "understand-anything:file-analyzer:ac2d1da",
+          "role": "understand-anything:file-analyzer",
+          "ownership": "ac2d1daa7b21ffd35",
+          "status": "done",
+          "currentStep": null,
+          "latestUpdate": "completed",
+          "completedSummary": null,
+          "updatedAt": "2026-06-08T07:04:27.897Z"
+        },
+        {
+          "name": "understand-anything:file-analyzer:afa6823",
+          "role": "understand-anything:file-analyzer",
+          "ownership": "afa68232c0fdefa2f",
+          "status": "done",
+          "currentStep": null,
+          "latestUpdate": "completed",
+          "completedSummary": null,
+          "updatedAt": "2026-06-08T07:05:37.015Z"
+        },
+        {
+          "name": "understand-anything:file-analyzer:a28d391",
+          "role": "understand-anything:file-analyzer",
+          "ownership": "a28d391a422fc18cf",
+          "status": "done",
+          "currentStep": null,
+          "latestUpdate": "completed",
+          "completedSummary": null,
+          "updatedAt": "2026-06-08T07:04:58.447Z"
+        },
+        {
+          "name": "understand-anything:file-analyzer:a3a4d53",
+          "role": "understand-anything:file-analyzer",
+          "ownership": "a3a4d53a7093806f5",
+          "status": "done",
+          "currentStep": null,
+          "latestUpdate": "completed",
+          "completedSummary": null,
+          "updatedAt": "2026-06-08T07:05:16.503Z"
+        },
+        {
+          "name": "understand-anything:file-analyzer:a1f4f4d",
+          "role": "understand-anything:file-analyzer",
+          "ownership": "a1f4f4d25369407fe",
+          "status": "done",
+          "currentStep": null,
+          "latestUpdate": "completed",
+          "completedSummary": null,
+          "updatedAt": "2026-06-08T07:05:11.022Z"
+        },
+        {
+          "name": "understand-anything:file-analyzer:a66cdcc",
+          "role": "understand-anything:file-analyzer",
+          "ownership": "a66cdcc4c70834e51",
+          "status": "running",
+          "currentStep": null,
+          "latestUpdate": null,
+          "completedSummary": null,
+          "updatedAt": "2026-06-08T07:06:03.444Z"
+        },
+        {
+          "name": "understand-anything:file-analyzer:ac636d1",
+          "role": "understand-anything:file-analyzer",
+          "ownership": "ac636d1598ff4bb11",
+          "status": "running",
+          "currentStep": null,
+          "latestUpdate": null,
+          "completedSummary": null,
+          "updatedAt": "2026-06-08T07:06:20.907Z"
+        },
+        {
+          "name": "understand-anything:file-analyzer:a9f6a3a",
+          "role": "understand-anything:file-analyzer",
+          "ownership": "a9f6a3a715f728364",
+          "status": "running",
+          "currentStep": null,
+          "latestUpdate": null,
+          "completedSummary": null,
+          "updatedAt": "2026-06-08T07:06:36.445Z"
+        },
+        {
+          "name": "understand-anything:file-analyzer:a32151f",
+          "role": "understand-anything:file-analyzer",
+          "ownership": "a32151f9b3b28601c",
+          "status": "running",
+          "currentStep": null,
+          "latestUpdate": null,
+          "completedSummary": null,
+          "updatedAt": "2026-06-08T07:06:51.457Z"
+        },
+        {
+          "name": "understand-anything:file-analyzer:a2adada",
+          "role": "understand-anything:file-analyzer",
+          "ownership": "a2adada7456c85e29",
+          "status": "done",
+          "currentStep": null,
+          "latestUpdate": "completed",
+          "completedSummary": null,
+          "updatedAt": "2026-06-08T07:07:52.090Z"
+        }
+      ],
+      "timeline": [
+        {
+          "id": "session-start:a9f6a3a715f728364:2026-06-08T07:06:36.445Z",
+          "at": "2026-06-08T07:06:36.445Z",
+          "kind": "update",
+          "agent": "understand-anything:file-analyzer:a9f6a3a",
+          "detail": "started understand-anything:file-analyzer:a9f6a3a",
+          "sourceKey": "session-start:a9f6a3a715f728364"
+        },
+        {
+          "id": "session-start:a32151f9b3b28601c:2026-06-08T07:06:51.457Z",
+          "at": "2026-06-08T07:06:51.457Z",
+          "kind": "update",
+          "agent": "understand-anything:file-analyzer:a32151f",
+          "detail": "started understand-anything:file-analyzer:a32151f",
+          "sourceKey": "session-start:a32151f9b3b28601c"
+        },
+        {
+          "id": "session-start:a2adada7456c85e29:2026-06-08T07:06:55.946Z",
+          "at": "2026-06-08T07:06:55.946Z",
+          "kind": "update",
+          "agent": "understand-anything:file-analyzer:a2adada",
+          "detail": "started understand-anything:file-analyzer:a2adada",
+          "sourceKey": "session-start:a2adada7456c85e29"
+        },
+        {
+          "id": "session-stop:a2adada7456c85e29:2026-06-08T07:07:27.884Z",
+          "at": "2026-06-08T07:07:27.884Z",
+          "kind": "completion",
+          "agent": "understand-anything:file-analyzer:a2adada",
+          "detail": "completed",
+          "sourceKey": "session-stop:a2adada7456c85e29"
+        },
+        {
+          "id": "session-stop:a2adada7456c85e29:2026-06-08T07:07:30.843Z",
+          "at": "2026-06-08T07:07:30.843Z",
+          "kind": "completion",
+          "agent": "understand-anything:file-analyzer:a2adada",
+          "detail": "completed",
+          "sourceKey": "session-stop:a2adada7456c85e29"
+        },
+        {
+          "id": "session-stop:a2adada7456c85e29:2026-06-08T07:07:34.426Z",
+          "at": "2026-06-08T07:07:34.426Z",
+          "kind": "completion",
+          "agent": "understand-anything:file-analyzer:a2adada",
+          "detail": "completed",
+          "sourceKey": "session-stop:a2adada7456c85e29"
+        },
+        {
+          "id": "session-stop:a2adada7456c85e29:2026-06-08T07:07:36.375Z",
+          "at": "2026-06-08T07:07:36.375Z",
+          "kind": "completion",
+          "agent": "understand-anything:file-analyzer:a2adada",
+          "detail": "completed",
+          "sourceKey": "session-stop:a2adada7456c85e29"
+        },
+        {
+          "id": "session-stop:a2adada7456c85e29:2026-06-08T07:07:39.316Z",
+          "at": "2026-06-08T07:07:39.316Z",
+          "kind": "completion",
+          "agent": "understand-anything:file-analyzer:a2adada",
+          "detail": "completed",
+          "sourceKey": "session-stop:a2adada7456c85e29"
+        },
+        {
+          "id": "session-stop:a2adada7456c85e29:2026-06-08T07:07:41.751Z",
+          "at": "2026-06-08T07:07:41.751Z",
+          "kind": "completion",
+          "agent": "understand-anything:file-analyzer:a2adada",
+          "detail": "completed",
+          "sourceKey": "session-stop:a2adada7456c85e29"
+        },
+        {
+          "id": "session-stop:a2adada7456c85e29:2026-06-08T07:07:48.928Z",
+          "at": "2026-06-08T07:07:48.928Z",
+          "kind": "completion",
+          "agent": "understand-anything:file-analyzer:a2adada",
+          "detail": "completed",
+          "sourceKey": "session-stop:a2adada7456c85e29"
+        },
+        {
+          "id": "session-stop:a2adada7456c85e29:2026-06-08T07:07:50.493Z",
+          "at": "2026-06-08T07:07:50.493Z",
+          "kind": "completion",
+          "agent": "understand-anything:file-analyzer:a2adada",
+          "detail": "completed",
+          "sourceKey": "session-stop:a2adada7456c85e29"
+        },
+        {
+          "id": "session-stop:a2adada7456c85e29:2026-06-08T07:07:52.090Z",
+          "at": "2026-06-08T07:07:52.090Z",
+          "kind": "completion",
+          "agent": "understand-anything:file-analyzer:a2adada",
+          "detail": "completed",
+          "sourceKey": "session-stop:a2adada7456c85e29"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "projectRoot": "/Users/a453498/Downloads/project/soon_board",
+  "batchFiles": [
+    {"path": ".omc/plans/dashboard-implementation.md", "language": "markdown", "sizeLines": 727, "fileCategory": "docs"},
+    {"path": ".omc/plans/dashboard-layout-improvements.md", "language": "markdown", "sizeLines": 217, "fileCategory": "docs"},
+    {"path": ".omc/plans/future-leak-dnf-followup.md", "language": "markdown", "sizeLines": 163, "fileCategory": "docs"},
+    {"path": ".omc/plans/live-map-followup.md", "language": "markdown", "sizeLines": 162, "fileCategory": "docs"},
+    {"path": ".omc/plans/live-map-implementation.md", "language": "markdown", "sizeLines": 930, "fileCategory": "docs"},
+    {"path": ".omc/plans/main-page-implementation.md", "language": "markdown", "sizeLines": 707, "fileCategory": "docs"},
+    {"path": ".omc/plans/openf1-client.md", "language": "markdown", "sizeLines": 626, "fileCategory": "docs"},
+    {"path": ".omc/plans/p0-critic-fixes.md", "language": "markdown", "sizeLines": 220, "fileCategory": "docs"},
+    {"path": ".omc/plans/qualifying-session-dashboard.md", "language": "markdown", "sizeLines": 192, "fileCategory": "docs"}
+  ],
+  "batchImportData": {
+    ".omc/plans/dashboard-implementation.md": [],
+    ".omc/plans/dashboard-layout-improvements.md": [],
+    ".omc/plans/future-leak-dnf-followup.md": [],
+    ".omc/plans/live-map-followup.md": [],
+    ".omc/plans/live-map-implementation.md": [],
+    ".omc/plans/main-page-implementation.md": [],
+    ".omc/plans/openf1-client.md": [],
+    ".omc/plans/p0-critic-fixes.md": [],
+    ".omc/plans/qualifying-session-dashboard.md": []
+  }
+}

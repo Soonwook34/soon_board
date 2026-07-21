@@ -1,0 +1,599 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 10,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "src/dashboard/DashboardApp.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 146,
+      "nonEmptyLines": 137,
+      "functions": [
+        {
+          "name": "DashboardApp",
+          "startLine": 50,
+          "endLine": 146,
+          "params": [
+            "{ meeting, session, year, mode, map, onBack }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "DashboardApp",
+          "line": 50,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "DashboardApp",
+          "callee": "useSelectedDriver",
+          "lineNumber": 51
+        },
+        {
+          "caller": "DashboardApp",
+          "callee": "useMediaQuery",
+          "lineNumber": 52
+        },
+        {
+          "caller": "DashboardApp",
+          "callee": "useState",
+          "lineNumber": 53
+        },
+        {
+          "caller": "DashboardApp",
+          "callee": "resolveProfile",
+          "lineNumber": 58
+        },
+        {
+          "caller": "DashboardApp",
+          "callee": "resolveSessionKind",
+          "lineNumber": 58
+        },
+        {
+          "caller": "DashboardApp",
+          "callee": "useEffect",
+          "lineNumber": 63
+        },
+        {
+          "caller": "DashboardApp",
+          "callee": "clearSelection",
+          "lineNumber": 64
+        },
+        {
+          "caller": "DashboardApp",
+          "callee": "useEffect",
+          "lineNumber": 68
+        },
+        {
+          "caller": "DashboardApp",
+          "callee": "clearSelection",
+          "lineNumber": 70
+        },
+        {
+          "caller": "DashboardApp",
+          "callee": "setToast",
+          "lineNumber": 71
+        },
+        {
+          "caller": "DashboardApp",
+          "callee": "profile.renderProgress",
+          "lineNumber": 95
+        },
+        {
+          "caller": "DashboardApp",
+          "callee": "profile.renderSidebar",
+          "lineNumber": 131
+        },
+        {
+          "caller": "DashboardApp",
+          "callee": "profile.renderBadges",
+          "lineNumber": 133
+        },
+        {
+          "caller": "DashboardApp",
+          "callee": "setToast",
+          "lineNumber": 143
+        }
+      ],
+      "metrics": {
+        "importCount": 13,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/__tests__/DashboardApp.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 212,
+      "nonEmptyLines": 196,
+      "functions": [
+        {
+          "name": "installViewport",
+          "startLine": 146,
+          "endLine": 165,
+          "params": [
+            "belowInitial"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "installViewport",
+          "callee": "listeners.add",
+          "lineNumber": 155
+        },
+        {
+          "caller": "installViewport",
+          "callee": "listeners.delete",
+          "lineNumber": 157
+        },
+        {
+          "caller": "set",
+          "callee": "l",
+          "lineNumber": 162
+        },
+        {
+          "caller": "renderApp",
+          "callee": "makeFakeDs",
+          "lineNumber": 177
+        },
+        {
+          "caller": "renderApp",
+          "callee": "render",
+          "lineNumber": 178
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/detailPanel/DriverDetailPanel.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 92,
+      "nonEmptyLines": 85,
+      "functions": [
+        {
+          "name": "DetailSection",
+          "startLine": 20,
+          "endLine": 29,
+          "params": [
+            "{ children }"
+          ]
+        },
+        {
+          "name": "DriverDetailPanel",
+          "startLine": 31,
+          "endLine": 92,
+          "params": [
+            "{ session }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "DriverDetailPanel",
+          "line": 31,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "DriverDetailPanel",
+          "callee": "useSelectedDriver",
+          "lineNumber": 32
+        },
+        {
+          "caller": "DriverDetailPanel",
+          "callee": "useEffect",
+          "lineNumber": 36
+        },
+        {
+          "caller": "onKey",
+          "callee": "clearSelection",
+          "lineNumber": 39
+        },
+        {
+          "caller": "DriverDetailPanel",
+          "callee": "window.addEventListener",
+          "lineNumber": 41
+        },
+        {
+          "caller": "DriverDetailPanel",
+          "callee": "window.removeEventListener",
+          "lineNumber": 42
+        },
+        {
+          "caller": "DriverDetailPanel",
+          "callee": "clearSelection",
+          "lineNumber": 70
+        }
+      ],
+      "metrics": {
+        "importCount": 9,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/detailPanel/__tests__/DriverDetailPanel.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 81,
+      "nonEmptyLines": 72,
+      "functions": [
+        {
+          "name": "drivers1",
+          "startLine": 24,
+          "endLine": 31,
+          "params": []
+        },
+        {
+          "name": "renderPanel",
+          "startLine": 33,
+          "endLine": 41,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "renderPanel",
+          "callee": "render",
+          "lineNumber": 34
+        },
+        {
+          "caller": "renderPanel",
+          "callee": "makeFakeDs",
+          "lineNumber": 35
+        },
+        {
+          "caller": "renderPanel",
+          "callee": "drivers1",
+          "lineNumber": 36
+        }
+      ],
+      "metrics": {
+        "importCount": 7,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/shared/__tests__/selectionStore.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 61,
+      "nonEmptyLines": 54,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/shared/__tests__/useMediaQuery.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 66,
+      "nonEmptyLines": 60,
+      "functions": [
+        {
+          "name": "installMatchMedia",
+          "startLine": 14,
+          "endLine": 36,
+          "params": [
+            "initial"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "installMatchMedia",
+          "callee": "listeners.add",
+          "lineNumber": 22
+        },
+        {
+          "caller": "installMatchMedia",
+          "callee": "listeners.delete",
+          "lineNumber": 23
+        },
+        {
+          "caller": "set",
+          "callee": "l",
+          "lineNumber": 32
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/shared/selectionStore.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 47,
+      "nonEmptyLines": 38,
+      "functions": [
+        {
+          "name": "emit",
+          "startLine": 10,
+          "endLine": 12,
+          "params": []
+        },
+        {
+          "name": "selectDriver",
+          "startLine": 15,
+          "endLine": 18,
+          "params": [
+            "driverNumber"
+          ]
+        },
+        {
+          "name": "clearSelection",
+          "startLine": 21,
+          "endLine": 25,
+          "params": []
+        },
+        {
+          "name": "getSelectedDriver",
+          "startLine": 27,
+          "endLine": 29,
+          "params": []
+        },
+        {
+          "name": "subscribeSelection",
+          "startLine": 31,
+          "endLine": 36,
+          "params": [
+            "listener"
+          ]
+        },
+        {
+          "name": "_resetSelection",
+          "startLine": 39,
+          "endLine": 42,
+          "params": []
+        },
+        {
+          "name": "useSelectedDriver",
+          "startLine": 45,
+          "endLine": 47,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "selectDriver",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "clearSelection",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "getSelectedDriver",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "subscribeSelection",
+          "line": 31,
+          "isDefault": false
+        },
+        {
+          "name": "_resetSelection",
+          "line": 39,
+          "isDefault": false
+        },
+        {
+          "name": "useSelectedDriver",
+          "line": 45,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "emit",
+          "callee": "l",
+          "lineNumber": 11
+        },
+        {
+          "caller": "selectDriver",
+          "callee": "emit",
+          "lineNumber": 17
+        },
+        {
+          "caller": "clearSelection",
+          "callee": "emit",
+          "lineNumber": 24
+        },
+        {
+          "caller": "subscribeSelection",
+          "callee": "listeners.add",
+          "lineNumber": 32
+        },
+        {
+          "caller": "subscribeSelection",
+          "callee": "listeners.delete",
+          "lineNumber": 34
+        },
+        {
+          "caller": "_resetSelection",
+          "callee": "listeners.clear",
+          "lineNumber": 41
+        },
+        {
+          "caller": "useSelectedDriver",
+          "callee": "useSyncExternalStore",
+          "lineNumber": 46
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 6,
+        "functionCount": 7,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/shared/useMediaQuery.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 25,
+      "nonEmptyLines": 20,
+      "functions": [
+        {
+          "name": "evaluate",
+          "startLine": 7,
+          "endLine": 10,
+          "params": [
+            "query"
+          ]
+        },
+        {
+          "name": "useMediaQuery",
+          "startLine": 12,
+          "endLine": 25,
+          "params": [
+            "query"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useMediaQuery",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "evaluate",
+          "callee": "window.matchMedia",
+          "lineNumber": 9
+        },
+        {
+          "caller": "useMediaQuery",
+          "callee": "useState",
+          "lineNumber": 13
+        },
+        {
+          "caller": "useMediaQuery",
+          "callee": "evaluate",
+          "lineNumber": 13
+        },
+        {
+          "caller": "useMediaQuery",
+          "callee": "useEffect",
+          "lineNumber": 15
+        },
+        {
+          "caller": "useMediaQuery",
+          "callee": "window.matchMedia",
+          "lineNumber": 17
+        },
+        {
+          "caller": "onChange",
+          "callee": "setMatches",
+          "lineNumber": 18
+        },
+        {
+          "caller": "useMediaQuery",
+          "callee": "onChange",
+          "lineNumber": 19
+        },
+        {
+          "caller": "useMediaQuery",
+          "callee": "mql.addEventListener",
+          "lineNumber": 20
+        },
+        {
+          "caller": "useMediaQuery",
+          "callee": "mql.removeEventListener",
+          "lineNumber": 21
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/NarrowScreenBanner.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 21,
+      "nonEmptyLines": 20,
+      "functions": [
+        {
+          "name": "NarrowScreenBanner",
+          "startLine": 4,
+          "endLine": 21,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "NarrowScreenBanner",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/Toast.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 51,
+      "nonEmptyLines": 49,
+      "functions": [
+        {
+          "name": "Toast",
+          "startLine": 10,
+          "endLine": 51,
+          "params": [
+            "{ message, onDismiss }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Toast",
+          "line": 10,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    }
+  ]
+}

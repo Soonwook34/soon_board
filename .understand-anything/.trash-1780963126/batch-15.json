@@ -1,0 +1,67 @@
+{
+  "nodes": [
+    {
+      "id": "config:src/dashboard/derived/__tests__/fixtures/quali-9468-laps.json",
+      "type": "config",
+      "name": "quali-9468-laps.json",
+      "filePath": "src/dashboard/derived/__tests__/fixtures/quali-9468-laps.json",
+      "summary": "OpenF1 quali 세션(session 9468)의 lap 데이터를 캡처한 테스트 fixture로, 드라이버별 267개 랩 레코드(섹터별 duration, i1/i2/st speed, segments, is_pit_out_lap, lap_duration)를 담는다. derived 로직 테스트에서 퀄리파잉 섹터·랩 계산 검증에 사용된다.",
+      "tags": ["test-fixture", "data", "openf1", "qualifying", "laps"],
+      "complexity": "complex",
+      "languageNotes": "267개 lap 레코드를 담은 단일 라인 minified JSON 배열."
+    },
+    {
+      "id": "config:src/dashboard/derived/__tests__/fixtures/quali-9468-pit.json",
+      "type": "config",
+      "name": "quali-9468-pit.json",
+      "filePath": "src/dashboard/derived/__tests__/fixtures/quali-9468-pit.json",
+      "summary": "OpenF1 quali 세션(session 9468)의 pit 데이터를 캡처한 테스트 fixture로, 92개 핏 레코드(lane_duration, stop_duration, pit_duration, driver_number, lap_number)를 담는다. 핏스톱 파생 로직 회귀 테스트용 골든 데이터.",
+      "tags": ["test-fixture", "data", "openf1", "qualifying", "pit"],
+      "complexity": "moderate",
+      "languageNotes": "92개 pit 레코드를 담은 단일 라인 minified JSON 배열."
+    },
+    {
+      "id": "config:src/dashboard/derived/__tests__/fixtures/quali-9468-race_control.json",
+      "type": "config",
+      "name": "quali-9468-race_control.json",
+      "filePath": "src/dashboard/derived/__tests__/fixtures/quali-9468-race_control.json",
+      "summary": "OpenF1 quali 세션(session 9468)의 race control 메시지를 캡처한 테스트 fixture로, 20개 레코드(category, flag, scope, sector, qualifying_phase, message)를 담는다. 퀄리파잉 phase 전환·플래그 처리 로직 검증에 사용된다.",
+      "tags": ["test-fixture", "data", "openf1", "qualifying", "race-control"],
+      "complexity": "simple",
+      "languageNotes": "20개 race_control 메시지를 담은 단일 라인 minified JSON 배열."
+    },
+    {
+      "id": "config:src/dashboard/derived/__tests__/fixtures/quali-9468-session_result.json",
+      "type": "config",
+      "name": "quali-9468-session_result.json",
+      "filePath": "src/dashboard/derived/__tests__/fixtures/quali-9468-session_result.json",
+      "summary": "OpenF1 quali 세션(session 9468)의 최종 결과를 캡처한 테스트 fixture로, 20개 드라이버 레코드(position, number_of_laps, dnf/dns/dsq, duration, gap_to_leader)를 담는다. 세션 결과 파생 로직의 기대값 검증에 사용된다.",
+      "tags": ["test-fixture", "data", "openf1", "qualifying", "session-result"],
+      "complexity": "simple",
+      "languageNotes": "20개 session_result 레코드를 담은 단일 라인 minified JSON 배열."
+    }
+  ],
+  "edges": [
+    {
+      "source": "config:src/dashboard/derived/__tests__/fixtures/quali-9468-laps.json",
+      "target": "file:src/dashboard/derived/__tests__/qualifyingSegments.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:src/dashboard/derived/__tests__/fixtures/quali-9468-race_control.json",
+      "target": "file:src/dashboard/derived/__tests__/qualifyingSegments.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:src/dashboard/derived/__tests__/fixtures/quali-9468-session_result.json",
+      "target": "file:src/dashboard/derived/__tests__/qualifyingSegments.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

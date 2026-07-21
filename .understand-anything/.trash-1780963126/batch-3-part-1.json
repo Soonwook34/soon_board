@@ -1,0 +1,1175 @@
+{
+  "nodes": [
+    {
+      "id": "file:src/dashboard/detailPanel/DriverHeader.tsx",
+      "type": "file",
+      "name": "DriverHeader.tsx",
+      "filePath": "src/dashboard/detailPanel/DriverHeader.tsx",
+      "summary": "선택된 드라이버의 번호·약자·팀 컬러를 표시하는 detail 패널 헤더 컴포넌트.",
+      "tags": [
+        "component",
+        "ui",
+        "data-model",
+        "detail-panel"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/panels/FastestLapBadges.tsx",
+      "type": "file",
+      "name": "FastestLapBadges.tsx",
+      "filePath": "src/dashboard/panels/FastestLapBadges.tsx",
+      "summary": "세션 내 최고 랩타임과 섹터별 베스트를 배지 카드 형태로 보여주는 대시보드 패널 컴포넌트.",
+      "tags": [
+        "component",
+        "ui",
+        "panel",
+        "aggregation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/panels/TyreStrategy.tsx",
+      "type": "file",
+      "name": "TyreStrategy.tsx",
+      "filePath": "src/dashboard/panels/TyreStrategy.tsx",
+      "summary": "드라이버별 타이어 스틴트와 핏 전략을 랩 단위 막대로 시각화하는 대시보드 패널과 스틴트 랩 구간 계산 헬퍼.",
+      "tags": [
+        "component",
+        "ui",
+        "panel",
+        "data-pipeline"
+      ],
+      "complexity": "complex",
+      "languageNotes": "스틴트/핏 데이터를 useMemo로 가공해 랩 스팬 막대로 렌더링하는 데이터 변환 중심 패널."
+    },
+    {
+      "id": "file:src/dashboard/panels/__tests__/FastestLapBadges.test.tsx",
+      "type": "file",
+      "name": "FastestLapBadges.test.tsx",
+      "filePath": "src/dashboard/panels/__tests__/FastestLapBadges.test.tsx",
+      "summary": "FastestLapBadges 패널이 fake DataSource로 최고 랩·섹터 배지를 올바르게 렌더링하는지 검증하는 테스트.",
+      "tags": [
+        "test",
+        "ui",
+        "component"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/panels/__tests__/TyreStrategy.test.tsx",
+      "type": "file",
+      "name": "TyreStrategy.test.tsx",
+      "filePath": "src/dashboard/panels/__tests__/TyreStrategy.test.tsx",
+      "summary": "TyreStrategy 패널의 스틴트 스팬·핏 랩·리더 기준 현재 랩 처리 로직을 fake DataSource로 검증하는 테스트.",
+      "tags": [
+        "test",
+        "ui",
+        "component"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/dashboard/panels/qualifying/KnockoutPanel.tsx",
+      "type": "file",
+      "name": "KnockoutPanel.tsx",
+      "filePath": "src/dashboard/panels/qualifying/KnockoutPanel.tsx",
+      "summary": "퀄리파잉 컷라인 근처 녹아웃 존 드라이버들을 컷라인 대비 갭과 함께 보여주는 패널 컴포넌트.",
+      "tags": [
+        "component",
+        "ui",
+        "panel",
+        "qualifying"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/panels/qualifying/QualifyingTower.tsx",
+      "type": "file",
+      "name": "QualifyingTower.tsx",
+      "filePath": "src/dashboard/panels/qualifying/QualifyingTower.tsx",
+      "summary": "퀄리파잉 세그먼트별 순위 타워를 컷라인·녹아웃 존 표시와 드라이버 선택 기능과 함께 렌더링하는 패널.",
+      "tags": [
+        "component",
+        "ui",
+        "panel",
+        "qualifying"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/panels/qualifying/SegmentBestBoard.tsx",
+      "type": "file",
+      "name": "SegmentBestBoard.tsx",
+      "filePath": "src/dashboard/panels/qualifying/SegmentBestBoard.tsx",
+      "summary": "Q1/Q2/Q3 각 세그먼트의 베스트 랩 상위 드라이버를 보드 형태로 나열하는 퀄리파잉 패널.",
+      "tags": [
+        "component",
+        "ui",
+        "panel",
+        "qualifying"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/panels/qualifying/SegmentProgress.tsx",
+      "type": "file",
+      "name": "SegmentProgress.tsx",
+      "filePath": "src/dashboard/panels/qualifying/SegmentProgress.tsx",
+      "summary": "퀄리파잉 각 세그먼트의 경과/남은 시간과 진행 상태를 시계 형식으로 보여주는 진행 표시 패널.",
+      "tags": [
+        "component",
+        "ui",
+        "panel",
+        "qualifying"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/panels/qualifying/__tests__/qualifyingPanels.test.tsx",
+      "type": "file",
+      "name": "qualifyingPanels.test.tsx",
+      "filePath": "src/dashboard/panels/qualifying/__tests__/qualifyingPanels.test.tsx",
+      "summary": "퀄리파잉 패널(타워·녹아웃·세그먼트 보드/진행)들이 fake DataSource로 올바르게 렌더링되는지 검증하는 통합 테스트.",
+      "tags": [
+        "test",
+        "ui",
+        "component",
+        "qualifying"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/panels/qualifying/useQualifyingModel.tsx",
+      "type": "file",
+      "name": "useQualifyingModel.tsx",
+      "filePath": "src/dashboard/panels/qualifying/useQualifyingModel.tsx",
+      "summary": "퀄리파잉 모델을 1회 계산해 Context로 제공하고 소비 hook을 노출하는 provider/hook 모듈.",
+      "tags": [
+        "hook",
+        "context",
+        "provider",
+        "qualifying"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/profiles/__tests__/dashboardProfile.test.ts",
+      "type": "file",
+      "name": "dashboardProfile.test.ts",
+      "filePath": "src/dashboard/profiles/__tests__/dashboardProfile.test.ts",
+      "summary": "세션 종류에 따라 resolveProfile이 기본/퀄리파잉 프로파일을 올바르게 선택하는지 검증하는 테스트.",
+      "tags": [
+        "test",
+        "profile",
+        "routing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/detailPanel/DriverHeader.tsx:DriverHeader",
+      "type": "function",
+      "name": "DriverHeader",
+      "filePath": "src/dashboard/detailPanel/DriverHeader.tsx",
+      "lineRange": [
+        7,
+        60
+      ],
+      "summary": "driverNumber prop으로 드라이버를 조회해 약자·번호·팀 컬러 헤더를 렌더링하는 컴포넌트.",
+      "tags": [
+        "component",
+        "ui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/panels/FastestLapBadges.tsx:BadgeCard",
+      "type": "function",
+      "name": "BadgeCard",
+      "filePath": "src/dashboard/panels/FastestLapBadges.tsx",
+      "lineRange": [
+        21,
+        75
+      ],
+      "summary": "라벨·값·약자·팀 컬러를 받아 단일 최고 기록 배지 카드를 렌더링하는 presentational 컴포넌트.",
+      "tags": [
+        "component",
+        "ui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/dashboard/panels/FastestLapBadges.tsx:FastestLapBadges",
+      "type": "function",
+      "name": "FastestLapBadges",
+      "filePath": "src/dashboard/panels/FastestLapBadges.tsx",
+      "lineRange": [
+        77,
+        154
+      ],
+      "summary": "DataSource를 집계해 최고 랩과 섹터별 베스트를 계산하고 배지 카드들로 렌더링하는 패널 컴포넌트.",
+      "tags": [
+        "component",
+        "ui",
+        "aggregation"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/dashboard/panels/TyreStrategy.tsx:stintLapSpans",
+      "type": "function",
+      "name": "stintLapSpans",
+      "filePath": "src/dashboard/panels/TyreStrategy.tsx",
+      "lineRange": [
+        30,
+        44
+      ],
+      "summary": "스틴트 목록과 현재 랩으로부터 각 컴파운드의 랩 구간 스팬 배열을 계산하는 헬퍼.",
+      "tags": [
+        "utility",
+        "data-pipeline"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/panels/TyreStrategy.tsx:TyreStrategy",
+      "type": "function",
+      "name": "TyreStrategy",
+      "filePath": "src/dashboard/panels/TyreStrategy.tsx",
+      "lineRange": [
+        55,
+        203
+      ],
+      "summary": "드라이버별 스틴트·핏 데이터를 가공해 타이어 전략을 랩 막대 형태로 시각화하는 패널 컴포넌트.",
+      "tags": [
+        "component",
+        "ui",
+        "data-pipeline"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/dashboard/panels/qualifying/KnockoutPanel.tsx:KnockoutPanel",
+      "type": "function",
+      "name": "KnockoutPanel",
+      "filePath": "src/dashboard/panels/qualifying/KnockoutPanel.tsx",
+      "lineRange": [
+        14,
+        86
+      ],
+      "summary": "퀄리파잉 모델에서 컷라인과 녹아웃 존을 계산해 위험 드라이버들을 갭과 함께 렌더링하는 컴포넌트.",
+      "tags": [
+        "component",
+        "ui",
+        "qualifying"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/dashboard/panels/qualifying/QualifyingTower.tsx:QualifyingTower",
+      "type": "function",
+      "name": "QualifyingTower",
+      "filePath": "src/dashboard/panels/qualifying/QualifyingTower.tsx",
+      "lineRange": [
+        27,
+        128
+      ],
+      "summary": "세그먼트 순위를 정렬하고 컷라인·녹아웃 존·드라이버 선택을 처리하는 퀄리파잉 타워 컴포넌트.",
+      "tags": [
+        "component",
+        "ui",
+        "qualifying"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/dashboard/panels/qualifying/SegmentBestBoard.tsx:SegmentBestBoard",
+      "type": "function",
+      "name": "SegmentBestBoard",
+      "filePath": "src/dashboard/panels/qualifying/SegmentBestBoard.tsx",
+      "lineRange": [
+        18,
+        80
+      ],
+      "summary": "각 퀄리파잉 세그먼트의 베스트 랩 상위 드라이버를 part별로 묶어 보드로 렌더링하는 컴포넌트.",
+      "tags": [
+        "component",
+        "ui",
+        "qualifying"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/dashboard/panels/qualifying/SegmentProgress.tsx:SegmentProgress",
+      "type": "function",
+      "name": "SegmentProgress",
+      "filePath": "src/dashboard/panels/qualifying/SegmentProgress.tsx",
+      "lineRange": [
+        21,
+        86
+      ],
+      "summary": "세그먼트 경계로부터 경과/남은 시간을 계산해 각 part의 진행 상태를 시계 형식으로 보여주는 컴포넌트.",
+      "tags": [
+        "component",
+        "ui",
+        "qualifying"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/dashboard/panels/qualifying/useQualifyingModel.tsx:QualifyingModelProvider",
+      "type": "function",
+      "name": "QualifyingModelProvider",
+      "filePath": "src/dashboard/panels/qualifying/useQualifyingModel.tsx",
+      "lineRange": [
+        16,
+        22
+      ],
+      "summary": "DataSource·드라이버로부터 퀄리파잉 모델을 useMemo로 1회 계산해 Context로 내려주는 provider.",
+      "tags": [
+        "provider",
+        "context",
+        "qualifying"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/panels/qualifying/useQualifyingModel.tsx:useQualifyingModel",
+      "type": "function",
+      "name": "useQualifyingModel",
+      "filePath": "src/dashboard/panels/qualifying/useQualifyingModel.tsx",
+      "lineRange": [
+        24,
+        30
+      ],
+      "summary": "QualifyingModel Context를 소비하는 hook.",
+      "tags": [
+        "hook",
+        "context",
+        "qualifying"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:src/dashboard/detailPanel/DriverHeader.tsx",
+      "target": "file:src/dashboard/shared/dashboardStyles.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/detailPanel/DriverHeader.tsx",
+      "target": "file:src/dashboard/shared/DriversContext.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/FastestLapBadges.tsx",
+      "target": "file:src/dashboard/shared/dashboardStyles.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/FastestLapBadges.tsx",
+      "target": "file:src/dashboard/shared/DataSourceContext.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/FastestLapBadges.tsx",
+      "target": "file:src/dashboard/shared/DriversContext.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/FastestLapBadges.tsx",
+      "target": "file:src/dashboard/shared/formatTime.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/FastestLapBadges.tsx",
+      "target": "file:src/dashboard/shared/sectorColors.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/FastestLapBadges.tsx",
+      "target": "file:src/dashboard/shared/useAggregate.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/FastestLapBadges.tsx",
+      "target": "file:src/dashboard/shared/useDisplayTime.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/TyreStrategy.tsx",
+      "target": "file:src/dashboard/derived/currentLap.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/TyreStrategy.tsx",
+      "target": "file:src/dashboard/derived/stints.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/TyreStrategy.tsx",
+      "target": "file:src/dashboard/shared/dashboardStyles.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/TyreStrategy.tsx",
+      "target": "file:src/dashboard/shared/DataSourceContext.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/TyreStrategy.tsx",
+      "target": "file:src/dashboard/shared/DriversContext.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/TyreStrategy.tsx",
+      "target": "file:src/dashboard/shared/PanelHeading.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/TyreStrategy.tsx",
+      "target": "file:src/dashboard/shared/tyreColors.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/TyreStrategy.tsx",
+      "target": "file:src/dashboard/shared/useDisplayTime.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/TyreStrategy.tsx",
+      "target": "file:src/shared/openf1Types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/__tests__/FastestLapBadges.test.tsx",
+      "target": "file:src/dashboard/__tests__/fakeDataSource.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/__tests__/FastestLapBadges.test.tsx",
+      "target": "file:src/dashboard/panels/FastestLapBadges.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/__tests__/FastestLapBadges.test.tsx",
+      "target": "file:src/dashboard/shared/DataSourceContext.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/__tests__/FastestLapBadges.test.tsx",
+      "target": "file:src/dashboard/shared/DriversContext.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/__tests__/FastestLapBadges.test.tsx",
+      "target": "file:src/shared/openf1Types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/__tests__/TyreStrategy.test.tsx",
+      "target": "file:src/dashboard/__tests__/fakeDataSource.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/__tests__/TyreStrategy.test.tsx",
+      "target": "file:src/dashboard/panels/TyreStrategy.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/__tests__/TyreStrategy.test.tsx",
+      "target": "file:src/dashboard/shared/DataSourceContext.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/__tests__/TyreStrategy.test.tsx",
+      "target": "file:src/dashboard/shared/DriversContext.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/__tests__/TyreStrategy.test.tsx",
+      "target": "file:src/shared/openf1Types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/KnockoutPanel.tsx",
+      "target": "file:src/dashboard/derived/knockout.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/KnockoutPanel.tsx",
+      "target": "file:src/dashboard/panels/qualifying/useQualifyingModel.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/KnockoutPanel.tsx",
+      "target": "file:src/dashboard/shared/dashboardStyles.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/KnockoutPanel.tsx",
+      "target": "file:src/dashboard/shared/DriversContext.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/KnockoutPanel.tsx",
+      "target": "file:src/dashboard/shared/PanelHeading.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/KnockoutPanel.tsx",
+      "target": "file:src/shared/seasonData.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/KnockoutPanel.tsx",
+      "target": "file:src/shared/sessionKind.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/KnockoutPanel.tsx",
+      "target": "file:src/style/tokens.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/QualifyingTower.tsx",
+      "target": "file:src/dashboard/derived/knockout.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/QualifyingTower.tsx",
+      "target": "file:src/dashboard/panels/qualifying/useQualifyingModel.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/QualifyingTower.tsx",
+      "target": "file:src/dashboard/shared/dashboardStyles.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/QualifyingTower.tsx",
+      "target": "file:src/dashboard/shared/DriversContext.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/QualifyingTower.tsx",
+      "target": "file:src/dashboard/shared/formatTime.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/QualifyingTower.tsx",
+      "target": "file:src/dashboard/shared/PanelHeading.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/QualifyingTower.tsx",
+      "target": "file:src/dashboard/shared/selectionStore.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/QualifyingTower.tsx",
+      "target": "file:src/shared/seasonData.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/QualifyingTower.tsx",
+      "target": "file:src/shared/sessionKind.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/QualifyingTower.tsx",
+      "target": "file:src/style/tokens.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/SegmentBestBoard.tsx",
+      "target": "file:src/dashboard/derived/qualifyingSegments.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/SegmentBestBoard.tsx",
+      "target": "file:src/dashboard/panels/qualifying/useQualifyingModel.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/SegmentBestBoard.tsx",
+      "target": "file:src/dashboard/shared/dashboardStyles.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/SegmentBestBoard.tsx",
+      "target": "file:src/dashboard/shared/DriversContext.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/SegmentBestBoard.tsx",
+      "target": "file:src/dashboard/shared/formatTime.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/SegmentBestBoard.tsx",
+      "target": "file:src/dashboard/shared/PanelHeading.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/SegmentBestBoard.tsx",
+      "target": "file:src/shared/seasonData.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/SegmentBestBoard.tsx",
+      "target": "file:src/shared/sessionKind.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/SegmentBestBoard.tsx",
+      "target": "file:src/style/tokens.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/SegmentProgress.tsx",
+      "target": "file:src/dashboard/derived/qualifyingSegments.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/SegmentProgress.tsx",
+      "target": "file:src/dashboard/shared/dashboardStyles.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/SegmentProgress.tsx",
+      "target": "file:src/dashboard/shared/DataSourceContext.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/SegmentProgress.tsx",
+      "target": "file:src/dashboard/shared/useDisplayTime.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/SegmentProgress.tsx",
+      "target": "file:src/shared/seasonData.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/SegmentProgress.tsx",
+      "target": "file:src/shared/sessionKind.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/SegmentProgress.tsx",
+      "target": "file:src/style/tokens.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/__tests__/qualifyingPanels.test.tsx",
+      "target": "file:src/dashboard/__tests__/fakeDataSource.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/__tests__/qualifyingPanels.test.tsx",
+      "target": "file:src/dashboard/panels/qualifying/KnockoutPanel.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/__tests__/qualifyingPanels.test.tsx",
+      "target": "file:src/dashboard/panels/qualifying/QualifyingTower.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/__tests__/qualifyingPanels.test.tsx",
+      "target": "file:src/dashboard/panels/qualifying/SegmentBestBoard.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/__tests__/qualifyingPanels.test.tsx",
+      "target": "file:src/dashboard/panels/qualifying/SegmentProgress.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/__tests__/qualifyingPanels.test.tsx",
+      "target": "file:src/dashboard/panels/qualifying/useQualifyingModel.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/__tests__/qualifyingPanels.test.tsx",
+      "target": "file:src/dashboard/shared/DataSourceContext.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/__tests__/qualifyingPanels.test.tsx",
+      "target": "file:src/dashboard/shared/DriversContext.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/__tests__/qualifyingPanels.test.tsx",
+      "target": "file:src/dashboard/shared/selectionStore.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/__tests__/qualifyingPanels.test.tsx",
+      "target": "file:src/shared/openf1Types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/__tests__/qualifyingPanels.test.tsx",
+      "target": "file:src/shared/seasonData.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/useQualifyingModel.tsx",
+      "target": "file:src/dashboard/derived/qualifyingModel.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/useQualifyingModel.tsx",
+      "target": "file:src/dashboard/shared/DataSourceContext.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/useQualifyingModel.tsx",
+      "target": "file:src/dashboard/shared/DriversContext.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/useQualifyingModel.tsx",
+      "target": "file:src/dashboard/shared/useDisplayTime.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/profiles/__tests__/dashboardProfile.test.ts",
+      "target": "file:src/dashboard/profiles/index.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/profiles/__tests__/dashboardProfile.test.ts",
+      "target": "file:src/shared/sessionKind.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/detailPanel/DriverHeader.tsx",
+      "target": "function:src/dashboard/detailPanel/DriverHeader.tsx:DriverHeader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/dashboard/detailPanel/DriverHeader.tsx",
+      "target": "function:src/dashboard/detailPanel/DriverHeader.tsx:DriverHeader",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/dashboard/panels/FastestLapBadges.tsx",
+      "target": "function:src/dashboard/panels/FastestLapBadges.tsx:BadgeCard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/dashboard/panels/FastestLapBadges.tsx",
+      "target": "function:src/dashboard/panels/FastestLapBadges.tsx:FastestLapBadges",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/dashboard/panels/FastestLapBadges.tsx",
+      "target": "function:src/dashboard/panels/FastestLapBadges.tsx:FastestLapBadges",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/dashboard/panels/TyreStrategy.tsx",
+      "target": "function:src/dashboard/panels/TyreStrategy.tsx:stintLapSpans",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/dashboard/panels/TyreStrategy.tsx",
+      "target": "function:src/dashboard/panels/TyreStrategy.tsx:stintLapSpans",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/dashboard/panels/TyreStrategy.tsx",
+      "target": "function:src/dashboard/panels/TyreStrategy.tsx:TyreStrategy",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/dashboard/panels/TyreStrategy.tsx",
+      "target": "function:src/dashboard/panels/TyreStrategy.tsx:TyreStrategy",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/KnockoutPanel.tsx",
+      "target": "function:src/dashboard/panels/qualifying/KnockoutPanel.tsx:KnockoutPanel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/KnockoutPanel.tsx",
+      "target": "function:src/dashboard/panels/qualifying/KnockoutPanel.tsx:KnockoutPanel",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/QualifyingTower.tsx",
+      "target": "function:src/dashboard/panels/qualifying/QualifyingTower.tsx:QualifyingTower",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/QualifyingTower.tsx",
+      "target": "function:src/dashboard/panels/qualifying/QualifyingTower.tsx:QualifyingTower",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/SegmentBestBoard.tsx",
+      "target": "function:src/dashboard/panels/qualifying/SegmentBestBoard.tsx:SegmentBestBoard",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/SegmentBestBoard.tsx",
+      "target": "function:src/dashboard/panels/qualifying/SegmentBestBoard.tsx:SegmentBestBoard",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/SegmentProgress.tsx",
+      "target": "function:src/dashboard/panels/qualifying/SegmentProgress.tsx:SegmentProgress",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/SegmentProgress.tsx",
+      "target": "function:src/dashboard/panels/qualifying/SegmentProgress.tsx:SegmentProgress",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/useQualifyingModel.tsx",
+      "target": "function:src/dashboard/panels/qualifying/useQualifyingModel.tsx:QualifyingModelProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/useQualifyingModel.tsx",
+      "target": "function:src/dashboard/panels/qualifying/useQualifyingModel.tsx:QualifyingModelProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/useQualifyingModel.tsx",
+      "target": "function:src/dashboard/panels/qualifying/useQualifyingModel.tsx:useQualifyingModel",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/useQualifyingModel.tsx",
+      "target": "function:src/dashboard/panels/qualifying/useQualifyingModel.tsx:useQualifyingModel",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/dashboard/detailPanel/DriverHeader.tsx:DriverHeader",
+      "target": "function:src/dashboard/shared/DriversContext.tsx:teamColorOf",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/dashboard/panels/FastestLapBadges.tsx:FastestLapBadges",
+      "target": "function:src/dashboard/shared/formatTime.ts:formatLapTime",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/dashboard/panels/qualifying/KnockoutPanel.tsx:KnockoutPanel",
+      "target": "function:src/shared/sessionKind.ts:resolveSessionKind",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/dashboard/panels/qualifying/QualifyingTower.tsx:QualifyingTower",
+      "target": "function:src/shared/sessionKind.ts:resolveSessionKind",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/dashboard/panels/qualifying/QualifyingTower.tsx:QualifyingTower",
+      "target": "function:src/dashboard/shared/formatTime.ts:formatLapTime",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/dashboard/panels/qualifying/SegmentBestBoard.tsx:SegmentBestBoard",
+      "target": "function:src/shared/sessionKind.ts:resolveSessionKind",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/dashboard/panels/qualifying/SegmentBestBoard.tsx:SegmentBestBoard",
+      "target": "function:src/dashboard/shared/formatTime.ts:formatLapTime",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/dashboard/panels/qualifying/SegmentProgress.tsx:SegmentProgress",
+      "target": "function:src/shared/sessionKind.ts:resolveSessionKind",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/dashboard/panels/qualifying/KnockoutPanel.tsx:KnockoutPanel",
+      "target": "function:src/dashboard/panels/qualifying/useQualifyingModel.tsx:useQualifyingModel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/dashboard/panels/qualifying/QualifyingTower.tsx:QualifyingTower",
+      "target": "function:src/dashboard/panels/qualifying/useQualifyingModel.tsx:useQualifyingModel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/dashboard/panels/qualifying/SegmentBestBoard.tsx:SegmentBestBoard",
+      "target": "function:src/dashboard/panels/qualifying/useQualifyingModel.tsx:useQualifyingModel",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/dashboard/panels/FastestLapBadges.tsx",
+      "target": "file:src/dashboard/panels/__tests__/FastestLapBadges.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/dashboard/panels/TyreStrategy.tsx",
+      "target": "file:src/dashboard/panels/__tests__/TyreStrategy.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/KnockoutPanel.tsx",
+      "target": "file:src/dashboard/panels/qualifying/__tests__/qualifyingPanels.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/QualifyingTower.tsx",
+      "target": "file:src/dashboard/panels/qualifying/__tests__/qualifyingPanels.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/SegmentBestBoard.tsx",
+      "target": "file:src/dashboard/panels/qualifying/__tests__/qualifyingPanels.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/dashboard/panels/qualifying/SegmentProgress.tsx",
+      "target": "file:src/dashboard/panels/qualifying/__tests__/qualifyingPanels.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

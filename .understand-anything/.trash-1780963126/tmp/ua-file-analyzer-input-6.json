@@ -1,0 +1,228 @@
+{
+  "projectRoot": "/Users/a453498/Downloads/project/soon_board",
+  "batchFiles": [
+    {
+      "path": "src/dashboard/__tests__/DashboardSeek.test.tsx",
+      "language": "typescript",
+      "sizeLines": 88,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/__tests__/fakeDataSource.ts",
+      "language": "typescript",
+      "sizeLines": 44,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/derived/__tests__/currentLap.test.ts",
+      "language": "typescript",
+      "sizeLines": 46,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/derived/__tests__/stints.test.ts",
+      "language": "typescript",
+      "sizeLines": 39,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/derived/__tests__/totalLaps.test.ts",
+      "language": "typescript",
+      "sizeLines": 54,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/derived/currentLap.ts",
+      "language": "typescript",
+      "sizeLines": 19,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/derived/stints.ts",
+      "language": "typescript",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/derived/totalLaps.ts",
+      "language": "typescript",
+      "sizeLines": 69,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/detailPanel/PitHistory.tsx",
+      "language": "typescript",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/detailPanel/SessionResult.tsx",
+      "language": "typescript",
+      "sizeLines": 74,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/detailPanel/StintHistory.tsx",
+      "language": "typescript",
+      "sizeLines": 55,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/detailPanel/__tests__/PitHistory.test.tsx",
+      "language": "typescript",
+      "sizeLines": 44,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/detailPanel/__tests__/SessionResult.test.tsx",
+      "language": "typescript",
+      "sizeLines": 63,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/detailPanel/__tests__/StintHistory.test.tsx",
+      "language": "typescript",
+      "sizeLines": 64,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/EventBroadcast.tsx",
+      "language": "typescript",
+      "sizeLines": 115,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/EventTicker.tsx",
+      "language": "typescript",
+      "sizeLines": 56,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/RaceControlBanner.tsx",
+      "language": "typescript",
+      "sizeLines": 53,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/SessionHeader.tsx",
+      "language": "typescript",
+      "sizeLines": 130,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/SessionProgress.tsx",
+      "language": "typescript",
+      "sizeLines": 102,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "src/dashboard/__tests__/DashboardSeek.test.tsx": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/DashboardApp.tsx",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/shared/seasonData.ts"
+    ],
+    "src/dashboard/__tests__/fakeDataSource.ts": [
+      "src/shared/DataSource.ts"
+    ],
+    "src/dashboard/derived/__tests__/currentLap.test.ts": [
+      "src/dashboard/derived/currentLap.ts",
+      "src/shared/DataSource.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/derived/__tests__/stints.test.ts": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/derived/stints.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/derived/__tests__/totalLaps.test.ts": [
+      "src/dashboard/derived/totalLaps.ts"
+    ],
+    "src/dashboard/derived/currentLap.ts": [
+      "src/shared/DataSource.ts"
+    ],
+    "src/dashboard/derived/stints.ts": [
+      "src/shared/DataSource.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/derived/totalLaps.ts": [],
+    "src/dashboard/detailPanel/PitHistory.tsx": [
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/useDisplayTime.ts"
+    ],
+    "src/dashboard/detailPanel/SessionResult.tsx": [
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/formatTime.ts",
+      "src/dashboard/shared/useDisplayTime.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/dashboard/detailPanel/StintHistory.tsx": [
+      "src/dashboard/derived/currentLap.ts",
+      "src/dashboard/derived/stints.ts",
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/tyreColors.ts",
+      "src/dashboard/shared/useDisplayTime.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/detailPanel/__tests__/PitHistory.test.tsx": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/detailPanel/PitHistory.tsx",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/detailPanel/__tests__/SessionResult.test.tsx": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/detailPanel/SessionResult.tsx",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/shared/openf1Types.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/dashboard/detailPanel/__tests__/StintHistory.test.tsx": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/detailPanel/StintHistory.tsx",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/panels/EventBroadcast.tsx": [
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/flagDecoder.ts",
+      "src/dashboard/shared/flagIcons.ts",
+      "src/dashboard/shared/useDisplayTime.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/panels/EventTicker.tsx": [
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/flagIcons.ts",
+      "src/dashboard/shared/PanelHeading.tsx",
+      "src/dashboard/shared/useDisplayTime.ts"
+    ],
+    "src/dashboard/panels/RaceControlBanner.tsx": [
+      "src/dashboard/derived/activeFlags.ts",
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/flagDecoder.ts",
+      "src/dashboard/shared/flagIcons.ts",
+      "src/dashboard/shared/useDisplayTime.ts"
+    ],
+    "src/dashboard/panels/SessionHeader.tsx": [
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/useDisplayTime.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/dashboard/panels/SessionProgress.tsx": [
+      "src/dashboard/derived/currentLap.ts",
+      "src/dashboard/derived/totalLaps.ts",
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/useDisplayTime.ts",
+      "src/shared/seasonData.ts"
+    ]
+  }
+}

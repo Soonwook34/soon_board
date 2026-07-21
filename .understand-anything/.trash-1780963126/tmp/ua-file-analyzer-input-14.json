@@ -1,0 +1,17 @@
+{
+  "projectRoot": "/Users/a453498/Downloads/project/soon_board",
+  "batchFiles": [
+    {"path": "docs/deployment-architecture.md", "language": "markdown", "sizeLines": 406, "fileCategory": "docs"},
+    {"path": "docs/live-streaming-strategy.md", "language": "markdown", "sizeLines": 279, "fileCategory": "docs"},
+    {"path": "docs/openf1-api-reference.md", "language": "markdown", "sizeLines": 605, "fileCategory": "docs"},
+    {"path": "docs/playwright-memory-profile.md", "language": "markdown", "sizeLines": 41, "fileCategory": "docs"},
+    {"path": "docs/replay-strategy.md", "language": "markdown", "sizeLines": 318, "fileCategory": "docs"}
+  ],
+  "batchImportData": {
+    "docs/deployment-architecture.md": [],
+    "docs/live-streaming-strategy.md": [],
+    "docs/openf1-api-reference.md": [],
+    "docs/playwright-memory-profile.md": [],
+    "docs/replay-strategy.md": []
+  }
+}

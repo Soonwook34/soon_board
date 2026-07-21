@@ -1,0 +1,1548 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 21,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "src/live/CountdownOverlay.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 125,
+      "nonEmptyLines": 118,
+      "functions": [
+        {
+          "name": "CountdownOverlay",
+          "startLine": 23,
+          "endLine": 125,
+          "params": [
+            "{ meetingName, session, onBack }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "CountdownOverlay",
+          "line": 23,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "CountdownOverlay",
+          "callee": "useNowSecond",
+          "lineNumber": 24
+        },
+        {
+          "caller": "CountdownOverlay",
+          "callee": "useMemo",
+          "lineNumber": 25
+        },
+        {
+          "caller": "CountdownOverlay",
+          "callee": "classify",
+          "lineNumber": 26
+        },
+        {
+          "caller": "CountdownOverlay",
+          "callee": "useEffect",
+          "lineNumber": 28
+        },
+        {
+          "caller": "onKey",
+          "callee": "onBack",
+          "lineNumber": 30
+        },
+        {
+          "caller": "CountdownOverlay",
+          "callee": "window.addEventListener",
+          "lineNumber": 32
+        },
+        {
+          "caller": "CountdownOverlay",
+          "callee": "window.removeEventListener",
+          "lineNumber": 33
+        },
+        {
+          "caller": "CountdownOverlay",
+          "callee": "Date.parse",
+          "lineNumber": 38
+        },
+        {
+          "caller": "CountdownOverlay",
+          "callee": "formatHmsCountdown",
+          "lineNumber": 100
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/live/derived/__tests__/overlayCountdown.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 37,
+      "nonEmptyLines": 29,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/live/derived/overlayCountdown.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 12,
+      "functions": [
+        {
+          "name": "formatHmsCountdown",
+          "startLine": 6,
+          "endLine": 13,
+          "params": [
+            "ms"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "formatHmsCountdown",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "formatHmsCountdown",
+          "callee": "Number.isFinite",
+          "lineNumber": 7
+        },
+        {
+          "caller": "formatHmsCountdown",
+          "callee": "Math.max",
+          "lineNumber": 8
+        },
+        {
+          "caller": "formatHmsCountdown",
+          "callee": "Math.floor",
+          "lineNumber": 8
+        },
+        {
+          "caller": "formatHmsCountdown",
+          "callee": "Math.floor",
+          "lineNumber": 9
+        },
+        {
+          "caller": "formatHmsCountdown",
+          "callee": "Math.floor",
+          "lineNumber": 10
+        },
+        {
+          "caller": "formatHmsCountdown",
+          "callee": "String(h).padStart",
+          "lineNumber": 12
+        },
+        {
+          "caller": "formatHmsCountdown",
+          "callee": "String",
+          "lineNumber": 12
+        },
+        {
+          "caller": "formatHmsCountdown",
+          "callee": "String(m).padStart",
+          "lineNumber": 12
+        },
+        {
+          "caller": "formatHmsCountdown",
+          "callee": "String",
+          "lineNumber": 12
+        },
+        {
+          "caller": "formatHmsCountdown",
+          "callee": "String(s).padStart",
+          "lineNumber": 12
+        },
+        {
+          "caller": "formatHmsCountdown",
+          "callee": "String",
+          "lineNumber": 12
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 15,
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/Countdown.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 48,
+      "nonEmptyLines": 40,
+      "functions": [
+        {
+          "name": "Countdown",
+          "startLine": 15,
+          "endLine": 48,
+          "params": [
+            "{ targetDate, onExpire, className }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Countdown",
+          "line": 15,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Countdown",
+          "callee": "targetDate.getTime",
+          "lineNumber": 20
+        },
+        {
+          "caller": "Countdown",
+          "callee": "Date.parse",
+          "lineNumber": 21
+        },
+        {
+          "caller": "Countdown",
+          "callee": "useState",
+          "lineNumber": 23
+        },
+        {
+          "caller": "Countdown",
+          "callee": "Date.now",
+          "lineNumber": 23
+        },
+        {
+          "caller": "Countdown",
+          "callee": "useRef",
+          "lineNumber": 24
+        },
+        {
+          "caller": "Countdown",
+          "callee": "useEffect",
+          "lineNumber": 26
+        },
+        {
+          "caller": "Countdown",
+          "callee": "window.setInterval",
+          "lineNumber": 27
+        },
+        {
+          "caller": "Countdown",
+          "callee": "setNow",
+          "lineNumber": 28
+        },
+        {
+          "caller": "Countdown",
+          "callee": "Date.now",
+          "lineNumber": 28
+        },
+        {
+          "caller": "Countdown",
+          "callee": "window.clearInterval",
+          "lineNumber": 30
+        },
+        {
+          "caller": "Countdown",
+          "callee": "useEffect",
+          "lineNumber": 36
+        },
+        {
+          "caller": "Countdown",
+          "callee": "onExpire",
+          "lineNumber": 39
+        },
+        {
+          "caller": "Countdown",
+          "callee": "formatCountdown",
+          "lineNumber": 45
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/ExpandedSessions.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 109,
+      "nonEmptyLines": 102,
+      "functions": [
+        {
+          "name": "ExpandedSessions",
+          "startLine": 22,
+          "endLine": 109,
+          "params": [
+            "{ meeting, onClose }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ExpandedSessions",
+          "line": 22,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ExpandedSessions",
+          "callee": "useLocation",
+          "lineNumber": 23
+        },
+        {
+          "caller": "ExpandedSessions",
+          "callee": "useNowSecond",
+          "lineNumber": 24
+        },
+        {
+          "caller": "ExpandedSessions",
+          "callee": "useEffect",
+          "lineNumber": 26
+        },
+        {
+          "caller": "onKey",
+          "callee": "onClose",
+          "lineNumber": 28
+        },
+        {
+          "caller": "ExpandedSessions",
+          "callee": "window.addEventListener",
+          "lineNumber": 30
+        },
+        {
+          "caller": "ExpandedSessions",
+          "callee": "window.removeEventListener",
+          "lineNumber": 31
+        },
+        {
+          "caller": "ExpandedSessions",
+          "callee": "useMemo",
+          "lineNumber": 34
+        },
+        {
+          "caller": "ExpandedSessions",
+          "callee": "[...meeting.sessions].sort",
+          "lineNumber": 36
+        },
+        {
+          "caller": "ExpandedSessions",
+          "callee": "Date.parse",
+          "lineNumber": 37
+        },
+        {
+          "caller": "ExpandedSessions",
+          "callee": "Date.parse",
+          "lineNumber": 37
+        },
+        {
+          "caller": "ExpandedSessions",
+          "callee": "useMemo",
+          "lineNumber": 42
+        },
+        {
+          "caller": "ExpandedSessions",
+          "callee": "meeting.meeting_name.replace",
+          "lineNumber": 66
+        },
+        {
+          "caller": "ExpandedSessions",
+          "callee": "sorted.map",
+          "lineNumber": 92
+        },
+        {
+          "caller": "ExpandedSessions",
+          "callee": "classify",
+          "lineNumber": 93
+        },
+        {
+          "caller": "ExpandedSessions",
+          "callee": "sessionRoute",
+          "lineNumber": 94
+        },
+        {
+          "caller": "ExpandedSessions",
+          "callee": "setLocation",
+          "lineNumber": 101
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/GpCard.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 64,
+      "nonEmptyLines": 59,
+      "functions": [
+        {
+          "name": "formatRaceDate",
+          "startLine": 17,
+          "endLine": 22,
+          "params": [
+            "iso"
+          ]
+        },
+        {
+          "name": "GpCard",
+          "startLine": 24,
+          "endLine": 64,
+          "params": [
+            "{ meeting, status, isExpanded, onClick }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "GpCard",
+          "line": 24,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "formatRaceDate",
+          "callee": "Number.isNaN",
+          "lineNumber": 20
+        },
+        {
+          "caller": "formatRaceDate",
+          "callee": "d.getTime",
+          "lineNumber": 20
+        },
+        {
+          "caller": "formatRaceDate",
+          "callee": "d.getUTCMonth",
+          "lineNumber": 21
+        },
+        {
+          "caller": "formatRaceDate",
+          "callee": "d.getUTCDate",
+          "lineNumber": 21
+        },
+        {
+          "caller": "GpCard",
+          "callee": "meeting.meeting_name.replace",
+          "lineNumber": 57
+        },
+        {
+          "caller": "GpCard",
+          "callee": "formatRaceDate",
+          "lineNumber": 60
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/GpGrid.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 125,
+      "nonEmptyLines": 117,
+      "functions": [
+        {
+          "name": "GpGrid",
+          "startLine": 25,
+          "endLine": 125,
+          "params": [
+            "{\n  meetings,\n  expandedGp,\n  onExpandGp,\n  search,\n  sessionTypes,\n  statuses,\n  now,\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "GpGrid",
+          "line": 25,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "GpGrid",
+          "callee": "useMemo",
+          "lineNumber": 36
+        },
+        {
+          "caller": "GpGrid",
+          "callee": "filterMeetings",
+          "lineNumber": 37
+        },
+        {
+          "caller": "GpGrid",
+          "callee": "useCallback",
+          "lineNumber": 42
+        },
+        {
+          "caller": "GpGrid",
+          "callee": "onExpandGp",
+          "lineNumber": 42
+        },
+        {
+          "caller": "GpGrid",
+          "callee": "resetFilters",
+          "lineNumber": 91
+        },
+        {
+          "caller": "GpGrid",
+          "callee": "statusesByMeeting.map",
+          "lineNumber": 109
+        },
+        {
+          "caller": "GpGrid",
+          "callee": "onExpandGp",
+          "lineNumber": 117
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/Hero.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 147,
+      "nonEmptyLines": 131,
+      "functions": [
+        {
+          "name": "Hero",
+          "startLine": 19,
+          "endLine": 35,
+          "params": [
+            "{ seasons }"
+          ]
+        },
+        {
+          "name": "HeroBody",
+          "startLine": 37,
+          "endLine": 58,
+          "params": [
+            "{ selection }"
+          ]
+        },
+        {
+          "name": "labelText",
+          "startLine": 60,
+          "endLine": 64,
+          "params": [
+            "kind"
+          ]
+        },
+        {
+          "name": "subtitleText",
+          "startLine": 66,
+          "endLine": 89,
+          "params": [
+            "status",
+            "startIso",
+            "endIso"
+          ]
+        },
+        {
+          "name": "containerStyle",
+          "startLine": 93,
+          "endLine": 107,
+          "params": [
+            "status"
+          ]
+        },
+        {
+          "name": "labelStyle",
+          "startLine": 114,
+          "endLine": 124,
+          "params": [
+            "kind"
+          ]
+        },
+        {
+          "name": "ctaStyle",
+          "startLine": 137,
+          "endLine": 147,
+          "params": [
+            "kind"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Hero",
+          "line": 19,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Hero",
+          "callee": "useNowSecond",
+          "lineNumber": 20
+        },
+        {
+          "caller": "Hero",
+          "callee": "useMemo",
+          "lineNumber": 21
+        },
+        {
+          "caller": "Hero",
+          "callee": "nextHeroSession",
+          "lineNumber": 22
+        },
+        {
+          "caller": "Hero",
+          "callee": "containerStyle",
+          "lineNumber": 28
+        },
+        {
+          "caller": "HeroBody",
+          "callee": "useLocation",
+          "lineNumber": 38
+        },
+        {
+          "caller": "HeroBody",
+          "callee": "containerStyle",
+          "lineNumber": 45
+        },
+        {
+          "caller": "HeroBody",
+          "callee": "labelStyle",
+          "lineNumber": 47
+        },
+        {
+          "caller": "HeroBody",
+          "callee": "labelText",
+          "lineNumber": 47
+        },
+        {
+          "caller": "HeroBody",
+          "callee": "meeting.meeting_name.replace",
+          "lineNumber": 49
+        },
+        {
+          "caller": "HeroBody",
+          "callee": "subtitleText",
+          "lineNumber": 51
+        },
+        {
+          "caller": "HeroBody",
+          "callee": "setLocation",
+          "lineNumber": 53
+        },
+        {
+          "caller": "HeroBody",
+          "callee": "ctaStyle",
+          "lineNumber": 53
+        },
+        {
+          "caller": "subtitleText",
+          "callee": "Number.isNaN",
+          "lineNumber": 87
+        },
+        {
+          "caller": "subtitleText",
+          "callee": "d.getTime",
+          "lineNumber": 87
+        },
+        {
+          "caller": "subtitleText",
+          "callee": "d.toUTCString().slice",
+          "lineNumber": 88
+        },
+        {
+          "caller": "subtitleText",
+          "callee": "d.toUTCString",
+          "lineNumber": 88
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 7,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/MainPage.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 117,
+      "nonEmptyLines": 105,
+      "functions": [
+        {
+          "name": "MainPage",
+          "startLine": 23,
+          "endLine": 117,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "MainPage",
+          "line": 23,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "MainPage",
+          "callee": "useCatalogIndex",
+          "lineNumber": 24
+        },
+        {
+          "caller": "MainPage",
+          "callee": "useUiState",
+          "lineNumber": 25
+        },
+        {
+          "caller": "MainPage",
+          "callee": "useMemo",
+          "lineNumber": 26
+        },
+        {
+          "caller": "MainPage",
+          "callee": "selectInitialSeason",
+          "lineNumber": 26
+        },
+        {
+          "caller": "MainPage",
+          "callee": "useSeasonCatalog",
+          "lineNumber": 27
+        },
+        {
+          "caller": "MainPage",
+          "callee": "useState",
+          "lineNumber": 28
+        },
+        {
+          "caller": "MainPage",
+          "callee": "useRef",
+          "lineNumber": 30
+        },
+        {
+          "caller": "MainPage",
+          "callee": "useEffect",
+          "lineNumber": 32
+        },
+        {
+          "caller": "MainPage",
+          "callee": "loadCatalogIndex().catch",
+          "lineNumber": 33
+        },
+        {
+          "caller": "MainPage",
+          "callee": "loadCatalogIndex",
+          "lineNumber": 33
+        },
+        {
+          "caller": "MainPage",
+          "callee": "console.error",
+          "lineNumber": 34
+        },
+        {
+          "caller": "MainPage",
+          "callee": "useEffect",
+          "lineNumber": 38
+        },
+        {
+          "caller": "MainPage",
+          "callee": "new Date().getFullYear",
+          "lineNumber": 40
+        },
+        {
+          "caller": "MainPage",
+          "callee": "loadSeason(effectiveSeason)\n      .then(() => {\n        if (!isCurrent || revalidatedYearsRef.current.has(effectiveSeason)) return [];\n        revalidatedYearsRef.current.add(effectiveSeason);\n        return revalidateCurrentSeason(effectiveSeason);\n      })\n      .then((changes) => {\n        if (changes.length > 0) setToastMessage('일정이 업데이트되었습니다');\n      })\n      .catch",
+          "lineNumber": 41
+        },
+        {
+          "caller": "MainPage",
+          "callee": "loadSeason(effectiveSeason)\n      .then(() => {\n        if (!isCurrent || revalidatedYearsRef.current.has(effectiveSeason)) return [];\n        revalidatedYearsRef.current.add(effectiveSeason);\n        return revalidateCurrentSeason(effectiveSeason);\n      })\n      .then",
+          "lineNumber": 41
+        },
+        {
+          "caller": "MainPage",
+          "callee": "loadSeason(effectiveSeason)\n      .then",
+          "lineNumber": 41
+        },
+        {
+          "caller": "MainPage",
+          "callee": "loadSeason",
+          "lineNumber": 41
+        },
+        {
+          "caller": "MainPage",
+          "callee": "revalidatedYearsRef.current.has",
+          "lineNumber": 43
+        },
+        {
+          "caller": "MainPage",
+          "callee": "revalidatedYearsRef.current.add",
+          "lineNumber": 44
+        },
+        {
+          "caller": "MainPage",
+          "callee": "revalidateCurrentSeason",
+          "lineNumber": 45
+        },
+        {
+          "caller": "MainPage",
+          "callee": "setToastMessage",
+          "lineNumber": 48
+        },
+        {
+          "caller": "MainPage",
+          "callee": "console.error",
+          "lineNumber": 51
+        },
+        {
+          "caller": "MainPage",
+          "callee": "useNowSecond",
+          "lineNumber": 57
+        },
+        {
+          "caller": "MainPage",
+          "callee": "useMemo",
+          "lineNumber": 58
+        },
+        {
+          "caller": "MainPage",
+          "callee": "setSeason",
+          "lineNumber": 91
+        },
+        {
+          "caller": "MainPage",
+          "callee": "setToastMessage",
+          "lineNumber": 109
+        }
+      ],
+      "metrics": {
+        "importCount": 13,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/ResultPreviewTooltip.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 118,
+      "nonEmptyLines": 111,
+      "functions": [
+        {
+          "name": "ResultPreviewTooltip",
+          "startLine": 27,
+          "endLine": 118,
+          "params": [
+            "{ session, anchorRect, visible }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ResultPreviewTooltip",
+          "line": 27,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ResultPreviewTooltip",
+          "callee": "/^qualifying$/i.test",
+          "lineNumber": 31
+        },
+        {
+          "caller": "ResultPreviewTooltip",
+          "callee": "session.session_type.trim",
+          "lineNumber": 31
+        },
+        {
+          "caller": "ResultPreviewTooltip",
+          "callee": "[...preview.podium].sort",
+          "lineNumber": 32
+        },
+        {
+          "caller": "ResultPreviewTooltip",
+          "callee": "Math.max",
+          "lineNumber": 35
+        },
+        {
+          "caller": "ResultPreviewTooltip",
+          "callee": "Math.min",
+          "lineNumber": 37
+        },
+        {
+          "caller": "ResultPreviewTooltip",
+          "callee": "createPortal",
+          "lineNumber": 40
+        },
+        {
+          "caller": "ResultPreviewTooltip",
+          "callee": "sortedPodium.map",
+          "lineNumber": 71
+        },
+        {
+          "caller": "ResultPreviewTooltip",
+          "callee": "formatLapDuration",
+          "lineNumber": 109
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/SearchFilter.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 150,
+      "nonEmptyLines": 140,
+      "functions": [
+        {
+          "name": "SearchBar",
+          "startLine": 38,
+          "endLine": 80,
+          "params": []
+        },
+        {
+          "name": "CheckboxChip",
+          "startLine": 82,
+          "endLine": 116,
+          "params": [
+            "{\n  label,\n  checked,\n  onChange,\n}"
+          ]
+        },
+        {
+          "name": "FilterChips",
+          "startLine": 118,
+          "endLine": 150,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "SearchBar",
+          "line": 38,
+          "isDefault": false
+        },
+        {
+          "name": "FilterChips",
+          "line": 118,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "SearchBar",
+          "callee": "useUiState",
+          "lineNumber": 39
+        },
+        {
+          "caller": "SearchBar",
+          "callee": "useState",
+          "lineNumber": 40
+        },
+        {
+          "caller": "SearchBar",
+          "callee": "useRef",
+          "lineNumber": 41
+        },
+        {
+          "caller": "SearchBar",
+          "callee": "useEffect",
+          "lineNumber": 45
+        },
+        {
+          "caller": "SearchBar",
+          "callee": "setText",
+          "lineNumber": 47
+        },
+        {
+          "caller": "SearchBar",
+          "callee": "useEffect",
+          "lineNumber": 52
+        },
+        {
+          "caller": "SearchBar",
+          "callee": "window.setTimeout",
+          "lineNumber": 54
+        },
+        {
+          "caller": "SearchBar",
+          "callee": "setSearch",
+          "lineNumber": 56
+        },
+        {
+          "caller": "SearchBar",
+          "callee": "window.clearTimeout",
+          "lineNumber": 58
+        },
+        {
+          "caller": "SearchBar",
+          "callee": "setText",
+          "lineNumber": 65
+        },
+        {
+          "caller": "FilterChips",
+          "callee": "useUiState",
+          "lineNumber": 119
+        },
+        {
+          "caller": "FilterChips",
+          "callee": "ALL_SESSION_TYPES.map",
+          "lineNumber": 126
+        },
+        {
+          "caller": "FilterChips",
+          "callee": "ui.sessionTypes.has",
+          "lineNumber": 130
+        },
+        {
+          "caller": "FilterChips",
+          "callee": "toggleSessionType",
+          "lineNumber": 131
+        },
+        {
+          "caller": "FilterChips",
+          "callee": "ALL_STATUSES.map",
+          "lineNumber": 139
+        },
+        {
+          "caller": "FilterChips",
+          "callee": "ui.statuses.has",
+          "lineNumber": 143
+        },
+        {
+          "caller": "FilterChips",
+          "callee": "toggleStatus",
+          "lineNumber": 144
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 2,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/SeasonPicker.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 52,
+      "nonEmptyLines": 48,
+      "functions": [
+        {
+          "name": "SeasonPicker",
+          "startLine": 12,
+          "endLine": 52,
+          "params": [
+            "{ index, currentSeason, onChange }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SeasonPicker",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "SeasonPicker",
+          "callee": "[...index.seasons].sort",
+          "lineNumber": 13
+        },
+        {
+          "caller": "SeasonPicker",
+          "callee": "onChange",
+          "lineNumber": 30
+        },
+        {
+          "caller": "SeasonPicker",
+          "callee": "Number",
+          "lineNumber": 30
+        },
+        {
+          "caller": "SeasonPicker",
+          "callee": "seasons.some",
+          "lineNumber": 41
+        },
+        {
+          "caller": "SeasonPicker",
+          "callee": "seasons.map",
+          "lineNumber": 44
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/SessionCard.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 123,
+      "nonEmptyLines": 113,
+      "functions": [
+        {
+          "name": "formatStartUtc",
+          "startLine": 23,
+          "endLine": 31,
+          "params": [
+            "iso"
+          ]
+        },
+        {
+          "name": "SessionCard",
+          "startLine": 33,
+          "endLine": 123,
+          "params": [
+            "{ session, status, onClick }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SessionCard",
+          "line": 33,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "formatStartUtc",
+          "callee": "Number.isNaN",
+          "lineNumber": 25
+        },
+        {
+          "caller": "formatStartUtc",
+          "callee": "d.getTime",
+          "lineNumber": 25
+        },
+        {
+          "caller": "formatStartUtc",
+          "callee": "d.getUTCMonth",
+          "lineNumber": 26
+        },
+        {
+          "caller": "formatStartUtc",
+          "callee": "d.getUTCDate",
+          "lineNumber": 27
+        },
+        {
+          "caller": "formatStartUtc",
+          "callee": "String(d.getUTCHours()).padStart",
+          "lineNumber": 28
+        },
+        {
+          "caller": "formatStartUtc",
+          "callee": "String",
+          "lineNumber": 28
+        },
+        {
+          "caller": "formatStartUtc",
+          "callee": "d.getUTCHours",
+          "lineNumber": 28
+        },
+        {
+          "caller": "formatStartUtc",
+          "callee": "String(d.getUTCMinutes()).padStart",
+          "lineNumber": 29
+        },
+        {
+          "caller": "formatStartUtc",
+          "callee": "String",
+          "lineNumber": 29
+        },
+        {
+          "caller": "formatStartUtc",
+          "callee": "d.getUTCMinutes",
+          "lineNumber": 29
+        },
+        {
+          "caller": "SessionCard",
+          "callee": "useRef",
+          "lineNumber": 37
+        },
+        {
+          "caller": "SessionCard",
+          "callee": "useRef",
+          "lineNumber": 38
+        },
+        {
+          "caller": "SessionCard",
+          "callee": "useRef",
+          "lineNumber": 39
+        },
+        {
+          "caller": "SessionCard",
+          "callee": "useState",
+          "lineNumber": 40
+        },
+        {
+          "caller": "SessionCard",
+          "callee": "useState",
+          "lineNumber": 41
+        },
+        {
+          "caller": "SessionCard",
+          "callee": "useEffect",
+          "lineNumber": 43
+        },
+        {
+          "caller": "SessionCard",
+          "callee": "window.clearTimeout",
+          "lineNumber": 45
+        },
+        {
+          "caller": "SessionCard",
+          "callee": "window.clearTimeout",
+          "lineNumber": 46
+        },
+        {
+          "caller": "handleEnter",
+          "callee": "window.clearTimeout",
+          "lineNumber": 54
+        },
+        {
+          "caller": "handleEnter",
+          "callee": "window.setTimeout",
+          "lineNumber": 58
+        },
+        {
+          "caller": "handleEnter",
+          "callee": "setAnchorRect",
+          "lineNumber": 60
+        },
+        {
+          "caller": "handleEnter",
+          "callee": "buttonRef.current.getBoundingClientRect",
+          "lineNumber": 60
+        },
+        {
+          "caller": "handleEnter",
+          "callee": "setVisible",
+          "lineNumber": 61
+        },
+        {
+          "caller": "handleLeave",
+          "callee": "window.clearTimeout",
+          "lineNumber": 68
+        },
+        {
+          "caller": "handleLeave",
+          "callee": "window.setTimeout",
+          "lineNumber": 72
+        },
+        {
+          "caller": "handleLeave",
+          "callee": "setVisible",
+          "lineNumber": 74
+        },
+        {
+          "caller": "SessionCard",
+          "callee": "formatStartUtc",
+          "lineNumber": 115
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/SimBadge.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 51,
+      "nonEmptyLines": 48,
+      "functions": [
+        {
+          "name": "SimBadge",
+          "startLine": 9,
+          "endLine": 51,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "SimBadge",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "SimBadge",
+          "callee": "useRef",
+          "lineNumber": 12
+        },
+        {
+          "caller": "SimBadge",
+          "callee": "readSimulatedNowMs",
+          "lineNumber": 17
+        },
+        {
+          "caller": "SimBadge",
+          "callee": "new Date(simulated).toISOString",
+          "lineNumber": 25
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/StatusBadge.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 59,
+      "nonEmptyLines": 54,
+      "functions": [
+        {
+          "name": "StatusBadge",
+          "startLine": 24,
+          "endLine": 59,
+          "params": [
+            "{ status }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "StatusBadge",
+          "line": 24,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/__tests__/initialSeason.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 29,
+      "nonEmptyLines": 24,
+      "functions": [
+        {
+          "name": "mkIndex",
+          "startLine": 5,
+          "endLine": 8,
+          "params": [
+            "years"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "mkIndex",
+          "callee": "years.map",
+          "lineNumber": 7
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/__tests__/useNowSecond.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 59,
+      "nonEmptyLines": 52,
+      "functions": [
+        {
+          "name": "pushHistory",
+          "startLine": 6,
+          "endLine": 8,
+          "params": [
+            "search"
+          ]
+        },
+        {
+          "name": "Probe",
+          "startLine": 10,
+          "endLine": 14,
+          "params": [
+            "{ onValue }"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "pushHistory",
+          "callee": "window.history.pushState",
+          "lineNumber": 7
+        },
+        {
+          "caller": "Probe",
+          "callee": "useNowSecond",
+          "lineNumber": 11
+        },
+        {
+          "caller": "Probe",
+          "callee": "onValue",
+          "lineNumber": 12
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/derived/__tests__/countdownFormat.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 46,
+      "nonEmptyLines": 39,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/derived/__tests__/meetingStatus.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 104,
+      "nonEmptyLines": 94,
+      "functions": [
+        {
+          "name": "mkSession",
+          "startLine": 5,
+          "endLine": 15,
+          "params": [
+            "override"
+          ]
+        },
+        {
+          "name": "mkMeeting",
+          "startLine": 17,
+          "endLine": 23,
+          "params": [
+            "sessions"
+          ]
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/derived/__tests__/nextUpcoming.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 105,
+      "nonEmptyLines": 97,
+      "functions": [
+        {
+          "name": "mkSession",
+          "startLine": 7,
+          "endLine": 11,
+          "params": [
+            "override"
+          ]
+        },
+        {
+          "name": "mkMeeting",
+          "startLine": 12,
+          "endLine": 14,
+          "params": [
+            "sessions",
+            "key"
+          ]
+        },
+        {
+          "name": "mkSeason",
+          "startLine": 15,
+          "endLine": 17,
+          "params": [
+            "meetings",
+            "year"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "mkSeason",
+          "callee": "NOW.toISOString",
+          "lineNumber": 16
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    }
+  ]
+}

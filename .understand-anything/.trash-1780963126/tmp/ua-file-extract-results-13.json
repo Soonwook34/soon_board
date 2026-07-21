@@ -1,0 +1,215 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 6,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "CLAUDE.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 65,
+      "nonEmptyLines": 44,
+      "sections": [
+        {
+          "heading": "CLAUDE.md",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Think Before Coding",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "2. Simplicity First",
+          "level": 2,
+          "line": 17
+        },
+        {
+          "heading": "3. Surgical Changes",
+          "level": 2,
+          "line": 29
+        },
+        {
+          "heading": "4. Goal-Driven Execution",
+          "level": 2,
+          "line": 45
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "THIRD_PARTY_LICENSES.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 48,
+      "nonEmptyLines": 35,
+      "sections": [
+        {
+          "heading": "Third-party assets and licenses",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "julesr0y/f1-circuits-svg (CC-BY-4.0)",
+          "level": 2,
+          "line": 7
+        },
+        {
+          "heading": "CC BY 4.0 요약 (전문은 위 링크 참조)",
+          "level": 3,
+          "line": 21
+        },
+        {
+          "heading": "OpenF1 API (CC0-1.0)",
+          "level": 2,
+          "line": 31
+        },
+        {
+          "heading": "Formula 1 / FIA / FOM trademark disclaimer",
+          "level": 2,
+          "line": 41
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    },
+    {
+      "path": "index.html",
+      "language": "html",
+      "fileCategory": "markup",
+      "totalLines": 13,
+      "nonEmptyLines": 13,
+      "metrics": {}
+    },
+    {
+      "path": "package.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 53,
+      "nonEmptyLines": 53,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "private",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "type",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "scripts",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "dependencies",
+          "level": 1,
+          "line": 33
+        },
+        {
+          "heading": "devDependencies",
+          "level": 1,
+          "line": 38
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": "tsconfig.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 22,
+      "nonEmptyLines": 22,
+      "sections": [
+        {
+          "heading": "compilerOptions",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "include",
+          "level": 1,
+          "line": 21
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    },
+    {
+      "path": "vercel.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 12,
+      "nonEmptyLines": 12,
+      "sections": [
+        {
+          "heading": "buildCommand",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "outputDirectory",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "framework",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "rewrites",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "env",
+          "level": 1,
+          "line": 9
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    }
+  ]
+}

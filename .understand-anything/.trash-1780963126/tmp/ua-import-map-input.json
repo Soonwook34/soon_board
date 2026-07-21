@@ -1,0 +1,2415 @@
+{
+  "projectRoot": "/Users/a453498/Downloads/project/soon_board",
+  "files": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "language": "yaml",
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".github/workflows/daily-data-refresh.yml",
+      "language": "yaml",
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".github/workflows/playwright.yml",
+      "language": "yaml",
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".gitmodules",
+      "language": "unknown",
+      "fileCategory": "code"
+    },
+    {
+      "path": ".omc/plans/dashboard-implementation.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".omc/plans/dashboard-layout-improvements.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".omc/plans/future-leak-dnf-followup.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".omc/plans/live-map-followup.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".omc/plans/live-map-implementation.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".omc/plans/main-page-implementation.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".omc/plans/openf1-client.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".omc/plans/p0-critic-fixes.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".omc/plans/qualifying-session-dashboard.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".understand-anything/.understandignore",
+      "language": "unknown",
+      "fileCategory": "code"
+    },
+    {
+      "path": ".understand-anything/config.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "CLAUDE.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "data/slm-zones-raw.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "docs/deployment-architecture.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/live-streaming-strategy.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/openf1-api-reference.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/playwright-memory-profile.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/replay-strategy.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "e2e/memory.spec.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "e2e/replay-smoke.spec.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "e2e/smoke.spec.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "e2e/visual.spec.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "index.html",
+      "language": "html",
+      "fileCategory": "markup"
+    },
+    {
+      "path": "package.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "playwright.config.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "public/seasons/2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/seasons/2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/seasons/2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/seasons/2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/seasons/index.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/10-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/10-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/10-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/10-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/14-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/14-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/14-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/14-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/144-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/144-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/144-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/144-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/149-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/149-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/149-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/149-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/15-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/15-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/15-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/15-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/150-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/150-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/150-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/150-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/151-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/151-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/151-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/151-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/152-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/152-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/152-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/152-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/153-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/19-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/19-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/19-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/19-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/2-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/2-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/2-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/2-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/22-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/22-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/22-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/22-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/23-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/23-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/23-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/23-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/39-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/39-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/39-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/39-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/4-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/4-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/4-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/4-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/46-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/46-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/46-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/46-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/49-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/49-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/49-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/55-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/55-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/55-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/55-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/6-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/6-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/6-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/61-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/61-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/61-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/61-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/63-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/63-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/63-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/63-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/65-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/65-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/65-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/65-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/7-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/7-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/7-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/7-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/70-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/70-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/70-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/70-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/9-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/9-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/9-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/9-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/drsZones_2-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/drsZones_2-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/index.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_10-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_10-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_10-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_14-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_144-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_144-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_149-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_149-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_15-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_15-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_15-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_150-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_150-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_150-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_151-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_151-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_151-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_152-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_152-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_152-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_19-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_19-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_2-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_2-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_2-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_22-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_22-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_23-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_23-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_23-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_23-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_39-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_39-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_39-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_4-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_4-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_4-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_46-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_46-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_46-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_46-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_49-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_49-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_49-2026.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_55-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_55-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_55-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_6-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_6-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_61-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_61-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_61-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_63-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_63-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_65-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_65-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_65-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_7-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_7-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_70-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_70-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_70-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/pitlane_9-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/residual-report.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/sectors_2-2023.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/sectors_2-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/sectors_2-2025.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "public/trackOutlines/sectors_23-2024.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "scripts/__tests__/buildAllCircuits.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/__tests__/buildCircuitsCatalog.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/__tests__/checkSeasonSizes.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/__tests__/computeConfidence.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/__tests__/curateResidual.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/__tests__/dailyDataRefresh.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/__tests__/dataUtils.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/__tests__/drsZonesDeriver.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/__tests__/extractOpenf1Transform.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/__tests__/fetchCircuitMaps.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/__tests__/fetchSeasonCatalogArgs.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/__tests__/openf1Affine.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/__tests__/openf1Client.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/__tests__/openf1FastLap.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/__tests__/pitlaneTracer.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/__tests__/seasonCatalog.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/__tests__/seasonsIndex.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/__tests__/seasonsList.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/__tests__/sectorBoundariesDeriver.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/__tests__/slmZonesLoader.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/__tests__/svgToPolyline.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/__tests__/tracePitlane.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/__tests__/trackOutlinesIndex.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/_lib/atomicWrite.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/_lib/dataUtils.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/_lib/drsZonesDeriver.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/_lib/openf1Affine.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/_lib/openf1Client.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/_lib/openf1FastLap.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/_lib/pitlaneTracer.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/_lib/seasonCatalog.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/_lib/seasonsIndex.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/_lib/seasonsList.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/_lib/sectorBoundariesDeriver.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/_lib/slmZonesLoader.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/_lib/svgToPolyline.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/_lib/trackOutlinesIndex.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/_lib/trackOutlinesSchema.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/build-all-circuits.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/build-circuits-catalog.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/check-season-sizes.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/circuits-candidates.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "scripts/curate-residual.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/derive-drs-zones.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/derive-sector-boundaries.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/extract-openf1-transform.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/fetch-circuit-maps.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/fetch-season-catalog.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/load-slm-zones.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/trace-pitlane.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/App.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/__tests__/DashboardApp.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/__tests__/DashboardSeek.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/__tests__/fakeDataSource.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/__tests__/futureLeakGuard.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/DashboardApp.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/derived/__tests__/currentLap.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/derived/__tests__/driverOutStatus.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/derived/__tests__/fixtures/quali-9468-laps.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "src/dashboard/derived/__tests__/fixtures/quali-9468-pit.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "src/dashboard/derived/__tests__/fixtures/quali-9468-race_control.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "src/dashboard/derived/__tests__/fixtures/quali-9468-session_result.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "src/dashboard/derived/__tests__/knockout.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/derived/__tests__/personalBests.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/derived/__tests__/qualifyingSegments.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/derived/__tests__/qualiLapClass.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/derived/__tests__/stints.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/derived/__tests__/totalLaps.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/derived/activeFlags.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/derived/currentLap.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/derived/driverOutStatus.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/derived/knockout.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/derived/personalBests.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/derived/qualifyingModel.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/derived/qualifyingSegments.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/derived/qualiLapClass.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/derived/stints.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/derived/totalLaps.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/detailPanel/__tests__/CurrentState.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/detailPanel/__tests__/DriverDetailPanel.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/detailPanel/__tests__/PitHistory.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/detailPanel/__tests__/RecentLapsTable.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/detailPanel/__tests__/SessionResult.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/detailPanel/__tests__/StintHistory.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/detailPanel/CurrentState.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/detailPanel/DriverDetailPanel.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/detailPanel/DriverHeader.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/detailPanel/PitHistory.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/detailPanel/RecentLapsTable.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/detailPanel/SessionResult.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/detailPanel/StintHistory.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/index.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/__tests__/EventBroadcast.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/__tests__/EventTicker.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/__tests__/FastestLapBadges.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/__tests__/Leaderboard.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/__tests__/RaceControlBanner.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/__tests__/SessionHeader.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/__tests__/SessionProgress.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/__tests__/TyreStrategy.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/__tests__/WeatherMini.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/EventBroadcast.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/EventTicker.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/FastestLapBadges.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/Leaderboard.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/qualifying/__tests__/qualifyingPanels.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/qualifying/KnockoutPanel.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/qualifying/QualifyingTower.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/qualifying/SegmentBestBoard.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/qualifying/SegmentProgress.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/qualifying/useQualifyingModel.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/RaceControlBanner.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/SessionHeader.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/SessionProgress.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/TyreStrategy.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/panels/WeatherMini.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/profiles/__tests__/dashboardProfile.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/profiles/defaultProfile.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/profiles/index.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/profiles/qualifyingProfile.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/profiles/types.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/__tests__/DataSourceContext.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/__tests__/DriversContext.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/__tests__/flagDecoder.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/__tests__/flagIcons.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/__tests__/formatTime.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/__tests__/queryHooks.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/__tests__/SectorBar.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/__tests__/sectorColors.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/__tests__/selectionStore.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/__tests__/tyreColors.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/__tests__/useDisplayTime.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/__tests__/useMediaQuery.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/dashboardStyles.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/DataSourceContext.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/DriversContext.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/flagDecoder.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/flagIcons.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/formatTime.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/PanelHeading.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/SectorBar.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/sectorColors.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/selectionStore.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/tyreColors.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/useAggregate.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/useAggregateResults.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/useAllBefore.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/useDisplayTime.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/useLatestBefore.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/useMediaQuery.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/live/__tests__/corsPing.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/live/__tests__/findSessionByKey.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/live/__tests__/LiveMap.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/live/__tests__/LiveScreen.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/live/__tests__/ReplayScreen.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/live/__tests__/SyntheticDataSource.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/live/CorsFailedNotice.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/live/corsPing.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/live/CountdownOverlay.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/live/derived/__tests__/overlayCountdown.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/live/derived/overlayCountdown.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/live/findSessionByKey.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/live/LiveMap.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/live/LiveScreen.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/live/ReplayScreen.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/live/SyntheticDataSource.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/live/TestRigScreen.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/live/usePing.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/__tests__/initialSeason.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/__tests__/useNowSecond.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/Countdown.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/derived/__tests__/countdownFormat.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/derived/__tests__/meetingStatus.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/derived/__tests__/nextUpcoming.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/derived/__tests__/openf1ToSessionMap.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/derived/__tests__/resultPreviewFormat.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/derived/__tests__/searchFilter.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/derived/__tests__/seasonDiff.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/derived/__tests__/sessionRoute.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/derived/__tests__/sessionStatus.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/derived/countdownFormat.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/derived/meetingStatus.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/derived/nextUpcoming.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/derived/openf1ToSessionMap.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/derived/resultPreviewFormat.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/derived/searchFilter.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/derived/seasonDiff.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/derived/sessionRoute.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/derived/sessionStatus.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/ExpandedSessions.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/GpCard.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/GpGrid.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/Hero.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/initialSeason.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/MainPage.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/NarrowScreenBanner.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/ResultPreviewTooltip.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/SearchFilter.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/SeasonPicker.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/SessionCard.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/SimBadge.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/StatusBadge.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/stores/__tests__/catalogStore.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/stores/__tests__/revalidateSeason.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/stores/__tests__/uiStore.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/stores/catalogStore.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/stores/hooks.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/stores/revalidateSeason.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/stores/uiStore.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/Toast.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/useNowSecond.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/__tests__/arcLength.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/__tests__/dashboardQueries.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/__tests__/drsZones.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/__tests__/interpolation.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/__tests__/layoutVersions.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/__tests__/LiveDataSource.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/__tests__/LiveDataSourceMemory.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/__tests__/LiveDataSourceTabResume.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/__tests__/LiveMapRenderer.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/__tests__/LocationBuffer.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/__tests__/mapStyles.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/__tests__/markerLabelToggle.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/__tests__/markers.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/__tests__/pathProjection.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/__tests__/PerDriverBuffer.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/__tests__/pitLane.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/__tests__/ReplayDataSource.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/__tests__/sectorBoundaries.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/__tests__/slmZones.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/__tests__/stateBadges.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/__tests__/trackRenderer.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/__tests__/trails.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/__tests__/transform.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/__tests__/viewport.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/arcLength.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/circuits.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "src/map/dashboardQueries.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/drsZones.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/interpolation.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/layoutVersions.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "src/map/layoutVersions.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/LiveDataSource.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/LiveMapRenderer.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/LocationBuffer.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/mapStyles.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/markerLabelToggle.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/markers.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/pathProjection.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/PerDriverBuffer.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/pitLane.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/ReplayDataSource.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/sectorBoundaries.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/slmZones.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/stateBadges.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/trackRenderer.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/trails.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/transform.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/map/viewport.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/shared/__tests__/createMockOpenF1Client.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/shared/__tests__/createMockOpenF1Client.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/shared/__tests__/Footer.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/shared/__tests__/openf1Client.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/shared/__tests__/sessionKind.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/shared/__tests__/simulatedNow.test.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/shared/__tests__/SyntheticDataSource.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/shared/DataSource.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/shared/env.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/shared/Footer.tsx",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/shared/openf1Client.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/shared/openf1Types.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/shared/seasonData.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/shared/sessionKind.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/shared/simulatedNow.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/style/global.css",
+      "language": "css",
+      "fileCategory": "markup"
+    },
+    {
+      "path": "src/style/tokens.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "THIRD_PARTY_LICENSES.md",
+      "language": "markdown",
+      "fileCategory": "docs"
+    },
+    {
+      "path": "tsconfig.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "vercel.json",
+      "language": "json",
+      "fileCategory": "config"
+    },
+    {
+      "path": "vite.config.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "vitest.setup.ts",
+      "language": "typescript",
+      "fileCategory": "code"
+    }
+  ]
+}

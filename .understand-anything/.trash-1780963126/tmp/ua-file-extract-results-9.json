@@ -1,0 +1,631 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 7,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "src/map/__tests__/drsZones.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 98,
+      "nonEmptyLines": 90,
+      "functions": [
+        {
+          "name": "makeCtx",
+          "startLine": 6,
+          "endLine": 22,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "makeCtx",
+          "callee": "vi.fn",
+          "lineNumber": 8
+        },
+        {
+          "caller": "makeCtx",
+          "callee": "vi.fn",
+          "lineNumber": 9
+        },
+        {
+          "caller": "makeCtx",
+          "callee": "vi.fn",
+          "lineNumber": 10
+        },
+        {
+          "caller": "makeCtx",
+          "callee": "vi.fn",
+          "lineNumber": 11
+        },
+        {
+          "caller": "makeCtx",
+          "callee": "vi.fn",
+          "lineNumber": 12
+        },
+        {
+          "caller": "makeCtx",
+          "callee": "vi.fn",
+          "lineNumber": 13
+        },
+        {
+          "caller": "makeCtx",
+          "callee": "vi.fn",
+          "lineNumber": 14
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/__tests__/sectorBoundaries.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 80,
+      "nonEmptyLines": 71,
+      "functions": [
+        {
+          "name": "makeCtx",
+          "startLine": 6,
+          "endLine": 16,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "makeCtx",
+          "callee": "vi.fn",
+          "lineNumber": 8
+        },
+        {
+          "caller": "makeCtx",
+          "callee": "vi.fn",
+          "lineNumber": 9
+        },
+        {
+          "caller": "makeCtx",
+          "callee": "vi.fn",
+          "lineNumber": 10
+        },
+        {
+          "caller": "makeCtx",
+          "callee": "vi.fn",
+          "lineNumber": 11
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/__tests__/slmZones.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 72,
+      "nonEmptyLines": 66,
+      "functions": [
+        {
+          "name": "makeCtx",
+          "startLine": 6,
+          "endLine": 20,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "makeCtx",
+          "callee": "vi.fn",
+          "lineNumber": 8
+        },
+        {
+          "caller": "makeCtx",
+          "callee": "vi.fn",
+          "lineNumber": 9
+        },
+        {
+          "caller": "makeCtx",
+          "callee": "vi.fn",
+          "lineNumber": 10
+        },
+        {
+          "caller": "makeCtx",
+          "callee": "vi.fn",
+          "lineNumber": 11
+        },
+        {
+          "caller": "makeCtx",
+          "callee": "vi.fn",
+          "lineNumber": 12
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/drsZones.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 88,
+      "nonEmptyLines": 81,
+      "functions": [
+        {
+          "name": "loadDrsZones",
+          "startLine": 16,
+          "endLine": 28,
+          "params": [
+            "circuitKey",
+            "year",
+            "fetchImpl"
+          ]
+        },
+        {
+          "name": "drawDrsZones",
+          "startLine": 34,
+          "endLine": 59,
+          "params": [
+            "ctx",
+            "zones",
+            "polyline",
+            "arcLengthTable",
+            "viewport",
+            "opts"
+          ]
+        },
+        {
+          "name": "strokeArcSegment",
+          "startLine": 61,
+          "endLine": 88,
+          "params": [
+            "ctx",
+            "sStart",
+            "sEnd",
+            "polyline",
+            "arcTable",
+            "viewport"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "DrsZone",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "DrsZonesJsonBase",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "loadDrsZones",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "drawDrsZones",
+          "line": 34,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "loadDrsZones",
+          "callee": "globalThis.fetch?.bind",
+          "lineNumber": 21
+        },
+        {
+          "caller": "loadDrsZones",
+          "callee": "f",
+          "lineNumber": 24
+        },
+        {
+          "caller": "loadDrsZones",
+          "callee": "res.json",
+          "lineNumber": 27
+        },
+        {
+          "caller": "drawDrsZones",
+          "callee": "strokeArcSegment",
+          "lineNumber": 47
+        },
+        {
+          "caller": "drawDrsZones",
+          "callee": "sampleAtArcLength",
+          "lineNumber": 54
+        },
+        {
+          "caller": "drawDrsZones",
+          "callee": "applyViewport",
+          "lineNumber": 55
+        },
+        {
+          "caller": "drawDrsZones",
+          "callee": "ctx.fillText",
+          "lineNumber": 56
+        },
+        {
+          "caller": "strokeArcSegment",
+          "callee": "ctx.beginPath",
+          "lineNumber": 70
+        },
+        {
+          "caller": "strokeArcSegment",
+          "callee": "sampleAtArcLength",
+          "lineNumber": 71
+        },
+        {
+          "caller": "strokeArcSegment",
+          "callee": "applyViewport",
+          "lineNumber": 72
+        },
+        {
+          "caller": "strokeArcSegment",
+          "callee": "ctx.moveTo",
+          "lineNumber": 73
+        },
+        {
+          "caller": "strokeArcSegment",
+          "callee": "applyViewport",
+          "lineNumber": 80
+        },
+        {
+          "caller": "strokeArcSegment",
+          "callee": "ctx.lineTo",
+          "lineNumber": 81
+        },
+        {
+          "caller": "strokeArcSegment",
+          "callee": "sampleAtArcLength",
+          "lineNumber": 84
+        },
+        {
+          "caller": "strokeArcSegment",
+          "callee": "applyViewport",
+          "lineNumber": 85
+        },
+        {
+          "caller": "strokeArcSegment",
+          "callee": "ctx.lineTo",
+          "lineNumber": 86
+        },
+        {
+          "caller": "strokeArcSegment",
+          "callee": "ctx.stroke",
+          "lineNumber": 87
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 4,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/sectorBoundaries.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 62,
+      "nonEmptyLines": 55,
+      "functions": [
+        {
+          "name": "loadSectorBoundaries",
+          "startLine": 20,
+          "endLine": 32,
+          "params": [
+            "circuitKey",
+            "year",
+            "fetchImpl"
+          ]
+        },
+        {
+          "name": "drawSectorBoundaries",
+          "startLine": 43,
+          "endLine": 62,
+          "params": [
+            "ctx",
+            "boundaries",
+            "viewport",
+            "opts"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SectorBoundary",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "SectorsJsonBase",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "sectorColors",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "loadSectorBoundaries",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "drawSectorBoundaries",
+          "line": 43,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "loadSectorBoundaries",
+          "callee": "globalThis.fetch?.bind",
+          "lineNumber": 25
+        },
+        {
+          "caller": "loadSectorBoundaries",
+          "callee": "f",
+          "lineNumber": 28
+        },
+        {
+          "caller": "loadSectorBoundaries",
+          "callee": "res.json",
+          "lineNumber": 31
+        },
+        {
+          "caller": "drawSectorBoundaries",
+          "callee": "applyViewport",
+          "lineNumber": 53
+        },
+        {
+          "caller": "drawSectorBoundaries",
+          "callee": "ctx.beginPath",
+          "lineNumber": 57
+        },
+        {
+          "caller": "drawSectorBoundaries",
+          "callee": "ctx.arc",
+          "lineNumber": 58
+        },
+        {
+          "caller": "drawSectorBoundaries",
+          "callee": "ctx.fill",
+          "lineNumber": 59
+        },
+        {
+          "caller": "drawSectorBoundaries",
+          "callee": "ctx.stroke",
+          "lineNumber": 60
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 5,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/slmZones.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 81,
+      "nonEmptyLines": 75,
+      "functions": [
+        {
+          "name": "loadSlmZones",
+          "startLine": 16,
+          "endLine": 28,
+          "params": [
+            "circuitKey",
+            "year",
+            "fetchImpl"
+          ]
+        },
+        {
+          "name": "drawSlmZones",
+          "startLine": 30,
+          "endLine": 52,
+          "params": [
+            "ctx",
+            "zones",
+            "polyline",
+            "arcLengthTable",
+            "viewport"
+          ]
+        },
+        {
+          "name": "strokeArcSegment",
+          "startLine": 54,
+          "endLine": 81,
+          "params": [
+            "ctx",
+            "sStart",
+            "sEnd",
+            "polyline",
+            "arcTable",
+            "viewport"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SlmZone",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "SlmZonesJsonBase",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "loadSlmZones",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "drawSlmZones",
+          "line": 30,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "loadSlmZones",
+          "callee": "globalThis.fetch?.bind",
+          "lineNumber": 21
+        },
+        {
+          "caller": "loadSlmZones",
+          "callee": "f",
+          "lineNumber": 24
+        },
+        {
+          "caller": "loadSlmZones",
+          "callee": "res.json",
+          "lineNumber": 27
+        },
+        {
+          "caller": "drawSlmZones",
+          "callee": "strokeArcSegment",
+          "lineNumber": 42
+        },
+        {
+          "caller": "drawSlmZones",
+          "callee": "sampleAtArcLength",
+          "lineNumber": 48
+        },
+        {
+          "caller": "drawSlmZones",
+          "callee": "applyViewport",
+          "lineNumber": 49
+        },
+        {
+          "caller": "drawSlmZones",
+          "callee": "ctx.fillText",
+          "lineNumber": 50
+        },
+        {
+          "caller": "strokeArcSegment",
+          "callee": "ctx.beginPath",
+          "lineNumber": 63
+        },
+        {
+          "caller": "strokeArcSegment",
+          "callee": "sampleAtArcLength",
+          "lineNumber": 64
+        },
+        {
+          "caller": "strokeArcSegment",
+          "callee": "applyViewport",
+          "lineNumber": 65
+        },
+        {
+          "caller": "strokeArcSegment",
+          "callee": "ctx.moveTo",
+          "lineNumber": 66
+        },
+        {
+          "caller": "strokeArcSegment",
+          "callee": "applyViewport",
+          "lineNumber": 73
+        },
+        {
+          "caller": "strokeArcSegment",
+          "callee": "ctx.lineTo",
+          "lineNumber": 74
+        },
+        {
+          "caller": "strokeArcSegment",
+          "callee": "sampleAtArcLength",
+          "lineNumber": 77
+        },
+        {
+          "caller": "strokeArcSegment",
+          "callee": "applyViewport",
+          "lineNumber": 78
+        },
+        {
+          "caller": "strokeArcSegment",
+          "callee": "ctx.lineTo",
+          "lineNumber": 79
+        },
+        {
+          "caller": "strokeArcSegment",
+          "callee": "ctx.stroke",
+          "lineNumber": 80
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 4,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/viewport.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 66,
+      "nonEmptyLines": 58,
+      "functions": [
+        {
+          "name": "computeViewport",
+          "startLine": 34,
+          "endLine": 59,
+          "params": [
+            "input"
+          ]
+        },
+        {
+          "name": "applyViewport",
+          "startLine": 64,
+          "endLine": 66,
+          "params": [
+            "p",
+            "t"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "computeViewport",
+          "line": 34,
+          "isDefault": false
+        },
+        {
+          "name": "applyViewport",
+          "line": 64,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "computeViewport",
+          "callee": "Math.min",
+          "lineNumber": 46
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    }
+  ]
+}

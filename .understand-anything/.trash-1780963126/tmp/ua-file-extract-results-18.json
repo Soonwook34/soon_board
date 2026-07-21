@@ -1,0 +1,1956 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "scripts/extract-openf1-transform.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 344,
+      "nonEmptyLines": 310,
+      "functions": [
+        {
+          "name": "extractTransform",
+          "startLine": 83,
+          "endLine": 145,
+          "params": [
+            "input"
+          ]
+        },
+        {
+          "name": "computeConfidence",
+          "startLine": 157,
+          "endLine": 164,
+          "params": [
+            "rmse",
+            "threshold"
+          ]
+        },
+        {
+          "name": "readTrackOutline",
+          "startLine": 168,
+          "endLine": 171,
+          "params": [
+            "filePath"
+          ]
+        },
+        {
+          "name": "writeTrackOutlineWithTransform",
+          "startLine": 173,
+          "endLine": 206,
+          "params": [
+            "filePath",
+            "existing",
+            "fastLap",
+            "result",
+            "now"
+          ]
+        },
+        {
+          "name": "runExtract",
+          "startLine": 229,
+          "endLine": 282,
+          "params": [
+            "opts"
+          ]
+        },
+        {
+          "name": "parseCliArgs",
+          "startLine": 286,
+          "endLine": 313,
+          "params": [
+            "argv"
+          ]
+        },
+        {
+          "name": "isMainModule",
+          "startLine": 315,
+          "endLine": 319,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "OpenF1AffineJson",
+          "line": 43,
+          "isDefault": false
+        },
+        {
+          "name": "TrackOutlineJson",
+          "line": 43,
+          "isDefault": false
+        },
+        {
+          "name": "extractTransform",
+          "line": 83,
+          "isDefault": false
+        },
+        {
+          "name": "computeConfidence",
+          "line": 157,
+          "isDefault": false
+        },
+        {
+          "name": "readTrackOutline",
+          "line": 168,
+          "isDefault": false
+        },
+        {
+          "name": "writeTrackOutlineWithTransform",
+          "line": 173,
+          "isDefault": false
+        },
+        {
+          "name": "runExtract",
+          "line": 229,
+          "isDefault": false
+        },
+        {
+          "name": "parseCliArgs",
+          "line": 286,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "extractTransform",
+          "callee": "input.openf1Samples.map",
+          "lineNumber": 93
+        },
+        {
+          "caller": "extractTransform",
+          "callee": "arcLengthResample",
+          "lineNumber": 96
+        },
+        {
+          "caller": "extractTransform",
+          "callee": "arcLengthResample",
+          "lineNumber": 97
+        },
+        {
+          "caller": "extractTransform",
+          "callee": "openf1Resampled.slice",
+          "lineNumber": 103
+        },
+        {
+          "caller": "extractTransform",
+          "callee": "[...openf1Ring].reverse",
+          "lineNumber": 104
+        },
+        {
+          "caller": "extractTransform",
+          "callee": "candidate.slice(k).concat",
+          "lineNumber": 112
+        },
+        {
+          "caller": "extractTransform",
+          "callee": "candidate.slice",
+          "lineNumber": 112
+        },
+        {
+          "caller": "extractTransform",
+          "callee": "candidate.slice",
+          "lineNumber": 112
+        },
+        {
+          "caller": "extractTransform",
+          "callee": "rotated.push",
+          "lineNumber": 113
+        },
+        {
+          "caller": "extractTransform",
+          "callee": "fitSimilarity2D",
+          "lineNumber": 114
+        },
+        {
+          "caller": "extractTransform",
+          "callee": "icpRefine",
+          "lineNumber": 125
+        },
+        {
+          "caller": "extractTransform",
+          "callee": "openf1Polyline.map",
+          "lineNumber": 131
+        },
+        {
+          "caller": "extractTransform",
+          "callee": "applyAffine2D",
+          "lineNumber": 131
+        },
+        {
+          "caller": "extractTransform",
+          "callee": "residualToPolyline",
+          "lineNumber": 132
+        },
+        {
+          "caller": "extractTransform",
+          "callee": "computeConfidence",
+          "lineNumber": 134
+        },
+        {
+          "caller": "readTrackOutline",
+          "callee": "readFileSync",
+          "lineNumber": 169
+        },
+        {
+          "caller": "readTrackOutline",
+          "callee": "JSON.parse",
+          "lineNumber": 170
+        },
+        {
+          "caller": "writeTrackOutlineWithTransform",
+          "callee": "now.toISOString",
+          "lineNumber": 199
+        },
+        {
+          "caller": "writeTrackOutlineWithTransform",
+          "callee": "writeJsonAtomicSync",
+          "lineNumber": 204
+        },
+        {
+          "caller": "runExtract",
+          "callee": "join",
+          "lineNumber": 231
+        },
+        {
+          "caller": "runExtract",
+          "callee": "readTrackOutline",
+          "lineNumber": 232
+        },
+        {
+          "caller": "runExtract",
+          "callee": "fetchFastLapLocations",
+          "lineNumber": 236
+        },
+        {
+          "caller": "runExtract",
+          "callee": "extractTransform",
+          "lineNumber": 248
+        },
+        {
+          "caller": "runExtract",
+          "callee": "console.warn",
+          "lineNumber": 257
+        },
+        {
+          "caller": "runExtract",
+          "callee": "result.rmse.toFixed",
+          "lineNumber": 258
+        },
+        {
+          "caller": "runExtract",
+          "callee": "result.confidence.toFixed",
+          "lineNumber": 258
+        },
+        {
+          "caller": "runExtract",
+          "callee": "writeTrackOutlineWithTransform",
+          "lineNumber": 262
+        },
+        {
+          "caller": "runExtract",
+          "callee": "upsertTrackOutlinesIndex",
+          "lineNumber": 263
+        },
+        {
+          "caller": "runExtract",
+          "callee": "now.toISOString",
+          "lineNumber": 271
+        },
+        {
+          "caller": "parseCliArgs",
+          "callee": "/^--key=(\\d+)$/.exec",
+          "lineNumber": 301
+        },
+        {
+          "caller": "parseCliArgs",
+          "callee": "Number",
+          "lineNumber": 302
+        },
+        {
+          "caller": "parseCliArgs",
+          "callee": "/^--year=(\\d+)$/.exec",
+          "lineNumber": 303
+        },
+        {
+          "caller": "parseCliArgs",
+          "callee": "Number",
+          "lineNumber": 304
+        },
+        {
+          "caller": "parseCliArgs",
+          "callee": "/^--samples=(\\d+)$/.exec",
+          "lineNumber": 305
+        },
+        {
+          "caller": "parseCliArgs",
+          "callee": "Number",
+          "lineNumber": 306
+        },
+        {
+          "caller": "parseCliArgs",
+          "callee": "/^--threshold=([\\d.]+)$/.exec",
+          "lineNumber": 307
+        },
+        {
+          "caller": "parseCliArgs",
+          "callee": "Number",
+          "lineNumber": 308
+        },
+        {
+          "caller": "parseCliArgs",
+          "callee": "/^--session-type=([\\w,]+)$/.exec",
+          "lineNumber": 309
+        },
+        {
+          "caller": "parseCliArgs",
+          "callee": "stm[1].split",
+          "lineNumber": 310
+        },
+        {
+          "caller": "isMainModule",
+          "callee": "fileURLToPath",
+          "lineNumber": 318
+        },
+        {
+          "caller": "isMainModule",
+          "callee": "resolve",
+          "lineNumber": 318
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 8,
+        "functionCount": 7,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/fetch-circuit-maps.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 254,
+      "nonEmptyLines": 228,
+      "functions": [
+        {
+          "name": "readCircuitsConfig",
+          "startLine": 69,
+          "endLine": 79,
+          "params": [
+            "path"
+          ]
+        },
+        {
+          "name": "svgPathFor",
+          "startLine": 81,
+          "endLine": 87,
+          "params": [
+            "vendorRoot",
+            "variant",
+            "julesr0yLayoutId"
+          ]
+        },
+        {
+          "name": "buildAll",
+          "startLine": 89,
+          "endLine": 202,
+          "params": [
+            "config",
+            "opts",
+            "now"
+          ]
+        },
+        {
+          "name": "parseCliArgs",
+          "startLine": 206,
+          "endLine": 230,
+          "params": [
+            "argv"
+          ]
+        },
+        {
+          "name": "isMainModule",
+          "startLine": 232,
+          "endLine": 236,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "TrackOutlineJson",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "readCircuitsConfig",
+          "line": 69,
+          "isDefault": false
+        },
+        {
+          "name": "svgPathFor",
+          "line": 81,
+          "isDefault": false
+        },
+        {
+          "name": "buildAll",
+          "line": 89,
+          "isDefault": false
+        },
+        {
+          "name": "parseCliArgs",
+          "line": 206,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "readCircuitsConfig",
+          "callee": "readFileSync",
+          "lineNumber": 70
+        },
+        {
+          "caller": "readCircuitsConfig",
+          "callee": "JSON.parse",
+          "lineNumber": 71
+        },
+        {
+          "caller": "readCircuitsConfig",
+          "callee": "Array.isArray",
+          "lineNumber": 72
+        },
+        {
+          "caller": "svgPathFor",
+          "callee": "join",
+          "lineNumber": 86
+        },
+        {
+          "caller": "buildAll",
+          "callee": "config.circuits.filter",
+          "lineNumber": 98
+        },
+        {
+          "caller": "buildAll",
+          "callee": "JSON.stringify",
+          "lineNumber": 108
+        },
+        {
+          "caller": "buildAll",
+          "callee": "svgPathFor",
+          "lineNumber": 114
+        },
+        {
+          "caller": "buildAll",
+          "callee": "existsSync",
+          "lineNumber": 115
+        },
+        {
+          "caller": "buildAll",
+          "callee": "result.skipped.push",
+          "lineNumber": 116
+        },
+        {
+          "caller": "buildAll",
+          "callee": "readFileSync",
+          "lineNumber": 124
+        },
+        {
+          "caller": "buildAll",
+          "callee": "svgToPolyline",
+          "lineNumber": 127
+        },
+        {
+          "caller": "buildAll",
+          "callee": "result.skipped.push",
+          "lineNumber": 129
+        },
+        {
+          "caller": "buildAll",
+          "callee": "join",
+          "lineNumber": 138
+        },
+        {
+          "caller": "buildAll",
+          "callee": "existsSync",
+          "lineNumber": 143
+        },
+        {
+          "caller": "buildAll",
+          "callee": "JSON.parse",
+          "lineNumber": 145
+        },
+        {
+          "caller": "buildAll",
+          "callee": "readFileSync",
+          "lineNumber": 145
+        },
+        {
+          "caller": "buildAll",
+          "callee": "now.toISOString",
+          "lineNumber": 167
+        },
+        {
+          "caller": "buildAll",
+          "callee": "JSON.stringify",
+          "lineNumber": 178
+        },
+        {
+          "caller": "buildAll",
+          "callee": "writeJsonAtomicSync",
+          "lineNumber": 179
+        },
+        {
+          "caller": "buildAll",
+          "callee": "upsertTrackOutlinesIndex",
+          "lineNumber": 181
+        },
+        {
+          "caller": "buildAll",
+          "callee": "result.built.push",
+          "lineNumber": 194
+        },
+        {
+          "caller": "buildAll",
+          "callee": "Buffer.byteLength",
+          "lineNumber": 197
+        },
+        {
+          "caller": "parseCliArgs",
+          "callee": "/^--key=(\\d+)$/.exec",
+          "lineNumber": 213
+        },
+        {
+          "caller": "parseCliArgs",
+          "callee": "Number",
+          "lineNumber": 215
+        },
+        {
+          "caller": "parseCliArgs",
+          "callee": "/^--year=(\\d+)$/.exec",
+          "lineNumber": 218
+        },
+        {
+          "caller": "parseCliArgs",
+          "callee": "Number",
+          "lineNumber": 220
+        },
+        {
+          "caller": "parseCliArgs",
+          "callee": "/^--step=([\\d.]+)$/.exec",
+          "lineNumber": 223
+        },
+        {
+          "caller": "parseCliArgs",
+          "callee": "Number",
+          "lineNumber": 225
+        },
+        {
+          "caller": "isMainModule",
+          "callee": "fileURLToPath",
+          "lineNumber": 235
+        },
+        {
+          "caller": "isMainModule",
+          "callee": "resolve",
+          "lineNumber": 235
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 5,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/load-slm-zones.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 122,
+      "nonEmptyLines": 113,
+      "functions": [
+        {
+          "name": "runLoadSlm",
+          "startLine": 35,
+          "endLine": 91,
+          "params": [
+            "opts"
+          ]
+        },
+        {
+          "name": "parseCli",
+          "startLine": 93,
+          "endLine": 105,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "runLoadSlm",
+          "line": 35,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "runLoadSlm",
+          "callee": "join",
+          "lineNumber": 38
+        },
+        {
+          "caller": "runLoadSlm",
+          "callee": "existsSync",
+          "lineNumber": 39
+        },
+        {
+          "caller": "runLoadSlm",
+          "callee": "existsSync",
+          "lineNumber": 42
+        },
+        {
+          "caller": "runLoadSlm",
+          "callee": "JSON.parse",
+          "lineNumber": 45
+        },
+        {
+          "caller": "runLoadSlm",
+          "callee": "readFileSync",
+          "lineNumber": 45
+        },
+        {
+          "caller": "runLoadSlm",
+          "callee": "JSON.parse",
+          "lineNumber": 46
+        },
+        {
+          "caller": "runLoadSlm",
+          "callee": "readFileSync",
+          "lineNumber": 46
+        },
+        {
+          "caller": "runLoadSlm",
+          "callee": "loadSlmZonesFromRaw",
+          "lineNumber": 48
+        },
+        {
+          "caller": "runLoadSlm",
+          "callee": "console.warn",
+          "lineNumber": 55
+        },
+        {
+          "caller": "runLoadSlm",
+          "callee": "now.toISOString",
+          "lineNumber": 66
+        },
+        {
+          "caller": "runLoadSlm",
+          "callee": "join",
+          "lineNumber": 68
+        },
+        {
+          "caller": "runLoadSlm",
+          "callee": "writeJsonAtomicSync",
+          "lineNumber": 69
+        },
+        {
+          "caller": "runLoadSlm",
+          "callee": "readTrackOutlinesIndex",
+          "lineNumber": 71
+        },
+        {
+          "caller": "runLoadSlm",
+          "callee": "index.entries.find",
+          "lineNumber": 72
+        },
+        {
+          "caller": "runLoadSlm",
+          "callee": "upsertTrackOutlinesIndex",
+          "lineNumber": 75
+        },
+        {
+          "caller": "runLoadSlm",
+          "callee": "now.toISOString",
+          "lineNumber": 86
+        },
+        {
+          "caller": "parseCli",
+          "callee": "process.argv.slice",
+          "lineNumber": 94
+        },
+        {
+          "caller": "parseCli",
+          "callee": "a.startsWith",
+          "lineNumber": 97
+        },
+        {
+          "caller": "parseCli",
+          "callee": "Number",
+          "lineNumber": 97
+        },
+        {
+          "caller": "parseCli",
+          "callee": "a.slice",
+          "lineNumber": 97
+        },
+        {
+          "caller": "parseCli",
+          "callee": "a.startsWith",
+          "lineNumber": 98
+        },
+        {
+          "caller": "parseCli",
+          "callee": "Number",
+          "lineNumber": 98
+        },
+        {
+          "caller": "parseCli",
+          "callee": "a.slice",
+          "lineNumber": 98
+        },
+        {
+          "caller": "parseCli",
+          "callee": "console.error",
+          "lineNumber": 101
+        },
+        {
+          "caller": "parseCli",
+          "callee": "process.exit",
+          "lineNumber": 102
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/trace-pitlane.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 224,
+      "nonEmptyLines": 205,
+      "functions": [
+        {
+          "name": "readTrackOutline",
+          "startLine": 70,
+          "endLine": 84,
+          "params": [
+            "filePath"
+          ]
+        },
+        {
+          "name": "runTracePitlane",
+          "startLine": 86,
+          "endLine": 175,
+          "params": [
+            "opts"
+          ]
+        },
+        {
+          "name": "parseCliArgs",
+          "startLine": 179,
+          "endLine": 194,
+          "params": [
+            "argv"
+          ]
+        },
+        {
+          "name": "isMainModule",
+          "startLine": 196,
+          "endLine": 200,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "PitlaneJson",
+          "line": 42,
+          "isDefault": false
+        },
+        {
+          "name": "runTracePitlane",
+          "line": 86,
+          "isDefault": false
+        },
+        {
+          "name": "parseCliArgs",
+          "line": 179,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "readTrackOutline",
+          "callee": "existsSync",
+          "lineNumber": 71
+        },
+        {
+          "caller": "readTrackOutline",
+          "callee": "readFileSync",
+          "lineNumber": 76
+        },
+        {
+          "caller": "readTrackOutline",
+          "callee": "JSON.parse",
+          "lineNumber": 77
+        },
+        {
+          "caller": "runTracePitlane",
+          "callee": "join",
+          "lineNumber": 88
+        },
+        {
+          "caller": "runTracePitlane",
+          "callee": "join",
+          "lineNumber": 89
+        },
+        {
+          "caller": "runTracePitlane",
+          "callee": "readTrackOutline",
+          "lineNumber": 90
+        },
+        {
+          "caller": "runTracePitlane",
+          "callee": "await client.get",
+          "lineNumber": 96
+        },
+        {
+          "caller": "runTracePitlane",
+          "callee": "pickPreferredSession",
+          "lineNumber": 103
+        },
+        {
+          "caller": "runTracePitlane",
+          "callee": "preferred.join",
+          "lineNumber": 106
+        },
+        {
+          "caller": "runTracePitlane",
+          "callee": "fetchPitStops",
+          "lineNumber": 111
+        },
+        {
+          "caller": "runTracePitlane",
+          "callee": "fetchPitLocations",
+          "lineNumber": 112
+        },
+        {
+          "caller": "runTracePitlane",
+          "callee": "applyTransformAndFilter",
+          "lineNumber": 118
+        },
+        {
+          "caller": "runTracePitlane",
+          "callee": "tracePitlanePolyline",
+          "lineNumber": 121
+        },
+        {
+          "caller": "runTracePitlane",
+          "callee": "now.toISOString",
+          "lineNumber": 145
+        },
+        {
+          "caller": "runTracePitlane",
+          "callee": "now.toISOString",
+          "lineNumber": 147
+        },
+        {
+          "caller": "runTracePitlane",
+          "callee": "writeJsonAtomicSync",
+          "lineNumber": 149
+        },
+        {
+          "caller": "runTracePitlane",
+          "callee": "readTrackOutlinesIndex",
+          "lineNumber": 152
+        },
+        {
+          "caller": "runTracePitlane",
+          "callee": "currentIndex.entries.find",
+          "lineNumber": 153
+        },
+        {
+          "caller": "runTracePitlane",
+          "callee": "upsertTrackOutlinesIndex",
+          "lineNumber": 156
+        },
+        {
+          "caller": "runTracePitlane",
+          "callee": "now.toISOString",
+          "lineNumber": 164
+        },
+        {
+          "caller": "parseCliArgs",
+          "callee": "/^--key=(\\d+)$/.exec",
+          "lineNumber": 182
+        },
+        {
+          "caller": "parseCliArgs",
+          "callee": "Number",
+          "lineNumber": 183
+        },
+        {
+          "caller": "parseCliArgs",
+          "callee": "/^--year=(\\d+)$/.exec",
+          "lineNumber": 184
+        },
+        {
+          "caller": "parseCliArgs",
+          "callee": "Number",
+          "lineNumber": 185
+        },
+        {
+          "caller": "parseCliArgs",
+          "callee": "/^--session-type=([\\w,]+)$/.exec",
+          "lineNumber": 186
+        },
+        {
+          "caller": "parseCliArgs",
+          "callee": "stm[1].split",
+          "lineNumber": 187
+        },
+        {
+          "caller": "parseCliArgs",
+          "callee": "/^--bucket=([\\d.]+)$/.exec",
+          "lineNumber": 188
+        },
+        {
+          "caller": "parseCliArgs",
+          "callee": "Number",
+          "lineNumber": 189
+        },
+        {
+          "caller": "parseCliArgs",
+          "callee": "/^--pad=([\\d.]+)$/.exec",
+          "lineNumber": 190
+        },
+        {
+          "caller": "parseCliArgs",
+          "callee": "Number",
+          "lineNumber": 191
+        },
+        {
+          "caller": "isMainModule",
+          "callee": "fileURLToPath",
+          "lineNumber": 199
+        },
+        {
+          "caller": "isMainModule",
+          "callee": "resolve",
+          "lineNumber": 199
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 3,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/__tests__/futureLeakGuard.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 43,
+      "nonEmptyLines": 38,
+      "functions": [
+        {
+          "name": "collectSources",
+          "startLine": 19,
+          "endLine": 28,
+          "params": [
+            "dir"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "collectSources",
+          "callee": "readdirSync",
+          "lineNumber": 21
+        },
+        {
+          "caller": "collectSources",
+          "callee": "join",
+          "lineNumber": 23
+        },
+        {
+          "caller": "collectSources",
+          "callee": "ent.isDirectory",
+          "lineNumber": 24
+        },
+        {
+          "caller": "collectSources",
+          "callee": "out.push",
+          "lineNumber": 24
+        },
+        {
+          "caller": "collectSources",
+          "callee": "collectSources",
+          "lineNumber": 24
+        },
+        {
+          "caller": "collectSources",
+          "callee": "/\\.tsx?$/.test",
+          "lineNumber": 25
+        },
+        {
+          "caller": "collectSources",
+          "callee": "out.push",
+          "lineNumber": 25
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/__tests__/arcLength.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 70,
+      "nonEmptyLines": 64,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/__tests__/dashboardQueries.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 272,
+      "nonEmptyLines": 230,
+      "functions": [
+        {
+          "name": "at",
+          "startLine": 25,
+          "endLine": 25,
+          "params": [
+            "sec"
+          ]
+        },
+        {
+          "name": "pos",
+          "startLine": 27,
+          "endLine": 29,
+          "params": [
+            "driver",
+            "sec",
+            "position"
+          ]
+        },
+        {
+          "name": "lap",
+          "startLine": 31,
+          "endLine": 56,
+          "params": [
+            "driver",
+            "lapNumber",
+            "startSec",
+            "durationSec",
+            "sectors"
+          ]
+        },
+        {
+          "name": "stint",
+          "startLine": 58,
+          "endLine": 69,
+          "params": [
+            "driver",
+            "n",
+            "lapStart",
+            "lapEnd"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "pos",
+          "callee": "at",
+          "lineNumber": 28
+        },
+        {
+          "caller": "lap",
+          "callee": "at",
+          "lineNumber": 39
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/__tests__/interpolation.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 171,
+      "nonEmptyLines": 159,
+      "functions": [
+        {
+          "name": "sample",
+          "startLine": 55,
+          "endLine": 57,
+          "params": [
+            "date",
+            "s",
+            "n",
+            "rawXY"
+          ]
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/__tests__/layoutVersions.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 93,
+      "nonEmptyLines": 84,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/__tests__/LiveDataSource.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 415,
+      "nonEmptyLines": 382,
+      "functions": [
+        {
+          "name": "jsonResponse",
+          "startLine": 26,
+          "endLine": 31,
+          "params": [
+            "body",
+            "status"
+          ]
+        },
+        {
+          "name": "locationRecord",
+          "startLine": 33,
+          "endLine": 35,
+          "params": [
+            "driver",
+            "dateIso",
+            "x",
+            "y",
+            "z"
+          ]
+        },
+        {
+          "name": "makeClient",
+          "startLine": 42,
+          "endLine": 44,
+          "params": [
+            "respond"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "jsonResponse",
+          "callee": "JSON.stringify",
+          "lineNumber": 27
+        },
+        {
+          "caller": "makeClient",
+          "callee": "createMockOpenF1Client",
+          "lineNumber": 43
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/__tests__/LiveDataSourceMemory.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 197,
+      "nonEmptyLines": 173,
+      "functions": [
+        {
+          "name": "jsonResponse",
+          "startLine": 20,
+          "endLine": 25,
+          "params": [
+            "body",
+            "status"
+          ]
+        },
+        {
+          "name": "makeLiveClient",
+          "startLine": 30,
+          "endLine": 32,
+          "params": [
+            "respond"
+          ]
+        },
+        {
+          "name": "makeReplayClient",
+          "startLine": 34,
+          "endLine": 36,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "jsonResponse",
+          "callee": "JSON.stringify",
+          "lineNumber": 21
+        },
+        {
+          "caller": "makeLiveClient",
+          "callee": "createMockOpenF1Client",
+          "lineNumber": 31
+        },
+        {
+          "caller": "makeReplayClient",
+          "callee": "createMockOpenF1Client",
+          "lineNumber": 35
+        },
+        {
+          "caller": "makeReplayClient",
+          "callee": "jsonResponse",
+          "lineNumber": 35
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 0,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/__tests__/LiveDataSourceTabResume.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 190,
+      "nonEmptyLines": 167,
+      "functions": [
+        {
+          "name": "jsonResponse",
+          "startLine": 24,
+          "endLine": 29,
+          "params": [
+            "body",
+            "status"
+          ]
+        },
+        {
+          "name": "locationRecord",
+          "startLine": 31,
+          "endLine": 33,
+          "params": [
+            "driver",
+            "dateIso",
+            "x",
+            "y",
+            "z"
+          ]
+        },
+        {
+          "name": "makeClient",
+          "startLine": 37,
+          "endLine": 39,
+          "params": [
+            "respond"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "jsonResponse",
+          "callee": "JSON.stringify",
+          "lineNumber": 25
+        },
+        {
+          "caller": "makeClient",
+          "callee": "createMockOpenF1Client",
+          "lineNumber": 38
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 0,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/__tests__/LiveMapRenderer.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 653,
+      "nonEmptyLines": 619,
+      "functions": [
+        {
+          "name": "makeMockCtx",
+          "startLine": 17,
+          "endLine": 40,
+          "params": []
+        },
+        {
+          "name": "sample",
+          "startLine": 57,
+          "endLine": 59,
+          "params": [
+            "date",
+            "x",
+            "y",
+            "s",
+            "n"
+          ]
+        },
+        {
+          "name": "makeRenderer",
+          "startLine": 61,
+          "endLine": 92,
+          "params": [
+            "opts"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "record",
+          "callee": "calls.push",
+          "lineNumber": 23
+        },
+        {
+          "caller": "get",
+          "callee": "record",
+          "lineNumber": 30
+        },
+        {
+          "caller": "get",
+          "callee": "String",
+          "lineNumber": 30
+        },
+        {
+          "caller": "set",
+          "callee": "String",
+          "lineNumber": 33
+        },
+        {
+          "caller": "set",
+          "callee": "calls.push",
+          "lineNumber": 34
+        },
+        {
+          "caller": "set",
+          "callee": "String",
+          "lineNumber": 34
+        },
+        {
+          "caller": "makeRenderer",
+          "callee": "drivers.get",
+          "lineNumber": 84
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 0,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/__tests__/LocationBuffer.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 119,
+      "nonEmptyLines": 104,
+      "functions": [
+        {
+          "name": "raw",
+          "startLine": 6,
+          "endLine": 8,
+          "params": [
+            "driver",
+            "dateIso",
+            "x",
+            "y",
+            "z"
+          ]
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/__tests__/mapStyles.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 64,
+      "nonEmptyLines": 53,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/__tests__/markerLabelToggle.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 102,
+      "nonEmptyLines": 94,
+      "functions": [
+        {
+          "name": "Probe",
+          "startLine": 13,
+          "endLine": 16,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Probe",
+          "callee": "useMarkerLabel",
+          "lineNumber": 14
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/__tests__/markers.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 227,
+      "nonEmptyLines": 213,
+      "functions": [
+        {
+          "name": "makeMockCtx",
+          "startLine": 12,
+          "endLine": 35,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "record",
+          "callee": "calls.push",
+          "lineNumber": 18
+        },
+        {
+          "caller": "get",
+          "callee": "record",
+          "lineNumber": 25
+        },
+        {
+          "caller": "get",
+          "callee": "String",
+          "lineNumber": 25
+        },
+        {
+          "caller": "set",
+          "callee": "String",
+          "lineNumber": 28
+        },
+        {
+          "caller": "set",
+          "callee": "calls.push",
+          "lineNumber": 29
+        },
+        {
+          "caller": "set",
+          "callee": "String",
+          "lineNumber": 29
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/__tests__/pathProjection.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 109,
+      "nonEmptyLines": 102,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/__tests__/PerDriverBuffer.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 121,
+      "nonEmptyLines": 115,
+      "functions": [
+        {
+          "name": "sample",
+          "startLine": 7,
+          "endLine": 9,
+          "params": [
+            "date",
+            "x",
+            "y",
+            "s",
+            "n"
+          ]
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/__tests__/pitLane.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 66,
+      "nonEmptyLines": 60,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/__tests__/ReplayDataSource.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 465,
+      "nonEmptyLines": 424,
+      "functions": [
+        {
+          "name": "jsonResponse",
+          "startLine": 29,
+          "endLine": 34,
+          "params": [
+            "body",
+            "status"
+          ]
+        },
+        {
+          "name": "locationRecord",
+          "startLine": 36,
+          "endLine": 38,
+          "params": [
+            "driver",
+            "dateIso",
+            "x",
+            "y",
+            "z"
+          ]
+        },
+        {
+          "name": "makeDs",
+          "startLine": 48,
+          "endLine": 70,
+          "params": [
+            "overrides"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "jsonResponse",
+          "callee": "JSON.stringify",
+          "lineNumber": 30
+        },
+        {
+          "caller": "makeDs",
+          "callee": "createMockOpenF1Client",
+          "lineNumber": 55
+        },
+        {
+          "caller": "makeDs",
+          "callee": "jsonResponse",
+          "lineNumber": 57
+        },
+        {
+          "caller": "respond",
+          "callee": "resolvers.push",
+          "lineNumber": 182
+        },
+        {
+          "caller": "respond",
+          "callee": "r",
+          "lineNumber": 182
+        },
+        {
+          "caller": "respond",
+          "callee": "jsonResponse",
+          "lineNumber": 182
+        },
+        {
+          "caller": "respond",
+          "callee": "url.includes",
+          "lineNumber": 245
+        },
+        {
+          "caller": "respond",
+          "callee": "jsonResponse",
+          "lineNumber": 246
+        },
+        {
+          "caller": "respond",
+          "callee": "locationRecord",
+          "lineNumber": 246
+        },
+        {
+          "caller": "respond",
+          "callee": "jsonResponse",
+          "lineNumber": 248
+        },
+        {
+          "caller": "respond",
+          "callee": "url.includes",
+          "lineNumber": 257
+        },
+        {
+          "caller": "respond",
+          "callee": "jsonResponse",
+          "lineNumber": 258
+        },
+        {
+          "caller": "respond",
+          "callee": "locationRecord",
+          "lineNumber": 259
+        },
+        {
+          "caller": "respond",
+          "callee": "locationRecord",
+          "lineNumber": 260
+        },
+        {
+          "caller": "respond",
+          "callee": "jsonResponse",
+          "lineNumber": 263
+        },
+        {
+          "caller": "denseBounds",
+          "callee": "url.match",
+          "lineNumber": 305
+        },
+        {
+          "caller": "denseBounds",
+          "callee": "url.match",
+          "lineNumber": 306
+        },
+        {
+          "caller": "denseBounds",
+          "callee": "Date.parse",
+          "lineNumber": 308
+        },
+        {
+          "caller": "denseBounds",
+          "callee": "decodeURIComponent",
+          "lineNumber": 308
+        },
+        {
+          "caller": "denseBounds",
+          "callee": "Date.parse",
+          "lineNumber": 309
+        },
+        {
+          "caller": "denseBounds",
+          "callee": "decodeURIComponent",
+          "lineNumber": 309
+        },
+        {
+          "caller": "respond",
+          "callee": "url.includes",
+          "lineNumber": 314
+        },
+        {
+          "caller": "respond",
+          "callee": "jsonResponse",
+          "lineNumber": 314
+        },
+        {
+          "caller": "respond",
+          "callee": "url.includes",
+          "lineNumber": 315
+        },
+        {
+          "caller": "respond",
+          "callee": "jsonResponse",
+          "lineNumber": 315
+        },
+        {
+          "caller": "respond",
+          "callee": "url.includes",
+          "lineNumber": 316
+        },
+        {
+          "caller": "respond",
+          "callee": "denseBounds",
+          "lineNumber": 317
+        },
+        {
+          "caller": "respond",
+          "callee": "jsonResponse",
+          "lineNumber": 318
+        },
+        {
+          "caller": "respond",
+          "callee": "POSITIONS.filter",
+          "lineNumber": 318
+        },
+        {
+          "caller": "respond",
+          "callee": "Date.parse",
+          "lineNumber": 319
+        },
+        {
+          "caller": "respond",
+          "callee": "jsonResponse",
+          "lineNumber": 323
+        },
+        {
+          "caller": "setup",
+          "callee": "makeDs",
+          "lineNumber": 328
+        },
+        {
+          "caller": "setup",
+          "callee": "ds.start",
+          "lineNumber": 329
+        },
+        {
+          "caller": "respond",
+          "callee": "jsonResponse",
+          "lineNumber": 449
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/__tests__/stateBadges.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 114,
+      "nonEmptyLines": 108,
+      "functions": [
+        {
+          "name": "sample",
+          "startLine": 12,
+          "endLine": 14,
+          "params": [
+            "date",
+            "x",
+            "y",
+            "s"
+          ]
+        },
+        {
+          "name": "makeMockCtx",
+          "startLine": 20,
+          "endLine": 40,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "get",
+          "callee": "calls.push",
+          "lineNumber": 29
+        },
+        {
+          "caller": "get",
+          "callee": "String",
+          "lineNumber": 29
+        },
+        {
+          "caller": "set",
+          "callee": "String",
+          "lineNumber": 33
+        },
+        {
+          "caller": "set",
+          "callee": "calls.push",
+          "lineNumber": 34
+        },
+        {
+          "caller": "set",
+          "callee": "String",
+          "lineNumber": 34
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/__tests__/trackRenderer.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 164,
+      "nonEmptyLines": 152,
+      "functions": [
+        {
+          "name": "makeMockCtx",
+          "startLine": 13,
+          "endLine": 36,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "record",
+          "callee": "calls.push",
+          "lineNumber": 19
+        },
+        {
+          "caller": "get",
+          "callee": "record",
+          "lineNumber": 26
+        },
+        {
+          "caller": "get",
+          "callee": "String",
+          "lineNumber": 26
+        },
+        {
+          "caller": "set",
+          "callee": "String",
+          "lineNumber": 29
+        },
+        {
+          "caller": "set",
+          "callee": "calls.push",
+          "lineNumber": 30
+        },
+        {
+          "caller": "set",
+          "callee": "String",
+          "lineNumber": 30
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/__tests__/trails.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 123,
+      "nonEmptyLines": 117,
+      "functions": [
+        {
+          "name": "makeMockCtx",
+          "startLine": 13,
+          "endLine": 33,
+          "params": []
+        },
+        {
+          "name": "sample",
+          "startLine": 41,
+          "endLine": 43,
+          "params": [
+            "date",
+            "x",
+            "y"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "get",
+          "callee": "calls.push",
+          "lineNumber": 22
+        },
+        {
+          "caller": "get",
+          "callee": "String",
+          "lineNumber": 22
+        },
+        {
+          "caller": "set",
+          "callee": "String",
+          "lineNumber": 26
+        },
+        {
+          "caller": "set",
+          "callee": "calls.push",
+          "lineNumber": 27
+        },
+        {
+          "caller": "set",
+          "callee": "String",
+          "lineNumber": 27
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/__tests__/transform.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 95,
+      "nonEmptyLines": 88,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

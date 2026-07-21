@@ -1,0 +1,1891 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 9,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": ".omc/plans/dashboard-implementation.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 727,
+      "nonEmptyLines": 584,
+      "sections": [
+        {
+          "heading": "대시보드 구현 계획 (pending approval)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "0. 한눈에 보는 사양",
+          "level": 2,
+          "line": 12
+        },
+        {
+          "heading": "1. 화면 레이아웃 (Desktop 한 페이지)",
+          "level": 2,
+          "line": 27
+        },
+        {
+          "heading": "1.1 기본 형태 (사이드 패널 닫힘)",
+          "level": 3,
+          "line": 29
+        },
+        {
+          "heading": "1.2 사이드 패널 열림 (Push 모드, 사용자 결정)",
+          "level": 3,
+          "line": 62
+        },
+        {
+          "heading": "1.3 그리드 결정",
+          "level": 3,
+          "line": 90
+        },
+        {
+          "heading": "1.4 사이드 패널 열림 시 우측 패널 적응",
+          "level": 3,
+          "line": 103
+        },
+        {
+          "heading": "1.5 좁은 화면 fallback (Desktop only)",
+          "level": 3,
+          "line": 110
+        },
+        {
+          "heading": "2. 글로벌 패널 — 항목별 데이터/주기/시간정렬 매트릭스",
+          "level": 2,
+          "line": 119
+        },
+        {
+          "heading": "2.1 ① 세션 헤더",
+          "level": 3,
+          "line": 123
+        },
+        {
+          "heading": "2.2 ② 세션 진행률 바",
+          "level": 3,
+          "line": 134
+        },
+        {
+          "heading": "2.3 ③ 라이브 맵",
+          "level": 3,
+          "line": 159
+        },
+        {
+          "heading": "2.4 ④ Race Control latest 배너",
+          "level": 3,
+          "line": 162
+        },
+        {
+          "heading": "2.5 ⑤ 리더보드 (20행)",
+          "level": 3,
+          "line": 176
+        },
+        {
+          "heading": "2.6 ⑥ 타이어 전략 시각화 (사용자 결정 패널)",
+          "level": 3,
+          "line": 211
+        },
+        {
+          "heading": "2.7 ⑦ 이벤트 티커 (사용자 결정 패널)",
+          "level": 3,
+          "line": 223
+        },
+        {
+          "heading": "2.8 ⑧ 빠른 랩 / 보라색 섹터 배지 (사용자 결정 패널)",
+          "level": 3,
+          "line": 233
+        },
+        {
+          "heading": "2.9 ⑨ 날씨 미니 패널",
+          "level": 3,
+          "line": 246
+        },
+        {
+          "heading": "3. ⑩ 우측 sticky 사이드 패널 — 선수 디테일",
+          "level": 2,
+          "line": 259
+        },
+        {
+          "heading": "3.1 헤더 영역 (정적)",
+          "level": 3,
+          "line": 263
+        },
+        {
+          "heading": "3.2 현재 상태 섹션",
+          "level": 3,
+          "line": 273
+        },
+        {
+          "heading": "3.3 최근 랩 5개 (테이블)",
+          "level": 3,
+          "line": 286
+        },
+        {
+          "heading": "3.4 핏 히스토리",
+          "level": 3,
+          "line": 297
+        },
+        {
+          "heading": "3.5 스틴트 히스토리",
+          "level": 3,
+          "line": 308
+        },
+        {
+          "heading": "3.6 세션 결과 (세션 종료 후만)",
+          "level": 3,
+          "line": 315
+        },
+        {
+          "heading": "3.7 사이드 패널 동작 규칙",
+          "level": 3,
+          "line": 326
+        },
+        {
+          "heading": "4. 시간 정렬 모델 (핵심 원칙)",
+          "level": 2,
+          "line": 336
+        },
+        {
+          "heading": "4.1 단일 진실 원천: `display_time`",
+          "level": 3,
+          "line": 338
+        },
+        {
+          "heading": "4.2 데이터 쿼리 패턴 (DataSource SSOT)",
+          "level": 3,
+          "line": 344
+        },
+        {
+          "heading": "4.3 패널의 리액티브 구독",
+          "level": 3,
+          "line": 365
+        },
+        {
+          "heading": "4.4 시크 / 모드 전환 시 일관성",
+          "level": 3,
+          "line": 397
+        },
+        {
+          "heading": "4.5 미래 누설 zero (Future Leak Prevention)",
+          "level": 3,
+          "line": 403
+        },
+        {
+          "heading": "5. 데이터 흐름 통합 (라이브맵과 공유)",
+          "level": 2,
+          "line": 425
+        },
+        {
+          "heading": "6. 컴포넌트 / 모듈 구조",
+          "level": 2,
+          "line": 456
+        },
+        {
+          "heading": "7. 기술 스택 정합 (2026-05-22 확정)",
+          "level": 2,
+          "line": 511
+        },
+        {
+          "heading": "8. 인수 기준 (Acceptance Criteria)",
+          "level": 2,
+          "line": 524
+        },
+        {
+          "heading": "9. 구현 단계",
+          "level": 2,
+          "line": 559
+        },
+        {
+          "heading": "단계 1: DataSource 확장 (SSOT)",
+          "level": 3,
+          "line": 568
+        },
+        {
+          "heading": "단계 2: 공유 훅 + 시간 동기 인프라",
+          "level": 3,
+          "line": 574
+        },
+        {
+          "heading": "단계 3: derived 모듈 (총 lap, 현재 lap, active flag, personal best) + 섹터 색 판정",
+          "level": 3,
+          "line": 579
+        },
+        {
+          "heading": "단계 4: 글로벌 패널 — 세션 헤더, 진행률 바, 날씨, Race Control 배너",
+          "level": 3,
+          "line": 589
+        },
+        {
+          "heading": "단계 5: 리더보드",
+          "level": 3,
+          "line": 593
+        },
+        {
+          "heading": "단계 6: 타이어 전략 시각화",
+          "level": 3,
+          "line": 599
+        },
+        {
+          "heading": "단계 7: 이벤트 티커 + 빠른 랩 배지",
+          "level": 3,
+          "line": 604
+        },
+        {
+          "heading": "단계 8: 사이드 패널 컨테이너 + 헤더 + 현재 상태",
+          "level": 3,
+          "line": 608
+        },
+        {
+          "heading": "단계 9: 사이드 패널 — 랩 / 핏 / 스틴트 히스토리",
+          "level": 3,
+          "line": 614
+        },
+        {
+          "heading": "단계 10: 사이드 패널 — 세션 결과 (게이트)",
+          "level": 3,
+          "line": 620
+        },
+        {
+          "heading": "단계 11: 모드 전환 + 시크 시 일관성 시각 회귀",
+          "level": 3,
+          "line": 624
+        },
+        {
+          "heading": "단계 12: 1024px 이하 fallback + 1280px 이상 디자인 폴리시",
+          "level": 3,
+          "line": 628
+        },
+        {
+          "heading": "10. 위험과 완화",
+          "level": 2,
+          "line": 635
+        },
+        {
+          "heading": "11. 검증",
+          "level": 2,
+          "line": 668
+        },
+        {
+          "heading": "12. 명시적으로 스코프 밖",
+          "level": 2,
+          "line": 686
+        },
+        {
+          "heading": "13. 미해결 / 결정 필요 항목",
+          "level": 2,
+          "line": 701
+        },
+        {
+          "heading": "14. 참고",
+          "level": 2,
+          "line": 720
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 54
+      }
+    },
+    {
+      "path": ".omc/plans/dashboard-layout-improvements.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 217,
+      "nonEmptyLines": 175,
+      "sections": [
+        {
+          "heading": "대시보드 레이아웃·디자인 개선 plan (pending approval)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "사용자 결정 사항",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "요청 → 작업 그룹 매핑",
+          "level": 3,
+          "line": 15
+        },
+        {
+          "heading": "A. ⑥ 타이어 전략 — 현재 순위 정렬 (#1, est ~30m)",
+          "level": 2,
+          "line": 30
+        },
+        {
+          "heading": "B. 우측 컬럼 재배치 — 리더보드 우선 + ⑥ 접이식 + 패널 타이틀 (#2, #6, est ~2h)",
+          "level": 2,
+          "line": 42
+        },
+        {
+          "heading": "C. 디테일 §3.3 — 최근 5랩 + 전체 펼치기 (#3, est ~1h)",
+          "level": 2,
+          "line": 60
+        },
+        {
+          "heading": "D. ⑦ 이벤트 티커 압축 + 상단 브로드캐스트 (#5, est ~3h, **신규·최고난도**)",
+          "level": 2,
+          "line": 73
+        },
+        {
+          "heading": "D1. 티커 1줄 압축",
+          "level": 3,
+          "line": 75
+        },
+        {
+          "heading": "D2. 상단 브로드캐스트 (중요 이벤트만 + 자동 사라짐)",
+          "level": 3,
+          "line": 80
+        },
+        {
+          "heading": "E. 상단 띠 그리드 재배치 + 컨트롤 정리 (#4, #6, est ~2.5h, **cross-cutting**)",
+          "level": 2,
+          "line": 96
+        },
+        {
+          "heading": "E1. ②진행률 + ④Race Control 을 라이브맵 위 좌측으로, 우측열 2행 확장",
+          "level": 3,
+          "line": 98
+        },
+        {
+          "heading": "E2. Back / Pause 컨트롤 정리 (#6 — live-map 조정 허용)",
+          "level": 3,
+          "line": 122
+        },
+        {
+          "heading": "F. live-map 마커 라벨 declutter (#6 — 맵 가독성, est ~1.5h)",
+          "level": 2,
+          "line": 135
+        },
+        {
+          "heading": "G. 디테일 섹션 구분선 + 마감(회귀·시각 게이트) (#6, est ~1h)",
+          "level": 2,
+          "line": 148
+        },
+        {
+          "heading": "추천 실행 순서",
+          "level": 2,
+          "line": 159
+        },
+        {
+          "heading": "인증 요건 / 회귀",
+          "level": 2,
+          "line": 174
+        },
+        {
+          "heading": "변경 파일 요약",
+          "level": 2,
+          "line": 181
+        },
+        {
+          "heading": "결정 미루기 (deferred / 범위 밖)",
+          "level": 2,
+          "line": 187
+        },
+        {
+          "heading": "Changelog",
+          "level": 2,
+          "line": 194
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 19
+      }
+    },
+    {
+      "path": ".omc/plans/future-leak-dnf-followup.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 163,
+      "nonEmptyLines": 118,
+      "sections": [
+        {
+          "heading": "미래 누설 검수 + DNF/out 표시 시점 개선 plan (구현 완료·커밋 대기)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "사용자 결정 사항",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "1. 검수 결과 (전 프로젝트 미래 누설 스윕)",
+          "level": 2,
+          "line": 18
+        },
+        {
+          "heading": "1.1 시간 컷 계약 (SSOT = [DataSource.ts](../../src/shared/DataSource.ts), 구현 [dashboardQueries.ts](../../src/map/dashboardQueries.ts))",
+          "level": 3,
+          "line": 22
+        },
+        {
+          "heading": "1.2 확정 누설 (1건)",
+          "level": 3,
+          "line": 30
+        },
+        {
+          "heading": "1.3 \"이벤트 티커\" 확인 — 누설 아님",
+          "level": 3,
+          "line": 39
+        },
+        {
+          "heading": "1.4 안전 확인된 나머지 (누설 0)",
+          "level": 3,
+          "line": 43
+        },
+        {
+          "heading": "2. 설계 — time-cut \"retired by t\" 파생 신호",
+          "level": 2,
+          "line": 49
+        },
+        {
+          "heading": "2.1 신규 derived 헬퍼 `src/dashboard/derived/driverOutStatus.ts`",
+          "level": 3,
+          "line": 51
+        },
+        {
+          "heading": "2.2 적용 지점",
+          "level": 3,
+          "line": 88
+        },
+        {
+          "heading": "2.3 재발 방지 가드 (전 프로젝트 \"개선 방법\")",
+          "level": 3,
+          "line": 96
+        },
+        {
+          "heading": "3. 작업 그룹 / 단계",
+          "level": 2,
+          "line": 103
+        },
+        {
+          "heading": "4. 인수 기준 (Acceptance Criteria)",
+          "level": 2,
+          "line": 116
+        },
+        {
+          "heading": "5. 위험 / 완화",
+          "level": 2,
+          "line": 132
+        },
+        {
+          "heading": "6. 결정 미루기 (범위 밖)",
+          "level": 2,
+          "line": 141
+        },
+        {
+          "heading": "7. 변경 파일 요약",
+          "level": 2,
+          "line": 149
+        },
+        {
+          "heading": "Changelog",
+          "level": 2,
+          "line": 155
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 17
+      }
+    },
+    {
+      "path": ".omc/plans/live-map-followup.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 162,
+      "nonEmptyLines": 124,
+      "sections": [
+        {
+          "heading": "live-map 후속 개선 plan (pending approval)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "사용자 결정 사항",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "A. P0/P1 안전 가드 (estimated 2~3h)",
+          "level": 2,
+          "line": 17
+        },
+        {
+          "heading": "A1. Canvas state 격리 (markers.ts globalAlpha + shadow 누수)",
+          "level": 3,
+          "line": 19
+        },
+        {
+          "heading": "A2. canvas.getContext('2d') null 시 사용자 알림",
+          "level": 3,
+          "line": 27
+        },
+        {
+          "heading": "A3. Asset fetch timeout",
+          "level": 3,
+          "line": 32
+        },
+        {
+          "heading": "A 종합 위험",
+          "level": 3,
+          "line": 37
+        },
+        {
+          "heading": "B. Replay 재생 UI (estimated 0.5~1d, **API rate-limit 제약**)",
+          "level": 2,
+          "line": 43
+        },
+        {
+          "heading": "B1. Play / Pause (안전, MVP 후보)",
+          "level": 3,
+          "line": 45
+        },
+        {
+          "heading": "B2. Speed 조절 (1x / 2x / 4x / 8x) — **conditional GO**",
+          "level": 3,
+          "line": 51
+        },
+        {
+          "heading": "B3. Seek (timeline scrubber) — **most risk, deferred candidate**",
+          "level": 3,
+          "line": 61
+        },
+        {
+          "heading": "B 종합 정책",
+          "level": 3,
+          "line": 71
+        },
+        {
+          "heading": "B AC",
+          "level": 3,
+          "line": 75
+        },
+        {
+          "heading": "C. 성능 최적화 (estimated 0.5d, **profile-first**)",
+          "level": 2,
+          "line": 83
+        },
+        {
+          "heading": "C1. Profiling 먼저",
+          "level": 3,
+          "line": 85
+        },
+        {
+          "heading": "C2. 정적 트랙 offscreen cache",
+          "level": 3,
+          "line": 90
+        },
+        {
+          "heading": "C3. Ring buffer trim 주기화",
+          "level": 3,
+          "line": 96
+        },
+        {
+          "heading": "C4. setLineDash 캐싱 (low priority)",
+          "level": 3,
+          "line": 101
+        },
+        {
+          "heading": "D. Live/Replay 중복 제거 (estimated 0.5d)",
+          "level": 2,
+          "line": 107
+        },
+        {
+          "heading": "D1. 공유 LocationBuffer 클래스",
+          "level": 3,
+          "line": 109
+        },
+        {
+          "heading": "D2. 위험",
+          "level": 3,
+          "line": 118
+        },
+        {
+          "heading": "D AC",
+          "level": 3,
+          "line": 121
+        },
+        {
+          "heading": "추천 실행 순서",
+          "level": 2,
+          "line": 128
+        },
+        {
+          "heading": "인증 요건 / 회귀",
+          "level": 2,
+          "line": 138
+        },
+        {
+          "heading": "결정 미루기 (deferred / 이 plan 범위 밖)",
+          "level": 2,
+          "line": 144
+        },
+        {
+          "heading": "Changelog",
+          "level": 2,
+          "line": 152
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 26
+      }
+    },
+    {
+      "path": ".omc/plans/live-map-implementation.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 930,
+      "nonEmptyLines": 744,
+      "sections": [
+        {
+          "heading": "라이브 맵 구현 계획 (pending approval)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "0. 요구 사항 요약",
+          "level": 2,
+          "line": 12
+        },
+        {
+          "heading": "1. 맵 소스 전략",
+          "level": 2,
+          "line": 23
+        },
+        {
+          "heading": "1.1 채택: **julesr0y/f1-circuits-svg** (CC-BY-4.0, SVG)",
+          "level": 3,
+          "line": 25
+        },
+        {
+          "heading": "1.2 Attribution 처리 (CC-BY-4.0 의무)",
+          "level": 3,
+          "line": 38
+        },
+        {
+          "heading": "1.3 빌드 타임 맵 데이터 파이프라인",
+          "level": 3,
+          "line": 44
+        },
+        {
+          "heading": "1.3.1 트랙 polyline (`scripts/fetch-circuit-maps.ts`)",
+          "level": 4,
+          "line": 57
+        },
+        {
+          "heading": "1.3.2 핏레인 polyline (`scripts/trace-pitlane.ts`)",
+          "level": 4,
+          "line": 89
+        },
+        {
+          "heading": "1.3.3 섹터 경계 좌표 (`scripts/derive-sector-boundaries.ts`, i1/i2 derive)",
+          "level": 4,
+          "line": 103
+        },
+        {
+          "heading": "1.3.4 DRS zone 폴리라인 (`scripts/derive-drs-zones.ts`, **historical 재생 전용**, 사용자 결정)",
+          "level": 4,
+          "line": 127
+        },
+        {
+          "heading": "1.3.5 SLM (Straight Line Mode = 2026 X-mode) zone 좌표 (`scripts/load-slm-zones.ts`, **정적 입력**, 사용자 결정)",
+          "level": 4,
+          "line": 154
+        },
+        {
+          "heading": "1.3.6 산출물 인덱스 — `public/trackOutlines/index.json`",
+          "level": 4,
+          "line": 163
+        },
+        {
+          "heading": "1.4 레이아웃 변경 대응 — `layout_versions` 매핑 (사용자 결정)",
+          "level": 3,
+          "line": 183
+        },
+        {
+          "heading": "1.5 신규 서킷 / 시즌 시작 시 절차",
+          "level": 3,
+          "line": 223
+        },
+        {
+          "heading": "2. 좌표계와 렌더링 기술",
+          "level": 2,
+          "line": 235
+        },
+        {
+          "heading": "2.1 좌표계 계층",
+          "level": 3,
+          "line": 237
+        },
+        {
+          "heading": "2.2 openf1_transform 추출 (빌드 타임, §1.3 단계 6)",
+          "level": 3,
+          "line": 256
+        },
+        {
+          "heading": "2.3 렌더링 기술: **Canvas 2D**",
+          "level": 3,
+          "line": 272
+        },
+        {
+          "heading": "2.4 더블 버퍼링",
+          "level": 3,
+          "line": 285
+        },
+        {
+          "heading": "3. 데이터 소스 추상화 (라이브/리플레이 공용)",
+          "level": 2,
+          "line": 299
+        },
+        {
+          "heading": "3.1 `DataSource` 인터페이스 — **SSOT: `src/shared/DataSource.ts`**",
+          "level": 3,
+          "line": 301
+        },
+        {
+          "heading": "3.2 구현체",
+          "level": 3,
+          "line": 342
+        },
+        {
+          "heading": "3.3 차량별 독립 버퍼",
+          "level": 3,
+          "line": 349
+        },
+        {
+          "heading": "4. 마커 표시",
+          "level": 2,
+          "line": 369
+        },
+        {
+          "heading": "4.1 시각 디자인 (다크 모드 토큰 기반)",
+          "level": 3,
+          "line": 371
+        },
+        {
+          "heading": "4.1.1 마커 라벨 토글 (2026-05-22 확정)",
+          "level": 3,
+          "line": 381
+        },
+        {
+          "heading": "4.2 상태별 표현",
+          "level": 3,
+          "line": 388
+        },
+        {
+          "heading": "4.3 트레일 (선택, 기본 on)",
+          "level": 3,
+          "line": 399
+        },
+        {
+          "heading": "4.4 리더 강조 (선택)",
+          "level": 3,
+          "line": 404
+        },
+        {
+          "heading": "4.5 트랙 기능 오버레이 표시 (핏레인 · 섹터 · DRS · SLM)",
+          "level": 3,
+          "line": 408
+        },
+        {
+          "heading": "4.5.1 토글 정책",
+          "level": 4,
+          "line": 421
+        },
+        {
+          "heading": "4.5.2 SLM 활성화 표시 (미래 확장 자리)",
+          "level": 4,
+          "line": 426
+        },
+        {
+          "heading": "4.5.3 줌·해상도 적응",
+          "level": 4,
+          "line": 431
+        },
+        {
+          "heading": "5. 자연스러운 움직임 (Path-arc 보간)",
+          "level": 2,
+          "line": 436
+        },
+        {
+          "heading": "5.1 사전 계산 (빌드 타임, §1.3에서 출력됨)",
+          "level": 3,
+          "line": 440
+        },
+        {
+          "heading": "5.2 런타임 — sample 수신 시 (~3.7 Hz, sample마다 1회)",
+          "level": 3,
+          "line": 447
+        },
+        {
+          "heading": "5.3 런타임 — 매 렌더 프레임 (30 fps, 20대)",
+          "level": 3,
+          "line": 480
+        },
+        {
+          "heading": "5.4 임계치 (튜닝 필요, 단계 6에서 확정)",
+          "level": 3,
+          "line": 503
+        },
+        {
+          "heading": "5.5 핏레인 처리",
+          "level": 3,
+          "line": 512
+        },
+        {
+          "heading": "5.6 외삽 금지",
+          "level": 3,
+          "line": 519
+        },
+        {
+          "heading": "5.7 성능 예산",
+          "level": 3,
+          "line": 523
+        },
+        {
+          "heading": "5.8 렌더 루프",
+          "level": 3,
+          "line": 530
+        },
+        {
+          "heading": "5.9 탭 백그라운드 처리",
+          "level": 3,
+          "line": 557
+        },
+        {
+          "heading": "6. 라이브/리플레이 모드별 간격·버퍼 통합",
+          "level": 2,
+          "line": 564
+        },
+        {
+          "heading": "6.1 라이브 모드",
+          "level": 3,
+          "line": 566
+        },
+        {
+          "heading": "6.2 리플레이 모드",
+          "level": 3,
+          "line": 578
+        },
+        {
+          "heading": "6.3 모드 전환",
+          "level": 3,
+          "line": 589
+        },
+        {
+          "heading": "7. 모듈 구조",
+          "level": 2,
+          "line": 595
+        },
+        {
+          "heading": "8. 기술 스택 (2026-05-22 확정)",
+          "level": 2,
+          "line": 659
+        },
+        {
+          "heading": "9. 인수 기준 (Acceptance Criteria)",
+          "level": 2,
+          "line": 671
+        },
+        {
+          "heading": "10. 구현 단계 (순서)",
+          "level": 2,
+          "line": 699
+        },
+        {
+          "heading": "단계 0.5: SSOT 인터페이스 파일 생성 (critic P0-1)",
+          "level": 3,
+          "line": 705
+        },
+        {
+          "heading": "단계 1: SVG fetch + polyline 추출 (1개 서킷)",
+          "level": 3,
+          "line": 709
+        },
+        {
+          "heading": "단계 2: openf1_transform 자동 추출",
+          "level": 3,
+          "line": 716
+        },
+        {
+          "heading": "단계 3: 정적 트랙 렌더 + viewport",
+          "level": 3,
+          "line": 722
+        },
+        {
+          "heading": "단계 4: layout_versions 매핑",
+          "level": 3,
+          "line": 728
+        },
+        {
+          "heading": "단계 5: path-arc 보간 라이브러리",
+          "level": 3,
+          "line": 733
+        },
+        {
+          "heading": "단계 6: DataSource + 마커 + 렌더 루프",
+          "level": 3,
+          "line": 740
+        },
+        {
+          "heading": "단계 7: 트레일 + 상태 인디케이터",
+          "level": 3,
+          "line": 747
+        },
+        {
+          "heading": "단계 8: 핏레인 polyline 추적 + 마커 전환",
+          "level": 3,
+          "line": 752
+        },
+        {
+          "heading": "단계 9 [후속, §14]: 섹터 경계 derive + 표시",
+          "level": 3,
+          "line": 760
+        },
+        {
+          "heading": "단계 10 [후속, §14]: DRS zone derive (historical 전용)",
+          "level": 3,
+          "line": 768
+        },
+        {
+          "heading": "단계 11 [후속, §14]: SLM zone 정적 입력 + UI placeholder",
+          "level": 3,
+          "line": 776
+        },
+        {
+          "heading": "단계 12 [MVP]: 라이브 어댑터",
+          "level": 3,
+          "line": 785
+        },
+        {
+          "heading": "단계 13 [MVP]: 리플레이 어댑터",
+          "level": 3,
+          "line": 791
+        },
+        {
+          "heading": "단계 14 [MVP]: 78개 서킷 일괄 처리 + 잔차 큐레이션",
+          "level": 3,
+          "line": 795
+        },
+        {
+          "heading": "단계 15 [MVP]: 시각 회귀 + 메모리 + 탭 처리",
+          "level": 3,
+          "line": 802
+        },
+        {
+          "heading": "11. 위험과 완화",
+          "level": 2,
+          "line": 809
+        },
+        {
+          "heading": "12. 검증 단계",
+          "level": 2,
+          "line": 843
+        },
+        {
+          "heading": "13. 명시적으로 스코프 밖",
+          "level": 2,
+          "line": 857
+        },
+        {
+          "heading": "14. 후속 개선 항목 (MVP 이후)",
+          "level": 2,
+          "line": 871
+        },
+        {
+          "heading": "15. 미해결 / 결정 필요 항목",
+          "level": 2,
+          "line": 883
+        },
+        {
+          "heading": "16. 참고",
+          "level": 2,
+          "line": 908
+        },
+        {
+          "heading": "본 프로젝트 문서",
+          "level": 3,
+          "line": 910
+        },
+        {
+          "heading": "채택된 외부 자료",
+          "level": 3,
+          "line": 918
+        },
+        {
+          "heading": "참고한 외부 자료 (채택 안 함)",
+          "level": 3,
+          "line": 921
+        },
+        {
+          "heading": "보간 알고리즘 참고",
+          "level": 3,
+          "line": 926
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 77
+      }
+    },
+    {
+      "path": ".omc/plans/main-page-implementation.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 707,
+      "nonEmptyLines": 577,
+      "sections": [
+        {
+          "heading": "메인 페이지 구현 계획 (pending approval)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "0. 한눈에 보는 사양",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "1. 화면 구조",
+          "level": 2,
+          "line": 27
+        },
+        {
+          "heading": "1.1 기본 형태",
+          "level": 3,
+          "line": 29
+        },
+        {
+          "heading": "1.2 GP 카드 확장 시 (인라인 expand)",
+          "level": 3,
+          "line": 54
+        },
+        {
+          "heading": "1.3 그리드 결정 (Desktop only)",
+          "level": 3,
+          "line": 81
+        },
+        {
+          "heading": "2. 데이터 모델 (연도별 JSON)",
+          "level": 2,
+          "line": 90
+        },
+        {
+          "heading": "2.1 파일 구조",
+          "level": 3,
+          "line": 92
+        },
+        {
+          "heading": "2.2 스키마 (한 연도 = 한 파일)",
+          "level": 3,
+          "line": 107
+        },
+        {
+          "heading": "2.3 크기 예산",
+          "level": 3,
+          "line": 165
+        },
+        {
+          "heading": "3. 빌드 + 런타임 데이터 파이프라인",
+          "level": 2,
+          "line": 175
+        },
+        {
+          "heading": "3.1 빌드 타임 (`scripts/fetch-season-catalog.ts`)",
+          "level": 3,
+          "line": 177
+        },
+        {
+          "heading": "3.2 일일 GitHub Actions 갱신",
+          "level": 3,
+          "line": 194
+        },
+        {
+          "heading": "3.3 런타임 재검증 (현재 시즌만)",
+          "level": 3,
+          "line": 202
+        },
+        {
+          "heading": "4. 상태 판정 (past / live / upcoming) + 카운트다운",
+          "level": 2,
+          "line": 217
+        },
+        {
+          "heading": "4.1 판정 로직",
+          "level": 3,
+          "line": 219
+        },
+        {
+          "heading": "4.2 GP(meeting) 상태 = sessions 집계",
+          "level": 3,
+          "line": 254
+        },
+        {
+          "heading": "4.3 카운트다운 컴포넌트",
+          "level": 3,
+          "line": 261
+        },
+        {
+          "heading": "4.4 다음 Upcoming 세션 선택 (Hero용)",
+          "level": 3,
+          "line": 273
+        },
+        {
+          "heading": "5. 라이브 화면 진입 시 카운트다운 오버레이",
+          "level": 2,
+          "line": 292
+        },
+        {
+          "heading": "6. 인라인 확장 UX 디테일",
+          "level": 2,
+          "line": 325
+        },
+        {
+          "heading": "6.1 동작 규칙",
+          "level": 3,
+          "line": 327
+        },
+        {
+          "heading": "6.2 그리드 reflow 처리",
+          "level": 3,
+          "line": 334
+        },
+        {
+          "heading": "6.3 URL 보존",
+          "level": 3,
+          "line": 338
+        },
+        {
+          "heading": "7. 검색 + 필터",
+          "level": 2,
+          "line": 346
+        },
+        {
+          "heading": "7.1 검색",
+          "level": 3,
+          "line": 348
+        },
+        {
+          "heading": "7.2 필터",
+          "level": 3,
+          "line": 356
+        },
+        {
+          "heading": "7.3 빈 결과 처리",
+          "level": 3,
+          "line": 367
+        },
+        {
+          "heading": "8. 완료 세션 결과 미리보기",
+          "level": 2,
+          "line": 373
+        },
+        {
+          "heading": "8.1 트리거",
+          "level": 3,
+          "line": 375
+        },
+        {
+          "heading": "8.2 미리보기 내용",
+          "level": 3,
+          "line": 380
+        },
+        {
+          "heading": "8.3 Qualifying 세션 변형",
+          "level": 3,
+          "line": 398
+        },
+        {
+          "heading": "9. 라우팅 + URL 구조",
+          "level": 2,
+          "line": 410
+        },
+        {
+          "heading": "10. 모듈 구조",
+          "level": 2,
+          "line": 427
+        },
+        {
+          "heading": "11. 인수 기준",
+          "level": 2,
+          "line": 484
+        },
+        {
+          "heading": "12. 구현 단계",
+          "level": 2,
+          "line": 509
+        },
+        {
+          "heading": "단계 0: 프로젝트 부트스트랩 + 디자인 토큰",
+          "level": 3,
+          "line": 511
+        },
+        {
+          "heading": "단계 1: 시즌 카탈로그 빌드 스크립트",
+          "level": 3,
+          "line": 538
+        },
+        {
+          "heading": "단계 2: 상태 판정 + 카운트다운 derived",
+          "level": 3,
+          "line": 545
+        },
+        {
+          "heading": "단계 3: catalogStore + UI store (URL sync)",
+          "level": 3,
+          "line": 551
+        },
+        {
+          "heading": "단계 4: 메인 페이지 골격 + GP 그리드",
+          "level": 3,
+          "line": 556
+        },
+        {
+          "heading": "단계 5: Hero + 다음 upcoming 자동 선택",
+          "level": 3,
+          "line": 561
+        },
+        {
+          "heading": "단계 6: 인라인 확장 + 세션 카드",
+          "level": 3,
+          "line": 566
+        },
+        {
+          "heading": "단계 7: 검색 + 필터",
+          "level": 3,
+          "line": 571
+        },
+        {
+          "heading": "단계 8: 결과 미리보기 호버",
+          "level": 3,
+          "line": 576
+        },
+        {
+          "heading": "단계 9: 라이브 화면 카운트다운 오버레이",
+          "level": 3,
+          "line": 581
+        },
+        {
+          "heading": "단계 10: 런타임 재검증 + 변경 토스트",
+          "level": 3,
+          "line": 586
+        },
+        {
+          "heading": "단계 11: 라우팅 (`/`, `/live/{}`, `/replay/{}`)",
+          "level": 3,
+          "line": 591
+        },
+        {
+          "heading": "단계 12: 일일 GitHub Actions 갱신",
+          "level": 3,
+          "line": 601
+        },
+        {
+          "heading": "단계 13: 2023/2025/2026/2027 시즌 빌드 + 시각 점검",
+          "level": 3,
+          "line": 608
+        },
+        {
+          "heading": "단계 14: 시간 시뮬레이션 + 시각 회귀",
+          "level": 3,
+          "line": 612
+        },
+        {
+          "heading": "13. 위험과 완화",
+          "level": 2,
+          "line": 619
+        },
+        {
+          "heading": "14. 검증",
+          "level": 2,
+          "line": 643
+        },
+        {
+          "heading": "15. 명시적으로 스코프 밖",
+          "level": 2,
+          "line": 660
+        },
+        {
+          "heading": "16. 미해결 / 결정 필요 항목",
+          "level": 2,
+          "line": 676
+        },
+        {
+          "heading": "17. 참고",
+          "level": 2,
+          "line": 700
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 56
+      }
+    },
+    {
+      "path": ".omc/plans/openf1-client.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 626,
+      "nonEmptyLines": 508,
+      "sections": [
+        {
+          "heading": "OpenF1Client (browser) 중앙 API handler — 구현 계획",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "0. Why (현재 문제)",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "1. Requirements Summary",
+          "level": 2,
+          "line": 36
+        },
+        {
+          "heading": "2. Acceptance Criteria",
+          "level": 2,
+          "line": 42
+        },
+        {
+          "heading": "2.1 Core client behavior",
+          "level": 3,
+          "line": 46
+        },
+        {
+          "heading": "2.2 Priority queue",
+          "level": 3,
+          "line": 56
+        },
+        {
+          "heading": "2.3 Observability",
+          "level": 3,
+          "line": 62
+        },
+        {
+          "heading": "2.4 Integration",
+          "level": 3,
+          "line": 67
+        },
+        {
+          "heading": "2.5 End-to-end behavior",
+          "level": 3,
+          "line": 80
+        },
+        {
+          "heading": "3. Design",
+          "level": 2,
+          "line": 87
+        },
+        {
+          "heading": "3.1 Public API",
+          "level": 3,
+          "line": 89
+        },
+        {
+          "heading": "3.2 Internals",
+          "level": 3,
+          "line": 151
+        },
+        {
+          "heading": "Token bucket",
+          "level": 4,
+          "line": 153
+        },
+        {
+          "heading": "Priority queue (3 separate FIFOs)",
+          "level": 4,
+          "line": 160
+        },
+        {
+          "heading": "In-flight dedup + priority promotion",
+          "level": 4,
+          "line": 165
+        },
+        {
+          "heading": "Abort decision table",
+          "level": 4,
+          "line": 172
+        },
+        {
+          "heading": "Backoff",
+          "level": 4,
+          "line": 185
+        },
+        {
+          "heading": "Metrics + logging",
+          "level": 4,
+          "line": 189
+        },
+        {
+          "heading": "Event subscription",
+          "level": 4,
+          "line": 196
+        },
+        {
+          "heading": "Module singleton lifecycle (HMR + StrictMode 대응)",
+          "level": 4,
+          "line": 199
+        },
+        {
+          "heading": "3.3 Concurrency model",
+          "level": 3,
+          "line": 204
+        },
+        {
+          "heading": "3.4 Dedup key canonicalization",
+          "level": 3,
+          "line": 222
+        },
+        {
+          "heading": "4. Implementation Steps",
+          "level": 2,
+          "line": 231
+        },
+        {
+          "heading": "Step 1 — Client 신규 작성 + 단위 테스트 (2일, 기존 추정 1.5일 → ↑0.5)",
+          "level": 3,
+          "line": 233
+        },
+        {
+          "heading": "Step 1.5 — `createMockOpenF1Client` test util + 8개 테스트 마이그레이션 골격 (1일, **신규**)",
+          "level": 3,
+          "line": 254
+        },
+        {
+          "heading": "Step 2 — corsPing 마이그레이션 (0.5일)",
+          "level": 3,
+          "line": 259
+        },
+        {
+          "heading": "Step 3 — LiveMap drivers fetch 마이그레이션 (0.5일)",
+          "level": 3,
+          "line": 266
+        },
+        {
+          "heading": "Step 4 — LiveDataSource 마이그레이션 (1일)",
+          "level": 3,
+          "line": 272
+        },
+        {
+          "heading": "Step 5 — ReplayDataSource 마이그레이션 (1일)",
+          "level": 3,
+          "line": 281
+        },
+        {
+          "heading": "Step 6 — revalidateSeason 마이그레이션 (0.25일)",
+          "level": 3,
+          "line": 290
+        },
+        {
+          "heading": "Step 7 — rateLimitedFetch 삭제 + dashboard addendum (0.25일)",
+          "level": 3,
+          "line": 296
+        },
+        {
+          "heading": "Step 8 — Integration verify + browser smoke (0.5일)",
+          "level": 3,
+          "line": 304
+        },
+        {
+          "heading": "5. Migration map (call site 별)",
+          "level": 2,
+          "line": 313
+        },
+        {
+          "heading": "6. Risks and Mitigations",
+          "level": 2,
+          "line": 328
+        },
+        {
+          "heading": "7. Verification Steps",
+          "level": 2,
+          "line": 346
+        },
+        {
+          "heading": "Automated",
+          "level": 3,
+          "line": 348
+        },
+        {
+          "heading": "Manual (browser dev)",
+          "level": 3,
+          "line": 353
+        },
+        {
+          "heading": "8. Sequencing (dashboard 와의 관계)",
+          "level": 2,
+          "line": 363
+        },
+        {
+          "heading": "9. Out of scope",
+          "level": 2,
+          "line": 380
+        },
+        {
+          "heading": "10. Estimated effort",
+          "level": 2,
+          "line": 389
+        },
+        {
+          "heading": "11. ADR (Architecture Decision Record)",
+          "level": 2,
+          "line": 409
+        },
+        {
+          "heading": "12. 지연 발생 시 화면별 UX 처리",
+          "level": 2,
+          "line": 434
+        },
+        {
+          "heading": "12.1 MainPage ([src/main/MainPage.tsx](../../src/main/MainPage.tsx))",
+          "level": 3,
+          "line": 438
+        },
+        {
+          "heading": "12.2 LiveScreen / ReplayScreen ([src/live/LiveScreen.tsx](../../src/live/LiveScreen.tsx), [ReplayScreen.tsx](../../src/live/ReplayScreen.tsx))",
+          "level": 3,
+          "line": 444
+        },
+        {
+          "heading": "12.3 LiveMap ([src/live/LiveMap.tsx](../../src/live/LiveMap.tsx))",
+          "level": 3,
+          "line": 451
+        },
+        {
+          "heading": "12.4 Dashboard (future, dashboard-implementation.md 와 통합)",
+          "level": 3,
+          "line": 465
+        },
+        {
+          "heading": "12.5 정책 요약 표",
+          "level": 3,
+          "line": 477
+        },
+        {
+          "heading": "13. Debug HUD (Phase 2 of this plan)",
+          "level": 2,
+          "line": 488
+        },
+        {
+          "heading": "13.1 컴포넌트",
+          "level": 3,
+          "line": 490
+        },
+        {
+          "heading": "13.2 표시 metric (모두 client.getMetrics() + window 통계)",
+          "level": 3,
+          "line": 500
+        },
+        {
+          "heading": "13.3 데이터 소스 (client API)",
+          "level": 3,
+          "line": 515
+        },
+        {
+          "heading": "13.4 시각 디자인",
+          "level": 3,
+          "line": 523
+        },
+        {
+          "heading": "13.5 v2 토글 (out of scope — 후속)",
+          "level": 3,
+          "line": 532
+        },
+        {
+          "heading": "13.6 AC (HUD)",
+          "level": 3,
+          "line": 537
+        },
+        {
+          "heading": "13.7 구현 step 매핑",
+          "level": 3,
+          "line": 545
+        },
+        {
+          "heading": "14. Open question for v2 (이 plan 의 scope 아님)",
+          "level": 2,
+          "line": 555
+        },
+        {
+          "heading": "15. Changelog",
+          "level": 2,
+          "line": 562
+        },
+        {
+          "heading": "v3 (2026-06-01) — Critic review 적용",
+          "level": 3,
+          "line": 564
+        },
+        {
+          "heading": "v2 (2026-06-01) — User 요청 추가",
+          "level": 3,
+          "line": 604
+        },
+        {
+          "heading": "v1 (2026-06-01) — 초안",
+          "level": 3,
+          "line": 609
+        },
+        {
+          "heading": "Status",
+          "level": 2,
+          "line": 617
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 61
+      }
+    },
+    {
+      "path": ".omc/plans/p0-critic-fixes.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 220,
+      "nonEmptyLines": 158,
+      "sections": [
+        {
+          "heading": "P0 Critic 고침 계획 — `.omc/plans/` 일관성·검증 결함 5건",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "요구사항 요약",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "인수 기준 (testable)",
+          "level": 2,
+          "line": 24
+        },
+        {
+          "heading": "P0-1 인수",
+          "level": 3,
+          "line": 28
+        },
+        {
+          "heading": "P0-2 인수",
+          "level": 3,
+          "line": 34
+        },
+        {
+          "heading": "P0-3 인수",
+          "level": 3,
+          "line": 39
+        },
+        {
+          "heading": "P0-4 인수",
+          "level": 3,
+          "line": 45
+        },
+        {
+          "heading": "P0-5 인수",
+          "level": 3,
+          "line": 51
+        },
+        {
+          "heading": "구현 단계",
+          "level": 2,
+          "line": 59
+        },
+        {
+          "heading": "단계 1 — P0-1: DataSource SSOT 경로 통일",
+          "level": 3,
+          "line": 63
+        },
+        {
+          "heading": "단계 2 — P0-2: 단계 0 cross-plan 의존 명시",
+          "level": 3,
+          "line": 83
+        },
+        {
+          "heading": "단계 3 — P0-3: `?now=` production 차단 메커니즘 명시",
+          "level": 3,
+          "line": 93
+        },
+        {
+          "heading": "단계 4 — P0-4: OpenF1 CORS 변경 위험 대응",
+          "level": 3,
+          "line": 121
+        },
+        {
+          "heading": "단계 5 — P0-5: hydration burst와 정상 cadence 직렬성",
+          "level": 3,
+          "line": 138
+        },
+        {
+          "heading": "위험과 완화",
+          "level": 2,
+          "line": 166
+        },
+        {
+          "heading": "검증 절차",
+          "level": 2,
+          "line": 177
+        },
+        {
+          "heading": "후속 작업 (본 plan 스코프 밖)",
+          "level": 2,
+          "line": 209
+        },
+        {
+          "heading": "승인 요청",
+          "level": 2,
+          "line": 218
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 18
+      }
+    },
+    {
+      "path": ".omc/plans/qualifying-session-dashboard.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 192,
+      "nonEmptyLines": 143,
+      "sections": [
+        {
+          "heading": "세션 특화 대시보드 — 퀄리파잉 우선 (Qualifying + Sprint Qualifying)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Requirements Summary",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "1.1 핵심 데이터 사실 (검증 완료, 코드/문서 라인 근거)",
+          "level": 3,
+          "line": 19
+        },
+        {
+          "heading": "2. Acceptance Criteria (testable)",
+          "level": 2,
+          "line": 35
+        },
+        {
+          "heading": "3. Architecture",
+          "level": 2,
+          "line": 68
+        },
+        {
+          "heading": "3.1 Session-kind 해석 (SSOT)",
+          "level": 3,
+          "line": 70
+        },
+        {
+          "heading": "3.2 대시보드 컴포지션 레이어 (요구 B의 핵심)",
+          "level": 3,
+          "line": 87
+        },
+        {
+          "heading": "3.3 퀄리파잉 파생 모듈 (`src/dashboard/derived/`)",
+          "level": 3,
+          "line": 100
+        },
+        {
+          "heading": "3.4 퀄리파잉 패널 (`src/dashboard/panels/qualifying/`)",
+          "level": 3,
+          "line": 114
+        },
+        {
+          "heading": "3.5 퀄리파잉 라이브맵 변형",
+          "level": 3,
+          "line": 120
+        },
+        {
+          "heading": "4. Implementation Steps (phased)",
+          "level": 2,
+          "line": 127
+        },
+        {
+          "heading": "Phase 0 — Foundation (UI 무변화, 회귀 안전)",
+          "level": 3,
+          "line": 131
+        },
+        {
+          "heading": "Phase 1 — 퀄리파잉 파생 코어 (UI 무변화)",
+          "level": 3,
+          "line": 137
+        },
+        {
+          "heading": "Phase 2 — 퀄리파잉 패널 (시각 게이트)",
+          "level": 3,
+          "line": 143
+        },
+        {
+          "heading": "Phase 3 — 퀄리파잉 라이브맵 변형 (시각 게이트)",
+          "level": 3,
+          "line": 148
+        },
+        {
+          "heading": "Phase 4 — 후속(현 범위 밖, 별도 승인)",
+          "level": 3,
+          "line": 152
+        },
+        {
+          "heading": "5. Risks & Mitigations",
+          "level": 2,
+          "line": 157
+        },
+        {
+          "heading": "6. Verification Steps",
+          "level": 2,
+          "line": 172
+        },
+        {
+          "heading": "7. Open Questions (실행 전 확인 권장)",
+          "level": 2,
+          "line": 182
+        },
+        {
+          "heading": "8. Changelog",
+          "level": 2,
+          "line": 190
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 20
+      }
+    }
+  ]
+}

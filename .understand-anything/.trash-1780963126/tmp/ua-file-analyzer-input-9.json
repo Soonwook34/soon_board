@@ -1,0 +1,21 @@
+{
+  "projectRoot": "/Users/a453498/Downloads/project/soon_board",
+  "batchFiles": [
+    {"path": "src/map/__tests__/drsZones.test.ts", "language": "typescript", "sizeLines": 98, "fileCategory": "code"},
+    {"path": "src/map/__tests__/sectorBoundaries.test.ts", "language": "typescript", "sizeLines": 80, "fileCategory": "code"},
+    {"path": "src/map/__tests__/slmZones.test.ts", "language": "typescript", "sizeLines": 72, "fileCategory": "code"},
+    {"path": "src/map/drsZones.ts", "language": "typescript", "sizeLines": 88, "fileCategory": "code"},
+    {"path": "src/map/sectorBoundaries.ts", "language": "typescript", "sizeLines": 62, "fileCategory": "code"},
+    {"path": "src/map/slmZones.ts", "language": "typescript", "sizeLines": 81, "fileCategory": "code"},
+    {"path": "src/map/viewport.ts", "language": "typescript", "sizeLines": 66, "fileCategory": "code"}
+  ],
+  "batchImportData": {
+    "src/map/__tests__/drsZones.test.ts": ["src/map/drsZones.ts", "src/map/viewport.ts"],
+    "src/map/__tests__/sectorBoundaries.test.ts": ["src/map/sectorBoundaries.ts", "src/map/viewport.ts"],
+    "src/map/__tests__/slmZones.test.ts": ["src/map/slmZones.ts", "src/map/viewport.ts"],
+    "src/map/drsZones.ts": [],
+    "src/map/sectorBoundaries.ts": [],
+    "src/map/slmZones.ts": [],
+    "src/map/viewport.ts": []
+  }
+}

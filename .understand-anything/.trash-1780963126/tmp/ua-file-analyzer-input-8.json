@@ -1,0 +1,120 @@
+{
+  "projectRoot": "/Users/a453498/Downloads/project/soon_board",
+  "batchFiles": [
+    {
+      "path": "src/dashboard/DashboardApp.tsx",
+      "language": "typescript",
+      "sizeLines": 146,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/__tests__/DashboardApp.test.tsx",
+      "language": "typescript",
+      "sizeLines": 212,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/detailPanel/DriverDetailPanel.tsx",
+      "language": "typescript",
+      "sizeLines": 92,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/detailPanel/__tests__/DriverDetailPanel.test.tsx",
+      "language": "typescript",
+      "sizeLines": 81,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/__tests__/selectionStore.test.ts",
+      "language": "typescript",
+      "sizeLines": 61,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/__tests__/useMediaQuery.test.tsx",
+      "language": "typescript",
+      "sizeLines": 66,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/selectionStore.ts",
+      "language": "typescript",
+      "sizeLines": 47,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/dashboard/shared/useMediaQuery.ts",
+      "language": "typescript",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/NarrowScreenBanner.tsx",
+      "language": "typescript",
+      "sizeLines": 21,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/Toast.tsx",
+      "language": "typescript",
+      "sizeLines": 51,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "src/dashboard/DashboardApp.tsx": [
+      "src/dashboard/detailPanel/DriverDetailPanel.tsx",
+      "src/dashboard/panels/EventBroadcast.tsx",
+      "src/dashboard/panels/RaceControlBanner.tsx",
+      "src/dashboard/panels/SessionHeader.tsx",
+      "src/dashboard/panels/WeatherMini.tsx",
+      "src/dashboard/profiles/index.ts",
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/selectionStore.ts",
+      "src/dashboard/shared/useMediaQuery.ts",
+      "src/main/NarrowScreenBanner.tsx",
+      "src/main/Toast.tsx",
+      "src/shared/seasonData.ts",
+      "src/shared/sessionKind.ts"
+    ],
+    "src/dashboard/__tests__/DashboardApp.test.tsx": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/DashboardApp.tsx",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/DriversContext.tsx",
+      "src/dashboard/shared/selectionStore.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/dashboard/detailPanel/DriverDetailPanel.tsx": [
+      "src/dashboard/detailPanel/CurrentState.tsx",
+      "src/dashboard/detailPanel/DriverHeader.tsx",
+      "src/dashboard/detailPanel/PitHistory.tsx",
+      "src/dashboard/detailPanel/RecentLapsTable.tsx",
+      "src/dashboard/detailPanel/SessionResult.tsx",
+      "src/dashboard/detailPanel/StintHistory.tsx",
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/selectionStore.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/dashboard/detailPanel/__tests__/DriverDetailPanel.test.tsx": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/detailPanel/DriverDetailPanel.tsx",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/DriversContext.tsx",
+      "src/dashboard/shared/selectionStore.ts",
+      "src/shared/openf1Types.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/dashboard/shared/__tests__/selectionStore.test.ts": [
+      "src/dashboard/shared/selectionStore.ts"
+    ],
+    "src/dashboard/shared/__tests__/useMediaQuery.test.tsx": [
+      "src/dashboard/shared/useMediaQuery.ts"
+    ],
+    "src/dashboard/shared/selectionStore.ts": [],
+    "src/dashboard/shared/useMediaQuery.ts": [],
+    "src/main/NarrowScreenBanner.tsx": [],
+    "src/main/Toast.tsx": []
+  }
+}

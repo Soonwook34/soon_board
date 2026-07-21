@@ -1,0 +1,1542 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 20,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "src/main/derived/__tests__/resultPreviewFormat.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 28,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/derived/__tests__/searchFilter.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 136,
+      "nonEmptyLines": 117,
+      "functions": [
+        {
+          "name": "mkSession",
+          "startLine": 12,
+          "endLine": 22,
+          "params": [
+            "override"
+          ]
+        },
+        {
+          "name": "mkMeeting",
+          "startLine": 24,
+          "endLine": 38,
+          "params": [
+            "override"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "mkMeeting",
+          "callee": "mkSession",
+          "lineNumber": 32
+        },
+        {
+          "caller": "mkMeeting",
+          "callee": "mkSession",
+          "lineNumber": 33
+        },
+        {
+          "caller": "mkMeeting",
+          "callee": "mkSession",
+          "lineNumber": 34
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/derived/__tests__/sessionRoute.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 30,
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/derived/__tests__/sessionStatus.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 78,
+      "nonEmptyLines": 69,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/derived/countdownFormat.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 35,
+      "nonEmptyLines": 29,
+      "functions": [
+        {
+          "name": "formatCountdown",
+          "startLine": 12,
+          "endLine": 35,
+          "params": [
+            "remainingMs"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "formatCountdown",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "formatCountdown",
+          "callee": "Math.floor",
+          "lineNumber": 16
+        },
+        {
+          "caller": "formatCountdown",
+          "callee": "Math.floor",
+          "lineNumber": 17
+        },
+        {
+          "caller": "formatCountdown",
+          "callee": "Math.floor",
+          "lineNumber": 22
+        },
+        {
+          "caller": "formatCountdown",
+          "callee": "Math.floor",
+          "lineNumber": 23
+        },
+        {
+          "caller": "formatCountdown",
+          "callee": "Math.floor",
+          "lineNumber": 28
+        },
+        {
+          "caller": "formatCountdown",
+          "callee": "Math.floor",
+          "lineNumber": 29
+        },
+        {
+          "caller": "formatCountdown",
+          "callee": "Math.ceil",
+          "lineNumber": 33
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/derived/meetingStatus.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 38,
+      "nonEmptyLines": 33,
+      "functions": [
+        {
+          "name": "classifyMeeting",
+          "startLine": 13,
+          "endLine": 38,
+          "params": [
+            "meeting",
+            "now"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "classifyMeeting",
+          "line": 13,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "classifyMeeting",
+          "callee": "classify",
+          "lineNumber": 19
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/derived/nextUpcoming.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 58,
+      "nonEmptyLines": 51,
+      "functions": [
+        {
+          "name": "nextHeroSession",
+          "startLine": 17,
+          "endLine": 58,
+          "params": [
+            "seasons",
+            "now"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "nextHeroSession",
+          "line": 17,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "nextHeroSession",
+          "callee": "all.push",
+          "lineNumber": 22
+        },
+        {
+          "caller": "nextHeroSession",
+          "callee": "classify",
+          "lineNumber": 22
+        },
+        {
+          "caller": "nextHeroSession",
+          "callee": "all.filter",
+          "lineNumber": 27
+        },
+        {
+          "caller": "nextHeroSession",
+          "callee": "live.sort",
+          "lineNumber": 29
+        },
+        {
+          "caller": "nextHeroSession",
+          "callee": "Math.abs",
+          "lineNumber": 32
+        },
+        {
+          "caller": "nextHeroSession",
+          "callee": "Math.abs",
+          "lineNumber": 32
+        },
+        {
+          "caller": "nextHeroSession",
+          "callee": "all.filter",
+          "lineNumber": 37
+        },
+        {
+          "caller": "nextHeroSession",
+          "callee": "upcoming.sort",
+          "lineNumber": 39
+        },
+        {
+          "caller": "nextHeroSession",
+          "callee": "all.filter",
+          "lineNumber": 47
+        },
+        {
+          "caller": "nextHeroSession",
+          "callee": "past.sort",
+          "lineNumber": 49
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/derived/resultPreviewFormat.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 14,
+      "nonEmptyLines": 13,
+      "functions": [
+        {
+          "name": "formatLapDuration",
+          "startLine": 6,
+          "endLine": 14,
+          "params": [
+            "seconds"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "formatLapDuration",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "formatLapDuration",
+          "callee": "Number.isFinite",
+          "lineNumber": 7
+        },
+        {
+          "caller": "formatLapDuration",
+          "callee": "Math.round",
+          "lineNumber": 8
+        },
+        {
+          "caller": "formatLapDuration",
+          "callee": "Math.floor",
+          "lineNumber": 9
+        },
+        {
+          "caller": "formatLapDuration",
+          "callee": "Math.floor",
+          "lineNumber": 11
+        },
+        {
+          "caller": "formatLapDuration",
+          "callee": "String(secs).padStart",
+          "lineNumber": 13
+        },
+        {
+          "caller": "formatLapDuration",
+          "callee": "String",
+          "lineNumber": 13
+        },
+        {
+          "caller": "formatLapDuration",
+          "callee": "String(ms).padStart",
+          "lineNumber": 13
+        },
+        {
+          "caller": "formatLapDuration",
+          "callee": "String",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/derived/searchFilter.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 62,
+      "nonEmptyLines": 57,
+      "functions": [
+        {
+          "name": "matchSearch",
+          "startLine": 16,
+          "endLine": 26,
+          "params": [
+            "meeting",
+            "query"
+          ]
+        },
+        {
+          "name": "matchSessionType",
+          "startLine": 28,
+          "endLine": 35,
+          "params": [
+            "session",
+            "selected"
+          ]
+        },
+        {
+          "name": "filterMeetings",
+          "startLine": 47,
+          "endLine": 62,
+          "params": [
+            "meetings",
+            "ui",
+            "now"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "matchSearch",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "matchSessionType",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "filterMeetings",
+          "line": 47,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "matchSearch",
+          "callee": "query.trim().toLowerCase",
+          "lineNumber": 17
+        },
+        {
+          "caller": "matchSearch",
+          "callee": "query.trim",
+          "lineNumber": 17
+        },
+        {
+          "caller": "matchSearch",
+          "callee": "fields.some",
+          "lineNumber": 25
+        },
+        {
+          "caller": "matchSearch",
+          "callee": "f.toLowerCase().includes",
+          "lineNumber": 25
+        },
+        {
+          "caller": "matchSearch",
+          "callee": "f.toLowerCase",
+          "lineNumber": 25
+        },
+        {
+          "caller": "matchSessionType",
+          "callee": "resolveSessionKind",
+          "lineNumber": 33
+        },
+        {
+          "caller": "matchSessionType",
+          "callee": "selected.has",
+          "lineNumber": 34
+        },
+        {
+          "caller": "filterMeetings",
+          "callee": "matchSearch",
+          "lineNumber": 54
+        },
+        {
+          "caller": "filterMeetings",
+          "callee": "m.sessions.some",
+          "lineNumber": 56
+        },
+        {
+          "caller": "filterMeetings",
+          "callee": "matchSessionType",
+          "lineNumber": 56
+        },
+        {
+          "caller": "filterMeetings",
+          "callee": "classifyMeeting",
+          "lineNumber": 57
+        },
+        {
+          "caller": "filterMeetings",
+          "callee": "ui.statuses.has",
+          "lineNumber": 58
+        },
+        {
+          "caller": "filterMeetings",
+          "callee": "out.push",
+          "lineNumber": 59
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/derived/sessionRoute.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 11,
+      "nonEmptyLines": 9,
+      "functions": [
+        {
+          "name": "sessionRoute",
+          "startLine": 7,
+          "endLine": 11,
+          "params": [
+            "session",
+            "status"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "sessionRoute",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/derived/sessionStatus.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 38,
+      "nonEmptyLines": 32,
+      "functions": [
+        {
+          "name": "classify",
+          "startLine": 16,
+          "endLine": 38,
+          "params": [
+            "session",
+            "now"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "LIVE_PREROLL_MS",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "LIVE_POSTROLL_MS",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "classify",
+          "line": 16,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "classify",
+          "callee": "Date.parse",
+          "lineNumber": 19
+        },
+        {
+          "caller": "classify",
+          "callee": "Date.parse",
+          "lineNumber": 20
+        },
+        {
+          "caller": "classify",
+          "callee": "now.getTime",
+          "lineNumber": 21
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 3,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/initialSeason.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 16,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "selectInitialSeason",
+          "startLine": 9,
+          "endLine": 16,
+          "params": [
+            "index",
+            "uiSeason"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "selectInitialSeason",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "selectInitialSeason",
+          "callee": "index.seasons.reduce",
+          "lineNumber": 15
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/stores/__tests__/uiStore.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 228,
+      "nonEmptyLines": 199,
+      "functions": [
+        {
+          "name": "ui",
+          "startLine": 23,
+          "endLine": 25,
+          "params": [
+            "state"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ui",
+          "callee": "defaultUiState",
+          "lineNumber": 24
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/stores/hooks.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 32,
+      "nonEmptyLines": 26,
+      "functions": [
+        {
+          "name": "useCatalogIndex",
+          "startLine": 10,
+          "endLine": 12,
+          "params": []
+        },
+        {
+          "name": "useSeasonCatalog",
+          "startLine": 14,
+          "endLine": 20,
+          "params": [
+            "year"
+          ]
+        },
+        {
+          "name": "useAllSeasons",
+          "startLine": 26,
+          "endLine": 28,
+          "params": []
+        },
+        {
+          "name": "useUiState",
+          "startLine": 30,
+          "endLine": 32,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "useCatalogIndex",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "useSeasonCatalog",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "useAllSeasons",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "useUiState",
+          "line": 30,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useCatalogIndex",
+          "callee": "useSyncExternalStore",
+          "lineNumber": 11
+        },
+        {
+          "caller": "useSeasonCatalog",
+          "callee": "useSyncExternalStore",
+          "lineNumber": 15
+        },
+        {
+          "caller": "useSeasonCatalog",
+          "callee": "getSeason",
+          "lineNumber": 17
+        },
+        {
+          "caller": "useAllSeasons",
+          "callee": "useSyncExternalStore",
+          "lineNumber": 27
+        },
+        {
+          "caller": "useUiState",
+          "callee": "useSyncExternalStore",
+          "lineNumber": 31
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 4,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/stores/uiStore.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 223,
+      "nonEmptyLines": 187,
+      "functions": [
+        {
+          "name": "defaultUiState",
+          "startLine": 33,
+          "endLine": 41,
+          "params": []
+        },
+        {
+          "name": "parseSearchParams",
+          "startLine": 48,
+          "endLine": 84,
+          "params": [
+            "search"
+          ]
+        },
+        {
+          "name": "stringifyUiState",
+          "startLine": 86,
+          "endLine": 104,
+          "params": [
+            "state"
+          ]
+        },
+        {
+          "name": "setsEqual",
+          "startLine": 106,
+          "endLine": 110,
+          "params": [
+            "a",
+            "b"
+          ]
+        },
+        {
+          "name": "makeBrowserEnv",
+          "startLine": 129,
+          "endLine": 143,
+          "params": []
+        },
+        {
+          "name": "configureUiStore",
+          "startLine": 145,
+          "endLine": 147,
+          "params": [
+            "custom"
+          ]
+        },
+        {
+          "name": "initUiStore",
+          "startLine": 149,
+          "endLine": 157,
+          "params": []
+        },
+        {
+          "name": "getUiState",
+          "startLine": 159,
+          "endLine": 162,
+          "params": []
+        },
+        {
+          "name": "mutate",
+          "startLine": 164,
+          "endLine": 170,
+          "params": [
+            "updater"
+          ]
+        },
+        {
+          "name": "setSeason",
+          "startLine": 172,
+          "endLine": 174,
+          "params": [
+            "year"
+          ]
+        },
+        {
+          "name": "setExpandedGp",
+          "startLine": 176,
+          "endLine": 178,
+          "params": [
+            "meetingKey"
+          ]
+        },
+        {
+          "name": "setSearch",
+          "startLine": 180,
+          "endLine": 182,
+          "params": [
+            "text"
+          ]
+        },
+        {
+          "name": "toggleSessionType",
+          "startLine": 184,
+          "endLine": 191,
+          "params": [
+            "type"
+          ]
+        },
+        {
+          "name": "toggleStatus",
+          "startLine": 193,
+          "endLine": 200,
+          "params": [
+            "status"
+          ]
+        },
+        {
+          "name": "resetFilters",
+          "startLine": 202,
+          "endLine": 207,
+          "params": []
+        },
+        {
+          "name": "subscribeUi",
+          "startLine": 209,
+          "endLine": 212,
+          "params": [
+            "listener"
+          ]
+        },
+        {
+          "name": "notify",
+          "startLine": 214,
+          "endLine": 216,
+          "params": []
+        },
+        {
+          "name": "_resetUiStore",
+          "startLine": 218,
+          "endLine": 223,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ALL_SESSION_TYPES",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "ALL_STATUSES",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "DEFAULT_STATUSES",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "defaultUiState",
+          "line": 33,
+          "isDefault": false
+        },
+        {
+          "name": "parseSearchParams",
+          "line": 48,
+          "isDefault": false
+        },
+        {
+          "name": "stringifyUiState",
+          "line": 86,
+          "isDefault": false
+        },
+        {
+          "name": "configureUiStore",
+          "line": 145,
+          "isDefault": false
+        },
+        {
+          "name": "initUiStore",
+          "line": 149,
+          "isDefault": false
+        },
+        {
+          "name": "getUiState",
+          "line": 159,
+          "isDefault": false
+        },
+        {
+          "name": "setSeason",
+          "line": 172,
+          "isDefault": false
+        },
+        {
+          "name": "setExpandedGp",
+          "line": 176,
+          "isDefault": false
+        },
+        {
+          "name": "setSearch",
+          "line": 180,
+          "isDefault": false
+        },
+        {
+          "name": "toggleSessionType",
+          "line": 184,
+          "isDefault": false
+        },
+        {
+          "name": "toggleStatus",
+          "line": 193,
+          "isDefault": false
+        },
+        {
+          "name": "resetFilters",
+          "line": 202,
+          "isDefault": false
+        },
+        {
+          "name": "subscribeUi",
+          "line": 209,
+          "isDefault": false
+        },
+        {
+          "name": "_resetUiStore",
+          "line": 218,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "parseSearchParams",
+          "callee": "search.startsWith",
+          "lineNumber": 49
+        },
+        {
+          "caller": "parseSearchParams",
+          "callee": "search.slice",
+          "lineNumber": 49
+        },
+        {
+          "caller": "parseSearchParams",
+          "callee": "defaultUiState",
+          "lineNumber": 50
+        },
+        {
+          "caller": "parseSearchParams",
+          "callee": "params.get",
+          "lineNumber": 52
+        },
+        {
+          "caller": "parseSearchParams",
+          "callee": "/^\\d{4}$/.test",
+          "lineNumber": 53
+        },
+        {
+          "caller": "parseSearchParams",
+          "callee": "Number",
+          "lineNumber": 54
+        },
+        {
+          "caller": "parseSearchParams",
+          "callee": "params.get",
+          "lineNumber": 57
+        },
+        {
+          "caller": "parseSearchParams",
+          "callee": "/^\\d+$/.test",
+          "lineNumber": 58
+        },
+        {
+          "caller": "parseSearchParams",
+          "callee": "Number",
+          "lineNumber": 59
+        },
+        {
+          "caller": "parseSearchParams",
+          "callee": "params.get",
+          "lineNumber": 62
+        },
+        {
+          "caller": "parseSearchParams",
+          "callee": "params.get",
+          "lineNumber": 65
+        },
+        {
+          "caller": "parseSearchParams",
+          "callee": "sessionStr\n      .split(',')\n      .map((t) => t.trim().toLowerCase())\n      .filter",
+          "lineNumber": 67
+        },
+        {
+          "caller": "parseSearchParams",
+          "callee": "sessionStr\n      .split(',')\n      .map",
+          "lineNumber": 67
+        },
+        {
+          "caller": "parseSearchParams",
+          "callee": "sessionStr\n      .split",
+          "lineNumber": 67
+        },
+        {
+          "caller": "parseSearchParams",
+          "callee": "t.trim().toLowerCase",
+          "lineNumber": 69
+        },
+        {
+          "caller": "parseSearchParams",
+          "callee": "t.trim",
+          "lineNumber": 69
+        },
+        {
+          "caller": "parseSearchParams",
+          "callee": "SESSION_TYPE_SET.has",
+          "lineNumber": 70
+        },
+        {
+          "caller": "parseSearchParams",
+          "callee": "params.get",
+          "lineNumber": 74
+        },
+        {
+          "caller": "parseSearchParams",
+          "callee": "statusStr\n      .split(',')\n      .map((t) => t.trim().toLowerCase())\n      .filter",
+          "lineNumber": 76
+        },
+        {
+          "caller": "parseSearchParams",
+          "callee": "statusStr\n      .split(',')\n      .map",
+          "lineNumber": 76
+        },
+        {
+          "caller": "parseSearchParams",
+          "callee": "statusStr\n      .split",
+          "lineNumber": 76
+        },
+        {
+          "caller": "parseSearchParams",
+          "callee": "t.trim().toLowerCase",
+          "lineNumber": 78
+        },
+        {
+          "caller": "parseSearchParams",
+          "callee": "t.trim",
+          "lineNumber": 78
+        },
+        {
+          "caller": "parseSearchParams",
+          "callee": "STATUS_SET.has",
+          "lineNumber": 79
+        },
+        {
+          "caller": "stringifyUiState",
+          "callee": "params.set",
+          "lineNumber": 89
+        },
+        {
+          "caller": "stringifyUiState",
+          "callee": "String",
+          "lineNumber": 89
+        },
+        {
+          "caller": "stringifyUiState",
+          "callee": "params.set",
+          "lineNumber": 90
+        },
+        {
+          "caller": "stringifyUiState",
+          "callee": "String",
+          "lineNumber": 90
+        },
+        {
+          "caller": "stringifyUiState",
+          "callee": "params.set",
+          "lineNumber": 91
+        },
+        {
+          "caller": "stringifyUiState",
+          "callee": "setsEqual",
+          "lineNumber": 93
+        },
+        {
+          "caller": "stringifyUiState",
+          "callee": "ALL_SESSION_TYPES.filter",
+          "lineNumber": 94
+        },
+        {
+          "caller": "stringifyUiState",
+          "callee": "state.sessionTypes.has",
+          "lineNumber": 94
+        },
+        {
+          "caller": "stringifyUiState",
+          "callee": "params.set",
+          "lineNumber": 95
+        },
+        {
+          "caller": "stringifyUiState",
+          "callee": "tokens.join",
+          "lineNumber": 95
+        },
+        {
+          "caller": "stringifyUiState",
+          "callee": "setsEqual",
+          "lineNumber": 97
+        },
+        {
+          "caller": "stringifyUiState",
+          "callee": "ALL_STATUSES.filter",
+          "lineNumber": 98
+        },
+        {
+          "caller": "stringifyUiState",
+          "callee": "state.statuses.has",
+          "lineNumber": 98
+        },
+        {
+          "caller": "stringifyUiState",
+          "callee": "params.set",
+          "lineNumber": 99
+        },
+        {
+          "caller": "stringifyUiState",
+          "callee": "tokens.join",
+          "lineNumber": 99
+        },
+        {
+          "caller": "stringifyUiState",
+          "callee": "params.toString",
+          "lineNumber": 102
+        },
+        {
+          "caller": "setsEqual",
+          "callee": "b.has",
+          "lineNumber": 108
+        },
+        {
+          "caller": "makeBrowserEnv",
+          "callee": "window.history.replaceState",
+          "lineNumber": 135
+        },
+        {
+          "caller": "makeBrowserEnv",
+          "callee": "window.addEventListener",
+          "lineNumber": 139
+        },
+        {
+          "caller": "makeBrowserEnv",
+          "callee": "window.removeEventListener",
+          "lineNumber": 140
+        },
+        {
+          "caller": "initUiStore",
+          "callee": "parseSearchParams",
+          "lineNumber": 152
+        },
+        {
+          "caller": "initUiStore",
+          "callee": "env.readSearch",
+          "lineNumber": 152
+        },
+        {
+          "caller": "initUiStore",
+          "callee": "env.onPopState",
+          "lineNumber": 153
+        },
+        {
+          "caller": "initUiStore",
+          "callee": "parseSearchParams",
+          "lineNumber": 154
+        },
+        {
+          "caller": "initUiStore",
+          "callee": "env.readSearch",
+          "lineNumber": 154
+        },
+        {
+          "caller": "initUiStore",
+          "callee": "notify",
+          "lineNumber": 155
+        },
+        {
+          "caller": "getUiState",
+          "callee": "initUiStore",
+          "lineNumber": 160
+        },
+        {
+          "caller": "mutate",
+          "callee": "updater",
+          "lineNumber": 165
+        },
+        {
+          "caller": "mutate",
+          "callee": "getUiState",
+          "lineNumber": 165
+        },
+        {
+          "caller": "mutate",
+          "callee": "env.writeSearch",
+          "lineNumber": 168
+        },
+        {
+          "caller": "mutate",
+          "callee": "stringifyUiState",
+          "lineNumber": 168
+        },
+        {
+          "caller": "mutate",
+          "callee": "notify",
+          "lineNumber": 169
+        },
+        {
+          "caller": "setSeason",
+          "callee": "mutate",
+          "lineNumber": 173
+        },
+        {
+          "caller": "setExpandedGp",
+          "callee": "mutate",
+          "lineNumber": 177
+        },
+        {
+          "caller": "setSearch",
+          "callee": "mutate",
+          "lineNumber": 181
+        },
+        {
+          "caller": "toggleSessionType",
+          "callee": "mutate",
+          "lineNumber": 185
+        },
+        {
+          "caller": "toggleSessionType",
+          "callee": "next.has",
+          "lineNumber": 187
+        },
+        {
+          "caller": "toggleSessionType",
+          "callee": "next.delete",
+          "lineNumber": 187
+        },
+        {
+          "caller": "toggleSessionType",
+          "callee": "next.add",
+          "lineNumber": 188
+        },
+        {
+          "caller": "toggleStatus",
+          "callee": "mutate",
+          "lineNumber": 194
+        },
+        {
+          "caller": "toggleStatus",
+          "callee": "next.has",
+          "lineNumber": 196
+        },
+        {
+          "caller": "toggleStatus",
+          "callee": "next.delete",
+          "lineNumber": 196
+        },
+        {
+          "caller": "toggleStatus",
+          "callee": "next.add",
+          "lineNumber": 197
+        },
+        {
+          "caller": "resetFilters",
+          "callee": "mutate",
+          "lineNumber": 203
+        },
+        {
+          "caller": "resetFilters",
+          "callee": "defaultUiState",
+          "lineNumber": 204
+        },
+        {
+          "caller": "subscribeUi",
+          "callee": "listeners.add",
+          "lineNumber": 210
+        },
+        {
+          "caller": "subscribeUi",
+          "callee": "listeners.delete",
+          "lineNumber": 211
+        },
+        {
+          "caller": "notify",
+          "callee": "l",
+          "lineNumber": 215
+        },
+        {
+          "caller": "_resetUiStore",
+          "callee": "defaultUiState",
+          "lineNumber": 219
+        },
+        {
+          "caller": "_resetUiStore",
+          "callee": "listeners.clear",
+          "lineNumber": 221
+        },
+        {
+          "caller": "_resetUiStore",
+          "callee": "makeBrowserEnv",
+          "lineNumber": 222
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 17,
+        "functionCount": 18,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/useNowSecond.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 51,
+      "nonEmptyLines": 47,
+      "functions": [
+        {
+          "name": "useNowSecond",
+          "startLine": 18,
+          "endLine": 51,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "useNowSecond",
+          "line": 18,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "useNowSecond",
+          "callee": "useRef",
+          "lineNumber": 21
+        },
+        {
+          "caller": "useNowSecond",
+          "callee": "readSimulatedNowMs",
+          "lineNumber": 26
+        },
+        {
+          "caller": "useNowSecond",
+          "callee": "useState",
+          "lineNumber": 32
+        },
+        {
+          "caller": "useNowSecond",
+          "callee": "Date.now",
+          "lineNumber": 32
+        },
+        {
+          "caller": "useNowSecond",
+          "callee": "useEffect",
+          "lineNumber": 34
+        },
+        {
+          "caller": "useNowSecond",
+          "callee": "window.setInterval",
+          "lineNumber": 37
+        },
+        {
+          "caller": "useNowSecond",
+          "callee": "setNow",
+          "lineNumber": 38
+        },
+        {
+          "caller": "useNowSecond",
+          "callee": "Date.now",
+          "lineNumber": 38
+        },
+        {
+          "caller": "onVis",
+          "callee": "setNow",
+          "lineNumber": 41
+        },
+        {
+          "caller": "onVis",
+          "callee": "Date.now",
+          "lineNumber": 41
+        },
+        {
+          "caller": "useNowSecond",
+          "callee": "document.addEventListener",
+          "lineNumber": 43
+        },
+        {
+          "caller": "useNowSecond",
+          "callee": "window.clearInterval",
+          "lineNumber": 45
+        },
+        {
+          "caller": "useNowSecond",
+          "callee": "document.removeEventListener",
+          "lineNumber": 46
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/shared/__tests__/simulatedNow.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 47,
+      "nonEmptyLines": 38,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/shared/env.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 9,
+      "nonEmptyLines": 8,
+      "exports": [
+        {
+          "name": "VERCEL_ENV",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "IS_PRODUCTION_DEPLOY",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "IS_PREVIEW_DEPLOY",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "IS_DEV_OR_PREVIEW",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/shared/seasonData.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 67,
+      "nonEmptyLines": 60,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/shared/simulatedNow.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 22,
+      "nonEmptyLines": 20,
+      "functions": [
+        {
+          "name": "readSimulatedNowMs",
+          "startLine": 14,
+          "endLine": 22,
+          "params": [
+            "search",
+            "env"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "readSimulatedNowMs",
+          "line": 14,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "readSimulatedNowMs",
+          "callee": "params.get",
+          "lineNumber": 18
+        },
+        {
+          "caller": "readSimulatedNowMs",
+          "callee": "Date.parse",
+          "lineNumber": 20
+        },
+        {
+          "caller": "readSimulatedNowMs",
+          "callee": "Number.isFinite",
+          "lineNumber": 21
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    }
+  ]
+}

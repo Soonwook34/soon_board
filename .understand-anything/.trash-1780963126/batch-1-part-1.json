@@ -1,0 +1,416 @@
+{
+  "nodes": [
+    {
+      "id": "file:scripts/_lib/trackOutlinesSchema.ts",
+      "type": "file",
+      "name": "trackOutlinesSchema.ts",
+      "filePath": "scripts/_lib/trackOutlinesSchema.ts",
+      "summary": "트랙 아웃라인 JSON(public/trackOutlines/{key}-{year}.json)의 공유 타입 스키마 모듈로, Phase 1(트랙 polyline)과 Phase 2(OpenF1 affine 변환)에서 쓰는 인터페이스를 한 곳에 정의해 두 entry script 간 중복을 제거한다.",
+      "tags": ["type-definition", "schema-definition", "track-outline", "build-system"],
+      "complexity": "moderate",
+      "languageNotes": "전부 export interface 로 구성된 순수 타입 모듈 — 런타임 코드 없음. Phase 2 산출 필드는 optional 로 표현."
+    },
+    {
+      "id": "file:src/App.tsx",
+      "type": "file",
+      "name": "App.tsx",
+      "filePath": "src/App.tsx",
+      "summary": "라우팅 루트 컴포넌트로 MainPage·LiveScreen·ReplayScreen·TestRigScreen 등 최상위 화면을 연결하고 공통 Footer 를 렌더링하는 SPA 진입 컴포넌트.",
+      "tags": ["entry-point", "component", "routing", "spa"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/App.tsx:App",
+      "type": "function",
+      "name": "App",
+      "filePath": "src/App.tsx",
+      "lineRange": [14, 27],
+      "summary": "라우트 정의와 공통 레이아웃(Footer 포함)을 묶어 반환하는 최상위 애플리케이션 컴포넌트.",
+      "tags": ["component", "entry-point", "routing"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "src/dashboard/index.ts",
+      "summary": "dashboard 패키지의 barrel 모듈로 DashboardApp·DataSource/Drivers Provider·selection store API 등 공개 심볼을 한 곳에서 re-export 한다.",
+      "tags": ["barrel", "entry-point", "exports", "dashboard"],
+      "complexity": "simple",
+      "languageNotes": "TypeScript barrel — re-export 14건으로 구성된 공개 API 표면."
+    },
+    {
+      "id": "file:src/dashboard/shared/__tests__/DriversContext.test.tsx",
+      "type": "file",
+      "name": "DriversContext.test.tsx",
+      "filePath": "src/dashboard/shared/__tests__/DriversContext.test.tsx",
+      "summary": "DriversProvider/useDrivers/teamColorOf 등 드라이버 컨텍스트 동작을 검증하는 단위 테스트로, mock OpenF1 client 로 드라이버 메타를 주입해 팀 컬러 매핑을 확인한다.",
+      "tags": ["test", "dashboard", "context", "react-testing-library"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/live/CorsFailedNotice.tsx",
+      "type": "file",
+      "name": "CorsFailedNotice.tsx",
+      "filePath": "src/live/CorsFailedNotice.tsx",
+      "summary": "OpenF1 CORS ping 실패 시 사용자에게 안내 메시지와 재시도 버튼을 표시하는 라이브 화면용 알림 컴포넌트.",
+      "tags": ["component", "live", "error-handling", "ui"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/live/CorsFailedNotice.tsx:CorsFailedNotice",
+      "type": "function",
+      "name": "CorsFailedNotice",
+      "filePath": "src/live/CorsFailedNotice.tsx",
+      "lineRange": [9, 60],
+      "summary": "onRetry 콜백을 받아 CORS 실패 안내와 재시도 액션을 렌더링하는 presentational 컴포넌트.",
+      "tags": ["component", "error-handling", "live"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/live/LiveMap.tsx",
+      "type": "file",
+      "name": "LiveMap.tsx",
+      "filePath": "src/live/LiveMap.tsx",
+      "summary": "트랙 아웃라인·핏레인·섹터·DRS·SLM 존 자산을 로드하고 canvas 위에 드라이버 위치를 실시간 렌더링하는 라이브/리플레이 공용 맵 컴포넌트로, DataSource 와 LiveMapRenderer 를 연결한다.",
+      "tags": ["component", "live", "canvas-rendering", "data-source", "map"],
+      "complexity": "complex",
+      "languageNotes": "useEffect 다단계 자산 로드 + Promise.all 병렬 fetch, AbortController/timeout 으로 취소·시간초과 처리. circuit 트랜스폼 누락 시 사용자 안내 분기."
+    },
+    {
+      "id": "function:src/live/LiveMap.tsx:LiveMap",
+      "type": "function",
+      "name": "LiveMap",
+      "filePath": "src/live/LiveMap.tsx",
+      "lineRange": [111, 420],
+      "summary": "세션 키·circuit·연도를 받아 트랙 자산을 비동기 로드하고, DataSource 와 canvas 렌더러를 구성해 드라이버 마커·트레일을 그리는 핵심 라이브맵 컴포넌트.",
+      "tags": ["component", "canvas-rendering", "data-source", "live"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/live/LiveMap.tsx:createOutLapDimmer",
+      "type": "function",
+      "name": "createOutLapDimmer",
+      "filePath": "src/live/LiveMap.tsx",
+      "lineRange": [93, 109],
+      "summary": "DataSource 의 getLapAt 결과를 캐싱해 아웃랩 여부에 따라 드라이버 마커 디밍 여부를 결정하는 헬퍼 팩토리.",
+      "tags": ["utility", "factory", "rendering", "caching"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/live/LiveScreen.tsx",
+      "type": "file",
+      "name": "LiveScreen.tsx",
+      "filePath": "src/live/LiveScreen.tsx",
+      "summary": "URL 파라미터로 세션을 해석하고 카탈로그를 로드해 라이브 세션 상태(preroll/live/postroll)를 분류한 뒤 LiveMap 과 대시보드를 묶어 표시하는 라이브 모드 최상위 화면.",
+      "tags": ["component", "live", "screen", "routing", "data-source"],
+      "complexity": "complex",
+      "languageNotes": "ping/auth 게이트 화면 — 모든 hook(useParams/useMemo/useEffect/usePing 등)을 conditional return 전에 호출하는 패턴 준수."
+    },
+    {
+      "id": "function:src/live/LiveScreen.tsx:LiveScreen",
+      "type": "function",
+      "name": "LiveScreen",
+      "filePath": "src/live/LiveScreen.tsx",
+      "lineRange": [32, 152],
+      "summary": "세션 키를 카탈로그에서 찾아 LiveDataSource 를 구성하고 라이브맵·대시보드를 렌더링하며, 세션 상태 전환에 따라 라우팅을 조정하는 라이브 화면 컴포넌트.",
+      "tags": ["component", "screen", "live", "data-source"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/live/ReplayScreen.tsx",
+      "type": "file",
+      "name": "ReplayScreen.tsx",
+      "filePath": "src/live/ReplayScreen.tsx",
+      "summary": "과거 세션 키를 모든 시즌에서 검색해 ReplayDataSource 로 재생하는 리플레이 모드 최상위 화면으로, LiveScreen 과 형제 구조를 공유한다.",
+      "tags": ["component", "replay", "screen", "routing", "data-source"],
+      "complexity": "complex",
+      "languageNotes": "LiveScreen 과 형제 컴포넌트 — hook 호출 순서·세션 분류·라우팅 구조를 cross-check 한 일관 구현."
+    },
+    {
+      "id": "function:src/live/ReplayScreen.tsx:ReplayScreen",
+      "type": "function",
+      "name": "ReplayScreen",
+      "filePath": "src/live/ReplayScreen.tsx",
+      "lineRange": [25, 164],
+      "summary": "전 시즌 카탈로그에서 세션을 찾아 ReplayDataSource 를 구성하고 라이브맵·대시보드를 재생 모드로 렌더링하는 리플레이 화면 컴포넌트.",
+      "tags": ["component", "screen", "replay", "data-source"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/live/SyntheticDataSource.ts",
+      "type": "file",
+      "name": "SyntheticDataSource.ts",
+      "filePath": "src/live/SyntheticDataSource.ts",
+      "summary": "실 OpenF1 데이터 없이 폴리라인 위를 일정 속도로 순회하는 합성 위치 스트림을 생성하는 DataSource 구현으로, TestRigScreen 등 개발/테스트 시나리오에 쓰인다.",
+      "tags": ["data-source", "testing", "simulation", "service"],
+      "complexity": "complex",
+      "languageNotes": "arc-length 테이블 기반 보간으로 폴리라인 순회. setInterval 주입(setIntervalImpl)으로 테스트에서 시간 제어 가능."
+    },
+    {
+      "id": "class:src/live/SyntheticDataSource.ts:SyntheticDataSource",
+      "type": "class",
+      "name": "SyntheticDataSource",
+      "filePath": "src/live/SyntheticDataSource.ts",
+      "lineRange": [53, 225],
+      "summary": "DataSource 인터페이스를 구현해 폴리라인을 따라 합성 드라이버 위치 샘플을 tick 마다 버퍼에 push 하고 표시 시간/스트림 상태를 제공하는 시뮬레이션 데이터 소스.",
+      "tags": ["data-source", "simulation", "service", "ring-buffer"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/live/SyntheticDataSource.ts:buildArcTable",
+      "type": "function",
+      "name": "buildArcTable",
+      "filePath": "src/live/SyntheticDataSource.ts",
+      "lineRange": [227, 235],
+      "summary": "폴리라인 각 정점까지의 누적 호 길이 테이블을 계산해 arc-length 기반 보간의 인덱스로 사용한다.",
+      "tags": ["utility", "geometry", "interpolation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/live/SyntheticDataSource.ts:sampleAtArc",
+      "type": "function",
+      "name": "sampleAtArc",
+      "filePath": "src/live/SyntheticDataSource.ts",
+      "lineRange": [237, 251],
+      "summary": "누적 호 길이 s 에 해당하는 폴리라인 좌표를 선형 보간으로 산출하는 헬퍼.",
+      "tags": ["utility", "geometry", "interpolation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/live/TestRigScreen.tsx",
+      "type": "file",
+      "name": "TestRigScreen.tsx",
+      "filePath": "src/live/TestRigScreen.tsx",
+      "summary": "쿼리 파라미터로 드라이버 수 등을 받아 합성 fetch 와 LiveDataSource/SyntheticDataSource 를 연결해 LiveMap 을 구동하는 개발용 테스트 리그 화면.",
+      "tags": ["component", "testing", "dev-tool", "data-source"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/live/TestRigScreen.tsx:TestRigScreen",
+      "type": "function",
+      "name": "TestRigScreen",
+      "filePath": "src/live/TestRigScreen.tsx",
+      "lineRange": [49, 131],
+      "summary": "합성 fetch 구현과 데이터 소스를 구성해 LiveMap 을 렌더링하는 개발·검증용 리그 컴포넌트.",
+      "tags": ["component", "testing", "dev-tool"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/live/TestRigScreen.tsx:parseQuery",
+      "type": "function",
+      "name": "parseQuery",
+      "filePath": "src/live/TestRigScreen.tsx",
+      "lineRange": [34, 45],
+      "summary": "URL search 문자열에서 드라이버 수·세션 파라미터 등을 정수로 파싱하는 헬퍼.",
+      "tags": ["utility", "parsing", "query"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/live/__tests__/LiveMap.test.tsx",
+      "type": "file",
+      "name": "LiveMap.test.tsx",
+      "filePath": "src/live/__tests__/LiveMap.test.tsx",
+      "summary": "LiveMap 컴포넌트의 자산 로드·에러 처리·렌더링 동작을 stub fetch 와 mock client·DataSource 팩토리로 검증하는 대규모 단위 테스트.",
+      "tags": ["test", "live", "canvas-rendering", "react-testing-library"],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:src/live/__tests__/LiveMap.test.tsx:makeFetch",
+      "type": "function",
+      "name": "makeFetch",
+      "filePath": "src/live/__tests__/LiveMap.test.tsx",
+      "lineRange": [112, 148],
+      "summary": "트랙·핏레인·섹터·DRS 등 URL 별로 분기해 고정 JSON 을 응답하는 테스트용 fetch 스텁 팩토리.",
+      "tags": ["test", "fixture", "fetch-stub"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/live/__tests__/LiveMap.test.tsx:makeStubFactory",
+      "type": "function",
+      "name": "makeStubFactory",
+      "filePath": "src/live/__tests__/LiveMap.test.tsx",
+      "lineRange": [199, 221],
+      "summary": "LiveMap 에 주입할 stub DataSource 팩토리를 생성해 렌더 동작을 격리 검증한다.",
+      "tags": ["test", "fixture", "data-source"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/live/__tests__/LiveScreen.test.tsx",
+      "type": "file",
+      "name": "LiveScreen.test.tsx",
+      "filePath": "src/live/__tests__/LiveScreen.test.tsx",
+      "summary": "memory router 환경에서 LiveScreen 을 렌더링해 라이브 시점 라우팅과 세션 해석 동작을 검증하는 단위 테스트.",
+      "tags": ["test", "live", "routing", "react-testing-library"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/live/__tests__/ReplayScreen.test.tsx",
+      "type": "file",
+      "name": "ReplayScreen.test.tsx",
+      "filePath": "src/live/__tests__/ReplayScreen.test.tsx",
+      "summary": "합성 시즌 데이터와 fetch 구현으로 ReplayScreen 의 세션 검색·재생 라우팅 동작을 검증하는 단위 테스트.",
+      "tags": ["test", "replay", "routing", "react-testing-library"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/live/__tests__/ReplayScreen.test.tsx:mkSeason",
+      "type": "function",
+      "name": "mkSeason",
+      "filePath": "src/live/__tests__/ReplayScreen.test.tsx",
+      "lineRange": [21, 43],
+      "summary": "테스트용 시즌·미팅·세션 픽스처를 연도·세션키·시간 범위로 구성하는 빌더.",
+      "tags": ["test", "fixture", "season"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/live/__tests__/ReplayScreen.test.tsx:makeFetchImpl",
+      "type": "function",
+      "name": "makeFetchImpl",
+      "filePath": "src/live/__tests__/ReplayScreen.test.tsx",
+      "lineRange": [52, 74],
+      "summary": "세션 키 URL 패턴별로 합성 응답을 돌려주는 테스트용 fetch 구현 팩토리.",
+      "tags": ["test", "fixture", "fetch-stub"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/live/__tests__/SyntheticDataSource.test.ts",
+      "type": "file",
+      "name": "SyntheticDataSource.test.ts",
+      "filePath": "src/live/__tests__/SyntheticDataSource.test.ts",
+      "summary": "주입된 시간/인터벌로 SyntheticDataSource 의 tick·샘플 push·트림 동작을 결정적으로 검증하는 단위 테스트.",
+      "tags": ["test", "data-source", "simulation"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/live/__tests__/SyntheticDataSource.test.ts:makeDs",
+      "type": "function",
+      "name": "makeDs",
+      "filePath": "src/live/__tests__/SyntheticDataSource.test.ts",
+      "lineRange": [13, 47],
+      "summary": "제어 가능한 setInterval/now 를 주입해 SyntheticDataSource 인스턴스와 시간 진행 헬퍼를 만드는 테스트 빌더.",
+      "tags": ["test", "fixture", "data-source"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/live/__tests__/corsPing.test.ts",
+      "type": "file",
+      "name": "corsPing.test.ts",
+      "filePath": "src/live/__tests__/corsPing.test.ts",
+      "summary": "pingOpenF1 의 성공/실패/타임아웃·abort 동작을 라우트별 mock 응답으로 검증하는 단위 테스트.",
+      "tags": ["test", "live", "cors", "network"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/live/__tests__/findSessionByKey.test.ts",
+      "type": "file",
+      "name": "findSessionByKey.test.ts",
+      "filePath": "src/live/__tests__/findSessionByKey.test.ts",
+      "summary": "findSessionByKey/findSessionAcrossSeasons 가 세션 키로 올바른 세션을 찾는지 검증하는 단위 테스트.",
+      "tags": ["test", "live", "session-lookup"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {"source": "file:src/App.tsx", "target": "file:src/live/LiveScreen.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/App.tsx", "target": "file:src/live/ReplayScreen.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/App.tsx", "target": "file:src/live/TestRigScreen.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/App.tsx", "target": "file:src/main/MainPage.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/App.tsx", "target": "file:src/shared/Footer.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/App.tsx", "target": "function:src/App.tsx:App", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/App.tsx", "target": "function:src/App.tsx:App", "type": "exports", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/dashboard/shared/__tests__/DriversContext.test.tsx", "target": "file:src/dashboard/shared/DriversContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/__tests__/DriversContext.test.tsx", "target": "file:src/shared/__tests__/createMockOpenF1Client.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/__tests__/DriversContext.test.tsx", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/shared/DriversContext.tsx", "target": "file:src/dashboard/shared/__tests__/DriversContext.test.tsx", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/live/CorsFailedNotice.tsx", "target": "function:src/live/CorsFailedNotice.tsx:CorsFailedNotice", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/live/CorsFailedNotice.tsx", "target": "function:src/live/CorsFailedNotice.tsx:CorsFailedNotice", "type": "exports", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/live/LiveMap.tsx", "target": "function:src/live/LiveMap.tsx:LiveMap", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/live/LiveMap.tsx", "target": "function:src/live/LiveMap.tsx:LiveMap", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/live/LiveMap.tsx", "target": "function:src/live/LiveMap.tsx:createOutLapDimmer", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/live/LiveMap.tsx", "target": "file:src/live/__tests__/LiveMap.test.tsx", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/live/LiveScreen.tsx", "target": "file:src/dashboard/index.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/LiveScreen.tsx", "target": "file:src/live/CorsFailedNotice.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/LiveScreen.tsx", "target": "file:src/live/CountdownOverlay.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/LiveScreen.tsx", "target": "file:src/live/findSessionByKey.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/LiveScreen.tsx", "target": "file:src/live/LiveMap.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/LiveScreen.tsx", "target": "file:src/live/usePing.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/LiveScreen.tsx", "target": "file:src/main/derived/sessionStatus.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/LiveScreen.tsx", "target": "file:src/main/stores/catalogStore.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/LiveScreen.tsx", "target": "file:src/main/stores/hooks.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/LiveScreen.tsx", "target": "file:src/main/useNowSecond.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/LiveScreen.tsx", "target": "file:src/map/LiveDataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/LiveScreen.tsx", "target": "file:src/shared/DataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/LiveScreen.tsx", "target": "file:src/shared/sessionKind.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/LiveScreen.tsx", "target": "function:src/live/LiveScreen.tsx:LiveScreen", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/live/LiveScreen.tsx", "target": "function:src/live/LiveScreen.tsx:LiveScreen", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/live/LiveScreen.tsx:LiveScreen", "target": "function:src/live/findSessionByKey.ts:findSessionByKey", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/live/LiveScreen.tsx:LiveScreen", "target": "function:src/main/stores/catalogStore.ts:loadCatalogIndex", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/live/LiveScreen.tsx:LiveScreen", "target": "function:src/main/stores/catalogStore.ts:loadSeason", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/live/LiveScreen.tsx:LiveScreen", "target": "function:src/main/derived/sessionStatus.ts:classify", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/live/LiveScreen.tsx:LiveScreen", "target": "function:src/live/usePing.ts:usePing", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/live/LiveScreen.tsx", "target": "file:src/live/__tests__/LiveScreen.test.tsx", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/live/ReplayScreen.tsx", "target": "file:src/dashboard/index.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/ReplayScreen.tsx", "target": "file:src/live/CorsFailedNotice.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/ReplayScreen.tsx", "target": "file:src/live/findSessionByKey.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/ReplayScreen.tsx", "target": "file:src/live/LiveMap.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/ReplayScreen.tsx", "target": "file:src/live/usePing.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/ReplayScreen.tsx", "target": "file:src/main/derived/sessionStatus.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/ReplayScreen.tsx", "target": "file:src/main/stores/catalogStore.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/ReplayScreen.tsx", "target": "file:src/main/stores/hooks.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/ReplayScreen.tsx", "target": "file:src/main/useNowSecond.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/ReplayScreen.tsx", "target": "file:src/map/ReplayDataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/ReplayScreen.tsx", "target": "file:src/shared/DataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/ReplayScreen.tsx", "target": "file:src/shared/sessionKind.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/ReplayScreen.tsx", "target": "function:src/live/ReplayScreen.tsx:ReplayScreen", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/live/ReplayScreen.tsx", "target": "function:src/live/ReplayScreen.tsx:ReplayScreen", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/live/ReplayScreen.tsx:ReplayScreen", "target": "function:src/live/findSessionByKey.ts:findSessionAcrossSeasons", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/live/ReplayScreen.tsx:ReplayScreen", "target": "function:src/main/stores/catalogStore.ts:loadSeason", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/live/ReplayScreen.tsx:ReplayScreen", "target": "function:src/main/derived/sessionStatus.ts:classify", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/live/ReplayScreen.tsx", "target": "file:src/live/__tests__/ReplayScreen.test.tsx", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/live/SyntheticDataSource.ts", "target": "class:src/live/SyntheticDataSource.ts:SyntheticDataSource", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/live/SyntheticDataSource.ts", "target": "class:src/live/SyntheticDataSource.ts:SyntheticDataSource", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/live/SyntheticDataSource.ts", "target": "function:src/live/SyntheticDataSource.ts:buildArcTable", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/live/SyntheticDataSource.ts", "target": "function:src/live/SyntheticDataSource.ts:buildArcTable", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/live/SyntheticDataSource.ts", "target": "function:src/live/SyntheticDataSource.ts:sampleAtArc", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/live/SyntheticDataSource.ts", "target": "file:src/live/__tests__/SyntheticDataSource.test.ts", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/live/TestRigScreen.tsx", "target": "file:src/live/LiveMap.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/TestRigScreen.tsx", "target": "file:src/live/SyntheticDataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/TestRigScreen.tsx", "target": "file:src/map/LiveDataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/TestRigScreen.tsx", "target": "function:src/live/TestRigScreen.tsx:TestRigScreen", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/live/TestRigScreen.tsx", "target": "function:src/live/TestRigScreen.tsx:TestRigScreen", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/live/TestRigScreen.tsx", "target": "function:src/live/TestRigScreen.tsx:parseQuery", "type": "contains", "direction": "forward", "weight": 1.0},
+
+    {"source": "file:src/live/__tests__/LiveMap.test.tsx", "target": "file:scripts/_lib/trackOutlinesSchema.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/__tests__/LiveMap.test.tsx", "target": "file:src/live/LiveMap.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/__tests__/LiveMap.test.tsx", "target": "file:src/map/LiveDataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/__tests__/LiveMap.test.tsx", "target": "file:src/shared/DataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/__tests__/LiveMap.test.tsx", "target": "function:src/live/__tests__/LiveMap.test.tsx:makeFetch", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/live/__tests__/LiveMap.test.tsx", "target": "function:src/live/__tests__/LiveMap.test.tsx:makeStubFactory", "type": "contains", "direction": "forward", "weight": 1.0},
+
+    {"source": "file:src/live/__tests__/LiveScreen.test.tsx", "target": "file:src/live/LiveScreen.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/__tests__/LiveScreen.test.tsx", "target": "file:src/main/stores/catalogStore.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+
+    {"source": "file:src/live/__tests__/ReplayScreen.test.tsx", "target": "file:src/live/findSessionByKey.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/__tests__/ReplayScreen.test.tsx", "target": "file:src/live/ReplayScreen.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/__tests__/ReplayScreen.test.tsx", "target": "file:src/main/stores/catalogStore.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/__tests__/ReplayScreen.test.tsx", "target": "file:src/shared/seasonData.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/__tests__/ReplayScreen.test.tsx", "target": "function:src/live/__tests__/ReplayScreen.test.tsx:mkSeason", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/live/__tests__/ReplayScreen.test.tsx", "target": "function:src/live/__tests__/ReplayScreen.test.tsx:makeFetchImpl", "type": "contains", "direction": "forward", "weight": 1.0},
+
+    {"source": "file:src/live/__tests__/SyntheticDataSource.test.ts", "target": "file:src/live/SyntheticDataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/__tests__/SyntheticDataSource.test.ts", "target": "function:src/live/__tests__/SyntheticDataSource.test.ts:makeDs", "type": "contains", "direction": "forward", "weight": 1.0},
+
+    {"source": "file:src/live/__tests__/corsPing.test.ts", "target": "file:src/live/corsPing.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+
+    {"source": "file:src/live/__tests__/findSessionByKey.test.ts", "target": "file:src/live/findSessionByKey.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/live/__tests__/findSessionByKey.test.ts", "target": "file:src/shared/seasonData.ts", "type": "imports", "direction": "forward", "weight": 0.7}
+  ]
+}

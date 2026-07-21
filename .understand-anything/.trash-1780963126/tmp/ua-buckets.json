@@ -1,0 +1,3570 @@
+{
+  "src/live": [
+    {
+      "id": "file:src/live/corsPing.ts",
+      "p": "src/live/corsPing.ts",
+      "t": "file",
+      "tags": [
+        "utility",
+        "cors",
+        "network",
+        "live",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/live/findSessionByKey.ts",
+      "p": "src/live/findSessionByKey.ts",
+      "t": "file",
+      "tags": [
+        "utility",
+        "session-lookup",
+        "live",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/live/usePing.ts",
+      "p": "src/live/usePing.ts",
+      "t": "file",
+      "tags": [
+        "hook",
+        "cors",
+        "live",
+        "state"
+      ]
+    },
+    {
+      "id": "file:src/live/CorsFailedNotice.tsx",
+      "p": "src/live/CorsFailedNotice.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "live",
+        "error-handling",
+        "ui"
+      ]
+    },
+    {
+      "id": "file:src/live/LiveMap.tsx",
+      "p": "src/live/LiveMap.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "live",
+        "canvas-rendering",
+        "data-source",
+        "map",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/live/LiveScreen.tsx",
+      "p": "src/live/LiveScreen.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "live",
+        "screen",
+        "routing",
+        "data-source",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/live/ReplayScreen.tsx",
+      "p": "src/live/ReplayScreen.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "replay",
+        "screen",
+        "routing",
+        "data-source",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/live/SyntheticDataSource.ts",
+      "p": "src/live/SyntheticDataSource.ts",
+      "t": "file",
+      "tags": [
+        "data-source",
+        "testing",
+        "simulation",
+        "service",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/live/TestRigScreen.tsx",
+      "p": "src/live/TestRigScreen.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "testing",
+        "dev-tool",
+        "data-source"
+      ]
+    },
+    {
+      "id": "file:src/live/__tests__/LiveMap.test.tsx",
+      "p": "src/live/__tests__/LiveMap.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "live",
+        "canvas-rendering",
+        "react-testing-library"
+      ]
+    },
+    {
+      "id": "file:src/live/__tests__/LiveScreen.test.tsx",
+      "p": "src/live/__tests__/LiveScreen.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "live",
+        "routing",
+        "react-testing-library"
+      ]
+    },
+    {
+      "id": "file:src/live/__tests__/ReplayScreen.test.tsx",
+      "p": "src/live/__tests__/ReplayScreen.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "replay",
+        "routing",
+        "react-testing-library"
+      ]
+    },
+    {
+      "id": "file:src/live/__tests__/SyntheticDataSource.test.ts",
+      "p": "src/live/__tests__/SyntheticDataSource.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "data-source",
+        "simulation"
+      ]
+    },
+    {
+      "id": "file:src/live/__tests__/corsPing.test.ts",
+      "p": "src/live/__tests__/corsPing.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "live",
+        "cors",
+        "network"
+      ]
+    },
+    {
+      "id": "file:src/live/__tests__/findSessionByKey.test.ts",
+      "p": "src/live/__tests__/findSessionByKey.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "live",
+        "session-lookup"
+      ]
+    },
+    {
+      "id": "file:src/live/CountdownOverlay.tsx",
+      "p": "src/live/CountdownOverlay.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "live",
+        "countdown",
+        "overlay",
+        "event-handler"
+      ]
+    },
+    {
+      "id": "file:src/live/derived/__tests__/overlayCountdown.test.ts",
+      "p": "src/live/derived/__tests__/overlayCountdown.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "countdown",
+        "formatting"
+      ]
+    },
+    {
+      "id": "file:src/live/derived/overlayCountdown.ts",
+      "p": "src/live/derived/overlayCountdown.ts",
+      "t": "file",
+      "tags": [
+        "utility",
+        "countdown",
+        "formatting",
+        "pure-function",
+        "tested"
+      ]
+    }
+  ],
+  "src/main": [
+    {
+      "id": "file:src/main/derived/__tests__/openf1ToSessionMap.test.ts",
+      "p": "src/main/derived/__tests__/openf1ToSessionMap.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "derived",
+        "session-map"
+      ]
+    },
+    {
+      "id": "file:src/main/derived/__tests__/seasonDiff.test.ts",
+      "p": "src/main/derived/__tests__/seasonDiff.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "derived",
+        "diff",
+        "season"
+      ]
+    },
+    {
+      "id": "file:src/main/derived/openf1ToSessionMap.ts",
+      "p": "src/main/derived/openf1ToSessionMap.ts",
+      "t": "file",
+      "tags": [
+        "utility",
+        "derived",
+        "session-map",
+        "transformation",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/main/derived/seasonDiff.ts",
+      "p": "src/main/derived/seasonDiff.ts",
+      "t": "file",
+      "tags": [
+        "utility",
+        "derived",
+        "diff",
+        "season",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/main/stores/__tests__/catalogStore.test.ts",
+      "p": "src/main/stores/__tests__/catalogStore.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "store",
+        "catalog",
+        "caching"
+      ]
+    },
+    {
+      "id": "file:src/main/stores/__tests__/revalidateSeason.test.ts",
+      "p": "src/main/stores/__tests__/revalidateSeason.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "store",
+        "revalidation",
+        "season"
+      ]
+    },
+    {
+      "id": "file:src/main/stores/catalogStore.ts",
+      "p": "src/main/stores/catalogStore.ts",
+      "t": "file",
+      "tags": [
+        "store",
+        "catalog",
+        "caching",
+        "data-fetching",
+        "singleton",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/main/stores/revalidateSeason.ts",
+      "p": "src/main/stores/revalidateSeason.ts",
+      "t": "file",
+      "tags": [
+        "store",
+        "revalidation",
+        "data-fetching",
+        "season",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/main/Countdown.tsx",
+      "p": "src/main/Countdown.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "countdown",
+        "timer",
+        "main-page"
+      ]
+    },
+    {
+      "id": "file:src/main/ExpandedSessions.tsx",
+      "p": "src/main/ExpandedSessions.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "main-page",
+        "session-list",
+        "event-handler"
+      ]
+    },
+    {
+      "id": "file:src/main/GpCard.tsx",
+      "p": "src/main/GpCard.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "main-page",
+        "card",
+        "grand-prix"
+      ]
+    },
+    {
+      "id": "file:src/main/GpGrid.tsx",
+      "p": "src/main/GpGrid.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "main-page",
+        "grid",
+        "filtering"
+      ]
+    },
+    {
+      "id": "file:src/main/Hero.tsx",
+      "p": "src/main/Hero.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "main-page",
+        "hero",
+        "next-session"
+      ]
+    },
+    {
+      "id": "file:src/main/MainPage.tsx",
+      "p": "src/main/MainPage.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "main-page",
+        "container",
+        "entry-point"
+      ]
+    },
+    {
+      "id": "file:src/main/ResultPreviewTooltip.tsx",
+      "p": "src/main/ResultPreviewTooltip.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "main-page",
+        "tooltip",
+        "portal"
+      ]
+    },
+    {
+      "id": "file:src/main/SearchFilter.tsx",
+      "p": "src/main/SearchFilter.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "main-page",
+        "search",
+        "filtering"
+      ]
+    },
+    {
+      "id": "file:src/main/SeasonPicker.tsx",
+      "p": "src/main/SeasonPicker.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "main-page",
+        "season",
+        "selector"
+      ]
+    },
+    {
+      "id": "file:src/main/SessionCard.tsx",
+      "p": "src/main/SessionCard.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "main-page",
+        "card",
+        "session"
+      ]
+    },
+    {
+      "id": "file:src/main/SimBadge.tsx",
+      "p": "src/main/SimBadge.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "main-page",
+        "simulation",
+        "dev-tool"
+      ]
+    },
+    {
+      "id": "file:src/main/StatusBadge.tsx",
+      "p": "src/main/StatusBadge.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "main-page",
+        "badge",
+        "presentational"
+      ]
+    },
+    {
+      "id": "file:src/main/__tests__/initialSeason.test.ts",
+      "p": "src/main/__tests__/initialSeason.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "season"
+      ]
+    },
+    {
+      "id": "file:src/main/__tests__/useNowSecond.test.tsx",
+      "p": "src/main/__tests__/useNowSecond.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "hook",
+        "unit-test"
+      ]
+    },
+    {
+      "id": "file:src/main/derived/__tests__/countdownFormat.test.ts",
+      "p": "src/main/derived/__tests__/countdownFormat.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "countdown",
+        "formatting"
+      ]
+    },
+    {
+      "id": "file:src/main/derived/__tests__/meetingStatus.test.ts",
+      "p": "src/main/derived/__tests__/meetingStatus.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "status",
+        "classification"
+      ]
+    },
+    {
+      "id": "file:src/main/derived/__tests__/nextUpcoming.test.ts",
+      "p": "src/main/derived/__tests__/nextUpcoming.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "next-session"
+      ]
+    },
+    {
+      "id": "file:src/main/derived/__tests__/resultPreviewFormat.test.ts",
+      "p": "src/main/derived/__tests__/resultPreviewFormat.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "formatting",
+        "validation"
+      ]
+    },
+    {
+      "id": "file:src/main/derived/__tests__/searchFilter.test.ts",
+      "p": "src/main/derived/__tests__/searchFilter.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "search",
+        "filtering"
+      ]
+    },
+    {
+      "id": "file:src/main/derived/__tests__/sessionRoute.test.ts",
+      "p": "src/main/derived/__tests__/sessionRoute.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "routing"
+      ]
+    },
+    {
+      "id": "file:src/main/derived/__tests__/sessionStatus.test.ts",
+      "p": "src/main/derived/__tests__/sessionStatus.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "status",
+        "boundary-test"
+      ]
+    },
+    {
+      "id": "file:src/main/derived/countdownFormat.ts",
+      "p": "src/main/derived/countdownFormat.ts",
+      "t": "file",
+      "tags": [
+        "utility",
+        "formatting",
+        "date",
+        "pure-function",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/main/derived/meetingStatus.ts",
+      "p": "src/main/derived/meetingStatus.ts",
+      "t": "file",
+      "tags": [
+        "derived-state",
+        "status",
+        "aggregation",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/main/derived/nextUpcoming.ts",
+      "p": "src/main/derived/nextUpcoming.ts",
+      "t": "file",
+      "tags": [
+        "derived-state",
+        "selection",
+        "sorting",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/main/derived/resultPreviewFormat.ts",
+      "p": "src/main/derived/resultPreviewFormat.ts",
+      "t": "file",
+      "tags": [
+        "utility",
+        "formatting",
+        "pure-function",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/main/derived/searchFilter.ts",
+      "p": "src/main/derived/searchFilter.ts",
+      "t": "file",
+      "tags": [
+        "derived-state",
+        "search",
+        "filtering",
+        "validation",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/main/derived/sessionRoute.ts",
+      "p": "src/main/derived/sessionRoute.ts",
+      "t": "file",
+      "tags": [
+        "utility",
+        "routing",
+        "pure-function",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/main/derived/sessionStatus.ts",
+      "p": "src/main/derived/sessionStatus.ts",
+      "t": "file",
+      "tags": [
+        "derived-state",
+        "status",
+        "time-window",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/main/initialSeason.ts",
+      "p": "src/main/initialSeason.ts",
+      "t": "file",
+      "tags": [
+        "utility",
+        "selection",
+        "initialization",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/main/stores/__tests__/uiStore.test.ts",
+      "p": "src/main/stores/__tests__/uiStore.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "store",
+        "url-state"
+      ]
+    },
+    {
+      "id": "file:src/main/stores/hooks.ts",
+      "p": "src/main/stores/hooks.ts",
+      "t": "file",
+      "tags": [
+        "hook",
+        "store",
+        "react",
+        "subscription"
+      ]
+    },
+    {
+      "id": "file:src/main/stores/uiStore.ts",
+      "p": "src/main/stores/uiStore.ts",
+      "t": "file",
+      "tags": [
+        "store",
+        "state-management",
+        "url-state",
+        "singleton",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/main/useNowSecond.ts",
+      "p": "src/main/useNowSecond.ts",
+      "t": "file",
+      "tags": [
+        "hook",
+        "react",
+        "timer",
+        "clock",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/main/NarrowScreenBanner.tsx",
+      "p": "src/main/NarrowScreenBanner.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "presentational",
+        "responsive",
+        "banner"
+      ]
+    },
+    {
+      "id": "file:src/main/Toast.tsx",
+      "p": "src/main/Toast.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "presentational",
+        "notification",
+        "controlled"
+      ]
+    }
+  ],
+  "src/map": [
+    {
+      "id": "file:src/map/LiveDataSource.ts",
+      "p": "src/map/LiveDataSource.ts",
+      "t": "file",
+      "tags": [
+        "data-source",
+        "live",
+        "polling",
+        "ring-buffer",
+        "service",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/map/ReplayDataSource.ts",
+      "p": "src/map/ReplayDataSource.ts",
+      "t": "file",
+      "tags": [
+        "data-source",
+        "replay",
+        "playback",
+        "prefetch",
+        "service",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/map/__tests__/drsZones.test.ts",
+      "p": "src/map/__tests__/drsZones.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "canvas",
+        "drs-zone",
+        "rendering"
+      ]
+    },
+    {
+      "id": "file:src/map/__tests__/sectorBoundaries.test.ts",
+      "p": "src/map/__tests__/sectorBoundaries.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "canvas",
+        "sector-boundary",
+        "rendering"
+      ]
+    },
+    {
+      "id": "file:src/map/__tests__/slmZones.test.ts",
+      "p": "src/map/__tests__/slmZones.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "canvas",
+        "slm-zone",
+        "rendering"
+      ]
+    },
+    {
+      "id": "file:src/map/drsZones.ts",
+      "p": "src/map/drsZones.ts",
+      "t": "file",
+      "tags": [
+        "data-model",
+        "canvas",
+        "drs-zone",
+        "rendering",
+        "geometry",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/map/sectorBoundaries.ts",
+      "p": "src/map/sectorBoundaries.ts",
+      "t": "file",
+      "tags": [
+        "data-model",
+        "canvas",
+        "sector-boundary",
+        "rendering",
+        "geometry",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/map/slmZones.ts",
+      "p": "src/map/slmZones.ts",
+      "t": "file",
+      "tags": [
+        "data-model",
+        "canvas",
+        "slm-zone",
+        "rendering",
+        "geometry",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/map/viewport.ts",
+      "p": "src/map/viewport.ts",
+      "t": "file",
+      "tags": [
+        "utility",
+        "viewport",
+        "geometry",
+        "coordinate-transform",
+        "type-definition",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/map/__tests__/arcLength.test.ts",
+      "p": "src/map/__tests__/arcLength.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "interpolation"
+      ]
+    },
+    {
+      "id": "file:src/map/__tests__/dashboardQueries.test.ts",
+      "p": "src/map/__tests__/dashboardQueries.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "data-model"
+      ]
+    },
+    {
+      "id": "file:src/map/__tests__/interpolation.test.ts",
+      "p": "src/map/__tests__/interpolation.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "interpolation"
+      ]
+    },
+    {
+      "id": "file:src/map/__tests__/layoutVersions.test.ts",
+      "p": "src/map/__tests__/layoutVersions.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "config"
+      ]
+    },
+    {
+      "id": "file:src/map/__tests__/LiveDataSource.test.ts",
+      "p": "src/map/__tests__/LiveDataSource.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "service",
+        "data-source"
+      ]
+    },
+    {
+      "id": "file:src/map/__tests__/LiveDataSourceMemory.test.ts",
+      "p": "src/map/__tests__/LiveDataSourceMemory.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "service",
+        "memory"
+      ]
+    },
+    {
+      "id": "file:src/map/__tests__/LiveDataSourceTabResume.test.ts",
+      "p": "src/map/__tests__/LiveDataSourceTabResume.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "service",
+        "data-source"
+      ]
+    },
+    {
+      "id": "file:src/map/__tests__/LiveMapRenderer.test.ts",
+      "p": "src/map/__tests__/LiveMapRenderer.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "renderer",
+        "canvas"
+      ]
+    },
+    {
+      "id": "file:src/map/__tests__/LocationBuffer.test.ts",
+      "p": "src/map/__tests__/LocationBuffer.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "buffer"
+      ]
+    },
+    {
+      "id": "file:src/map/__tests__/mapStyles.test.ts",
+      "p": "src/map/__tests__/mapStyles.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "config",
+        "styles"
+      ]
+    },
+    {
+      "id": "file:src/map/__tests__/markerLabelToggle.test.tsx",
+      "p": "src/map/__tests__/markerLabelToggle.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "hook",
+        "component"
+      ]
+    },
+    {
+      "id": "file:src/map/__tests__/markers.test.ts",
+      "p": "src/map/__tests__/markers.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "renderer",
+        "canvas"
+      ]
+    },
+    {
+      "id": "file:src/map/__tests__/pathProjection.test.ts",
+      "p": "src/map/__tests__/pathProjection.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "geometry"
+      ]
+    },
+    {
+      "id": "file:src/map/__tests__/PerDriverBuffer.test.ts",
+      "p": "src/map/__tests__/PerDriverBuffer.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "buffer"
+      ]
+    },
+    {
+      "id": "file:src/map/__tests__/pitLane.test.ts",
+      "p": "src/map/__tests__/pitLane.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "geometry"
+      ]
+    },
+    {
+      "id": "file:src/map/__tests__/ReplayDataSource.test.ts",
+      "p": "src/map/__tests__/ReplayDataSource.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "service",
+        "data-source"
+      ]
+    },
+    {
+      "id": "file:src/map/__tests__/stateBadges.test.ts",
+      "p": "src/map/__tests__/stateBadges.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "renderer"
+      ]
+    },
+    {
+      "id": "file:src/map/__tests__/trackRenderer.test.ts",
+      "p": "src/map/__tests__/trackRenderer.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "renderer",
+        "canvas"
+      ]
+    },
+    {
+      "id": "file:src/map/__tests__/trails.test.ts",
+      "p": "src/map/__tests__/trails.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "renderer"
+      ]
+    },
+    {
+      "id": "file:src/map/__tests__/transform.test.ts",
+      "p": "src/map/__tests__/transform.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "transform"
+      ]
+    },
+    {
+      "id": "file:src/map/__tests__/viewport.test.ts",
+      "p": "src/map/__tests__/viewport.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "viewport",
+        "unit-test",
+        "map"
+      ]
+    },
+    {
+      "id": "file:src/map/arcLength.ts",
+      "p": "src/map/arcLength.ts",
+      "t": "file",
+      "tags": [
+        "utility",
+        "geometry",
+        "interpolation",
+        "map",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/map/dashboardQueries.ts",
+      "p": "src/map/dashboardQueries.ts",
+      "t": "file",
+      "tags": [
+        "utility",
+        "data-query",
+        "aggregation",
+        "dashboard",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/map/interpolation.ts",
+      "p": "src/map/interpolation.ts",
+      "t": "file",
+      "tags": [
+        "interpolation",
+        "map",
+        "utility",
+        "geometry",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/map/layoutVersions.ts",
+      "p": "src/map/layoutVersions.ts",
+      "t": "file",
+      "tags": [
+        "utility",
+        "map",
+        "layout-versions",
+        "config",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/map/LiveMapRenderer.ts",
+      "p": "src/map/LiveMapRenderer.ts",
+      "t": "file",
+      "tags": [
+        "renderer",
+        "map",
+        "canvas",
+        "animation-loop",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/map/LocationBuffer.ts",
+      "p": "src/map/LocationBuffer.ts",
+      "t": "file",
+      "tags": [
+        "buffer",
+        "data-model",
+        "map",
+        "location",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/map/mapStyles.ts",
+      "p": "src/map/mapStyles.ts",
+      "t": "file",
+      "tags": [
+        "config",
+        "map",
+        "styling",
+        "constants",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/map/markerLabelToggle.ts",
+      "p": "src/map/markerLabelToggle.ts",
+      "t": "file",
+      "tags": [
+        "context",
+        "hook",
+        "map",
+        "state-management",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/map/markers.ts",
+      "p": "src/map/markers.ts",
+      "t": "file",
+      "tags": [
+        "renderer",
+        "map",
+        "canvas",
+        "marker",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/map/pathProjection.ts",
+      "p": "src/map/pathProjection.ts",
+      "t": "file",
+      "tags": [
+        "utility",
+        "geometry",
+        "map",
+        "projection",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/map/PerDriverBuffer.ts",
+      "p": "src/map/PerDriverBuffer.ts",
+      "t": "file",
+      "tags": [
+        "buffer",
+        "data-model",
+        "map",
+        "location",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/map/pitLane.ts",
+      "p": "src/map/pitLane.ts",
+      "t": "file",
+      "tags": [
+        "utility",
+        "map",
+        "pitlane",
+        "data-loader",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/map/stateBadges.ts",
+      "p": "src/map/stateBadges.ts",
+      "t": "file",
+      "tags": [
+        "renderer",
+        "map",
+        "canvas",
+        "state",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/map/trackRenderer.ts",
+      "p": "src/map/trackRenderer.ts",
+      "t": "file",
+      "tags": [
+        "renderer",
+        "map",
+        "canvas",
+        "track",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/map/trails.ts",
+      "p": "src/map/trails.ts",
+      "t": "file",
+      "tags": [
+        "renderer",
+        "map",
+        "canvas",
+        "trail",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/map/transform.ts",
+      "p": "src/map/transform.ts",
+      "t": "file",
+      "tags": [
+        "utility",
+        "geometry",
+        "map",
+        "transform",
+        "tested"
+      ]
+    }
+  ],
+  "src/shared": [
+    {
+      "id": "file:src/shared/Footer.tsx",
+      "p": "src/shared/Footer.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "footer",
+        "shared",
+        "ui",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/shared/__tests__/createMockOpenF1Client.ts",
+      "p": "src/shared/__tests__/createMockOpenF1Client.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "fixture",
+        "mock",
+        "openf1-client",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/shared/openf1Client.ts",
+      "p": "src/shared/openf1Client.ts",
+      "t": "file",
+      "tags": [
+        "service",
+        "api-client",
+        "rate-limiting",
+        "singleton",
+        "network",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/shared/openf1Types.ts",
+      "p": "src/shared/openf1Types.ts",
+      "t": "file",
+      "tags": [
+        "type-definition",
+        "openf1",
+        "data-model",
+        "shared"
+      ]
+    },
+    {
+      "id": "file:src/shared/__tests__/sessionKind.test.ts",
+      "p": "src/shared/__tests__/sessionKind.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "utility",
+        "validation"
+      ]
+    },
+    {
+      "id": "file:src/shared/sessionKind.ts",
+      "p": "src/shared/sessionKind.ts",
+      "t": "file",
+      "tags": [
+        "utility",
+        "classification",
+        "domain",
+        "validation",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/shared/__tests__/simulatedNow.test.ts",
+      "p": "src/shared/__tests__/simulatedNow.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "simulation",
+        "env"
+      ]
+    },
+    {
+      "id": "file:src/shared/env.ts",
+      "p": "src/shared/env.ts",
+      "t": "file",
+      "tags": [
+        "config",
+        "environment",
+        "constants",
+        "shared"
+      ]
+    },
+    {
+      "id": "file:src/shared/seasonData.ts",
+      "p": "src/shared/seasonData.ts",
+      "t": "file",
+      "tags": [
+        "type-definition",
+        "data-model",
+        "shared",
+        "schema-definition"
+      ]
+    },
+    {
+      "id": "file:src/shared/simulatedNow.ts",
+      "p": "src/shared/simulatedNow.ts",
+      "t": "file",
+      "tags": [
+        "utility",
+        "simulation",
+        "shared",
+        "pure-function",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/shared/DataSource.ts",
+      "p": "src/shared/DataSource.ts",
+      "t": "file",
+      "tags": [
+        "type-definition",
+        "interface",
+        "data-access",
+        "contract",
+        "ssot"
+      ]
+    },
+    {
+      "id": "file:src/shared/__tests__/createMockOpenF1Client.test.ts",
+      "p": "src/shared/__tests__/createMockOpenF1Client.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "mock",
+        "openf1"
+      ]
+    },
+    {
+      "id": "file:src/shared/__tests__/Footer.test.tsx",
+      "p": "src/shared/__tests__/Footer.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "component",
+        "footer",
+        "react"
+      ]
+    },
+    {
+      "id": "file:src/shared/__tests__/openf1Client.test.ts",
+      "p": "src/shared/__tests__/openf1Client.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "openf1",
+        "http-client"
+      ]
+    },
+    {
+      "id": "file:src/shared/__tests__/SyntheticDataSource.ts",
+      "p": "src/shared/__tests__/SyntheticDataSource.ts",
+      "t": "file",
+      "tags": [
+        "test-fixture",
+        "data-source",
+        "synthetic",
+        "map"
+      ]
+    }
+  ],
+  "scripts": [
+    {
+      "id": "file:scripts/_lib/trackOutlinesSchema.ts",
+      "p": "scripts/_lib/trackOutlinesSchema.ts",
+      "t": "file",
+      "tags": [
+        "type-definition",
+        "schema-definition",
+        "track-outline",
+        "build-system"
+      ]
+    },
+    {
+      "id": "file:scripts/__tests__/fetchSeasonCatalogArgs.test.ts",
+      "p": "scripts/__tests__/fetchSeasonCatalogArgs.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "cli",
+        "validation",
+        "vitest"
+      ]
+    },
+    {
+      "id": "file:scripts/__tests__/seasonsList.test.ts",
+      "p": "scripts/__tests__/seasonsList.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "data-model",
+        "vitest"
+      ]
+    },
+    {
+      "id": "file:scripts/_lib/seasonsList.ts",
+      "p": "scripts/_lib/seasonsList.ts",
+      "t": "file",
+      "tags": [
+        "data-model",
+        "utility",
+        "type-definition",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:scripts/fetch-season-catalog.ts",
+      "p": "scripts/fetch-season-catalog.ts",
+      "t": "file",
+      "tags": [
+        "entry-point",
+        "cli",
+        "data-pipeline",
+        "service",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:scripts/__tests__/buildAllCircuits.test.ts",
+      "p": "scripts/__tests__/buildAllCircuits.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "vitest",
+        "build-pipeline"
+      ]
+    },
+    {
+      "id": "file:scripts/__tests__/buildCircuitsCatalog.test.ts",
+      "p": "scripts/__tests__/buildCircuitsCatalog.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "vitest",
+        "catalog"
+      ]
+    },
+    {
+      "id": "file:scripts/__tests__/checkSeasonSizes.test.ts",
+      "p": "scripts/__tests__/checkSeasonSizes.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "vitest",
+        "validation"
+      ]
+    },
+    {
+      "id": "file:scripts/__tests__/computeConfidence.test.ts",
+      "p": "scripts/__tests__/computeConfidence.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "vitest",
+        "validation"
+      ]
+    },
+    {
+      "id": "file:scripts/__tests__/curateResidual.test.ts",
+      "p": "scripts/__tests__/curateResidual.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "vitest",
+        "data-quality"
+      ]
+    },
+    {
+      "id": "file:scripts/__tests__/dailyDataRefresh.test.ts",
+      "p": "scripts/__tests__/dailyDataRefresh.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "vitest",
+        "ci-cd"
+      ]
+    },
+    {
+      "id": "file:scripts/__tests__/dataUtils.test.ts",
+      "p": "scripts/__tests__/dataUtils.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "vitest",
+        "utility"
+      ]
+    },
+    {
+      "id": "file:scripts/__tests__/drsZonesDeriver.test.ts",
+      "p": "scripts/__tests__/drsZonesDeriver.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "vitest",
+        "telemetry"
+      ]
+    },
+    {
+      "id": "file:scripts/__tests__/extractOpenf1Transform.test.ts",
+      "p": "scripts/__tests__/extractOpenf1Transform.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "vitest",
+        "geometry"
+      ]
+    },
+    {
+      "id": "file:scripts/__tests__/fetchCircuitMaps.test.ts",
+      "p": "scripts/__tests__/fetchCircuitMaps.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "vitest",
+        "circuit-maps"
+      ]
+    },
+    {
+      "id": "file:scripts/__tests__/openf1Affine.test.ts",
+      "p": "scripts/__tests__/openf1Affine.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "vitest",
+        "geometry"
+      ]
+    },
+    {
+      "id": "file:scripts/__tests__/openf1Client.test.ts",
+      "p": "scripts/__tests__/openf1Client.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "vitest",
+        "api-client"
+      ]
+    },
+    {
+      "id": "file:scripts/__tests__/openf1FastLap.test.ts",
+      "p": "scripts/__tests__/openf1FastLap.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "vitest",
+        "telemetry"
+      ]
+    },
+    {
+      "id": "file:scripts/__tests__/pitlaneTracer.test.ts",
+      "p": "scripts/__tests__/pitlaneTracer.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "vitest",
+        "geometry"
+      ]
+    },
+    {
+      "id": "file:scripts/__tests__/seasonCatalog.test.ts",
+      "p": "scripts/__tests__/seasonCatalog.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "vitest",
+        "catalog"
+      ]
+    },
+    {
+      "id": "file:scripts/__tests__/seasonsIndex.test.ts",
+      "p": "scripts/__tests__/seasonsIndex.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "vitest",
+        "indexing"
+      ]
+    },
+    {
+      "id": "file:scripts/__tests__/sectorBoundariesDeriver.test.ts",
+      "p": "scripts/__tests__/sectorBoundariesDeriver.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "deriver",
+        "fixture",
+        "sector-boundaries"
+      ]
+    },
+    {
+      "id": "file:scripts/__tests__/slmZonesLoader.test.ts",
+      "p": "scripts/__tests__/slmZonesLoader.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "slm-zones",
+        "loader",
+        "validation"
+      ]
+    },
+    {
+      "id": "file:scripts/__tests__/svgToPolyline.test.ts",
+      "p": "scripts/__tests__/svgToPolyline.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "svg",
+        "polyline",
+        "parsing"
+      ]
+    },
+    {
+      "id": "file:scripts/__tests__/tracePitlane.test.ts",
+      "p": "scripts/__tests__/tracePitlane.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "pitlane",
+        "cli",
+        "integration",
+        "mock"
+      ]
+    },
+    {
+      "id": "file:scripts/__tests__/trackOutlinesIndex.test.ts",
+      "p": "scripts/__tests__/trackOutlinesIndex.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "index",
+        "filesystem",
+        "fixture"
+      ]
+    },
+    {
+      "id": "file:scripts/_lib/atomicWrite.ts",
+      "p": "scripts/_lib/atomicWrite.ts",
+      "t": "file",
+      "tags": [
+        "utility",
+        "filesystem",
+        "serialization",
+        "atomic-write",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:scripts/_lib/dataUtils.ts",
+      "p": "scripts/_lib/dataUtils.ts",
+      "t": "file",
+      "tags": [
+        "utility",
+        "data-processing",
+        "ssot",
+        "openf1",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:scripts/_lib/drsZonesDeriver.ts",
+      "p": "scripts/_lib/drsZonesDeriver.ts",
+      "t": "file",
+      "tags": [
+        "deriver",
+        "drs-zones",
+        "clustering",
+        "openf1",
+        "geometry",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:scripts/_lib/openf1Affine.ts",
+      "p": "scripts/_lib/openf1Affine.ts",
+      "t": "file",
+      "tags": [
+        "geometry",
+        "affine-transform",
+        "icp",
+        "math",
+        "library",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:scripts/_lib/openf1Client.ts",
+      "p": "scripts/_lib/openf1Client.ts",
+      "t": "file",
+      "tags": [
+        "api-client",
+        "openf1",
+        "http",
+        "retry",
+        "throttle",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:scripts/_lib/openf1FastLap.ts",
+      "p": "scripts/_lib/openf1FastLap.ts",
+      "t": "file",
+      "tags": [
+        "openf1",
+        "fast-lap",
+        "data-fetch",
+        "library",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:scripts/_lib/pitlaneTracer.ts",
+      "p": "scripts/_lib/pitlaneTracer.ts",
+      "t": "file",
+      "tags": [
+        "deriver",
+        "pitlane",
+        "openf1",
+        "geometry",
+        "library",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:scripts/_lib/seasonCatalog.ts",
+      "p": "scripts/_lib/seasonCatalog.ts",
+      "t": "file",
+      "tags": [
+        "data-pipeline",
+        "deriver",
+        "openf1",
+        "serialization",
+        "season",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:scripts/_lib/seasonsIndex.ts",
+      "p": "scripts/_lib/seasonsIndex.ts",
+      "t": "file",
+      "tags": [
+        "utility",
+        "serialization",
+        "season",
+        "index",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:scripts/_lib/sectorBoundariesDeriver.ts",
+      "p": "scripts/_lib/sectorBoundariesDeriver.ts",
+      "t": "file",
+      "tags": [
+        "deriver",
+        "geometry",
+        "telemetry",
+        "sector",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:scripts/_lib/slmZonesLoader.ts",
+      "p": "scripts/_lib/slmZonesLoader.ts",
+      "t": "file",
+      "tags": [
+        "loader",
+        "drs",
+        "geometry",
+        "slm",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:scripts/_lib/svgToPolyline.ts",
+      "p": "scripts/_lib/svgToPolyline.ts",
+      "t": "file",
+      "tags": [
+        "geometry",
+        "svg",
+        "serialization",
+        "track",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:scripts/_lib/trackOutlinesIndex.ts",
+      "p": "scripts/_lib/trackOutlinesIndex.ts",
+      "t": "file",
+      "tags": [
+        "utility",
+        "serialization",
+        "index",
+        "track",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:scripts/build-all-circuits.ts",
+      "p": "scripts/build-all-circuits.ts",
+      "t": "file",
+      "tags": [
+        "entry-point",
+        "orchestrator",
+        "data-pipeline",
+        "cli",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:scripts/build-circuits-catalog.ts",
+      "p": "scripts/build-circuits-catalog.ts",
+      "t": "file",
+      "tags": [
+        "entry-point",
+        "data-pipeline",
+        "openf1",
+        "cli",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:scripts/check-season-sizes.ts",
+      "p": "scripts/check-season-sizes.ts",
+      "t": "file",
+      "tags": [
+        "entry-point",
+        "validation",
+        "ci-cd",
+        "cli",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:scripts/curate-residual.ts",
+      "p": "scripts/curate-residual.ts",
+      "t": "file",
+      "tags": [
+        "entry-point",
+        "cli",
+        "quality-check",
+        "report",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:scripts/derive-drs-zones.ts",
+      "p": "scripts/derive-drs-zones.ts",
+      "t": "file",
+      "tags": [
+        "entry-point",
+        "deriver",
+        "drs",
+        "openf1",
+        "cli",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:scripts/derive-sector-boundaries.ts",
+      "p": "scripts/derive-sector-boundaries.ts",
+      "t": "file",
+      "tags": [
+        "entry-point",
+        "deriver",
+        "sector",
+        "openf1",
+        "cli",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:scripts/extract-openf1-transform.ts",
+      "p": "scripts/extract-openf1-transform.ts",
+      "t": "file",
+      "tags": [
+        "script",
+        "build-system",
+        "entry-point",
+        "data-pipeline",
+        "transform",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:scripts/fetch-circuit-maps.ts",
+      "p": "scripts/fetch-circuit-maps.ts",
+      "t": "file",
+      "tags": [
+        "script",
+        "build-system",
+        "entry-point",
+        "data-pipeline",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:scripts/load-slm-zones.ts",
+      "p": "scripts/load-slm-zones.ts",
+      "t": "file",
+      "tags": [
+        "script",
+        "data-pipeline",
+        "entry-point",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:scripts/trace-pitlane.ts",
+      "p": "scripts/trace-pitlane.ts",
+      "t": "file",
+      "tags": [
+        "script",
+        "data-pipeline",
+        "entry-point",
+        "transform",
+        "tested"
+      ]
+    }
+  ],
+  "src/App.tsx": [
+    {
+      "id": "file:src/App.tsx",
+      "p": "src/App.tsx",
+      "t": "file",
+      "tags": [
+        "entry-point",
+        "component",
+        "routing",
+        "spa"
+      ]
+    }
+  ],
+  "src/dashboard": [
+    {
+      "id": "file:src/dashboard/index.ts",
+      "p": "src/dashboard/index.ts",
+      "t": "file",
+      "tags": [
+        "barrel",
+        "entry-point",
+        "exports",
+        "dashboard",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/__tests__/DriversContext.test.tsx",
+      "p": "src/dashboard/shared/__tests__/DriversContext.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "dashboard",
+        "context",
+        "react-testing-library"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/derived/__tests__/driverOutStatus.test.ts",
+      "p": "src/dashboard/derived/__tests__/driverOutStatus.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "derived",
+        "fixture",
+        "leaderboard"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/derived/__tests__/knockout.test.ts",
+      "p": "src/dashboard/derived/__tests__/knockout.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "derived",
+        "qualifying",
+        "knockout"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/derived/__tests__/personalBests.test.ts",
+      "p": "src/dashboard/derived/__tests__/personalBests.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "derived",
+        "personal-best"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/derived/__tests__/qualiLapClass.test.ts",
+      "p": "src/dashboard/derived/__tests__/qualiLapClass.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "derived",
+        "qualifying",
+        "lap-classification"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/derived/__tests__/qualifyingSegments.test.ts",
+      "p": "src/dashboard/derived/__tests__/qualifyingSegments.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "derived",
+        "qualifying",
+        "fixture"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/derived/activeFlags.ts",
+      "p": "src/dashboard/derived/activeFlags.ts",
+      "t": "file",
+      "tags": [
+        "derived",
+        "race-control",
+        "flag",
+        "live",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/derived/driverOutStatus.ts",
+      "p": "src/dashboard/derived/driverOutStatus.ts",
+      "t": "file",
+      "tags": [
+        "derived",
+        "data-source",
+        "leaderboard",
+        "status",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/derived/knockout.ts",
+      "p": "src/dashboard/derived/knockout.ts",
+      "t": "file",
+      "tags": [
+        "derived",
+        "qualifying",
+        "knockout",
+        "utility",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/derived/personalBests.ts",
+      "p": "src/dashboard/derived/personalBests.ts",
+      "t": "file",
+      "tags": [
+        "derived",
+        "personal-best",
+        "utility",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/derived/qualiLapClass.ts",
+      "p": "src/dashboard/derived/qualiLapClass.ts",
+      "t": "file",
+      "tags": [
+        "derived",
+        "qualifying",
+        "lap-classification",
+        "utility",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/derived/qualifyingModel.ts",
+      "p": "src/dashboard/derived/qualifyingModel.ts",
+      "t": "file",
+      "tags": [
+        "derived",
+        "qualifying",
+        "data-source",
+        "model"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/derived/qualifyingSegments.ts",
+      "p": "src/dashboard/derived/qualifyingSegments.ts",
+      "t": "file",
+      "tags": [
+        "derived",
+        "qualifying",
+        "segment",
+        "race-control",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/detailPanel/CurrentState.tsx",
+      "p": "src/dashboard/detailPanel/CurrentState.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "detail-panel",
+        "react",
+        "live",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/detailPanel/RecentLapsTable.tsx",
+      "p": "src/dashboard/detailPanel/RecentLapsTable.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "detail-panel",
+        "react",
+        "table",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/detailPanel/__tests__/CurrentState.test.tsx",
+      "p": "src/dashboard/detailPanel/__tests__/CurrentState.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "component",
+        "detail-panel",
+        "react"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/detailPanel/__tests__/RecentLapsTable.test.tsx",
+      "p": "src/dashboard/detailPanel/__tests__/RecentLapsTable.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "component",
+        "detail-panel",
+        "table"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/panels/Leaderboard.tsx",
+      "p": "src/dashboard/panels/Leaderboard.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "panel",
+        "react",
+        "leaderboard",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/panels/__tests__/Leaderboard.test.tsx",
+      "p": "src/dashboard/panels/__tests__/Leaderboard.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "component",
+        "panel",
+        "leaderboard"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/SectorBar.tsx",
+      "p": "src/dashboard/shared/SectorBar.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "shared",
+        "react",
+        "visualization",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/__tests__/SectorBar.test.tsx",
+      "p": "src/dashboard/shared/__tests__/SectorBar.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "component",
+        "shared",
+        "visualization"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/__tests__/flagDecoder.test.ts",
+      "p": "src/dashboard/shared/__tests__/flagDecoder.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "shared",
+        "flag",
+        "race-control"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/__tests__/sectorColors.test.ts",
+      "p": "src/dashboard/shared/__tests__/sectorColors.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "shared",
+        "sector-color",
+        "visualization"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/__tests__/tyreColors.test.ts",
+      "p": "src/dashboard/shared/__tests__/tyreColors.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "shared",
+        "tyre",
+        "utility"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/flagDecoder.ts",
+      "p": "src/dashboard/shared/flagDecoder.ts",
+      "t": "file",
+      "tags": [
+        "shared",
+        "flag",
+        "race-control",
+        "utility",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/sectorColors.ts",
+      "p": "src/dashboard/shared/sectorColors.ts",
+      "t": "file",
+      "tags": [
+        "shared",
+        "sector-color",
+        "visualization",
+        "utility",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/tyreColors.ts",
+      "p": "src/dashboard/shared/tyreColors.ts",
+      "t": "file",
+      "tags": [
+        "shared",
+        "tyre",
+        "utility",
+        "visualization",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/useAggregateResults.ts",
+      "p": "src/dashboard/shared/useAggregateResults.ts",
+      "t": "file",
+      "tags": [
+        "hook",
+        "shared",
+        "react",
+        "aggregate"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/detailPanel/DriverHeader.tsx",
+      "p": "src/dashboard/detailPanel/DriverHeader.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "ui",
+        "data-model",
+        "detail-panel"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/panels/FastestLapBadges.tsx",
+      "p": "src/dashboard/panels/FastestLapBadges.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "ui",
+        "panel",
+        "aggregation",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/panels/TyreStrategy.tsx",
+      "p": "src/dashboard/panels/TyreStrategy.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "ui",
+        "panel",
+        "data-pipeline",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/panels/__tests__/FastestLapBadges.test.tsx",
+      "p": "src/dashboard/panels/__tests__/FastestLapBadges.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "ui",
+        "component"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/panels/__tests__/TyreStrategy.test.tsx",
+      "p": "src/dashboard/panels/__tests__/TyreStrategy.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "ui",
+        "component"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/panels/qualifying/KnockoutPanel.tsx",
+      "p": "src/dashboard/panels/qualifying/KnockoutPanel.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "ui",
+        "panel",
+        "qualifying",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/panels/qualifying/QualifyingTower.tsx",
+      "p": "src/dashboard/panels/qualifying/QualifyingTower.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "ui",
+        "panel",
+        "qualifying",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/panels/qualifying/SegmentBestBoard.tsx",
+      "p": "src/dashboard/panels/qualifying/SegmentBestBoard.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "ui",
+        "panel",
+        "qualifying",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/panels/qualifying/SegmentProgress.tsx",
+      "p": "src/dashboard/panels/qualifying/SegmentProgress.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "ui",
+        "panel",
+        "qualifying",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/panels/qualifying/__tests__/qualifyingPanels.test.tsx",
+      "p": "src/dashboard/panels/qualifying/__tests__/qualifyingPanels.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "ui",
+        "component",
+        "qualifying"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/panels/qualifying/useQualifyingModel.tsx",
+      "p": "src/dashboard/panels/qualifying/useQualifyingModel.tsx",
+      "t": "file",
+      "tags": [
+        "hook",
+        "context",
+        "provider",
+        "qualifying"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/profiles/__tests__/dashboardProfile.test.ts",
+      "p": "src/dashboard/profiles/__tests__/dashboardProfile.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "profile",
+        "routing"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/profiles/defaultProfile.tsx",
+      "p": "src/dashboard/profiles/defaultProfile.tsx",
+      "t": "file",
+      "tags": [
+        "profile",
+        "configuration",
+        "layout"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/profiles/index.ts",
+      "p": "src/dashboard/profiles/index.ts",
+      "t": "file",
+      "tags": [
+        "barrel",
+        "entry-point",
+        "profile",
+        "routing",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/profiles/qualifyingProfile.tsx",
+      "p": "src/dashboard/profiles/qualifyingProfile.tsx",
+      "t": "file",
+      "tags": [
+        "profile",
+        "configuration",
+        "layout",
+        "qualifying"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/profiles/types.ts",
+      "p": "src/dashboard/profiles/types.ts",
+      "t": "file",
+      "tags": [
+        "type-definition",
+        "profile",
+        "schema-definition"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/DriversContext.tsx",
+      "p": "src/dashboard/shared/DriversContext.tsx",
+      "t": "file",
+      "tags": [
+        "context",
+        "provider",
+        "hook",
+        "data-fetching",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/PanelHeading.tsx",
+      "p": "src/dashboard/shared/PanelHeading.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "ui",
+        "utility"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/__tests__/formatTime.test.ts",
+      "p": "src/dashboard/shared/__tests__/formatTime.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "utility",
+        "formatting"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/dashboardStyles.ts",
+      "p": "src/dashboard/shared/dashboardStyles.ts",
+      "t": "file",
+      "tags": [
+        "configuration",
+        "styling",
+        "utility"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/formatTime.ts",
+      "p": "src/dashboard/shared/formatTime.ts",
+      "t": "file",
+      "tags": [
+        "utility",
+        "formatting",
+        "serialization",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/__tests__/DashboardSeek.test.tsx",
+      "p": "src/dashboard/__tests__/DashboardSeek.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "integration-test",
+        "dashboard",
+        "seek"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/__tests__/fakeDataSource.ts",
+      "p": "src/dashboard/__tests__/fakeDataSource.ts",
+      "t": "file",
+      "tags": [
+        "test-helper",
+        "fake-datasource",
+        "factory",
+        "utility"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/derived/__tests__/currentLap.test.ts",
+      "p": "src/dashboard/derived/__tests__/currentLap.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "derived",
+        "current-lap"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/derived/__tests__/stints.test.ts",
+      "p": "src/dashboard/derived/__tests__/stints.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "derived",
+        "stints"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/derived/__tests__/totalLaps.test.ts",
+      "p": "src/dashboard/derived/__tests__/totalLaps.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "derived",
+        "total-laps"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/derived/currentLap.ts",
+      "p": "src/dashboard/derived/currentLap.ts",
+      "t": "file",
+      "tags": [
+        "derived",
+        "utility",
+        "current-lap",
+        "dashboard",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/derived/stints.ts",
+      "p": "src/dashboard/derived/stints.ts",
+      "t": "file",
+      "tags": [
+        "derived",
+        "utility",
+        "stints",
+        "dashboard",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/derived/totalLaps.ts",
+      "p": "src/dashboard/derived/totalLaps.ts",
+      "t": "file",
+      "tags": [
+        "derived",
+        "data-loader",
+        "total-laps",
+        "caching",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/detailPanel/PitHistory.tsx",
+      "p": "src/dashboard/detailPanel/PitHistory.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "detail-panel",
+        "pit-history",
+        "dashboard",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/detailPanel/SessionResult.tsx",
+      "p": "src/dashboard/detailPanel/SessionResult.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "detail-panel",
+        "session-result",
+        "dashboard",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/detailPanel/StintHistory.tsx",
+      "p": "src/dashboard/detailPanel/StintHistory.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "detail-panel",
+        "stint-history",
+        "tyre",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/detailPanel/__tests__/PitHistory.test.tsx",
+      "p": "src/dashboard/detailPanel/__tests__/PitHistory.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "detail-panel",
+        "pit-history"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/detailPanel/__tests__/SessionResult.test.tsx",
+      "p": "src/dashboard/detailPanel/__tests__/SessionResult.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "detail-panel",
+        "session-result"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/detailPanel/__tests__/StintHistory.test.tsx",
+      "p": "src/dashboard/detailPanel/__tests__/StintHistory.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "detail-panel",
+        "stint-history"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/panels/EventBroadcast.tsx",
+      "p": "src/dashboard/panels/EventBroadcast.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "panel",
+        "race-control",
+        "event-handler",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/panels/EventTicker.tsx",
+      "p": "src/dashboard/panels/EventTicker.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "panel",
+        "race-control",
+        "event-ticker",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/panels/RaceControlBanner.tsx",
+      "p": "src/dashboard/panels/RaceControlBanner.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "panel",
+        "race-control",
+        "banner",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/panels/SessionHeader.tsx",
+      "p": "src/dashboard/panels/SessionHeader.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "panel",
+        "session-header",
+        "dashboard",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/panels/SessionProgress.tsx",
+      "p": "src/dashboard/panels/SessionProgress.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "panel",
+        "session-progress",
+        "dashboard",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/panels/WeatherMini.tsx",
+      "p": "src/dashboard/panels/WeatherMini.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "dashboard",
+        "panel",
+        "weather",
+        "ui",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/panels/__tests__/EventBroadcast.test.tsx",
+      "p": "src/dashboard/panels/__tests__/EventBroadcast.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "dashboard",
+        "panel",
+        "event"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/panels/__tests__/EventTicker.test.tsx",
+      "p": "src/dashboard/panels/__tests__/EventTicker.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "dashboard",
+        "panel",
+        "event"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/panels/__tests__/RaceControlBanner.test.tsx",
+      "p": "src/dashboard/panels/__tests__/RaceControlBanner.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "dashboard",
+        "panel",
+        "race-control"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/panels/__tests__/SessionHeader.test.tsx",
+      "p": "src/dashboard/panels/__tests__/SessionHeader.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "dashboard",
+        "panel",
+        "session"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/panels/__tests__/SessionProgress.test.tsx",
+      "p": "src/dashboard/panels/__tests__/SessionProgress.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "dashboard",
+        "panel",
+        "session"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/panels/__tests__/WeatherMini.test.tsx",
+      "p": "src/dashboard/panels/__tests__/WeatherMini.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "dashboard",
+        "panel",
+        "weather"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/DataSourceContext.tsx",
+      "p": "src/dashboard/shared/DataSourceContext.tsx",
+      "t": "file",
+      "tags": [
+        "context",
+        "provider",
+        "hook",
+        "dashboard",
+        "data-access",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/__tests__/DataSourceContext.test.tsx",
+      "p": "src/dashboard/shared/__tests__/DataSourceContext.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "context",
+        "hook",
+        "data-access"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/__tests__/flagIcons.test.ts",
+      "p": "src/dashboard/shared/__tests__/flagIcons.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "utility",
+        "race-control"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/__tests__/queryHooks.test.tsx",
+      "p": "src/dashboard/shared/__tests__/queryHooks.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "hook",
+        "query",
+        "data-access"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/__tests__/useDisplayTime.test.tsx",
+      "p": "src/dashboard/shared/__tests__/useDisplayTime.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "hook",
+        "display-time",
+        "data-access"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/flagIcons.ts",
+      "p": "src/dashboard/shared/flagIcons.ts",
+      "t": "file",
+      "tags": [
+        "utility",
+        "race-control",
+        "flag",
+        "mapping",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/useAggregate.ts",
+      "p": "src/dashboard/shared/useAggregate.ts",
+      "t": "file",
+      "tags": [
+        "hook",
+        "query",
+        "aggregate",
+        "data-access",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/useAllBefore.ts",
+      "p": "src/dashboard/shared/useAllBefore.ts",
+      "t": "file",
+      "tags": [
+        "hook",
+        "query",
+        "data-access",
+        "endpoint",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/useDisplayTime.ts",
+      "p": "src/dashboard/shared/useDisplayTime.ts",
+      "t": "file",
+      "tags": [
+        "hook",
+        "display-time",
+        "data-access",
+        "polling",
+        "subscription",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/useLatestBefore.ts",
+      "p": "src/dashboard/shared/useLatestBefore.ts",
+      "t": "file",
+      "tags": [
+        "hook",
+        "query",
+        "data-access",
+        "endpoint",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/DashboardApp.tsx",
+      "p": "src/dashboard/DashboardApp.tsx",
+      "t": "file",
+      "tags": [
+        "entry-point",
+        "component",
+        "layout",
+        "dashboard",
+        "responsive",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/__tests__/DashboardApp.test.tsx",
+      "p": "src/dashboard/__tests__/DashboardApp.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "component-test",
+        "responsive",
+        "mock"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/detailPanel/DriverDetailPanel.tsx",
+      "p": "src/dashboard/detailPanel/DriverDetailPanel.tsx",
+      "t": "file",
+      "tags": [
+        "component",
+        "detail-panel",
+        "dashboard",
+        "event-handler",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/detailPanel/__tests__/DriverDetailPanel.test.tsx",
+      "p": "src/dashboard/detailPanel/__tests__/DriverDetailPanel.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "component-test",
+        "detail-panel"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/__tests__/selectionStore.test.ts",
+      "p": "src/dashboard/shared/__tests__/selectionStore.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "unit-test",
+        "store"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/__tests__/useMediaQuery.test.tsx",
+      "p": "src/dashboard/shared/__tests__/useMediaQuery.test.tsx",
+      "t": "file",
+      "tags": [
+        "test",
+        "hook-test",
+        "responsive",
+        "mock"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/selectionStore.ts",
+      "p": "src/dashboard/shared/selectionStore.ts",
+      "t": "file",
+      "tags": [
+        "store",
+        "state-management",
+        "singleton",
+        "utility",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/shared/useMediaQuery.ts",
+      "p": "src/dashboard/shared/useMediaQuery.ts",
+      "t": "file",
+      "tags": [
+        "hook",
+        "responsive",
+        "utility",
+        "tested"
+      ]
+    },
+    {
+      "id": "file:src/dashboard/__tests__/futureLeakGuard.test.ts",
+      "p": "src/dashboard/__tests__/futureLeakGuard.test.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "validation",
+        "security",
+        "regression-guard"
+      ]
+    }
+  ],
+  "src/style": [
+    {
+      "id": "file:src/style/tokens.ts",
+      "p": "src/style/tokens.ts",
+      "t": "file",
+      "tags": [
+        "configuration",
+        "styling",
+        "design-tokens",
+        "type-definition"
+      ]
+    },
+    {
+      "id": "file:src/style/global.css",
+      "p": "src/style/global.css",
+      "t": "file",
+      "tags": [
+        "styling",
+        "css",
+        "global",
+        "ui"
+      ]
+    }
+  ],
+  "src/main.tsx": [
+    {
+      "id": "file:src/main.tsx",
+      "p": "src/main.tsx",
+      "t": "file",
+      "tags": [
+        "entry-point",
+        "bootstrap",
+        "react"
+      ]
+    }
+  ],
+  "ci-cd": [
+    {
+      "id": "pipeline:.github/workflows/ci.yml",
+      "p": ".github/workflows/ci.yml",
+      "t": "pipeline",
+      "tags": [
+        "ci-cd",
+        "infrastructure",
+        "build-system",
+        "test",
+        "deployment"
+      ]
+    },
+    {
+      "id": "pipeline:.github/workflows/daily-data-refresh.yml",
+      "p": ".github/workflows/daily-data-refresh.yml",
+      "t": "pipeline",
+      "tags": [
+        "ci-cd",
+        "data-pipeline",
+        "infrastructure",
+        "automation",
+        "deployment"
+      ]
+    },
+    {
+      "id": "pipeline:.github/workflows/playwright.yml",
+      "p": ".github/workflows/playwright.yml",
+      "t": "pipeline",
+      "tags": [
+        "ci-cd",
+        "test",
+        "infrastructure",
+        "automation",
+        "deployment"
+      ]
+    }
+  ],
+  "docs": [
+    {
+      "id": "document:.omc/plans/dashboard-implementation.md",
+      "p": ".omc/plans/dashboard-implementation.md",
+      "t": "document",
+      "tags": [
+        "documentation",
+        "dashboard",
+        "구현계획",
+        "시간정렬",
+        "ui-layout"
+      ]
+    },
+    {
+      "id": "document:.omc/plans/dashboard-layout-improvements.md",
+      "p": ".omc/plans/dashboard-layout-improvements.md",
+      "t": "document",
+      "tags": [
+        "documentation",
+        "dashboard",
+        "레이아웃개선",
+        "ui-layout",
+        "리팩토링"
+      ]
+    },
+    {
+      "id": "document:.omc/plans/future-leak-dnf-followup.md",
+      "p": ".omc/plans/future-leak-dnf-followup.md",
+      "t": "document",
+      "tags": [
+        "documentation",
+        "미래누설",
+        "시간정렬",
+        "derived",
+        "검수"
+      ]
+    },
+    {
+      "id": "document:.omc/plans/live-map-followup.md",
+      "p": ".omc/plans/live-map-followup.md",
+      "t": "document",
+      "tags": [
+        "documentation",
+        "live-map",
+        "후속개선",
+        "성능최적화",
+        "canvas"
+      ]
+    },
+    {
+      "id": "document:.omc/plans/live-map-implementation.md",
+      "p": ".omc/plans/live-map-implementation.md",
+      "t": "document",
+      "tags": [
+        "documentation",
+        "live-map",
+        "구현계획",
+        "data-pipeline",
+        "canvas"
+      ]
+    },
+    {
+      "id": "document:.omc/plans/main-page-implementation.md",
+      "p": ".omc/plans/main-page-implementation.md",
+      "t": "document",
+      "tags": [
+        "documentation",
+        "main-page",
+        "구현계획",
+        "data-pipeline",
+        "라우팅"
+      ]
+    },
+    {
+      "id": "document:.omc/plans/openf1-client.md",
+      "p": ".omc/plans/openf1-client.md",
+      "t": "document",
+      "tags": [
+        "documentation",
+        "openf1-client",
+        "api-handler",
+        "rate-limiting",
+        "구현계획"
+      ]
+    },
+    {
+      "id": "document:.omc/plans/p0-critic-fixes.md",
+      "p": ".omc/plans/p0-critic-fixes.md",
+      "t": "document",
+      "tags": [
+        "documentation",
+        "critic-fixes",
+        "일관성",
+        "검증",
+        "ssot"
+      ]
+    },
+    {
+      "id": "document:.omc/plans/qualifying-session-dashboard.md",
+      "p": ".omc/plans/qualifying-session-dashboard.md",
+      "t": "document",
+      "tags": [
+        "documentation",
+        "dashboard",
+        "qualifying",
+        "구현계획",
+        "profile"
+      ]
+    },
+    {
+      "id": "document:CLAUDE.md",
+      "p": "CLAUDE.md",
+      "t": "document",
+      "tags": [
+        "documentation",
+        "guidelines",
+        "ai-coding",
+        "conventions"
+      ]
+    },
+    {
+      "id": "document:THIRD_PARTY_LICENSES.md",
+      "p": "THIRD_PARTY_LICENSES.md",
+      "t": "document",
+      "tags": [
+        "documentation",
+        "license",
+        "attribution",
+        "legal"
+      ]
+    },
+    {
+      "id": "document:docs/deployment-architecture.md",
+      "p": "docs/deployment-architecture.md",
+      "t": "document",
+      "tags": [
+        "documentation",
+        "deployment",
+        "infrastructure",
+        "ci-cd",
+        "architecture"
+      ]
+    },
+    {
+      "id": "document:docs/live-streaming-strategy.md",
+      "p": "docs/live-streaming-strategy.md",
+      "t": "document",
+      "tags": [
+        "documentation",
+        "strategy",
+        "live-streaming",
+        "rate-limiting",
+        "architecture"
+      ]
+    },
+    {
+      "id": "document:docs/openf1-api-reference.md",
+      "p": "docs/openf1-api-reference.md",
+      "t": "document",
+      "tags": [
+        "documentation",
+        "api-reference",
+        "openf1",
+        "data-model",
+        "reference"
+      ]
+    },
+    {
+      "id": "document:docs/playwright-memory-profile.md",
+      "p": "docs/playwright-memory-profile.md",
+      "t": "document",
+      "tags": [
+        "documentation",
+        "testing",
+        "memory-profiling",
+        "monitoring",
+        "live-map"
+      ]
+    },
+    {
+      "id": "document:docs/replay-strategy.md",
+      "p": "docs/replay-strategy.md",
+      "t": "document",
+      "tags": [
+        "documentation",
+        "strategy",
+        "replay",
+        "caching",
+        "architecture"
+      ]
+    }
+  ],
+  "root-code": [
+    {
+      "id": "file:index.html",
+      "p": "index.html",
+      "t": "file",
+      "tags": [
+        "entry-point",
+        "markup",
+        "spa",
+        "vite"
+      ]
+    },
+    {
+      "id": "file:playwright.config.ts",
+      "p": "playwright.config.ts",
+      "t": "file",
+      "tags": [
+        "config",
+        "test",
+        "playwright",
+        "e2e"
+      ]
+    },
+    {
+      "id": "file:vite.config.ts",
+      "p": "vite.config.ts",
+      "t": "file",
+      "tags": [
+        "config",
+        "build-system",
+        "vite",
+        "tooling"
+      ]
+    },
+    {
+      "id": "file:vitest.setup.ts",
+      "p": "vitest.setup.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "test-setup",
+        "configuration",
+        "react",
+        "vitest"
+      ]
+    }
+  ],
+  "config": [
+    {
+      "id": "config:package.json",
+      "p": "package.json",
+      "t": "config",
+      "tags": [
+        "configuration",
+        "build-system",
+        "dependencies",
+        "npm-scripts"
+      ]
+    },
+    {
+      "id": "config:tsconfig.json",
+      "p": "tsconfig.json",
+      "t": "config",
+      "tags": [
+        "configuration",
+        "typescript",
+        "build-system",
+        "strict-mode"
+      ]
+    },
+    {
+      "id": "config:vercel.json",
+      "p": "vercel.json",
+      "t": "config",
+      "tags": [
+        "configuration",
+        "deployment",
+        "vercel",
+        "spa-routing"
+      ]
+    },
+    {
+      "id": "config:src/dashboard/derived/__tests__/fixtures/quali-9468-laps.json",
+      "p": "src/dashboard/derived/__tests__/fixtures/quali-9468-laps.json",
+      "t": "config",
+      "tags": [
+        "test-fixture",
+        "data",
+        "openf1",
+        "qualifying",
+        "laps"
+      ]
+    },
+    {
+      "id": "config:src/dashboard/derived/__tests__/fixtures/quali-9468-pit.json",
+      "p": "src/dashboard/derived/__tests__/fixtures/quali-9468-pit.json",
+      "t": "config",
+      "tags": [
+        "test-fixture",
+        "data",
+        "openf1",
+        "qualifying",
+        "pit"
+      ]
+    },
+    {
+      "id": "config:src/dashboard/derived/__tests__/fixtures/quali-9468-race_control.json",
+      "p": "src/dashboard/derived/__tests__/fixtures/quali-9468-race_control.json",
+      "t": "config",
+      "tags": [
+        "test-fixture",
+        "data",
+        "openf1",
+        "qualifying",
+        "race-control"
+      ]
+    },
+    {
+      "id": "config:src/dashboard/derived/__tests__/fixtures/quali-9468-session_result.json",
+      "p": "src/dashboard/derived/__tests__/fixtures/quali-9468-session_result.json",
+      "t": "config",
+      "tags": [
+        "test-fixture",
+        "data",
+        "openf1",
+        "qualifying",
+        "session-result"
+      ]
+    },
+    {
+      "id": "config:.gitmodules",
+      "p": ".gitmodules",
+      "t": "config",
+      "tags": [
+        "configuration",
+        "git",
+        "submodule"
+      ]
+    },
+    {
+      "id": "config:.understand-anything/.understandignore",
+      "p": ".understand-anything/.understandignore",
+      "t": "config",
+      "tags": [
+        "configuration",
+        "tooling",
+        "ignore-rules"
+      ]
+    },
+    {
+      "id": "config:.understand-anything/config.json",
+      "p": ".understand-anything/config.json",
+      "t": "config",
+      "tags": [
+        "configuration",
+        "tooling",
+        "json"
+      ]
+    },
+    {
+      "id": "config:data/slm-zones-raw.json",
+      "p": "data/slm-zones-raw.json",
+      "t": "config",
+      "tags": [
+        "configuration",
+        "data",
+        "seed-data",
+        "json"
+      ]
+    },
+    {
+      "id": "config:src/map/circuits.json",
+      "p": "src/map/circuits.json",
+      "t": "config",
+      "tags": [
+        "configuration",
+        "map",
+        "track-data",
+        "circuits"
+      ]
+    },
+    {
+      "id": "config:src/map/layoutVersions.json",
+      "p": "src/map/layoutVersions.json",
+      "t": "config",
+      "tags": [
+        "configuration",
+        "map",
+        "layout-versions",
+        "track-data"
+      ]
+    },
+    {
+      "id": "config:playwright.config.ts",
+      "p": "playwright.config.ts",
+      "t": "config",
+      "tags": [
+        "configuration",
+        "testing",
+        "playwright",
+        "e2e"
+      ]
+    }
+  ],
+  "e2e": [
+    {
+      "id": "file:e2e/memory.spec.ts",
+      "p": "e2e/memory.spec.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "e2e",
+        "playwright",
+        "memory-profiling"
+      ]
+    },
+    {
+      "id": "file:e2e/replay-smoke.spec.ts",
+      "p": "e2e/replay-smoke.spec.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "e2e",
+        "playwright",
+        "smoke-test",
+        "replay"
+      ]
+    },
+    {
+      "id": "file:e2e/smoke.spec.ts",
+      "p": "e2e/smoke.spec.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "e2e",
+        "playwright",
+        "smoke-test"
+      ]
+    },
+    {
+      "id": "file:e2e/visual.spec.ts",
+      "p": "e2e/visual.spec.ts",
+      "t": "file",
+      "tags": [
+        "test",
+        "e2e",
+        "playwright",
+        "visual-regression"
+      ]
+    }
+  ]
+}

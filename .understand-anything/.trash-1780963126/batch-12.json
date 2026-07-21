@@ -1,0 +1,658 @@
+{
+  "nodes": [
+    {
+      "id": "document:.omc/plans/dashboard-implementation.md",
+      "type": "document",
+      "name": "dashboard-implementation.md",
+      "filePath": ".omc/plans/dashboard-implementation.md",
+      "summary": "데스크톱 단일 페이지 대시보드의 전체 구현 계획으로, 글로벌 패널(세션 헤더·진행률·리더보드·타이어 전략·이벤트 티커·날씨)과 우측 선수 디테일 사이드 패널, display_time 기반 시간 정렬 모델 및 미래 누설 방지 원칙, 12단계 구현 로드맵을 정의한다.",
+      "tags": ["documentation", "dashboard", "구현계획", "시간정렬", "ui-layout"],
+      "complexity": "complex",
+      "languageNotes": "54개 섹션의 대규모 설계 문서로, DataSource SSOT와 display_time 단일 진실 원천을 핵심 아키텍처 원칙으로 삼는다."
+    },
+    {
+      "id": "document:.omc/plans/dashboard-layout-improvements.md",
+      "type": "document",
+      "name": "dashboard-layout-improvements.md",
+      "filePath": ".omc/plans/dashboard-layout-improvements.md",
+      "summary": "기존 대시보드의 레이아웃·디자인 개선 계획으로, 타이어 전략 순위 정렬, 우측 컬럼 재배치, 이벤트 티커 압축 및 상단 브로드캐스트, 상단 띠 그리드 재배치, 라이브맵 마커 라벨 declutter 등 작업 그룹을 우선순위와 함께 정의한다.",
+      "tags": ["documentation", "dashboard", "레이아웃개선", "ui-layout", "리팩토링"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.omc/plans/future-leak-dnf-followup.md",
+      "type": "document",
+      "name": "future-leak-dnf-followup.md",
+      "filePath": ".omc/plans/future-leak-dnf-followup.md",
+      "summary": "전 프로젝트 미래 누설(future leak) 검수 결과와 DNF/out 표시 시점 개선 계획으로, time-cut 기반 driverOutStatus 파생 신호 설계와 재발 방지 가드를 정의한다.",
+      "tags": ["documentation", "미래누설", "시간정렬", "derived", "검수"],
+      "complexity": "moderate",
+      "languageNotes": "시간 컷 계약의 SSOT를 src/shared/DataSource.ts, 구현을 src/map/dashboardQueries.ts로 명시한다."
+    },
+    {
+      "id": "document:.omc/plans/live-map-followup.md",
+      "type": "document",
+      "name": "live-map-followup.md",
+      "filePath": ".omc/plans/live-map-followup.md",
+      "summary": "라이브 맵의 후속 개선 계획으로, Canvas state 격리·context null 알림·asset timeout 등 안전 가드(P0/P1), Replay 재생 UI(play/pause/speed/seek), 성능 최적화, Live/Replay 중복 제거를 다룬다.",
+      "tags": ["documentation", "live-map", "후속개선", "성능최적화", "canvas"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.omc/plans/live-map-implementation.md",
+      "type": "document",
+      "name": "live-map-implementation.md",
+      "filePath": ".omc/plans/live-map-implementation.md",
+      "summary": "실시간/리플레이 라이브 맵의 전체 구현 계획으로, F1 서킷 SVG 맵 소스 전략과 빌드 타임 데이터 파이프라인(트랙·핏레인·섹터·DRS·SLM polyline), openf1_transform 좌표 정합, Canvas 2D 렌더링, path-arc 보간, DataSource 추상화, 15단계 로드맵을 정의한다.",
+      "tags": ["documentation", "live-map", "구현계획", "data-pipeline", "canvas"],
+      "complexity": "complex",
+      "languageNotes": "77개 섹션의 최대 규모 문서로, 빌드 타임 좌표 추출 스크립트와 런타임 보간/렌더 루프를 모두 포괄한다."
+    },
+    {
+      "id": "document:.omc/plans/main-page-implementation.md",
+      "type": "document",
+      "name": "main-page-implementation.md",
+      "filePath": ".omc/plans/main-page-implementation.md",
+      "summary": "메인(랜딩) 페이지 구현 계획으로, 연도별 JSON 데이터 모델과 시즌 카탈로그 빌드/런타임 재검증 파이프라인, past/live/upcoming 상태 판정과 카운트다운, GP 카드 인라인 확장, 검색·필터, 결과 미리보기, 라우팅 구조 및 14단계 로드맵을 정의한다.",
+      "tags": ["documentation", "main-page", "구현계획", "data-pipeline", "라우팅"],
+      "complexity": "complex"
+    },
+    {
+      "id": "document:.omc/plans/openf1-client.md",
+      "type": "document",
+      "name": "openf1-client.md",
+      "filePath": ".omc/plans/openf1-client.md",
+      "summary": "브라우저 중앙 API 핸들러 OpenF1Client의 구현 계획으로, token bucket 레이트 리미팅·우선순위 큐·in-flight dedup·backoff·메트릭/로깅·싱글톤 라이프사이클 설계와 호출부 마이그레이션 맵, Debug HUD를 정의한다.",
+      "tags": ["documentation", "openf1-client", "api-handler", "rate-limiting", "구현계획"],
+      "complexity": "complex",
+      "languageNotes": "ADR과 v1~v3 Changelog를 포함하며, corsPing·LiveDataSource·ReplayDataSource·revalidateSeason의 단계별 마이그레이션을 명시한다."
+    },
+    {
+      "id": "document:.omc/plans/p0-critic-fixes.md",
+      "type": "document",
+      "name": "p0-critic-fixes.md",
+      "filePath": ".omc/plans/p0-critic-fixes.md",
+      "summary": ".omc/plans/ 전반의 일관성·검증 결함 5건(P0)을 고치는 계획으로, DataSource SSOT 경로 통일, cross-plan 의존 명시, production ?now= 차단, OpenF1 CORS 변경 위험 대응, hydration burst 직렬성을 다룬다.",
+      "tags": ["documentation", "critic-fixes", "일관성", "검증", "ssot"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "document:.omc/plans/qualifying-session-dashboard.md",
+      "type": "document",
+      "name": "qualifying-session-dashboard.md",
+      "filePath": ".omc/plans/qualifying-session-dashboard.md",
+      "summary": "퀄리파잉/스프린트 퀄리파잉 세션 특화 대시보드 계획으로, session-kind 해석(SSOT), 프로필 기반 대시보드 컴포지션 레이어, 퀄리파잉 파생 모듈과 전용 패널(녹아웃·세그먼트), 라이브맵 변형을 단계별로 정의한다.",
+      "tags": ["documentation", "dashboard", "qualifying", "구현계획", "profile"],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:.omc/plans/dashboard-implementation.md",
+      "target": "file:src/dashboard/DashboardApp.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/dashboard-implementation.md",
+      "target": "file:src/shared/DataSource.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/dashboard-implementation.md",
+      "target": "file:src/map/dashboardQueries.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/dashboard-implementation.md",
+      "target": "file:src/dashboard/panels/Leaderboard.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/dashboard-implementation.md",
+      "target": "file:src/dashboard/panels/TyreStrategy.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/dashboard-implementation.md",
+      "target": "file:src/dashboard/panels/EventTicker.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/dashboard-implementation.md",
+      "target": "file:src/dashboard/panels/SessionHeader.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/dashboard-implementation.md",
+      "target": "file:src/dashboard/panels/SessionProgress.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/dashboard-implementation.md",
+      "target": "file:src/dashboard/panels/WeatherMini.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/dashboard-implementation.md",
+      "target": "file:src/dashboard/panels/RaceControlBanner.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/dashboard-implementation.md",
+      "target": "file:src/dashboard/detailPanel/DriverDetailPanel.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/dashboard-implementation.md",
+      "target": "file:src/dashboard/shared/useDisplayTime.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/dashboard-layout-improvements.md",
+      "target": "file:src/dashboard/panels/TyreStrategy.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/dashboard-layout-improvements.md",
+      "target": "file:src/dashboard/panels/Leaderboard.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/dashboard-layout-improvements.md",
+      "target": "file:src/dashboard/panels/EventTicker.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/dashboard-layout-improvements.md",
+      "target": "file:src/dashboard/panels/EventBroadcast.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/dashboard-layout-improvements.md",
+      "target": "file:src/dashboard/panels/SessionProgress.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/dashboard-layout-improvements.md",
+      "target": "file:src/dashboard/panels/RaceControlBanner.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/dashboard-layout-improvements.md",
+      "target": "file:src/map/markerLabelToggle.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/dashboard-layout-improvements.md",
+      "target": "file:src/dashboard/detailPanel/RecentLapsTable.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/future-leak-dnf-followup.md",
+      "target": "file:src/shared/DataSource.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/future-leak-dnf-followup.md",
+      "target": "file:src/map/dashboardQueries.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/future-leak-dnf-followup.md",
+      "target": "file:src/dashboard/derived/driverOutStatus.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/future-leak-dnf-followup.md",
+      "target": "file:src/dashboard/panels/Leaderboard.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/live-map-followup.md",
+      "target": "file:src/map/markers.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/live-map-followup.md",
+      "target": "file:src/live/LiveMap.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/live-map-followup.md",
+      "target": "file:src/map/LiveDataSource.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/live-map-followup.md",
+      "target": "file:src/map/ReplayDataSource.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/live-map-followup.md",
+      "target": "file:src/map/LocationBuffer.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/live-map-followup.md",
+      "target": "file:src/map/trackRenderer.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/live-map-implementation.md",
+      "target": "file:src/live/LiveMap.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/live-map-implementation.md",
+      "target": "file:src/shared/DataSource.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/live-map-implementation.md",
+      "target": "file:src/map/LiveDataSource.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/live-map-implementation.md",
+      "target": "file:src/map/ReplayDataSource.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/live-map-implementation.md",
+      "target": "file:scripts/fetch-circuit-maps.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/live-map-implementation.md",
+      "target": "file:scripts/trace-pitlane.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/live-map-implementation.md",
+      "target": "file:scripts/derive-sector-boundaries.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/live-map-implementation.md",
+      "target": "file:scripts/derive-drs-zones.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/live-map-implementation.md",
+      "target": "file:scripts/load-slm-zones.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/live-map-implementation.md",
+      "target": "file:scripts/extract-openf1-transform.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/live-map-implementation.md",
+      "target": "file:src/map/interpolation.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/live-map-implementation.md",
+      "target": "file:src/map/layoutVersions.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/live-map-implementation.md",
+      "target": "file:src/map/trackRenderer.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/live-map-implementation.md",
+      "target": "file:src/map/markers.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/main-page-implementation.md",
+      "target": "file:src/main/MainPage.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/main-page-implementation.md",
+      "target": "file:scripts/fetch-season-catalog.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/main-page-implementation.md",
+      "target": "file:src/main/stores/catalogStore.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/main-page-implementation.md",
+      "target": "file:src/main/stores/uiStore.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/main-page-implementation.md",
+      "target": "file:src/main/stores/revalidateSeason.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/main-page-implementation.md",
+      "target": "file:src/main/derived/sessionStatus.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/main-page-implementation.md",
+      "target": "file:src/main/Countdown.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/main-page-implementation.md",
+      "target": "file:src/main/derived/nextUpcoming.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/main-page-implementation.md",
+      "target": "file:src/main/derived/searchFilter.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/main-page-implementation.md",
+      "target": "file:src/main/Hero.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/main-page-implementation.md",
+      "target": "file:src/main/GpCard.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/openf1-client.md",
+      "target": "file:src/shared/openf1Client.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/openf1-client.md",
+      "target": "file:src/live/corsPing.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/openf1-client.md",
+      "target": "file:src/live/LiveMap.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/openf1-client.md",
+      "target": "file:src/map/LiveDataSource.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/openf1-client.md",
+      "target": "file:src/map/ReplayDataSource.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/openf1-client.md",
+      "target": "file:src/main/stores/revalidateSeason.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/openf1-client.md",
+      "target": "file:src/main/MainPage.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/openf1-client.md",
+      "target": "file:src/live/LiveScreen.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/openf1-client.md",
+      "target": "file:src/live/ReplayScreen.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/p0-critic-fixes.md",
+      "target": "file:src/shared/DataSource.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/p0-critic-fixes.md",
+      "target": "file:src/shared/simulatedNow.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/p0-critic-fixes.md",
+      "target": "file:src/shared/env.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/p0-critic-fixes.md",
+      "target": "file:src/live/corsPing.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/p0-critic-fixes.md",
+      "target": "file:src/shared/openf1Client.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/p0-critic-fixes.md",
+      "target": "document:.omc/plans/openf1-client.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/p0-critic-fixes.md",
+      "target": "document:.omc/plans/live-map-implementation.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/p0-critic-fixes.md",
+      "target": "document:.omc/plans/dashboard-implementation.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/qualifying-session-dashboard.md",
+      "target": "file:src/shared/sessionKind.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/qualifying-session-dashboard.md",
+      "target": "file:src/dashboard/profiles/qualifyingProfile.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/qualifying-session-dashboard.md",
+      "target": "file:src/dashboard/profiles/index.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/qualifying-session-dashboard.md",
+      "target": "file:src/dashboard/derived/qualifyingModel.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/qualifying-session-dashboard.md",
+      "target": "file:src/dashboard/derived/qualifyingSegments.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/qualifying-session-dashboard.md",
+      "target": "file:src/dashboard/derived/knockout.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/qualifying-session-dashboard.md",
+      "target": "file:src/dashboard/panels/qualifying/KnockoutPanel.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/qualifying-session-dashboard.md",
+      "target": "file:src/dashboard/panels/qualifying/QualifyingTower.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.omc/plans/qualifying-session-dashboard.md",
+      "target": "document:.omc/plans/dashboard-implementation.md",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

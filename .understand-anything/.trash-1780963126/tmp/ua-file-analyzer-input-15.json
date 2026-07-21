@@ -1,0 +1,15 @@
+{
+  "projectRoot": "/Users/a453498/Downloads/project/soon_board",
+  "batchFiles": [
+    {"path": "src/dashboard/derived/__tests__/fixtures/quali-9468-laps.json", "language": "json", "sizeLines": 0, "fileCategory": "config"},
+    {"path": "src/dashboard/derived/__tests__/fixtures/quali-9468-pit.json", "language": "json", "sizeLines": 0, "fileCategory": "config"},
+    {"path": "src/dashboard/derived/__tests__/fixtures/quali-9468-race_control.json", "language": "json", "sizeLines": 0, "fileCategory": "config"},
+    {"path": "src/dashboard/derived/__tests__/fixtures/quali-9468-session_result.json", "language": "json", "sizeLines": 0, "fileCategory": "config"}
+  ],
+  "batchImportData": {
+    "src/dashboard/derived/__tests__/fixtures/quali-9468-laps.json": [],
+    "src/dashboard/derived/__tests__/fixtures/quali-9468-pit.json": [],
+    "src/dashboard/derived/__tests__/fixtures/quali-9468-race_control.json": [],
+    "src/dashboard/derived/__tests__/fixtures/quali-9468-session_result.json": []
+  }
+}

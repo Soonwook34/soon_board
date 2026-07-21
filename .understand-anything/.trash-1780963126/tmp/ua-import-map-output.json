@@ -1,0 +1,1147 @@
+{
+  "scriptCompleted": true,
+  "stats": {
+    "filesScanned": 482,
+    "filesWithImports": 149,
+    "totalEdges": 506
+  },
+  "importMap": {
+    ".github/workflows/ci.yml": [],
+    ".github/workflows/daily-data-refresh.yml": [],
+    ".github/workflows/playwright.yml": [],
+    ".gitmodules": [],
+    ".omc/plans/dashboard-implementation.md": [],
+    ".omc/plans/dashboard-layout-improvements.md": [],
+    ".omc/plans/future-leak-dnf-followup.md": [],
+    ".omc/plans/live-map-followup.md": [],
+    ".omc/plans/live-map-implementation.md": [],
+    ".omc/plans/main-page-implementation.md": [],
+    ".omc/plans/openf1-client.md": [],
+    ".omc/plans/p0-critic-fixes.md": [],
+    ".omc/plans/qualifying-session-dashboard.md": [],
+    ".understand-anything/.understandignore": [],
+    ".understand-anything/config.json": [],
+    "CLAUDE.md": [],
+    "data/slm-zones-raw.json": [],
+    "docs/deployment-architecture.md": [],
+    "docs/live-streaming-strategy.md": [],
+    "docs/openf1-api-reference.md": [],
+    "docs/playwright-memory-profile.md": [],
+    "docs/replay-strategy.md": [],
+    "e2e/memory.spec.ts": [],
+    "e2e/replay-smoke.spec.ts": [],
+    "e2e/smoke.spec.ts": [],
+    "e2e/visual.spec.ts": [],
+    "index.html": [],
+    "package.json": [],
+    "playwright.config.ts": [],
+    "public/seasons/2023.json": [],
+    "public/seasons/2024.json": [],
+    "public/seasons/2025.json": [],
+    "public/seasons/2026.json": [],
+    "public/seasons/index.json": [],
+    "public/trackOutlines/10-2023.json": [],
+    "public/trackOutlines/10-2024.json": [],
+    "public/trackOutlines/10-2025.json": [],
+    "public/trackOutlines/10-2026.json": [],
+    "public/trackOutlines/14-2023.json": [],
+    "public/trackOutlines/14-2024.json": [],
+    "public/trackOutlines/14-2025.json": [],
+    "public/trackOutlines/14-2026.json": [],
+    "public/trackOutlines/144-2023.json": [],
+    "public/trackOutlines/144-2024.json": [],
+    "public/trackOutlines/144-2025.json": [],
+    "public/trackOutlines/144-2026.json": [],
+    "public/trackOutlines/149-2023.json": [],
+    "public/trackOutlines/149-2024.json": [],
+    "public/trackOutlines/149-2025.json": [],
+    "public/trackOutlines/149-2026.json": [],
+    "public/trackOutlines/15-2023.json": [],
+    "public/trackOutlines/15-2024.json": [],
+    "public/trackOutlines/15-2025.json": [],
+    "public/trackOutlines/15-2026.json": [],
+    "public/trackOutlines/150-2023.json": [],
+    "public/trackOutlines/150-2024.json": [],
+    "public/trackOutlines/150-2025.json": [],
+    "public/trackOutlines/150-2026.json": [],
+    "public/trackOutlines/151-2023.json": [],
+    "public/trackOutlines/151-2024.json": [],
+    "public/trackOutlines/151-2025.json": [],
+    "public/trackOutlines/151-2026.json": [],
+    "public/trackOutlines/152-2023.json": [],
+    "public/trackOutlines/152-2024.json": [],
+    "public/trackOutlines/152-2025.json": [],
+    "public/trackOutlines/152-2026.json": [],
+    "public/trackOutlines/153-2026.json": [],
+    "public/trackOutlines/19-2023.json": [],
+    "public/trackOutlines/19-2024.json": [],
+    "public/trackOutlines/19-2025.json": [],
+    "public/trackOutlines/19-2026.json": [],
+    "public/trackOutlines/2-2023.json": [],
+    "public/trackOutlines/2-2024.json": [],
+    "public/trackOutlines/2-2025.json": [],
+    "public/trackOutlines/2-2026.json": [],
+    "public/trackOutlines/22-2023.json": [],
+    "public/trackOutlines/22-2024.json": [],
+    "public/trackOutlines/22-2025.json": [],
+    "public/trackOutlines/22-2026.json": [],
+    "public/trackOutlines/23-2023.json": [],
+    "public/trackOutlines/23-2024.json": [],
+    "public/trackOutlines/23-2025.json": [],
+    "public/trackOutlines/23-2026.json": [],
+    "public/trackOutlines/39-2023.json": [],
+    "public/trackOutlines/39-2024.json": [],
+    "public/trackOutlines/39-2025.json": [],
+    "public/trackOutlines/39-2026.json": [],
+    "public/trackOutlines/4-2023.json": [],
+    "public/trackOutlines/4-2024.json": [],
+    "public/trackOutlines/4-2025.json": [],
+    "public/trackOutlines/4-2026.json": [],
+    "public/trackOutlines/46-2023.json": [],
+    "public/trackOutlines/46-2024.json": [],
+    "public/trackOutlines/46-2025.json": [],
+    "public/trackOutlines/46-2026.json": [],
+    "public/trackOutlines/49-2024.json": [],
+    "public/trackOutlines/49-2025.json": [],
+    "public/trackOutlines/49-2026.json": [],
+    "public/trackOutlines/55-2023.json": [],
+    "public/trackOutlines/55-2024.json": [],
+    "public/trackOutlines/55-2025.json": [],
+    "public/trackOutlines/55-2026.json": [],
+    "public/trackOutlines/6-2023.json": [],
+    "public/trackOutlines/6-2024.json": [],
+    "public/trackOutlines/6-2025.json": [],
+    "public/trackOutlines/61-2023.json": [],
+    "public/trackOutlines/61-2024.json": [],
+    "public/trackOutlines/61-2025.json": [],
+    "public/trackOutlines/61-2026.json": [],
+    "public/trackOutlines/63-2023.json": [],
+    "public/trackOutlines/63-2024.json": [],
+    "public/trackOutlines/63-2025.json": [],
+    "public/trackOutlines/63-2026.json": [],
+    "public/trackOutlines/65-2023.json": [],
+    "public/trackOutlines/65-2024.json": [],
+    "public/trackOutlines/65-2025.json": [],
+    "public/trackOutlines/65-2026.json": [],
+    "public/trackOutlines/7-2023.json": [],
+    "public/trackOutlines/7-2024.json": [],
+    "public/trackOutlines/7-2025.json": [],
+    "public/trackOutlines/7-2026.json": [],
+    "public/trackOutlines/70-2023.json": [],
+    "public/trackOutlines/70-2024.json": [],
+    "public/trackOutlines/70-2025.json": [],
+    "public/trackOutlines/70-2026.json": [],
+    "public/trackOutlines/9-2023.json": [],
+    "public/trackOutlines/9-2024.json": [],
+    "public/trackOutlines/9-2025.json": [],
+    "public/trackOutlines/9-2026.json": [],
+    "public/trackOutlines/drsZones_2-2023.json": [],
+    "public/trackOutlines/drsZones_2-2024.json": [],
+    "public/trackOutlines/index.json": [],
+    "public/trackOutlines/pitlane_10-2024.json": [],
+    "public/trackOutlines/pitlane_10-2025.json": [],
+    "public/trackOutlines/pitlane_10-2026.json": [],
+    "public/trackOutlines/pitlane_14-2025.json": [],
+    "public/trackOutlines/pitlane_144-2024.json": [],
+    "public/trackOutlines/pitlane_144-2025.json": [],
+    "public/trackOutlines/pitlane_149-2024.json": [],
+    "public/trackOutlines/pitlane_149-2025.json": [],
+    "public/trackOutlines/pitlane_15-2023.json": [],
+    "public/trackOutlines/pitlane_15-2024.json": [],
+    "public/trackOutlines/pitlane_15-2025.json": [],
+    "public/trackOutlines/pitlane_150-2023.json": [],
+    "public/trackOutlines/pitlane_150-2024.json": [],
+    "public/trackOutlines/pitlane_150-2025.json": [],
+    "public/trackOutlines/pitlane_151-2024.json": [],
+    "public/trackOutlines/pitlane_151-2025.json": [],
+    "public/trackOutlines/pitlane_151-2026.json": [],
+    "public/trackOutlines/pitlane_152-2023.json": [],
+    "public/trackOutlines/pitlane_152-2024.json": [],
+    "public/trackOutlines/pitlane_152-2025.json": [],
+    "public/trackOutlines/pitlane_19-2023.json": [],
+    "public/trackOutlines/pitlane_19-2025.json": [],
+    "public/trackOutlines/pitlane_2-2023.json": [],
+    "public/trackOutlines/pitlane_2-2024.json": [],
+    "public/trackOutlines/pitlane_2-2025.json": [],
+    "public/trackOutlines/pitlane_22-2024.json": [],
+    "public/trackOutlines/pitlane_22-2025.json": [],
+    "public/trackOutlines/pitlane_23-2023.json": [],
+    "public/trackOutlines/pitlane_23-2024.json": [],
+    "public/trackOutlines/pitlane_23-2025.json": [],
+    "public/trackOutlines/pitlane_23-2026.json": [],
+    "public/trackOutlines/pitlane_39-2023.json": [],
+    "public/trackOutlines/pitlane_39-2024.json": [],
+    "public/trackOutlines/pitlane_39-2025.json": [],
+    "public/trackOutlines/pitlane_4-2023.json": [],
+    "public/trackOutlines/pitlane_4-2024.json": [],
+    "public/trackOutlines/pitlane_4-2025.json": [],
+    "public/trackOutlines/pitlane_46-2023.json": [],
+    "public/trackOutlines/pitlane_46-2024.json": [],
+    "public/trackOutlines/pitlane_46-2025.json": [],
+    "public/trackOutlines/pitlane_46-2026.json": [],
+    "public/trackOutlines/pitlane_49-2024.json": [],
+    "public/trackOutlines/pitlane_49-2025.json": [],
+    "public/trackOutlines/pitlane_49-2026.json": [],
+    "public/trackOutlines/pitlane_55-2023.json": [],
+    "public/trackOutlines/pitlane_55-2024.json": [],
+    "public/trackOutlines/pitlane_55-2025.json": [],
+    "public/trackOutlines/pitlane_6-2024.json": [],
+    "public/trackOutlines/pitlane_6-2025.json": [],
+    "public/trackOutlines/pitlane_61-2023.json": [],
+    "public/trackOutlines/pitlane_61-2024.json": [],
+    "public/trackOutlines/pitlane_61-2025.json": [],
+    "public/trackOutlines/pitlane_63-2024.json": [],
+    "public/trackOutlines/pitlane_63-2025.json": [],
+    "public/trackOutlines/pitlane_65-2023.json": [],
+    "public/trackOutlines/pitlane_65-2024.json": [],
+    "public/trackOutlines/pitlane_65-2025.json": [],
+    "public/trackOutlines/pitlane_7-2023.json": [],
+    "public/trackOutlines/pitlane_7-2024.json": [],
+    "public/trackOutlines/pitlane_70-2023.json": [],
+    "public/trackOutlines/pitlane_70-2024.json": [],
+    "public/trackOutlines/pitlane_70-2025.json": [],
+    "public/trackOutlines/pitlane_9-2025.json": [],
+    "public/trackOutlines/residual-report.json": [],
+    "public/trackOutlines/sectors_2-2023.json": [],
+    "public/trackOutlines/sectors_2-2024.json": [],
+    "public/trackOutlines/sectors_2-2025.json": [],
+    "public/trackOutlines/sectors_23-2024.json": [],
+    "scripts/__tests__/buildAllCircuits.test.ts": [],
+    "scripts/__tests__/buildCircuitsCatalog.test.ts": [],
+    "scripts/__tests__/checkSeasonSizes.test.ts": [
+      "scripts/check-season-sizes.ts"
+    ],
+    "scripts/__tests__/computeConfidence.test.ts": [],
+    "scripts/__tests__/curateResidual.test.ts": [],
+    "scripts/__tests__/dailyDataRefresh.test.ts": [],
+    "scripts/__tests__/dataUtils.test.ts": [],
+    "scripts/__tests__/drsZonesDeriver.test.ts": [],
+    "scripts/__tests__/extractOpenf1Transform.test.ts": [],
+    "scripts/__tests__/fetchCircuitMaps.test.ts": [],
+    "scripts/__tests__/fetchSeasonCatalogArgs.test.ts": [
+      "scripts/_lib/seasonsList.ts",
+      "scripts/fetch-season-catalog.ts"
+    ],
+    "scripts/__tests__/openf1Affine.test.ts": [],
+    "scripts/__tests__/openf1Client.test.ts": [],
+    "scripts/__tests__/openf1FastLap.test.ts": [],
+    "scripts/__tests__/pitlaneTracer.test.ts": [],
+    "scripts/__tests__/seasonCatalog.test.ts": [],
+    "scripts/__tests__/seasonsIndex.test.ts": [],
+    "scripts/__tests__/seasonsList.test.ts": [
+      "scripts/_lib/seasonsList.ts"
+    ],
+    "scripts/__tests__/sectorBoundariesDeriver.test.ts": [],
+    "scripts/__tests__/slmZonesLoader.test.ts": [],
+    "scripts/__tests__/svgToPolyline.test.ts": [],
+    "scripts/__tests__/tracePitlane.test.ts": [],
+    "scripts/__tests__/trackOutlinesIndex.test.ts": [],
+    "scripts/_lib/atomicWrite.ts": [],
+    "scripts/_lib/dataUtils.ts": [],
+    "scripts/_lib/drsZonesDeriver.ts": [],
+    "scripts/_lib/openf1Affine.ts": [],
+    "scripts/_lib/openf1Client.ts": [],
+    "scripts/_lib/openf1FastLap.ts": [],
+    "scripts/_lib/pitlaneTracer.ts": [],
+    "scripts/_lib/seasonCatalog.ts": [],
+    "scripts/_lib/seasonsIndex.ts": [],
+    "scripts/_lib/seasonsList.ts": [],
+    "scripts/_lib/sectorBoundariesDeriver.ts": [],
+    "scripts/_lib/slmZonesLoader.ts": [],
+    "scripts/_lib/svgToPolyline.ts": [],
+    "scripts/_lib/trackOutlinesIndex.ts": [],
+    "scripts/_lib/trackOutlinesSchema.ts": [],
+    "scripts/build-all-circuits.ts": [],
+    "scripts/build-circuits-catalog.ts": [],
+    "scripts/check-season-sizes.ts": [],
+    "scripts/circuits-candidates.json": [],
+    "scripts/curate-residual.ts": [],
+    "scripts/derive-drs-zones.ts": [],
+    "scripts/derive-sector-boundaries.ts": [],
+    "scripts/extract-openf1-transform.ts": [],
+    "scripts/fetch-circuit-maps.ts": [],
+    "scripts/fetch-season-catalog.ts": [],
+    "scripts/load-slm-zones.ts": [],
+    "scripts/trace-pitlane.ts": [],
+    "src/App.tsx": [
+      "src/live/LiveScreen.tsx",
+      "src/live/ReplayScreen.tsx",
+      "src/live/TestRigScreen.tsx",
+      "src/main/MainPage.tsx",
+      "src/shared/Footer.tsx"
+    ],
+    "src/dashboard/__tests__/DashboardApp.test.tsx": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/DashboardApp.tsx",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/DriversContext.tsx",
+      "src/dashboard/shared/selectionStore.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/dashboard/__tests__/DashboardSeek.test.tsx": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/DashboardApp.tsx",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/shared/seasonData.ts"
+    ],
+    "src/dashboard/__tests__/fakeDataSource.ts": [
+      "src/shared/DataSource.ts"
+    ],
+    "src/dashboard/__tests__/futureLeakGuard.test.ts": [],
+    "src/dashboard/DashboardApp.tsx": [
+      "src/dashboard/detailPanel/DriverDetailPanel.tsx",
+      "src/dashboard/panels/EventBroadcast.tsx",
+      "src/dashboard/panels/RaceControlBanner.tsx",
+      "src/dashboard/panels/SessionHeader.tsx",
+      "src/dashboard/panels/WeatherMini.tsx",
+      "src/dashboard/profiles/index.ts",
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/selectionStore.ts",
+      "src/dashboard/shared/useMediaQuery.ts",
+      "src/main/NarrowScreenBanner.tsx",
+      "src/main/Toast.tsx",
+      "src/shared/seasonData.ts",
+      "src/shared/sessionKind.ts"
+    ],
+    "src/dashboard/derived/__tests__/currentLap.test.ts": [
+      "src/dashboard/derived/currentLap.ts",
+      "src/shared/DataSource.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/derived/__tests__/driverOutStatus.test.ts": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/derived/driverOutStatus.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/derived/__tests__/fixtures/quali-9468-laps.json": [],
+    "src/dashboard/derived/__tests__/fixtures/quali-9468-pit.json": [],
+    "src/dashboard/derived/__tests__/fixtures/quali-9468-race_control.json": [],
+    "src/dashboard/derived/__tests__/fixtures/quali-9468-session_result.json": [],
+    "src/dashboard/derived/__tests__/knockout.test.ts": [
+      "src/dashboard/derived/knockout.ts",
+      "src/dashboard/derived/qualifyingSegments.ts"
+    ],
+    "src/dashboard/derived/__tests__/personalBests.test.ts": [
+      "src/dashboard/derived/personalBests.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/derived/__tests__/qualifyingSegments.test.ts": [
+      "src/dashboard/derived/qualifyingSegments.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/derived/__tests__/qualiLapClass.test.ts": [
+      "src/dashboard/derived/qualiLapClass.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/derived/__tests__/stints.test.ts": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/derived/stints.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/derived/__tests__/totalLaps.test.ts": [
+      "src/dashboard/derived/totalLaps.ts"
+    ],
+    "src/dashboard/derived/activeFlags.ts": [
+      "src/dashboard/shared/flagDecoder.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/derived/currentLap.ts": [
+      "src/shared/DataSource.ts"
+    ],
+    "src/dashboard/derived/driverOutStatus.ts": [
+      "src/shared/DataSource.ts"
+    ],
+    "src/dashboard/derived/knockout.ts": [
+      "src/dashboard/derived/qualifyingSegments.ts"
+    ],
+    "src/dashboard/derived/personalBests.ts": [
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/derived/qualifyingModel.ts": [
+      "src/dashboard/derived/qualifyingSegments.ts",
+      "src/dashboard/derived/qualiLapClass.ts",
+      "src/shared/DataSource.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/derived/qualifyingSegments.ts": [
+      "src/dashboard/derived/qualiLapClass.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/derived/qualiLapClass.ts": [
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/derived/stints.ts": [
+      "src/shared/DataSource.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/derived/totalLaps.ts": [],
+    "src/dashboard/detailPanel/__tests__/CurrentState.test.tsx": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/detailPanel/CurrentState.tsx",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/DriversContext.tsx",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/detailPanel/__tests__/DriverDetailPanel.test.tsx": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/detailPanel/DriverDetailPanel.tsx",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/DriversContext.tsx",
+      "src/dashboard/shared/selectionStore.ts",
+      "src/shared/openf1Types.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/dashboard/detailPanel/__tests__/PitHistory.test.tsx": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/detailPanel/PitHistory.tsx",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/detailPanel/__tests__/RecentLapsTable.test.tsx": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/detailPanel/RecentLapsTable.tsx",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/detailPanel/__tests__/SessionResult.test.tsx": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/detailPanel/SessionResult.tsx",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/shared/openf1Types.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/dashboard/detailPanel/__tests__/StintHistory.test.tsx": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/detailPanel/StintHistory.tsx",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/detailPanel/CurrentState.tsx": [
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/formatTime.ts",
+      "src/dashboard/shared/SectorBar.tsx",
+      "src/dashboard/shared/sectorColors.ts",
+      "src/dashboard/shared/tyreColors.ts",
+      "src/dashboard/shared/useAggregateResults.ts",
+      "src/dashboard/shared/useDisplayTime.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/detailPanel/DriverDetailPanel.tsx": [
+      "src/dashboard/detailPanel/CurrentState.tsx",
+      "src/dashboard/detailPanel/DriverHeader.tsx",
+      "src/dashboard/detailPanel/PitHistory.tsx",
+      "src/dashboard/detailPanel/RecentLapsTable.tsx",
+      "src/dashboard/detailPanel/SessionResult.tsx",
+      "src/dashboard/detailPanel/StintHistory.tsx",
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/selectionStore.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/dashboard/detailPanel/DriverHeader.tsx": [
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/DriversContext.tsx"
+    ],
+    "src/dashboard/detailPanel/PitHistory.tsx": [
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/useDisplayTime.ts"
+    ],
+    "src/dashboard/detailPanel/RecentLapsTable.tsx": [
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/formatTime.ts",
+      "src/dashboard/shared/sectorColors.ts",
+      "src/dashboard/shared/useAggregateResults.ts",
+      "src/dashboard/shared/useDisplayTime.ts"
+    ],
+    "src/dashboard/detailPanel/SessionResult.tsx": [
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/formatTime.ts",
+      "src/dashboard/shared/useDisplayTime.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/dashboard/detailPanel/StintHistory.tsx": [
+      "src/dashboard/derived/currentLap.ts",
+      "src/dashboard/derived/stints.ts",
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/tyreColors.ts",
+      "src/dashboard/shared/useDisplayTime.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/index.ts": [],
+    "src/dashboard/panels/__tests__/EventBroadcast.test.tsx": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/panels/EventBroadcast.tsx",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/panels/__tests__/EventTicker.test.tsx": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/panels/EventTicker.tsx",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/panels/__tests__/FastestLapBadges.test.tsx": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/panels/FastestLapBadges.tsx",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/DriversContext.tsx",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/panels/__tests__/Leaderboard.test.tsx": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/panels/Leaderboard.tsx",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/DriversContext.tsx",
+      "src/dashboard/shared/selectionStore.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/panels/__tests__/RaceControlBanner.test.tsx": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/panels/RaceControlBanner.tsx",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/panels/__tests__/SessionHeader.test.tsx": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/panels/SessionHeader.tsx",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/shared/seasonData.ts"
+    ],
+    "src/dashboard/panels/__tests__/SessionProgress.test.tsx": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/panels/SessionProgress.tsx",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/shared/seasonData.ts"
+    ],
+    "src/dashboard/panels/__tests__/TyreStrategy.test.tsx": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/panels/TyreStrategy.tsx",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/DriversContext.tsx",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/panels/__tests__/WeatherMini.test.tsx": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/panels/WeatherMini.tsx",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/panels/EventBroadcast.tsx": [
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/flagDecoder.ts",
+      "src/dashboard/shared/flagIcons.ts",
+      "src/dashboard/shared/useDisplayTime.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/panels/EventTicker.tsx": [
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/flagIcons.ts",
+      "src/dashboard/shared/PanelHeading.tsx",
+      "src/dashboard/shared/useDisplayTime.ts"
+    ],
+    "src/dashboard/panels/FastestLapBadges.tsx": [
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/DriversContext.tsx",
+      "src/dashboard/shared/formatTime.ts",
+      "src/dashboard/shared/sectorColors.ts",
+      "src/dashboard/shared/useAggregate.ts",
+      "src/dashboard/shared/useDisplayTime.ts"
+    ],
+    "src/dashboard/panels/Leaderboard.tsx": [
+      "src/dashboard/derived/driverOutStatus.ts",
+      "src/dashboard/derived/personalBests.ts",
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/DriversContext.tsx",
+      "src/dashboard/shared/formatTime.ts",
+      "src/dashboard/shared/PanelHeading.tsx",
+      "src/dashboard/shared/SectorBar.tsx",
+      "src/dashboard/shared/sectorColors.ts",
+      "src/dashboard/shared/selectionStore.ts",
+      "src/dashboard/shared/tyreColors.ts",
+      "src/dashboard/shared/useAggregateResults.ts",
+      "src/dashboard/shared/useDisplayTime.ts"
+    ],
+    "src/dashboard/panels/qualifying/__tests__/qualifyingPanels.test.tsx": [
+      "src/dashboard/__tests__/fakeDataSource.ts",
+      "src/dashboard/panels/qualifying/KnockoutPanel.tsx",
+      "src/dashboard/panels/qualifying/QualifyingTower.tsx",
+      "src/dashboard/panels/qualifying/SegmentBestBoard.tsx",
+      "src/dashboard/panels/qualifying/SegmentProgress.tsx",
+      "src/dashboard/panels/qualifying/useQualifyingModel.tsx",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/DriversContext.tsx",
+      "src/dashboard/shared/selectionStore.ts",
+      "src/shared/openf1Types.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/dashboard/panels/qualifying/KnockoutPanel.tsx": [
+      "src/dashboard/derived/knockout.ts",
+      "src/dashboard/panels/qualifying/useQualifyingModel.tsx",
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/DriversContext.tsx",
+      "src/dashboard/shared/PanelHeading.tsx",
+      "src/shared/seasonData.ts",
+      "src/shared/sessionKind.ts",
+      "src/style/tokens.ts"
+    ],
+    "src/dashboard/panels/qualifying/QualifyingTower.tsx": [
+      "src/dashboard/derived/knockout.ts",
+      "src/dashboard/panels/qualifying/useQualifyingModel.tsx",
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/DriversContext.tsx",
+      "src/dashboard/shared/formatTime.ts",
+      "src/dashboard/shared/PanelHeading.tsx",
+      "src/dashboard/shared/selectionStore.ts",
+      "src/shared/seasonData.ts",
+      "src/shared/sessionKind.ts",
+      "src/style/tokens.ts"
+    ],
+    "src/dashboard/panels/qualifying/SegmentBestBoard.tsx": [
+      "src/dashboard/derived/qualifyingSegments.ts",
+      "src/dashboard/panels/qualifying/useQualifyingModel.tsx",
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/DriversContext.tsx",
+      "src/dashboard/shared/formatTime.ts",
+      "src/dashboard/shared/PanelHeading.tsx",
+      "src/shared/seasonData.ts",
+      "src/shared/sessionKind.ts",
+      "src/style/tokens.ts"
+    ],
+    "src/dashboard/panels/qualifying/SegmentProgress.tsx": [
+      "src/dashboard/derived/qualifyingSegments.ts",
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/useDisplayTime.ts",
+      "src/shared/seasonData.ts",
+      "src/shared/sessionKind.ts",
+      "src/style/tokens.ts"
+    ],
+    "src/dashboard/panels/qualifying/useQualifyingModel.tsx": [
+      "src/dashboard/derived/qualifyingModel.ts",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/DriversContext.tsx",
+      "src/dashboard/shared/useDisplayTime.ts"
+    ],
+    "src/dashboard/panels/RaceControlBanner.tsx": [
+      "src/dashboard/derived/activeFlags.ts",
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/flagDecoder.ts",
+      "src/dashboard/shared/flagIcons.ts",
+      "src/dashboard/shared/useDisplayTime.ts"
+    ],
+    "src/dashboard/panels/SessionHeader.tsx": [
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/useDisplayTime.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/dashboard/panels/SessionProgress.tsx": [
+      "src/dashboard/derived/currentLap.ts",
+      "src/dashboard/derived/totalLaps.ts",
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/useDisplayTime.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/dashboard/panels/TyreStrategy.tsx": [
+      "src/dashboard/derived/currentLap.ts",
+      "src/dashboard/derived/stints.ts",
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/DriversContext.tsx",
+      "src/dashboard/shared/PanelHeading.tsx",
+      "src/dashboard/shared/tyreColors.ts",
+      "src/dashboard/shared/useDisplayTime.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/panels/WeatherMini.tsx": [
+      "src/dashboard/shared/dashboardStyles.ts",
+      "src/dashboard/shared/useLatestBefore.ts"
+    ],
+    "src/dashboard/profiles/__tests__/dashboardProfile.test.ts": [
+      "src/dashboard/profiles/index.ts",
+      "src/shared/sessionKind.ts"
+    ],
+    "src/dashboard/profiles/defaultProfile.tsx": [
+      "src/dashboard/panels/EventTicker.tsx",
+      "src/dashboard/panels/FastestLapBadges.tsx",
+      "src/dashboard/panels/Leaderboard.tsx",
+      "src/dashboard/panels/SessionProgress.tsx",
+      "src/dashboard/panels/TyreStrategy.tsx",
+      "src/dashboard/profiles/types.ts"
+    ],
+    "src/dashboard/profiles/index.ts": [
+      "src/dashboard/profiles/defaultProfile.tsx",
+      "src/dashboard/profiles/qualifyingProfile.tsx",
+      "src/dashboard/profiles/types.ts",
+      "src/shared/sessionKind.ts"
+    ],
+    "src/dashboard/profiles/qualifyingProfile.tsx": [
+      "src/dashboard/panels/FastestLapBadges.tsx",
+      "src/dashboard/panels/qualifying/KnockoutPanel.tsx",
+      "src/dashboard/panels/qualifying/QualifyingTower.tsx",
+      "src/dashboard/panels/qualifying/SegmentBestBoard.tsx",
+      "src/dashboard/panels/qualifying/SegmentProgress.tsx",
+      "src/dashboard/panels/qualifying/useQualifyingModel.tsx",
+      "src/dashboard/profiles/types.ts"
+    ],
+    "src/dashboard/profiles/types.ts": [
+      "src/shared/seasonData.ts"
+    ],
+    "src/dashboard/shared/__tests__/DataSourceContext.test.tsx": [
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/shared/DataSource.ts"
+    ],
+    "src/dashboard/shared/__tests__/DriversContext.test.tsx": [
+      "src/dashboard/shared/DriversContext.tsx",
+      "src/shared/__tests__/createMockOpenF1Client.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/shared/__tests__/flagDecoder.test.ts": [
+      "src/dashboard/derived/activeFlags.ts",
+      "src/dashboard/shared/flagDecoder.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/shared/__tests__/flagIcons.test.ts": [
+      "src/dashboard/shared/flagIcons.ts"
+    ],
+    "src/dashboard/shared/__tests__/formatTime.test.ts": [
+      "src/dashboard/shared/formatTime.ts"
+    ],
+    "src/dashboard/shared/__tests__/queryHooks.test.tsx": [
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/useAggregate.ts",
+      "src/dashboard/shared/useAllBefore.ts",
+      "src/dashboard/shared/useLatestBefore.ts",
+      "src/shared/DataSource.ts"
+    ],
+    "src/dashboard/shared/__tests__/SectorBar.test.tsx": [
+      "src/dashboard/shared/SectorBar.tsx",
+      "src/dashboard/shared/sectorColors.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/shared/__tests__/sectorColors.test.ts": [
+      "src/dashboard/shared/sectorColors.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/shared/__tests__/selectionStore.test.ts": [
+      "src/dashboard/shared/selectionStore.ts"
+    ],
+    "src/dashboard/shared/__tests__/tyreColors.test.ts": [
+      "src/dashboard/shared/tyreColors.ts"
+    ],
+    "src/dashboard/shared/__tests__/useDisplayTime.test.tsx": [
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/useDisplayTime.ts",
+      "src/shared/DataSource.ts"
+    ],
+    "src/dashboard/shared/__tests__/useMediaQuery.test.tsx": [
+      "src/dashboard/shared/useMediaQuery.ts"
+    ],
+    "src/dashboard/shared/dashboardStyles.ts": [
+      "src/style/tokens.ts"
+    ],
+    "src/dashboard/shared/DataSourceContext.tsx": [
+      "src/shared/DataSource.ts"
+    ],
+    "src/dashboard/shared/DriversContext.tsx": [
+      "src/shared/openf1Client.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/shared/flagDecoder.ts": [
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/shared/flagIcons.ts": [],
+    "src/dashboard/shared/formatTime.ts": [],
+    "src/dashboard/shared/PanelHeading.tsx": [
+      "src/dashboard/shared/dashboardStyles.ts"
+    ],
+    "src/dashboard/shared/SectorBar.tsx": [
+      "src/dashboard/shared/sectorColors.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/shared/sectorColors.ts": [
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/shared/selectionStore.ts": [],
+    "src/dashboard/shared/tyreColors.ts": [],
+    "src/dashboard/shared/useAggregate.ts": [
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/useDisplayTime.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/shared/useAggregateResults.ts": [
+      "src/dashboard/shared/useAggregate.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/shared/useAllBefore.ts": [
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/useDisplayTime.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/shared/useDisplayTime.ts": [
+      "src/dashboard/shared/DataSourceContext.tsx"
+    ],
+    "src/dashboard/shared/useLatestBefore.ts": [
+      "src/dashboard/shared/DataSourceContext.tsx",
+      "src/dashboard/shared/useDisplayTime.ts",
+      "src/shared/openf1Types.ts"
+    ],
+    "src/dashboard/shared/useMediaQuery.ts": [],
+    "src/live/__tests__/corsPing.test.ts": [
+      "src/live/corsPing.ts"
+    ],
+    "src/live/__tests__/findSessionByKey.test.ts": [
+      "src/live/findSessionByKey.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/live/__tests__/LiveMap.test.tsx": [
+      "scripts/_lib/trackOutlinesSchema.ts",
+      "src/live/LiveMap.tsx",
+      "src/map/LiveDataSource.ts",
+      "src/shared/DataSource.ts"
+    ],
+    "src/live/__tests__/LiveScreen.test.tsx": [
+      "src/live/LiveScreen.tsx",
+      "src/main/stores/catalogStore.ts"
+    ],
+    "src/live/__tests__/ReplayScreen.test.tsx": [
+      "src/live/findSessionByKey.ts",
+      "src/live/ReplayScreen.tsx",
+      "src/main/stores/catalogStore.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/live/__tests__/SyntheticDataSource.test.ts": [
+      "src/live/SyntheticDataSource.ts"
+    ],
+    "src/live/CorsFailedNotice.tsx": [],
+    "src/live/corsPing.ts": [],
+    "src/live/CountdownOverlay.tsx": [
+      "src/live/derived/overlayCountdown.ts",
+      "src/main/derived/sessionStatus.ts",
+      "src/main/useNowSecond.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/live/derived/__tests__/overlayCountdown.test.ts": [
+      "src/live/derived/overlayCountdown.ts"
+    ],
+    "src/live/derived/overlayCountdown.ts": [],
+    "src/live/findSessionByKey.ts": [
+      "src/shared/seasonData.ts"
+    ],
+    "src/live/LiveMap.tsx": [],
+    "src/live/LiveScreen.tsx": [
+      "src/dashboard/index.ts",
+      "src/live/CorsFailedNotice.tsx",
+      "src/live/CountdownOverlay.tsx",
+      "src/live/findSessionByKey.ts",
+      "src/live/LiveMap.tsx",
+      "src/live/usePing.ts",
+      "src/main/derived/sessionStatus.ts",
+      "src/main/stores/catalogStore.ts",
+      "src/main/stores/hooks.ts",
+      "src/main/useNowSecond.ts",
+      "src/map/LiveDataSource.ts",
+      "src/shared/DataSource.ts",
+      "src/shared/sessionKind.ts"
+    ],
+    "src/live/ReplayScreen.tsx": [
+      "src/dashboard/index.ts",
+      "src/live/CorsFailedNotice.tsx",
+      "src/live/findSessionByKey.ts",
+      "src/live/LiveMap.tsx",
+      "src/live/usePing.ts",
+      "src/main/derived/sessionStatus.ts",
+      "src/main/stores/catalogStore.ts",
+      "src/main/stores/hooks.ts",
+      "src/main/useNowSecond.ts",
+      "src/map/ReplayDataSource.ts",
+      "src/shared/DataSource.ts",
+      "src/shared/sessionKind.ts"
+    ],
+    "src/live/SyntheticDataSource.ts": [],
+    "src/live/TestRigScreen.tsx": [
+      "src/live/LiveMap.tsx",
+      "src/live/SyntheticDataSource.ts",
+      "src/map/LiveDataSource.ts"
+    ],
+    "src/live/usePing.ts": [
+      "src/live/corsPing.ts"
+    ],
+    "src/main.tsx": [
+      "src/App.tsx",
+      "src/shared/env.ts",
+      "src/style/global.css"
+    ],
+    "src/main/__tests__/initialSeason.test.ts": [
+      "src/main/initialSeason.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/__tests__/useNowSecond.test.tsx": [
+      "src/main/useNowSecond.ts"
+    ],
+    "src/main/Countdown.tsx": [
+      "src/main/derived/countdownFormat.ts"
+    ],
+    "src/main/derived/__tests__/countdownFormat.test.ts": [
+      "src/main/derived/countdownFormat.ts"
+    ],
+    "src/main/derived/__tests__/meetingStatus.test.ts": [
+      "src/main/derived/meetingStatus.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/derived/__tests__/nextUpcoming.test.ts": [
+      "src/main/derived/nextUpcoming.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/derived/__tests__/openf1ToSessionMap.test.ts": [
+      "src/main/derived/openf1ToSessionMap.ts"
+    ],
+    "src/main/derived/__tests__/resultPreviewFormat.test.ts": [
+      "src/main/derived/resultPreviewFormat.ts"
+    ],
+    "src/main/derived/__tests__/searchFilter.test.ts": [
+      "src/main/derived/searchFilter.ts",
+      "src/main/stores/uiStore.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/derived/__tests__/seasonDiff.test.ts": [
+      "src/main/derived/seasonDiff.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/derived/__tests__/sessionRoute.test.ts": [
+      "src/main/derived/sessionRoute.ts",
+      "src/main/derived/sessionStatus.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/derived/__tests__/sessionStatus.test.ts": [
+      "src/main/derived/sessionStatus.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/derived/countdownFormat.ts": [],
+    "src/main/derived/meetingStatus.ts": [
+      "src/main/derived/sessionStatus.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/derived/nextUpcoming.ts": [
+      "src/main/derived/sessionStatus.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/derived/openf1ToSessionMap.ts": [
+      "src/main/derived/seasonDiff.ts"
+    ],
+    "src/main/derived/resultPreviewFormat.ts": [],
+    "src/main/derived/searchFilter.ts": [
+      "src/main/derived/meetingStatus.ts",
+      "src/main/stores/uiStore.ts",
+      "src/shared/seasonData.ts",
+      "src/shared/sessionKind.ts"
+    ],
+    "src/main/derived/seasonDiff.ts": [
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/derived/sessionRoute.ts": [
+      "src/main/derived/sessionStatus.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/derived/sessionStatus.ts": [
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/ExpandedSessions.tsx": [
+      "src/main/derived/sessionRoute.ts",
+      "src/main/derived/sessionStatus.ts",
+      "src/main/SessionCard.tsx",
+      "src/main/useNowSecond.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/GpCard.tsx": [
+      "src/main/derived/meetingStatus.ts",
+      "src/main/StatusBadge.tsx",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/GpGrid.tsx": [
+      "src/main/derived/searchFilter.ts",
+      "src/main/ExpandedSessions.tsx",
+      "src/main/GpCard.tsx",
+      "src/main/stores/uiStore.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/Hero.tsx": [
+      "src/main/Countdown.tsx",
+      "src/main/derived/nextUpcoming.ts",
+      "src/main/useNowSecond.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/initialSeason.ts": [
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/MainPage.tsx": [
+      "src/main/GpGrid.tsx",
+      "src/main/Hero.tsx",
+      "src/main/initialSeason.ts",
+      "src/main/NarrowScreenBanner.tsx",
+      "src/main/SearchFilter.tsx",
+      "src/main/SeasonPicker.tsx",
+      "src/main/SimBadge.tsx",
+      "src/main/stores/catalogStore.ts",
+      "src/main/stores/hooks.ts",
+      "src/main/stores/revalidateSeason.ts",
+      "src/main/stores/uiStore.ts",
+      "src/main/Toast.tsx",
+      "src/main/useNowSecond.ts"
+    ],
+    "src/main/NarrowScreenBanner.tsx": [],
+    "src/main/ResultPreviewTooltip.tsx": [
+      "src/main/derived/resultPreviewFormat.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/SearchFilter.tsx": [
+      "src/main/stores/hooks.ts",
+      "src/main/stores/uiStore.ts"
+    ],
+    "src/main/SeasonPicker.tsx": [
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/SessionCard.tsx": [
+      "src/main/derived/sessionStatus.ts",
+      "src/main/ResultPreviewTooltip.tsx",
+      "src/main/StatusBadge.tsx",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/SimBadge.tsx": [
+      "src/shared/env.ts",
+      "src/shared/simulatedNow.ts"
+    ],
+    "src/main/StatusBadge.tsx": [],
+    "src/main/stores/__tests__/catalogStore.test.ts": [
+      "src/main/stores/catalogStore.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/stores/__tests__/revalidateSeason.test.ts": [
+      "src/main/stores/catalogStore.ts",
+      "src/main/stores/revalidateSeason.ts",
+      "src/shared/__tests__/createMockOpenF1Client.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/stores/__tests__/uiStore.test.ts": [
+      "src/main/stores/uiStore.ts"
+    ],
+    "src/main/stores/catalogStore.ts": [
+      "src/main/derived/seasonDiff.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/stores/hooks.ts": [
+      "src/main/stores/catalogStore.ts",
+      "src/main/stores/uiStore.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/stores/revalidateSeason.ts": [
+      "src/main/derived/openf1ToSessionMap.ts",
+      "src/main/derived/seasonDiff.ts",
+      "src/main/stores/catalogStore.ts",
+      "src/shared/openf1Client.ts"
+    ],
+    "src/main/stores/uiStore.ts": [],
+    "src/main/Toast.tsx": [],
+    "src/main/useNowSecond.ts": [
+      "src/shared/env.ts",
+      "src/shared/simulatedNow.ts"
+    ],
+    "src/map/__tests__/arcLength.test.ts": [],
+    "src/map/__tests__/dashboardQueries.test.ts": [],
+    "src/map/__tests__/drsZones.test.ts": [
+      "src/map/drsZones.ts",
+      "src/map/viewport.ts"
+    ],
+    "src/map/__tests__/interpolation.test.ts": [],
+    "src/map/__tests__/layoutVersions.test.ts": [],
+    "src/map/__tests__/LiveDataSource.test.ts": [],
+    "src/map/__tests__/LiveDataSourceMemory.test.ts": [],
+    "src/map/__tests__/LiveDataSourceTabResume.test.ts": [],
+    "src/map/__tests__/LiveMapRenderer.test.ts": [],
+    "src/map/__tests__/LocationBuffer.test.ts": [],
+    "src/map/__tests__/mapStyles.test.ts": [],
+    "src/map/__tests__/markerLabelToggle.test.tsx": [],
+    "src/map/__tests__/markers.test.ts": [],
+    "src/map/__tests__/pathProjection.test.ts": [],
+    "src/map/__tests__/PerDriverBuffer.test.ts": [],
+    "src/map/__tests__/pitLane.test.ts": [],
+    "src/map/__tests__/ReplayDataSource.test.ts": [],
+    "src/map/__tests__/sectorBoundaries.test.ts": [
+      "src/map/sectorBoundaries.ts",
+      "src/map/viewport.ts"
+    ],
+    "src/map/__tests__/slmZones.test.ts": [
+      "src/map/slmZones.ts",
+      "src/map/viewport.ts"
+    ],
+    "src/map/__tests__/stateBadges.test.ts": [],
+    "src/map/__tests__/trackRenderer.test.ts": [],
+    "src/map/__tests__/trails.test.ts": [],
+    "src/map/__tests__/transform.test.ts": [],
+    "src/map/__tests__/viewport.test.ts": [],
+    "src/map/arcLength.ts": [],
+    "src/map/circuits.json": [],
+    "src/map/dashboardQueries.ts": [],
+    "src/map/drsZones.ts": [],
+    "src/map/interpolation.ts": [],
+    "src/map/layoutVersions.json": [],
+    "src/map/layoutVersions.ts": [
+      "src/map/layoutVersions.json"
+    ],
+    "src/map/LiveDataSource.ts": [],
+    "src/map/LiveMapRenderer.ts": [],
+    "src/map/LocationBuffer.ts": [],
+    "src/map/mapStyles.ts": [],
+    "src/map/markerLabelToggle.ts": [],
+    "src/map/markers.ts": [],
+    "src/map/pathProjection.ts": [],
+    "src/map/PerDriverBuffer.ts": [],
+    "src/map/pitLane.ts": [],
+    "src/map/ReplayDataSource.ts": [],
+    "src/map/sectorBoundaries.ts": [],
+    "src/map/slmZones.ts": [],
+    "src/map/stateBadges.ts": [],
+    "src/map/trackRenderer.ts": [],
+    "src/map/trails.ts": [],
+    "src/map/transform.ts": [],
+    "src/map/viewport.ts": [],
+    "src/shared/__tests__/createMockOpenF1Client.test.ts": [],
+    "src/shared/__tests__/createMockOpenF1Client.ts": [],
+    "src/shared/__tests__/Footer.test.tsx": [],
+    "src/shared/__tests__/openf1Client.test.ts": [],
+    "src/shared/__tests__/sessionKind.test.ts": [
+      "src/shared/sessionKind.ts"
+    ],
+    "src/shared/__tests__/simulatedNow.test.ts": [
+      "src/shared/simulatedNow.ts"
+    ],
+    "src/shared/__tests__/SyntheticDataSource.ts": [],
+    "src/shared/DataSource.ts": [
+      "src/shared/openf1Types.ts"
+    ],
+    "src/shared/env.ts": [],
+    "src/shared/Footer.tsx": [],
+    "src/shared/openf1Client.ts": [],
+    "src/shared/openf1Types.ts": [],
+    "src/shared/seasonData.ts": [],
+    "src/shared/sessionKind.ts": [],
+    "src/shared/simulatedNow.ts": [],
+    "src/style/global.css": [],
+    "src/style/tokens.ts": [],
+    "THIRD_PARTY_LICENSES.md": [],
+    "tsconfig.json": [],
+    "vercel.json": [],
+    "vite.config.ts": [],
+    "vitest.setup.ts": []
+  }
+}

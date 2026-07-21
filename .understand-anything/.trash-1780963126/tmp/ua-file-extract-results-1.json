@@ -1,0 +1,4706 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 32,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "scripts/_lib/trackOutlinesSchema.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 167,
+      "nonEmptyLines": 153,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/App.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 27,
+      "nonEmptyLines": 24,
+      "functions": [
+        {
+          "name": "NotFound",
+          "startLine": 12,
+          "endLine": 12,
+          "params": []
+        },
+        {
+          "name": "App",
+          "startLine": 14,
+          "endLine": 27,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "App",
+          "line": 14,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 19,
+      "nonEmptyLines": 18,
+      "exports": [
+        {
+          "name": "DashboardApp",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "DashboardAppProps",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "DataSourceProvider",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "useDataSource",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "DriversProvider",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "useDrivers",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "useSessionDrivers",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "teamColorOf",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "DriversMap",
+          "line": 6,
+          "isDefault": false
+        },
+        {
+          "name": "DashboardMode",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "selectDriver",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "clearSelection",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "getSelectedDriver",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "useSelectedDriver",
+          "line": 14,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 14,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/dashboard/shared/__tests__/DriversContext.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 89,
+      "nonEmptyLines": 80,
+      "functions": [
+        {
+          "name": "mkDriver",
+          "startLine": 12,
+          "endLine": 27,
+          "params": [
+            "n",
+            "acr",
+            "colour"
+          ]
+        },
+        {
+          "name": "jsonOk",
+          "startLine": 29,
+          "endLine": 31,
+          "params": [
+            "body"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "jsonOk",
+          "callee": "JSON.stringify",
+          "lineNumber": 30
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/live/CorsFailedNotice.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 60,
+      "nonEmptyLines": 58,
+      "functions": [
+        {
+          "name": "CorsFailedNotice",
+          "startLine": 9,
+          "endLine": 60,
+          "params": [
+            "{ onRetry }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "CorsFailedNotice",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/live/LiveMap.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 420,
+      "nonEmptyLines": 394,
+      "functions": [
+        {
+          "name": "createOutLapDimmer",
+          "startLine": 93,
+          "endLine": 109,
+          "params": [
+            "ds"
+          ]
+        },
+        {
+          "name": "LiveMap",
+          "startLine": 111,
+          "endLine": 420,
+          "params": [
+            "{\n  sessionKey,\n  circuitKey,\n  year,\n  onBack,\n  fetchImpl,\n  client = openF1Client,\n  dataSourceFactory,\n  dataSource,\n  onSampleRef,\n  isReplay = false,\n  dimOutLaps = false,\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "LiveMap",
+          "line": 111,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "createOutLapDimmer",
+          "callee": "Math.floor",
+          "lineNumber": 97
+        },
+        {
+          "caller": "createOutLapDimmer",
+          "callee": "cache.clear",
+          "lineNumber": 100
+        },
+        {
+          "caller": "createOutLapDimmer",
+          "callee": "cache.get",
+          "lineNumber": 102
+        },
+        {
+          "caller": "createOutLapDimmer",
+          "callee": "ds.getLapAt",
+          "lineNumber": 104
+        },
+        {
+          "caller": "createOutLapDimmer",
+          "callee": "cache.set",
+          "lineNumber": 105
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "useState",
+          "lineNumber": 124
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "useState",
+          "lineNumber": 125
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "useState",
+          "lineNumber": 126
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "useState",
+          "lineNumber": 127
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "useState",
+          "lineNumber": 129
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "useRef",
+          "lineNumber": 130
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "useRef",
+          "lineNumber": 132
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "useMarkerLabel",
+          "lineNumber": 133
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "useRef",
+          "lineNumber": 134
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "useEffect",
+          "lineNumber": 135
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "useMemo",
+          "lineNumber": 139
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "globalThis.fetch.bind",
+          "lineNumber": 140
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "useMemo",
+          "lineNumber": 143
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "useEffect",
+          "lineNumber": 151
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "setAssets",
+          "lineNumber": 152
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "setError",
+          "lineNumber": 153
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "setTimeout",
+          "lineNumber": 156
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "ctrl.abort",
+          "lineNumber": 157
+        },
+        {
+          "caller": "isHtmlFallback",
+          "callee": "(r.headers.get('content-type') ?? '').toLowerCase().includes",
+          "lineNumber": 165
+        },
+        {
+          "caller": "isHtmlFallback",
+          "callee": "(r.headers.get('content-type') ?? '').toLowerCase",
+          "lineNumber": 165
+        },
+        {
+          "caller": "isHtmlFallback",
+          "callee": "r.headers.get",
+          "lineNumber": 165
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "Promise.all([\n      fetcher(trackUrl, { signal: ctrl.signal }).then((r) => {\n        if (r.status === 404 || isHtmlFallback(r)) {\n          return Promise.reject(\n            new Error(\n              `트랙 데이터 없음 (${trackUrl}) — \\`npm run build:all:base\\` 를 실행해 circuit ${circuitKey}/${year} 트랙 아웃라인을 생성하세요.`,\n            ),\n          );\n        }\n        if (!r.ok) return Promise.reject(new Error(`track HTTP ${r.status}`));\n        return r.json() as Promise<TrackOutlineJson>;\n      }),\n      fetcher(pitlaneUrl, { signal: ctrl.signal }).then((r) => {\n        if (r.status === 404 || isHtmlFallback(r)) return null;\n        if (!r.ok) return Promise.reject(new Error(`pitlane HTTP ${r.status}`));\n        return r.json() as Promise<PitlaneJsonBase>;\n      }),\n      // drivers 만 OpenF1 — client 경유 (priority='high': user 가 \"Loading track…\" 에서 block).\n      client\n        .fetch({\n          path: '/v1/drivers',\n          params: { session_key: sessionKey },\n          priority: 'high',\n          signal: ctrl.signal,\n        })\n        .then((r) =>\n          r.ok\n            ? (r.json() as Promise<Array<Record<string, unknown>>>)\n            : Promise.reject(new Error(`drivers HTTP ${r.status}`)),\n        ),\n      // Phase 9/10/11 — 모두 optional (404 → null). 실패 (5xx) 는 null 로 흡수해 라이브맵 차단 안 함.\n      loadSectorBoundaries(circuitKey, year, fetcher).catch(() => null),\n      loadDrsZones(circuitKey, year, fetcher).catch(() => null),\n      loadSlmZones(circuitKey, year, fetcher).catch(() => null),\n    ])\n      .then(([track, pitlane, driversList, sectors, drsZones, slmZones]) => {\n        if (!track.openf1_transform) {\n          setError(\n            `이 트랙 (circuit ${circuitKey}/${year}) 의 OpenF1 좌표 매핑이 아직 준비되지 않았습니다. ` +\n              `터미널에서 \\`npx tsx scripts/extract-openf1-transform.ts --key=${circuitKey} --year=${year}\\` ` +\n              `또는 \\`npm run build:all -- --key=${circuitKey} --year=${year}\\` 를 실행하세요. ` +\n              `이게 끝나면 Retry 를 누르세요.`,\n          );\n          return;\n        }\n        const drivers = new Map<number, DriverMetaRow>();\n        for (const d of driversList) {\n          const num = Number(d.driver_number);\n          if (!Number.isFinite(num)) continue;\n          const colour = typeof d.team_colour === 'string' && d.team_colour.length > 0\n            ? `#${d.team_colour}`\n            : '#ffffff';\n          const acronym = typeof d.name_acronym === 'string' ? d.name_acronym : `D${num}`;\n          drivers.set(num, { teamColour: colour, nameAcronym: acronym });\n        }\n        setAssets({ track, pitlane, drivers, sectors, drsZones, slmZones });\n      })\n      .catch((err: Error & { name?: string }) => {\n        if (err.name === 'TimeoutError') {\n          setError(\n            `자산 로드 시간 초과 (${ASSET_FETCH_TIMEOUT_MS / 1000}s) — 네트워크 확인 후 Retry 를 누르세요.`,\n          );\n          return;\n        }\n        if (err.name === 'AbortError') return;\n        setError(err.message ?? String(err));\n      })\n      .finally",
+          "lineNumber": 167
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "Promise.all([\n      fetcher(trackUrl, { signal: ctrl.signal }).then((r) => {\n        if (r.status === 404 || isHtmlFallback(r)) {\n          return Promise.reject(\n            new Error(\n              `트랙 데이터 없음 (${trackUrl}) — \\`npm run build:all:base\\` 를 실행해 circuit ${circuitKey}/${year} 트랙 아웃라인을 생성하세요.`,\n            ),\n          );\n        }\n        if (!r.ok) return Promise.reject(new Error(`track HTTP ${r.status}`));\n        return r.json() as Promise<TrackOutlineJson>;\n      }),\n      fetcher(pitlaneUrl, { signal: ctrl.signal }).then((r) => {\n        if (r.status === 404 || isHtmlFallback(r)) return null;\n        if (!r.ok) return Promise.reject(new Error(`pitlane HTTP ${r.status}`));\n        return r.json() as Promise<PitlaneJsonBase>;\n      }),\n      // drivers 만 OpenF1 — client 경유 (priority='high': user 가 \"Loading track…\" 에서 block).\n      client\n        .fetch({\n          path: '/v1/drivers',\n          params: { session_key: sessionKey },\n          priority: 'high',\n          signal: ctrl.signal,\n        })\n        .then((r) =>\n          r.ok\n            ? (r.json() as Promise<Array<Record<string, unknown>>>)\n            : Promise.reject(new Error(`drivers HTTP ${r.status}`)),\n        ),\n      // Phase 9/10/11 — 모두 optional (404 → null). 실패 (5xx) 는 null 로 흡수해 라이브맵 차단 안 함.\n      loadSectorBoundaries(circuitKey, year, fetcher).catch(() => null),\n      loadDrsZones(circuitKey, year, fetcher).catch(() => null),\n      loadSlmZones(circuitKey, year, fetcher).catch(() => null),\n    ])\n      .then(([track, pitlane, driversList, sectors, drsZones, slmZones]) => {\n        if (!track.openf1_transform) {\n          setError(\n            `이 트랙 (circuit ${circuitKey}/${year}) 의 OpenF1 좌표 매핑이 아직 준비되지 않았습니다. ` +\n              `터미널에서 \\`npx tsx scripts/extract-openf1-transform.ts --key=${circuitKey} --year=${year}\\` ` +\n              `또는 \\`npm run build:all -- --key=${circuitKey} --year=${year}\\` 를 실행하세요. ` +\n              `이게 끝나면 Retry 를 누르세요.`,\n          );\n          return;\n        }\n        const drivers = new Map<number, DriverMetaRow>();\n        for (const d of driversList) {\n          const num = Number(d.driver_number);\n          if (!Number.isFinite(num)) continue;\n          const colour = typeof d.team_colour === 'string' && d.team_colour.length > 0\n            ? `#${d.team_colour}`\n            : '#ffffff';\n          const acronym = typeof d.name_acronym === 'string' ? d.name_acronym : `D${num}`;\n          drivers.set(num, { teamColour: colour, nameAcronym: acronym });\n        }\n        setAssets({ track, pitlane, drivers, sectors, drsZones, slmZones });\n      })\n      .catch",
+          "lineNumber": 167
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "Promise.all([\n      fetcher(trackUrl, { signal: ctrl.signal }).then((r) => {\n        if (r.status === 404 || isHtmlFallback(r)) {\n          return Promise.reject(\n            new Error(\n              `트랙 데이터 없음 (${trackUrl}) — \\`npm run build:all:base\\` 를 실행해 circuit ${circuitKey}/${year} 트랙 아웃라인을 생성하세요.`,\n            ),\n          );\n        }\n        if (!r.ok) return Promise.reject(new Error(`track HTTP ${r.status}`));\n        return r.json() as Promise<TrackOutlineJson>;\n      }),\n      fetcher(pitlaneUrl, { signal: ctrl.signal }).then((r) => {\n        if (r.status === 404 || isHtmlFallback(r)) return null;\n        if (!r.ok) return Promise.reject(new Error(`pitlane HTTP ${r.status}`));\n        return r.json() as Promise<PitlaneJsonBase>;\n      }),\n      // drivers 만 OpenF1 — client 경유 (priority='high': user 가 \"Loading track…\" 에서 block).\n      client\n        .fetch({\n          path: '/v1/drivers',\n          params: { session_key: sessionKey },\n          priority: 'high',\n          signal: ctrl.signal,\n        })\n        .then((r) =>\n          r.ok\n            ? (r.json() as Promise<Array<Record<string, unknown>>>)\n            : Promise.reject(new Error(`drivers HTTP ${r.status}`)),\n        ),\n      // Phase 9/10/11 — 모두 optional (404 → null). 실패 (5xx) 는 null 로 흡수해 라이브맵 차단 안 함.\n      loadSectorBoundaries(circuitKey, year, fetcher).catch(() => null),\n      loadDrsZones(circuitKey, year, fetcher).catch(() => null),\n      loadSlmZones(circuitKey, year, fetcher).catch(() => null),\n    ])\n      .then",
+          "lineNumber": 167
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "Promise.all",
+          "lineNumber": 167
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "fetcher(trackUrl, { signal: ctrl.signal }).then",
+          "lineNumber": 168
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "fetcher",
+          "lineNumber": 168
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "isHtmlFallback",
+          "lineNumber": 169
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "Promise.reject",
+          "lineNumber": 170
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "Promise.reject",
+          "lineNumber": 176
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "r.json",
+          "lineNumber": 177
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "fetcher(pitlaneUrl, { signal: ctrl.signal }).then",
+          "lineNumber": 179
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "fetcher",
+          "lineNumber": 179
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "isHtmlFallback",
+          "lineNumber": 180
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "Promise.reject",
+          "lineNumber": 181
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "r.json",
+          "lineNumber": 182
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "client\n        .fetch({\n          path: '/v1/drivers',\n          params: { session_key: sessionKey },\n          priority: 'high',\n          signal: ctrl.signal,\n        })\n        .then",
+          "lineNumber": 185
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "client\n        .fetch",
+          "lineNumber": 185
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "r.json",
+          "lineNumber": 194
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "Promise.reject",
+          "lineNumber": 195
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "loadSectorBoundaries(circuitKey, year, fetcher).catch",
+          "lineNumber": 198
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "loadSectorBoundaries",
+          "lineNumber": 198
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "loadDrsZones(circuitKey, year, fetcher).catch",
+          "lineNumber": 199
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "loadDrsZones",
+          "lineNumber": 199
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "loadSlmZones(circuitKey, year, fetcher).catch",
+          "lineNumber": 200
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "loadSlmZones",
+          "lineNumber": 200
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "setError",
+          "lineNumber": 204
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "Number",
+          "lineNumber": 214
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "Number.isFinite",
+          "lineNumber": 215
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "drivers.set",
+          "lineNumber": 220
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "setAssets",
+          "lineNumber": 222
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "setError",
+          "lineNumber": 226
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "setError",
+          "lineNumber": 232
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "String",
+          "lineNumber": 232
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "clearTimeout",
+          "lineNumber": 234
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "clearTimeout",
+          "lineNumber": 237
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "ctrl.abort",
+          "lineNumber": 238
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "useEffect",
+          "lineNumber": 243
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "canvas.getContext",
+          "lineNumber": 246
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "setError",
+          "lineNumber": 249
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "ctx.setTransform",
+          "lineNumber": 263
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "assets.track.polyline.map",
+          "lineNumber": 265
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "computeViewport",
+          "lineNumber": 267
+        },
+        {
+          "caller": "pushSample",
+          "callee": "applyOpenF1Transform",
+          "lineNumber": 277
+        },
+        {
+          "caller": "pushSample",
+          "callee": "projectToPolyline",
+          "lineNumber": 278
+        },
+        {
+          "caller": "pushSample",
+          "callee": "buffer.push",
+          "lineNumber": 279
+        },
+        {
+          "caller": "pushSample",
+          "callee": "sample.date.valueOf",
+          "lineNumber": 280
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "factory",
+          "lineNumber": 290
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "assets.pitlane.polyline.map",
+          "lineNumber": 294
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "document.createElement",
+          "lineNumber": 299
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "staticLayerCanvas.getContext",
+          "lineNumber": 302
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "offCtx.setTransform",
+          "lineNumber": 303
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "createOutLapDimmer",
+          "lineNumber": 306
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "assets.drivers.get",
+          "lineNumber": 317
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "setIsPaused",
+          "lineNumber": 331
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "setSupportsPause",
+          "lineNumber": 332
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "ds.start",
+          "lineNumber": 333
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "renderer.start",
+          "lineNumber": 334
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "renderer.stop",
+          "lineNumber": 337
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "ds.stop",
+          "lineNumber": 338
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "setSupportsPause",
+          "lineNumber": 341
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "useCallback",
+          "lineNumber": 345
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "ds.isPaused",
+          "lineNumber": 348
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "ds.resume",
+          "lineNumber": 349
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "setIsPaused",
+          "lineNumber": 350
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "ds.pause",
+          "lineNumber": 352
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "setIsPaused",
+          "lineNumber": 353
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "useCallback",
+          "lineNumber": 357
+        },
+        {
+          "caller": "LiveMap",
+          "callee": "setReloadKey",
+          "lineNumber": 357
+        }
+      ],
+      "metrics": {
+        "importCount": 13,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/live/LiveScreen.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 152,
+      "nonEmptyLines": 140,
+      "functions": [
+        {
+          "name": "LiveScreen",
+          "startLine": 32,
+          "endLine": 152,
+          "params": [
+            "{ pingImpl }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "LiveScreen",
+          "line": 32,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "LiveScreen",
+          "callee": "useParams",
+          "lineNumber": 33
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "Number",
+          "lineNumber": 34
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "useLocation",
+          "lineNumber": 35
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "usePing",
+          "lineNumber": 36
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "useMemo",
+          "lineNumber": 39
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "new Date().getFullYear",
+          "lineNumber": 39
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "useCatalogIndex",
+          "lineNumber": 40
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "useSeasonCatalog",
+          "lineNumber": 41
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "useEffect",
+          "lineNumber": 42
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "loadCatalogIndex().catch",
+          "lineNumber": 44
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "loadCatalogIndex",
+          "lineNumber": 44
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "console.error",
+          "lineNumber": 44
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "loadSeason(currentYear).catch",
+          "lineNumber": 45
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "loadSeason",
+          "lineNumber": 45
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "console.error",
+          "lineNumber": 45
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "useNowSecond",
+          "lineNumber": 48
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "Number.isFinite",
+          "lineNumber": 53
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "findSessionByKey",
+          "lineNumber": 54
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "classify",
+          "lineNumber": 56
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "useEffect",
+          "lineNumber": 61
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "setLocation",
+          "lineNumber": 62
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "useRef",
+          "lineNumber": 67
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "useMemo",
+          "lineNumber": 68
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "Number.isFinite",
+          "lineNumber": 70
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "onSampleRef.current",
+          "lineNumber": 73
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "useSessionDrivers",
+          "lineNumber": 79
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "Number.isFinite",
+          "lineNumber": 90
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "setLocation",
+          "lineNumber": 125
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "isQualifyingFamily",
+          "lineNumber": 133
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "resolveSessionKind",
+          "lineNumber": 134
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "setLocation",
+          "lineNumber": 136
+        },
+        {
+          "caller": "LiveScreen",
+          "callee": "setLocation",
+          "lineNumber": 149
+        }
+      ],
+      "metrics": {
+        "importCount": 13,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/live/ReplayScreen.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 164,
+      "nonEmptyLines": 149,
+      "functions": [
+        {
+          "name": "ReplayScreen",
+          "startLine": 25,
+          "endLine": 164,
+          "params": [
+            "{ pingImpl }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ReplayScreen",
+          "line": 25,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ReplayScreen",
+          "callee": "useParams",
+          "lineNumber": 26
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "Number",
+          "lineNumber": 27
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "useLocation",
+          "lineNumber": 28
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "usePing",
+          "lineNumber": 29
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "useCatalogIndex",
+          "lineNumber": 31
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "useAllSeasons",
+          "lineNumber": 32
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "useEffect",
+          "lineNumber": 35
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "loadCatalogIndex().catch",
+          "lineNumber": 37
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "loadCatalogIndex",
+          "lineNumber": 37
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "console.error",
+          "lineNumber": 37
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "useEffect",
+          "lineNumber": 42
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "loadSeason(entry.year).catch",
+          "lineNumber": 45
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "loadSeason",
+          "lineNumber": 45
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "console.error",
+          "lineNumber": 46
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "useNowSecond",
+          "lineNumber": 51
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "Number.isFinite",
+          "lineNumber": 55
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "findSessionAcrossSeasons",
+          "lineNumber": 56
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "classify",
+          "lineNumber": 57
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "useEffect",
+          "lineNumber": 60
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "setLocation",
+          "lineNumber": 61
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "useRef",
+          "lineNumber": 68
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "useMemo",
+          "lineNumber": 69
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "onSampleRef.current",
+          "lineNumber": 75
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "useSessionDrivers",
+          "lineNumber": 79
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "index.seasons.every",
+          "lineNumber": 101
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "allSeasons.some",
+          "lineNumber": 101
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "setLocation",
+          "lineNumber": 143
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "isQualifyingFamily",
+          "lineNumber": 152
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "resolveSessionKind",
+          "lineNumber": 153
+        },
+        {
+          "caller": "ReplayScreen",
+          "callee": "setLocation",
+          "lineNumber": 155
+        }
+      ],
+      "metrics": {
+        "importCount": 12,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/live/SyntheticDataSource.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 255,
+      "nonEmptyLines": 231,
+      "functions": [
+        {
+          "name": "buildArcTable",
+          "startLine": 227,
+          "endLine": 235,
+          "params": [
+            "polyline"
+          ]
+        },
+        {
+          "name": "sampleAtArc",
+          "startLine": 237,
+          "endLine": 251,
+          "params": [
+            "polyline",
+            "arcTable",
+            "s"
+          ]
+        },
+        {
+          "name": "toExternal",
+          "startLine": 253,
+          "endLine": 255,
+          "params": [
+            "s"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "SyntheticDataSource",
+          "startLine": 53,
+          "endLine": 225,
+          "methods": [
+            "constructor",
+            "start",
+            "stop",
+            "getDisplayTime",
+            "getSamplePair",
+            "getStreamState",
+            "onDisplayTimeChange",
+            "getLatestBefore",
+            "getAllBefore",
+            "getLapAt",
+            "getCompletedLapsBefore",
+            "getStintForLap",
+            "getAggregateBefore",
+            "getSessionResult",
+            "tick",
+            "pushSample",
+            "trim",
+            "_bufferSize"
+          ],
+          "properties": [
+            "buffer",
+            "listeners",
+            "displayLagMs",
+            "ringBufferMs",
+            "cruiseSpeed",
+            "tickIntervalMs",
+            "now",
+            "setIntervalImpl",
+            "clearIntervalImpl",
+            "arcTable",
+            "lastEmittedAt",
+            "newestMs",
+            "intervalId",
+            "started"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SyntheticDataSource",
+          "line": 53,
+          "isDefault": false
+        },
+        {
+          "name": "buildArcTable",
+          "line": 227,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "Date.now",
+          "lineNumber": 77
+        },
+        {
+          "caller": "constructor",
+          "callee": "setInterval",
+          "lineNumber": 78
+        },
+        {
+          "caller": "constructor",
+          "callee": "clearInterval",
+          "lineNumber": 79
+        },
+        {
+          "caller": "constructor",
+          "callee": "buildArcTable",
+          "lineNumber": 80
+        },
+        {
+          "caller": "start",
+          "callee": "this.tick",
+          "lineNumber": 87
+        },
+        {
+          "caller": "start",
+          "callee": "this.setIntervalImpl",
+          "lineNumber": 88
+        },
+        {
+          "caller": "start",
+          "callee": "this.tick",
+          "lineNumber": 88
+        },
+        {
+          "caller": "stop",
+          "callee": "this.clearIntervalImpl",
+          "lineNumber": 92
+        },
+        {
+          "caller": "getSamplePair",
+          "callee": "this.buffer.get",
+          "lineNumber": 105
+        },
+        {
+          "caller": "getSamplePair",
+          "callee": "t.valueOf",
+          "lineNumber": 107
+        },
+        {
+          "caller": "getSamplePair",
+          "callee": "toExternal",
+          "lineNumber": 108
+        },
+        {
+          "caller": "getSamplePair",
+          "callee": "toExternal",
+          "lineNumber": 109
+        },
+        {
+          "caller": "getSamplePair",
+          "callee": "toExternal",
+          "lineNumber": 111
+        },
+        {
+          "caller": "getSamplePair",
+          "callee": "toExternal",
+          "lineNumber": 120
+        },
+        {
+          "caller": "getSamplePair",
+          "callee": "toExternal",
+          "lineNumber": 120
+        },
+        {
+          "caller": "onDisplayTimeChange",
+          "callee": "this.listeners.add",
+          "lineNumber": 128
+        },
+        {
+          "caller": "onDisplayTimeChange",
+          "callee": "this.listeners.delete",
+          "lineNumber": 130
+        },
+        {
+          "caller": "tick",
+          "callee": "this.now",
+          "lineNumber": 170
+        },
+        {
+          "caller": "tick",
+          "callee": "this.lastEmittedAt.get",
+          "lineNumber": 174
+        },
+        {
+          "caller": "tick",
+          "callee": "sampleAtArc",
+          "lineNumber": 181
+        },
+        {
+          "caller": "tick",
+          "callee": "this.pushSample",
+          "lineNumber": 189
+        },
+        {
+          "caller": "tick",
+          "callee": "this.lastEmittedAt.set",
+          "lineNumber": 190
+        },
+        {
+          "caller": "tick",
+          "callee": "this.opts.onSample",
+          "lineNumber": 191
+        },
+        {
+          "caller": "tick",
+          "callee": "this.getDisplayTime",
+          "lineNumber": 195
+        },
+        {
+          "caller": "tick",
+          "callee": "cb",
+          "lineNumber": 196
+        },
+        {
+          "caller": "tick",
+          "callee": "this.trim",
+          "lineNumber": 198
+        },
+        {
+          "caller": "pushSample",
+          "callee": "this.buffer.get",
+          "lineNumber": 202
+        },
+        {
+          "caller": "pushSample",
+          "callee": "this.buffer.set",
+          "lineNumber": 204
+        },
+        {
+          "caller": "pushSample",
+          "callee": "arr.push",
+          "lineNumber": 207
+        },
+        {
+          "caller": "trim",
+          "callee": "this.buffer.values",
+          "lineNumber": 213
+        },
+        {
+          "caller": "trim",
+          "callee": "arr.splice",
+          "lineNumber": 217
+        },
+        {
+          "caller": "_bufferSize",
+          "callee": "this.buffer.get",
+          "lineNumber": 223
+        },
+        {
+          "caller": "buildArcTable",
+          "callee": "table.push",
+          "lineNumber": 232
+        },
+        {
+          "caller": "buildArcTable",
+          "callee": "Math.hypot",
+          "lineNumber": 232
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 2,
+        "functionCount": 3,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/live/TestRigScreen.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 131,
+      "nonEmptyLines": 121,
+      "functions": [
+        {
+          "name": "parseQuery",
+          "startLine": 34,
+          "endLine": 45,
+          "params": [
+            "search"
+          ]
+        },
+        {
+          "name": "TestRigScreen",
+          "startLine": 49,
+          "endLine": 131,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "TestRigScreen",
+          "line": 49,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "n",
+          "callee": "Number",
+          "lineNumber": 37
+        },
+        {
+          "caller": "n",
+          "callee": "sp.get",
+          "lineNumber": 37
+        },
+        {
+          "caller": "n",
+          "callee": "Number.isFinite",
+          "lineNumber": 38
+        },
+        {
+          "caller": "parseQuery",
+          "callee": "Math.floor",
+          "lineNumber": 41
+        },
+        {
+          "caller": "parseQuery",
+          "callee": "n",
+          "lineNumber": 41
+        },
+        {
+          "caller": "parseQuery",
+          "callee": "n",
+          "lineNumber": 42
+        },
+        {
+          "caller": "parseQuery",
+          "callee": "Math.floor",
+          "lineNumber": 43
+        },
+        {
+          "caller": "parseQuery",
+          "callee": "n",
+          "lineNumber": 43
+        },
+        {
+          "caller": "TestRigScreen",
+          "callee": "useMemo",
+          "lineNumber": 50
+        },
+        {
+          "caller": "TestRigScreen",
+          "callee": "parseQuery",
+          "lineNumber": 50
+        },
+        {
+          "caller": "TestRigScreen",
+          "callee": "useMemo",
+          "lineNumber": 51
+        },
+        {
+          "caller": "TestRigScreen",
+          "callee": "Array.from",
+          "lineNumber": 52
+        },
+        {
+          "caller": "TestRigScreen",
+          "callee": "useMemo",
+          "lineNumber": 57
+        },
+        {
+          "caller": "TestRigScreen",
+          "callee": "input.toString",
+          "lineNumber": 60
+        },
+        {
+          "caller": "TestRigScreen",
+          "callee": "url.includes",
+          "lineNumber": 61
+        },
+        {
+          "caller": "TestRigScreen",
+          "callee": "Promise.resolve",
+          "lineNumber": 62
+        },
+        {
+          "caller": "TestRigScreen",
+          "callee": "JSON.stringify",
+          "lineNumber": 64
+        },
+        {
+          "caller": "TestRigScreen",
+          "callee": "SQUARE_POLYLINE.map",
+          "lineNumber": 73
+        },
+        {
+          "caller": "TestRigScreen",
+          "callee": "new Date().toISOString",
+          "lineNumber": 78
+        },
+        {
+          "caller": "TestRigScreen",
+          "callee": "url.includes",
+          "lineNumber": 90
+        },
+        {
+          "caller": "TestRigScreen",
+          "callee": "Promise.resolve",
+          "lineNumber": 91
+        },
+        {
+          "caller": "TestRigScreen",
+          "callee": "url.includes",
+          "lineNumber": 93
+        },
+        {
+          "caller": "TestRigScreen",
+          "callee": "driverNumbers.map",
+          "lineNumber": 94
+        },
+        {
+          "caller": "TestRigScreen",
+          "callee": "String(n).padStart",
+          "lineNumber": 96
+        },
+        {
+          "caller": "TestRigScreen",
+          "callee": "String",
+          "lineNumber": 96
+        },
+        {
+          "caller": "TestRigScreen",
+          "callee": "Promise.resolve",
+          "lineNumber": 99
+        },
+        {
+          "caller": "TestRigScreen",
+          "callee": "JSON.stringify",
+          "lineNumber": 99
+        },
+        {
+          "caller": "TestRigScreen",
+          "callee": "Promise.reject",
+          "lineNumber": 101
+        },
+        {
+          "caller": "TestRigScreen",
+          "callee": "useMemo",
+          "lineNumber": 106
+        },
+        {
+          "caller": "TestRigScreen",
+          "callee": "Date.now",
+          "lineNumber": 114
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/live/__tests__/LiveMap.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 653,
+      "nonEmptyLines": 618,
+      "functions": [
+        {
+          "name": "jsonOk",
+          "startLine": 104,
+          "endLine": 109,
+          "params": [
+            "body"
+          ]
+        },
+        {
+          "name": "makeFetch",
+          "startLine": 112,
+          "endLine": 148,
+          "params": [
+            "opts"
+          ]
+        },
+        {
+          "name": "makeDriversClient",
+          "startLine": 153,
+          "endLine": 160,
+          "params": [
+            "override"
+          ]
+        },
+        {
+          "name": "makeStubFactory",
+          "startLine": 199,
+          "endLine": 221,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "jsonOk",
+          "callee": "JSON.stringify",
+          "lineNumber": 105
+        },
+        {
+          "caller": "makeFetch",
+          "callee": "vi.fn",
+          "lineNumber": 119
+        },
+        {
+          "caller": "makeFetch",
+          "callee": "input.toString",
+          "lineNumber": 120
+        },
+        {
+          "caller": "makeFetch",
+          "callee": "url.includes",
+          "lineNumber": 121
+        },
+        {
+          "caller": "makeFetch",
+          "callee": "jsonOk",
+          "lineNumber": 123
+        },
+        {
+          "caller": "makeFetch",
+          "callee": "url.includes",
+          "lineNumber": 125
+        },
+        {
+          "caller": "makeFetch",
+          "callee": "jsonOk",
+          "lineNumber": 127
+        },
+        {
+          "caller": "makeFetch",
+          "callee": "url.includes",
+          "lineNumber": 129
+        },
+        {
+          "caller": "makeFetch",
+          "callee": "jsonOk",
+          "lineNumber": 131
+        },
+        {
+          "caller": "makeFetch",
+          "callee": "url.includes",
+          "lineNumber": 133
+        },
+        {
+          "caller": "makeFetch",
+          "callee": "jsonOk",
+          "lineNumber": 137
+        },
+        {
+          "caller": "makeFetch",
+          "callee": "jsonOk",
+          "lineNumber": 139
+        },
+        {
+          "caller": "makeFetch",
+          "callee": "url.includes",
+          "lineNumber": 141
+        },
+        {
+          "caller": "makeFetch",
+          "callee": "jsonOk",
+          "lineNumber": 144
+        },
+        {
+          "caller": "route",
+          "callee": "jsonOk",
+          "lineNumber": 155
+        },
+        {
+          "caller": "makeDriversClient",
+          "callee": "createMockOpenF1Client",
+          "lineNumber": 156
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 0,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/live/__tests__/LiveScreen.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 165,
+      "nonEmptyLines": 153,
+      "functions": [
+        {
+          "name": "renderAtLive",
+          "startLine": 16,
+          "endLine": 23,
+          "params": [
+            "pingImpl"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "renderAtLive",
+          "callee": "memoryLocation",
+          "lineNumber": 17
+        },
+        {
+          "caller": "renderAtLive",
+          "callee": "render",
+          "lineNumber": 18
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/live/__tests__/ReplayScreen.test.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 159,
+      "nonEmptyLines": 146,
+      "functions": [
+        {
+          "name": "mkSeason",
+          "startLine": 21,
+          "endLine": 43,
+          "params": [
+            "year",
+            "sessionKey",
+            "dateStart",
+            "dateEnd"
+          ]
+        },
+        {
+          "name": "makeFetchImpl",
+          "startLine": 52,
+          "endLine": 74,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "makeFetchImpl",
+          "callee": "vi.fn",
+          "lineNumber": 53
+        },
+        {
+          "caller": "makeFetchImpl",
+          "callee": "input.toString",
+          "lineNumber": 54
+        },
+        {
+          "caller": "makeFetchImpl",
+          "callee": "url.endsWith",
+          "lineNumber": 55
+        },
+        {
+          "caller": "makeFetchImpl",
+          "callee": "JSON.stringify",
+          "lineNumber": 56
+        },
+        {
+          "caller": "makeFetchImpl",
+          "callee": "url.match",
+          "lineNumber": 61
+        },
+        {
+          "caller": "makeFetchImpl",
+          "callee": "Number",
+          "lineNumber": 63
+        },
+        {
+          "caller": "makeFetchImpl",
+          "callee": "JSON.stringify",
+          "lineNumber": 66
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/live/__tests__/SyntheticDataSource.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 117,
+      "nonEmptyLines": 108,
+      "functions": [
+        {
+          "name": "makeDs",
+          "startLine": 13,
+          "endLine": 47,
+          "params": [
+            "opts"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "advance",
+          "callee": "Math.max",
+          "lineNumber": 37
+        },
+        {
+          "caller": "advance",
+          "callee": "Math.floor",
+          "lineNumber": 37
+        },
+        {
+          "caller": "advance",
+          "callee": "scheduledCb",
+          "lineNumber": 40
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/live/__tests__/corsPing.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 67,
+      "nonEmptyLines": 61,
+      "callGraph": [
+        {
+          "caller": "route",
+          "callee": "init.signal.addEventListener",
+          "lineNumber": 57
+        },
+        {
+          "caller": "route",
+          "callee": "reject",
+          "lineNumber": 60
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/live/__tests__/findSessionByKey.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 49,
+      "nonEmptyLines": 44,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/live/corsPing.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 44,
+      "nonEmptyLines": 39,
+      "functions": [
+        {
+          "name": "pingOpenF1",
+          "startLine": 18,
+          "endLine": 44,
+          "params": [
+            "opts"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "pingOpenF1",
+          "line": 18,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "pingOpenF1",
+          "callee": "setTimeout",
+          "lineNumber": 23
+        },
+        {
+          "caller": "pingOpenF1",
+          "callee": "controller.abort",
+          "lineNumber": 23
+        },
+        {
+          "caller": "pingOpenF1",
+          "callee": "client.fetch",
+          "lineNumber": 27
+        },
+        {
+          "caller": "pingOpenF1",
+          "callee": "console.warn",
+          "lineNumber": 34
+        },
+        {
+          "caller": "pingOpenF1",
+          "callee": "console.warn",
+          "lineNumber": 39
+        },
+        {
+          "caller": "pingOpenF1",
+          "callee": "clearTimeout",
+          "lineNumber": 42
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/live/findSessionByKey.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 40,
+      "nonEmptyLines": 35,
+      "functions": [
+        {
+          "name": "findSessionByKey",
+          "startLine": 17,
+          "endLine": 25,
+          "params": [
+            "season",
+            "sessionKey"
+          ]
+        },
+        {
+          "name": "findSessionAcrossSeasons",
+          "startLine": 31,
+          "endLine": 40,
+          "params": [
+            "seasons",
+            "sessionKey"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "findSessionByKey",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "findSessionAcrossSeasons",
+          "line": 31,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "findSessionAcrossSeasons",
+          "callee": "findSessionByKey",
+          "lineNumber": 36
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/live/usePing.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 38,
+      "nonEmptyLines": 32,
+      "functions": [
+        {
+          "name": "usePing",
+          "startLine": 10,
+          "endLine": 38,
+          "params": [
+            "pingImpl"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "usePing",
+          "line": 10,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "usePing",
+          "callee": "useState",
+          "lineNumber": 14
+        },
+        {
+          "caller": "usePing",
+          "callee": "useRef",
+          "lineNumber": 15
+        },
+        {
+          "caller": "usePing",
+          "callee": "useCallback",
+          "lineNumber": 17
+        },
+        {
+          "caller": "usePing",
+          "callee": "setPingState",
+          "lineNumber": 19
+        },
+        {
+          "caller": "usePing",
+          "callee": "pingOpenF1",
+          "lineNumber": 20
+        },
+        {
+          "caller": "usePing",
+          "callee": "exec()\n      .then((ok) => {\n        if (myRun !== pingRunIdRef.current) return;\n        setPingState(ok ? 'ok' : 'failed');\n      })\n      .catch",
+          "lineNumber": 21
+        },
+        {
+          "caller": "usePing",
+          "callee": "exec()\n      .then",
+          "lineNumber": 21
+        },
+        {
+          "caller": "usePing",
+          "callee": "exec",
+          "lineNumber": 21
+        },
+        {
+          "caller": "usePing",
+          "callee": "setPingState",
+          "lineNumber": 24
+        },
+        {
+          "caller": "usePing",
+          "callee": "setPingState",
+          "lineNumber": 29
+        },
+        {
+          "caller": "usePing",
+          "callee": "useEffect",
+          "lineNumber": 33
+        },
+        {
+          "caller": "usePing",
+          "callee": "runPing",
+          "lineNumber": 34
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/derived/__tests__/openf1ToSessionMap.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 43,
+      "nonEmptyLines": 39,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/derived/__tests__/seasonDiff.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 119,
+      "nonEmptyLines": 111,
+      "functions": [
+        {
+          "name": "makeSeason",
+          "startLine": 5,
+          "endLine": 47,
+          "params": []
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/derived/openf1ToSessionMap.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 29,
+      "nonEmptyLines": 26,
+      "functions": [
+        {
+          "name": "openf1ToSessionMap",
+          "startLine": 15,
+          "endLine": 29,
+          "params": [
+            "rows"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "openf1ToSessionMap",
+          "line": 15,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "openf1ToSessionMap",
+          "callee": "Array.isArray",
+          "lineNumber": 17
+        },
+        {
+          "caller": "openf1ToSessionMap",
+          "callee": "out.set",
+          "lineNumber": 26
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/derived/seasonDiff.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 70,
+      "nonEmptyLines": 63,
+      "functions": [
+        {
+          "name": "normalizeCancelled",
+          "startLine": 26,
+          "endLine": 28,
+          "params": [
+            "v"
+          ]
+        },
+        {
+          "name": "diffSessions",
+          "startLine": 30,
+          "endLine": 70,
+          "params": [
+            "cached",
+            "fresh"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "normalizeCancelled",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "diffSessions",
+          "line": 30,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "diffSessions",
+          "callee": "fresh.get",
+          "lineNumber": 37
+        },
+        {
+          "caller": "diffSessions",
+          "callee": "changes.push",
+          "lineNumber": 41
+        },
+        {
+          "caller": "diffSessions",
+          "callee": "changes.push",
+          "lineNumber": 50
+        },
+        {
+          "caller": "diffSessions",
+          "callee": "normalizeCancelled",
+          "lineNumber": 58
+        },
+        {
+          "caller": "diffSessions",
+          "callee": "normalizeCancelled",
+          "lineNumber": 58
+        },
+        {
+          "caller": "diffSessions",
+          "callee": "changes.push",
+          "lineNumber": 59
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/stores/__tests__/catalogStore.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 221,
+      "nonEmptyLines": 196,
+      "functions": [
+        {
+          "name": "jsonResponse",
+          "startLine": 14,
+          "endLine": 19,
+          "params": [
+            "body",
+            "status"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "jsonResponse",
+          "callee": "JSON.stringify",
+          "lineNumber": 15
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/stores/__tests__/revalidateSeason.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 131,
+      "nonEmptyLines": 121,
+      "functions": [
+        {
+          "name": "jsonResponse",
+          "startLine": 10,
+          "endLine": 15,
+          "params": [
+            "body",
+            "status"
+          ]
+        },
+        {
+          "name": "primeSeasonCache",
+          "startLine": 38,
+          "endLine": 42,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "jsonResponse",
+          "callee": "JSON.stringify",
+          "lineNumber": 11
+        },
+        {
+          "caller": "primeSeasonCache",
+          "callee": "vi.fn",
+          "lineNumber": 39
+        },
+        {
+          "caller": "primeSeasonCache",
+          "callee": "jsonResponse",
+          "lineNumber": 39
+        },
+        {
+          "caller": "primeSeasonCache",
+          "callee": "configureCatalogStore",
+          "lineNumber": 40
+        },
+        {
+          "caller": "primeSeasonCache",
+          "callee": "loadSeason",
+          "lineNumber": 41
+        },
+        {
+          "caller": "respond",
+          "callee": "jsonResponse",
+          "lineNumber": 60
+        },
+        {
+          "caller": "respond",
+          "callee": "jsonResponse",
+          "lineNumber": 78
+        },
+        {
+          "caller": "respond",
+          "callee": "init.signal.addEventListener",
+          "lineNumber": 109
+        },
+        {
+          "caller": "respond",
+          "callee": "reject",
+          "lineNumber": 112
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/stores/catalogStore.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 179,
+      "nonEmptyLines": 160,
+      "functions": [
+        {
+          "name": "DEFAULT_SEASON_URL",
+          "startLine": 17,
+          "endLine": 17,
+          "params": [
+            "year"
+          ]
+        },
+        {
+          "name": "requireFetch",
+          "startLine": 25,
+          "endLine": 28,
+          "params": []
+        },
+        {
+          "name": "makeDefaultOpts",
+          "startLine": 30,
+          "endLine": 36,
+          "params": []
+        },
+        {
+          "name": "configureCatalogStore",
+          "startLine": 51,
+          "endLine": 53,
+          "params": [
+            "custom"
+          ]
+        },
+        {
+          "name": "getCatalogIndex",
+          "startLine": 55,
+          "endLine": 57,
+          "params": []
+        },
+        {
+          "name": "getSeason",
+          "startLine": 59,
+          "endLine": 61,
+          "params": [
+            "year"
+          ]
+        },
+        {
+          "name": "getAllSeasons",
+          "startLine": 65,
+          "endLine": 71,
+          "params": []
+        },
+        {
+          "name": "loadCatalogIndex",
+          "startLine": 73,
+          "endLine": 89,
+          "params": []
+        },
+        {
+          "name": "loadSeason",
+          "startLine": 91,
+          "endLine": 110,
+          "params": [
+            "year"
+          ]
+        },
+        {
+          "name": "_patchSessions",
+          "startLine": 116,
+          "endLine": 158,
+          "params": [
+            "year",
+            "fresh"
+          ]
+        },
+        {
+          "name": "subscribeCatalog",
+          "startLine": 160,
+          "endLine": 163,
+          "params": [
+            "listener"
+          ]
+        },
+        {
+          "name": "notify",
+          "startLine": 165,
+          "endLine": 168,
+          "params": []
+        },
+        {
+          "name": "_resetCatalogStore",
+          "startLine": 170,
+          "endLine": 179,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "configureCatalogStore",
+          "line": 51,
+          "isDefault": false
+        },
+        {
+          "name": "getCatalogIndex",
+          "line": 55,
+          "isDefault": false
+        },
+        {
+          "name": "getSeason",
+          "line": 59,
+          "isDefault": false
+        },
+        {
+          "name": "getAllSeasons",
+          "line": 65,
+          "isDefault": false
+        },
+        {
+          "name": "loadCatalogIndex",
+          "line": 73,
+          "isDefault": false
+        },
+        {
+          "name": "loadSeason",
+          "line": 91,
+          "isDefault": false
+        },
+        {
+          "name": "_patchSessions",
+          "line": 116,
+          "isDefault": false
+        },
+        {
+          "name": "subscribeCatalog",
+          "line": 160,
+          "isDefault": false
+        },
+        {
+          "name": "_resetCatalogStore",
+          "line": 170,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "requireFetch",
+          "callee": "globalThis.fetch.bind",
+          "lineNumber": 27
+        },
+        {
+          "caller": "makeDefaultOpts",
+          "callee": "requireFetch",
+          "lineNumber": 32
+        },
+        {
+          "caller": "getSeason",
+          "callee": "seasonCache.get",
+          "lineNumber": 60
+        },
+        {
+          "caller": "getAllSeasons",
+          "callee": "Array.from",
+          "lineNumber": 67
+        },
+        {
+          "caller": "getAllSeasons",
+          "callee": "seasonCache.values",
+          "lineNumber": 67
+        },
+        {
+          "caller": "loadCatalogIndex",
+          "callee": "(async () => {\n    try {\n      const res = await opts.fetchImpl(opts.indexUrl);\n      if (!res.ok) throw new Error(`catalog index ${res.status}: ${opts.indexUrl}`);\n      const data = (await res.json()) as SeasonsIndex;\n      cachedIndex = data;\n      notify();\n      return data;\n    } finally {\n      indexInflight = null;\n    }\n  })",
+          "lineNumber": 76
+        },
+        {
+          "caller": "loadCatalogIndex",
+          "callee": "opts.fetchImpl",
+          "lineNumber": 78
+        },
+        {
+          "caller": "loadCatalogIndex",
+          "callee": "res.json",
+          "lineNumber": 80
+        },
+        {
+          "caller": "loadCatalogIndex",
+          "callee": "notify",
+          "lineNumber": 82
+        },
+        {
+          "caller": "loadSeason",
+          "callee": "seasonCache.get",
+          "lineNumber": 92
+        },
+        {
+          "caller": "loadSeason",
+          "callee": "seasonInflight.get",
+          "lineNumber": 94
+        },
+        {
+          "caller": "loadSeason",
+          "callee": "(async () => {\n    try {\n      const res = await opts.fetchImpl(opts.seasonUrl(year));\n      if (!res.ok) throw new Error(`season ${year} ${res.status}: ${opts.seasonUrl(year)}`);\n      const data = (await res.json()) as SeasonData;\n      seasonCache.set(year, data);\n      notify();\n      return data;\n    } finally {\n      seasonInflight.delete(year);\n    }\n  })",
+          "lineNumber": 96
+        },
+        {
+          "caller": "loadSeason",
+          "callee": "opts.fetchImpl",
+          "lineNumber": 98
+        },
+        {
+          "caller": "loadSeason",
+          "callee": "opts.seasonUrl",
+          "lineNumber": 98
+        },
+        {
+          "caller": "loadSeason",
+          "callee": "opts.seasonUrl",
+          "lineNumber": 99
+        },
+        {
+          "caller": "loadSeason",
+          "callee": "res.json",
+          "lineNumber": 100
+        },
+        {
+          "caller": "loadSeason",
+          "callee": "seasonCache.set",
+          "lineNumber": 101
+        },
+        {
+          "caller": "loadSeason",
+          "callee": "notify",
+          "lineNumber": 102
+        },
+        {
+          "caller": "loadSeason",
+          "callee": "seasonInflight.delete",
+          "lineNumber": 105
+        },
+        {
+          "caller": "loadSeason",
+          "callee": "seasonInflight.set",
+          "lineNumber": 108
+        },
+        {
+          "caller": "_patchSessions",
+          "callee": "seasonCache.get",
+          "lineNumber": 117
+        },
+        {
+          "caller": "_patchSessions",
+          "callee": "cached.meetings.map",
+          "lineNumber": 121
+        },
+        {
+          "caller": "_patchSessions",
+          "callee": "meeting.sessions.map",
+          "lineNumber": 123
+        },
+        {
+          "caller": "_patchSessions",
+          "callee": "fresh.get",
+          "lineNumber": 124
+        },
+        {
+          "caller": "_patchSessions",
+          "callee": "normalizeCancelled",
+          "lineNumber": 139
+        },
+        {
+          "caller": "_patchSessions",
+          "callee": "normalizeCancelled",
+          "lineNumber": 139
+        },
+        {
+          "caller": "_patchSessions",
+          "callee": "seasonCache.set",
+          "lineNumber": 156
+        },
+        {
+          "caller": "_patchSessions",
+          "callee": "notify",
+          "lineNumber": 157
+        },
+        {
+          "caller": "subscribeCatalog",
+          "callee": "listeners.add",
+          "lineNumber": 161
+        },
+        {
+          "caller": "subscribeCatalog",
+          "callee": "listeners.delete",
+          "lineNumber": 162
+        },
+        {
+          "caller": "notify",
+          "callee": "l",
+          "lineNumber": 167
+        },
+        {
+          "caller": "_resetCatalogStore",
+          "callee": "seasonCache.clear",
+          "lineNumber": 173
+        },
+        {
+          "caller": "_resetCatalogStore",
+          "callee": "seasonInflight.clear",
+          "lineNumber": 174
+        },
+        {
+          "caller": "_resetCatalogStore",
+          "callee": "listeners.clear",
+          "lineNumber": 175
+        },
+        {
+          "caller": "_resetCatalogStore",
+          "callee": "makeDefaultOpts",
+          "lineNumber": 178
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 9,
+        "functionCount": 13,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/main/stores/revalidateSeason.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 63,
+      "nonEmptyLines": 57,
+      "functions": [
+        {
+          "name": "revalidateCurrentSeason",
+          "startLine": 29,
+          "endLine": 63,
+          "params": [
+            "year",
+            "opts"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "revalidateCurrentSeason",
+          "line": 29,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "revalidateCurrentSeason",
+          "callee": "getSeason",
+          "lineNumber": 33
+        },
+        {
+          "caller": "revalidateCurrentSeason",
+          "callee": "setTimeout",
+          "lineNumber": 40
+        },
+        {
+          "caller": "revalidateCurrentSeason",
+          "callee": "controller.abort",
+          "lineNumber": 40
+        },
+        {
+          "caller": "revalidateCurrentSeason",
+          "callee": "client.fetch",
+          "lineNumber": 42
+        },
+        {
+          "caller": "revalidateCurrentSeason",
+          "callee": "console.warn",
+          "lineNumber": 49
+        },
+        {
+          "caller": "revalidateCurrentSeason",
+          "callee": "res.json",
+          "lineNumber": 52
+        },
+        {
+          "caller": "revalidateCurrentSeason",
+          "callee": "openf1ToSessionMap",
+          "lineNumber": 53
+        },
+        {
+          "caller": "revalidateCurrentSeason",
+          "callee": "diffSessions",
+          "lineNumber": 54
+        },
+        {
+          "caller": "revalidateCurrentSeason",
+          "callee": "_patchSessions",
+          "lineNumber": 55
+        },
+        {
+          "caller": "revalidateCurrentSeason",
+          "callee": "console.warn",
+          "lineNumber": 58
+        },
+        {
+          "caller": "revalidateCurrentSeason",
+          "callee": "clearTimeout",
+          "lineNumber": 61
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/map/LiveDataSource.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 411,
+      "nonEmptyLines": 375,
+      "functions": [
+        {
+          "name": "priorityFor",
+          "startLine": 73,
+          "endLine": 75,
+          "params": [
+            "endpoint"
+          ]
+        },
+        {
+          "name": "recordKey",
+          "startLine": 82,
+          "endLine": 99,
+          "params": [
+            "endpoint",
+            "r"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "LiveDataSource",
+          "startLine": 125,
+          "endLine": 410,
+          "methods": [
+            "constructor",
+            "start",
+            "stop",
+            "getDisplayTime",
+            "getSamplePair",
+            "getStreamState",
+            "onDisplayTimeChange",
+            "getLatestBefore",
+            "getAllBefore",
+            "getLapAt",
+            "getCompletedLapsBefore",
+            "getStintForLap",
+            "getAggregateBefore",
+            "getSessionResult",
+            "recordsFor",
+            "hydrate",
+            "startCadence",
+            "fetchHydrationWindow",
+            "fetchCadence",
+            "runFetch",
+            "ingestLocation",
+            "ingestGeneric",
+            "advanceNewest",
+            "trimRingBuffer"
+          ],
+          "properties": [
+            "client",
+            "now",
+            "displayLagMs",
+            "ringBufferMs",
+            "trimMinIntervalMs",
+            "lastTrimAtMs",
+            "locationBuffer",
+            "records",
+            "cursors",
+            "newestDate",
+            "anchorWall",
+            "lastSampleWall",
+            "listeners",
+            "intervalIds",
+            "started",
+            "abortController"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "LIVE_CADENCE",
+          "line": 56,
+          "isDefault": false
+        },
+        {
+          "name": "LiveDataSource",
+          "line": 125,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "priorityFor",
+          "callee": "HIGH_PRIORITY_ENDPOINTS.has",
+          "lineNumber": 74
+        },
+        {
+          "caller": "recordKey",
+          "callee": "str",
+          "lineNumber": 92
+        },
+        {
+          "caller": "recordKey",
+          "callee": "str",
+          "lineNumber": 94
+        },
+        {
+          "caller": "recordKey",
+          "callee": "str",
+          "lineNumber": 97
+        },
+        {
+          "caller": "start",
+          "callee": "this.opts.onCorsFailed",
+          "lineNumber": 175
+        },
+        {
+          "caller": "start",
+          "callee": "this.hydrate",
+          "lineNumber": 181
+        },
+        {
+          "caller": "start",
+          "callee": "this.startCadence",
+          "lineNumber": 184
+        },
+        {
+          "caller": "stop",
+          "callee": "clearInterval",
+          "lineNumber": 188
+        },
+        {
+          "caller": "stop",
+          "callee": "this.abortController?.abort",
+          "lineNumber": 192
+        },
+        {
+          "caller": "getDisplayTime",
+          "callee": "this.newestDate.valueOf",
+          "lineNumber": 201
+        },
+        {
+          "caller": "getDisplayTime",
+          "callee": "this.now().valueOf",
+          "lineNumber": 202
+        },
+        {
+          "caller": "getDisplayTime",
+          "callee": "this.now",
+          "lineNumber": 202
+        },
+        {
+          "caller": "getDisplayTime",
+          "callee": "this.anchorWall.valueOf",
+          "lineNumber": 202
+        },
+        {
+          "caller": "getSamplePair",
+          "callee": "this.locationBuffer.getSamplePair",
+          "lineNumber": 207
+        },
+        {
+          "caller": "getStreamState",
+          "callee": "this.now().valueOf",
+          "lineNumber": 212
+        },
+        {
+          "caller": "getStreamState",
+          "callee": "this.now",
+          "lineNumber": 212
+        },
+        {
+          "caller": "getStreamState",
+          "callee": "this.lastSampleWall.valueOf",
+          "lineNumber": 212
+        },
+        {
+          "caller": "onDisplayTimeChange",
+          "callee": "this.listeners.add",
+          "lineNumber": 219
+        },
+        {
+          "caller": "onDisplayTimeChange",
+          "callee": "this.listeners.delete",
+          "lineNumber": 221
+        },
+        {
+          "caller": "getLatestBefore",
+          "callee": "latestBefore",
+          "lineNumber": 235
+        },
+        {
+          "caller": "getLatestBefore",
+          "callee": "this.recordsFor",
+          "lineNumber": 235
+        },
+        {
+          "caller": "getAllBefore",
+          "callee": "allBefore",
+          "lineNumber": 243
+        },
+        {
+          "caller": "getAllBefore",
+          "callee": "this.recordsFor",
+          "lineNumber": 243
+        },
+        {
+          "caller": "getLapAt",
+          "callee": "lapAt",
+          "lineNumber": 246
+        },
+        {
+          "caller": "getLapAt",
+          "callee": "this.recordsFor",
+          "lineNumber": 246
+        },
+        {
+          "caller": "getCompletedLapsBefore",
+          "callee": "completedLapsBefore",
+          "lineNumber": 249
+        },
+        {
+          "caller": "getCompletedLapsBefore",
+          "callee": "this.recordsFor",
+          "lineNumber": 249
+        },
+        {
+          "caller": "getStintForLap",
+          "callee": "stintForLap",
+          "lineNumber": 252
+        },
+        {
+          "caller": "getStintForLap",
+          "callee": "this.recordsFor",
+          "lineNumber": 252
+        },
+        {
+          "caller": "getAggregateBefore",
+          "callee": "computeAggregateBefore",
+          "lineNumber": 255
+        },
+        {
+          "caller": "getAggregateBefore",
+          "callee": "this.recordsFor",
+          "lineNumber": 255
+        },
+        {
+          "caller": "getSessionResult",
+          "callee": "sessionResultFor",
+          "lineNumber": 260
+        },
+        {
+          "caller": "getSessionResult",
+          "callee": "this.recordsFor",
+          "lineNumber": 260
+        },
+        {
+          "caller": "recordsFor",
+          "callee": "this.records.get",
+          "lineNumber": 265
+        },
+        {
+          "caller": "recordsFor",
+          "callee": "Array.from",
+          "lineNumber": 266
+        },
+        {
+          "caller": "recordsFor",
+          "callee": "inner.values",
+          "lineNumber": 266
+        },
+        {
+          "caller": "hydrate",
+          "callee": "this.now().valueOf",
+          "lineNumber": 272
+        },
+        {
+          "caller": "hydrate",
+          "callee": "this.now",
+          "lineNumber": 272
+        },
+        {
+          "caller": "hydrate",
+          "callee": "new Date(nowMs - DEFAULT_HYDRATION_WINDOW_MS).toISOString",
+          "lineNumber": 273
+        },
+        {
+          "caller": "hydrate",
+          "callee": "new Date(nowMs - DEFAULT_HYDRATION_END_LAG_MS).toISOString",
+          "lineNumber": 274
+        },
+        {
+          "caller": "hydrate",
+          "callee": "LIVE_CADENCE.map",
+          "lineNumber": 277
+        },
+        {
+          "caller": "hydrate",
+          "callee": "this.fetchHydrationWindow",
+          "lineNumber": 278
+        },
+        {
+          "caller": "hydrate",
+          "callee": "Promise.all",
+          "lineNumber": 280
+        },
+        {
+          "caller": "startCadence",
+          "callee": "setInterval",
+          "lineNumber": 286
+        },
+        {
+          "caller": "startCadence",
+          "callee": "this.fetchCadence",
+          "lineNumber": 287
+        },
+        {
+          "caller": "startCadence",
+          "callee": "this.intervalIds.push",
+          "lineNumber": 289
+        },
+        {
+          "caller": "fetchHydrationWindow",
+          "callee": "this.runFetch",
+          "lineNumber": 300
+        },
+        {
+          "caller": "fetchCadence",
+          "callee": "this.cursors.get",
+          "lineNumber": 308
+        },
+        {
+          "caller": "fetchCadence",
+          "callee": "cursor.toISOString",
+          "lineNumber": 312
+        },
+        {
+          "caller": "fetchCadence",
+          "callee": "this.runFetch",
+          "lineNumber": 314
+        },
+        {
+          "caller": "runFetch",
+          "callee": "this.client.fetch",
+          "lineNumber": 321
+        },
+        {
+          "caller": "runFetch",
+          "callee": "priorityFor",
+          "lineNumber": 324
+        },
+        {
+          "caller": "runFetch",
+          "callee": "console.warn",
+          "lineNumber": 330
+        },
+        {
+          "caller": "runFetch",
+          "callee": "console.warn",
+          "lineNumber": 334
+        },
+        {
+          "caller": "runFetch",
+          "callee": "res.json",
+          "lineNumber": 337
+        },
+        {
+          "caller": "runFetch",
+          "callee": "Array.isArray",
+          "lineNumber": 338
+        },
+        {
+          "caller": "runFetch",
+          "callee": "this.ingestLocation",
+          "lineNumber": 340
+        },
+        {
+          "caller": "runFetch",
+          "callee": "this.ingestGeneric",
+          "lineNumber": 342
+        },
+        {
+          "caller": "ingestLocation",
+          "callee": "this.locationBuffer.ingestRaw",
+          "lineNumber": 349
+        },
+        {
+          "caller": "ingestLocation",
+          "callee": "this.opts.onSample",
+          "lineNumber": 351
+        },
+        {
+          "caller": "ingestLocation",
+          "callee": "result.sample.date.valueOf",
+          "lineNumber": 352
+        },
+        {
+          "caller": "ingestLocation",
+          "callee": "maxDate.valueOf",
+          "lineNumber": 352
+        },
+        {
+          "caller": "ingestLocation",
+          "callee": "this.cursors.set",
+          "lineNumber": 355
+        },
+        {
+          "caller": "ingestLocation",
+          "callee": "this.advanceNewest",
+          "lineNumber": 356
+        },
+        {
+          "caller": "ingestLocation",
+          "callee": "this.now().valueOf",
+          "lineNumber": 361
+        },
+        {
+          "caller": "ingestLocation",
+          "callee": "this.now",
+          "lineNumber": 361
+        },
+        {
+          "caller": "ingestLocation",
+          "callee": "this.trimRingBuffer",
+          "lineNumber": 364
+        },
+        {
+          "caller": "ingestGeneric",
+          "callee": "this.records.get",
+          "lineNumber": 372
+        },
+        {
+          "caller": "ingestGeneric",
+          "callee": "this.records.set",
+          "lineNumber": 375
+        },
+        {
+          "caller": "ingestGeneric",
+          "callee": "parseDate",
+          "lineNumber": 379
+        },
+        {
+          "caller": "ingestGeneric",
+          "callee": "date.valueOf",
+          "lineNumber": 381
+        },
+        {
+          "caller": "ingestGeneric",
+          "callee": "maxDate.valueOf",
+          "lineNumber": 381
+        },
+        {
+          "caller": "ingestGeneric",
+          "callee": "parseDate",
+          "lineNumber": 386
+        },
+        {
+          "caller": "ingestGeneric",
+          "callee": "bucket.set",
+          "lineNumber": 387
+        },
+        {
+          "caller": "ingestGeneric",
+          "callee": "recordKey",
+          "lineNumber": 387
+        },
+        {
+          "caller": "ingestGeneric",
+          "callee": "this.cursors.set",
+          "lineNumber": 390
+        },
+        {
+          "caller": "ingestGeneric",
+          "callee": "this.advanceNewest",
+          "lineNumber": 391
+        },
+        {
+          "caller": "advanceNewest",
+          "callee": "date.valueOf",
+          "lineNumber": 396
+        },
+        {
+          "caller": "advanceNewest",
+          "callee": "this.newestDate.valueOf",
+          "lineNumber": 396
+        },
+        {
+          "caller": "advanceNewest",
+          "callee": "this.now",
+          "lineNumber": 398
+        },
+        {
+          "caller": "advanceNewest",
+          "callee": "this.now",
+          "lineNumber": 400
+        },
+        {
+          "caller": "advanceNewest",
+          "callee": "this.getDisplayTime",
+          "lineNumber": 401
+        },
+        {
+          "caller": "advanceNewest",
+          "callee": "cb",
+          "lineNumber": 402
+        },
+        {
+          "caller": "trimRingBuffer",
+          "callee": "this.newestDate.valueOf",
+          "lineNumber": 407
+        },
+        {
+          "caller": "trimRingBuffer",
+          "callee": "this.locationBuffer.trimBefore",
+          "lineNumber": 408
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/map/ReplayDataSource.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 431,
+      "nonEmptyLines": 393,
+      "functions": [
+        {
+          "name": "densePriority",
+          "startLine": 70,
+          "endLine": 72,
+          "params": [
+            "endpoint"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ReplayDataSource",
+          "startLine": 97,
+          "endLine": 431,
+          "methods": [
+            "constructor",
+            "start",
+            "stop",
+            "pause",
+            "resume",
+            "isPaused",
+            "startClockTick",
+            "advanceClock",
+            "setPlaybackClock",
+            "setSpeed",
+            "getSpeed",
+            "getDisplayTime",
+            "getSamplePair",
+            "getStreamState",
+            "onDisplayTimeChange",
+            "getLatestBefore",
+            "getAllBefore",
+            "getLapAt",
+            "getCompletedLapsBefore",
+            "getStintForLap",
+            "getAggregateBefore",
+            "getSessionResult",
+            "recordsFor",
+            "windowStartFor",
+            "ensureLookahead",
+            "fetchSparse",
+            "fetchDenseWindow",
+            "runFetch",
+            "ingestLocation"
+          ],
+          "properties": [
+            "client",
+            "windowMs",
+            "lookaheadBaseMs",
+            "sessionStartMs",
+            "cache",
+            "inflight",
+            "locationBuffer",
+            "playbackClock",
+            "speed",
+            "state",
+            "paused",
+            "listeners",
+            "tickTimer",
+            "lastTickWallMs",
+            "lastLookaheadAt",
+            "abortController"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SPARSE_ENDPOINTS",
+          "line": 48,
+          "isDefault": false
+        },
+        {
+          "name": "DENSE_ENDPOINTS",
+          "line": 58,
+          "isDefault": false
+        },
+        {
+          "name": "ReplayDataSource",
+          "line": 97,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "densePriority",
+          "callee": "DENSE_HIGH_PRIORITY.has",
+          "lineNumber": 71
+        },
+        {
+          "caller": "constructor",
+          "callee": "opts.sessionDateStart.valueOf",
+          "lineNumber": 128
+        },
+        {
+          "caller": "start",
+          "callee": "Promise.all",
+          "lineNumber": 141
+        },
+        {
+          "caller": "start",
+          "callee": "SPARSE_ENDPOINTS.map",
+          "lineNumber": 141
+        },
+        {
+          "caller": "start",
+          "callee": "this.fetchSparse",
+          "lineNumber": 141
+        },
+        {
+          "caller": "start",
+          "callee": "this.ensureLookahead",
+          "lineNumber": 144
+        },
+        {
+          "caller": "start",
+          "callee": "this.startClockTick",
+          "lineNumber": 147
+        },
+        {
+          "caller": "stop",
+          "callee": "clearInterval",
+          "lineNumber": 157
+        },
+        {
+          "caller": "stop",
+          "callee": "this.abortController?.abort",
+          "lineNumber": 160
+        },
+        {
+          "caller": "stop",
+          "callee": "this.listeners.clear",
+          "lineNumber": 162
+        },
+        {
+          "caller": "pause",
+          "callee": "clearInterval",
+          "lineNumber": 172
+        },
+        {
+          "caller": "resume",
+          "callee": "this.startClockTick",
+          "lineNumber": 182
+        },
+        {
+          "caller": "startClockTick",
+          "callee": "Date.now",
+          "lineNumber": 194
+        },
+        {
+          "caller": "startClockTick",
+          "callee": "setInterval",
+          "lineNumber": 195
+        },
+        {
+          "caller": "startClockTick",
+          "callee": "this.advanceClock",
+          "lineNumber": 195
+        },
+        {
+          "caller": "startClockTick",
+          "callee": "t.unref",
+          "lineNumber": 198
+        },
+        {
+          "caller": "advanceClock",
+          "callee": "Date.now",
+          "lineNumber": 207
+        },
+        {
+          "caller": "advanceClock",
+          "callee": "this.playbackClock.valueOf",
+          "lineNumber": 211
+        },
+        {
+          "caller": "advanceClock",
+          "callee": "this.opts.sessionDateEnd?.valueOf",
+          "lineNumber": 212
+        },
+        {
+          "caller": "advanceClock",
+          "callee": "Math.min",
+          "lineNumber": 213
+        },
+        {
+          "caller": "advanceClock",
+          "callee": "this.ensureLookahead",
+          "lineNumber": 218
+        },
+        {
+          "caller": "advanceClock",
+          "callee": "cb",
+          "lineNumber": 220
+        },
+        {
+          "caller": "setPlaybackClock",
+          "callee": "this.ensureLookahead",
+          "lineNumber": 227
+        },
+        {
+          "caller": "setPlaybackClock",
+          "callee": "cb",
+          "lineNumber": 228
+        },
+        {
+          "caller": "setSpeed",
+          "callee": "this.ensureLookahead",
+          "lineNumber": 234
+        },
+        {
+          "caller": "getSamplePair",
+          "callee": "this.locationBuffer.getSamplePair",
+          "lineNumber": 248
+        },
+        {
+          "caller": "onDisplayTimeChange",
+          "callee": "this.listeners.add",
+          "lineNumber": 256
+        },
+        {
+          "caller": "onDisplayTimeChange",
+          "callee": "this.listeners.delete",
+          "lineNumber": 258
+        },
+        {
+          "caller": "getLatestBefore",
+          "callee": "latestBefore",
+          "lineNumber": 273
+        },
+        {
+          "caller": "getLatestBefore",
+          "callee": "this.recordsFor",
+          "lineNumber": 273
+        },
+        {
+          "caller": "getAllBefore",
+          "callee": "allBefore",
+          "lineNumber": 281
+        },
+        {
+          "caller": "getAllBefore",
+          "callee": "this.recordsFor",
+          "lineNumber": 281
+        },
+        {
+          "caller": "getLapAt",
+          "callee": "lapAt",
+          "lineNumber": 284
+        },
+        {
+          "caller": "getLapAt",
+          "callee": "this.recordsFor",
+          "lineNumber": 284
+        },
+        {
+          "caller": "getCompletedLapsBefore",
+          "callee": "completedLapsBefore",
+          "lineNumber": 287
+        },
+        {
+          "caller": "getCompletedLapsBefore",
+          "callee": "this.recordsFor",
+          "lineNumber": 287
+        },
+        {
+          "caller": "getStintForLap",
+          "callee": "stintForLap",
+          "lineNumber": 290
+        },
+        {
+          "caller": "getStintForLap",
+          "callee": "this.recordsFor",
+          "lineNumber": 290
+        },
+        {
+          "caller": "getAggregateBefore",
+          "callee": "computeAggregateBefore",
+          "lineNumber": 293
+        },
+        {
+          "caller": "getAggregateBefore",
+          "callee": "this.recordsFor",
+          "lineNumber": 293
+        },
+        {
+          "caller": "getSessionResult",
+          "callee": "sessionResultFor",
+          "lineNumber": 297
+        },
+        {
+          "caller": "getSessionResult",
+          "callee": "this.recordsFor",
+          "lineNumber": 297
+        },
+        {
+          "caller": "recordsFor",
+          "callee": "this.cache.get",
+          "lineNumber": 306
+        },
+        {
+          "caller": "recordsFor",
+          "callee": "key.startsWith",
+          "lineNumber": 311
+        },
+        {
+          "caller": "recordsFor",
+          "callee": "out.push",
+          "lineNumber": 311
+        },
+        {
+          "caller": "windowStartFor",
+          "callee": "t.valueOf",
+          "lineNumber": 320
+        },
+        {
+          "caller": "windowStartFor",
+          "callee": "Math.floor",
+          "lineNumber": 321
+        },
+        {
+          "caller": "ensureLookahead",
+          "callee": "this.windowStartFor",
+          "lineNumber": 328
+        },
+        {
+          "caller": "ensureLookahead",
+          "callee": "this.playbackClock.valueOf",
+          "lineNumber": 329
+        },
+        {
+          "caller": "ensureLookahead",
+          "callee": "startWindow.valueOf",
+          "lineNumber": 332
+        },
+        {
+          "caller": "ensureLookahead",
+          "callee": "windows.push",
+          "lineNumber": 336
+        },
+        {
+          "caller": "ensureLookahead",
+          "callee": "tasks.push",
+          "lineNumber": 341
+        },
+        {
+          "caller": "ensureLookahead",
+          "callee": "this.fetchDenseWindow",
+          "lineNumber": 341
+        },
+        {
+          "caller": "ensureLookahead",
+          "callee": "Promise.all",
+          "lineNumber": 344
+        },
+        {
+          "caller": "fetchSparse",
+          "callee": "this.cache.has",
+          "lineNumber": 349
+        },
+        {
+          "caller": "fetchSparse",
+          "callee": "this.inflight.get",
+          "lineNumber": 350
+        },
+        {
+          "caller": "fetchSparse",
+          "callee": "this.runFetch",
+          "lineNumber": 352
+        },
+        {
+          "caller": "fetchSparse",
+          "callee": "this.inflight.set",
+          "lineNumber": 353
+        },
+        {
+          "caller": "fetchSparse",
+          "callee": "this.inflight.delete",
+          "lineNumber": 357
+        },
+        {
+          "caller": "fetchDenseWindow",
+          "callee": "windowStart.toISOString",
+          "lineNumber": 362
+        },
+        {
+          "caller": "fetchDenseWindow",
+          "callee": "this.cache.has",
+          "lineNumber": 364
+        },
+        {
+          "caller": "fetchDenseWindow",
+          "callee": "this.inflight.get",
+          "lineNumber": 365
+        },
+        {
+          "caller": "fetchDenseWindow",
+          "callee": "new Date(windowStart.valueOf() + this.windowMs).toISOString",
+          "lineNumber": 367
+        },
+        {
+          "caller": "fetchDenseWindow",
+          "callee": "windowStart.valueOf",
+          "lineNumber": 367
+        },
+        {
+          "caller": "fetchDenseWindow",
+          "callee": "this.runFetch",
+          "lineNumber": 374
+        },
+        {
+          "caller": "fetchDenseWindow",
+          "callee": "densePriority",
+          "lineNumber": 374
+        },
+        {
+          "caller": "fetchDenseWindow",
+          "callee": "this.inflight.set",
+          "lineNumber": 375
+        },
+        {
+          "caller": "fetchDenseWindow",
+          "callee": "this.inflight.delete",
+          "lineNumber": 379
+        },
+        {
+          "caller": "runFetch",
+          "callee": "this.client.fetch",
+          "lineNumber": 392
+        },
+        {
+          "caller": "runFetch",
+          "callee": "console.warn",
+          "lineNumber": 401
+        },
+        {
+          "caller": "runFetch",
+          "callee": "console.warn",
+          "lineNumber": 405
+        },
+        {
+          "caller": "runFetch",
+          "callee": "res.json",
+          "lineNumber": 408
+        },
+        {
+          "caller": "runFetch",
+          "callee": "Array.isArray",
+          "lineNumber": 409
+        },
+        {
+          "caller": "runFetch",
+          "callee": "parseDate",
+          "lineNumber": 412
+        },
+        {
+          "caller": "runFetch",
+          "callee": "parseDate",
+          "lineNumber": 416
+        },
+        {
+          "caller": "runFetch",
+          "callee": "parsed.push",
+          "lineNumber": 417
+        },
+        {
+          "caller": "runFetch",
+          "callee": "this.cache.set",
+          "lineNumber": 419
+        },
+        {
+          "caller": "runFetch",
+          "callee": "this.ingestLocation",
+          "lineNumber": 420
+        },
+        {
+          "caller": "ingestLocation",
+          "callee": "this.locationBuffer.ingestRaw",
+          "lineNumber": 425
+        },
+        {
+          "caller": "ingestLocation",
+          "callee": "this.opts.onSample",
+          "lineNumber": 428
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 3,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "src/shared/Footer.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 83,
+      "nonEmptyLines": 76,
+      "functions": [
+        {
+          "name": "AttrLink",
+          "startLine": 17,
+          "endLine": 23,
+          "params": [
+            "{ href, children }"
+          ]
+        },
+        {
+          "name": "Footer",
+          "startLine": 25,
+          "endLine": 70,
+          "params": []
+        },
+        {
+          "name": "formatGeneratedAt",
+          "startLine": 72,
+          "endLine": 83,
+          "params": [
+            "iso"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Footer",
+          "line": 25,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "Footer",
+          "callee": "useCatalogIndex",
+          "lineNumber": 26
+        },
+        {
+          "caller": "Footer",
+          "callee": "useEffect",
+          "lineNumber": 27
+        },
+        {
+          "caller": "Footer",
+          "callee": "loadCatalogIndex().catch",
+          "lineNumber": 28
+        },
+        {
+          "caller": "Footer",
+          "callee": "loadCatalogIndex",
+          "lineNumber": 28
+        },
+        {
+          "caller": "Footer",
+          "callee": "console.warn",
+          "lineNumber": 28
+        },
+        {
+          "caller": "Footer",
+          "callee": "formatGeneratedAt",
+          "lineNumber": 31
+        },
+        {
+          "caller": "formatGeneratedAt",
+          "callee": "Number.isFinite",
+          "lineNumber": 75
+        },
+        {
+          "caller": "formatGeneratedAt",
+          "callee": "d.getTime",
+          "lineNumber": 75
+        },
+        {
+          "caller": "formatGeneratedAt",
+          "callee": "d.getUTCFullYear",
+          "lineNumber": 77
+        },
+        {
+          "caller": "formatGeneratedAt",
+          "callee": "String(d.getUTCMonth() + 1).padStart",
+          "lineNumber": 78
+        },
+        {
+          "caller": "formatGeneratedAt",
+          "callee": "String",
+          "lineNumber": 78
+        },
+        {
+          "caller": "formatGeneratedAt",
+          "callee": "d.getUTCMonth",
+          "lineNumber": 78
+        },
+        {
+          "caller": "formatGeneratedAt",
+          "callee": "String(d.getUTCDate()).padStart",
+          "lineNumber": 79
+        },
+        {
+          "caller": "formatGeneratedAt",
+          "callee": "String",
+          "lineNumber": 79
+        },
+        {
+          "caller": "formatGeneratedAt",
+          "callee": "d.getUTCDate",
+          "lineNumber": 79
+        },
+        {
+          "caller": "formatGeneratedAt",
+          "callee": "String(d.getUTCHours()).padStart",
+          "lineNumber": 80
+        },
+        {
+          "caller": "formatGeneratedAt",
+          "callee": "String",
+          "lineNumber": 80
+        },
+        {
+          "caller": "formatGeneratedAt",
+          "callee": "d.getUTCHours",
+          "lineNumber": 80
+        },
+        {
+          "caller": "formatGeneratedAt",
+          "callee": "String(d.getUTCMinutes()).padStart",
+          "lineNumber": 81
+        },
+        {
+          "caller": "formatGeneratedAt",
+          "callee": "String",
+          "lineNumber": 81
+        },
+        {
+          "caller": "formatGeneratedAt",
+          "callee": "d.getUTCMinutes",
+          "lineNumber": 81
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/shared/__tests__/createMockOpenF1Client.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 51,
+      "nonEmptyLines": 46,
+      "functions": [
+        {
+          "name": "jsonOk",
+          "startLine": 21,
+          "endLine": 26,
+          "params": [
+            "body"
+          ]
+        },
+        {
+          "name": "createMockOpenF1Client",
+          "startLine": 32,
+          "endLine": 51,
+          "params": [
+            "routes",
+            "opts"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "createMockOpenF1Client",
+          "line": 32,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "jsonOk",
+          "callee": "JSON.stringify",
+          "lineNumber": 22
+        },
+        {
+          "caller": "createMockOpenF1Client",
+          "callee": "jsonOk",
+          "lineNumber": 36
+        },
+        {
+          "caller": "createMockOpenF1Client",
+          "callee": "vi.fn",
+          "lineNumber": 37
+        },
+        {
+          "caller": "createMockOpenF1Client",
+          "callee": "String",
+          "lineNumber": 38
+        },
+        {
+          "caller": "createMockOpenF1Client",
+          "callee": "handler",
+          "lineNumber": 41
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "src/shared/openf1Client.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 461,
+      "nonEmptyLines": 405,
+      "functions": [
+        {
+          "name": "makeAbortError",
+          "startLine": 71,
+          "endLine": 76,
+          "params": []
+        },
+        {
+          "name": "defaultSchedule",
+          "startLine": 78,
+          "endLine": 81,
+          "params": [
+            "cb",
+            "ms"
+          ]
+        },
+        {
+          "name": "defaultSleep",
+          "startLine": 83,
+          "endLine": 99,
+          "params": [
+            "ms",
+            "signal"
+          ]
+        },
+        {
+          "name": "sortedParamEntries",
+          "startLine": 102,
+          "endLine": 111,
+          "params": [
+            "params"
+          ]
+        },
+        {
+          "name": "joinParam",
+          "startLine": 114,
+          "endLine": 116,
+          "params": [
+            "key",
+            "value"
+          ]
+        },
+        {
+          "name": "canonicalKey",
+          "startLine": 118,
+          "endLine": 121,
+          "params": [
+            "path",
+            "entries"
+          ]
+        },
+        {
+          "name": "buildUrl",
+          "startLine": 123,
+          "endLine": 127,
+          "params": [
+            "baseUrl",
+            "path",
+            "entries"
+          ]
+        },
+        {
+          "name": "computeWaitMs",
+          "startLine": 130,
+          "endLine": 142,
+          "params": [
+            "res",
+            "attempt",
+            "baseMs",
+            "maxMs"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "TokenBucket",
+          "startLine": 164,
+          "endLine": 212,
+          "methods": [
+            "constructor",
+            "tryTake",
+            "ensureTimer",
+            "reset"
+          ],
+          "properties": [
+            "tokens",
+            "capacity",
+            "refillMs",
+            "schedule",
+            "onRefill",
+            "cancelTimer"
+          ]
+        },
+        {
+          "name": "OpenF1Client",
+          "startLine": 214,
+          "endLine": 458,
+          "methods": [
+            "constructor",
+            "fetch",
+            "fetchJson",
+            "getMetrics",
+            "onRequestEvent",
+            "_resetForTest",
+            "addSubscriber",
+            "removeSubscriberListener",
+            "handleSubscriberAbort",
+            "removeFromQueue",
+            "promote",
+            "schedulePump",
+            "dequeueHighest",
+            "pump",
+            "emit",
+            "dispatch",
+            "resolveAll",
+            "rejectAll"
+          ],
+          "properties": [
+            "baseUrl",
+            "fetchImpl",
+            "maxConcurrent",
+            "maxRetries",
+            "backoffBaseMs",
+            "backoffMaxMs",
+            "sleep",
+            "bucket",
+            "queues",
+            "pendingByKey",
+            "inflightByKey",
+            "listeners",
+            "metrics",
+            "pumpScheduled"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "OpenF1Client",
+          "line": 214,
+          "isDefault": false
+        },
+        {
+          "name": "openF1Client",
+          "line": 461,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "defaultSchedule",
+          "callee": "setTimeout",
+          "lineNumber": 79
+        },
+        {
+          "caller": "defaultSchedule",
+          "callee": "clearTimeout",
+          "lineNumber": 80
+        },
+        {
+          "caller": "defaultSleep",
+          "callee": "reject",
+          "lineNumber": 86
+        },
+        {
+          "caller": "defaultSleep",
+          "callee": "makeAbortError",
+          "lineNumber": 86
+        },
+        {
+          "caller": "onAbort",
+          "callee": "clearTimeout",
+          "lineNumber": 90
+        },
+        {
+          "caller": "onAbort",
+          "callee": "signal?.removeEventListener",
+          "lineNumber": 91
+        },
+        {
+          "caller": "onAbort",
+          "callee": "reject",
+          "lineNumber": 92
+        },
+        {
+          "caller": "onAbort",
+          "callee": "makeAbortError",
+          "lineNumber": 92
+        },
+        {
+          "caller": "defaultSleep",
+          "callee": "setTimeout",
+          "lineNumber": 94
+        },
+        {
+          "caller": "defaultSleep",
+          "callee": "signal?.removeEventListener",
+          "lineNumber": 95
+        },
+        {
+          "caller": "defaultSleep",
+          "callee": "resolve",
+          "lineNumber": 96
+        },
+        {
+          "caller": "defaultSleep",
+          "callee": "signal?.addEventListener",
+          "lineNumber": 98
+        },
+        {
+          "caller": "sortedParamEntries",
+          "callee": "Object.keys(params)\n    .sort()\n    .map",
+          "lineNumber": 104
+        },
+        {
+          "caller": "sortedParamEntries",
+          "callee": "Object.keys(params)\n    .sort",
+          "lineNumber": 104
+        },
+        {
+          "caller": "sortedParamEntries",
+          "callee": "Object.keys",
+          "lineNumber": 104
+        },
+        {
+          "caller": "sortedParamEntries",
+          "callee": "String",
+          "lineNumber": 108
+        },
+        {
+          "caller": "joinParam",
+          "callee": "/[<>=]$/.test",
+          "lineNumber": 115
+        },
+        {
+          "caller": "canonicalKey",
+          "callee": "entries.map(([k, v]) => joinParam(k, v)).join",
+          "lineNumber": 120
+        },
+        {
+          "caller": "canonicalKey",
+          "callee": "entries.map",
+          "lineNumber": 120
+        },
+        {
+          "caller": "canonicalKey",
+          "callee": "joinParam",
+          "lineNumber": 120
+        },
+        {
+          "caller": "buildUrl",
+          "callee": "entries.map(([k, v]) => joinParam(k, encodeURIComponent(v))).join",
+          "lineNumber": 125
+        },
+        {
+          "caller": "buildUrl",
+          "callee": "entries.map",
+          "lineNumber": 125
+        },
+        {
+          "caller": "buildUrl",
+          "callee": "joinParam",
+          "lineNumber": 125
+        },
+        {
+          "caller": "buildUrl",
+          "callee": "encodeURIComponent",
+          "lineNumber": 125
+        },
+        {
+          "caller": "computeWaitMs",
+          "callee": "res.headers.get",
+          "lineNumber": 131
+        },
+        {
+          "caller": "computeWaitMs",
+          "callee": "Number",
+          "lineNumber": 133
+        },
+        {
+          "caller": "computeWaitMs",
+          "callee": "Number.isFinite",
+          "lineNumber": 134
+        },
+        {
+          "caller": "computeWaitMs",
+          "callee": "Math.min",
+          "lineNumber": 134
+        },
+        {
+          "caller": "computeWaitMs",
+          "callee": "Date.parse",
+          "lineNumber": 135
+        },
+        {
+          "caller": "computeWaitMs",
+          "callee": "Number.isNaN",
+          "lineNumber": 136
+        },
+        {
+          "caller": "computeWaitMs",
+          "callee": "Date.now",
+          "lineNumber": 137
+        },
+        {
+          "caller": "computeWaitMs",
+          "callee": "Math.min",
+          "lineNumber": 138
+        },
+        {
+          "caller": "computeWaitMs",
+          "callee": "Math.min",
+          "lineNumber": 141
+        },
+        {
+          "caller": "computeWaitMs",
+          "callee": "Math.pow",
+          "lineNumber": 141
+        },
+        {
+          "caller": "constructor",
+          "callee": "Math.ceil",
+          "lineNumber": 181
+        },
+        {
+          "caller": "tryTake",
+          "callee": "this.ensureTimer",
+          "lineNumber": 190
+        },
+        {
+          "caller": "ensureTimer",
+          "callee": "this.schedule",
+          "lineNumber": 199
+        },
+        {
+          "caller": "ensureTimer",
+          "callee": "Math.min",
+          "lineNumber": 201
+        },
+        {
+          "caller": "ensureTimer",
+          "callee": "this.onRefill",
+          "lineNumber": 202
+        },
+        {
+          "caller": "ensureTimer",
+          "callee": "this.ensureTimer",
+          "lineNumber": 203
+        },
+        {
+          "caller": "reset",
+          "callee": "this.cancelTimer",
+          "lineNumber": 208
+        },
+        {
+          "caller": "constructor",
+          "callee": "fetch",
+          "lineNumber": 236
+        },
+        {
+          "caller": "constructor",
+          "callee": "this.schedulePump",
+          "lineNumber": 246
+        },
+        {
+          "caller": "fetch",
+          "callee": "Promise.reject",
+          "lineNumber": 252
+        },
+        {
+          "caller": "fetch",
+          "callee": "makeAbortError",
+          "lineNumber": 252
+        },
+        {
+          "caller": "fetch",
+          "callee": "sortedParamEntries",
+          "lineNumber": 254
+        },
+        {
+          "caller": "fetch",
+          "callee": "canonicalKey",
+          "lineNumber": 255
+        },
+        {
+          "caller": "fetch",
+          "callee": "buildUrl",
+          "lineNumber": 256
+        },
+        {
+          "caller": "fetch",
+          "callee": "this.inflightByKey.get",
+          "lineNumber": 261
+        },
+        {
+          "caller": "fetch",
+          "callee": "this.addSubscriber",
+          "lineNumber": 264
+        },
+        {
+          "caller": "fetch",
+          "callee": "this.pendingByKey.get",
+          "lineNumber": 268
+        },
+        {
+          "caller": "fetch",
+          "callee": "this.addSubscriber",
+          "lineNumber": 271
+        },
+        {
+          "caller": "fetch",
+          "callee": "this.promote",
+          "lineNumber": 273
+        },
+        {
+          "caller": "fetch",
+          "callee": "this.addSubscriber",
+          "lineNumber": 279
+        },
+        {
+          "caller": "fetch",
+          "callee": "this.pendingByKey.set",
+          "lineNumber": 280
+        },
+        {
+          "caller": "fetch",
+          "callee": "this.queues[priority].push",
+          "lineNumber": 281
+        },
+        {
+          "caller": "fetch",
+          "callee": "this.schedulePump",
+          "lineNumber": 282
+        },
+        {
+          "caller": "fetchJson",
+          "callee": "this.fetch",
+          "lineNumber": 287
+        },
+        {
+          "caller": "fetchJson",
+          "callee": "res.json",
+          "lineNumber": 289
+        },
+        {
+          "caller": "onRequestEvent",
+          "callee": "this.listeners.add",
+          "lineNumber": 301
+        },
+        {
+          "caller": "onRequestEvent",
+          "callee": "this.listeners.delete",
+          "lineNumber": 303
+        },
+        {
+          "caller": "_resetForTest",
+          "callee": "this.bucket.reset",
+          "lineNumber": 309
+        },
+        {
+          "caller": "_resetForTest",
+          "callee": "this.pendingByKey.clear",
+          "lineNumber": 311
+        },
+        {
+          "caller": "_resetForTest",
+          "callee": "this.inflightByKey.values",
+          "lineNumber": 312
+        },
+        {
+          "caller": "_resetForTest",
+          "callee": "entry.controller?.abort",
+          "lineNumber": 312
+        },
+        {
+          "caller": "_resetForTest",
+          "callee": "this.inflightByKey.clear",
+          "lineNumber": 313
+        },
+        {
+          "caller": "_resetForTest",
+          "callee": "this.listeners.clear",
+          "lineNumber": 314
+        },
+        {
+          "caller": "addSubscriber",
+          "callee": "entry.subscribers.push",
+          "lineNumber": 322
+        },
+        {
+          "caller": "onAbort",
+          "callee": "this.handleSubscriberAbort",
+          "lineNumber": 324
+        },
+        {
+          "caller": "addSubscriber",
+          "callee": "sub.signal.addEventListener",
+          "lineNumber": 326
+        },
+        {
+          "caller": "removeSubscriberListener",
+          "callee": "sub.signal.removeEventListener",
+          "lineNumber": 331
+        },
+        {
+          "caller": "handleSubscriberAbort",
+          "callee": "entry.subscribers.indexOf",
+          "lineNumber": 335
+        },
+        {
+          "caller": "handleSubscriberAbort",
+          "callee": "entry.subscribers.splice",
+          "lineNumber": 337
+        },
+        {
+          "caller": "handleSubscriberAbort",
+          "callee": "this.removeSubscriberListener",
+          "lineNumber": 338
+        },
+        {
+          "caller": "handleSubscriberAbort",
+          "callee": "sub.reject",
+          "lineNumber": 339
+        },
+        {
+          "caller": "handleSubscriberAbort",
+          "callee": "makeAbortError",
+          "lineNumber": 339
+        },
+        {
+          "caller": "handleSubscriberAbort",
+          "callee": "entry.controller.abort",
+          "lineNumber": 345
+        },
+        {
+          "caller": "handleSubscriberAbort",
+          "callee": "this.removeFromQueue",
+          "lineNumber": 348
+        },
+        {
+          "caller": "handleSubscriberAbort",
+          "callee": "this.pendingByKey.delete",
+          "lineNumber": 349
+        },
+        {
+          "caller": "removeFromQueue",
+          "callee": "arr.indexOf",
+          "lineNumber": 355
+        },
+        {
+          "caller": "removeFromQueue",
+          "callee": "arr.splice",
+          "lineNumber": 356
+        },
+        {
+          "caller": "promote",
+          "callee": "this.removeFromQueue",
+          "lineNumber": 360
+        },
+        {
+          "caller": "promote",
+          "callee": "this.queues[priority].push",
+          "lineNumber": 362
+        },
+        {
+          "caller": "promote",
+          "callee": "this.schedulePump",
+          "lineNumber": 363
+        },
+        {
+          "caller": "schedulePump",
+          "callee": "queueMicrotask",
+          "lineNumber": 370
+        },
+        {
+          "caller": "schedulePump",
+          "callee": "this.pump",
+          "lineNumber": 372
+        },
+        {
+          "caller": "pump",
+          "callee": "this.dequeueHighest",
+          "lineNumber": 386
+        },
+        {
+          "caller": "pump",
+          "callee": "this.bucket.tryTake",
+          "lineNumber": 388
+        },
+        {
+          "caller": "pump",
+          "callee": "this.removeFromQueue",
+          "lineNumber": 389
+        },
+        {
+          "caller": "pump",
+          "callee": "this.pendingByKey.delete",
+          "lineNumber": 390
+        },
+        {
+          "caller": "pump",
+          "callee": "this.inflightByKey.set",
+          "lineNumber": 391
+        },
+        {
+          "caller": "pump",
+          "callee": "this.dispatch",
+          "lineNumber": 392
+        },
+        {
+          "caller": "emit",
+          "callee": "cb",
+          "lineNumber": 397
+        },
+        {
+          "caller": "dispatch",
+          "callee": "this.emit",
+          "lineNumber": 408
+        },
+        {
+          "caller": "dispatch",
+          "callee": "Date.now",
+          "lineNumber": 409
+        },
+        {
+          "caller": "dispatch",
+          "callee": "this.fetchImpl",
+          "lineNumber": 410
+        },
+        {
+          "caller": "dispatch",
+          "callee": "this.emit",
+          "lineNumber": 414
+        },
+        {
+          "caller": "dispatch",
+          "callee": "Date.now",
+          "lineNumber": 414
+        },
+        {
+          "caller": "dispatch",
+          "callee": "this.resolveAll",
+          "lineNumber": 415
+        },
+        {
+          "caller": "dispatch",
+          "callee": "computeWaitMs",
+          "lineNumber": 422
+        },
+        {
+          "caller": "dispatch",
+          "callee": "this.emit",
+          "lineNumber": 423
+        },
+        {
+          "caller": "dispatch",
+          "callee": "console.warn",
+          "lineNumber": 425
+        },
+        {
+          "caller": "dispatch",
+          "callee": "this.sleep",
+          "lineNumber": 429
+        },
+        {
+          "caller": "dispatch",
+          "callee": "String",
+          "lineNumber": 432
+        },
+        {
+          "caller": "dispatch",
+          "callee": "this.emit",
+          "lineNumber": 433
+        },
+        {
+          "caller": "dispatch",
+          "callee": "this.rejectAll",
+          "lineNumber": 434
+        },
+        {
+          "caller": "dispatch",
+          "callee": "this.inflightByKey.delete",
+          "lineNumber": 436
+        },
+        {
+          "caller": "dispatch",
+          "callee": "this.schedulePump",
+          "lineNumber": 438
+        },
+        {
+          "caller": "resolveAll",
+          "callee": "this.removeSubscriberListener",
+          "lineNumber": 445
+        },
+        {
+          "caller": "resolveAll",
+          "callee": "sub.resolve",
+          "lineNumber": 446
+        },
+        {
+          "caller": "resolveAll",
+          "callee": "res.clone",
+          "lineNumber": 446
+        },
+        {
+          "caller": "rejectAll",
+          "callee": "this.removeSubscriberListener",
+          "lineNumber": 453
+        },
+        {
+          "caller": "rejectAll",
+          "callee": "sub.reject",
+          "lineNumber": 454
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 8,
+        "classCount": 2
+      }
+    }
+  ]
+}

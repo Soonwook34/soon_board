@@ -1,0 +1,43 @@
+{
+  "issues": [],
+  "warnings": [
+    "Node 'document:CLAUDE.md' has no edges (orphan)",
+    "Node 'config:src/dashboard/derived/__tests__/fixtures/quali-9468-laps.json' has no edges (orphan)",
+    "Node 'config:src/dashboard/derived/__tests__/fixtures/quali-9468-pit.json' has no edges (orphan)",
+    "Node 'config:src/dashboard/derived/__tests__/fixtures/quali-9468-race_control.json' has no edges (orphan)",
+    "Node 'config:src/dashboard/derived/__tests__/fixtures/quali-9468-session_result.json' has no edges (orphan)",
+    "Node 'config:.gitmodules' has no edges (orphan)",
+    "Node 'config:.understand-anything/.understandignore' has no edges (orphan)",
+    "Node 'config:.understand-anything/config.json' has no edges (orphan)",
+    "Node 'config:data/slm-zones-raw.json' has no edges (orphan)",
+    "Node 'file:scripts/__tests__/dailyDataRefresh.test.ts' has no edges (orphan)",
+    "Node 'file:vitest.setup.ts' has no edges (orphan)"
+  ],
+  "stats": {
+    "totalNodes": 577,
+    "totalEdges": 1403,
+    "totalLayers": 9,
+    "tourSteps": 13,
+    "nodeTypes": {
+      "file": 278,
+      "function": 256,
+      "class": 10,
+      "pipeline": 3,
+      "document": 16,
+      "config": 14
+    },
+    "edgeTypes": {
+      "contains": 266,
+      "exports": 199,
+      "tested_by": 137,
+      "imports": 546,
+      "calls": 120,
+      "depends_on": 12,
+      "related": 10,
+      "triggers": 4,
+      "documents": 97,
+      "configures": 10,
+      "deploys": 2
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "nodes": [
+    {
+      "id": "file:vitest.setup.ts",
+      "type": "file",
+      "name": "vitest.setup.ts",
+      "filePath": "vitest.setup.ts",
+      "summary": "단위 테스트 스위트 실행 전에 로드되는 Vitest 전역 setup 파일로, jsdom 통합 테스트에서 React 18의 act() 경고를 억제하기 위해 IS_REACT_ACT_ENVIRONMENT 전역 플래그를 설정한다.",
+      "tags": ["test", "test-setup", "configuration", "react", "vitest"],
+      "complexity": "simple",
+      "languageNotes": "globalThis를 인라인 타입 단언으로 캐스팅하여 비표준 React 전역 플래그(IS_REACT_ACT_ENVIRONMENT)를 설정하는 단일 부수효과(side-effect) 스크립트. vite.config.ts의 test.setupFiles로 로드된다."
+    }
+  ],
+  "edges": []
+}

@@ -1,0 +1,477 @@
+{
+  "nodes": [
+    {
+      "id": "file:src/dashboard/__tests__/DashboardSeek.test.tsx",
+      "type": "file",
+      "name": "DashboardSeek.test.tsx",
+      "filePath": "src/dashboard/__tests__/DashboardSeek.test.tsx",
+      "summary": "시간 의존적 가짜 DataSource를 구성해 displayTime 변화에 따라 DashboardApp이 시킹(seek) 시점 데이터로 올바르게 갱신되는지 검증하는 통합 테스트.",
+      "tags": ["test", "integration-test", "dashboard", "seek"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/dashboard/__tests__/DashboardSeek.test.tsx:makeTimeDependentDs",
+      "type": "function",
+      "name": "makeTimeDependentDs",
+      "filePath": "src/dashboard/__tests__/DashboardSeek.test.tsx",
+      "lineRange": [36, 58],
+      "summary": "displayTime에 따라 그 시점 이전 이벤트만 필터링해 반환하는 시간 의존적 가짜 DataSource를 생성하는 테스트 헬퍼.",
+      "tags": ["test-helper", "fake-datasource", "time-dependent"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/__tests__/fakeDataSource.ts",
+      "type": "file",
+      "name": "fakeDataSource.ts",
+      "filePath": "src/dashboard/__tests__/fakeDataSource.ts",
+      "summary": "대시보드 컴포넌트 테스트 전반에서 공유되는 가짜 DataSource 팩토리로, displayTime 구독 리스너와 메서드 override를 지원한다.",
+      "tags": ["test-helper", "fake-datasource", "factory", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/__tests__/fakeDataSource.ts:makeFakeDs",
+      "type": "function",
+      "name": "makeFakeDs",
+      "filePath": "src/dashboard/__tests__/fakeDataSource.ts",
+      "lineRange": [12, 44],
+      "summary": "override 가능한 메서드 집합과 setTime 기반 리스너 알림을 갖춘 가짜 DataSource 인스턴스를 생성하는 공유 테스트 팩토리.",
+      "tags": ["test-helper", "factory", "fake-datasource"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/derived/__tests__/currentLap.test.ts",
+      "type": "file",
+      "name": "currentLap.test.ts",
+      "filePath": "src/dashboard/derived/__tests__/currentLap.test.ts",
+      "summary": "leaderDriverNumber와 leaderCurrentLap 파생 함수가 리더 위치 및 랩 데이터로부터 선두 차량의 현재 랩을 올바르게 도출하는지 검증하는 단위 테스트.",
+      "tags": ["test", "unit-test", "derived", "current-lap"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/derived/__tests__/stints.test.ts",
+      "type": "file",
+      "name": "stints.test.ts",
+      "filePath": "src/dashboard/derived/__tests__/stints.test.ts",
+      "summary": "collectStints가 랩별 스틴트 정보를 스틴트 번호 기준으로 중복 제거해 집계하는 동작을 검증하는 단위 테스트.",
+      "tags": ["test", "unit-test", "derived", "stints"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/derived/__tests__/totalLaps.test.ts",
+      "type": "file",
+      "name": "totalLaps.test.ts",
+      "filePath": "src/dashboard/derived/__tests__/totalLaps.test.ts",
+      "summary": "loadRaceDistance가 race-distance JSON을 fetch해 캐시하고 HTTP 오류/실패 시 degraded 동작으로 폴백하는지 검증하는 단위 테스트.",
+      "tags": ["test", "unit-test", "derived", "total-laps"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/derived/currentLap.ts",
+      "type": "file",
+      "name": "currentLap.ts",
+      "filePath": "src/dashboard/derived/currentLap.ts",
+      "summary": "DataSource에서 선두 차량 번호와 그 차량의 현재 랩 수를 도출하는 파생 헬퍼를 제공한다.",
+      "tags": ["derived", "utility", "current-lap", "dashboard"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/derived/currentLap.ts:leaderCurrentLap",
+      "type": "function",
+      "name": "leaderCurrentLap",
+      "filePath": "src/dashboard/derived/currentLap.ts",
+      "lineRange": [14, 19],
+      "summary": "주어진 시점의 선두 차량 번호를 먼저 구한 뒤 해당 차량의 현재 랩 번호를 DataSource에서 조회해 반환한다.",
+      "tags": ["derived", "current-lap", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/derived/stints.ts",
+      "type": "file",
+      "name": "stints.ts",
+      "filePath": "src/dashboard/derived/stints.ts",
+      "summary": "특정 드라이버의 모든 랩을 순회하며 DataSource의 스틴트 조회 결과를 스틴트 번호 기준으로 중복 제거해 스틴트 목록을 집계한다.",
+      "tags": ["derived", "utility", "stints", "dashboard"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/derived/stints.ts:collectStints",
+      "type": "function",
+      "name": "collectStints",
+      "filePath": "src/dashboard/derived/stints.ts",
+      "lineRange": [9, 20],
+      "summary": "드라이버의 1랩부터 현재 랩까지 순회하며 각 랩의 스틴트를 Map으로 중복 제거해 고유 스틴트 배열을 반환한다.",
+      "tags": ["derived", "stints", "aggregation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/derived/totalLaps.ts",
+      "type": "file",
+      "name": "totalLaps.ts",
+      "filePath": "src/dashboard/derived/totalLaps.ts",
+      "summary": "서킷/연도별 총 랩 수 데이터를 race-distance JSON에서 fetch·캐시하고 조회하는 파생 로더로, 실패 시 degraded 모드로 안전하게 폴백한다.",
+      "tags": ["derived", "data-loader", "total-laps", "caching"],
+      "complexity": "moderate",
+      "languageNotes": "모듈 레벨 cache/inflight 변수로 fetch 결과를 메모이즈하며, _resetRaceDistanceCache로 테스트 간 격리를 제공한다."
+    },
+    {
+      "id": "function:src/dashboard/derived/totalLaps.ts:loadRaceDistance",
+      "type": "function",
+      "name": "loadRaceDistance",
+      "filePath": "src/dashboard/derived/totalLaps.ts",
+      "lineRange": [29, 58],
+      "summary": "race-distance JSON을 fetch해 서킷-연도 키 기준 Map으로 파싱·캐시하며, HTTP 오류나 예외 발생 시 경고 로그와 함께 빈 맵으로 degraded 폴백한다.",
+      "tags": ["data-loader", "fetch", "caching", "error-handling"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/detailPanel/PitHistory.tsx",
+      "type": "file",
+      "name": "PitHistory.tsx",
+      "filePath": "src/dashboard/detailPanel/PitHistory.tsx",
+      "summary": "선택된 드라이버의 피트스톱 이력을 현재 displayTime 이전 데이터만 메모이즈해 표시하는 디테일 패널 컴포넌트.",
+      "tags": ["component", "detail-panel", "pit-history", "dashboard"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/detailPanel/PitHistory.tsx:PitHistory",
+      "type": "function",
+      "name": "PitHistory",
+      "filePath": "src/dashboard/detailPanel/PitHistory.tsx",
+      "lineRange": [9, 36],
+      "summary": "useDataSource와 useDisplayTime으로 현재 시점 이전 피트스톱을 조회해 드라이버의 피트 이력을 렌더링하는 함수형 컴포넌트.",
+      "tags": ["component", "pit-history", "react"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/detailPanel/SessionResult.tsx",
+      "type": "file",
+      "name": "SessionResult.tsx",
+      "filePath": "src/dashboard/detailPanel/SessionResult.tsx",
+      "summary": "드라이버의 세션 결과(순위, 랩타임, 갭, DNF/DSQ 상태 등)를 레이스/퀄리파잉 세션 유형에 맞게 포맷해 표시하는 디테일 패널 컴포넌트.",
+      "tags": ["component", "detail-panel", "session-result", "dashboard"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/dashboard/detailPanel/SessionResult.tsx:SessionResult",
+      "type": "function",
+      "name": "SessionResult",
+      "filePath": "src/dashboard/detailPanel/SessionResult.tsx",
+      "lineRange": [18, 74],
+      "summary": "세션 결과를 조회해 상태 라벨, 퀄리파잉 세그먼트별 랩타임, 갭 등을 세션 유형에 따라 분기 렌더링하는 함수형 컴포넌트.",
+      "tags": ["component", "session-result", "react", "formatting"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/dashboard/detailPanel/SessionResult.tsx:statusLabel",
+      "type": "function",
+      "name": "statusLabel",
+      "filePath": "src/dashboard/detailPanel/SessionResult.tsx",
+      "lineRange": [11, 16],
+      "summary": "세션 결과 객체의 DNF/DSQ/DNS 플래그를 사람이 읽을 수 있는 상태 라벨 문자열로 변환하는 헬퍼.",
+      "tags": ["utility", "formatting", "session-result"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/detailPanel/StintHistory.tsx",
+      "type": "file",
+      "name": "StintHistory.tsx",
+      "filePath": "src/dashboard/detailPanel/StintHistory.tsx",
+      "summary": "선택된 드라이버의 타이어 스틴트 이력을 collectStints로 집계하고 컴파운드 색상·글자로 시각화하는 디테일 패널 컴포넌트.",
+      "tags": ["component", "detail-panel", "stint-history", "tyre"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/dashboard/detailPanel/StintHistory.tsx:StintHistory",
+      "type": "function",
+      "name": "StintHistory",
+      "filePath": "src/dashboard/detailPanel/StintHistory.tsx",
+      "lineRange": [14, 55],
+      "summary": "선두 현재 랩 기준으로 collectStints를 메모이즈 호출해 드라이버의 스틴트를 정렬·렌더링하고 타이어 컴파운드 색상을 적용하는 함수형 컴포넌트.",
+      "tags": ["component", "stint-history", "react", "tyre"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/detailPanel/__tests__/PitHistory.test.tsx",
+      "type": "file",
+      "name": "PitHistory.test.tsx",
+      "filePath": "src/dashboard/detailPanel/__tests__/PitHistory.test.tsx",
+      "summary": "PitHistory 컴포넌트가 가짜 DataSource의 피트스톱 데이터를 올바르게 렌더링하는지 검증하는 단위 테스트.",
+      "tags": ["test", "unit-test", "detail-panel", "pit-history"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/detailPanel/__tests__/SessionResult.test.tsx",
+      "type": "file",
+      "name": "SessionResult.test.tsx",
+      "filePath": "src/dashboard/detailPanel/__tests__/SessionResult.test.tsx",
+      "summary": "SessionResult 컴포넌트가 레이스/퀄리파잉 세션 유형별로 결과를 올바르게 포맷·렌더링하는지 검증하는 단위 테스트.",
+      "tags": ["test", "unit-test", "detail-panel", "session-result"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/detailPanel/__tests__/StintHistory.test.tsx",
+      "type": "file",
+      "name": "StintHistory.test.tsx",
+      "filePath": "src/dashboard/detailPanel/__tests__/StintHistory.test.tsx",
+      "summary": "StintHistory 컴포넌트가 스틴트 집계와 타이어 컴파운드 표시를 올바르게 렌더링하는지 가짜 DataSource로 검증하는 단위 테스트.",
+      "tags": ["test", "unit-test", "detail-panel", "stint-history"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/panels/EventBroadcast.tsx",
+      "type": "file",
+      "name": "EventBroadcast.tsx",
+      "filePath": "src/dashboard/panels/EventBroadcast.tsx",
+      "summary": "안전차/적색기 등 중요 레이스 컨트롤 이벤트를 감지해 일정 시간 동안 강조 표시 후 자동 소멸시키는 방송형 오버레이 패널.",
+      "tags": ["component", "panel", "race-control", "event-handler"],
+      "complexity": "moderate",
+      "languageNotes": "useRef와 setTimeout으로 이벤트 활성화 후 자동 해제(auto-dismiss) 타이머를 관리하는 패턴을 사용한다."
+    },
+    {
+      "id": "function:src/dashboard/panels/EventBroadcast.tsx:EventBroadcast",
+      "type": "function",
+      "name": "EventBroadcast",
+      "filePath": "src/dashboard/panels/EventBroadcast.tsx",
+      "lineRange": [42, 115],
+      "summary": "최신 레이스 컨트롤 이벤트가 중요 플래그인지 판정해 활성화 상태로 띄우고 타이머로 자동 소멸시키는 함수형 컴포넌트.",
+      "tags": ["component", "event-handler", "race-control", "react"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/panels/EventTicker.tsx",
+      "type": "file",
+      "name": "EventTicker.tsx",
+      "filePath": "src/dashboard/panels/EventTicker.tsx",
+      "summary": "현재 시점 이전의 레이스 컨트롤 이벤트 목록을 플래그 아이콘과 함께 스크롤 형태로 나열하는 티커 패널 컴포넌트.",
+      "tags": ["component", "panel", "race-control", "event-ticker"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/panels/EventTicker.tsx:EventTicker",
+      "type": "function",
+      "name": "EventTicker",
+      "filePath": "src/dashboard/panels/EventTicker.tsx",
+      "lineRange": [10, 56],
+      "summary": "displayTime 이전 이벤트를 메모이즈 조회해 플래그 아이콘과 함께 목록으로 렌더링하는 함수형 컴포넌트.",
+      "tags": ["component", "event-ticker", "react"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/panels/RaceControlBanner.tsx",
+      "type": "file",
+      "name": "RaceControlBanner.tsx",
+      "filePath": "src/dashboard/panels/RaceControlBanner.tsx",
+      "summary": "현재 활성 플래그 상태(예: 황색기, 안전차)를 activeFlag 파생으로 계산해 상단 배너로 강조 표시하는 패널 컴포넌트.",
+      "tags": ["component", "panel", "race-control", "banner"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/panels/RaceControlBanner.tsx:RaceControlBanner",
+      "type": "function",
+      "name": "RaceControlBanner",
+      "filePath": "src/dashboard/panels/RaceControlBanner.tsx",
+      "lineRange": [23, 53],
+      "summary": "displayTime 이전 이벤트에서 activeFlag로 현재 활성 플래그를 계산해 배너로 렌더링하는 함수형 컴포넌트.",
+      "tags": ["component", "race-control", "react", "banner"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/panels/SessionHeader.tsx",
+      "type": "file",
+      "name": "SessionHeader.tsx",
+      "filePath": "src/dashboard/panels/SessionHeader.tsx",
+      "summary": "미팅/세션 정보와 현지 시각, 스트림 상태(LIVE/REPLAY 등)를 헤더로 표시하고 뒤로가기를 제공하는 대시보드 상단 패널.",
+      "tags": ["component", "panel", "session-header", "dashboard"],
+      "complexity": "moderate",
+      "languageNotes": "GMT 오프셋 문자열을 정규식으로 파싱하고 UTC 기준 시각을 수동 포맷해 서킷 현지 시계를 계산한다."
+    },
+    {
+      "id": "function:src/dashboard/panels/SessionHeader.tsx:SessionHeader",
+      "type": "function",
+      "name": "SessionHeader",
+      "filePath": "src/dashboard/panels/SessionHeader.tsx",
+      "lineRange": [38, 130],
+      "summary": "미팅·세션 메타데이터, 현지 시계, 스트림 상태를 표시하고 onBack 콜백을 노출하는 함수형 헤더 컴포넌트.",
+      "tags": ["component", "session-header", "react"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/dashboard/panels/SessionHeader.tsx:formatLocalClock",
+      "type": "function",
+      "name": "formatLocalClock",
+      "filePath": "src/dashboard/panels/SessionHeader.tsx",
+      "lineRange": [29, 36],
+      "summary": "displayTime과 GMT 오프셋(ms)을 적용해 HH:MM:SS 형식의 서킷 현지 시각 문자열을 생성하는 헬퍼.",
+      "tags": ["utility", "formatting", "time"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/panels/SessionProgress.tsx",
+      "type": "file",
+      "name": "SessionProgress.tsx",
+      "filePath": "src/dashboard/panels/SessionProgress.tsx",
+      "summary": "랩 기반 세션은 현재/총 랩 수를, 시간 기반 세션은 경과/잔여 시간을 계산해 세션 진행도를 표시하는 패널 컴포넌트.",
+      "tags": ["component", "panel", "session-progress", "dashboard"],
+      "complexity": "moderate",
+      "languageNotes": "totalLaps 로더를 useEffect로 비동기 로드하고 세션 유형에 따라 랩 카운트와 시간 진행도를 분기 계산한다."
+    },
+    {
+      "id": "function:src/dashboard/panels/SessionProgress.tsx:SessionProgress",
+      "type": "function",
+      "name": "SessionProgress",
+      "filePath": "src/dashboard/panels/SessionProgress.tsx",
+      "lineRange": [31, 102],
+      "summary": "race-distance를 비동기 로드해 랩 기반/시간 기반 세션 진행도를 계산하고 진행 바와 경과·잔여 정보를 렌더링하는 함수형 컴포넌트.",
+      "tags": ["component", "session-progress", "react", "async"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/dashboard/panels/SessionProgress.tsx:fmtDuration",
+      "type": "function",
+      "name": "fmtDuration",
+      "filePath": "src/dashboard/panels/SessionProgress.tsx",
+      "lineRange": [24, 29],
+      "summary": "밀리초 값을 H:MM:SS 형식의 경과/잔여 시간 문자열로 포맷하는 헬퍼.",
+      "tags": ["utility", "formatting", "time"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {"source": "file:src/dashboard/__tests__/DashboardSeek.test.tsx", "target": "file:src/dashboard/__tests__/fakeDataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/__tests__/DashboardSeek.test.tsx", "target": "file:src/dashboard/DashboardApp.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/__tests__/DashboardSeek.test.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/__tests__/DashboardSeek.test.tsx", "target": "file:src/shared/seasonData.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/__tests__/DashboardSeek.test.tsx", "target": "function:src/dashboard/__tests__/DashboardSeek.test.tsx:makeTimeDependentDs", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/DashboardApp.tsx", "target": "file:src/dashboard/__tests__/DashboardSeek.test.tsx", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/__tests__/fakeDataSource.ts", "target": "file:src/shared/DataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/__tests__/fakeDataSource.ts", "target": "function:src/dashboard/__tests__/fakeDataSource.ts:makeFakeDs", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/__tests__/fakeDataSource.ts", "target": "function:src/dashboard/__tests__/fakeDataSource.ts:makeFakeDs", "type": "exports", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/dashboard/derived/__tests__/currentLap.test.ts", "target": "file:src/dashboard/derived/currentLap.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/__tests__/currentLap.test.ts", "target": "file:src/shared/DataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/__tests__/currentLap.test.ts", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/currentLap.ts", "target": "file:src/dashboard/derived/__tests__/currentLap.test.ts", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/derived/__tests__/stints.test.ts", "target": "file:src/dashboard/__tests__/fakeDataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/__tests__/stints.test.ts", "target": "file:src/dashboard/derived/stints.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/__tests__/stints.test.ts", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/stints.ts", "target": "file:src/dashboard/derived/__tests__/stints.test.ts", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/derived/__tests__/totalLaps.test.ts", "target": "file:src/dashboard/derived/totalLaps.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/totalLaps.ts", "target": "file:src/dashboard/derived/__tests__/totalLaps.test.ts", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/derived/currentLap.ts", "target": "file:src/shared/DataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/currentLap.ts", "target": "function:src/dashboard/derived/currentLap.ts:leaderCurrentLap", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/derived/currentLap.ts", "target": "function:src/dashboard/derived/currentLap.ts:leaderCurrentLap", "type": "exports", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/dashboard/derived/stints.ts", "target": "file:src/shared/DataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/stints.ts", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/derived/stints.ts", "target": "function:src/dashboard/derived/stints.ts:collectStints", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/derived/stints.ts", "target": "function:src/dashboard/derived/stints.ts:collectStints", "type": "exports", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/dashboard/derived/totalLaps.ts", "target": "function:src/dashboard/derived/totalLaps.ts:loadRaceDistance", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/derived/totalLaps.ts", "target": "function:src/dashboard/derived/totalLaps.ts:loadRaceDistance", "type": "exports", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/dashboard/detailPanel/PitHistory.tsx", "target": "file:src/dashboard/shared/dashboardStyles.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/PitHistory.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/PitHistory.tsx", "target": "file:src/dashboard/shared/useDisplayTime.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/PitHistory.tsx", "target": "function:src/dashboard/detailPanel/PitHistory.tsx:PitHistory", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/detailPanel/PitHistory.tsx", "target": "function:src/dashboard/detailPanel/PitHistory.tsx:PitHistory", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/detailPanel/PitHistory.tsx:PitHistory", "target": "function:src/dashboard/shared/DataSourceContext.tsx:useDataSource", "type": "depends_on", "direction": "forward", "weight": 0.6},
+    {"source": "function:src/dashboard/detailPanel/PitHistory.tsx:PitHistory", "target": "function:src/dashboard/shared/useDisplayTime.ts:useDisplayTime", "type": "depends_on", "direction": "forward", "weight": 0.6},
+    {"source": "file:src/dashboard/detailPanel/PitHistory.tsx", "target": "file:src/dashboard/detailPanel/__tests__/PitHistory.test.tsx", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/detailPanel/SessionResult.tsx", "target": "file:src/dashboard/shared/dashboardStyles.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/SessionResult.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/SessionResult.tsx", "target": "file:src/dashboard/shared/formatTime.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/SessionResult.tsx", "target": "file:src/dashboard/shared/useDisplayTime.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/SessionResult.tsx", "target": "file:src/shared/seasonData.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/SessionResult.tsx", "target": "function:src/dashboard/detailPanel/SessionResult.tsx:SessionResult", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/detailPanel/SessionResult.tsx", "target": "function:src/dashboard/detailPanel/SessionResult.tsx:statusLabel", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/detailPanel/SessionResult.tsx", "target": "function:src/dashboard/detailPanel/SessionResult.tsx:SessionResult", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/detailPanel/SessionResult.tsx:SessionResult", "target": "function:src/dashboard/shared/formatTime.ts:formatLapTime", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/detailPanel/SessionResult.tsx:SessionResult", "target": "function:src/dashboard/shared/formatTime.ts:formatGap", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/dashboard/detailPanel/SessionResult.tsx", "target": "file:src/dashboard/detailPanel/__tests__/SessionResult.test.tsx", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/detailPanel/StintHistory.tsx", "target": "file:src/dashboard/derived/currentLap.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/StintHistory.tsx", "target": "file:src/dashboard/derived/stints.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/StintHistory.tsx", "target": "file:src/dashboard/shared/dashboardStyles.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/StintHistory.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/StintHistory.tsx", "target": "file:src/dashboard/shared/tyreColors.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/StintHistory.tsx", "target": "file:src/dashboard/shared/useDisplayTime.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/StintHistory.tsx", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/StintHistory.tsx", "target": "function:src/dashboard/detailPanel/StintHistory.tsx:StintHistory", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/detailPanel/StintHistory.tsx", "target": "function:src/dashboard/detailPanel/StintHistory.tsx:StintHistory", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/detailPanel/StintHistory.tsx:StintHistory", "target": "function:src/dashboard/derived/stints.ts:collectStints", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/detailPanel/StintHistory.tsx:StintHistory", "target": "function:src/dashboard/derived/currentLap.ts:leaderCurrentLap", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "file:src/dashboard/detailPanel/StintHistory.tsx", "target": "file:src/dashboard/detailPanel/__tests__/StintHistory.test.tsx", "type": "tested_by", "direction": "forward", "weight": 0.5},
+
+    {"source": "file:src/dashboard/detailPanel/__tests__/PitHistory.test.tsx", "target": "file:src/dashboard/__tests__/fakeDataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/__tests__/PitHistory.test.tsx", "target": "file:src/dashboard/detailPanel/PitHistory.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/__tests__/PitHistory.test.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/__tests__/PitHistory.test.tsx", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+
+    {"source": "file:src/dashboard/detailPanel/__tests__/SessionResult.test.tsx", "target": "file:src/dashboard/__tests__/fakeDataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/__tests__/SessionResult.test.tsx", "target": "file:src/dashboard/detailPanel/SessionResult.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/__tests__/SessionResult.test.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/__tests__/SessionResult.test.tsx", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/__tests__/SessionResult.test.tsx", "target": "file:src/shared/seasonData.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+
+    {"source": "file:src/dashboard/detailPanel/__tests__/StintHistory.test.tsx", "target": "file:src/dashboard/__tests__/fakeDataSource.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/__tests__/StintHistory.test.tsx", "target": "file:src/dashboard/detailPanel/StintHistory.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/__tests__/StintHistory.test.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/detailPanel/__tests__/StintHistory.test.tsx", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+
+    {"source": "file:src/dashboard/panels/EventBroadcast.tsx", "target": "file:src/dashboard/shared/dashboardStyles.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/EventBroadcast.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/EventBroadcast.tsx", "target": "file:src/dashboard/shared/flagDecoder.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/EventBroadcast.tsx", "target": "file:src/dashboard/shared/flagIcons.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/EventBroadcast.tsx", "target": "file:src/dashboard/shared/useDisplayTime.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/EventBroadcast.tsx", "target": "file:src/shared/openf1Types.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/EventBroadcast.tsx", "target": "function:src/dashboard/panels/EventBroadcast.tsx:EventBroadcast", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/panels/EventBroadcast.tsx", "target": "function:src/dashboard/panels/EventBroadcast.tsx:EventBroadcast", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/panels/EventBroadcast.tsx:EventBroadcast", "target": "function:src/dashboard/shared/flagDecoder.ts:flagKind", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/panels/EventBroadcast.tsx:EventBroadcast", "target": "function:src/dashboard/shared/flagIcons.ts:flagIcon", "type": "calls", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/dashboard/panels/EventTicker.tsx", "target": "file:src/dashboard/shared/dashboardStyles.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/EventTicker.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/EventTicker.tsx", "target": "file:src/dashboard/shared/flagIcons.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/EventTicker.tsx", "target": "file:src/dashboard/shared/PanelHeading.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/EventTicker.tsx", "target": "file:src/dashboard/shared/useDisplayTime.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/EventTicker.tsx", "target": "function:src/dashboard/panels/EventTicker.tsx:EventTicker", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/panels/EventTicker.tsx", "target": "function:src/dashboard/panels/EventTicker.tsx:EventTicker", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/panels/EventTicker.tsx:EventTicker", "target": "function:src/dashboard/shared/flagIcons.ts:flagIcon", "type": "calls", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/dashboard/panels/RaceControlBanner.tsx", "target": "file:src/dashboard/derived/activeFlags.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/RaceControlBanner.tsx", "target": "file:src/dashboard/shared/dashboardStyles.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/RaceControlBanner.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/RaceControlBanner.tsx", "target": "file:src/dashboard/shared/flagDecoder.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/RaceControlBanner.tsx", "target": "file:src/dashboard/shared/flagIcons.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/RaceControlBanner.tsx", "target": "file:src/dashboard/shared/useDisplayTime.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/RaceControlBanner.tsx", "target": "function:src/dashboard/panels/RaceControlBanner.tsx:RaceControlBanner", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/panels/RaceControlBanner.tsx", "target": "function:src/dashboard/panels/RaceControlBanner.tsx:RaceControlBanner", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/panels/RaceControlBanner.tsx:RaceControlBanner", "target": "function:src/dashboard/derived/activeFlags.ts:activeFlag", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/panels/RaceControlBanner.tsx:RaceControlBanner", "target": "function:src/dashboard/shared/flagIcons.ts:flagIcon", "type": "calls", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/dashboard/panels/SessionHeader.tsx", "target": "file:src/dashboard/shared/dashboardStyles.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/SessionHeader.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/SessionHeader.tsx", "target": "file:src/dashboard/shared/useDisplayTime.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/SessionHeader.tsx", "target": "file:src/shared/seasonData.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/SessionHeader.tsx", "target": "function:src/dashboard/panels/SessionHeader.tsx:SessionHeader", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/panels/SessionHeader.tsx", "target": "function:src/dashboard/panels/SessionHeader.tsx:formatLocalClock", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/panels/SessionHeader.tsx", "target": "function:src/dashboard/panels/SessionHeader.tsx:SessionHeader", "type": "exports", "direction": "forward", "weight": 0.8},
+
+    {"source": "file:src/dashboard/panels/SessionProgress.tsx", "target": "file:src/dashboard/derived/currentLap.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/SessionProgress.tsx", "target": "file:src/dashboard/derived/totalLaps.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/SessionProgress.tsx", "target": "file:src/dashboard/shared/dashboardStyles.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/SessionProgress.tsx", "target": "file:src/dashboard/shared/DataSourceContext.tsx", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/SessionProgress.tsx", "target": "file:src/dashboard/shared/useDisplayTime.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/SessionProgress.tsx", "target": "file:src/shared/seasonData.ts", "type": "imports", "direction": "forward", "weight": 0.7},
+    {"source": "file:src/dashboard/panels/SessionProgress.tsx", "target": "function:src/dashboard/panels/SessionProgress.tsx:SessionProgress", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/panels/SessionProgress.tsx", "target": "function:src/dashboard/panels/SessionProgress.tsx:fmtDuration", "type": "contains", "direction": "forward", "weight": 1.0},
+    {"source": "file:src/dashboard/panels/SessionProgress.tsx", "target": "function:src/dashboard/panels/SessionProgress.tsx:SessionProgress", "type": "exports", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/panels/SessionProgress.tsx:SessionProgress", "target": "function:src/dashboard/derived/currentLap.ts:leaderCurrentLap", "type": "calls", "direction": "forward", "weight": 0.8},
+    {"source": "function:src/dashboard/panels/SessionProgress.tsx:SessionProgress", "target": "function:src/dashboard/derived/totalLaps.ts:loadRaceDistance", "type": "calls", "direction": "forward", "weight": 0.8}
+  ]
+}

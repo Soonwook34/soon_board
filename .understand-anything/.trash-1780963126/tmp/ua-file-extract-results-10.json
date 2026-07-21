@@ -1,0 +1,302 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 4,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "scripts/__tests__/fetchSeasonCatalogArgs.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 40,
+      "nonEmptyLines": 33,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/__tests__/seasonsList.test.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 24,
+      "nonEmptyLines": 20,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/_lib/seasonsList.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 6,
+      "nonEmptyLines": 5,
+      "exports": [
+        {
+          "name": "KNOWN_SEASONS",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/fetch-season-catalog.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 152,
+      "nonEmptyLines": 142,
+      "functions": [
+        {
+          "name": "parseArgs",
+          "startLine": 34,
+          "endLine": 75,
+          "params": [
+            "argv"
+          ]
+        },
+        {
+          "name": "parseYear",
+          "startLine": 77,
+          "endLine": 83,
+          "params": [
+            "raw"
+          ]
+        },
+        {
+          "name": "processYear",
+          "startLine": 85,
+          "endLine": 115,
+          "params": [
+            "args"
+          ]
+        },
+        {
+          "name": "main",
+          "startLine": 117,
+          "endLine": 140,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "parseArgs",
+          "line": 34,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "parseArgs",
+          "callee": "/^--([^=]+)=(.*)$/.exec",
+          "lineNumber": 38
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "map.set",
+          "lineNumber": 40
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "arg.startsWith",
+          "lineNumber": 41
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "flags.add",
+          "lineNumber": 42
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "arg.slice",
+          "lineNumber": 42
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "map.get",
+          "lineNumber": 46
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "map.get",
+          "lineNumber": 47
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "flags.has",
+          "lineNumber": 48
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "[yearStr ? 1 : 0, yearsStr ? 1 : 0, all ? 1 : 0].reduce",
+          "lineNumber": 49
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "parseYear",
+          "lineNumber": 61
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "(yearsStr as string)\n      .split(',')\n      .map((s) => s.trim())\n      .filter((s) => s.length > 0)\n      .map",
+          "lineNumber": 63
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "(yearsStr as string)\n      .split(',')\n      .map((s) => s.trim())\n      .filter",
+          "lineNumber": 63
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "(yearsStr as string)\n      .split(',')\n      .map",
+          "lineNumber": 63
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "(yearsStr as string)\n      .split",
+          "lineNumber": 63
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "s.trim",
+          "lineNumber": 65
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "map.get",
+          "lineNumber": 71
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "map.get",
+          "lineNumber": 72
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "Number",
+          "lineNumber": 73
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "resolve",
+          "lineNumber": 74
+        },
+        {
+          "caller": "parseArgs",
+          "callee": "process.cwd",
+          "lineNumber": 74
+        },
+        {
+          "caller": "parseYear",
+          "callee": "Number",
+          "lineNumber": 78
+        },
+        {
+          "caller": "parseYear",
+          "callee": "Number.isInteger",
+          "lineNumber": 79
+        },
+        {
+          "caller": "processYear",
+          "callee": "Date.now",
+          "lineNumber": 88
+        },
+        {
+          "caller": "processYear",
+          "callee": "buildSeasonCatalog",
+          "lineNumber": 89
+        },
+        {
+          "caller": "processYear",
+          "callee": "console.log",
+          "lineNumber": 93
+        },
+        {
+          "caller": "processYear",
+          "callee": "console.log",
+          "lineNumber": 96
+        },
+        {
+          "caller": "processYear",
+          "callee": "writeJsonAtomicSync",
+          "lineNumber": 100
+        },
+        {
+          "caller": "processYear",
+          "callee": "upsertSeasonsIndex",
+          "lineNumber": 101
+        },
+        {
+          "caller": "processYear",
+          "callee": "((Date.now() - startedAt) / 1000).toFixed",
+          "lineNumber": 106
+        },
+        {
+          "caller": "processYear",
+          "callee": "Date.now",
+          "lineNumber": 106
+        },
+        {
+          "caller": "processYear",
+          "callee": "console.log",
+          "lineNumber": 108
+        },
+        {
+          "caller": "processYear",
+          "callee": "console.log",
+          "lineNumber": 113
+        },
+        {
+          "caller": "main",
+          "callee": "parseArgs",
+          "lineNumber": 118
+        },
+        {
+          "caller": "main",
+          "callee": "process.argv.slice",
+          "lineNumber": 118
+        },
+        {
+          "caller": "main",
+          "callee": "processYear",
+          "lineNumber": 124
+        },
+        {
+          "caller": "main",
+          "callee": "String",
+          "lineNumber": 129
+        },
+        {
+          "caller": "main",
+          "callee": "console.error",
+          "lineNumber": 130
+        },
+        {
+          "caller": "main",
+          "callee": "console.log",
+          "lineNumber": 133
+        },
+        {
+          "caller": "main",
+          "callee": "process.exit",
+          "lineNumber": 139
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    }
+  ]
+}

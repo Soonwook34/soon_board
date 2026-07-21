@@ -1,0 +1,101 @@
+{
+  "batchIndex": 17,
+  "totalBatches": 20,
+  "files": [
+    {
+      "path": "scripts/_lib/seasonCatalog.ts",
+      "sizeLines": 263,
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/_lib/seasonsIndex.ts",
+      "sizeLines": 48,
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/_lib/sectorBoundariesDeriver.ts",
+      "sizeLines": 182,
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/_lib/slmZonesLoader.ts",
+      "sizeLines": 57,
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/_lib/svgToPolyline.ts",
+      "sizeLines": 127,
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/_lib/trackOutlinesIndex.ts",
+      "sizeLines": 86,
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/build-all-circuits.ts",
+      "sizeLines": 386,
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/build-circuits-catalog.ts",
+      "sizeLines": 135,
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/check-season-sizes.ts",
+      "sizeLines": 91,
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/curate-residual.ts",
+      "sizeLines": 144,
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/derive-drs-zones.ts",
+      "sizeLines": 190,
+      "language": "typescript",
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/derive-sector-boundaries.ts",
+      "sizeLines": 210,
+      "language": "typescript",
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "scripts/_lib/seasonCatalog.ts": [],
+    "scripts/_lib/seasonsIndex.ts": [],
+    "scripts/_lib/sectorBoundariesDeriver.ts": [],
+    "scripts/_lib/slmZonesLoader.ts": [],
+    "scripts/_lib/svgToPolyline.ts": [],
+    "scripts/_lib/trackOutlinesIndex.ts": [],
+    "scripts/build-all-circuits.ts": [],
+    "scripts/build-circuits-catalog.ts": [],
+    "scripts/check-season-sizes.ts": [],
+    "scripts/curate-residual.ts": [],
+    "scripts/derive-drs-zones.ts": [],
+    "scripts/derive-sector-boundaries.ts": []
+  },
+  "neighborMap": {
+    "scripts/check-season-sizes.ts": [
+      {
+        "path": "scripts/__tests__/checkSeasonSizes.test.ts",
+        "batchIndex": 16,
+        "symbols": []
+      }
+    ]
+  }
+}

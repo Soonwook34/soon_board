@@ -1,0 +1,857 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 5,
+  "filesSkipped": [],
+  "results": [
+    {
+      "path": "docs/deployment-architecture.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 406,
+      "nonEmptyLines": 341,
+      "sections": [
+        {
+          "heading": "배포 아키텍처 (Deployment Architecture)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "0. 한눈에 보는 운영 사양",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "1. 토폴로지",
+          "level": 2,
+          "line": 27
+        },
+        {
+          "heading": "2. Repo 구조",
+          "level": 2,
+          "line": 86
+        },
+        {
+          "heading": "3. GitHub Actions Workflow",
+          "level": 2,
+          "line": 150
+        },
+        {
+          "heading": "3.1 `daily-data-refresh.yml` (통합 daily cron)",
+          "level": 3,
+          "line": 152
+        },
+        {
+          "heading": "3.2 `ci.yml` (on push/PR)",
+          "level": 3,
+          "line": 241
+        },
+        {
+          "heading": "4. Vercel 설정",
+          "level": 2,
+          "line": 267
+        },
+        {
+          "heading": "4.1 `vercel.json`",
+          "level": 3,
+          "line": 269
+        },
+        {
+          "heading": "4.2 환경 변수",
+          "level": 3,
+          "line": 292
+        },
+        {
+          "heading": "4.3 Preview 환경",
+          "level": 3,
+          "line": 296
+        },
+        {
+          "heading": "4.4 Vercel hobby 한도 예산 (critic M2)",
+          "level": 3,
+          "line": 301
+        },
+        {
+          "heading": "5. 데이터 흐름 — 정적 vs 동적",
+          "level": 2,
+          "line": 315
+        },
+        {
+          "heading": "6. 라이선스 · Attribution",
+          "level": 2,
+          "line": 329
+        },
+        {
+          "heading": "6.1 사용 자산",
+          "level": 3,
+          "line": 331
+        },
+        {
+          "heading": "6.2 Attribution 위치 (critic M8)",
+          "level": 3,
+          "line": 336
+        },
+        {
+          "heading": "7. 로컬 개발",
+          "level": 2,
+          "line": 350
+        },
+        {
+          "heading": "8. 향후 확장 트리거 — 백엔드 도입 시점",
+          "level": 2,
+          "line": 371
+        },
+        {
+          "heading": "9. 운영 한계 (개인 사용 MVP 기준)",
+          "level": 2,
+          "line": 387
+        },
+        {
+          "heading": "10. 참고",
+          "level": 2,
+          "line": 397
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 20
+      }
+    },
+    {
+      "path": "docs/live-streaming-strategy.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 279,
+      "nonEmptyLines": 209,
+      "sections": [
+        {
+          "heading": "OpenF1 라이브 스트리밍 운영 전략",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "0. 한눈에 보는 운영 사양",
+          "level": 2,
+          "line": 11
+        },
+        {
+          "heading": "1. 스코프",
+          "level": 2,
+          "line": 26
+        },
+        {
+          "heading": "1.1 라이브 표시 대상 (포함)",
+          "level": 3,
+          "line": 28
+        },
+        {
+          "heading": "1.2 라이브 표시 대상 (제외)",
+          "level": 3,
+          "line": 40
+        },
+        {
+          "heading": "1.3 정적 데이터 (세션당 1회만)",
+          "level": 3,
+          "line": 46
+        },
+        {
+          "heading": "2. 핵심 아이디어: 데이터 시계 기반 30초 플레이아웃 버퍼",
+          "level": 2,
+          "line": 55
+        },
+        {
+          "heading": "2.1 표시 시계 정의",
+          "level": 3,
+          "line": 67
+        },
+        {
+          "heading": "2.2 렌더 루프",
+          "level": 3,
+          "line": 73
+        },
+        {
+          "heading": "2.3 버퍼 운영 규칙",
+          "level": 3,
+          "line": 78
+        },
+        {
+          "heading": "3. 폴링 예산",
+          "level": 2,
+          "line": 88
+        },
+        {
+          "heading": "3.1 무료 플랜 (한도 30 req/min, 3 req/s) — **본 MVP 채택**",
+          "level": 3,
+          "line": 90
+        },
+        {
+          "heading": "3.2 유료 (스폰서) 플랜 — **본 MVP에서는 미사용 (향후 확장 참고)**",
+          "level": 3,
+          "line": 109
+        },
+        {
+          "heading": "4. 채택한 운영 트릭 (안정성 검증된 것만)",
+          "level": 2,
+          "line": 124
+        },
+        {
+          "heading": "5. 의도적으로 채택하지 않은 트릭",
+          "level": 2,
+          "line": 133
+        },
+        {
+          "heading": "6. 워밍업 (페이지 첫 로드 시) — **본 MVP: 클라이언트 hydration**",
+          "level": 2,
+          "line": 145
+        },
+        {
+          "heading": "6.5 OpenF1 30 req/min 한도 검증 (critic P0-5)",
+          "level": 3,
+          "line": 170
+        },
+        {
+          "heading": "7. 운영 시나리오별 흡수 결과",
+          "level": 2,
+          "line": 187
+        },
+        {
+          "heading": "8. 데이터 모델·코드 설계 가이드",
+          "level": 2,
+          "line": 200
+        },
+        {
+          "heading": "8.1 브라우저 컴포넌트 (본 MVP)",
+          "level": 3,
+          "line": 202
+        },
+        {
+          "heading": "8.2 무료 → 유료 전환 인터페이스 (향후 확장 참고)",
+          "level": 3,
+          "line": 215
+        },
+        {
+          "heading": "8.3 향후 확장: 백엔드 도입 시 추가 컴포넌트",
+          "level": 3,
+          "line": 222
+        },
+        {
+          "heading": "8.4 보간 (interpolation) 권장 방식",
+          "level": 3,
+          "line": 231
+        },
+        {
+          "heading": "9. 운영 지표 (모니터링 대상)",
+          "level": 2,
+          "line": 238
+        },
+        {
+          "heading": "10. 주의 사항",
+          "level": 2,
+          "line": 251
+        },
+        {
+          "heading": "11. 미해결 / 후속 결정 필요 항목",
+          "level": 2,
+          "line": 265
+        },
+        {
+          "heading": "12. 참고",
+          "level": 2,
+          "line": 275
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 27
+      }
+    },
+    {
+      "path": "docs/openf1-api-reference.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 605,
+      "nonEmptyLines": 470,
+      "sections": [
+        {
+          "heading": "OpenF1 API 분석 레퍼런스",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "0. 한눈에 보는 요약",
+          "level": 2,
+          "line": 8
+        },
+        {
+          "heading": "1. 프로젝트/API 개요",
+          "level": 2,
+          "line": 32
+        },
+        {
+          "heading": "1.1 정체성",
+          "level": 3,
+          "line": 34
+        },
+        {
+          "heading": "1.2 베이스 URL과 버전 정책",
+          "level": 3,
+          "line": 44
+        },
+        {
+          "heading": "1.3 데이터 소스 — 어떻게 모으는가",
+          "level": 3,
+          "line": 49
+        },
+        {
+          "heading": "2. 인증 모델",
+          "level": 2,
+          "line": 56
+        },
+        {
+          "heading": "2.1 토큰 발급 (실시간용)",
+          "level": 3,
+          "line": 63
+        },
+        {
+          "heading": "2.2 사용",
+          "level": 3,
+          "line": 72
+        },
+        {
+          "heading": "2.3 보안 권고",
+          "level": 3,
+          "line": 77
+        },
+        {
+          "heading": "3. Rate Limit과 운영 제약",
+          "level": 2,
+          "line": 83
+        },
+        {
+          "heading": "3.1 공식 한도",
+          "level": 3,
+          "line": 85
+        },
+        {
+          "heading": "3.2 응답 포맷",
+          "level": 3,
+          "line": 94
+        },
+        {
+          "heading": "3.3 CORS / 브라우저 직접 호출",
+          "level": 3,
+          "line": 99
+        },
+        {
+          "heading": "4. 쿼리 문법",
+          "level": 2,
+          "line": 105
+        },
+        {
+          "heading": "4.1 지원 연산자",
+          "level": 3,
+          "line": 107
+        },
+        {
+          "heading": "4.2 날짜/시간 입력",
+          "level": 3,
+          "line": 121
+        },
+        {
+          "heading": "4.3 `latest` 키워드",
+          "level": 3,
+          "line": 127
+        },
+        {
+          "heading": "5. 라이브 데이터 동작",
+          "level": 2,
+          "line": 134
+        },
+        {
+          "heading": "5.1 라이브 윈도우",
+          "level": 3,
+          "line": 136
+        },
+        {
+          "heading": "5.2 지연(latency)",
+          "level": 3,
+          "line": 140
+        },
+        {
+          "heading": "5.3 엔드포인트별 라이브/포스트세션 구분",
+          "level": 3,
+          "line": 145
+        },
+        {
+          "heading": "5.4 알려진 라이브 불안정 사례",
+          "level": 3,
+          "line": 163
+        },
+        {
+          "heading": "6. 시간/공간/단위 약속",
+          "level": 2,
+          "line": 172
+        },
+        {
+          "heading": "6.1 시간",
+          "level": 3,
+          "line": 174
+        },
+        {
+          "heading": "6.2 좌표 (`location`)",
+          "level": 3,
+          "line": 183
+        },
+        {
+          "heading": "6.3 텔레메트리 단위",
+          "level": 3,
+          "line": 189
+        },
+        {
+          "heading": "7. 엔드포인트 카탈로그 (Quick Index)",
+          "level": 2,
+          "line": 201
+        },
+        {
+          "heading": "7.1 ID/구조",
+          "level": 3,
+          "line": 203
+        },
+        {
+          "heading": "7.2 타이밍",
+          "level": 3,
+          "line": 208
+        },
+        {
+          "heading": "7.3 텔레메트리",
+          "level": 3,
+          "line": 215
+        },
+        {
+          "heading": "7.4 레이스 운영",
+          "level": 3,
+          "line": 219
+        },
+        {
+          "heading": "7.5 결과",
+          "level": 3,
+          "line": 224
+        },
+        {
+          "heading": "7.6 공통 조인 키",
+          "level": 3,
+          "line": 229
+        },
+        {
+          "heading": "8. 엔드포인트 상세",
+          "level": 2,
+          "line": 243
+        },
+        {
+          "heading": "8.1 `/v1/meetings`",
+          "level": 3,
+          "line": 245
+        },
+        {
+          "heading": "8.2 `/v1/sessions`",
+          "level": 3,
+          "line": 286
+        },
+        {
+          "heading": "8.3 `/v1/drivers`",
+          "level": 3,
+          "line": 306
+        },
+        {
+          "heading": "8.4 `/v1/laps`",
+          "level": 3,
+          "line": 325
+        },
+        {
+          "heading": "8.5 `/v1/intervals`",
+          "level": 3,
+          "line": 350
+        },
+        {
+          "heading": "8.6 `/v1/position`",
+          "level": 3,
+          "line": 365
+        },
+        {
+          "heading": "8.7 `/v1/stints`",
+          "level": 3,
+          "line": 377
+        },
+        {
+          "heading": "8.8 `/v1/pit`",
+          "level": 3,
+          "line": 388
+        },
+        {
+          "heading": "8.9 `/v1/car_data`",
+          "level": 3,
+          "line": 400
+        },
+        {
+          "heading": "8.10 `/v1/location`",
+          "level": 3,
+          "line": 422
+        },
+        {
+          "heading": "8.11 `/v1/race_control`",
+          "level": 3,
+          "line": 434
+        },
+        {
+          "heading": "8.12 `/v1/team_radio`",
+          "level": 3,
+          "line": 451
+        },
+        {
+          "heading": "8.13 `/v1/weather`",
+          "level": 3,
+          "line": 467
+        },
+        {
+          "heading": "8.14 `/v1/session_result`",
+          "level": 3,
+          "line": 485
+        },
+        {
+          "heading": "8.15 `/v1/starting_grid`",
+          "level": 3,
+          "line": 511
+        },
+        {
+          "heading": "9. 데이터 볼륨 가이드",
+          "level": 2,
+          "line": 516
+        },
+        {
+          "heading": "10. 시간 커버리지",
+          "level": 2,
+          "line": 536
+        },
+        {
+          "heading": "10.1 시작점",
+          "level": 3,
+          "line": 538
+        },
+        {
+          "heading": "10.2 엔드포인트별 미세 차이",
+          "level": 3,
+          "line": 541
+        },
+        {
+          "heading": "10.3 세션 타입",
+          "level": 3,
+          "line": 549
+        },
+        {
+          "heading": "10.4 취소된 세션",
+          "level": 3,
+          "line": 553
+        },
+        {
+          "heading": "10.5 자가 호스팅으로 pre-2023 확장",
+          "level": 3,
+          "line": 556
+        },
+        {
+          "heading": "11. 알려진 함정 정리",
+          "level": 2,
+          "line": 561
+        },
+        {
+          "heading": "12. 참고 자료",
+          "level": 2,
+          "line": 586
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 59
+      }
+    },
+    {
+      "path": "docs/playwright-memory-profile.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 41,
+      "nonEmptyLines": 27,
+      "sections": [
+        {
+          "heading": "Playwright Memory Profile (LiveMap)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "측정 방법",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "CI vs Local",
+          "level": 2,
+          "line": 13
+        },
+        {
+          "heading": "외삽 근거",
+          "level": 2,
+          "line": 22
+        },
+        {
+          "heading": "알려진 제약",
+          "level": 2,
+          "line": 28
+        },
+        {
+          "heading": "로컬 실행 (60 분)",
+          "level": 2,
+          "line": 34
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    },
+    {
+      "path": "docs/replay-strategy.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 318,
+      "nonEmptyLines": 240,
+      "sections": [
+        {
+          "heading": "OpenF1 과거 경기 재생(Replay) 운영 전략",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "0. 한눈에 보는 운영 사양",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "1. 스코프와 라이브와의 차이",
+          "level": 2,
+          "line": 28
+        },
+        {
+          "heading": "1.1 동일하게 표시할 엔드포인트",
+          "level": 3,
+          "line": 30
+        },
+        {
+          "heading": "1.2 라이브와의 핵심 차이",
+          "level": 3,
+          "line": 35
+        },
+        {
+          "heading": "1.3 요청 수 차이의 출처 (라이브와 재생)",
+          "level": 3,
+          "line": 47
+        },
+        {
+          "heading": "2. 핵심 기법: 반-개구간 윈도우 폴링",
+          "level": 2,
+          "line": 67
+        },
+        {
+          "heading": "2.1 OpenF1 쿼리 지원 사실 확인",
+          "level": 3,
+          "line": 69
+        },
+        {
+          "heading": "2.2 채택 규약: **좌-닫힘 / 우-열림** `[T1, T2)`",
+          "level": 3,
+          "line": 74
+        },
+        {
+          "heading": "2.3 비채택: 양-닫힘 `[T1, T2]`",
+          "level": 3,
+          "line": 84
+        },
+        {
+          "heading": "2.4 비채택: `>` 만 사용 (`>T1 & <=T2`)",
+          "level": 3,
+          "line": 88
+        },
+        {
+          "heading": "3. 엔드포인트별 fetch 전략",
+          "level": 2,
+          "line": 93
+        },
+        {
+          "heading": "3.1 풀세션 1회 (희박/이벤트성)",
+          "level": 3,
+          "line": 97
+        },
+        {
+          "heading": "3.2 윈도우 분할 fetch (조밀 시계열)",
+          "level": 3,
+          "line": 111
+        },
+        {
+          "heading": "3.3 윈도우 시간 정렬 (Snap)",
+          "level": 3,
+          "line": 123
+        },
+        {
+          "heading": "3.4 세션 경계 처리",
+          "level": 3,
+          "line": 129
+        },
+        {
+          "heading": "4. 재생 시계와 룩어헤드 버퍼",
+          "level": 2,
+          "line": 138
+        },
+        {
+          "heading": "4.1 재생 시계 정의",
+          "level": 3,
+          "line": 140
+        },
+        {
+          "heading": "4.2 룩어헤드 버퍼 규칙",
+          "level": 3,
+          "line": 145
+        },
+        {
+          "heading": "4.3 시크 (Scrub)",
+          "level": 3,
+          "line": 151
+        },
+        {
+          "heading": "4.4 배속 변경",
+          "level": 3,
+          "line": 157
+        },
+        {
+          "heading": "4.5 재생 시계 vs 라이브 모드 비교",
+          "level": 3,
+          "line": 162
+        },
+        {
+          "heading": "5. 캐시 모델 — **본 MVP: 브라우저 세션 메모리**",
+          "level": 2,
+          "line": 172
+        },
+        {
+          "heading": "5.1 캐시 키와 저장소",
+          "level": 3,
+          "line": 176
+        },
+        {
+          "heading": "5.2 캐시 동작",
+          "level": 3,
+          "line": 183
+        },
+        {
+          "heading": "5.3 캐시 한계와 후속 옵션",
+          "level": 3,
+          "line": 189
+        },
+        {
+          "heading": "5.4 핫 세션 사전 적재 (선택, 본 MVP에서는 GitHub Actions 빌드 타임에 정적 JSON으로)",
+          "level": 3,
+          "line": 194
+        },
+        {
+          "heading": "6. 요청 수 계산",
+          "level": 2,
+          "line": 201
+        },
+        {
+          "heading": "6.1 단일 사용자 1x 재생, 2시간 세션",
+          "level": 3,
+          "line": 203
+        },
+        {
+          "heading": "6.2 단일 사용자 4x 재생",
+          "level": 3,
+          "line": 215
+        },
+        {
+          "heading": "6.3 다중 사용자 (향후 확장 참고)",
+          "level": 3,
+          "line": 219
+        },
+        {
+          "heading": "7. 무료 vs 유료 차이",
+          "level": 2,
+          "line": 229
+        },
+        {
+          "heading": "7.1 무료 (REST)",
+          "level": 3,
+          "line": 231
+        },
+        {
+          "heading": "7.2 유료 (스폰서)",
+          "level": 3,
+          "line": 237
+        },
+        {
+          "heading": "8. 코드 설계 가이드",
+          "level": 2,
+          "line": 244
+        },
+        {
+          "heading": "8.1 브라우저 컴포넌트 (본 MVP)",
+          "level": 3,
+          "line": 246
+        },
+        {
+          "heading": "8.2 라이브 ↔ 재생 공통 추상",
+          "level": 3,
+          "line": 256
+        },
+        {
+          "heading": "8.3 UI 컴포넌트",
+          "level": 3,
+          "line": 261
+        },
+        {
+          "heading": "9. 운영 지표 — 본 MVP는 브라우저 dev console로 단순화",
+          "level": 2,
+          "line": 270
+        },
+        {
+          "heading": "10. 주의 사항",
+          "level": 2,
+          "line": 286
+        },
+        {
+          "heading": "11. 미해결 / 후속 결정 필요 항목",
+          "level": 2,
+          "line": 303
+        },
+        {
+          "heading": "12. 참고",
+          "level": 2,
+          "line": 314
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 42
+      }
+    }
+  ]
+}

@@ -1,0 +1,399 @@
+{
+  "nodes": [
+    {
+      "id": "file:src/map/__tests__/drsZones.test.ts",
+      "type": "file",
+      "name": "drsZones.test.ts",
+      "filePath": "src/map/__tests__/drsZones.test.ts",
+      "summary": "drsZones 모듈의 단위 테스트로, mock CanvasRenderingContext2D(makeCtx)를 사용해 DRS 존 로딩과 호 길이(arc-length) 기반 세그먼트 렌더링 동작을 검증한다.",
+      "tags": ["test", "canvas", "drs-zone", "rendering"],
+      "complexity": "moderate",
+      "languageNotes": "vi.fn()으로 Canvas 2D 컨텍스트의 각 메서드를 mock하여 실제 렌더링 없이 호출 시퀀스를 검증한다."
+    },
+    {
+      "id": "file:src/map/__tests__/sectorBoundaries.test.ts",
+      "type": "file",
+      "name": "sectorBoundaries.test.ts",
+      "filePath": "src/map/__tests__/sectorBoundaries.test.ts",
+      "summary": "sectorBoundaries 모듈의 단위 테스트로, mock Canvas 컨텍스트(makeCtx)를 통해 섹터 경계 로딩과 경계 마커 렌더링을 검증한다.",
+      "tags": ["test", "canvas", "sector-boundary", "rendering"],
+      "complexity": "moderate",
+      "languageNotes": "vi.fn() 기반 Canvas 2D 컨텍스트 mock으로 arc/fill/stroke 호출을 검증한다."
+    },
+    {
+      "id": "file:src/map/__tests__/slmZones.test.ts",
+      "type": "file",
+      "name": "slmZones.test.ts",
+      "filePath": "src/map/__tests__/slmZones.test.ts",
+      "summary": "slmZones 모듈의 단위 테스트로, mock Canvas 컨텍스트(makeCtx)를 사용해 SLM(Sprint/Slow zone) 로딩과 arc-length 기반 세그먼트 렌더링을 검증한다.",
+      "tags": ["test", "canvas", "slm-zone", "rendering"],
+      "complexity": "moderate",
+      "languageNotes": "vi.fn()으로 Canvas 2D 컨텍스트를 mock하여 렌더링 호출 시퀀스를 검증한다."
+    },
+    {
+      "id": "file:src/map/drsZones.ts",
+      "type": "file",
+      "name": "drsZones.ts",
+      "filePath": "src/map/drsZones.ts",
+      "summary": "DRS 존 지오메트리를 JSON에서 로드하고, arc-length 테이블과 viewport 변환을 이용해 트랙 폴리라인 위에 DRS 활성 구간을 Canvas로 렌더링한다.",
+      "tags": ["data-model", "canvas", "drs-zone", "rendering", "geometry"],
+      "complexity": "moderate",
+      "languageNotes": "fetchImpl 주입(globalThis.fetch?.bind)으로 fetch 의존성을 테스트 가능하게 분리하고, arc-length 보간으로 곡선 구간을 샘플링한다."
+    },
+    {
+      "id": "file:src/map/sectorBoundaries.ts",
+      "type": "file",
+      "name": "sectorBoundaries.ts",
+      "filePath": "src/map/sectorBoundaries.ts",
+      "summary": "섹터 경계 지점을 JSON에서 로드하고 섹터별 색상으로 viewport 변환을 적용해 트랙 위에 경계 마커(원형)를 Canvas로 렌더링한다.",
+      "tags": ["data-model", "canvas", "sector-boundary", "rendering", "geometry"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/map/slmZones.ts",
+      "type": "file",
+      "name": "slmZones.ts",
+      "filePath": "src/map/slmZones.ts",
+      "summary": "SLM 존(서행/마샬 구간) 지오메트리를 JSON에서 로드하고, arc-length 테이블과 viewport 변환을 이용해 트랙 폴리라인 위에 해당 구간을 Canvas로 렌더링한다.",
+      "tags": ["data-model", "canvas", "slm-zone", "rendering", "geometry"],
+      "complexity": "moderate",
+      "languageNotes": "drsZones.ts와 동일한 fetchImpl 주입 및 arc-length 샘플링 패턴을 공유하는 자매 모듈이다."
+    },
+    {
+      "id": "file:src/map/viewport.ts",
+      "type": "file",
+      "name": "viewport.ts",
+      "filePath": "src/map/viewport.ts",
+      "summary": "트랙 좌표를 화면 픽셀로 변환하는 viewport 계산(computeViewport)과 좌표 적용(applyViewport)을 제공하는 map 렌더링의 핵심 좌표 변환 유틸리티이다.",
+      "tags": ["utility", "viewport", "geometry", "coordinate-transform", "type-definition"],
+      "complexity": "simple",
+      "languageNotes": "Point2D / ViewportTransform 타입을 정의·export하여 map 모듈 전반의 좌표 변환 계약을 제공한다."
+    },
+    {
+      "id": "function:src/map/drsZones.ts:loadDrsZones",
+      "type": "function",
+      "name": "loadDrsZones",
+      "filePath": "src/map/drsZones.ts",
+      "lineRange": [16, 28],
+      "summary": "circuitKey와 year로 DRS 존 JSON을 fetch하여 파싱하는 비동기 로더로, fetchImpl 주입을 통해 테스트 가능성을 확보한다.",
+      "tags": ["data-loading", "fetch", "async", "drs-zone"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/map/drsZones.ts:drawDrsZones",
+      "type": "function",
+      "name": "drawDrsZones",
+      "filePath": "src/map/drsZones.ts",
+      "lineRange": [34, 59],
+      "summary": "DRS 존 목록을 순회하며 arc-length 구간을 stroke하고 라벨을 그려, viewport 변환된 트랙 위에 DRS 활성 구간을 Canvas로 렌더링한다.",
+      "tags": ["canvas", "rendering", "drs-zone", "geometry"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/map/drsZones.ts:strokeArcSegment",
+      "type": "function",
+      "name": "strokeArcSegment",
+      "filePath": "src/map/drsZones.ts",
+      "lineRange": [61, 88],
+      "summary": "시작/끝 arc-length(sStart~sEnd) 사이를 샘플링하여 폴리라인 세그먼트를 viewport 변환 후 Canvas에 stroke하는 내부 헬퍼이다.",
+      "tags": ["canvas", "rendering", "arc-length", "geometry"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/map/sectorBoundaries.ts:loadSectorBoundaries",
+      "type": "function",
+      "name": "loadSectorBoundaries",
+      "filePath": "src/map/sectorBoundaries.ts",
+      "lineRange": [20, 32],
+      "summary": "circuitKey와 year로 섹터 경계 JSON을 fetch하여 파싱하는 비동기 로더로, fetchImpl 주입으로 테스트 가능성을 확보한다.",
+      "tags": ["data-loading", "fetch", "async", "sector-boundary"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/map/sectorBoundaries.ts:drawSectorBoundaries",
+      "type": "function",
+      "name": "drawSectorBoundaries",
+      "filePath": "src/map/sectorBoundaries.ts",
+      "lineRange": [43, 62],
+      "summary": "섹터 경계 지점을 viewport 변환 후 섹터별 색상의 원형 마커로 Canvas에 렌더링한다.",
+      "tags": ["canvas", "rendering", "sector-boundary", "geometry"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/map/slmZones.ts:loadSlmZones",
+      "type": "function",
+      "name": "loadSlmZones",
+      "filePath": "src/map/slmZones.ts",
+      "lineRange": [16, 28],
+      "summary": "circuitKey와 year로 SLM 존 JSON을 fetch하여 파싱하는 비동기 로더로, fetchImpl 주입으로 테스트 가능성을 확보한다.",
+      "tags": ["data-loading", "fetch", "async", "slm-zone"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/map/slmZones.ts:drawSlmZones",
+      "type": "function",
+      "name": "drawSlmZones",
+      "filePath": "src/map/slmZones.ts",
+      "lineRange": [30, 52],
+      "summary": "SLM 존 목록을 순회하며 arc-length 구간을 stroke하고 라벨을 그려, viewport 변환된 트랙 위에 SLM 구간을 Canvas로 렌더링한다.",
+      "tags": ["canvas", "rendering", "slm-zone", "geometry"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/map/slmZones.ts:strokeArcSegment",
+      "type": "function",
+      "name": "strokeArcSegment",
+      "filePath": "src/map/slmZones.ts",
+      "lineRange": [54, 81],
+      "summary": "시작/끝 arc-length 사이를 샘플링하여 폴리라인 세그먼트를 viewport 변환 후 Canvas에 stroke하는 내부 헬퍼이다.",
+      "tags": ["canvas", "rendering", "arc-length", "geometry"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/map/viewport.ts:computeViewport",
+      "type": "function",
+      "name": "computeViewport",
+      "filePath": "src/map/viewport.ts",
+      "lineRange": [34, 59],
+      "summary": "트랙 좌표 범위와 캔버스 크기를 받아 종횡비를 유지하는 scale/offset(ViewportTransform)을 계산하는 핵심 좌표 변환 함수이다.",
+      "tags": ["utility", "viewport", "geometry", "coordinate-transform"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/map/viewport.ts:applyViewport",
+      "type": "function",
+      "name": "applyViewport",
+      "filePath": "src/map/viewport.ts",
+      "lineRange": [64, 66],
+      "summary": "단일 트랙 좌표 점을 ViewportTransform으로 화면 픽셀 좌표로 변환하는 짧은 유틸리티로, 모든 map 렌더러에서 호출된다.",
+      "tags": ["utility", "viewport", "coordinate-transform"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:src/map/__tests__/drsZones.test.ts",
+      "target": "file:src/map/drsZones.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/map/__tests__/drsZones.test.ts",
+      "target": "file:src/map/viewport.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/map/__tests__/sectorBoundaries.test.ts",
+      "target": "file:src/map/sectorBoundaries.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/map/__tests__/sectorBoundaries.test.ts",
+      "target": "file:src/map/viewport.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/map/__tests__/slmZones.test.ts",
+      "target": "file:src/map/slmZones.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/map/__tests__/slmZones.test.ts",
+      "target": "file:src/map/viewport.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/map/drsZones.ts",
+      "target": "file:src/map/__tests__/drsZones.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/map/sectorBoundaries.ts",
+      "target": "file:src/map/__tests__/sectorBoundaries.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/map/slmZones.ts",
+      "target": "file:src/map/__tests__/slmZones.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/map/drsZones.ts",
+      "target": "function:src/map/drsZones.ts:loadDrsZones",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/drsZones.ts",
+      "target": "function:src/map/drsZones.ts:drawDrsZones",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/drsZones.ts",
+      "target": "function:src/map/drsZones.ts:strokeArcSegment",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/drsZones.ts",
+      "target": "function:src/map/drsZones.ts:loadDrsZones",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/drsZones.ts",
+      "target": "function:src/map/drsZones.ts:drawDrsZones",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/sectorBoundaries.ts",
+      "target": "function:src/map/sectorBoundaries.ts:loadSectorBoundaries",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/sectorBoundaries.ts",
+      "target": "function:src/map/sectorBoundaries.ts:drawSectorBoundaries",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/sectorBoundaries.ts",
+      "target": "function:src/map/sectorBoundaries.ts:loadSectorBoundaries",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/sectorBoundaries.ts",
+      "target": "function:src/map/sectorBoundaries.ts:drawSectorBoundaries",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/slmZones.ts",
+      "target": "function:src/map/slmZones.ts:loadSlmZones",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/slmZones.ts",
+      "target": "function:src/map/slmZones.ts:drawSlmZones",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/slmZones.ts",
+      "target": "function:src/map/slmZones.ts:strokeArcSegment",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/slmZones.ts",
+      "target": "function:src/map/slmZones.ts:loadSlmZones",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/slmZones.ts",
+      "target": "function:src/map/slmZones.ts:drawSlmZones",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/viewport.ts",
+      "target": "function:src/map/viewport.ts:computeViewport",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/viewport.ts",
+      "target": "function:src/map/viewport.ts:applyViewport",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/viewport.ts",
+      "target": "function:src/map/viewport.ts:computeViewport",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/viewport.ts",
+      "target": "function:src/map/viewport.ts:applyViewport",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/map/drsZones.ts:drawDrsZones",
+      "target": "function:src/map/viewport.ts:applyViewport",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/map/drsZones.ts:strokeArcSegment",
+      "target": "function:src/map/viewport.ts:applyViewport",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/map/slmZones.ts:drawSlmZones",
+      "target": "function:src/map/viewport.ts:applyViewport",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/map/slmZones.ts:strokeArcSegment",
+      "target": "function:src/map/viewport.ts:applyViewport",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/map/sectorBoundaries.ts:drawSectorBoundaries",
+      "target": "function:src/map/viewport.ts:applyViewport",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

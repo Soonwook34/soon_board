@@ -1,0 +1,231 @@
+{
+  "projectRoot": "/Users/a453498/Downloads/project/soon_board",
+  "batchFiles": [
+    {
+      "path": "src/live/CountdownOverlay.tsx",
+      "language": "typescript",
+      "sizeLines": 125,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/live/derived/__tests__/overlayCountdown.test.ts",
+      "language": "typescript",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/live/derived/overlayCountdown.ts",
+      "language": "typescript",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main.tsx",
+      "language": "typescript",
+      "sizeLines": 18,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/Countdown.tsx",
+      "language": "typescript",
+      "sizeLines": 48,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/ExpandedSessions.tsx",
+      "language": "typescript",
+      "sizeLines": 109,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/GpCard.tsx",
+      "language": "typescript",
+      "sizeLines": 64,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/GpGrid.tsx",
+      "language": "typescript",
+      "sizeLines": 125,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/Hero.tsx",
+      "language": "typescript",
+      "sizeLines": 147,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/MainPage.tsx",
+      "language": "typescript",
+      "sizeLines": 117,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/ResultPreviewTooltip.tsx",
+      "language": "typescript",
+      "sizeLines": 118,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/SearchFilter.tsx",
+      "language": "typescript",
+      "sizeLines": 150,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/SeasonPicker.tsx",
+      "language": "typescript",
+      "sizeLines": 52,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/SessionCard.tsx",
+      "language": "typescript",
+      "sizeLines": 123,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/SimBadge.tsx",
+      "language": "typescript",
+      "sizeLines": 51,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/StatusBadge.tsx",
+      "language": "typescript",
+      "sizeLines": 59,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/__tests__/initialSeason.test.ts",
+      "language": "typescript",
+      "sizeLines": 29,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/__tests__/useNowSecond.test.tsx",
+      "language": "typescript",
+      "sizeLines": 59,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/derived/__tests__/countdownFormat.test.ts",
+      "language": "typescript",
+      "sizeLines": 46,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/derived/__tests__/meetingStatus.test.ts",
+      "language": "typescript",
+      "sizeLines": 104,
+      "fileCategory": "code"
+    },
+    {
+      "path": "src/main/derived/__tests__/nextUpcoming.test.ts",
+      "language": "typescript",
+      "sizeLines": 105,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "src/live/CountdownOverlay.tsx": [
+      "src/live/derived/overlayCountdown.ts",
+      "src/main/derived/sessionStatus.ts",
+      "src/main/useNowSecond.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/live/derived/__tests__/overlayCountdown.test.ts": [
+      "src/live/derived/overlayCountdown.ts"
+    ],
+    "src/live/derived/overlayCountdown.ts": [],
+    "src/main.tsx": [
+      "src/App.tsx",
+      "src/shared/env.ts",
+      "src/style/global.css"
+    ],
+    "src/main/Countdown.tsx": [
+      "src/main/derived/countdownFormat.ts"
+    ],
+    "src/main/ExpandedSessions.tsx": [
+      "src/main/derived/sessionRoute.ts",
+      "src/main/derived/sessionStatus.ts",
+      "src/main/SessionCard.tsx",
+      "src/main/useNowSecond.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/GpCard.tsx": [
+      "src/main/derived/meetingStatus.ts",
+      "src/main/StatusBadge.tsx",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/GpGrid.tsx": [
+      "src/main/derived/searchFilter.ts",
+      "src/main/ExpandedSessions.tsx",
+      "src/main/GpCard.tsx",
+      "src/main/stores/uiStore.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/Hero.tsx": [
+      "src/main/Countdown.tsx",
+      "src/main/derived/nextUpcoming.ts",
+      "src/main/useNowSecond.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/MainPage.tsx": [
+      "src/main/GpGrid.tsx",
+      "src/main/Hero.tsx",
+      "src/main/initialSeason.ts",
+      "src/main/NarrowScreenBanner.tsx",
+      "src/main/SearchFilter.tsx",
+      "src/main/SeasonPicker.tsx",
+      "src/main/SimBadge.tsx",
+      "src/main/stores/catalogStore.ts",
+      "src/main/stores/hooks.ts",
+      "src/main/stores/revalidateSeason.ts",
+      "src/main/stores/uiStore.ts",
+      "src/main/Toast.tsx",
+      "src/main/useNowSecond.ts"
+    ],
+    "src/main/ResultPreviewTooltip.tsx": [
+      "src/main/derived/resultPreviewFormat.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/SearchFilter.tsx": [
+      "src/main/stores/hooks.ts",
+      "src/main/stores/uiStore.ts"
+    ],
+    "src/main/SeasonPicker.tsx": [
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/SessionCard.tsx": [
+      "src/main/derived/sessionStatus.ts",
+      "src/main/ResultPreviewTooltip.tsx",
+      "src/main/StatusBadge.tsx",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/SimBadge.tsx": [
+      "src/shared/env.ts",
+      "src/shared/simulatedNow.ts"
+    ],
+    "src/main/StatusBadge.tsx": [],
+    "src/main/__tests__/initialSeason.test.ts": [
+      "src/main/initialSeason.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/__tests__/useNowSecond.test.tsx": [
+      "src/main/useNowSecond.ts"
+    ],
+    "src/main/derived/__tests__/countdownFormat.test.ts": [
+      "src/main/derived/countdownFormat.ts"
+    ],
+    "src/main/derived/__tests__/meetingStatus.test.ts": [
+      "src/main/derived/meetingStatus.ts",
+      "src/shared/seasonData.ts"
+    ],
+    "src/main/derived/__tests__/nextUpcoming.test.ts": [
+      "src/main/derived/nextUpcoming.ts",
+      "src/shared/seasonData.ts"
+    ]
+  }
+}

@@ -1,0 +1,514 @@
+{
+  "nodes": [
+    {
+      "id": "file:src/dashboard/profiles/defaultProfile.tsx",
+      "type": "file",
+      "name": "defaultProfile.tsx",
+      "filePath": "src/dashboard/profiles/defaultProfile.tsx",
+      "summary": "레이스/연습 세션용 기본 대시보드 레이아웃 프로파일 — 리더보드·타이어 전략·최고 랩 등 패널 구성 정의.",
+      "tags": [
+        "profile",
+        "configuration",
+        "layout"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/profiles/index.ts",
+      "type": "file",
+      "name": "index.ts",
+      "filePath": "src/dashboard/profiles/index.ts",
+      "summary": "세션 종류에 맞는 대시보드 프로파일을 선택하는 resolveProfile과 프로파일 모듈 재노출 배럴.",
+      "tags": [
+        "barrel",
+        "entry-point",
+        "profile",
+        "routing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/profiles/qualifyingProfile.tsx",
+      "type": "file",
+      "name": "qualifyingProfile.tsx",
+      "filePath": "src/dashboard/profiles/qualifyingProfile.tsx",
+      "summary": "퀄리파잉 세션용 대시보드 레이아웃 프로파일 — 타워·녹아웃·세그먼트 패널과 모델 provider 구성 정의.",
+      "tags": [
+        "profile",
+        "configuration",
+        "layout",
+        "qualifying"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/profiles/types.ts",
+      "type": "file",
+      "name": "types.ts",
+      "filePath": "src/dashboard/profiles/types.ts",
+      "summary": "대시보드 프로파일과 패널 렌더 컨텍스트의 타입 정의 모듈.",
+      "tags": [
+        "type-definition",
+        "profile",
+        "schema-definition"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/shared/DriversContext.tsx",
+      "type": "file",
+      "name": "DriversContext.tsx",
+      "filePath": "src/dashboard/shared/DriversContext.tsx",
+      "summary": "드라이버 맵을 Context로 제공하는 provider/hook과 팀 컬러 헬퍼, 세션별 드라이버를 OpenF1에서 fetch하는 hook을 제공.",
+      "tags": [
+        "context",
+        "provider",
+        "hook",
+        "data-fetching"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/dashboard/shared/PanelHeading.tsx",
+      "type": "file",
+      "name": "PanelHeading.tsx",
+      "filePath": "src/dashboard/shared/PanelHeading.tsx",
+      "summary": "대시보드 패널의 표준 제목 헤딩을 렌더링하는 단순 presentational 컴포넌트.",
+      "tags": [
+        "component",
+        "ui",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/shared/__tests__/formatTime.test.ts",
+      "type": "file",
+      "name": "formatTime.test.ts",
+      "filePath": "src/dashboard/shared/__tests__/formatTime.test.ts",
+      "summary": "랩타임·섹터·갭 포매팅 함수들의 출력 형식과 엣지 케이스를 검증하는 단위 테스트.",
+      "tags": [
+        "test",
+        "utility",
+        "formatting"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/shared/dashboardStyles.ts",
+      "type": "file",
+      "name": "dashboardStyles.ts",
+      "filePath": "src/dashboard/shared/dashboardStyles.ts",
+      "summary": "대시보드 패널 공통 색상 팔레트·모노 폰트·패널 스타일을 정의하는 스타일 상수 모듈.",
+      "tags": [
+        "configuration",
+        "styling",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/dashboard/shared/formatTime.ts",
+      "type": "file",
+      "name": "formatTime.ts",
+      "filePath": "src/dashboard/shared/formatTime.ts",
+      "summary": "랩타임(분:초.밀리), 섹터, 갭 값을 사람이 읽기 좋은 문자열로 변환하는 포매팅 유틸리티.",
+      "tags": [
+        "utility",
+        "formatting",
+        "serialization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/shared/__tests__/sessionKind.test.ts",
+      "type": "file",
+      "name": "sessionKind.test.ts",
+      "filePath": "src/shared/__tests__/sessionKind.test.ts",
+      "summary": "resolveSessionKind의 세션 타입/이름 분류와 퀄리파잉 family·세그먼트 prefix 판별을 검증하는 단위 테스트.",
+      "tags": [
+        "test",
+        "utility",
+        "validation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/shared/sessionKind.ts",
+      "type": "file",
+      "name": "sessionKind.ts",
+      "filePath": "src/shared/sessionKind.ts",
+      "summary": "OpenF1 세션 타입/이름을 정규화된 SessionKind로 분류하고 퀄리파잉 family·세그먼트 prefix·세그먼트 지속시간을 제공하는 정본 유틸리티.",
+      "tags": [
+        "utility",
+        "classification",
+        "domain",
+        "validation"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/style/tokens.ts",
+      "type": "file",
+      "name": "tokens.ts",
+      "filePath": "src/style/tokens.ts",
+      "summary": "앱 전역 디자인 토큰 — 색상·간격·반경·폰트 스케일을 정의하는 중앙 토큰 모듈.",
+      "tags": [
+        "configuration",
+        "styling",
+        "design-tokens",
+        "type-definition"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/dashboard/profiles/index.ts:resolveProfile",
+      "type": "function",
+      "name": "resolveProfile",
+      "filePath": "src/dashboard/profiles/index.ts",
+      "lineRange": [
+        12,
+        15
+      ],
+      "summary": "SessionKind가 퀄리파잉 family이면 퀄리파잉 프로파일, 아니면 기본 프로파일을 반환하는 라우팅 함수.",
+      "tags": [
+        "routing",
+        "profile"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/shared/DriversContext.tsx:useSessionDrivers",
+      "type": "function",
+      "name": "useSessionDrivers",
+      "filePath": "src/dashboard/shared/DriversContext.tsx",
+      "lineRange": [
+        37,
+        73
+      ],
+      "summary": "sessionKey로 OpenF1 /v1/drivers를 fetch해 드라이버 맵 state를 구성하는 hook (abort·정합 처리 포함).",
+      "tags": [
+        "hook",
+        "data-fetching",
+        "async"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/dashboard/shared/DriversContext.tsx:teamColorOf",
+      "type": "function",
+      "name": "teamColorOf",
+      "filePath": "src/dashboard/shared/DriversContext.tsx",
+      "lineRange": [
+        26,
+        30
+      ],
+      "summary": "드라이버 레코드의 팀 컬러를 # 접두 보정하여 CSS 색상 문자열로 반환하는 헬퍼.",
+      "tags": [
+        "utility",
+        "formatting"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/dashboard/shared/formatTime.ts:formatLapTime",
+      "type": "function",
+      "name": "formatLapTime",
+      "filePath": "src/dashboard/shared/formatTime.ts",
+      "lineRange": [
+        7,
+        12
+      ],
+      "summary": "초 단위 랩타임을 분:초.밀리초 형식 문자열로 변환하는 포매터.",
+      "tags": [
+        "utility",
+        "formatting"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/shared/sessionKind.ts:resolveSessionKind",
+      "type": "function",
+      "name": "resolveSessionKind",
+      "filePath": "src/shared/sessionKind.ts",
+      "lineRange": [
+        14,
+        29
+      ],
+      "summary": "세션 타입·이름 문자열을 정규화된 SessionKind enum 값으로 분류하는 함수.",
+      "tags": [
+        "utility",
+        "classification"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:src/dashboard/profiles/defaultProfile.tsx",
+      "target": "file:src/dashboard/panels/EventTicker.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/profiles/defaultProfile.tsx",
+      "target": "file:src/dashboard/panels/FastestLapBadges.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/profiles/defaultProfile.tsx",
+      "target": "file:src/dashboard/panels/Leaderboard.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/profiles/defaultProfile.tsx",
+      "target": "file:src/dashboard/panels/SessionProgress.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/profiles/defaultProfile.tsx",
+      "target": "file:src/dashboard/panels/TyreStrategy.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/profiles/defaultProfile.tsx",
+      "target": "file:src/dashboard/profiles/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/profiles/index.ts",
+      "target": "file:src/dashboard/profiles/defaultProfile.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/profiles/index.ts",
+      "target": "file:src/dashboard/profiles/qualifyingProfile.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/profiles/index.ts",
+      "target": "file:src/dashboard/profiles/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/profiles/index.ts",
+      "target": "file:src/shared/sessionKind.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/profiles/qualifyingProfile.tsx",
+      "target": "file:src/dashboard/panels/FastestLapBadges.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/profiles/qualifyingProfile.tsx",
+      "target": "file:src/dashboard/panels/qualifying/KnockoutPanel.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/profiles/qualifyingProfile.tsx",
+      "target": "file:src/dashboard/panels/qualifying/QualifyingTower.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/profiles/qualifyingProfile.tsx",
+      "target": "file:src/dashboard/panels/qualifying/SegmentBestBoard.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/profiles/qualifyingProfile.tsx",
+      "target": "file:src/dashboard/panels/qualifying/SegmentProgress.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/profiles/qualifyingProfile.tsx",
+      "target": "file:src/dashboard/panels/qualifying/useQualifyingModel.tsx",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/profiles/qualifyingProfile.tsx",
+      "target": "file:src/dashboard/profiles/types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/profiles/types.ts",
+      "target": "file:src/shared/seasonData.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/shared/DriversContext.tsx",
+      "target": "file:src/shared/openf1Client.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/shared/DriversContext.tsx",
+      "target": "file:src/shared/openf1Types.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/shared/PanelHeading.tsx",
+      "target": "file:src/dashboard/shared/dashboardStyles.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/shared/__tests__/formatTime.test.ts",
+      "target": "file:src/dashboard/shared/formatTime.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/shared/dashboardStyles.ts",
+      "target": "file:src/style/tokens.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/shared/__tests__/sessionKind.test.ts",
+      "target": "file:src/shared/sessionKind.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/dashboard/profiles/index.ts",
+      "target": "function:src/dashboard/profiles/index.ts:resolveProfile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/dashboard/profiles/index.ts",
+      "target": "function:src/dashboard/profiles/index.ts:resolveProfile",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/dashboard/shared/DriversContext.tsx",
+      "target": "function:src/dashboard/shared/DriversContext.tsx:useSessionDrivers",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/dashboard/shared/DriversContext.tsx",
+      "target": "function:src/dashboard/shared/DriversContext.tsx:useSessionDrivers",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/dashboard/shared/DriversContext.tsx",
+      "target": "function:src/dashboard/shared/DriversContext.tsx:teamColorOf",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/dashboard/shared/DriversContext.tsx",
+      "target": "function:src/dashboard/shared/DriversContext.tsx:teamColorOf",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/dashboard/shared/formatTime.ts",
+      "target": "function:src/dashboard/shared/formatTime.ts:formatLapTime",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/dashboard/shared/formatTime.ts",
+      "target": "function:src/dashboard/shared/formatTime.ts:formatLapTime",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/shared/sessionKind.ts",
+      "target": "function:src/shared/sessionKind.ts:resolveSessionKind",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/shared/sessionKind.ts",
+      "target": "function:src/shared/sessionKind.ts:resolveSessionKind",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/dashboard/profiles/index.ts:resolveProfile",
+      "target": "function:src/shared/sessionKind.ts:isQualifyingFamily",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/dashboard/profiles/index.ts",
+      "target": "file:src/dashboard/profiles/__tests__/dashboardProfile.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/dashboard/shared/formatTime.ts",
+      "target": "file:src/dashboard/shared/__tests__/formatTime.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/shared/sessionKind.ts",
+      "target": "file:src/shared/__tests__/sessionKind.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

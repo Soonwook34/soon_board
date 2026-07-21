@@ -1,0 +1,20 @@
+{
+  "projectRoot": "/Users/a453498/Downloads/project/soon_board",
+  "batchFiles": [
+    {"path": "scripts/__tests__/fetchSeasonCatalogArgs.test.ts", "language": "typescript", "sizeLines": 40, "fileCategory": "code"},
+    {"path": "scripts/__tests__/seasonsList.test.ts", "language": "typescript", "sizeLines": 24, "fileCategory": "code"},
+    {"path": "scripts/_lib/seasonsList.ts", "language": "typescript", "sizeLines": 6, "fileCategory": "code"},
+    {"path": "scripts/fetch-season-catalog.ts", "language": "typescript", "sizeLines": 152, "fileCategory": "code"}
+  ],
+  "batchImportData": {
+    "scripts/__tests__/fetchSeasonCatalogArgs.test.ts": [
+      "scripts/_lib/seasonsList.ts",
+      "scripts/fetch-season-catalog.ts"
+    ],
+    "scripts/__tests__/seasonsList.test.ts": [
+      "scripts/_lib/seasonsList.ts"
+    ],
+    "scripts/_lib/seasonsList.ts": [],
+    "scripts/fetch-season-catalog.ts": []
+  }
+}

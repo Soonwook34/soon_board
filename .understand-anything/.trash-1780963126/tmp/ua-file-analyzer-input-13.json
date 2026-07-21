@@ -1,0 +1,19 @@
+{
+  "projectRoot": "/Users/a453498/Downloads/project/soon_board",
+  "batchFiles": [
+    {"path": "CLAUDE.md", "language": "markdown", "sizeLines": 64, "fileCategory": "docs"},
+    {"path": "THIRD_PARTY_LICENSES.md", "language": "markdown", "sizeLines": 48, "fileCategory": "docs"},
+    {"path": "index.html", "language": "html", "sizeLines": 13, "fileCategory": "markup"},
+    {"path": "package.json", "language": "json", "sizeLines": 53, "fileCategory": "config"},
+    {"path": "tsconfig.json", "language": "json", "sizeLines": 22, "fileCategory": "config"},
+    {"path": "vercel.json", "language": "json", "sizeLines": 12, "fileCategory": "config"}
+  ],
+  "batchImportData": {
+    "CLAUDE.md": [],
+    "THIRD_PARTY_LICENSES.md": [],
+    "index.html": [],
+    "package.json": [],
+    "tsconfig.json": [],
+    "vercel.json": []
+  }
+}

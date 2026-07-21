@@ -1,0 +1,18 @@
+{
+  "fixedSectionOk": true,
+  "nodesRecovered": 7,
+  "edgesRestored": 14,
+  "crossBatchEdgesAdded": 0,
+  "typesRemapped": 0,
+  "complexityRemapped": 0,
+  "notes": [
+    "Step 1 (Fixed section sanity-check): clean. Only 5 mechanical corrections (orphan/mismatched tested_by edge drops) plus tested-by linker work (1 supplemental edge, 118 production nodes tagged 'tested'). No systemic ID-prefix or complexity skew in the Fixed report — no >30% upstream issue flagged.",
+    "Final graph state on input was already internally consistent: 0 nodes missing an id, 0 unknown node types (all in file/function/class/pipeline/document/config), 0 unknown complexity values (all simple/moderate/complex), 0 duplicate node ids, 0 duplicate (source,target,type) edges, 0 dangling edges.",
+    "Step 2 (Could not fix): all 9 dropped edges were true cross-batch omissions — 6 functions + 1 config node genuinely exist in source but were never emitted by ANY batch (verified via grep of source + scan of all 23 batch files). Recreated all 7 child nodes with accurate summaries/tags/lineRange derived from reading the source (not generic placeholders) and restored all 9 dropped edges (7 calls, 1 triggers, 1 contains).",
+    "Recovered nodes: personalBestLap, isQualifyingFamily, getSeason, formatGap, flagIcon (function:), collectSources (test helper function:), and playwright.config.ts (config:). flagIcon was the target of 3 distinct dropped 'calls' edges (EventBroadcast, EventTicker, RaceControlBanner) — single node recovery fixed all 3.",
+    "Added 5 extra 'contains' edges (weight 1.0) to anchor the 5 recovered function nodes to their existing parent file nodes, matching graph convention where every function node is contained by its file. collectSources already got its contains edge via the restored dropped edge; playwright.config.ts is a top-level config (no code-file parent) so correctly has no contains edge. These 5 anchors are counted within edgesRestored (9 dropped + 5 anchors = 14).",
+    "Step 3 (cross-batch import edges): NO additions needed. Cross-checked all 311 importMap entries (506 project-internal target refs) against existing 'imports' edges — every importMap-backed file->file relationship already had a corresponding 'imports' edge (the merge script's recovery pass found 0 to add, confirmed independently). Only skip was target src/map/layoutVersions.json (a JSON data file with no node), which is expected and matches the merge report's 'Skipped 1 importMap target paths'.",
+    "Post-fix integrity re-verified: 577 nodes, 1403 edges, 0 dangling, 0 duplicate edges, 0 duplicate node ids, valid JSON. File-level coverage remains complete (278 file nodes for 278 scanned code/script files).",
+    "Data-quality observation: the systemic issue is the LLM not emitting individual function/config child nodes when they are only referenced from a SIBLING batch (cross-batch call/trigger targets). 7 such nodes were silently dropped. Low absolute count (~1.2% of nodes) but worth noting for upstream batch-prompt tuning — consider having each batch emit stub nodes for cross-file call targets it references."
+  ]
+}

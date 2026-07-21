@@ -1,0 +1,576 @@
+{
+  "nodes": [
+    {
+      "id": "config:.gitmodules",
+      "type": "config",
+      "name": ".gitmodules",
+      "filePath": ".gitmodules",
+      "summary": "Git 서브모듈 설정 파일로, 프로젝트가 참조하는 외부 Git 저장소의 경로와 URL을 선언한다.",
+      "tags": ["configuration", "git", "submodule"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.understand-anything/.understandignore",
+      "type": "config",
+      "name": ".understandignore",
+      "filePath": ".understand-anything/.understandignore",
+      "summary": "Understand-Anything 분석 도구가 지식 그래프 생성 시 무시할 파일·디렉터리 패턴을 정의하는 ignore 설정.",
+      "tags": ["configuration", "tooling", "ignore-rules"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.understand-anything/config.json",
+      "type": "config",
+      "name": "config.json",
+      "filePath": ".understand-anything/config.json",
+      "summary": "Understand-Anything 분석 도구 설정으로, 출력 언어(outputLanguage) 등 그래프 생성 옵션을 지정한다.",
+      "tags": ["configuration", "tooling", "json"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:data/slm-zones-raw.json",
+      "type": "config",
+      "name": "slm-zones-raw.json",
+      "filePath": "data/slm-zones-raw.json",
+      "summary": "서킷별 SLM(speed/marshalling) 존 파생 빌드를 위한 원본 시드 데이터로, 라이선스 정보와 circuits 배열을 담는다.",
+      "tags": ["configuration", "data", "seed-data", "json"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:e2e/memory.spec.ts",
+      "type": "file",
+      "name": "memory.spec.ts",
+      "filePath": "e2e/memory.spec.ts",
+      "summary": "test-rig 페이지를 장시간 구동하며 JS 힙 메모리 추세를 선형 회귀로 측정해 메모리 누수가 없음을 검증하는 Playwright e2e 스펙.",
+      "tags": ["test", "e2e", "playwright", "memory-profiling"],
+      "complexity": "moderate",
+      "languageNotes": "Chrome DevTools Protocol 기반 힙 사용량 샘플링 후 linearRegressionSlope로 증가 추세를 통계 판정한다."
+    },
+    {
+      "id": "file:e2e/replay-smoke.spec.ts",
+      "type": "file",
+      "name": "replay-smoke.spec.ts",
+      "filePath": "e2e/replay-smoke.spec.ts",
+      "summary": "리플레이 모드(/replay/:key)의 정상 로딩과 네트워크 요청 중복·과다 호출(초당 요청 상한)을 점검하는 Playwright smoke 스펙.",
+      "tags": ["test", "e2e", "playwright", "smoke-test", "replay"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:e2e/smoke.spec.ts",
+      "type": "file",
+      "name": "smoke.spec.ts",
+      "filePath": "e2e/smoke.spec.ts",
+      "summary": "test-rig 페이지가 합성 텔레메트리로 정상 부팅·렌더링되는지 확인하는 최소 Playwright smoke 스펙.",
+      "tags": ["test", "e2e", "playwright", "smoke-test"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:e2e/visual.spec.ts",
+      "type": "file",
+      "name": "visual.spec.ts",
+      "filePath": "e2e/visual.spec.ts",
+      "summary": "test-rig 화면의 스크린샷을 기준 이미지와 비교하는 Playwright 시각 회귀(visual regression) 스펙.",
+      "tags": ["test", "e2e", "playwright", "visual-regression"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:playwright.config.ts",
+      "type": "file",
+      "name": "playwright.config.ts",
+      "filePath": "playwright.config.ts",
+      "summary": "Playwright e2e 실행 설정으로, e2e 디렉터리·baseURL(localhost:5173)·webServer 기동 및 디바이스 프로젝트를 정의한다.",
+      "tags": ["config", "test", "playwright", "e2e"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scripts/__tests__/buildAllCircuits.test.ts",
+      "type": "file",
+      "name": "buildAllCircuits.test.ts",
+      "filePath": "scripts/__tests__/buildAllCircuits.test.ts",
+      "summary": "전체 서킷 빌드 오케스트레이터(build-all-circuits)를 모킹된 OpenF1 클라이언트와 파생 모듈로 검증하는 대규모 단위 테스트.",
+      "tags": ["test", "unit-test", "vitest", "build-pipeline"],
+      "complexity": "complex",
+      "languageNotes": "동적 await import로 fetch-circuit-maps·derive-sector-boundaries·derive-drs-zones·load-slm-zones 모듈을 런타임 스파이/모킹한다."
+    },
+    {
+      "id": "file:scripts/__tests__/buildCircuitsCatalog.test.ts",
+      "type": "file",
+      "name": "buildCircuitsCatalog.test.ts",
+      "filePath": "scripts/__tests__/buildCircuitsCatalog.test.ts",
+      "summary": "build-circuits-catalog의 카탈로그 생성과 CLI 인자 파싱(parseCliArgs)을 모의 OpenF1 클라이언트로 검증하는 단위 테스트.",
+      "tags": ["test", "unit-test", "vitest", "catalog"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/__tests__/checkSeasonSizes.test.ts",
+      "type": "file",
+      "name": "checkSeasonSizes.test.ts",
+      "filePath": "scripts/__tests__/checkSeasonSizes.test.ts",
+      "summary": "시즌 데이터 용량 예산(DEFAULT_BUDGET) 검사 로직(checkSeasonSizes)을 임시 JSON 파일로 검증하는 단위 테스트.",
+      "tags": ["test", "unit-test", "vitest", "validation"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/__tests__/computeConfidence.test.ts",
+      "type": "file",
+      "name": "computeConfidence.test.ts",
+      "filePath": "scripts/__tests__/computeConfidence.test.ts",
+      "summary": "extract-openf1-transform의 computeConfidence 함수가 변환 신뢰도 점수를 올바르게 산출하는지 확인하는 소규모 단위 테스트.",
+      "tags": ["test", "unit-test", "vitest", "validation"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:scripts/__tests__/curateResidual.test.ts",
+      "type": "file",
+      "name": "curateResidual.test.ts",
+      "filePath": "scripts/__tests__/curateResidual.test.ts",
+      "summary": "잔차 리포트 큐레이션(curateResidual), 행 포맷팅(formatRow), CLI 인자 파싱을 임시 인덱스·리포트 픽스처로 검증하는 단위 테스트.",
+      "tags": ["test", "unit-test", "vitest", "data-quality"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/__tests__/dailyDataRefresh.test.ts",
+      "type": "file",
+      "name": "dailyDataRefresh.test.ts",
+      "filePath": "scripts/__tests__/dailyDataRefresh.test.ts",
+      "summary": "daily-data-refresh.yml GitHub Actions 워크플로의 step 구조(시즌 카탈로그 fetch, build-all-circuits 가드 등)를 정규식으로 검증하는 단위 테스트.",
+      "tags": ["test", "unit-test", "vitest", "ci-cd"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/__tests__/dataUtils.test.ts",
+      "type": "file",
+      "name": "dataUtils.test.ts",
+      "filePath": "scripts/__tests__/dataUtils.test.ts",
+      "summary": "scripts/_lib/dataUtils의 기하·데이터 헬퍼 함수를 Point2D 픽스처로 검증하는 단위 테스트.",
+      "tags": ["test", "unit-test", "vitest", "utility"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/__tests__/drsZonesDeriver.test.ts",
+      "type": "file",
+      "name": "drsZonesDeriver.test.ts",
+      "filePath": "scripts/__tests__/drsZonesDeriver.test.ts",
+      "summary": "드라이버 랩 데이터로부터 DRS 존을 파생하는 drsZonesDeriver 로직을 합성 랩 픽스처(makeDriverLaps)로 검증하는 단위 테스트.",
+      "tags": ["test", "unit-test", "vitest", "telemetry"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/__tests__/extractOpenf1Transform.test.ts",
+      "type": "file",
+      "name": "extractOpenf1Transform.test.ts",
+      "filePath": "scripts/__tests__/extractOpenf1Transform.test.ts",
+      "summary": "OpenF1 위치 데이터로부터 affine 변환을 추출하는 extract-openf1-transform 파이프라인을 모의 클라이언트와 합성 폴리라인으로 검증하는 대규모 단위 테스트.",
+      "tags": ["test", "unit-test", "vitest", "geometry"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:scripts/__tests__/fetchCircuitMaps.test.ts",
+      "type": "file",
+      "name": "fetchCircuitMaps.test.ts",
+      "filePath": "scripts/__tests__/fetchCircuitMaps.test.ts",
+      "summary": "벤더 SVG에서 서킷 맵을 가져와 트랙 아웃라인을 생성하는 fetch-circuit-maps 로직을 임시 SVG·설정 픽스처로 검증하는 단위 테스트.",
+      "tags": ["test", "unit-test", "vitest", "circuit-maps"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:scripts/__tests__/openf1Affine.test.ts",
+      "type": "file",
+      "name": "openf1Affine.test.ts",
+      "filePath": "scripts/__tests__/openf1Affine.test.ts",
+      "summary": "scripts/_lib/openf1Affine의 affine 변환 추정·적용 함수를 변환된 좌표 집합 픽스처로 검증하는 대규모 단위 테스트.",
+      "tags": ["test", "unit-test", "vitest", "geometry"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:scripts/__tests__/openf1Client.test.ts",
+      "type": "file",
+      "name": "openf1Client.test.ts",
+      "filePath": "scripts/__tests__/openf1Client.test.ts",
+      "summary": "OpenF1Client의 HTTP 요청·재시도·JSON 파싱 동작을 모의 fetch 응답(jsonResponse)으로 검증하는 단위 테스트.",
+      "tags": ["test", "unit-test", "vitest", "api-client"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/__tests__/openf1FastLap.test.ts",
+      "type": "file",
+      "name": "openf1FastLap.test.ts",
+      "filePath": "scripts/__tests__/openf1FastLap.test.ts",
+      "summary": "scripts/_lib/openf1FastLap의 최속랩 선정·위치 데이터 수집 로직을 모의 OpenF1Client로 검증하는 단위 테스트.",
+      "tags": ["test", "unit-test", "vitest", "telemetry"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:scripts/__tests__/pitlaneTracer.test.ts",
+      "type": "file",
+      "name": "pitlaneTracer.test.ts",
+      "filePath": "scripts/__tests__/pitlaneTracer.test.ts",
+      "summary": "피트레인 경로를 추적·생성하는 pitlaneTracer 로직을 모의 클라이언트와 Point2D 픽스처로 검증하는 단위 테스트.",
+      "tags": ["test", "unit-test", "vitest", "geometry"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:scripts/__tests__/seasonCatalog.test.ts",
+      "type": "file",
+      "name": "seasonCatalog.test.ts",
+      "filePath": "scripts/__tests__/seasonCatalog.test.ts",
+      "summary": "buildSeasonCatalog가 OpenF1 API에서 시즌 카탈로그를 구성하는 동작을 모의 클라이언트(mockClient)로 검증하는 대규모 단위 테스트.",
+      "tags": ["test", "unit-test", "vitest", "catalog"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:scripts/__tests__/seasonsIndex.test.ts",
+      "type": "file",
+      "name": "seasonsIndex.test.ts",
+      "filePath": "scripts/__tests__/seasonsIndex.test.ts",
+      "summary": "시즌 인덱스 읽기·업서트(readSeasonsIndex/upsertSeasonsIndex)와 원자적 쓰기 연동을 검증하는 단위 테스트.",
+      "tags": ["test", "unit-test", "vitest", "indexing"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:e2e/memory.spec.ts:runMemoryProfile",
+      "type": "function",
+      "name": "runMemoryProfile",
+      "filePath": "e2e/memory.spec.ts",
+      "lineRange": [21, 62],
+      "summary": "test-rig 페이지를 구동하며 일정 간격으로 JS 힙 사용량을 샘플링해 메모리 프로파일 시계열을 수집한다.",
+      "tags": ["test-helper", "memory-profiling", "e2e"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:e2e/memory.spec.ts:linearRegressionSlope",
+      "type": "function",
+      "name": "linearRegressionSlope",
+      "filePath": "e2e/memory.spec.ts",
+      "lineRange": [64, 75],
+      "summary": "샘플링한 메모리 시계열의 선형 회귀 기울기를 계산해 누수성 증가 추세를 판정하는 데 사용한다.",
+      "tags": ["test-helper", "statistics", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/__tests__/buildAllCircuits.test.ts:makeMockClient",
+      "type": "function",
+      "name": "makeMockClient",
+      "filePath": "scripts/__tests__/buildAllCircuits.test.ts",
+      "lineRange": [58, 106],
+      "summary": "build-all-circuits 테스트용 OpenF1Client 모의 객체를 생성해 세션·위치·랩 API 응답을 스텁한다.",
+      "tags": ["test-helper", "mock", "fixture"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/__tests__/buildAllCircuits.test.ts:generateTrackLocation",
+      "type": "function",
+      "name": "generateTrackLocation",
+      "filePath": "scripts/__tests__/buildAllCircuits.test.ts",
+      "lineRange": [109, 131],
+      "summary": "테스트용 합성 트랙 위치 좌표 시퀀스를 생성해 서킷 빌드 입력 픽스처로 제공한다.",
+      "tags": ["test-helper", "fixture", "geometry"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:scripts/__tests__/extractOpenf1Transform.test.ts:makeMockClient",
+      "type": "function",
+      "name": "makeMockClient",
+      "filePath": "scripts/__tests__/extractOpenf1Transform.test.ts",
+      "lineRange": [31, 44],
+      "summary": "extract-openf1-transform 테스트용 OpenF1Client 모의 객체를 생성해 위치 데이터 응답을 스텁한다.",
+      "tags": ["test-helper", "mock", "fixture"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/__tests__/openf1FastLap.test.ts:makeMockClient",
+      "type": "function",
+      "name": "makeMockClient",
+      "filePath": "scripts/__tests__/openf1FastLap.test.ts",
+      "lineRange": [24, 40],
+      "summary": "openf1FastLap 테스트용 OpenF1Client 모의 객체를 생성해 랩·위치 API 응답을 스텁한다.",
+      "tags": ["test-helper", "mock", "fixture"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:scripts/__tests__/seasonCatalog.test.ts:mockClient",
+      "type": "function",
+      "name": "mockClient",
+      "filePath": "scripts/__tests__/seasonCatalog.test.ts",
+      "lineRange": [19, 35],
+      "summary": "buildSeasonCatalog 테스트용 OpenF1Client 모의 객체를 생성해 미팅·세션 API 응답을 스텁한다.",
+      "tags": ["test-helper", "mock", "fixture"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:e2e/memory.spec.ts",
+      "target": "function:e2e/memory.spec.ts:runMemoryProfile",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:e2e/memory.spec.ts",
+      "target": "function:e2e/memory.spec.ts:linearRegressionSlope",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/__tests__/buildAllCircuits.test.ts",
+      "target": "function:scripts/__tests__/buildAllCircuits.test.ts:makeMockClient",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/__tests__/buildAllCircuits.test.ts",
+      "target": "function:scripts/__tests__/buildAllCircuits.test.ts:generateTrackLocation",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/__tests__/extractOpenf1Transform.test.ts",
+      "target": "function:scripts/__tests__/extractOpenf1Transform.test.ts:makeMockClient",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/__tests__/openf1FastLap.test.ts",
+      "target": "function:scripts/__tests__/openf1FastLap.test.ts:makeMockClient",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/__tests__/seasonCatalog.test.ts",
+      "target": "function:scripts/__tests__/seasonCatalog.test.ts:mockClient",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:scripts/__tests__/checkSeasonSizes.test.ts",
+      "target": "file:scripts/check-season-sizes.ts",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:scripts/build-all-circuits.ts",
+      "target": "file:scripts/__tests__/buildAllCircuits.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/fetch-circuit-maps.ts",
+      "target": "file:scripts/__tests__/buildAllCircuits.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/derive-sector-boundaries.ts",
+      "target": "file:scripts/__tests__/buildAllCircuits.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/derive-drs-zones.ts",
+      "target": "file:scripts/__tests__/buildAllCircuits.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/load-slm-zones.ts",
+      "target": "file:scripts/__tests__/buildAllCircuits.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/build-circuits-catalog.ts",
+      "target": "file:scripts/__tests__/buildCircuitsCatalog.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/check-season-sizes.ts",
+      "target": "file:scripts/__tests__/checkSeasonSizes.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/extract-openf1-transform.ts",
+      "target": "file:scripts/__tests__/computeConfidence.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/curate-residual.ts",
+      "target": "file:scripts/__tests__/curateResidual.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/_lib/trackOutlinesIndex.ts",
+      "target": "file:scripts/__tests__/curateResidual.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/_lib/dataUtils.ts",
+      "target": "file:scripts/__tests__/dataUtils.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/_lib/drsZonesDeriver.ts",
+      "target": "file:scripts/__tests__/drsZonesDeriver.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/extract-openf1-transform.ts",
+      "target": "file:scripts/__tests__/extractOpenf1Transform.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/_lib/openf1Affine.ts",
+      "target": "file:scripts/__tests__/extractOpenf1Transform.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/_lib/openf1Client.ts",
+      "target": "file:scripts/__tests__/extractOpenf1Transform.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/_lib/trackOutlinesIndex.ts",
+      "target": "file:scripts/__tests__/extractOpenf1Transform.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/fetch-circuit-maps.ts",
+      "target": "file:scripts/__tests__/fetchCircuitMaps.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/_lib/openf1Affine.ts",
+      "target": "file:scripts/__tests__/openf1Affine.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/_lib/openf1Client.ts",
+      "target": "file:scripts/__tests__/openf1Client.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/_lib/openf1FastLap.ts",
+      "target": "file:scripts/__tests__/openf1FastLap.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/_lib/openf1Client.ts",
+      "target": "file:scripts/__tests__/openf1FastLap.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/_lib/pitlaneTracer.ts",
+      "target": "file:scripts/__tests__/pitlaneTracer.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/_lib/seasonCatalog.ts",
+      "target": "file:scripts/__tests__/seasonCatalog.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/_lib/openf1Client.ts",
+      "target": "file:scripts/__tests__/seasonCatalog.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/_lib/seasonsIndex.ts",
+      "target": "file:scripts/__tests__/seasonsIndex.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:scripts/_lib/atomicWrite.ts",
+      "target": "file:scripts/__tests__/seasonsIndex.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "pipeline:.github/workflows/daily-data-refresh.yml",
+      "target": "file:scripts/__tests__/dailyDataRefresh.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:playwright.config.ts",
+      "target": "file:e2e/memory.spec.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:playwright.config.ts",
+      "target": "file:e2e/replay-smoke.spec.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:playwright.config.ts",
+      "target": "file:e2e/smoke.spec.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:playwright.config.ts",
+      "target": "file:e2e/visual.spec.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

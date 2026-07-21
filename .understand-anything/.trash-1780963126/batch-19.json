@@ -1,0 +1,1133 @@
+{
+  "nodes": [
+    {
+      "id": "file:src/map/__tests__/viewport.test.ts",
+      "type": "file",
+      "name": "viewport.test.ts",
+      "filePath": "src/map/__tests__/viewport.test.ts",
+      "summary": "src/map/viewport.ts의 computeViewport/applyViewport 좌표 변환 로직을 검증하는 Vitest 단위 테스트로, viewBox와 canvas 비율에 따른 scale·offset 계산을 케이스별로 확인한다.",
+      "tags": ["test", "viewport", "unit-test", "map"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/map/arcLength.ts",
+      "type": "file",
+      "name": "arcLength.ts",
+      "filePath": "src/map/arcLength.ts",
+      "summary": "트랙 polyline의 누적 호 길이(arc-length) 테이블을 따라 임의의 거리 s에서 좌표를 샘플링하고, 결승선 통과 시 호 길이를 wrap 처리하는 순수 함수 모음.",
+      "tags": ["utility", "geometry", "interpolation", "map"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:src/map/circuits.json",
+      "type": "config",
+      "name": "circuits.json",
+      "filePath": "src/map/circuits.json",
+      "summary": "각 서킷의 트랙 polyline·viewBox·섹터/DRS/SLM 존 등 정적 레이아웃 데이터를 담는 데이터 파일로, default_variant와 circuits 맵을 통해 렌더러가 사용할 좌표 기준을 제공한다.",
+      "tags": ["configuration", "map", "track-data", "circuits"],
+      "complexity": "complex",
+      "languageNotes": "서킷별 좌표 데이터가 큰 JSON 구조로 직렬화되어 있으며, 렌더 모듈에서 import해 정적 레이어 렌더링 기준으로 사용된다."
+    },
+    {
+      "id": "file:src/map/dashboardQueries.ts",
+      "type": "file",
+      "name": "dashboardQueries.ts",
+      "filePath": "src/map/dashboardQueries.ts",
+      "summary": "displayTime 기준으로 OpenF1 레코드를 필터링·정렬하여 최신 lap/stint/세션 결과 및 fastest lap·purple sector·personal best 집계를 계산하는 대시보드 쿼리 헬퍼 모음.",
+      "tags": ["utility", "data-query", "aggregation", "dashboard"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/map/interpolation.ts",
+      "type": "file",
+      "name": "interpolation.ts",
+      "filePath": "src/map/interpolation.ts",
+      "summary": "두 드라이버 sample 사이의 위치를 displayTime 기준으로 보간하는 순수 함수로, freeze·raw-xy lerp·wrapping path-arc·기본 path-arc 분기를 통해 트랙 위 마커 위치를 결정한다.",
+      "tags": ["interpolation", "map", "utility", "geometry"],
+      "complexity": "moderate",
+      "languageNotes": "RAF·Canvas 의존성 없이 순수 함수로 작성되어 node 환경에서 단위 테스트가 가능하도록 설계됨."
+    },
+    {
+      "id": "config:src/map/layoutVersions.json",
+      "type": "config",
+      "name": "layoutVersions.json",
+      "filePath": "src/map/layoutVersions.json",
+      "summary": "서킷별 연도 범위에 따른 트랙 레이아웃 버전 매핑을 정의하는 데이터 파일로, 동일 서킷의 연도별 변경된 레이아웃을 구분하는 데 사용된다.",
+      "tags": ["configuration", "map", "layout-versions", "track-data"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/map/layoutVersions.ts",
+      "type": "file",
+      "name": "layoutVersions.ts",
+      "filePath": "src/map/layoutVersions.ts",
+      "summary": "layoutVersions.json을 로드해 circuitKey와 year에 맞는 레이아웃 버전을 해석(resolveLayout)하는 얇은 래퍼 모듈.",
+      "tags": ["utility", "map", "layout-versions", "config"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/map/LiveMapRenderer.ts",
+      "type": "file",
+      "name": "LiveMapRenderer.ts",
+      "filePath": "src/map/LiveMapRenderer.ts",
+      "summary": "requestAnimationFrame 루프 기반 메인 렌더러로, 매 프레임 정적 트랙 레이어와 드라이버 마커·trail·상태 배지·라벨 declutter를 Canvas에 합성하는 라이브 맵 렌더링 오케스트레이터.",
+      "tags": ["renderer", "map", "canvas", "animation-loop"],
+      "complexity": "complex",
+      "languageNotes": "renderFrame은 RAF 비의존 순수 함수로 분리되어 node 테스트가 가능하고, start()/stop()만 requestAnimationFrame에 의존한다."
+    },
+    {
+      "id": "file:src/map/LocationBuffer.ts",
+      "type": "file",
+      "name": "LocationBuffer.ts",
+      "filePath": "src/map/LocationBuffer.ts",
+      "summary": "드라이버별 raw OpenF1 위치 sample을 시간순으로 정렬 저장하고, 주어진 displayTime에 대한 보간용 sample pair를 반환하며 오래된 sample을 trim하는 버퍼 클래스.",
+      "tags": ["buffer", "data-model", "map", "location"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/map/mapStyles.ts",
+      "type": "file",
+      "name": "mapStyles.ts",
+      "filePath": "src/map/mapStyles.ts",
+      "summary": "트랙·마커·trail·배지 등 맵 렌더링에 사용되는 색상·선폭·폰트 등 시각 스타일 상수를 중앙 정의하는 스타일 모듈.",
+      "tags": ["config", "map", "styling", "constants"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/map/markerLabelToggle.ts",
+      "type": "file",
+      "name": "markerLabelToggle.ts",
+      "filePath": "src/map/markerLabelToggle.ts",
+      "summary": "마커 라벨 표시 여부를 localStorage에 영속화하고 탭 간 storage 이벤트로 동기화하는 React Context Provider와 useMarkerLabel 훅을 제공한다.",
+      "tags": ["context", "hook", "map", "state-management"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/map/markers.ts",
+      "type": "file",
+      "name": "markers.ts",
+      "filePath": "src/map/markers.ts",
+      "summary": "드라이버 마커 원·라벨 chip·SLM 인디케이터를 Canvas 2D 컨텍스트에 그리는 저수준 드로잉 함수 모음으로, 둥근 사각형 헬퍼를 포함한다.",
+      "tags": ["renderer", "map", "canvas", "marker"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/map/pathProjection.ts",
+      "type": "file",
+      "name": "pathProjection.ts",
+      "filePath": "src/map/pathProjection.ts",
+      "summary": "임의의 점을 트랙 polyline에 정사영하여 가장 가까운 세그먼트와 누적 호 길이 s를 계산하는 projectToPolyline 순수 함수.",
+      "tags": ["utility", "geometry", "map", "projection"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/map/PerDriverBuffer.ts",
+      "type": "file",
+      "name": "PerDriverBuffer.ts",
+      "filePath": "src/map/PerDriverBuffer.ts",
+      "summary": "드라이버별 sample을 시간순으로 보관하며 보간용 pair 탐색·sentinel(무효 좌표) 필터링·trail용 최근 sample 조회를 제공하는 위치 버퍼 클래스.",
+      "tags": ["buffer", "data-model", "map", "location"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/map/pitLane.ts",
+      "type": "file",
+      "name": "pitLane.ts",
+      "filePath": "src/map/pitLane.ts",
+      "summary": "서킷별 pitlane polyline JSON을 fetch로 로드하고, 드라이버 위치가 pitlane 근접 범위 안에 있는지 polyline 정사영으로 판정하는 헬퍼.",
+      "tags": ["utility", "map", "pitlane", "data-loader"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/map/stateBadges.ts",
+      "type": "file",
+      "name": "stateBadges.ts",
+      "filePath": "src/map/stateBadges.ts",
+      "summary": "마지막 sample 이후 경과 시간으로 드라이버의 연결 상태(disconnect 등)를 분류하고, 해당 상태 배지를 마커 옆에 Canvas로 그리는 함수 모음.",
+      "tags": ["renderer", "map", "canvas", "state"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/map/trackRenderer.ts",
+      "type": "file",
+      "name": "trackRenderer.ts",
+      "filePath": "src/map/trackRenderer.ts",
+      "summary": "정적 트랙 레이어를 Canvas에 렌더링하는 모듈로, 배경을 채우고 viewport 변환을 적용해 트랙 polyline을 stroke한다.",
+      "tags": ["renderer", "map", "canvas", "track"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/map/trails.ts",
+      "type": "file",
+      "name": "trails.ts",
+      "filePath": "src/map/trails.ts",
+      "summary": "드라이버의 최근 이동 궤적(trail)을 시간 윈도우 안에서 수집해 페이드 처리하며 Canvas에 그리는 함수 모음.",
+      "tags": ["renderer", "map", "canvas", "trail"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/map/transform.ts",
+      "type": "file",
+      "name": "transform.ts",
+      "filePath": "src/map/transform.ts",
+      "summary": "OpenF1 좌표계를 회전 보정 등으로 내부 맵 좌표계로 변환하는 applyOpenF1Transform 순수 함수.",
+      "tags": ["utility", "geometry", "map", "transform"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/shared/__tests__/createMockOpenF1Client.test.ts",
+      "type": "file",
+      "name": "createMockOpenF1Client.test.ts",
+      "filePath": "src/shared/__tests__/createMockOpenF1Client.test.ts",
+      "summary": "createMockOpenF1Client 팩토리가 올바른 Mock fetch/Response를 생성하는지 검증하는 self-test 단위 테스트.",
+      "tags": ["test", "unit-test", "mock", "openf1"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:src/shared/__tests__/Footer.test.tsx",
+      "type": "file",
+      "name": "Footer.test.tsx",
+      "filePath": "src/shared/__tests__/Footer.test.tsx",
+      "summary": "Footer 컴포넌트를 React Testing Library로 렌더링해 4-line 표기와 generated_at 동기화를 jsdom 환경에서 검증하는 컴포넌트 테스트.",
+      "tags": ["test", "component", "footer", "react"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/shared/__tests__/openf1Client.test.ts",
+      "type": "file",
+      "name": "openf1Client.test.ts",
+      "filePath": "src/shared/__tests__/openf1Client.test.ts",
+      "summary": "OpenF1Client의 요청 큐·우선순위 승격·abort·재시도 등 AC1-AC10 전반을 커버하는 대규모 단위 테스트 스위트.",
+      "tags": ["test", "unit-test", "openf1", "http-client"],
+      "complexity": "complex"
+    },
+    {
+      "id": "file:src/shared/__tests__/SyntheticDataSource.ts",
+      "type": "file",
+      "name": "SyntheticDataSource.ts",
+      "filePath": "src/shared/__tests__/SyntheticDataSource.ts",
+      "summary": "DataSource 인터페이스를 최소 구현한 테스트 fixture로, 합성 sample을 push하고 displayTime 기준 sample pair·lap·집계 조회를 제공해 렌더러·보간 테스트에 사용된다.",
+      "tags": ["test-fixture", "data-source", "synthetic", "map"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:src/style/global.css",
+      "type": "file",
+      "name": "global.css",
+      "filePath": "src/style/global.css",
+      "summary": "앱 전역 기본 스타일을 정의하는 스타일시트로, reset·레이아웃·색상 등 전반적 UI 베이스를 제공하며 main.tsx에서 로드된다.",
+      "tags": ["styling", "css", "global", "ui"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:vite.config.ts",
+      "type": "file",
+      "name": "vite.config.ts",
+      "filePath": "vite.config.ts",
+      "summary": "Vite 빌드·개발 서버 설정 파일로, React 플러그인과 빌드 옵션 등 SPA 번들링 동작을 구성한다.",
+      "tags": ["config", "build-system", "vite", "tooling"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/map/arcLength.ts:sampleAtArcLength",
+      "type": "function",
+      "name": "sampleAtArcLength",
+      "filePath": "src/map/arcLength.ts",
+      "lineRange": [10, 40],
+      "summary": "arc-length 테이블을 이진/선형 탐색하여 주어진 거리 s에 해당하는 polyline 위 좌표를 보간 반환한다.",
+      "tags": ["utility", "geometry", "interpolation"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/map/arcLength.ts:wrapArcLength",
+      "type": "function",
+      "name": "wrapArcLength",
+      "filePath": "src/map/arcLength.ts",
+      "lineRange": [46, 50],
+      "summary": "총 트랙 길이를 기준으로 호 길이 s를 0~totalLength 범위로 wrap하여 결승선 통과를 처리한다.",
+      "tags": ["utility", "geometry", "wrapping"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/map/dashboardQueries.ts:latestBefore",
+      "type": "function",
+      "name": "latestBefore",
+      "filePath": "src/map/dashboardQueries.ts",
+      "lineRange": [52, 68],
+      "summary": "필터 조건에 맞으면서 시각 t 이전인 레코드 중 가장 최신 항목을 반환하는 시간 기준 조회 함수.",
+      "tags": ["data-query", "utility", "filtering"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/map/dashboardQueries.ts:allBefore",
+      "type": "function",
+      "name": "allBefore",
+      "filePath": "src/map/dashboardQueries.ts",
+      "lineRange": [74, 86],
+      "summary": "시각 t 이전이며 필터에 맞는 레코드들을 최신순 정렬해 limit만큼 반환한다.",
+      "tags": ["data-query", "utility", "filtering"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/map/dashboardQueries.ts:lapAt",
+      "type": "function",
+      "name": "lapAt",
+      "filePath": "src/map/dashboardQueries.ts",
+      "lineRange": [99, 114],
+      "summary": "특정 드라이버의 lap 중 시각 t가 속하는 진행 중인 lap을 date_start 기준으로 찾아 반환한다.",
+      "tags": ["data-query", "lap", "utility"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/map/dashboardQueries.ts:completedLapsBefore",
+      "type": "function",
+      "name": "completedLapsBefore",
+      "filePath": "src/map/dashboardQueries.ts",
+      "lineRange": [120, 136],
+      "summary": "시각 t 이전에 완료된 드라이버의 lap들을 최신순 정렬해 limit만큼 반환한다.",
+      "tags": ["data-query", "lap", "utility"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/map/dashboardQueries.ts:stintForLap",
+      "type": "function",
+      "name": "stintForLap",
+      "filePath": "src/map/dashboardQueries.ts",
+      "lineRange": [142, 152],
+      "summary": "특정 드라이버의 stint 목록에서 주어진 lap 번호가 속하는 stint를 찾아 반환한다.",
+      "tags": ["data-query", "stint", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/map/dashboardQueries.ts:sessionResultFor",
+      "type": "function",
+      "name": "sessionResultFor",
+      "filePath": "src/map/dashboardQueries.ts",
+      "lineRange": [159, 168],
+      "summary": "세션 결과 레코드에서 특정 드라이버 번호의 결과를 조회해 반환한다.",
+      "tags": ["data-query", "session", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/map/dashboardQueries.ts:computeAllAggregates",
+      "type": "function",
+      "name": "computeAllAggregates",
+      "filePath": "src/map/dashboardQueries.ts",
+      "lineRange": [250, 257],
+      "summary": "시각 t까지 완료된 lap을 기반으로 fastest lap·purple sector·personal best 집계를 한 번에 계산한다.",
+      "tags": ["aggregation", "data-query", "dashboard"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/map/dashboardQueries.ts:computeAggregateBefore",
+      "type": "function",
+      "name": "computeAggregateBefore",
+      "filePath": "src/map/dashboardQueries.ts",
+      "lineRange": [260, 266],
+      "summary": "주어진 aggregate 이름에 해당하는 집계 결과를 computeAllAggregates에서 선택해 시각 t 기준으로 반환한다.",
+      "tags": ["aggregation", "data-query", "dashboard"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/map/interpolation.ts:interpolatePosition",
+      "type": "function",
+      "name": "interpolatePosition",
+      "filePath": "src/map/interpolation.ts",
+      "lineRange": [56, 86],
+      "summary": "두 sample과 displayTime을 받아 freeze·raw-xy lerp·wrapping path-arc·path-arc 분기로 트랙 위 보간 위치를 계산하는 핵심 보간 함수.",
+      "tags": ["interpolation", "geometry", "map"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:src/map/LiveMapRenderer.ts:LiveMapRenderer",
+      "type": "class",
+      "name": "LiveMapRenderer",
+      "filePath": "src/map/LiveMapRenderer.ts",
+      "lineRange": [84, 245],
+      "summary": "정적 레이어 캐시 렌더링과 매 프레임 드라이버 마커·trail·배지·라벨 declutter를 합성하고 RAF 루프를 start/stop으로 제어하는 라이브 맵 렌더러 클래스.",
+      "tags": ["renderer", "canvas", "animation-loop", "map"],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:src/map/LocationBuffer.ts:LocationBuffer",
+      "type": "class",
+      "name": "LocationBuffer",
+      "filePath": "src/map/LocationBuffer.ts",
+      "lineRange": [16, 113],
+      "summary": "드라이버별 위치 sample을 시간순 정렬 저장하고 보간용 pair 조회·trim·카운트 집계를 제공하는 위치 버퍼 클래스.",
+      "tags": ["buffer", "data-model", "location"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/map/LocationBuffer.ts:parseDate",
+      "type": "function",
+      "name": "parseDate",
+      "filePath": "src/map/LocationBuffer.ts",
+      "lineRange": [115, 120],
+      "summary": "문자열·숫자·Date 입력을 안전하게 Date로 파싱하고 유효하지 않으면 null을 반환하는 헬퍼.",
+      "tags": ["utility", "parsing", "date"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/map/PerDriverBuffer.ts:PerDriverBuffer",
+      "type": "class",
+      "name": "PerDriverBuffer",
+      "filePath": "src/map/PerDriverBuffer.ts",
+      "lineRange": [20, 112],
+      "summary": "드라이버별 sample을 보관하며 보간용 pair 탐색·trim·최근 sample 조회를 제공하고 sentinel 좌표를 제외하는 위치 버퍼 클래스.",
+      "tags": ["buffer", "data-model", "location"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/map/markers.ts:drawMarker",
+      "type": "function",
+      "name": "drawMarker",
+      "filePath": "src/map/markers.ts",
+      "lineRange": [24, 88],
+      "summary": "드라이버 마커 원·번호·라벨 chip을 Canvas 2D 컨텍스트에 그리는 메인 마커 드로잉 함수.",
+      "tags": ["renderer", "canvas", "marker"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/map/markers.ts:drawRoundRect",
+      "type": "function",
+      "name": "drawRoundRect",
+      "filePath": "src/map/markers.ts",
+      "lineRange": [91, 114],
+      "summary": "지정한 모서리 반경으로 둥근 사각형 경로를 만들어 채우는 Canvas 헬퍼.",
+      "tags": ["renderer", "canvas", "utility"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/map/pathProjection.ts:projectToPolyline",
+      "type": "function",
+      "name": "projectToPolyline",
+      "filePath": "src/map/pathProjection.ts",
+      "lineRange": [23, 74],
+      "summary": "점을 polyline의 각 세그먼트에 정사영해 가장 가까운 지점과 누적 호 길이 s, 거리 정보를 계산하는 핵심 투영 함수.",
+      "tags": ["geometry", "projection", "map"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/map/pitLane.ts:loadPitlane",
+      "type": "function",
+      "name": "loadPitlane",
+      "filePath": "src/map/pitLane.ts",
+      "lineRange": [18, 30],
+      "summary": "서킷·연도에 해당하는 pitlane polyline JSON을 fetch로 비동기 로드한다.",
+      "tags": ["data-loader", "pitlane", "async"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/map/pitLane.ts:isInPitlane",
+      "type": "function",
+      "name": "isInPitlane",
+      "filePath": "src/map/pitLane.ts",
+      "lineRange": [33, 42],
+      "summary": "드라이버 위치를 pitlane polyline에 정사영해 근접 임계값 이내면 pitlane 안으로 판정한다.",
+      "tags": ["geometry", "pitlane", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/map/stateBadges.ts:classifyDriverState",
+      "type": "function",
+      "name": "classifyDriverState",
+      "filePath": "src/map/stateBadges.ts",
+      "lineRange": [26, 41],
+      "summary": "버퍼의 마지막 sample 시각과 displayTime 간 gap으로 드라이버 연결 상태를 분류한다.",
+      "tags": ["state", "classification", "map"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/map/stateBadges.ts:drawStateBadge",
+      "type": "function",
+      "name": "drawStateBadge",
+      "filePath": "src/map/stateBadges.ts",
+      "lineRange": [44, 64],
+      "summary": "분류된 드라이버 상태에 따른 배지를 마커 위치 옆 Canvas에 그린다.",
+      "tags": ["renderer", "canvas", "state"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/map/trackRenderer.ts:renderStaticTrack",
+      "type": "function",
+      "name": "renderStaticTrack",
+      "filePath": "src/map/trackRenderer.ts",
+      "lineRange": [32, 60],
+      "summary": "배경을 채우고 viewport 변환을 적용해 트랙 polyline을 stroke하여 정적 트랙 레이어를 렌더링한다.",
+      "tags": ["renderer", "canvas", "track"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/map/trackRenderer.ts:strokePolyline",
+      "type": "function",
+      "name": "strokePolyline",
+      "filePath": "src/map/trackRenderer.ts",
+      "lineRange": [68, 88],
+      "summary": "polyline 점들을 viewport 변환 후 연결해 지정 스타일로 stroke하는 Canvas 헬퍼.",
+      "tags": ["renderer", "canvas", "utility"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/map/trails.ts:drawTrail",
+      "type": "function",
+      "name": "drawTrail",
+      "filePath": "src/map/trails.ts",
+      "lineRange": [28, 51],
+      "summary": "trail 점들을 페이드(투명도 lerp) 처리하며 Canvas에 선으로 그리는 함수.",
+      "tags": ["renderer", "canvas", "trail"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:src/map/trails.ts:collectTrailPoints",
+      "type": "function",
+      "name": "collectTrailPoints",
+      "filePath": "src/map/trails.ts",
+      "lineRange": [57, 67],
+      "summary": "버퍼에서 시간 윈도우 내 최근 sample을 가져와 viewport·투영을 적용해 trail 점 목록을 만든다.",
+      "tags": ["data-query", "trail", "map"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/map/transform.ts:applyOpenF1Transform",
+      "type": "function",
+      "name": "applyOpenF1Transform",
+      "filePath": "src/map/transform.ts",
+      "lineRange": [26, 39],
+      "summary": "회전 각도를 적용해 OpenF1 좌표 (x, y)를 내부 맵 좌표계로 변환한다.",
+      "tags": ["geometry", "transform", "utility"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:src/map/layoutVersions.ts:resolveLayout",
+      "type": "function",
+      "name": "resolveLayout",
+      "filePath": "src/map/layoutVersions.ts",
+      "lineRange": [24, 31],
+      "summary": "LAYOUT_VERSIONS에서 circuitKey와 year 범위에 맞는 레이아웃 버전을 찾아 반환한다.",
+      "tags": ["utility", "layout-versions", "map"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:src/shared/__tests__/SyntheticDataSource.ts:SyntheticDataSource",
+      "type": "class",
+      "name": "SyntheticDataSource",
+      "filePath": "src/shared/__tests__/SyntheticDataSource.ts",
+      "lineRange": [16, 98],
+      "summary": "DataSource 인터페이스를 합성 데이터로 최소 구현한 테스트 fixture 클래스로, displayTime 제어와 sample pair·lap·집계 조회를 제공한다.",
+      "tags": ["test-fixture", "data-source", "synthetic"],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:src/map/arcLength.ts",
+      "target": "function:src/map/arcLength.ts:sampleAtArcLength",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/arcLength.ts",
+      "target": "function:src/map/arcLength.ts:wrapArcLength",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/arcLength.ts",
+      "target": "function:src/map/arcLength.ts:sampleAtArcLength",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/arcLength.ts",
+      "target": "function:src/map/arcLength.ts:wrapArcLength",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/dashboardQueries.ts",
+      "target": "function:src/map/dashboardQueries.ts:latestBefore",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/dashboardQueries.ts",
+      "target": "function:src/map/dashboardQueries.ts:allBefore",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/dashboardQueries.ts",
+      "target": "function:src/map/dashboardQueries.ts:lapAt",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/dashboardQueries.ts",
+      "target": "function:src/map/dashboardQueries.ts:completedLapsBefore",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/dashboardQueries.ts",
+      "target": "function:src/map/dashboardQueries.ts:stintForLap",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/dashboardQueries.ts",
+      "target": "function:src/map/dashboardQueries.ts:sessionResultFor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/dashboardQueries.ts",
+      "target": "function:src/map/dashboardQueries.ts:computeAllAggregates",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/dashboardQueries.ts",
+      "target": "function:src/map/dashboardQueries.ts:computeAggregateBefore",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/dashboardQueries.ts",
+      "target": "function:src/map/dashboardQueries.ts:latestBefore",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/dashboardQueries.ts",
+      "target": "function:src/map/dashboardQueries.ts:allBefore",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/dashboardQueries.ts",
+      "target": "function:src/map/dashboardQueries.ts:lapAt",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/dashboardQueries.ts",
+      "target": "function:src/map/dashboardQueries.ts:completedLapsBefore",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/dashboardQueries.ts",
+      "target": "function:src/map/dashboardQueries.ts:stintForLap",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/dashboardQueries.ts",
+      "target": "function:src/map/dashboardQueries.ts:sessionResultFor",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/dashboardQueries.ts",
+      "target": "function:src/map/dashboardQueries.ts:computeAllAggregates",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/dashboardQueries.ts",
+      "target": "function:src/map/dashboardQueries.ts:computeAggregateBefore",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/map/dashboardQueries.ts:computeAggregateBefore",
+      "target": "function:src/map/dashboardQueries.ts:computeAllAggregates",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/interpolation.ts",
+      "target": "function:src/map/interpolation.ts:interpolatePosition",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/interpolation.ts",
+      "target": "function:src/map/interpolation.ts:interpolatePosition",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/map/interpolation.ts:interpolatePosition",
+      "target": "function:src/map/arcLength.ts:wrapArcLength",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/map/interpolation.ts:interpolatePosition",
+      "target": "function:src/map/arcLength.ts:sampleAtArcLength",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/layoutVersions.ts",
+      "target": "config:src/map/layoutVersions.json",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:src/map/layoutVersions.ts",
+      "target": "function:src/map/layoutVersions.ts:resolveLayout",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/layoutVersions.ts",
+      "target": "function:src/map/layoutVersions.ts:resolveLayout",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/LiveMapRenderer.ts",
+      "target": "class:src/map/LiveMapRenderer.ts:LiveMapRenderer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/LiveMapRenderer.ts",
+      "target": "class:src/map/LiveMapRenderer.ts:LiveMapRenderer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:src/map/LiveMapRenderer.ts:LiveMapRenderer",
+      "target": "function:src/map/interpolation.ts:interpolatePosition",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:src/map/LiveMapRenderer.ts:LiveMapRenderer",
+      "target": "function:src/map/markers.ts:drawMarker",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:src/map/LiveMapRenderer.ts:LiveMapRenderer",
+      "target": "function:src/map/pathProjection.ts:projectToPolyline",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:src/map/LiveMapRenderer.ts:LiveMapRenderer",
+      "target": "function:src/map/stateBadges.ts:classifyDriverState",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:src/map/LiveMapRenderer.ts:LiveMapRenderer",
+      "target": "function:src/map/stateBadges.ts:drawStateBadge",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:src/map/LiveMapRenderer.ts:LiveMapRenderer",
+      "target": "function:src/map/trackRenderer.ts:renderStaticTrack",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:src/map/LiveMapRenderer.ts:LiveMapRenderer",
+      "target": "function:src/map/trails.ts:collectTrailPoints",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:src/map/LiveMapRenderer.ts:LiveMapRenderer",
+      "target": "function:src/map/trails.ts:drawTrail",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/LiveMapRenderer.ts",
+      "target": "file:src/map/interpolation.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:src/map/LiveMapRenderer.ts",
+      "target": "file:src/map/mapStyles.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:src/map/LiveMapRenderer.ts",
+      "target": "file:src/map/markers.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:src/map/LiveMapRenderer.ts",
+      "target": "file:src/map/PerDriverBuffer.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:src/map/LiveMapRenderer.ts",
+      "target": "file:src/map/pathProjection.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:src/map/LiveMapRenderer.ts",
+      "target": "file:src/map/stateBadges.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:src/map/LiveMapRenderer.ts",
+      "target": "file:src/map/trackRenderer.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:src/map/LiveMapRenderer.ts",
+      "target": "file:src/map/trails.ts",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:src/map/LocationBuffer.ts",
+      "target": "class:src/map/LocationBuffer.ts:LocationBuffer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/LocationBuffer.ts",
+      "target": "function:src/map/LocationBuffer.ts:parseDate",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/LocationBuffer.ts",
+      "target": "class:src/map/LocationBuffer.ts:LocationBuffer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/LocationBuffer.ts",
+      "target": "function:src/map/LocationBuffer.ts:parseDate",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "class:src/map/LocationBuffer.ts:LocationBuffer",
+      "target": "function:src/map/LocationBuffer.ts:parseDate",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/markers.ts",
+      "target": "function:src/map/markers.ts:drawMarker",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/markers.ts",
+      "target": "function:src/map/markers.ts:drawRoundRect",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/markers.ts",
+      "target": "function:src/map/markers.ts:drawMarker",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/map/markers.ts:drawMarker",
+      "target": "function:src/map/markers.ts:drawRoundRect",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/pathProjection.ts",
+      "target": "function:src/map/pathProjection.ts:projectToPolyline",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/pathProjection.ts",
+      "target": "function:src/map/pathProjection.ts:projectToPolyline",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/PerDriverBuffer.ts",
+      "target": "class:src/map/PerDriverBuffer.ts:PerDriverBuffer",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/PerDriverBuffer.ts",
+      "target": "class:src/map/PerDriverBuffer.ts:PerDriverBuffer",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/pitLane.ts",
+      "target": "function:src/map/pitLane.ts:loadPitlane",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/pitLane.ts",
+      "target": "function:src/map/pitLane.ts:isInPitlane",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/pitLane.ts",
+      "target": "function:src/map/pitLane.ts:loadPitlane",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/pitLane.ts",
+      "target": "function:src/map/pitLane.ts:isInPitlane",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/map/pitLane.ts:isInPitlane",
+      "target": "function:src/map/pathProjection.ts:projectToPolyline",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/stateBadges.ts",
+      "target": "function:src/map/stateBadges.ts:classifyDriverState",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/stateBadges.ts",
+      "target": "function:src/map/stateBadges.ts:drawStateBadge",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/stateBadges.ts",
+      "target": "function:src/map/stateBadges.ts:classifyDriverState",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/stateBadges.ts",
+      "target": "function:src/map/stateBadges.ts:drawStateBadge",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/trackRenderer.ts",
+      "target": "function:src/map/trackRenderer.ts:renderStaticTrack",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/trackRenderer.ts",
+      "target": "function:src/map/trackRenderer.ts:strokePolyline",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/trackRenderer.ts",
+      "target": "function:src/map/trackRenderer.ts:renderStaticTrack",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "function:src/map/trackRenderer.ts:renderStaticTrack",
+      "target": "function:src/map/trackRenderer.ts:strokePolyline",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/trails.ts",
+      "target": "function:src/map/trails.ts:drawTrail",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/trails.ts",
+      "target": "function:src/map/trails.ts:collectTrailPoints",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/trails.ts",
+      "target": "function:src/map/trails.ts:drawTrail",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/trails.ts",
+      "target": "function:src/map/trails.ts:collectTrailPoints",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/transform.ts",
+      "target": "function:src/map/transform.ts:applyOpenF1Transform",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/map/transform.ts",
+      "target": "function:src/map/transform.ts:applyOpenF1Transform",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/shared/__tests__/SyntheticDataSource.ts",
+      "target": "class:src/shared/__tests__/SyntheticDataSource.ts:SyntheticDataSource",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:src/shared/__tests__/SyntheticDataSource.ts",
+      "target": "class:src/shared/__tests__/SyntheticDataSource.ts:SyntheticDataSource",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:src/map/viewport.ts",
+      "target": "file:src/map/__tests__/viewport.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/shared/openf1Client.ts",
+      "target": "file:src/shared/__tests__/openf1Client.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/shared/Footer.tsx",
+      "target": "file:src/shared/__tests__/Footer.test.tsx",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "file:src/shared/createMockOpenF1Client.ts",
+      "target": "file:src/shared/__tests__/createMockOpenF1Client.test.ts",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:src/map/circuits.json",
+      "target": "file:src/map/trackRenderer.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:src/map/layoutVersions.json",
+      "target": "file:src/map/layoutVersions.ts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:src/style/global.css",
+      "target": "file:src/main.tsx",
+      "type": "related",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

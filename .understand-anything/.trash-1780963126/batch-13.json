@@ -1,0 +1,148 @@
+{
+  "nodes": [
+    {
+      "id": "document:CLAUDE.md",
+      "type": "document",
+      "name": "CLAUDE.md",
+      "filePath": "CLAUDE.md",
+      "summary": "LLM 코딩 어시스턴트를 위한 행동 가이드라인 문서로, '코딩 전 사고', '단순함 우선', '최소 변경', '목표 기반 실행' 4개 원칙을 정의한다.",
+      "tags": ["documentation", "guidelines", "ai-coding", "conventions"],
+      "complexity": "simple"
+    },
+    {
+      "id": "document:THIRD_PARTY_LICENSES.md",
+      "type": "document",
+      "name": "THIRD_PARTY_LICENSES.md",
+      "filePath": "THIRD_PARTY_LICENSES.md",
+      "summary": "프로젝트가 사용하는 외부 자산(f1-circuits-svg CC-BY-4.0, OpenF1 API CC0-1.0)의 라이선스 의무와 Formula 1 상표 비공식 면책 조항을 정리한 문서다.",
+      "tags": ["documentation", "license", "attribution", "legal"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:index.html",
+      "type": "file",
+      "name": "index.html",
+      "filePath": "index.html",
+      "summary": "Vite의 HTML 엔트리 포인트로, #root 컨테이너와 함께 ES 모듈 src/main.tsx를 로드하여 React SPA를 부트스트랩한다.",
+      "tags": ["entry-point", "markup", "spa", "vite"],
+      "complexity": "simple",
+      "languageNotes": "다크 color-scheme 메타와 한국어 lang 속성을 지정한 최소 SPA 셸."
+    },
+    {
+      "id": "config:package.json",
+      "type": "config",
+      "name": "package.json",
+      "filePath": "package.json",
+      "summary": "프로젝트 매니페스트로 React/wouter 런타임 의존성, Vite/Vitest/Playwright/tsx 개발 의존성, 그리고 dev·build·test·e2e·서킷 데이터 파이프라인(fetch/derive/build) 스크립트를 정의한다.",
+      "tags": ["configuration", "build-system", "dependencies", "npm-scripts"],
+      "complexity": "moderate",
+      "languageNotes": "ESM(type: module) 프로젝트로, tsx 기반의 빌드타임 데이터 생성 스크립트 그룹이 다수 포함됨."
+    },
+    {
+      "id": "config:tsconfig.json",
+      "type": "config",
+      "name": "tsconfig.json",
+      "filePath": "tsconfig.json",
+      "summary": "TypeScript 컴파일러 설정으로 ES2022 타깃, bundler 모듈 해석, strict 모드와 미사용 변수/파라미터 검사를 활성화하며 src·scripts·e2e를 컴파일 대상에 포함한다.",
+      "tags": ["configuration", "typescript", "build-system", "strict-mode"],
+      "complexity": "simple",
+      "languageNotes": "noEmit + Vite 번들러 위임 구성, allowImportingTsExtensions와 react-jsx 변환 사용."
+    },
+    {
+      "id": "config:vercel.json",
+      "type": "config",
+      "name": "vercel.json",
+      "filePath": "vercel.json",
+      "summary": "Vercel 배포 설정으로 Vite 빌드 산출물(dist)을 서빙하고, /live/* 및 /replay/* 경로를 index.html로 리라이트하는 SPA 폴백과 VITE_VERCEL_ENV 환경 변수를 구성한다.",
+      "tags": ["configuration", "deployment", "vercel", "spa-routing"],
+      "complexity": "simple",
+      "languageNotes": "클라이언트 사이드 라우팅(wouter)을 위한 SPA rewrite 폴백 패턴."
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:index.html",
+      "target": "file:src/main.tsx",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:package.json",
+      "target": "file:index.html",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:package.json",
+      "target": "file:src/main.tsx",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:tsconfig.json",
+      "target": "file:src/main.tsx",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:tsconfig.json",
+      "target": "file:src/App.tsx",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:vercel.json",
+      "target": "file:index.html",
+      "type": "deploys",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "config:vercel.json",
+      "target": "file:src/main.tsx",
+      "type": "deploys",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "document:THIRD_PARTY_LICENSES.md",
+      "target": "file:src/shared/Footer.tsx",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:THIRD_PARTY_LICENSES.md",
+      "target": "file:src/map/LiveDataSource.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:THIRD_PARTY_LICENSES.md",
+      "target": "file:src/map/ReplayDataSource.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:THIRD_PARTY_LICENSES.md",
+      "target": "file:scripts/fetch-circuit-maps.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:THIRD_PARTY_LICENSES.md",
+      "target": "file:scripts/fetch-season-catalog.ts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}
