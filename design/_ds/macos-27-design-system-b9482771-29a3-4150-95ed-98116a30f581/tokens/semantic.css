@@ -1,0 +1,36 @@
+/* Semantic aliases + base defaults layered on top of fig-tokens.css.
+   These give friendly names to the raw Figma variables. */
+
+:root {
+  /* Default system accent (macOS "Blue") */
+  --accent: var(--accents-blue);
+  --accent-vibrant: var(--accents-vibrant-blue);
+
+  /* Text */
+  --text-primary: var(--labels-primary);
+  --text-secondary: var(--labels-secondary);
+  --text-tertiary: var(--labels-tertiary);
+  --text-quaternary: var(--labels-quaternary);
+
+  /* Surfaces */
+  --surface-window: var(--window-background);
+  --surface-fill: var(--fills-opaque-primary);
+  --surface-fill-secondary: var(--fills-opaque-secondary);
+
+  /* Controls */
+  --control-radius: calc(var(--global-radius) * 1px);
+  --control-height: calc(var(--global-height) * 1px);
+
+  /* macOS standard elevation shadows (window / popover / menu) */
+  --shadow-window: 0 12px 32px rgba(0,0,0,0.22), 0 0 0 0.5px rgba(0,0,0,0.12);
+  --shadow-popover: 0 10px 28px rgba(0,0,0,0.24), 0 0 0 0.5px rgba(0,0,0,0.14);
+  --shadow-menu: 0 6px 18px rgba(0,0,0,0.20), 0 0 0 0.5px rgba(0,0,0,0.16);
+  --shadow-control: 0 0.5px 1px rgba(0,0,0,0.10), inset 0 0.5px 0 rgba(255,255,255,0.55);
+}
+
+:root[data-theme="dark"], .dark {
+  --shadow-window: 0 14px 40px rgba(0,0,0,0.55), 0 0 0 0.5px rgba(255,255,255,0.10);
+  --shadow-popover: 0 12px 34px rgba(0,0,0,0.55), 0 0 0 0.5px rgba(255,255,255,0.12);
+  --shadow-menu: 0 8px 22px rgba(0,0,0,0.50), 0 0 0 0.5px rgba(255,255,255,0.14);
+  --shadow-control: 0 0.5px 1px rgba(0,0,0,0.5), inset 0 0.5px 0 rgba(255,255,255,0.12);
+}

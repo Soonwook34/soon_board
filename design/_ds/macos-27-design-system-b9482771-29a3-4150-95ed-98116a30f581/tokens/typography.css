@@ -1,0 +1,43 @@
+/* macOS 27 type system — SF Pro, AppKit text styles.
+   SF Pro is not a freely-redistributable webfont; the stack below renders the
+   REAL SF Pro on macOS / iOS / iPadOS and falls back to the platform UI font
+   elsewhere. See readme.md > Fonts for the substitution note. */
+
+:root {
+  --font-system: "SF Pro", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-rounded: "SF Pro Rounded", "SF Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "SF Mono", ui-monospace, "Menlo", monospace;
+
+  /* AppKit text-style scale (point size / line-height) */
+  --text-large-title-size: 26px;   --text-large-title-line: 32px;
+  --text-title1-size: 22px;        --text-title1-line: 26px;
+  --text-title2-size: 17px;        --text-title2-line: 22px;
+  --text-title3-size: 15px;        --text-title3-line: 20px;
+  --text-headline-size: 13px;      --text-headline-line: 16px;
+  --text-body-size: 13px;          --text-body-line: 16px;
+  --text-callout-size: 12px;       --text-callout-line: 15px;
+  --text-subheadline-size: 11px;   --text-subheadline-line: 14px;
+  --text-footnote-size: 10px;      --text-footnote-line: 13px;
+  --text-caption1-size: 10px;      --text-caption1-line: 13px;
+  --text-caption2-size: 10px;      --text-caption2-line: 13px;
+
+  /* weights (SF Pro numeric axis, matched to Figma) */
+  --weight-regular: 400;
+  --weight-medium: 510;
+  --weight-semibold: 590;
+  --weight-bold: 700;
+  --weight-heavy: 850;
+}
+
+/* Text-style classes — apply directly to any element */
+.macos-large-title{font-family:var(--font-system);font-size:var(--text-large-title-size);line-height:var(--text-large-title-line);font-weight:var(--weight-bold);letter-spacing:.008em}
+.macos-title1{font-family:var(--font-system);font-size:var(--text-title1-size);line-height:var(--text-title1-line);font-weight:var(--weight-bold)}
+.macos-title2{font-family:var(--font-system);font-size:var(--text-title2-size);line-height:var(--text-title2-line);font-weight:var(--weight-regular)}
+.macos-title3{font-family:var(--font-system);font-size:var(--text-title3-size);line-height:var(--text-title3-line);font-weight:var(--weight-regular)}
+.macos-headline{font-family:var(--font-system);font-size:var(--text-headline-size);line-height:var(--text-headline-line);font-weight:var(--weight-semibold)}
+.macos-body{font-family:var(--font-system);font-size:var(--text-body-size);line-height:var(--text-body-line);font-weight:var(--weight-regular)}
+.macos-callout{font-family:var(--font-system);font-size:var(--text-callout-size);line-height:var(--text-callout-line);font-weight:var(--weight-regular)}
+.macos-subheadline{font-family:var(--font-system);font-size:var(--text-subheadline-size);line-height:var(--text-subheadline-line);font-weight:var(--weight-regular)}
+.macos-footnote{font-family:var(--font-system);font-size:var(--text-footnote-size);line-height:var(--text-footnote-line);font-weight:var(--weight-regular)}
+.macos-caption1{font-family:var(--font-system);font-size:var(--text-caption1-size);line-height:var(--text-caption1-line);font-weight:var(--weight-regular)}
+.macos-caption2{font-family:var(--font-system);font-size:var(--text-caption2-size);line-height:var(--text-caption2-line);font-weight:var(--weight-medium)}

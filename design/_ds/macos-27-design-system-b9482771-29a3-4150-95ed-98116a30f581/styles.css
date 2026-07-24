@@ -1,0 +1,6 @@
+/* macOS 27 Design System — global CSS entry point.
+   Consumers link THIS file. It is an @import manifest only. */
+@import "./tokens/fig-tokens.css";
+@import "./tokens/typography.css";
+@import "./tokens/semantic.css";
+@import "./components/figma-kit/fig-assets.css";
