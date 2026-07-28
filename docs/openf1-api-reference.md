@@ -178,6 +178,7 @@ username=<email>&password=<password>
 - **2026-03-15 (레이스 데이):** `POST /token` 트래픽 스파이크로 API 전체 다운 — 인증 엔드포인트 rate limiting 부재가 원인 (Discussions #365).
 - **2026-05-03 Miami:** 활성 세션 동안 전 엔드포인트 데이터 누락 (Issue #400).
 - **2026-05-01 Miami FP1:** MQTT 연결 끊김으로 약 8분 텔레메트리 공백 (Issue #397).
+- **세션 통째 결측 [실측 2026-07-27]:** 2026 개최 완료 레이스 13개 중 **2개(04-12 Bahrain, 04-19 Saudi Arabia)가 `race_control`·`pit`·`laps` 전부 404** — 일부 엔드포인트만 빠진 게 아니라 세션 데이터 자체가 없다. 나머지 11개는 정상(`race_control` 49~287건). **리플레이 대상 세션 목록은 "일정에 있으니 있을 것"이 아니라 실제 적재 여부로 만들어야 한다.**
 
 > SLA 없는 커뮤니티 프로젝트라는 점은 항상 전제해야 함. (서비스 측 대응 — 수집 재시도·리플레이 경로 분리 — 은 `infra-architecture.md` §6 참조)
 
@@ -199,6 +200,32 @@ username=<email>&password=<password>
 - 횡방향 정밀도가 낮아 "트랙 좌우 어디에 붙었는가"는 구분 불가 [공식].
 - WGS-84 위경도 변환은 미제공. 트랙 그림 위에 마커를 얹으려면 **서킷별 affine transform**(평행이동+회전+스케일)을 직접 산출해야 한다.
 - 보조 자원: `meetings.circuit_info_url`이 가리키는 **MultiViewer 서킷 API**(`https://api.multiviewer.app/api/v1/circuits/{key}/{year}`)가 트랙 아웃라인·코너 좌표 JSON을 제공하며, `location`과 같은 좌표계를 쓴다 (FastF1도 이를 사용) [공식·실측 200 확인].
+
+#### 6.2.1 MultiViewer 서킷 JSON — 스키마와 좌표계 일치 [실측 2026-07-28, Spa `circuit_key=7`, 2026, 19.7 KB]
+
+**좌표계가 `location`과 동일해 affine 변환이 필요 없다.** 같은 주말 퀄리(11330) NOR 1랩의 `location` 407건과 대조:
+
+| | x 범위 | y 범위 |
+|---|---|---|
+| `location` 실측 | −4338 … 8313 | −15767 … 4550 |
+| MultiViewer `x`/`y` | −4341 … 8316 | −15778 … 4555 |
+
+→ 회전·평행이동·스케일 전부 불필요. **아웃라인에 직접 투영(project)해서 arc-length를 얻을 수 있다.** (§6.2의 "서킷별 affine transform을 직접 산출해야 한다"는 자체 SVG 소스를 쓸 때의 이야기다.)
+
+**필드:**
+| 필드 | 내용 |
+|---|---|
+| `x` / `y` | 트랙 아웃라인 폴리라인 (Spa 1005점). 누적 거리 합 69,617 dm = **6,962 m** (공식 7,004 m 대비 −0.6% — 폴리라인 코드 오차) |
+| `miniSectorsIndexes` | **미니섹터 경계** — `x`/`y` 배열의 인덱스 (Spa 27개). §8.4 참조 |
+| `marshalSectors` | 마셜 섹터 (Spa 21개) — `number`·`trackPosition`·`length`(랩 시작부터 누적 거리 dm)·`angle`. **`race_control.sector`와 번호가 대응** [실측: 2026 스파 레이스의 `sector` 값이 4~19로 전부 1~21 범위, `scope='Sector'` 메시지 81건] |
+| `corners` | 코너 (Spa 19개) — 같은 구조. `number`로 **`TURN n` 라벨 파생 가능** (고유명 `Stavelot`은 여전히 없음) |
+| `marshalLights` | 마셜 라이트 패널 (Spa 21개) |
+| `pitLoss` | `{normal, sc, vsc}` — 핏 손실 시간 초 (Spa `19.07`/`12.08`/`13.80`) |
+| `candidateLap` | 아웃라인을 만든 기준 랩 (`driverNumber`·`lapNumber`·`lapStartDate`·`lapTime`·`session`) — Spa는 2021 FP1 3번차 3랩 |
+| `rotation` | 표시용 회전각(도). Spa 91 — **렌더링 방향 조정용이며 좌표 정합에는 불필요** |
+
+- 투영 정확도 실측: 최근접점 잔차 **중앙값 20 dm(2 m)**, 최대 1286 dm(129 m — 핏레인·코스이탈 표본). 이상치 가드 필요.
+- 서드파티이며 OpenF1보다도 보장이 없다 → **수집 시 R2에 스냅샷할 것** (infra §3.4). 비상업 개인 사용 범위에서 쓰고 출처를 표기한다.
 
 ### 6.3 텔레메트리 단위 (`car_data`)
 | 필드 | 단위 | 비고 |
@@ -336,6 +363,9 @@ meetings ─meeting_key─> sessions ─session_key─> (laps, intervals, positi
 - `is_pit_out_lap` — 아웃랩 여부. 랩타임 비교에서 통상 제외
 - `segments_sector_1/2/3` — 미니섹터 상태 코드 **배열** (배열이므로 필터 불가)
 
+**주의 — 개인 최고랩 플래그가 없다 [실측 2026-07-27]:** 랩 레코드에 `is_personal_best` 류의 필드는 **없다**(필드 전체: `date_start`·`driver_number`·`duration_sector_1/2/3`·`i1_speed`·`i2_speed`·`is_pit_out_lap`·`lap_duration`·`lap_number`·`meeting_key`·`segments_sector_1/2/3`·`session_key`·`st_speed`). 개인 최고랩은 **드라이버별 `min(lap_duration)`로 직접 계산**해야 하고, 핏 인/아웃랩은 제외한다(`is_pit_out_lap`). 미니섹터의 `2049`(개인 베스트)는 섹터 단위 플래그일 뿐 랩 단위가 아니다.
+- `lap_duration`이 ms 정밀도(소수 3자리)라 **동률은 실무상 발생하지 않는다** [실측 2026 스파 HAM: 최고랩 L33 `109.454` 단일]. 그래도 동률 시 규칙은 정해 둘 것 — **최초 달성 랩**.
+
 **미니섹터 코드 [공식 매핑]:**
 | 값 | 의미 |
 |---|---|
@@ -349,6 +379,47 @@ meetings ─meeting_key─> sessions ─session_key─> (laps, intervals, positi
 - 배열 중간에 `null` 원소가 섞일 수 있다 [실측].
 - **공식 문서는 "레이스 중 세그먼트 미제공"이라 하나, 실측상 레이스 랩에도 값이 채워져 있는 경우가 있다** (2024 Bahrain). 레이스에서의 신뢰도는 낮게 취급하고 연습/예선 위주로 활용.
 - TV 그래픽 색상과 완전히 일치하지 않을 수 있음 [공식].
+
+**미니섹터 개수와 커버리지 [실측 2026-07-28, 2026 스파 퀄리 `session_key=11330`, 269랩]:**
+
+| `(s1,s2,s3)` 길이 | 랩 수 |
+|---|---|
+| `(8, 12, 8)` = 28개 | **232** |
+| `(8, 12, 7)` | 27 |
+| `(8, 12, 1)` | 9 |
+| `(8, 1, null)` | 1 |
+
+→ 서킷별로 개수가 고정(Spa 8/12/8)이고 **예선에서는 86%의 랩이 완전히 채워진다.** 짧은 배열은 진행 중이거나 중단된 랩이다.
+
+**⚠ 미니섹터에는 "시간"이 없다.** 값은 색 코드뿐이므로 **구간별 랩타임/갭은 이 필드에서 나오지 않는다.** 방송 그래픽의 `GAP TO FASTEST -0.087` 같은 숫자는 별도 계산이 필요하다 — 아래.
+
+**미니섹터 경계의 위치 = MultiViewer `miniSectorsIndexes` [실측 검증 2026-07-28]:**
+
+§6.2.1의 아웃라인에 `location`을 투영해 각 경계 통과 시각을 구하고, 정확한 섹터 타임과 대조했다 (NOR 퀄리 최속 랩 `L8` 104.801s, S1/S2/S3 = 30.314/46.100/28.387):
+
+| 경계 | 통과 시각(파생) | 정확값 | 오차 |
+|---|---|---|---|
+| **8번째** | 30.133 s | `duration_sector_1` 30.314 | 0.181 s |
+| **20번째** | 76.347 s | S1+S2 = 76.414 | 0.067 s |
+| 27번째(마지막) | 104.552 s | `lap_duration` 104.801 | 0.249 s |
+
+→ **8 = 섹터1 끝, 20 = 섹터2 끝**이 8/12/8 분할과 정확히 일치한다. 미니섹터 지오메트리는 이 인덱스로 확정된다.
+- ⚠ **개수는 1개 어긋난다** — `segments_*` 합계는 28개인데 `miniSectorsIndexes`는 27개(마지막이 S/F 라인)로, 섹터 3에서 1개가 모자란다. **서킷별로 검증하고, 기준점은 항상 정확한 `duration_sector_*` 3개로 잡을 것.**
+
+**"최속 랩과의 갭"을 미니섹터 단위로 만들 수 있는가 — 조건부 가능 [실측 2026-07-28]:**
+
+두 랩(ANT 104.361 최속 vs VER 104.678)을 같은 아웃라인에 투영해 경계별 갭을 계산하고, 정확한 근거가 있는 지점에서 대조:
+
+| 지점 | 파생 갭 | 정확 갭 (섹터 타임 차) | 오차 |
+|---|---|---|---|
+| 미니섹터 8 (=S1 끝) | +0.302 | +0.283 | **+0.019 s** |
+| 미니섹터 20 (=S2 끝) | +0.291 | +0.274 | **+0.017 s** |
+| 미니섹터 27 (S/F) | +0.428 | +0.317 | +0.111 s |
+
+- **투영의 계통 오차는 두 랩 사이에서 대부분 상쇄된다** → 랩 중간 지점 오차 **±0.02 s**.
+- 다만 S/F 라인 부근(인덱스 954→1004의 큰 점프)에서는 0.11 s로 커지고, **미니섹터 단위 갭에는 물리적으로 불가능한 흔들림이 있다** (실측: MS11 +0.178 → MS12 +0.464 → MS13 +0.449). 3.7 Hz 표본(270 ms 간격, 300 km/h에서 22 m)의 한계다.
+- → **소수 3자리는 허위 정밀도다. 2자리로 표기하고, 섹터 경계 3개는 정확값으로 고정할 것.** 방송의 3자리 숫자는 재현 대상이 아니다.
+- 연산량: 세션당 표본 22대 × 3600 s × 3.7 Hz ≈ **29만 건**. 연속 표본이 트랙을 단조 진행하므로 최근접 탐색을 진행 인덱스에서 시작하면 O(n) — 클라이언트에서 충분하다.
 
 ---
 
@@ -421,6 +492,18 @@ meetings ─meeting_key─> sessions ─session_key─> (laps, intervals, positi
 
 → 실용 권장: `>=10` ON, `==8` 자격만, `0/1` OFF.
 
+**시즌별 가용성 — 2026은 `drs`가 전부 null이다 [실측 2026-07-28]:**
+
+| 시즌 | `car_data.drs` | `race_control?category=Drs` |
+|---|---|---|
+| 2024 (Bahrain 9472) | 값 있음 — `drs>=10` **145건**(14×142, 10×3), `drs=8` **344건** | — |
+| 2025 (Qatar 9850) | 값 있음 — `drs>=10` **254건**(14×250, 10×4) | — |
+| **2026 (Spa 11334)** | **459/459 전부 `null`** | **404** (2023 싱가포르는 `DRS ENABLED/DISABLED` 4건 정상) |
+
+- 2026 규정에서 DRS가 폐지되었고, **`car_data`의 필드 목록도 2024와 완전히 동일하다** (`brake·date·driver_number·drs·meeting_key·n_gear·rpm·session_key·speed·throttle`) — 액티브 에어로(스트레이트/코너 모드)·오버테이크 모드용 **신규 필드는 없다.**
+- → **DRS zone은 2023~2025만 데이터로 도출 가능**하고, **2026의 차량별 모드 사용 여부는 관측 불가**다. 단 **세션 단위 허용 상태는 `race_control`에 있다** — §8.11의 `OVERTAKE ENABLED/DISABLED` 참조.
+- 도출 방법: `drs` 전이(`0|1 → 8` = 디텍션, `<10 → >=10` = 액티베이션 시작, `>=10 → 0|1` = 종료) 시각을 `location`과 ±150 ms 매칭 → §6.2.1 아웃라인에 투영해 arc-length → 1D 클러스터링. `?drs>=10` / `?drs=8` 범위 필터로 필요한 표본만 24~57 KB로 받을 수 있어 `car_data` 전량 저장이 불필요하다 (저장 범위 제외 유지, infra §3.1).
+
 **볼륨:** 샘플레이트 ~3.7 Hz [실측: 30초에 111건]. 90분 세션 기준 드라이버당 약 2만 건, 20대 전체 약 40만 건. **반드시 `driver_number` + 좁은 `date` 범위로 필터**해서 호출할 것.
 
 ---
@@ -442,7 +525,8 @@ meetings ─meeting_key─> sessions ─session_key─> (laps, intervals, positi
 **필터:** `session_key`, `meeting_key`, `driver_number`, `lap_number`, `date`, `category`, `flag`, `scope`, `sector`
 
 **필드와 값 (2024 레이스 실측 분포 포함):**
-- `category` — `Flag`, `Other`, `Drs`, `SessionStatus`, `CarEvent` [공식·실측 모두 확인]
+- `category` — `Flag`, `Other`, `Drs`, `SessionStatus`, `CarEvent`, **`SafetyCar`** [공식·실측 모두 확인]
+  - ⚠ `SafetyCar`는 **공식 문서 예시에 없어 이 문서도 누락하고 있었다** — 2026-07-27 실측 추가. 2023 싱가포르 4건, 2026 스파 6건, 2026 8개 레이스 전수에서 확인.
 - `flag` — `GREEN`, `YELLOW`, `DOUBLE YELLOW`, `RED`, `CHEQUERED`, `BLUE`, `BLACK AND WHITE`, `BLACK`, `CLEAR` + **null** (깃발 무관 메시지)
 - `scope` — `Track`, `Sector`, `Driver` + **null**. scope에 따라 `sector`/`driver_number`가 채워짐
 - `qualifying_phase` — 예선에서만 1/2/3 (Q1/Q2/Q3), 그 외 null
@@ -450,6 +534,125 @@ meetings ─meeting_key─> sessions ─session_key─> (laps, intervals, positi
 - 세션 시작 전 메시지도 포함되며 그때도 `lap_number=1`로 찍힌다 [실측]
 
 **볼륨:** 세션당 30~150건 (2024 Bahrain 레이스: 71건).
+
+**주의 — SC/VSC 판별 [실측 2026-07-27]:**
+- 세이프티카와 버추얼 세이프티카는 **둘 다 `category='SafetyCar'` · `flag=null`**로 들어온다. 구분 정보는 `message` 텍스트뿐이다.
+- 그 텍스트가 **시즌마다 다르다:** 2023~2025 `VIRTUAL SAFETY CAR DEPLOYED` / `… ENDING` ↔ 2026 `VSC DEPLOYED` / `VSC ENDING`. 따라서 SC/VSC를 구분하려면 두 표기를 **모두** 매칭해야 한다(`VSC` ∪ `VIRTUAL`).
+- 다행히 문구 집합 자체는 닫혀 있다 — 아래 "도출 알고리즘"의 전수 조사표 참조.
+
+**주의 — 재개(그린 플래그)는 `flag='GREEN'`이 아니다 [실측 2026-07-27]:**
+- `flag='GREEN'`은 **전부 랩 1의 `GREEN LIGHT - PIT EXIT OPEN`**이다 (2026 6개 레이스 12/12건, 2023 싱가포르 2/2건). 레이스 중 재개를 뜻하는 GREEN 레코드는 **0건**.
+- SC·VSC·옐로 해제 후의 재개는 **`flag='CLEAR'` + `scope='Track'` (`TRACK CLEAR`)**로 들어온다 [2023 L22·L45, 2026 L4·L18·L21 확인]. `scope='Sector'`인 `CLEAR`는 해당 섹터 해제일 뿐 재개가 아니다 — **scope로 반드시 구분할 것.**
+
+**주의 — 이벤트 위치는 `lap_number`가 아니라 `date`로:** 2026 스파 L18에서 `VSC DEPLOYED`와 `VSC ENDING`이 같은 랩에 찍혔다. 시간축 UI(스크럽 바 등)에 랩 번호로 배치하면 두 이벤트가 겹친다.
+
+**중립화 구간 도출 — 실측 검증 [2026 스파 `session_key=11334`]:**
+
+`date`는 초 단위로 들어오므로 구간을 그대로 만들 수 있다.
+
+| 이벤트 | `date` | 랩 |
+|---|---|---|
+| `SAFETY CAR DEPLOYED` | 13:05:25 | L1 |
+| `SAFETY CAR IN THIS LAP` | 13:12:32 | L4 |
+| `TRACK CLEAR` (`CLEAR`/`Track`) | 13:13:50 | L4 |
+| `VSC DEPLOYED` | 13:39:13 | L18 |
+| `VSC ENDING` | 13:39:46 | L18 |
+| `TRACK CLEAR` | 13:39:59 | L18 |
+| `VSC DEPLOYED` | 13:43:18 | L20 |
+| `VSC ENDING` | 13:44:52 | L21 |
+| `TRACK CLEAR` | 13:45:06 | L21 |
+
+→ 구간 = **전개 `date` ~ 그 다음 `TRACK CLEAR` `date`**: SC 8분 25초, VSC 46초, VSC 1분 48초.
+`… IN THIS LAP` / `… ENDING`은 **해제 예고**이지 재개가 아니다(각각 78초·13초·14초 앞섬) — 구간 끝으로 쓰지 말 것.
+
+**도출 알고리즘 — 결정론적, 자연어 처리 불필요 [실측 검증 완료]:**
+
+```js
+// race_control을 date 오름차순으로 훑으며 상태 기계 하나만 돌린다.
+// 문자열 판정은 '어미가 DEPLOYED인가' + '앞이 VSC/VIRTUAL인가' 두 개뿐.
+let open = null; const out = [];
+for (const x of rc.sort(byDate)) {
+  const m = (x.message || '').trim().toUpperCase();
+  if (x.category === 'SafetyCar') {
+    if (m.endsWith('DEPLOYED')) {
+      const kind = m.startsWith('VSC') || m.startsWith('VIRTUAL') ? 'VSC' : 'SC';
+      if (!open) open = { kind, start: x.date, startLap: x.lap_number };
+      else if (kind === 'SC' && open.kind === 'VSC') open.kind = 'SC';  // VSC→SC 격상
+    }
+  } else if (x.flag === 'CLEAR' && x.scope === 'Track' && open) {
+    out.push({ ...open, end: x.date, endLap: x.lap_number }); open = null;
+  }
+}
+if (open) out.push({ ...open, end: null });   // 해제 없이 세션 종료
+```
+
+- `… IN THIS LAP` / `… ENDING` / `SAFETY CAR THROUGH THE PIT LANE`은 **읽지 않는다** — 어미가 `DEPLOYED`가 아니므로 자동으로 무시되고, 구간 끝은 항상 `TRACK CLEAR`가 된다.
+- **VSC→SC 격상 처리가 필요하다** [실측 2024 Qatar]: `17:08:24 VIRTUAL SAFETY CAR DEPLOYED` 20초 뒤 `17:08:44 SAFETY CAR DEPLOYED`. 격상 분기가 없으면 구간 경계는 맞지만 라벨이 `VSC`로 남는다.
+- 실행 결과: 2026 스파 `SC L1–L4 / VSC L18 / VSC L20–L21`, 2023 싱가포르 `SC L20–L22 / VSC L44–L45`, 2024 Qatar `SC L1–L4 / SC L35–L39 / SC L40–L42`, 2025 Australia `SC L1–L7 / SC L34–L41 / SC L47–L51` — 수기 판독과 완전 일치.
+
+**문구 집합은 닫혀 있다 [실측: 2023~2026 레이스 95개 중 응답 81개, SafetyCar 이벤트 보유 54개 세션 전수 조사].** `category='SafetyCar'`의 `message`는 **7종뿐**이고 그 밖은 0건:
+
+| message | 건수 |
+|---|---|
+| `SAFETY CAR DEPLOYED` | 54 |
+| `SAFETY CAR IN THIS LAP` | 47 |
+| `VIRTUAL SAFETY CAR DEPLOYED` | 32 |
+| `VIRTUAL SAFETY CAR ENDING` | 26 |
+| `VSC DEPLOYED` | 15 |
+| `VSC ENDING` | 15 |
+| `SAFETY CAR THROUGH THE PIT LANE` | 4 |
+
+→ 자유 텍스트지만 **이 필드에 한해서는 사실상 열거형**이다. 다만 열거형이라는 보장이 문서에 없으므로, 알려지지 않은 문구가 나오면 조용히 무시하지 말고 로그에 남길 것.
+- **랩 그래프 음영용 매핑:** 랩 구간 `[date_start, date_start + lap_duration]`이 중립화 구간과 겹치면 그 랩을 칠한다. 2026 스파 VER(#1) 결과 `L1,2,3,4(SC) · L18,20,21(VSC)` — 해당 랩 `140.0/163.2/157.3/158.2/122.6/130.0/121.7 s`, 비음영 랩 `110~113 s`. **경계가 정확히 갈린다** (VSC 두 구간 사이의 L19는 `111.5 s`로 미음영).
+
+**독립 교차검증 (랩타임과 대조):** 위 구간에 시작된 랩의 중앙값 랩타임이 나머지 구간과 확연히 갈린다 — SC **159.62 s**, VSC **124.33 s / 128.89 s**, 그 외 791랩 **111.99 s**. 중립화 구간 안의 최속 랩(112.01 s)조차 세션 최속(108.89 s)보다 느리다. **타임스탬프가 실제 주행 상황과 일치한다는 증거다.**
+
+**2026 오버테이크 모드 허용 상태 — `OVERTAKE ENABLED` / `DISABLED` [실측 2026-07-28]:**
+
+2023의 `category='Drs'` + `DRS ENABLED/DISABLED`를 2026에서 대체하는 신호가 있다. **`category='Other'`, `flag=null`**로 들어온다.
+
+- 2026 완료 레이스 13개 중 **11개에서 관측**(나머지 2개는 §5.4의 세션 통째 결측인 Bahrain·Saudi). 문구는 **`OVERTAKE ENABLED`·`OVERTAKE DISABLED` 두 종뿐**이고 `STRAIGHT MODE`·`SLM`·`AERO` 류 문구는 **0건**이다.
+- 예선에도 있다 (2026 스파 퀄리 `OVERTAKE ENABLED` 14:57:28 1건).
+- 중립화와 정합한다 [2026 스파 레이스 실측]: `OVERTAKE DISABLED` 12:57:25(레이스 시작 전) → `TRACK CLEAR` 13:13:50 → **`OVERTAKE ENABLED` 13:16:13** (재개 후 2랩 뒤 허용, DRS 시절과 같은 관례).
+- ⚠ **차량별 사용 여부는 여전히 없다.** 이 신호는 "지금 오버테이크 모드가 허용되는가"라는 **세션 단위 상태**일 뿐이다. 스트레이트 모드(SLM)의 허용 상태를 알리는 메시지는 존재하지 않는다.
+- 리플레이에서는 `date` 순으로 훑어 커서 시점의 최신 상태를 취하면 된다(`ENABLED`/`DISABLED` 토글). SC/VSC 상태 기계와 동일한 패턴.
+
+**스트레이트 모드(SLM) zone은 API에 없다 — 수동 큐레이션이 유일한 경로 [조사 2026-07-28]:**
+
+- 2026 규정의 스트레이트 모드는 **FIA가 서킷마다 지정한 액티베이션 존**에서만 쓸 수 있다(근접 조건 없이 전 드라이버 사용 가능). 멜버른 5곳, 스파 5곳으로 공표됐다 — 즉 **"구역"이 실재한다.**
+- 그러나 **어떤 API·공개 데이터셋도 이 좌표를 제공하지 않는다.** 출처는 이벤트별 FIA 레이스 디렉터 이벤트 노트(PDF)와 F1 공식 서킷 맵 그래픽이고, 커뮤니티 블로그가 이를 옮겨 적는다. MultiViewer 서킷 JSON에도 없다(§6.2.1 필드 목록 확인).
+- 오버테이크 모드는 DRS와 같은 **디텍션 포인트 1개 + 액티베이션 포인트 1개** 구조다 (스파: 디텍션 = 버스스톱 T19 앞, 액티베이션 = S/F 라인 / 멜버른: 디텍션 = 마지막 직전 코너 뒤, 액티베이션 = 마지막 코너 앞).
+- → **`data/slm-zones.json` 수동 큐레이션 + 코너 번호 기준 기술 → arc-length 변환**이 현실적인 방법이다. 존 길이가 주말 중 조정될 수 있다는 보도가 있어 **세션 단위가 아니라 서킷·연도 단위 근사로 취급**하고, 정확도를 주장하지 말 것.
+
+**퀄리 세그먼트 경계 도출 [실측 2026-07-28, 2026 스파 퀄리 `session_key=11330`]:**
+
+Q1/Q2/Q3 경계는 하드코딩할 필요 없이 `race_control`에서 그대로 나온다 — **`qualifying_phase`(1/2/3) + `SessionStatus 'SESSION STARTED'` / `flag='CHEQUERED'` 쌍**이 세그먼트마다 찍힌다:
+
+| `date` | phase | 이벤트 |
+|---|---|---|
+| 14:00:00 | 1 | `SESSION STARTED` + `GREEN LIGHT - PIT EXIT OPEN` |
+| 14:18:00 | 1 | `CHEQUERED FLAG` |
+| 14:25:00 | 2 | `SESSION STARTED` |
+| 14:40:00 | 2 | `CHEQUERED FLAG` |
+| 14:50:00 | 3 | `SESSION STARTED` |
+| 14:56:55 | 3 | **`RED FLAG`** → 15:00:16 `Q3 WILL RESUME AT 17:04` |
+| 15:04:00 | 3 | `SESSION STARTED` (재개 — 같은 phase에 START가 2회) |
+| 15:10:06 | 3 | `CHEQUERED FLAG` |
+
+- **주의 1:** 적기 중단 시 같은 phase에 `SESSION STARTED`가 여러 번 온다 — 세그먼트 시작은 **phase별 최초** START, 끝은 **phase별 최후** CHEQUERED로 잡을 것.
+- **주의 2:** 퀄리에서는 `flag='GREEN'`이 세그먼트마다 나온다(전부 `PIT EXIT OPEN`, 재개 포함 4건) — "GREEN은 랩 1뿐"이라는 §위 관찰은 **레이스 한정**이다.
+- **랩의 세그먼트 분류는 `laps.date_start` 버킷팅으로 충분하다** [실측 NOR 11랩]: Q1 `14:05~14:09` / Q2 `14:27~14:31` / Q3 `14:51~15:08`로 깨끗이 갈린다. 부산물 두 개 주의 — 가라지 대기가 포함된 아웃랩은 `lap_duration`이 1000초대로 찍히고(`is_pit_out_lap=true`라 어차피 제외), 적기로 중단된 랩은 `lap_duration=null`이다.
+- → **시안의 고정 경계(0/43.3/68.3/81.7%)는 목업 근사일 뿐, 구현은 이 실데이터 경계를 쓴다.** 세그먼트별 잔여 시간·"보드가 채워지는" 게이팅도 전부 이 시각들에서 파생 가능.
+
+**리플레이 키 모먼트 파생 가능 여부 [실측 2026 스파 `session_key=11334`]:**
+
+| 마커 | 소스 | 판정 |
+|---|---|---|
+| 핏스톱 | `/v1/pit` — `lap_number`·`date`·`lane_duration` (28건, 최다 랩 L20에 7건) | ✅ 확정 가능 |
+| 패스티스트 랩 | `/v1/laps` 최소 `lap_duration` (875행 중 null 4건; 최속 = 1번 차 L44 108.89s, `date_start` 보유) | ✅ 확정 가능 |
+| SC / VSC | `category='SafetyCar'` + message 매칭 | ⚠ 조건부 — 위 주의 참조 |
+| 재개(그린) | `flag='CLEAR'` + `scope='Track'` | ✅ 가능하나 **소스가 GREEN이 아님** |
+| 코너 이름 (예: "Stavelot") | 없음 — `scope='Sector'`의 섹터 번호이거나 자유 텍스트 속 `TURN n`뿐 | ❌ 파생 불가 |
 
 ---
 

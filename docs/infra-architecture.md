@@ -136,6 +136,17 @@ sessions/{session_key}     — meeting_key, session_name/type, date_start/end,
 - 프론트 탐색 흐름: `meetings`(연도 필터) → `sessions`(meeting_key 필터) → 매니페스트의 청크 목록으로 R2 fetch.
 - 인덱스 신선도: 수집기 체크 잡이 매일 `sessions?year=` 결과를 upsert — 클라이언트는 OpenF1를 몰라도 된다.
 
+### 3.4 서킷 지오메트리 정적 자산 [2026-07-28 추가]
+
+세션 청크와 달리 **서킷·연도 단위로 한 번만 만들고 재사용하는 작은 자산**이다. 트랙 맵 오버레이(섹터 경계·마셜 섹터·코너 번호·DRS zone)와 퀄리 미니섹터 갭 계산이 전부 여기에 의존한다.
+
+- 객체 키: `circuit/{year}/{circuit_key}.json.gz` — MultiViewer 서킷 JSON 원본 스냅샷 (Spa 19.7 KB raw). 소스는 `meetings.circuit_info_url`이며 **`location`과 좌표계가 동일해 affine 변환이 불필요하다** [실측, API ref §6.2.1].
+- 왜 R2에 넣는가: MultiViewer는 OpenF1보다도 보장이 없는 서드파티다. 시청 경로를 외부 API에서 분리하는 §1의 원칙을 그대로 적용한다. 24서킷 × 3시즌 × ~20 KB ≈ **1.5 MB** — 용량 무관.
+- 객체 키: `circuit/{year}/{circuit_key}.drs.json.gz` — **DRS zone 도출 결과** (zone별 detection / activation_start / activation_end를 arc-length로). 수집기가 `car_data?drs>=10` / `?drs=8` 범위 필터로 필요한 표본만 받아(세션·드라이버당 24~57 KB) 도출하므로 **`car_data` 전량 저장 없이** 만들 수 있다 — §3.1의 제외 결정은 유지된다.
+  - **2023~2025 세션만 생성된다.** 2026은 `car_data.drs`가 전부 null이고 `category='Drs'`도 404여서 소스가 없다 [실측, API ref §8.9]. 2026 이후는 오버레이를 "데이터 없음"으로 표시한다.
+  - 참고: 이 도출 로직은 `origin/personal_page` 브랜치에 이미 구현·검증되어 있다 (`scripts/_lib/drsZonesDeriver.ts` + `drsZones_2-{2023,2024}.json`, 전이 264건 → zone 2개). 재사용할 것. 단 그 브랜치는 아웃라인 소스가 julesr0y SVG여서 `applyOpenF1Transform` affine이 필요했는데, **MultiViewer로 바꾸면 그 단계가 사라진다.**
+- 국적 표기용 `driver_number→국가` 정적 매핑도 앱 번들에 둔다 (`drivers.country_code`가 2026부터 null, 시즌 후 필드 제거 예정 — API ref §8.3).
+
 ---
 
 ## 4. 용량 — 실측과 전망
@@ -237,6 +248,8 @@ sessions/{session_key}     — meeting_key, session_name/type, date_start/end,
 | `location` 청크 시간 분할 여부 | 리플레이 스크럽 UX 확인 후 |
 | RTDB 리전 | 라이브 활성화 시 |
 | 프리시즌 테스트 세션 포함 여부 | 필요해질 때 (기본 제외) |
+| 트랙 아웃라인 소스 — MultiViewer(좌표계 일치·메타데이터 포함) vs `origin/personal_page`의 julesr0y SVG(정규화된 그림, affine 필요) | 맵 구현 착수 시 (§3.4 권고는 MultiViewer) |
 
 ## 변경 이력
+- 2026-07-28 — §3.4 서킷 지오메트리 정적 자산 추가. MultiViewer 서킷 JSON이 `location`과 좌표계 동일함을 실측(affine 불필요), DRS zone은 2023~2025만 도출 가능(2026 `car_data.drs` 전건 null)임을 확인. 근거는 API ref §6.2.1·§8.4·§8.9.
 - 2026-07-23 — 최초 작성. 실측(볼륨 프로브·요금제 재검증) + 사용자 확정(저장 범위·스토리지·라이브 보류·repo 구조) 반영.
